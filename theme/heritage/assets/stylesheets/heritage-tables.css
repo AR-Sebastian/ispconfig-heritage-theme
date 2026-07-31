@@ -63,6 +63,7 @@ body.heritage-shell.wb-list-page .wb-table-workspace--finalized > .wb-table-view
 }
 
 body.heritage-shell.wb-list-page .wb-data-table {
+  inline-size: 100%;
   color: var(--hg-text);
   background: transparent;
 }
@@ -165,9 +166,28 @@ body.heritage-shell.wb-list-page .wb-data-table .wb-table-actions {
   position: sticky;
   inset-inline-end: 0;
   z-index: 2;
+  box-sizing: border-box;
+  inline-size: 104px;
+  min-inline-size: 104px;
+  white-space: nowrap;
   border-inline-start: 1px solid var(--hg-border);
   background: color-mix(in srgb, var(--hg-surface) 96%, transparent);
   box-shadow: -12px 0 22px color-mix(in srgb, var(--hg-page) 36%, transparent);
+}
+
+body.heritage-shell.wb-list-page .wb-data-table .wb-table-actions:has(.wb-row-actions > :nth-child(3)) {
+  inline-size: 148px;
+  min-inline-size: 148px;
+}
+
+body.heritage-shell.wb-list-page .wb-data-table .wb-table-actions:has(.wb-row-actions > :nth-child(4)) {
+  inline-size: 192px;
+  min-inline-size: 192px;
+}
+
+body.heritage-shell.wb-list-page .wb-data-table .wb-table-actions:has(.wb-row-actions > :nth-child(5)) {
+  inline-size: 236px;
+  min-inline-size: 236px;
 }
 
 body.heritage-shell.wb-list-page .wb-data-table > thead .wb-table-actions {
@@ -177,6 +197,7 @@ body.heritage-shell.wb-list-page .wb-data-table > thead .wb-table-actions {
 
 body.heritage-shell.wb-list-page .wb-row-actions {
   gap: 6px;
+  justify-content: flex-end;
 }
 
 body.heritage-shell.wb-list-page .wb-row-actions :is(a, button) {
