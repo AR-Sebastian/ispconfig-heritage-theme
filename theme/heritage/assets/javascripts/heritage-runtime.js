@@ -174,11 +174,44 @@
     var pageContent = document.getElementById('pageContent');
     if (!pageContent) return;
     var isMonitor = !!pageContent.querySelector('.wb-monitor-workspace, .systemmonitor, .stateview, .panel_system');
+    var family = document.body.classList.contains('wb-dashboard-page') ? 'dashboard' :
+      (isMonitor ? 'monitor' :
+        (pageContent.querySelector('.wb-extension-workspace') ? 'extension' :
+          (document.body.classList.contains('wb-form-profile--billing') || pageContent.querySelector('.wb-billing-product, .wb-billing-form, [data-billing-scope]') ? 'billing' :
+            (document.body.classList.contains('wb-form-profile--system-config') || pageContent.querySelector('.wb-system-workspace, .system-config') ? 'system' : 'standard'))));
     document.body.classList.toggle('wb-monitor-page', isMonitor);
     pageContent.classList.toggle('wb-monitor-surface', isMonitor);
+    document.body.setAttribute('data-heritage-module-family', family);
+    pageContent.setAttribute('data-heritage-module-family', family);
     document.body.setAttribute('data-heritage-surface', isMonitor ? 'monitor' :
       (document.body.classList.contains('wb-list-page') ? 'list' :
         (document.body.classList.contains('wb-form-page') ? 'form' : 'module')));
+
+    pageContent.querySelectorAll('.wb-monitor-workspace, .wb-extension-workspace, .wb-statistics-workspace, .wb-specialty-workspace, .wb-billing-product, .wb-billing-form, .wb-system-workspace').forEach(function (workspace) {
+      workspace.setAttribute('data-heritage-module-workspace', family);
+    });
+    pageContent.querySelectorAll('.wb-monitor-hero, .wb-extension-hero, .wb-dashboard-hero').forEach(function (hero, index) {
+      hero.setAttribute('data-heritage-module-hero', 'true');
+      var heading = hero.querySelector('h1, h2');
+      if (heading) {
+        if (!heading.id) heading.id = 'heritage-module-title-' + index;
+        hero.setAttribute('aria-labelledby', heading.id);
+      }
+    });
+    pageContent.querySelectorAll('.wb-monitor-chart-panel, .wb-monitor-status-panel, .wb-billing-panel, .wb-billing-settings-card, .wb-extension-workspace .panel, .wb-system-workspace .panel').forEach(function (panel, index) {
+      panel.setAttribute('data-heritage-module-panel', 'true');
+      var heading = panel.querySelector('h2, h3, .panel-title, .panel-heading');
+      if (heading) {
+        if (!heading.id) heading.id = 'heritage-module-panel-' + index;
+        panel.setAttribute('role', 'region');
+        panel.setAttribute('aria-labelledby', heading.id);
+      }
+    });
+    pageContent.querySelectorAll('.wb-monitor-refresh-panel, .wb-specialty-actions, .wb-extension-actions, .wb-billing-actions').forEach(function (actions) {
+      actions.setAttribute('data-heritage-module-actions', 'true');
+      actions.setAttribute('role', 'toolbar');
+      actions.setAttribute('aria-label', (document.documentElement.lang || '').toLowerCase().indexOf('de') === 0 ? 'Modulaktionen' : 'Module actions');
+    });
   }
 
   function enhanceAccessibility() {

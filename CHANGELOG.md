@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.10 – 2026-07-31
+
+- Dashboard, monitoring, system, billing and extensions share one module composition.
+- Specialty workspaces expose consistent heroes, panels and action toolbars.
+- Module panels use aligned density, headings, borders and responsive behaviour.
+- Semantic landmarks improve navigation without changing module functionality.
+
 ## 1.0.9 – 2026-07-31
 
 - Dialogs now share semantic tone, description and action-group contracts.

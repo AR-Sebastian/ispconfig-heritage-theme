@@ -1,13 +1,17 @@
-# ISPConfig HERITAGE 1.0.9
+# ISPConfig HERITAGE 1.0.10
 
-HERITAGE 1.0.9 establishes one interaction-feedback language across every
-supported module. Dialogs, confirmations, notifications and runtime feedback
-now retain the same hierarchy from desktop to narrow phones.
+HERITAGE 1.0.10 establishes one specialty-module language for dashboard,
+monitoring, system, billing and extensions. Their heroes, panels, tools and
+status regions now retain the same hierarchy from desktop to narrow phones.
 It targets ISPConfig 3.3.1p1 and keeps the original `default` theme as the
 required recovery path.
 
 Highlights:
 
+- shared specialty workspace, hero, panel and action contracts;
+- aligned information density across core and optional modules;
+- responsive module panels and toolbars;
+- accessible module and panel landmarks;
 - semantic dialog tone, description and action-group contracts;
 - consistent severity styling and accessible live regions;
 - pause-aware lifetime indicators for temporary feedback;
