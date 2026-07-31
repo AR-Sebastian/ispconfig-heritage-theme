@@ -81,6 +81,60 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell :i
   content: '';
 }
 
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .hg-tab-error-count {
+  display: inline-grid;
+  min-width: 18px;
+  height: 18px;
+  place-items: center;
+  margin-inline-start: 7px;
+  padding-inline: 5px;
+  color: var(--hg-danger);
+  border: 1px solid color-mix(in srgb, var(--hg-danger) 24%, var(--hg-border));
+  border-radius: var(--hg-radius-pill);
+  background: var(--hg-danger-soft);
+  font-size: 9px;
+  font-weight: 820;
+  line-height: 1;
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .hg-form-validation-summary {
+  display: flex;
+  width: 100%;
+  min-height: 42px;
+  align-items: center;
+  gap: 9px;
+  margin-block-end: 12px;
+  padding: 9px 12px;
+  color: var(--hg-danger);
+  border: 1px solid color-mix(in srgb, var(--hg-danger) 24%, var(--hg-border));
+  border-radius: var(--hg-radius-md);
+  background: linear-gradient(90deg, var(--hg-danger-soft), color-mix(in srgb, var(--hg-danger-soft) 35%, transparent));
+  box-shadow: var(--hg-shadow-xs);
+  font-size: 12px;
+  font-weight: 760;
+  text-align: start;
+  cursor: pointer;
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .hg-form-validation-summary::before {
+  display: inline-grid;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  place-items: center;
+  color: #fff;
+  border-radius: 50%;
+  background: var(--hg-danger);
+  content: '!';
+  font-size: 12px;
+  font-weight: 850;
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .hg-form-validation-summary:is(:hover, :focus-visible) {
+  border-color: color-mix(in srgb, var(--hg-danger) 46%, var(--hg-border));
+  box-shadow: var(--hg-focus-ring);
+}
+
 body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
   .wb-content-panel,
   .panel,
