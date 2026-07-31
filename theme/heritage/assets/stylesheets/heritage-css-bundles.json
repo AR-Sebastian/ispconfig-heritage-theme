@@ -1,0 +1,18 @@
+{
+  "application": {
+    "output": "heritage-app.bundle.css",
+    "sources": [
+      "workbench.css", "workbench-structure.css", "workbench-shell.css", "workbench-surfaces.css",
+      "workbench-modules.css", "workbench-lists.css", "workbench-tables.css", "workbench-forms.css",
+      "workbench-controls.css", "workbench-content.css", "workbench-dashboard.css", "heritage-tokens.css",
+      "heritage-components.css", "heritage-layouts.css", "heritage-detail.css", "heritage-tables.css",
+      "heritage-dashboard.css", "heritage-interactions.css", "heritage-states.css", "heritage-modules.css",
+      "heritage-accessibility.css", "heritage-responsive.css", "heritage-brand-language.css",
+      "heritage-shell.css", "heritage-color-modes.css"
+    ]
+  },
+  "login": {
+    "output": "heritage-login.bundle.css",
+    "sources": ["workbench.css", "workbench-auth.css", "heritage-tokens.css", "heritage-auth.css", "heritage-accessibility.css"]
+  }
+}
