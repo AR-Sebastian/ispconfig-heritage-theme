@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.22 – 2026-07-31
+
+- Views without a page heading retain accessible programmatic focus without drawing a full-content control ring.
+- Runtime validation now rejects unintended focus decoration on every programmatic page target.
+
 ## 1.0.21 – 2026-07-31
 
 - Standalone favicon references now retain an explicit cache generation.

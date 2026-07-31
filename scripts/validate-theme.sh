@@ -59,6 +59,9 @@ const accessibilityAuthority = fs.readFileSync(path.join(styles, 'heritage-acces
 if (!accessibilityAuthority.includes("h1[data-workbench-page-focus='true']:focus-visible")) {
   throw new Error('Programmatic page-heading focus contract is missing.');
 }
+if (!accessibilityAuthority.includes("#pageContent:is([data-workbench-page-focus='true']")) {
+  throw new Error('Programmatic page-container focus contract is missing.');
+}
 const bundles = JSON.parse(fs.readFileSync(path.join(styles, 'heritage-css-bundles.json'), 'utf8'));
 for (const bundle of Object.values(bundles)) {
   const output = fs.readFileSync(path.join(styles, bundle.output), 'utf8').replace(/\r\n/g, '\n');
