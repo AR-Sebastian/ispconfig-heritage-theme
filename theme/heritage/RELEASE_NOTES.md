@@ -1,6 +1,6 @@
-# ISPConfig HERITAGE 1.0.4
+# ISPConfig HERITAGE 1.0.5
 
-HERITAGE 1.0.4 improves guidance in long forms and multi-tab detail views. Primary
+HERITAGE 1.0.5 completes the list and table workspace. Primary
 icons retain concise text labels, the horizontal navigation remains available
 down to 721 pixels, and light-theme quick-create actions use quiet surfaces.
 It targets ISPConfig 3.3.1p1 and keeps the original `default` theme as the
@@ -8,6 +8,9 @@ required recovery path.
 
 Highlights:
 
+- sticky table headings with correctly aligned filter rows;
+- localized row-action names instead of generic numbered tooltips;
+- visible and accessible sorting direction;
 - form-wide summaries for explicit validation errors;
 - compact per-tab error counters and first-error navigation;
 - compact six-column module destinations on wide dashboards;

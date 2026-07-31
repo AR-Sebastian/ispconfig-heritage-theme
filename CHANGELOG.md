@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.5 – 2026-07-31
+
+- Finished the list/table workspace with sticky headings and aligned filter rows.
+- Added accessible sort-state indicators and filter names derived from columns.
+- Replaced generic numbered row-action labels with meaningful localized actions.
+- Preserved responsive record cards and the dedicated table pagination footer.
+
 ## 1.0.4 – 2026-07-31
 
 - Added form-wide validation summaries for explicit ISPConfig validation errors.
