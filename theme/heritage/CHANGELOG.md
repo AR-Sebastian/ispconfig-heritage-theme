@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.33 – 2026-07-31
+
+- Extended compact state columns to E-mail, Web, DNS, file and database server capabilities.
+- Added compact SMTP, delivery, IMAP and POP3 disable states to mailbox lists.
+- Distinguished enabled services from enabled disable-flags through success and warning semantics.
+- Verified server and mailbox tables at desktop, 721-pixel boundary and mobile widths in Light and Dark.
+
 ## 1.0.32 – 2026-07-31
 
 - Replaced wide boolean columns for active, locked and remote access states with compact, accessible status indicators.

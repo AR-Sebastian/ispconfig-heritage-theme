@@ -1129,6 +1129,9 @@ body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-status-heade
 body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-status-header-icon--active::before { content: '\2713'; }
 body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-status-header-icon--locked::before { content: '!'; }
 body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-status-header-icon--remote::before { content: '\2194'; }
+body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-status-header-icon--service::before { content: '\25cf'; }
+body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-status-header-icon--disabled::before { content: '\2212'; }
+body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-status-header-icon--boolean::before { content: '\2713'; }
 
 body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-status-indicator {
   display: inline-grid;
@@ -1148,13 +1151,13 @@ body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-status-indic
   line-height: 1;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table [data-wb-status-state='on']:not([data-wb-status-kind='locked']) .wb-status-indicator {
+body.wb-list-page .wb-table-workspace--finalized .wb-data-table [data-wb-status-state='on']:not([data-wb-status-kind='locked']):not([data-wb-status-kind='disabled']) .wb-status-indicator {
   color: var(--wb-success-ink);
   border-color: color-mix(in srgb, var(--wb-success) 40%, var(--wb-border));
   background: color-mix(in srgb, var(--wb-success) 10%, var(--wb-surface));
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table [data-wb-status-state='on']:not([data-wb-status-kind='locked']) .wb-status-indicator::before {
+body.wb-list-page .wb-table-workspace--finalized .wb-data-table [data-wb-status-state='on']:not([data-wb-status-kind='locked']):not([data-wb-status-kind='disabled']) .wb-status-indicator::before {
   content: '\2713';
 }
 
@@ -1165,6 +1168,16 @@ body.wb-list-page .wb-table-workspace--finalized .wb-data-table [data-wb-status-
 }
 
 body.wb-list-page .wb-table-workspace--finalized .wb-data-table [data-wb-status-kind='locked'][data-wb-status-state='on'] .wb-status-indicator::before {
+  content: '!';
+}
+
+body.wb-list-page .wb-table-workspace--finalized .wb-data-table [data-wb-status-kind='disabled'][data-wb-status-state='on'] .wb-status-indicator {
+  color: var(--wb-danger-ink);
+  border-color: color-mix(in srgb, var(--wb-danger) 38%, var(--wb-border));
+  background: color-mix(in srgb, var(--wb-danger) 9%, var(--wb-surface));
+}
+
+body.wb-list-page .wb-table-workspace--finalized .wb-data-table [data-wb-status-kind='disabled'][data-wb-status-state='on'] .wb-status-indicator::before {
   content: '!';
 }
 
