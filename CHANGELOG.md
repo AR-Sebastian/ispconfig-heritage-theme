@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.1 – 2026-07-31
+
+- Reclaimed the unused contextual-navigation column on the dashboard.
+- Expanded the dashboard canvas while preserving readable maximum widths.
+- Improved the desktop module-widget grid from three to four compact cards per row.
+- Added German and English recovery documentation and direct signed-release installation steps.
+- Added a structured bilingual bug-report form and clearer public project navigation.
+
 ## 1.0.0 – 2026-07-31
 
 - First stable standalone HERITAGE release for ISPConfig 3.3.1p1.

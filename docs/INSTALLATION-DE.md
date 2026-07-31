@@ -17,16 +17,21 @@ sudo ./scripts/manage-theme.sh install
 
 Danach HERITAGE zunächst für ein Testkonto auswählen und neu anmelden.
 
-## Release-Archiv
+## Signiertes Release-Archiv
 
-Vor dem Entpacken `SHA256SUMS.txt` prüfen:
+Lade für Linux bevorzugt das TAR.GZ-Archiv und die Prüfsummendatei direkt aus
+dem Release herunter:
 
 ```bash
-sha256sum -c SHA256SUMS.txt
+curl -fLO https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/download/v1.0.1/ispconfig-heritage-theme-1.0.1.tar.gz
+curl -fLO https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/download/v1.0.1/SHA256SUMS.txt
+sha256sum -c --ignore-missing SHA256SUMS.txt
+sudo tar -xzf ispconfig-heritage-theme-1.0.1.tar.gz -C /usr/local/ispconfig/interface/web/themes/
 ```
 
-Das gewählte Archiv muss anschließend das Verzeichnis `heritage` unter
-`/usr/local/ispconfig/interface/web/themes/` erzeugen.
+Die Prüfung muss das Archiv ausdrücklich mit `OK` bestätigen. Bei einer
+Warnung oder Abweichung nicht installieren. Das Archiv erzeugt
+`/usr/local/ispconfig/interface/web/themes/heritage`.
 
 ## Status und Rückkehr
 
@@ -37,3 +42,5 @@ sudo ./scripts/manage-theme.sh rollback
 
 Bei Problemen das Benutzerkonto auf `default` zurückstellen. Das originale
 Standardtheme nicht löschen oder überschreiben.
+
+Ausführliche Hinweise stehen unter [Problemlösung und sichere Rückkehr](TROUBLESHOOTING-DE.md).

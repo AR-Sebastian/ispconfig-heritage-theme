@@ -1,5 +1,9 @@
 # ISPConfig Theme HERITAGE
 
+[![Theme validation](https://github.com/AR-Sebastian/ispconfig-heritage-theme/actions/workflows/validate.yml/badge.svg)](https://github.com/AR-Sebastian/ispconfig-heritage-theme/actions/workflows/validate.yml)
+[![Release](https://img.shields.io/github/v/release/AR-Sebastian/ispconfig-heritage-theme?display_name=tag)](https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/latest)
+[![ISPConfig](https://img.shields.io/badge/ISPConfig-3.3.1p1-d71920)](docs/COMPATIBILITY.md)
+
 ## Deutsch
 
 HERITAGE ist ein eigenständiges Premium-Theme für ISPConfig 3.3.1p1. Es
@@ -25,14 +29,30 @@ fachlichen Aktionen, APIs und Provisionierungsabläufe bleiben bei ISPConfig.
 - eigenständiges Paket ohne NEXT-, LIQUID- oder Workbench-Abhängigkeit;
 - atomare Installation mit Backup und Rollback.
 
-### Version 1.0.0
+### Version 1.0.1
 
 Geprüft mit ISPConfig 3.3.1p1 für Administrator-, Reseller-, Kunden- und
 Mailuser-Ansichten sowie Ubuntu 22.04/24.04 und Debian 12/13 mit Apache und
 Nginx. Das originale ISPConfig-Theme `default` muss als Rückfallebene
 installiert bleiben.
 
+**[HERITAGE 1.0.1 herunterladen](https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/latest)**
+
+### Schnellstart
+
+```bash
+git clone --branch v1.0.1 --depth 1 https://github.com/AR-Sebastian/ispconfig-heritage-theme.git
+cd ispconfig-heritage-theme
+sudo ./scripts/manage-theme.sh install
+sudo ./scripts/manage-theme.sh status
+```
+
+Danach HERITAGE zunächst für ein Testkonto auswählen und neu anmelden. Das
+Installationsskript ersetzt keine ISPConfig-Kerndateien und legt bei einem
+Update automatisch eine rücksetzbare Sicherung des Themes an.
+
 - [Installation auf Deutsch](docs/INSTALLATION-DE.md)
+- [Problemlösung und Rückkehr](docs/TROUBLESHOOTING-DE.md)
 - [Kompatibilität und Prüfbereich](docs/COMPATIBILITY.md)
 - [Release-Abnahme 1.0.0](docs/RELEASE-GATE-1.0.0.md)
 - [Änderungsprotokoll](CHANGELOG.md)
@@ -75,13 +95,29 @@ remain owned by ISPConfig.
 - standalone package without NEXT, LIQUID or Workbench dependencies;
 - atomic installation with backup and rollback.
 
-### Version 1.0.0
+### Version 1.0.1
 
 Validated with ISPConfig 3.3.1p1 for administrator, reseller, client and
 mail-user views, plus Ubuntu 22.04/24.04 and Debian 12/13 with Apache and Nginx.
 Keep ISPConfig's original `default` theme installed as the recovery path.
 
+**[Download HERITAGE 1.0.1](https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/latest)**
+
+### Quick start
+
+```bash
+git clone --branch v1.0.1 --depth 1 https://github.com/AR-Sebastian/ispconfig-heritage-theme.git
+cd ispconfig-heritage-theme
+sudo ./scripts/manage-theme.sh install
+sudo ./scripts/manage-theme.sh status
+```
+
+Select HERITAGE for a test account and sign in again. The installer does not
+replace ISPConfig core files and automatically creates a restorable theme
+backup during updates.
+
 - [Installation in English](docs/INSTALLATION-EN.md)
+- [Troubleshooting and recovery](docs/TROUBLESHOOTING-EN.md)
 - [Compatibility and validation scope](docs/COMPATIBILITY.md)
 - [Release gate 1.0.0](docs/RELEASE-GATE-1.0.0.md)
 - [Changelog](CHANGELOG.md)

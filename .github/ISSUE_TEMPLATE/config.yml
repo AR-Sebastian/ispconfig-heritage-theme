@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Sicherheitsproblem / Security issue
+    url: https://github.com/AR-Sebastian/ispconfig-heritage-theme/security/policy
+    about: Sicherheitsprobleme vertraulich melden / Report security issues privately

@@ -162,7 +162,7 @@ body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-das
 }
 
 body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet-module-atomic.wb-dashlet-size-1x1 {
-  grid-column: span 4;
+  grid-column: span 3;
 }
 
 body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet-metric-atomic.wb-dashlet-size-1x1 {
@@ -375,6 +375,10 @@ body.heritage-shell.wb-dashboard-page .wb-dashboard-layout-edit > .wb-dashlet--d
 
   body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet-limits {
     grid-column: 1 / -1;
+  }
+
+  body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet-module-atomic.wb-dashlet-size-1x1 {
+    grid-column: span 4;
   }
 }
 

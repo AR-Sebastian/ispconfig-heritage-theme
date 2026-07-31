@@ -296,6 +296,23 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent {
   max-width: 1600px;
 }
 
+/* The dashboard has no contextual submenu. Reclaim that column instead of
+ * presenting an empty rail, while restoring the normal shell automatically
+ * as soon as another module page is loaded. */
+body.heritage-shell.wb-app-navigation-enabled.wb-dashboard-page #main-wrapper {
+  padding-inline-start: 0;
+}
+
+body.heritage-shell.wb-app-navigation-enabled.wb-dashboard-page .wb-mobile-navigation__secondary {
+  display: none !important;
+}
+
+body.heritage-shell.wb-app-navigation-enabled.wb-dashboard-page #pageContent {
+  width: 100%;
+  max-width: 1840px;
+  margin-inline: auto;
+}
+
 body.heritage-shell.wb-app-navigation-enabled :is(
   .panel,
   .content-box,
