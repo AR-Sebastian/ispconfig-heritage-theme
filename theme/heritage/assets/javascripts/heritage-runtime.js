@@ -212,7 +212,7 @@
   function syncModuleContext() {
     var pageContent = document.getElementById('pageContent');
     if (!pageContent) return;
-    var isMonitor = !!pageContent.querySelector('.wb-monitor-workspace, .systemmonitor, .stateview, .panel_system');
+    var isMonitor = !!pageContent.querySelector('.wb-monitor-workspace, .systemmonitor, .stateview, .panel_system, .codeview');
     var family = document.body.classList.contains('wb-dashboard-page') ? 'dashboard' :
       (isMonitor ? 'monitor' :
         (pageContent.querySelector('.wb-extension-workspace') ? 'extension' :
@@ -220,8 +220,18 @@
             (document.body.classList.contains('wb-form-profile--system-config') || pageContent.querySelector('.wb-system-workspace, .system-config') ? 'system' : 'standard'))));
     document.body.classList.toggle('wb-monitor-page', isMonitor);
     pageContent.classList.toggle('wb-monitor-surface', isMonitor);
+    if (isMonitor) {
+      document.body.classList.remove('wb-list-page', 'wb-form-page');
+      Array.prototype.slice.call(document.body.classList).forEach(function (className) {
+        if (className.indexOf('wb-form-profile--') === 0) document.body.classList.remove(className);
+      });
+      delete document.body.dataset.wbFormProfiles;
+    }
     document.body.setAttribute('data-heritage-module-family', family);
     pageContent.setAttribute('data-heritage-module-family', family);
+    if (isMonitor) pageContent.setAttribute('data-heritage-module-workspace', 'monitor');
+    else if (family === 'system') pageContent.setAttribute('data-heritage-module-workspace', 'system');
+    else if (/^(monitor|system)$/.test(pageContent.getAttribute('data-heritage-module-workspace') || '')) pageContent.removeAttribute('data-heritage-module-workspace');
     document.body.setAttribute('data-heritage-surface', isMonitor ? 'monitor' :
       (document.body.classList.contains('wb-list-page') ? 'list' :
         (document.body.classList.contains('wb-form-page') ? 'form' : 'module')));
@@ -237,7 +247,7 @@
         hero.setAttribute('aria-labelledby', heading.id);
       }
     });
-    pageContent.querySelectorAll('.wb-monitor-chart-panel, .wb-monitor-status-panel, .wb-billing-panel, .wb-billing-settings-card, .wb-extension-workspace .panel, .wb-system-workspace .panel').forEach(function (panel, index) {
+    pageContent.querySelectorAll('.wb-monitor-chart-panel, .wb-monitor-status-panel, .wb-content-panel--monitor, .wb-monitor-log, .wb-monitor-workspace > .panel_system, .wb-monitor-workspace > .panel, .panel_system, .codeview, .wb-billing-panel, .wb-billing-settings-card, .wb-extension-workspace .panel, .wb-extension-workspace .wb-table-workspace, .wb-system-workspace .panel').forEach(function (panel, index) {
       panel.setAttribute('data-heritage-module-panel', 'true');
       var heading = panel.querySelector('h2, h3, .panel-title, .panel-heading');
       if (heading) {
@@ -246,7 +256,7 @@
         panel.setAttribute('aria-labelledby', heading.id);
       }
     });
-    pageContent.querySelectorAll('.wb-monitor-refresh-panel, .wb-specialty-actions, .wb-extension-actions, .wb-billing-actions').forEach(function (actions) {
+    pageContent.querySelectorAll('.wb-monitor-refresh-panel, .wb-monitor-refresh, .wb-specialty-actions, .wb-extension-actions, .wb-billing-actions').forEach(function (actions) {
       actions.setAttribute('data-heritage-module-actions', 'true');
       actions.setAttribute('role', 'toolbar');
       actions.setAttribute('aria-label', (document.documentElement.lang || '').toLowerCase().indexOf('de') === 0 ? 'Modulaktionen' : 'Module actions');

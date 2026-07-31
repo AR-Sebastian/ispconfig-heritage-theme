@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.30 – 2026-07-31
+
+- Systemkonfiguration, Extension Installer sowie Monitoring-Daten und -Protokolle besitzen einen gemeinsamen, verbindlichen Oberflächenvertrag.
+- Dynamisch geladene Monitoring-Seiten entfernen alte Formularprofile vollständig.
+- Lange operative Überschriften bleiben auch in kompakten Zwischenbreiten innerhalb ihres Panels.
+- 60 Browserzustände sichern fünf Spezialoberflächen über sechs Breiten und beide Farbschemata ab.
+
 ## 1.0.29 – 2026-07-31
 
 - Dashboard und Monitoring besitzen jetzt eine verbindliche reale Browserabnahme.

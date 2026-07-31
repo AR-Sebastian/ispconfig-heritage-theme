@@ -1,4 +1,4 @@
-# ISPConfig HERITAGE 1.0.29
+# ISPConfig HERITAGE 1.0.30
 
 ## Deutsch
 
@@ -10,7 +10,7 @@ dieselbe Informationsarchitektur als zugängliche Navigation dargestellt.
 
 ### Status und Kompatibilität
 
-- Version: `1.0.29`
+- Version: `1.0.30`
 - Status: stabil
 - ISPConfig-Basis: `3.3.1p1`
 - geprüft mit Administrator-, Reseller-, Kunden- und Mailuser-Rollen
