@@ -1,10 +1,13 @@
-# ISPConfig HERITAGE 1.0.25
+# ISPConfig HERITAGE 1.0.26
 
-HERITAGE 1.0.25 removes the intermediate primary-navigation scroll state.
-Between 721 and 1180 pixels, modules share the available horizontal space,
-retain icon-above-label composition and no longer inherit the older drawer
-breakpoint. A dedicated 740-pixel browser state protects the compact desktop
-layout in addition to desktop, tablet and mobile coverage.
+HERITAGE 1.0.26 unifies the customer, website, mail and DNS list families under
+one responsive table contract. Columns now fill the available table viewport,
+record actions share a stable right-aligned lane with an explicit heading, and
+legacy width hints can no longer distort individual modules. Compact record
+summaries remain available on cards without duplicating identity values on
+desktop. Multi-create toolbars now distinguish the primary path from secondary
+alternatives. The runtime matrix covers 72 visual states across six surfaces,
+six viewport classes and both colour schemes.
 
 ## Previous releases
 

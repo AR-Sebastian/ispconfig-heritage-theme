@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.26 – 2026-07-31
+
+- Kunden-, Webseiten-, E-Mail- und DNS-Listen folgen demselben Tabellenvertrag.
+- Aktionsspalten bleiben am rechten Tabellenrand ausgerichtet und besitzen eine eindeutige Kopfzeile.
+- Veraltete prozentuale Spaltenbreiten beeinflussen die neue Tabellengeometrie nicht mehr.
+- Datensatzkennungen erscheinen auf Desktop nicht doppelt und bleiben in mobilen Karten verfügbar.
+- Mehrere Erstellen-Aktionen erhalten eine klare primäre und sekundäre Hierarchie.
+- Die Laufzeitmatrix deckt 72 Zustände aus sechs Ansichten, sechs Breiten und zwei Farbschemata ab.
+
 ## 1.0.25 – 2026-07-31
 
 - Compact desktop navigation no longer exposes a horizontal scrollbar.
