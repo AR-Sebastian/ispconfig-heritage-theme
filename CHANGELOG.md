@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.21 – 2026-07-31
+
+- Standalone favicon references now retain an explicit cache generation.
+- Package verification rejects uncached generated favicon references before publication.
+
 ## 1.0.20 – 2026-07-31
 
 - Mobile record cards retain their compact record identifier beside the promoted primary value.

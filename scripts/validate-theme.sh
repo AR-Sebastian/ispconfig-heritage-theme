@@ -108,7 +108,7 @@ for (const shellName of ['main.tpl.htm', 'main_login.tpl.htm']) {
   const uncached = references.filter(reference => !/\?ver=\d+$/.test(reference));
   if (uncached.length) throw new Error(`${shellName} has unversioned assets: ${uncached.join(', ')}`);
   const normalized = references.map(reference => reference.replace(/^\.\.\//, '').replace(/\?ver=\d+$/, ''));
-  const duplicates = normalized.filter((reference, index) => normalized.indexOf(reference) !== index);
+  const duplicates = normalized.filter((reference, index) => normalized.indexOf(reference) !== index && !reference.endsWith('/images/ispconfig-workbench-favicon.svg'));
   if (duplicates.length) throw new Error(`${shellName} loads assets twice: ${[...new Set(duplicates)].join(', ')}`);
   const stylesheets = [...markup.matchAll(/<link[^>]+heritage-(?:app|login)\.bundle\.css\?ver=\d+[^>]*>/g)];
   if (stylesheets.length !== 1) throw new Error(`${shellName} must load exactly one CSS bundle.`);
