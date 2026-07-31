@@ -1,10 +1,10 @@
-# ISPConfig HERITAGE 1.0.23
+# ISPConfig HERITAGE 1.0.24
 
-HERITAGE 1.0.23 completes the responsive axis of the primary navigation.
-Desktop and tablet modules place their icons above centered, single-line labels;
-the mobile drawer retains compact horizontal icon-and-label rows. The runtime
-matrix now measures those rendered relationships in every module surface,
-viewport and colour mode instead of trusting stylesheet declarations alone.
+HERITAGE 1.0.24 closes the trailing edge of wide data tables. Populated tables
+now keep their own horizontal scroll context even when ISPConfig retains a
+dormant legacy empty row, so sticky action controls remain completely visible
+inside the table surface. Runtime validation measures both action-cell bounds
+and the visible table viewport across every supported presentation state.
 
 ## Previous releases
 

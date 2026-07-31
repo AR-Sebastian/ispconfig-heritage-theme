@@ -1354,16 +1354,16 @@ body.wb-list-page .wb-table-workspace--finalized .wb-empty-state--table[data-wb-
   content: ' Die primäre Aktion befindet sich oben in der Befehlsleiste.';
 }
 
-body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport:has(.wb-table-empty-row) {
+body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport--empty {
   min-height: 190px;
   overflow-x: clip;
 }
 
-body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport:has(.wb-table-empty-row) .wb-data-table {
+body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport--empty .wb-data-table {
   min-inline-size: 100%;
 }
 
-body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport:has(.wb-table-empty-row) + .wb-table-footer {
+body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport--empty + .wb-table-footer {
   margin-top: 0;
 }
 
@@ -1454,10 +1454,10 @@ body.wb-list-page .wb-table-workspace--finalized .wb-empty-state--table {
   padding-block: 20px;
 }
 
-body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport:has(.wb-table-empty-row) {
+body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport--empty {
   min-height: 0;
 }
 
-body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport:has(.wb-table-empty-row) .wb-data-table {
+body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport--empty .wb-data-table {
   block-size: auto;
 }
