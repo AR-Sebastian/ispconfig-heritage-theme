@@ -1089,8 +1089,16 @@
 
   function enhanceForms() {
     var host = document.getElementById('pageContent');
-    var form = host && host.querySelector('#pageForm');
-    if (!form) return;
+    var form = document.getElementById('pageForm');
+    if (!host || !form || !form.contains(host) || !host.querySelector('.wb-form-actions')) {
+      if (form) {
+        form.removeAttribute('data-heritage-form-density');
+        form.removeAttribute('data-heritage-form-system');
+        form.removeAttribute('data-heritage-field-count');
+        form.removeAttribute('aria-label');
+      }
+      return;
+    }
     var german = (document.documentElement.lang || '').toLowerCase().indexOf('de') === 0;
     var controls = form.querySelectorAll('input:not([type="hidden"]), select, textarea');
     form.setAttribute('data-heritage-form-density', controls.length > 28 ? 'long' : (controls.length > 12 ? 'standard' : 'compact'));

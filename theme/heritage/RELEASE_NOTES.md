@@ -1,11 +1,11 @@
-# ISPConfig HERITAGE 1.0.27
+# ISPConfig HERITAGE 1.0.28
 
-HERITAGE 1.0.27 closes the table V1 acceptance block across 13 representative
-ISPConfig surfaces. Databases, FTP users, cronjobs, mailboxes, support messages,
-servers and remote users now join the original reference lists in a 156-state
-responsive matrix. Historical XMPP and virtual-server columns emitted by the
-unchanged ISPConfig server list are no longer presented by HERITAGE at any
-viewport width.
+HERITAGE 1.0.28 activates the semantic form system against ISPConfig's real
+outer `#pageForm` structure. Form metadata is applied only to detail pages and
+is removed when navigation returns to list content. Customer, website,
+database, mailbox, DNS-zone, support-message and server forms now participate
+in a 240-state runtime matrix spanning 20 surfaces, six viewport classes and
+both colour schemes.
 
 ## Previous releases
 

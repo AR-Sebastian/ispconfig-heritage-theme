@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.28 – 2026-07-31
+
+- Das Formularsystem erkennt jetzt die echte, von ISPConfig um den Inhaltsbereich gelegte Formularstruktur.
+- Formularmetadaten werden nur auf Detailseiten gesetzt und beim Wechsel zurück zu Listen sauber entfernt.
+- Kunden, Webseiten, Datenbanken, Postfächer, DNS-Zonen, Supportnachrichten und Server sind Teil der Formular-V1-Abnahme.
+- 240 Laufzeitzustände schützen 20 Oberflächen über sechs Breiten und beide Farbschemata.
+
 ## 1.0.27 – 2026-07-31
 
 - Die Tabellen-V1-Abnahme umfasst jetzt 13 reale ISPConfig-Oberflächen.
