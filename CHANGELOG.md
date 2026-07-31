@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.11 – 2026-07-31
+
+- Login and authenticated shells now use the same current runtime cache key.
+- Release acceptance verifies all shell assets and rejects placeholder actions.
+- Stable V1 boundaries and package lifecycle remain fully enforced.
+
 ## 1.0.10 – 2026-07-31
 
 - Dashboard, monitoring, system, billing and extensions share one module composition.
