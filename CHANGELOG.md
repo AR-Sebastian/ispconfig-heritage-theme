@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.3 – 2026-07-31
+
+- Rebuilt the wide dashboard module grid as genuinely compact 1x1 destinations.
+- Added a six-column wide-screen layout with four- and three-column responsive fallbacks.
+- Strengthened interactive metric points, focus states and glass tooltips.
+- Added calmer section separators and reduced vertical waste in module cards.
+
 ## 1.0.2 – 2026-07-31
 
 - Kept the horizontal icon-and-label navigation down to 721 pixels.

@@ -11,7 +11,7 @@ cat /usr/local/ispconfig/interface/web/themes/heritage/ispconfig_version
 ```
 
 The expected value is `3.3.1p1`. Other ISPConfig versions are outside the
-HERITAGE 1.0.2 release scope.
+HERITAGE 1.0.3 release scope.
 
 ## The previous theme remains visible
 

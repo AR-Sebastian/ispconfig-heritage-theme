@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.3 – 2026-07-31
+
+- Dashboard module cards now use a compact six-column wide-screen grid.
+- Metric charts provide clearer pointer and keyboard interaction feedback.
+- Dashboard sections and module density were refined for the full-width canvas.
+
 ## 1.0.2 – 2026-07-31
 
 - Improved split-screen and tablet navigation down to 721 pixels.
