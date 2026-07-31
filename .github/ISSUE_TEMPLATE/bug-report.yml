@@ -1,0 +1,63 @@
+name: Fehlerbericht / Bug report
+description: Reproduzierbaren Fehler in ISPConfig HERITAGE melden
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Bitte keine Zugangsdaten, Kundendaten oder Sicherheitslücken veröffentlichen.
+        Do not publish credentials, customer data or security vulnerabilities.
+  - type: input
+    id: version
+    attributes:
+      label: HERITAGE-Version
+      placeholder: "1.0.0"
+    validations:
+      required: true
+  - type: input
+    id: ispconfig
+    attributes:
+      label: ISPConfig-Version
+      placeholder: "3.3.1p1"
+    validations:
+      required: true
+  - type: dropdown
+    id: role
+    attributes:
+      label: Benutzerrolle / User role
+      options: [Administrator, Reseller, Kunde / Client, Mailuser]
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Umgebung / Environment
+      description: Betriebssystem, Apache oder Nginx, Browser und Bildschirmgröße
+      placeholder: "Ubuntu 24.04, Nginx, Firefox, 1440 × 900"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Schritte zum Fehler / Steps to reproduce
+      placeholder: "1. …\n2. …\n3. …"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Erwartetes Verhalten / Expected behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Tatsächliches Verhalten / Actual behaviour
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Screenshots oder Protokolle / Screenshots or logs
+      description: Vor dem Hochladen alle persönlichen und vertraulichen Daten entfernen.

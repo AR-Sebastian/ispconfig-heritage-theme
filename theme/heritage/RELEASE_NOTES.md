@@ -1,6 +1,8 @@
-# ISPConfig HERITAGE 1.0.0
+# ISPConfig HERITAGE 1.0.1
 
-HERITAGE 1.0.0 is the first stable release of the standalone ISPConfig theme.
+HERITAGE 1.0.1 expands the dashboard into the unused contextual-navigation
+column and provides a denser four-column module-widget layout on wide screens.
+Contextual navigation on module pages remains unchanged.
 It targets ISPConfig 3.3.1p1 and keeps the original `default` theme as the
 required recovery path.
 

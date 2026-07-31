@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1 – 2026-07-31
+
+- Dashboard uses the full application width when no contextual navigation exists.
+- Compact module widgets now form a denser four-column desktop grid.
+- Contextual navigation returns automatically on module pages.
+
 ## 1.0.0 – 2026-07-31
 
 - First stable HERITAGE release for ISPConfig 3.3.1p1.
