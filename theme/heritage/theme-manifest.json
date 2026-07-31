@@ -1,53 +1,53 @@
 {
-  "schemaVersion": 1,
-  "id": "com.ispconfig.heritage-glass.theme",
-  "name": "ISPConfig Heritage Glass",
-  "version": "1.0.19",
-  "stage": "stable",
-  "releaseDate": "2026-07-31",
-  "compatibility": {
-    "ispconfig": "3.3.1p1",
-    "preview": "Validated on Ubuntu 22.04/24.04 and Debian 12/13 with Apache and Nginx"
-  },
-  "packageDirectory": "heritage",
-  "distributionMode": "standalone-theme",
-  "releaseTag": "v1.0.19",
-  "supportedModules": [
-    "login",
-    "dashboard",
-    "help",
-    "client",
-    "sites",
-    "mail",
-    "mailuser",
-    "dns",
-    "monitor",
-    "tools",
-    "admin"
-  ],
-  "retiredThemeSurfaces": [
-    "openvz",
-    "aps-installer",
-    "mailman-2",
-    "xmpp"
-  ],
-  "acceptance": {
-    "responsiveVisuals": 35,
-    "contrastReports": 35,
-    "darkSurfaceReports": 35,
-    "roleTenantChecks": 459,
-    "platformRoleMatrices": 8,
-    "billingVisuals": 0
-  },
-  "boundaries": {
-    "themeOnly": true,
-    "coreReimplementation": false,
-    "productionDeploymentApproved": true,
-    "defaultThemeFallbackRequired": true
-  },
-  "optionalIntegration": {
-    "name": "Optional ISPConfig branding integration",
-    "required": false,
-    "behaviorWithoutIntegration": "Theme-local ISPConfig logo, favicon and red accent defaults"
-  }
+    "schemaVersion":  1,
+    "id":  "com.ispconfig.heritage-glass.theme",
+    "name":  "ISPConfig Heritage Glass",
+    "version":  "1.0.20",
+    "stage":  "stable",
+    "releaseDate":  "2026-07-31",
+    "compatibility":  {
+                          "ispconfig":  "3.3.1p1",
+                          "preview":  "Validated on Ubuntu 22.04/24.04 and Debian 12/13 with Apache and Nginx"
+                      },
+    "packageDirectory":  "heritage",
+    "releaseTag":  "v1.0.20",
+    "supportedModules":  [
+                             "login",
+                             "dashboard",
+                             "help",
+                             "client",
+                             "sites",
+                             "mail",
+                             "mailuser",
+                             "dns",
+                             "monitor",
+                             "tools",
+                             "admin"
+                         ],
+    "retiredThemeSurfaces":  [
+                                 "openvz",
+                                 "aps-installer",
+                                 "mailman-2",
+                                 "xmpp"
+                             ],
+    "acceptance":  {
+                       "responsiveVisuals":  35,
+                       "contrastReports":  35,
+                       "darkSurfaceReports":  35,
+                       "roleTenantChecks":  459,
+                       "platformRoleMatrices":  8,
+                       "billingVisuals":  0
+                   },
+    "boundaries":  {
+                       "themeOnly":  true,
+                       "coreReimplementation":  false,
+                       "productionDeploymentApproved":  true,
+                       "defaultThemeFallbackRequired":  true
+                   },
+    "distributionMode":  "standalone-theme",
+    "optionalIntegration":  {
+                                "Name":  "Optional ISPConfig branding integration",
+                                "Required":  false,
+                                "BehaviorWithoutIntegration":  "Theme-local ISPConfig logo, favicon and red accent defaults"
+                            }
 }

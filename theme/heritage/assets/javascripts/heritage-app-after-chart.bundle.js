@@ -323,6 +323,8 @@
         var identity = identityIndex >= 0 ? row.children[identityIndex] : null;
         var primary = row.children[primaryIndex];
         if (!primary) return;
+        var identityText = identity ? identity.textContent.replace(/\s+/g, ' ').trim() : '';
+        var identityLabel = identityIndex >= 0 ? labels[identityIndex] : '';
         primary.classList.add('hg-table-column--primary');
         if (identity && identity !== primary) identity.classList.add('hg-table-column--identity');
 
@@ -334,6 +336,13 @@
           primary.replaceChildren(promoted);
         } else if (sourceLink && primary.contains(sourceLink)) {
           sourceLink.classList.add('hg-record-primary-link');
+        }
+
+        if (identityText && !primary.querySelector('.hg-record-identity')) {
+          var identitySummary = document.createElement('span');
+          identitySummary.className = 'hg-record-identity';
+          identitySummary.textContent = (identityLabel ? identityLabel + ' ' : '') + identityText;
+          primary.appendChild(identitySummary);
         }
 
         headers.forEach(function (header, index) {

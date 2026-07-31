@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.20 – 2026-07-31
+
+- Mobile record cards retain their compact record identifier beside the promoted primary value.
+- The reusable identity badge follows the active colour mode without changing record links or actions.
+- Mobile runtime validation rejects hidden identity columns without a visible summary.
+
 ## 1.0.19 – 2026-07-31
 
 - Wide tables reserve stable space for complete row-action groups.

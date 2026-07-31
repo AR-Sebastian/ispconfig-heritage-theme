@@ -52,7 +52,7 @@ if (total > 3600000) throw new Error(`Asset payload exceeds 3.6 MB source and bu
 if (largest.size > 225000) throw new Error(`Authored asset exceeds 225 KB: ${path.basename(largest.file)} (${largest.size})`);
 const styles = path.join(theme, 'assets', 'stylesheets');
 const tableAuthority = fs.readFileSync(path.join(styles, 'heritage-tables.css'), 'utf8');
-for (const contract of ['inline-size: 100%', ':has(.wb-row-actions > :nth-child(3))', 'justify-content: flex-end']) {
+for (const contract of ['inline-size: 100%', ':has(.wb-row-actions > :nth-child(3))', 'justify-content: flex-end', '.hg-record-identity']) {
   if (!tableAuthority.includes(contract)) throw new Error(`Table geometry contract is missing: ${contract}`);
 }
 const accessibilityAuthority = fs.readFileSync(path.join(styles, 'heritage-accessibility.css'), 'utf8');
@@ -76,6 +76,9 @@ const scriptsDirectory = path.join(theme, 'assets', 'javascripts');
 const runtime = fs.readFileSync(path.join(scriptsDirectory, 'heritage-runtime.js'), 'utf8');
 for (const contract of ['contentObserver.disconnect()', 'window.setTimeout(enhanceObservedContent, 24)', 'observeContent();']) {
   if (!runtime.includes(contract)) throw new Error(`Runtime observer stability contract is missing: ${contract}`);
+}
+for (const contract of ['identityText', 'identityLabel', "identitySummary.className = 'hg-record-identity'"]) {
+  if (!runtime.includes(contract)) throw new Error(`Mobile record identity contract is missing: ${contract}`);
 }
 const scriptBundles = JSON.parse(fs.readFileSync(path.join(scriptsDirectory, 'heritage-js-bundles.json'), 'utf8'));
 for (const bundle of Object.values(scriptBundles)) {
