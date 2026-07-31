@@ -1,6 +1,6 @@
 # Compatibility and validation scope
 
-HERITAGE 1.0.15 targets ISPConfig 3.3.1p1 and PHP 8.1 or newer.
+HERITAGE 1.0.16 targets ISPConfig 3.3.1p1 and PHP 8.1 or newer.
 
 Validated platform combinations:
 

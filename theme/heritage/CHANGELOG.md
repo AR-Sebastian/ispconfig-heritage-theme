@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.16 – 2026-07-31
+
+- Application CSS now uses one reproducible ordered bundle instead of 25 requests.
+- Login CSS now uses one dedicated bundle instead of five requests.
+- Modular source styles remain authoritative and independently maintainable.
+- Release validation rejects stale output and enforces bundle budgets.
+
 ## 1.0.15 – 2026-07-31
 
 - All post-bootstrap login and application scripts now use ordered deferred loading.

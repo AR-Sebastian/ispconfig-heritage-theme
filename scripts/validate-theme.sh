@@ -44,9 +44,24 @@ const assets = walk(path.join(theme, 'assets'));
 const unused = assets.filter(file => !corpus.includes(path.basename(file)));
 if (unused.length) throw new Error(`Unreferenced assets: ${unused.map(file => path.relative(theme, file)).join(', ')}`);
 const total = assets.reduce((sum, file) => sum + fs.statSync(file).size, 0);
-const largest = assets.map(file => ({file, size: fs.statSync(file).size})).sort((a, b) => b.size - a.size)[0];
-if (total > 1600000) throw new Error(`Asset payload exceeds 1.6 MB source budget: ${total}`);
-if (largest.size > 225000) throw new Error(`Asset exceeds 225 KB source budget: ${path.basename(largest.file)} (${largest.size})`);
+const authored = assets.filter(file => !file.endsWith('.bundle.css'));
+const largest = authored.map(file => ({file, size: fs.statSync(file).size})).sort((a, b) => b.size - a.size)[0];
+if (total > 2800000) throw new Error(`Asset payload exceeds 2.8 MB source and bundle budget: ${total}`);
+if (largest.size > 225000) throw new Error(`Authored asset exceeds 225 KB: ${path.basename(largest.file)} (${largest.size})`);
+const styles = path.join(theme, 'assets', 'stylesheets');
+const bundles = JSON.parse(fs.readFileSync(path.join(styles, 'heritage-css-bundles.json'), 'utf8'));
+for (const bundle of Object.values(bundles)) {
+  const output = fs.readFileSync(path.join(styles, bundle.output), 'utf8').replace(/\r\n/g, '\n');
+  let cursor = -1;
+  for (const source of bundle.sources) {
+    const header = `/* source: ${source} */`;
+    const index = output.indexOf(header, cursor + 1);
+    if (index <= cursor) throw new Error(`Missing or unordered CSS source in ${bundle.output}: ${source}`);
+    const content = fs.readFileSync(path.join(styles, source), 'utf8').replace(/\r\n/g, '\n').trim();
+    if (!output.includes(content)) throw new Error(`Stale CSS source in ${bundle.output}: ${source}`);
+    cursor = index;
+  }
+}
 for (const shellName of ['main.tpl.htm', 'main_login.tpl.htm']) {
   const markup = fs.readFileSync(path.join(theme, 'templates', shellName), 'utf8');
   const references = [...markup.matchAll(/(?:src|href)=["']([^"']*themes\/heritage\/assets\/[^"']+)["']/g)].map(match => match[1]);
@@ -55,6 +70,8 @@ for (const shellName of ['main.tpl.htm', 'main_login.tpl.htm']) {
   const normalized = references.map(reference => reference.replace(/^\.\.\//, '').replace(/\?ver=\d+$/, ''));
   const duplicates = normalized.filter((reference, index) => normalized.indexOf(reference) !== index);
   if (duplicates.length) throw new Error(`${shellName} loads assets twice: ${[...new Set(duplicates)].join(', ')}`);
+  const stylesheets = [...markup.matchAll(/<link[^>]+heritage-(?:app|login)\.bundle\.css\?ver=\d+[^>]*>/g)];
+  if (stylesheets.length !== 1) throw new Error(`${shellName} must load exactly one CSS bundle.`);
   const scripts = [...markup.matchAll(/<script\s+([^>]*\s)?src=["'][^"']+["'][^>]*>/g)].map(match => match[0]);
   const nonDeferred = scripts.filter(script => !script.includes('workbench-early.js') && !/(^|\s)defer(\s|=|>)/.test(script));
   if (nonDeferred.length) throw new Error(`${shellName} has parser-blocking runtime scripts: ${nonDeferred.join(', ')}`);

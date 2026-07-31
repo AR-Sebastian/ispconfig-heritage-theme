@@ -1,4 +1,10 @@
-# ISPConfig HERITAGE 1.0.15
+# ISPConfig HERITAGE 1.0.16
+
+HERITAGE 1.0.16 replaces 25 application stylesheet requests and five login
+stylesheet requests with two deterministic bundles. Modular source files remain
+authoritative, and validation proves exact source order and current output.
+
+## Previous releases
 
 HERITAGE 1.0.15 converts the complete post-bootstrap runtime to ordered deferred
 loading. Login, dashboard and module scripts can download in parallel while their
