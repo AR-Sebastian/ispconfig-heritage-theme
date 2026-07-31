@@ -1,12 +1,10 @@
-# ISPConfig HERITAGE 1.0.22
+# ISPConfig HERITAGE 1.0.23
 
-HERITAGE 1.0.22 completes the information hierarchy of responsive table cards,
-keeps programmatic page transitions visually calm on views without headings and
-retains the standalone favicon cache contract.
-The compact record identifier remains visible beside the promoted primary value
-on phones, while the ordinary desktop identity column stays hidden to avoid
-duplication. The browser gate proves this relationship together with action
-geometry, overflow, colour modes and runtime stability.
+HERITAGE 1.0.23 completes the responsive axis of the primary navigation.
+Desktop and tablet modules place their icons above centered, single-line labels;
+the mobile drawer retains compact horizontal icon-and-label rows. The runtime
+matrix now measures those rendered relationships in every module surface,
+viewport and colour mode instead of trusting stylesheet declarations alone.
 
 ## Previous releases
 

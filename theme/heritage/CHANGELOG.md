@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.23 – 2026-07-31
+
+- Desktop and tablet primary navigation modules place icons above centered labels.
+- The mobile drawer retains its compact horizontal icon-and-label arrangement.
+- Runtime validation measures navigation geometry across all tested viewports and colour modes.
+
 ## 1.0.22 – 2026-07-31
 
 - Views without a page heading retain accessible programmatic focus without drawing a full-content control ring.

@@ -167,14 +167,16 @@ body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__modules > l
   border-inline-start: 1px solid var(--hg-glass-line);
 }
 
-  body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__module {
+body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__module {
   position: relative;
   display: grid;
   width: 100%;
   min-height: var(--hg-module-height);
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: 22px auto;
   place-content: center;
-  justify-items: center;
+  justify-content: center !important;
+  justify-items: center !important;
   gap: 5px;
   padding: 7px 8px 6px;
   border: 0;
@@ -187,9 +189,23 @@ body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__modules > l
 
 body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__module > .wb-svg-icon,
 body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__module > svg {
+  grid-column: 1;
+  grid-row: 1;
   width: 21px;
   height: 21px;
   margin: 0;
+}
+
+body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__module > .title {
+  grid-column: 1;
+  grid-row: 2;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  color: inherit;
+  text-align: center !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__module::before {
@@ -382,8 +398,10 @@ body.heritage-shell.wb-login-page {
 
   body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__module {
     display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    justify-items: center;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: 22px auto;
+    justify-content: center !important;
+    justify-items: center !important;
     font-size: 10px;
     text-align: center;
   }
@@ -472,13 +490,19 @@ body.heritage-shell.wb-login-page {
   }
 
   body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__module {
-    display: flex;
+    display: flex !important;
     min-height: 52px;
-    justify-content: flex-start;
+    justify-content: flex-start !important;
+    justify-items: start !important;
     padding: 10px 12px;
     border-radius: 12px;
     color: rgba(232, 238, 249, .8);
     text-align: left;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__module > .title {
+    width: auto;
+    text-align: left !important;
   }
 
   body.heritage-shell.wb-app-navigation-enabled :is(
