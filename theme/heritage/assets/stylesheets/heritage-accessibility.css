@@ -55,8 +55,14 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent [aria-invalid='true']
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--hg-danger) 14%, transparent);
 }
 
+body.wb-login-page.heritage-shell :is(a, button, input, select, textarea, [role='button'], [tabindex]):focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--hg-accent) 72%, white);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--hg-accent) 14%, transparent);
+}
+
 @media (pointer: coarse) {
-  body.heritage-shell.wb-app-navigation-enabled :is(
+  body.heritage-shell:is(.wb-app-navigation-enabled, .wb-login-page) :is(
     button,
     .btn,
     [role='button'],
@@ -92,12 +98,44 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent [aria-invalid='true']
     border: 1px solid CanvasText;
     forced-color-adjust: auto;
   }
+
+  body.heritage-shell.wb-app-navigation-enabled :is(.wb-app-navigation__module.active, .wb-app-navigation__module[aria-current='page'], .wb-mobile-navigation__module.active, .wb-mobile-navigation__module[aria-current='page'], .wb-secondary-navigation a.active, .wb-secondary-navigation a[aria-current='page']) {
+    border: 2px solid Highlight;
+    color: HighlightText;
+    background: Highlight;
+    forced-color-adjust: none;
+  }
+
+  body.wb-login-page.heritage-shell :is(.wb-login-shell, .wb-login-hero, .wb-login-form-surface, input, button) {
+    border-color: CanvasText;
+    box-shadow: none;
+    forced-color-adjust: auto;
+  }
+}
+
+@media (prefers-contrast: more) {
+  body.heritage-shell {
+    --hg-border: color-mix(in srgb, currentColor 52%, transparent);
+    --hg-border-strong: color-mix(in srgb, currentColor 74%, transparent);
+    --hg-text-muted: color-mix(in srgb, currentColor 82%, transparent);
+  }
+
+  body.heritage-shell :is(.wb-app-navigation__module, .wb-mobile-navigation__module, .wb-secondary-navigation a, .wb-surface, .wb-panel, .wb-card, .form-control, input, select, textarea, button, .btn) { border-width: 2px; }
+  body.heritage-shell :is(a, button, [role='button'], [role='tab']):focus-visible { outline-width: 4px; box-shadow: none; }
+  body.heritage-shell :is(.text-muted, .help-block, .wb-field-help, .wb-meta) { color: var(--hg-text) !important; }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  body.heritage-shell :is(.wb-app-header, .wb-app-navigation, .wb-mobile-navigation, .wb-secondary-navigation, .wb-login-shell, .wb-login-hero, .wb-login-form-surface, .wb-dialog) {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body.heritage-shell.wb-app-navigation-enabled *,
-  body.heritage-shell.wb-app-navigation-enabled *::before,
-  body.heritage-shell.wb-app-navigation-enabled *::after {
+  body.heritage-shell *,
+  body.heritage-shell *::before,
+  body.heritage-shell *::after {
     scroll-behavior: auto !important;
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.13 – 2026-07-31
+
+- One accessibility authority now covers login and authenticated surfaces.
+- High contrast, forced colours, reduced motion and reduced transparency are supported.
+- Active navigation and keyboard focus remain unambiguous.
+
 ## 1.0.12 – 2026-07-31
 
 - German and English labels now have an explicit parity contract.
