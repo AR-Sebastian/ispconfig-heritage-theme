@@ -143,6 +143,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent > [data-heritage-feed
 body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-feedback] {
   overflow: hidden;
 }
+
 body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-feedback][data-heritage-auto-dismiss='true']::after {
   position: absolute;
   inset: auto 0 0;
@@ -153,6 +154,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-feedba
   transform-origin: left;
   animation: hg-feedback-life var(--hg-feedback-duration, 7000ms) linear forwards;
 }
+
 body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-feedback][data-workbench-dismiss-paused='true']::after {
   animation-play-state: paused;
 }

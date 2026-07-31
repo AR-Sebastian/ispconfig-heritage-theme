@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.0.20 – 2026-07-31
+
+- Mobile record cards retain their compact record identifier beside the promoted primary value.
+- The reusable identity badge follows the active colour mode without changing record links or actions.
+- Mobile runtime validation rejects hidden identity columns without a visible summary.
+
+## 1.0.19 – 2026-07-31
+
+- Wide list actions retain a stable sticky width instead of crowding the final controls.
+- Programmatic page-title focus remains available to assistive technology without drawing an interactive-control ring.
+- Targeted runtime validation now covers light and dark presentation explicitly.
+- Browser evidence rejects clipped row actions and accidental page-title focus decoration.
+
+## 1.0.18 – 2026-07-31
+
+- Content enhancement no longer retriggers itself through its own DOM mutations.
+- Runtime post-processing is debounced and temporarily disconnects its observer.
+- Authenticated module transitions remain responsive under real browser execution.
+- A focused browser suite now validates representative surfaces in seconds.
+
 ## 1.0.17 – 2026-07-31
 
 - Application JavaScript now uses two reproducible ordered bundles around Chart.js.

@@ -412,6 +412,21 @@ body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li 
     text-decoration: none;
   }
 
+  body.heritage-shell.wb-list-page .hg-record-identity {
+    display: inline-flex;
+    align-items: center;
+    justify-self: start;
+    margin-block-start: 7px;
+    padding: 3px 8px;
+    color: var(--hg-text-muted);
+    border: 1px solid color-mix(in srgb, var(--hg-accent) 18%, var(--hg-border));
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--hg-accent-soft) 58%, var(--hg-surface));
+    font-size: var(--hg-font-xs);
+    font-weight: 720;
+    line-height: 1.35;
+  }
+
   body.heritage-shell.wb-list-page .hg-record-primary-link::after {
     margin-inline-start: 7px;
     color: var(--hg-accent);
