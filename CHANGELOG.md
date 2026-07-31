@@ -1,11 +1,11 @@
 # Changelog
 
-## 1.0.30 – 2026-07-31
+## 1.0.31 – 2026-07-31
 
-- System configuration, Extension Installer, monitoring data and monitoring logs now share an explicit specialty-surface contract.
-- Dynamic monitoring views completely clear stale form profiles after navigation.
-- Long operational headings remain contained at compact intermediate widths.
-- Sixty browser states protect five specialty surfaces across six widths and both colour schemes.
+- Tools and Admin now expose explicit, stable semantic workspaces.
+- Personal settings no longer inherit stale table state after dynamic navigation.
+- Resynchronization, ISPConfig import, users, PHP versions, firewall and IP addresses join real-browser acceptance.
+- Eighty-four browser states protect seven surfaces across six widths and both colour schemes.
 
 ## 1.0.28 – 2026-07-31
 

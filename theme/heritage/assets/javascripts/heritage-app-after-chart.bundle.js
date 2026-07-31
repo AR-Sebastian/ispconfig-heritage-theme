@@ -474,12 +474,14 @@
   function syncModuleContext() {
     var pageContent = document.getElementById('pageContent');
     if (!pageContent) return;
+    var activeModule = String(window.ISPConfig && window.ISPConfig.workbenchActiveModule || '').toLowerCase();
     var isMonitor = !!pageContent.querySelector('.wb-monitor-workspace, .systemmonitor, .stateview, .panel_system, .codeview');
     var family = document.body.classList.contains('wb-dashboard-page') ? 'dashboard' :
       (isMonitor ? 'monitor' :
         (pageContent.querySelector('.wb-extension-workspace') ? 'extension' :
           (document.body.classList.contains('wb-form-profile--billing') || pageContent.querySelector('.wb-billing-product, .wb-billing-form, [data-billing-scope]') ? 'billing' :
-            (document.body.classList.contains('wb-form-profile--system-config') || pageContent.querySelector('.wb-system-workspace, .system-config') ? 'system' : 'standard'))));
+            (document.body.classList.contains('wb-form-profile--system-config') || pageContent.querySelector('.wb-system-workspace, .system-config') ? 'system' :
+              (/^(tools|admin)$/.test(activeModule) ? activeModule : 'standard')))));
     document.body.classList.toggle('wb-monitor-page', isMonitor);
     pageContent.classList.toggle('wb-monitor-surface', isMonitor);
     if (isMonitor) {
@@ -489,11 +491,13 @@
       });
       delete document.body.dataset.wbFormProfiles;
     }
+    if (!pageContent.querySelector('table')) pageContent.classList.remove('wb-table-workspace', 'wb-table-workspace--finalized');
     document.body.setAttribute('data-heritage-module-family', family);
     pageContent.setAttribute('data-heritage-module-family', family);
     if (isMonitor) pageContent.setAttribute('data-heritage-module-workspace', 'monitor');
     else if (family === 'system') pageContent.setAttribute('data-heritage-module-workspace', 'system');
-    else if (/^(monitor|system)$/.test(pageContent.getAttribute('data-heritage-module-workspace') || '')) pageContent.removeAttribute('data-heritage-module-workspace');
+    else if (/^(tools|admin)$/.test(family)) pageContent.setAttribute('data-heritage-module-workspace', family);
+    else if (/^(monitor|system|tools|admin)$/.test(pageContent.getAttribute('data-heritage-module-workspace') || '')) pageContent.removeAttribute('data-heritage-module-workspace');
     document.body.setAttribute('data-heritage-surface', isMonitor ? 'monitor' :
       (document.body.classList.contains('wb-list-page') ? 'list' :
         (document.body.classList.contains('wb-form-page') ? 'form' : 'module')));
@@ -518,7 +522,7 @@
         panel.setAttribute('aria-labelledby', heading.id);
       }
     });
-    pageContent.querySelectorAll('.wb-monitor-refresh-panel, .wb-monitor-refresh, .wb-specialty-actions, .wb-extension-actions, .wb-billing-actions').forEach(function (actions) {
+    pageContent.querySelectorAll('.wb-monitor-refresh-panel, .wb-monitor-refresh, .wb-specialty-actions, .wb-extension-actions, .wb-billing-actions, .wb-form-actions').forEach(function (actions) {
       actions.setAttribute('data-heritage-module-actions', 'true');
       actions.setAttribute('role', 'toolbar');
       actions.setAttribute('aria-label', (document.documentElement.lang || '').toLowerCase().indexOf('de') === 0 ? 'Modulaktionen' : 'Module actions');

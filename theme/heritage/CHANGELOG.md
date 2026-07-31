@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.31 – 2026-07-31
+
+- Tools und Admin besitzen jetzt explizite, stabile Arbeitsflächen.
+- Benutzereinstellungen übernehmen nach dynamischen Seitenwechseln keine alten Tabellenklassen mehr.
+- Resynchronisierung, ISPConfig-Import, Benutzer, PHP-Versionen, Firewall und IP-Adressen sind Teil der realen Browserabnahme.
+- 84 Browserzustände sichern sieben Oberflächen über sechs Breiten und beide Farbschemata ab.
+
 ## 1.0.30 – 2026-07-31
 
 - Systemkonfiguration, Extension Installer sowie Monitoring-Daten und -Protokolle besitzen einen gemeinsamen, verbindlichen Oberflächenvertrag.
