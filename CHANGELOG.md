@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.28 – 2026-07-31
+
+- The form system now recognizes ISPConfig's real outer page-form structure.
+- Form metadata is applied only to detail pages and removed cleanly on list navigation.
+- Customer, website, database, mailbox, DNS-zone, support-message and server forms join V1 acceptance.
+- 240 runtime states protect 20 surfaces across six widths and both colour schemes.
+
 ## 1.0.27 – 2026-07-31
 
 - Table V1 acceptance now covers 13 representative ISPConfig surfaces.
