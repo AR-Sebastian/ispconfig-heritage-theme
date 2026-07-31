@@ -27,6 +27,44 @@ if grep -RIEq 'lorem ipsum|\bTODO\b|\bFIXME\b|themes/workbench/' "$theme"; then
   exit 1
 fi
 while IFS= read -r -d '' file; do node --check "$file"; done < <(find "$theme" -type f -name '*.js' -print0)
+
+node - "$theme" <<'NODE'
+const fs = require('fs');
+const path = require('path');
+const theme = process.argv[2];
+const textExtensions = new Set(['.css', '.htm', '.html', '.js', '.json', '.md', '.xml', '.webmanifest', '.svg', '.php']);
+const walk = directory => fs.readdirSync(directory, {withFileTypes: true}).flatMap(entry => {
+  const target = path.join(directory, entry.name);
+  return entry.isDirectory() ? walk(target) : [target];
+});
+const themeFiles = walk(theme);
+const corpus = themeFiles.filter(file => textExtensions.has(path.extname(file).toLowerCase()))
+  .map(file => fs.readFileSync(file, 'utf8')).join('\n');
+const assets = walk(path.join(theme, 'assets'));
+const unused = assets.filter(file => !corpus.includes(path.basename(file)));
+if (unused.length) throw new Error(`Unreferenced assets: ${unused.map(file => path.relative(theme, file)).join(', ')}`);
+const total = assets.reduce((sum, file) => sum + fs.statSync(file).size, 0);
+const largest = assets.map(file => ({file, size: fs.statSync(file).size})).sort((a, b) => b.size - a.size)[0];
+if (total > 1600000) throw new Error(`Asset payload exceeds 1.6 MB source budget: ${total}`);
+if (largest.size > 225000) throw new Error(`Asset exceeds 225 KB source budget: ${path.basename(largest.file)} (${largest.size})`);
+for (const shellName of ['main.tpl.htm', 'main_login.tpl.htm']) {
+  const markup = fs.readFileSync(path.join(theme, 'templates', shellName), 'utf8');
+  const references = [...markup.matchAll(/(?:src|href)=["']([^"']*themes\/heritage\/assets\/[^"']+)["']/g)].map(match => match[1]);
+  const uncached = references.filter(reference => !/\?ver=\d+$/.test(reference));
+  if (uncached.length) throw new Error(`${shellName} has unversioned assets: ${uncached.join(', ')}`);
+  const normalized = references.map(reference => reference.replace(/^\.\.\//, '').replace(/\?ver=\d+$/, ''));
+  const duplicates = normalized.filter((reference, index) => normalized.indexOf(reference) !== index);
+  if (duplicates.length) throw new Error(`${shellName} loads assets twice: ${[...new Set(duplicates)].join(', ')}`);
+}
+const main = fs.readFileSync(path.join(theme, 'templates', 'main.tpl.htm'), 'utf8');
+const head = main.slice(0, main.toLowerCase().indexOf('</head>'));
+const blocking = [...head.matchAll(/<script[^>]+src=["']([^"']*themes\/heritage\/assets\/[^"']+)["']/g)].map(match => match[1]);
+if (blocking.length !== 1 || !/workbench-early\.js\?ver=\d+$/.test(blocking[0])) {
+  throw new Error('Only workbench-early.js may block authenticated-shell parsing.');
+}
+console.log(`HERITAGE asset graph passed: ${assets.length} files, ${total} bytes.`);
+NODE
+
 bash -n "$root/scripts/manage-theme.sh" "$root/scripts/test-manager.sh" "$root/scripts/build-release.sh"
 "$root/scripts/test-manager.sh"
 echo 'HERITAGE validation passed.'

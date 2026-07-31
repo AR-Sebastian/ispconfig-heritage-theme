@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.14 – 2026-07-31
+
+- Removed an unreferenced private test logo from the distributable package.
+- Added a complete asset-reference and cache-generation release contract.
+- Added source payload budgets and duplicate shell-load protection.
+- Only the intentional early bootstrap may block authenticated-shell parsing.
+
 ## 1.0.13 – 2026-07-31
 
 - Login and authenticated surfaces now share one accessibility authority.

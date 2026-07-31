@@ -1,4 +1,4 @@
-# ISPConfig HERITAGE 1.0.13
+# ISPConfig HERITAGE 1.0.14
 
 ## Deutsch
 
@@ -10,7 +10,7 @@ dieselbe Informationsarchitektur als zugängliche Navigation dargestellt.
 
 ### Status und Kompatibilität
 
-- Version: `1.0.13`
+- Version: `1.0.14`
 - Status: stabil
 - ISPConfig-Basis: `3.3.1p1`
 - geprüft mit Administrator-, Reseller-, Kunden- und Mailuser-Rollen
@@ -52,7 +52,7 @@ architecture through an accessible responsive navigation.
 
 ### Status and compatibility
 
-- Version: `1.0.13`
+- Version: `1.0.14`
 - Stage: stable
 - ISPConfig baseline: `3.3.1p1`
 - validated with administrator, reseller, client and mail-user roles
