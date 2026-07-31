@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.5 – 2026-07-31
+
+- Table headings and visible filters remain aligned while scrolling.
+- Sort direction is exposed visually and through accessibility semantics.
+- Generic row actions receive meaningful German or English labels.
+
 ## 1.0.4 – 2026-07-31
 
 - Long forms now summarize explicit validation errors.

@@ -22,12 +22,32 @@
       var headers = table.querySelectorAll('thead tr:first-child > th, thead tr:first-child > td');
       if (!headers.length) return;
       var identityLabel = headers[0].textContent.trim();
-      var isCompactIdentity = headers[0].classList.contains('small-col') &&
-        /^(?:.*\s)?id$/i.test(identityLabel);
+      var isCompactIdentity = /^(?:.*[\s_-])?id$/i.test(identityLabel);
       if (!isCompactIdentity) return;
 
+      var primaryIndex = Array.prototype.findIndex.call(headers, function (header, index) {
+        if (!index) return false;
+        return /^(?:firmenname|company|domain(?:name)?|benutzername|username|e-?mail|name)$/i.test(header.textContent.replace(/\s+/g, ' ').trim());
+      });
+      if (primaryIndex < 1) return;
+
+      headers[primaryIndex].classList.add('hg-table-column--primary');
+
       table.querySelectorAll('tr').forEach(function (row) {
-        if (row.children[0]) row.children[0].classList.add('hg-table-column--identity');
+        var identity = row.children[0];
+        if (!identity) return;
+        if (row.closest('tbody')) {
+          var sourceLink = identity.querySelector('a[href]');
+          var primary = row.children[primaryIndex];
+          if (primary) primary.classList.add('hg-table-column--primary');
+          if (sourceLink && primary && !primary.querySelector('a, button, input') && primary.textContent.trim()) {
+            var promoted = sourceLink.cloneNode(false);
+            promoted.className = 'hg-record-primary-link';
+            promoted.textContent = primary.textContent.trim();
+            primary.replaceChildren(promoted);
+          }
+        }
+        identity.classList.add('hg-table-column--identity');
       });
     });
   }
@@ -308,6 +328,47 @@
     }
   }
 
+  function enhanceTables() {
+    var host = document.getElementById('pageContent');
+    if (!host) return;
+    var german = (document.documentElement.lang || '').toLowerCase().indexOf('de') === 0;
+    host.querySelectorAll('.wb-data-table').forEach(function (table) {
+      var headingRow = table.querySelector('thead > tr:first-child');
+      var headers = headingRow ? Array.prototype.slice.call(headingRow.children) : [];
+      headers.forEach(function (header) {
+        if (header.matches('.sorting_asc, [data-sort-direction="asc"]')) header.setAttribute('aria-sort', 'ascending');
+        else if (header.matches('.sorting_desc, [data-sort-direction="desc"]')) header.setAttribute('aria-sort', 'descending');
+        else if (header.matches('.sorting, [data-sortable="true"]')) header.setAttribute('aria-sort', 'none');
+      });
+
+      var filterRow = table.querySelector('thead > tr[data-workbench-filter-row]');
+      if (filterRow) {
+        filterRow.setAttribute('aria-label', german ? 'Tabellenfilter' : 'Table filters');
+        filterRow.querySelectorAll('input, select').forEach(function (control) {
+          if (control.getAttribute('aria-label')) return;
+          var cell = control.closest('th, td');
+          var index = cell ? Array.prototype.indexOf.call(filterRow.children, cell) : -1;
+          var heading = index >= 0 && headers[index] ? headers[index].textContent.replace(/\s+/g, ' ').trim() : '';
+          control.setAttribute('aria-label', (german ? 'Filtern nach ' : 'Filter by ') + (heading || (german ? 'Wert' : 'value')));
+        });
+      }
+
+      table.querySelectorAll('.wb-row-action').forEach(function (control) {
+        var current = (control.getAttribute('aria-label') || control.getAttribute('title') || '').trim();
+        var generic = /^(?:aktion|action)\s*\d*$/i.test(current);
+        var href = (control.getAttribute('href') || '').toLowerCase();
+        var label = current;
+        if (control.classList.contains('wb-row-action--danger') || /delete|del=/.test(href)) label = german ? 'Löschen' : 'Delete';
+        else if (control.classList.contains('wb-row-action--login') || /login/.test(href)) label = german ? 'Anmelden' : 'Log in';
+        else if (control.classList.contains('wb-row-action--edit') || /edit/.test(href)) label = german ? 'Bearbeiten' : 'Edit';
+        else if (/stat|traffic/.test(href)) label = german ? 'Statistiken' : 'Statistics';
+        else if (!label || generic) label = german ? 'Weitere Aktion' : 'More action';
+        control.setAttribute('aria-label', label);
+        control.setAttribute('title', label);
+      });
+    });
+  }
+
   function explicitInvalidFields(form) {
     var fields = [];
     form.querySelectorAll(
@@ -401,6 +462,7 @@
     localizeComponentLabels();
     syncModuleContext();
     enhanceForms();
+    enhanceTables();
     enhanceAccessibility();
     enhanceDashboard();
     window.setTimeout(enhanceDashboard, 250);
@@ -419,6 +481,7 @@
         syncModuleContext();
         enhanceAccessibility();
         enhanceForms();
+        enhanceTables();
       }).observe(pageContent, {
         childList: true,
         subtree: true,
@@ -434,6 +497,7 @@
     localizeComponentLabels();
     syncModuleContext();
     enhanceForms();
+    enhanceTables();
     enhanceAccessibility();
     enhanceDashboard();
     window.setTimeout(enhanceDashboard, 120);
