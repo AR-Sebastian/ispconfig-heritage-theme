@@ -183,6 +183,12 @@ body.heritage-shell.wb-list-page .hg-record-identity {
   display: none;
 }
 
+/* ISPConfig may retain historical service flags in core-owned list markup.
+ * HERITAGE does not present retired XMPP or virtual-server surfaces. */
+body.heritage-shell.wb-list-page .wb-data-table .hg-table-column--retired {
+  display: none !important;
+}
+
 body.heritage-shell.wb-list-page .wb-data-table .wb-table-actions {
   position: sticky;
   inset-inline-end: 0;
@@ -432,6 +438,10 @@ body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li 
   }
 
   body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > .hg-table-column--identity {
+    display: none !important;
+  }
+
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > .hg-table-column--retired {
     display: none !important;
   }
 

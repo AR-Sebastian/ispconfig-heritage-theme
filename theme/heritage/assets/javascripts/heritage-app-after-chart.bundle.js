@@ -293,6 +293,18 @@
       var labels = headers.map(function (header) {
         return header.textContent.replace(/\s+/g, ' ').trim();
       });
+      var retiredIndexes = labels.reduce(function (indexes, label, index) {
+        if (/^(?:xmpp|vserver)$/i.test(label)) indexes.push(index);
+        return indexes;
+      }, []);
+      retiredIndexes.forEach(function (index) {
+        headers[index].classList.add('hg-table-column--retired');
+      });
+      table.querySelectorAll('tr').forEach(function (row) {
+        retiredIndexes.forEach(function (index) {
+          if (row.children[index]) row.children[index].classList.add('hg-table-column--retired');
+        });
+      });
       var firstDataRow = table.querySelector('tbody > tr.wb-table-data-row');
       var actionCell = firstDataRow ? firstDataRow.querySelector('.wb-table-actions') : null;
       var actionIndex = actionCell ? Array.prototype.indexOf.call(firstDataRow.children, actionCell) : -1;

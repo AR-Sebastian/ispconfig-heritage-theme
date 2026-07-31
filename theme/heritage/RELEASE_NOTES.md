@@ -1,13 +1,11 @@
-# ISPConfig HERITAGE 1.0.26
+# ISPConfig HERITAGE 1.0.27
 
-HERITAGE 1.0.26 unifies the customer, website, mail and DNS list families under
-one responsive table contract. Columns now fill the available table viewport,
-record actions share a stable right-aligned lane with an explicit heading, and
-legacy width hints can no longer distort individual modules. Compact record
-summaries remain available on cards without duplicating identity values on
-desktop. Multi-create toolbars now distinguish the primary path from secondary
-alternatives. The runtime matrix covers 72 visual states across six surfaces,
-six viewport classes and both colour schemes.
+HERITAGE 1.0.27 closes the table V1 acceptance block across 13 representative
+ISPConfig surfaces. Databases, FTP users, cronjobs, mailboxes, support messages,
+servers and remote users now join the original reference lists in a 156-state
+responsive matrix. Historical XMPP and virtual-server columns emitted by the
+unchanged ISPConfig server list are no longer presented by HERITAGE at any
+viewport width.
 
 ## Previous releases
 

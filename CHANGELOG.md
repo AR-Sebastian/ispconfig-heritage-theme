@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.27 – 2026-07-31
+
+- Table V1 acceptance now covers 13 representative ISPConfig surfaces.
+- Databases, FTP, cronjobs, mailboxes, support, servers and remote users extend the reference matrix.
+- Historical XMPP and vServer columns are not presented at any responsive width.
+- 156 runtime states protect geometry, actions, identities and retired-service boundaries.
+
 ## 1.0.26 – 2026-07-31
 
 - Customer, website, mail and DNS lists now share one table contract.
