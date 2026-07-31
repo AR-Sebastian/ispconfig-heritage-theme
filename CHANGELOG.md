@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.14 – 2026-07-31
+
+- Removed a private, unreferenced image from the distribution.
+- Every packaged asset must now be referenced by theme source.
+- Shell assets require cache generations and may not be loaded twice.
+- Source payload budgets and the intentional early bootstrap are release gates.
+
 ## 1.0.13 – 2026-07-31
 
 - One accessibility authority now covers login and authenticated surfaces.

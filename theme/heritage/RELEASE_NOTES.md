@@ -1,4 +1,11 @@
-# ISPConfig HERITAGE 1.0.13
+# ISPConfig HERITAGE 1.0.14
+
+HERITAGE 1.0.14 closes package and loading hygiene for the stable V1 line. Every
+distributed asset must be referenced, cache-versioned and loaded only once per
+shell. Payload budgets and the single intentional early bootstrap are now enforced
+by validation, and an obsolete private test logo has been removed.
+
+## Previous releases
 
 HERITAGE 1.0.13 establishes a shared accessibility authority across login and the
 authenticated application. Increased contrast, forced system colours, reduced
