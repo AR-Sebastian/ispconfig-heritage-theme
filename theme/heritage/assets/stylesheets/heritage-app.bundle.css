@@ -8328,16 +8328,16 @@ body.wb-list-page .wb-table-workspace--finalized .wb-empty-state--table[data-wb-
   content: ' Die primäre Aktion befindet sich oben in der Befehlsleiste.';
 }
 
-body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport:has(.wb-table-empty-row) {
+body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport--empty {
   min-height: 190px;
   overflow-x: clip;
 }
 
-body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport:has(.wb-table-empty-row) .wb-data-table {
+body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport--empty .wb-data-table {
   min-inline-size: 100%;
 }
 
-body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport:has(.wb-table-empty-row) + .wb-table-footer {
+body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport--empty + .wb-table-footer {
   margin-top: 0;
 }
 
@@ -8428,11 +8428,11 @@ body.wb-list-page .wb-table-workspace--finalized .wb-empty-state--table {
   padding-block: 20px;
 }
 
-body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport:has(.wb-table-empty-row) {
+body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport--empty {
   min-height: 0;
 }
 
-body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport:has(.wb-table-empty-row) .wb-data-table {
+body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport--empty .wb-data-table {
   block-size: auto;
 }
 
@@ -20080,6 +20080,10 @@ body.heritage-shell.wb-list-page .wb-filter-toolbar {
 }
 
 body.heritage-shell.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport {
+  position: relative;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  overscroll-behavior-inline: contain;
   border: 1px solid var(--hg-border);
   border-radius: var(--hg-radius-lg) var(--hg-radius-lg) 0 0;
   background: var(--hg-surface);
@@ -20193,6 +20197,7 @@ body.heritage-shell.wb-list-page .wb-data-table .wb-table-actions {
   box-sizing: border-box;
   inline-size: 104px;
   min-inline-size: 104px;
+  padding-inline: 10px;
   white-space: nowrap;
   border-inline-start: 1px solid var(--hg-border);
   background: color-mix(in srgb, var(--hg-surface) 96%, transparent);
@@ -20316,7 +20321,7 @@ body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li 
 /* Viewport fallback for old list layouts whose intrinsic table width prevents
  * their container query from becoming narrow enough. Heritage must still
  * present records as complete cards on phones. */
-@media (max-width: 760px) {
+@media (max-width: 1180px) {
   body.heritage-shell.wb-list-page #pageContent.wb-table-workspace--finalized > .wb-list-command-bar {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) !important;
@@ -20503,7 +20508,7 @@ body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li 
   }
 }
 
-@media (min-width: 480px) and (max-width: 760px) {
+@media (min-width: 640px) and (max-width: 1180px) {
   body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

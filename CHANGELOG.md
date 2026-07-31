@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.24 – 2026-07-31
+
+- Populated tables retain their own bounded horizontal scroll context.
+- Dormant legacy empty rows no longer activate empty-state overflow geometry.
+- Sticky row actions remain fully visible inside the table viewport.
+- Tablet-width records use an adaptive card layout inside the desktop shell.
+
 ## 1.0.23 – 2026-07-31
 
 - Desktop and tablet primary navigation modules place icons above centered labels.
