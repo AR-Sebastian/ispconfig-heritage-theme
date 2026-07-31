@@ -134,6 +134,50 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent > .wb-feedback-stack 
   grid-column: 1 / -1;
 }
 
+body.heritage-shell.wb-app-navigation-enabled #pageContent > [data-heritage-feedback-stack='true'] {
+  position: relative;
+  display: grid;
+  gap: 8px;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-feedback] {
+  overflow: hidden;
+}
+body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-feedback][data-heritage-auto-dismiss='true']::after {
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  background: currentColor;
+  content: '';
+  opacity: .38;
+  transform-origin: left;
+  animation: hg-feedback-life var(--hg-feedback-duration, 7000ms) linear forwards;
+}
+body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-feedback][data-workbench-dismiss-paused='true']::after {
+  animation-play-state: paused;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-feedback='success'] {
+  border-inline-start-color: var(--hg-success);
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-feedback='warning'] {
+  border-inline-start-color: var(--hg-warning);
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-feedback='danger'] {
+  border-inline-start-color: var(--hg-danger);
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-feedback='info'] {
+  border-inline-start-color: var(--hg-info);
+}
+
+@keyframes hg-feedback-life {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0); }
+}
+
 body.heritage-shell.wb-app-navigation-enabled #pageContent > .wb-feedback-stack > :is(
   .alert,
   .alert-notification,
@@ -287,5 +331,10 @@ body.heritage-shell.wb-app-navigation-enabled :is(
 @media (prefers-reduced-motion: reduce) {
   body.heritage-shell.wb-app-navigation-enabled .wb-dialog__surface {
     transition: none;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-feedback][data-heritage-auto-dismiss='true']::after {
+    animation: none;
+    display: none;
   }
 }

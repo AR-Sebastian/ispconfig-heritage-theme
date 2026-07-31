@@ -1,13 +1,17 @@
-# ISPConfig HERITAGE 1.0.8
+# ISPConfig HERITAGE 1.0.9
 
-HERITAGE 1.0.8 establishes one form language across every supported module.
-Sections, fields, supporting text, validation and action bars now retain the
-same hierarchy from desktop to narrow phones.
+HERITAGE 1.0.9 establishes one interaction-feedback language across every
+supported module. Dialogs, confirmations, notifications and runtime feedback
+now retain the same hierarchy from desktop to narrow phones.
 It targets ISPConfig 3.3.1p1 and keeps the original `default` theme as the
 required recovery path.
 
 Highlights:
 
+- semantic dialog tone, description and action-group contracts;
+- consistent severity styling and accessible live regions;
+- pause-aware lifetime indicators for temporary feedback;
+- predictable safe-first desktop and mobile dialog actions;
 - unified semantic form sections and field groups;
 - accessible required, invalid, disabled and supporting-text states;
 - predictable primary, secondary and destructive action order;

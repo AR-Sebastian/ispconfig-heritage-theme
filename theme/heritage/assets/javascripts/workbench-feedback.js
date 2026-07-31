@@ -48,6 +48,7 @@
     var state = tone(alert);
     alert.dataset.workbenchFeedback = 'true';
     alert.dataset.workbenchTone = state;
+    alert.setAttribute('data-heritage-feedback', state);
     alert.classList.add('wb-feedback');
     alert.setAttribute('role', state === 'danger' || state === 'warning' ? 'alert' : 'status');
     alert.setAttribute('aria-live', state === 'danger' || state === 'warning' ? 'assertive' : 'polite');
@@ -70,6 +71,28 @@
 
   function enhanceDialog(dialog) {
     dialog.classList.add('wb-dialog--enhanced');
+    dialog.setAttribute('data-heritage-dialog', 'true');
+    var dangerAction = dialog.querySelector('.wb-dialog__action--danger, .btn-danger, [data-workbench-tab-confirm-action="discard"]');
+    var primaryAction = dialog.querySelector('.wb-dialog__action--primary, .btn-primary, [data-workbench-tab-confirm-action="save"]');
+    dialog.setAttribute('data-heritage-dialog-tone', dangerAction ? 'warning' : (primaryAction ? 'action' : 'neutral'));
+    var body = dialog.querySelector('.wb-dialog__body');
+    if (body && !dialog.getAttribute('aria-describedby')) {
+      var description = body.querySelector('p, .wb-dialog__supporting-text');
+      if (description) {
+        if (!description.id) description.id = (dialog.id || 'heritage-dialog') + '-description';
+        dialog.setAttribute('aria-describedby', description.id);
+      }
+    }
+    var footer = dialog.querySelector('.wb-dialog__footer');
+    if (footer) {
+      footer.setAttribute('role', 'group');
+      footer.setAttribute('aria-label', localized('Dialogaktionen', 'Dialog actions'));
+      Array.prototype.forEach.call(footer.querySelectorAll('button, a'), function (action) {
+        var kind = action.matches('.wb-dialog__action--primary, .btn-primary') ? 'primary' :
+          (action.matches('.wb-dialog__action--danger, .btn-danger') ? 'danger' : 'secondary');
+        action.setAttribute('data-heritage-dialog-action', kind);
+      });
+    }
     var list = dialog.querySelector('.wb-dialog__body > ul');
     if (list) {
       list.classList.add('wb-dialog__activity-list');
@@ -96,6 +119,8 @@
   function scheduleGeneratedDismiss(alert, toneName) {
     if (!alert || ['success', 'info'].indexOf(toneName) === -1) return;
     var duration = toneName === 'success' ? 7000 : 10000;
+    alert.setAttribute('data-heritage-auto-dismiss', 'true');
+    alert.style.setProperty('--hg-feedback-duration', duration + 'ms');
     var controller = alert.workbenchDismissController || {};
     if (controller.timer) window.clearTimeout(controller.timer);
     controller.timer = null;
@@ -156,6 +181,8 @@
       stack = document.createElement('div');
       stack.className = 'wb-feedback-stack';
       stack.setAttribute('aria-label', localized('Meldungen', 'Notifications'));
+      stack.setAttribute('data-heritage-feedback-stack', 'true');
+      stack.setAttribute('role', 'region');
       host.prepend(stack);
     }
 
