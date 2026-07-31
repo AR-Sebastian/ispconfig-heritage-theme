@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.4 – 2026-07-31
+
+- Added form-wide validation summaries for explicit ISPConfig validation errors.
+- Added per-tab error counters for long multi-tab detail forms.
+- Added one-step navigation to the first invalid field, including inactive tabs.
+- Preserved server validation, native form submission and existing permissions.
+
 ## 1.0.3 – 2026-07-31
 
 - Rebuilt the wide dashboard module grid as genuinely compact 1x1 destinations.

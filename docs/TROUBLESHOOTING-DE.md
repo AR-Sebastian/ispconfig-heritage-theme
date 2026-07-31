@@ -11,7 +11,7 @@ cat /usr/local/ispconfig/interface/web/themes/heritage/ispconfig_version
 ```
 
 Für diese Ausgabe muss `3.3.1p1` erscheinen. Andere ISPConfig-Versionen sind
-nicht Bestandteil der Freigabe von HERITAGE 1.0.3.
+nicht Bestandteil der Freigabe von HERITAGE 1.0.4.
 
 ## Nach der Auswahl bleibt das bisherige Theme sichtbar
 

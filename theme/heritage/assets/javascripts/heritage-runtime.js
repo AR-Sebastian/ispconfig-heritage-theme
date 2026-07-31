@@ -296,6 +296,83 @@
       actions.setAttribute('role', 'region');
       actions.setAttribute('aria-label', german ? 'Formularaktionen' : 'Form actions');
     });
+
+    syncFormValidation(form, german);
+    if (form.dataset.heritageValidationBound !== 'true') {
+      form.dataset.heritageValidationBound = 'true';
+      ['input', 'change'].forEach(function (eventName) {
+        form.addEventListener(eventName, function () {
+          window.requestAnimationFrame(function () { syncFormValidation(form, german); });
+        });
+      });
+    }
+  }
+
+  function explicitInvalidFields(form) {
+    var fields = [];
+    form.querySelectorAll(
+      '[aria-invalid="true"], .has-error input, .has-error select, .has-error textarea, ' +
+      '.wb-field-error input, .wb-field-error select, .wb-field-error textarea'
+    ).forEach(function (field) {
+      if (field.matches('input, select, textarea') && fields.indexOf(field) < 0) fields.push(field);
+    });
+    return fields;
+  }
+
+  function syncFormValidation(form, german) {
+    var invalid = explicitInvalidFields(form);
+    var tabs = form.querySelectorAll('.wb-form-tabs a[href^="#"], .nav-tabs a[href^="#"]');
+    tabs.forEach(function (tab) {
+      var target = tab.getAttribute('href');
+      var pane = target && target.length > 1 ? form.querySelector(target) : null;
+      var count = pane ? invalid.filter(function (field) { return pane.contains(field); }).length : 0;
+      var badge = tab.querySelector('.hg-tab-error-count');
+      if (!tab.dataset.heritageBaseLabel) {
+        var labelSource = tab.cloneNode(true);
+        var oldBadge = labelSource.querySelector('.hg-tab-error-count');
+        if (oldBadge) oldBadge.remove();
+        tab.dataset.heritageBaseLabel = labelSource.textContent.replace(/\s+/g, ' ').trim();
+      }
+      if (!count) {
+        if (badge) badge.remove();
+        tab.removeAttribute('data-heritage-has-errors');
+        tab.setAttribute('aria-label', tab.dataset.heritageBaseLabel);
+        return;
+      }
+      if (!badge) {
+        badge = document.createElement('span');
+        badge.className = 'hg-tab-error-count';
+        badge.setAttribute('aria-hidden', 'true');
+        tab.appendChild(badge);
+      }
+      if (badge.textContent !== String(count)) badge.textContent = String(count);
+      tab.setAttribute('data-heritage-has-errors', 'true');
+      tab.setAttribute('aria-label', tab.dataset.heritageBaseLabel + ' – ' + count + ' ' + (german ? 'Fehler' : (count === 1 ? 'error' : 'errors')));
+    });
+
+    var summary = form.querySelector(':scope > .hg-form-validation-summary');
+    if (!invalid.length) {
+      if (summary) summary.remove();
+      return;
+    }
+    if (!summary) {
+      summary = document.createElement('button');
+      summary.type = 'button';
+      summary.className = 'hg-form-validation-summary';
+      summary.addEventListener('click', function () {
+        var first = explicitInvalidFields(form)[0];
+        if (!first) return;
+        var pane = first.closest('.tab-pane');
+        if (pane && !pane.classList.contains('active')) {
+          var tab = form.querySelector('.wb-form-tabs a[href="#' + pane.id + '"], .nav-tabs a[href="#' + pane.id + '"]');
+          if (tab) tab.click();
+        }
+        window.setTimeout(function () { first.focus(); first.scrollIntoView({ block: 'center', behavior: 'smooth' }); }, 40);
+      });
+      form.insertBefore(summary, form.firstChild);
+    }
+    var message = invalid.length + ' ' + (german ? (invalid.length === 1 ? 'Eingabe prüfen' : 'Eingaben prüfen') : (invalid.length === 1 ? 'field needs attention' : 'fields need attention'));
+    if (summary.textContent !== message) summary.textContent = message;
   }
 
   function markShell() {

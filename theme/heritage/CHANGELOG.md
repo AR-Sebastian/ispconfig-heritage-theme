@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.4 – 2026-07-31
+
+- Long forms now summarize explicit validation errors.
+- Tabs display compact error counts and can reveal the first invalid field.
+- Validation guidance remains theme-only and preserves native submission.
+
 ## 1.0.3 – 2026-07-31
 
 - Dashboard module cards now use a compact six-column wide-screen grid.

@@ -1,6 +1,6 @@
-# ISPConfig HERITAGE 1.0.3
+# ISPConfig HERITAGE 1.0.4
 
-HERITAGE 1.0.3 turns the dashboard into a denser operational cockpit. Primary
+HERITAGE 1.0.4 improves guidance in long forms and multi-tab detail views. Primary
 icons retain concise text labels, the horizontal navigation remains available
 down to 721 pixels, and light-theme quick-create actions use quiet surfaces.
 It targets ISPConfig 3.3.1p1 and keeps the original `default` theme as the
@@ -8,6 +8,8 @@ required recovery path.
 
 Highlights:
 
+- form-wide summaries for explicit validation errors;
+- compact per-tab error counters and first-error navigation;
 - compact six-column module destinations on wide dashboards;
 - interactive metric points with pointer, touch and keyboard feedback;
 - responsive four-, three-, two- and one-column dashboard fallbacks;
