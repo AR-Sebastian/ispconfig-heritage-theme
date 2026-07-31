@@ -354,6 +354,9 @@
     var german = (document.documentElement.lang || '').toLowerCase().indexOf('de') === 0;
     var controls = form.querySelectorAll('input:not([type="hidden"]), select, textarea');
     form.setAttribute('data-heritage-form-density', controls.length > 28 ? 'long' : (controls.length > 12 ? 'standard' : 'compact'));
+    form.setAttribute('data-heritage-form-system', 'true');
+    form.setAttribute('data-heritage-field-count', String(controls.length));
+    if (!form.getAttribute('aria-label')) form.setAttribute('aria-label', german ? 'Bearbeitungsformular' : 'Edit form');
 
     var fieldContracts = {
       company_name: { autocomplete: 'organization' },
@@ -381,9 +384,23 @@
       });
     });
 
-    form.querySelectorAll('.wb-field-group, .form-group, .ctrlHolder').forEach(function (group) {
+    form.querySelectorAll('.wb-form-section, fieldset, .panel, .wb-content-panel').forEach(function (section, sectionIndex) {
+      var heading = section.querySelector(':scope > .wb-form-section-heading, :scope > legend, :scope > .panel-heading, :scope > .wb-content-panel__header');
+      section.setAttribute('data-heritage-form-section', 'true');
+      section.setAttribute('role', section.tagName === 'FIELDSET' ? 'group' : 'region');
+      if (heading) {
+        if (!heading.id) heading.id = 'heritage-form-section-' + sectionIndex;
+        section.setAttribute('aria-labelledby', heading.id);
+      }
+    });
+
+    form.querySelectorAll('.wb-field-group, .form-group, .ctrlHolder').forEach(function (group, groupIndex) {
       var field = group.querySelector('input:not([type="hidden"]), select, textarea');
       if (!field) return;
+      group.setAttribute('data-heritage-field', 'true');
+      var label = group.querySelector('label, .control-label');
+      if (label && !label.id) label.id = 'heritage-field-label-' + groupIndex;
+      if (label && !field.getAttribute('aria-labelledby') && !field.getAttribute('aria-label')) field.setAttribute('aria-labelledby', label.id);
       var help = group.querySelector('.help-block, .form-text, .field-help, .wb-field-help');
       var error = group.querySelector('.help-block-error, .field-error, .wb-field-error');
       var descriptions = (field.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean);
@@ -394,11 +411,26 @@
       });
       if (descriptions.length) field.setAttribute('aria-describedby', descriptions.join(' '));
       group.classList.toggle('hg-field-group--disabled', field.disabled);
+      group.toggleAttribute('data-heritage-required', field.required || field.getAttribute('aria-required') === 'true' || group.classList.contains('wb-field-group--required'));
+      group.toggleAttribute('data-heritage-invalid', field.getAttribute('aria-invalid') === 'true' || group.classList.contains('has-error') || group.classList.contains('wb-field-group--invalid'));
+      if (help) help.setAttribute('role', 'note');
+      if (error) {
+        error.setAttribute('role', 'alert');
+        error.setAttribute('aria-live', 'polite');
+      }
     });
 
     form.querySelectorAll('.wb-form-actions').forEach(function (actions) {
       actions.setAttribute('role', 'region');
       actions.setAttribute('aria-label', german ? 'Formularaktionen' : 'Form actions');
+      actions.setAttribute('data-heritage-form-actions', 'true');
+      var actionControls = actions.querySelectorAll('button, a, input[type="button"], input[type="submit"]');
+      actions.setAttribute('data-heritage-action-count', String(actionControls.length));
+      actionControls.forEach(function (action) {
+        if (action.matches('.formbutton-success, .btn-primary, .wb-form-action--primary, .wb-action-control--primary')) action.setAttribute('data-heritage-action', 'primary');
+        else if (action.matches('.formbutton-danger, .btn-danger, .wb-form-action--danger')) action.setAttribute('data-heritage-action', 'danger');
+        else action.setAttribute('data-heritage-action', 'secondary');
+      });
     });
 
     syncFormValidation(form, german);

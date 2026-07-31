@@ -193,6 +193,67 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-content-panel__hea
 
 /* Fields and compound controls */
 
+body.heritage-shell.wb-form-page #pageForm[data-heritage-form-system='true'] {
+  --hg-form-label-width: clamp(132px, 22%, 210px);
+}
+
+body.heritage-shell.wb-form-page #pageForm[data-heritage-form-system='true'] [data-heritage-form-section='true'] {
+  isolation: isolate;
+  scroll-margin-top: calc(var(--hg-header-height, 70px) + var(--hg-module-height, 68px) + 76px);
+}
+
+body.heritage-shell.wb-form-page #pageForm[data-heritage-form-system='true'] [data-heritage-form-section='true'] > :is(
+  .wb-form-section-heading,
+  legend,
+  .panel-heading,
+  .wb-content-panel__header
+) {
+  color: var(--hg-text);
+  letter-spacing: -.012em;
+}
+
+body.heritage-shell.wb-form-page #pageForm[data-heritage-form-system='true'] [data-heritage-field='true'] {
+  padding: 5px 7px;
+}
+
+body.heritage-shell.wb-form-page #pageForm[data-heritage-form-system='true'] [data-heritage-required] > :is(label, .control-label)::after {
+  margin-inline-start: 4px;
+  color: var(--hg-accent);
+  content: '\2022';
+  font-size: 13px;
+  font-weight: 900;
+}
+
+body.heritage-shell.wb-form-page #pageForm[data-heritage-form-system='true'] [data-heritage-invalid] {
+  background: linear-gradient(90deg, var(--hg-danger-soft), transparent 70%);
+  box-shadow: inset 3px 0 0 color-mix(in srgb, var(--hg-danger) 74%, transparent);
+}
+
+body.heritage-shell.wb-form-page #pageForm[data-heritage-form-system='true'] :is(
+  .help-block-error,
+  .field-error,
+  .wb-field-error
+) {
+  margin-block-start: 6px;
+  color: var(--hg-danger);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+body.heritage-shell.wb-form-page #pageForm[data-heritage-form-density='compact'] .tab-pane.active.wb-form-section {
+  max-width: 920px;
+}
+
+body.heritage-shell.wb-form-page #pageForm[data-heritage-form-density='long'] .wb-form-section-summary {
+  position: sticky;
+  z-index: 9;
+  top: calc(var(--hg-header-height, 70px) + var(--hg-module-height, 68px) + 58px);
+  border-color: color-mix(in srgb, var(--hg-accent) 14%, var(--hg-border));
+  background: color-mix(in srgb, var(--hg-surface) 94%, transparent);
+  backdrop-filter: blur(16px) saturate(125%);
+}
+
 body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
   .form-group,
   .ctrlHolder,
@@ -298,6 +359,24 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-actions {
   background: color-mix(in srgb, var(--hg-surface) 94%, transparent);
   box-shadow: var(--hg-shadow-md);
   backdrop-filter: blur(18px) saturate(140%);
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form [data-heritage-form-actions='true'] {
+  justify-content: flex-start;
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form [data-heritage-form-actions='true'] [data-heritage-action='primary'] {
+  order: 3;
+  margin-inline-start: auto;
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--hg-accent) 18%, transparent);
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form [data-heritage-form-actions='true'] [data-heritage-action='danger'] {
+  order: 2;
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form [data-heritage-form-actions='true'] [data-heritage-action='secondary'] {
+  order: 1;
 }
 
 body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-actions :is(
@@ -618,6 +697,23 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
 
   body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-actions > * {
     width: 100%;
+  }
+
+  body.heritage-shell.wb-form-page #pageForm[data-heritage-form-system='true'] [data-heritage-field='true'] {
+    padding: 5px 2px 10px;
+  }
+
+  body.heritage-shell.wb-form-page #pageForm.wb-modern-form [data-heritage-form-actions='true'] [data-heritage-action='primary'] {
+    order: 1;
+    margin-inline-start: 0;
+  }
+
+  body.heritage-shell.wb-form-page #pageForm.wb-modern-form [data-heritage-form-actions='true'] [data-heritage-action='secondary'] {
+    order: 2;
+  }
+
+  body.heritage-shell.wb-form-page #pageForm.wb-modern-form [data-heritage-form-actions='true'] [data-heritage-action='danger'] {
+    order: 3;
   }
 
   body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(

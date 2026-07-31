@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.8 – 2026-07-31
+
+- Forms now expose one stable section, field and action hierarchy.
+- Required, invalid, disabled and supporting-text states share accessible semantics.
+- Primary, secondary and destructive actions retain a predictable desktop and mobile order.
+- Compact and long forms use density-aware composition without changing ISPConfig submission behaviour.
+
 ## 1.0.7 – 2026-07-31
 
 - Einheitliche Seitenköpfe, Statusbereiche und Aktionsgruppen.
