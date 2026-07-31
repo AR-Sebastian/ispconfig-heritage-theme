@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.7 – 2026-07-31
+
+- Einheitliche Seitenköpfe, Statusbereiche und Aktionsgruppen.
+- Meldungen mit stabiler Schweregrad- und Vollbreitenkomposition.
+- Gemeinsame responsive Fläche für Leer-, Lade- und Fehlerzustände.
+- Linksbündige mobile Titelhierarchie mit vollständigen Aktionsbreiten.
+
 ## 1.0.6 – 2026-07-31
 
 - Einheitliches mobiles Datensatzkarten-System für alle unterstützten Module.

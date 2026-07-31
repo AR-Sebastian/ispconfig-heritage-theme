@@ -20,6 +20,19 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-header {
   border-bottom: 1px solid var(--hg-border);
 }
 
+body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-page-header='true'] {
+  inline-size: 100%;
+  text-align: start;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-page-header='true'] :is(h1, h2) {
+  text-wrap: balance;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-page-header='true'] .wb-page-header__actions > :is(a, button) {
+  min-block-size: 42px;
+}
+
 body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-header__eyebrow {
   color: var(--hg-accent);
   font-size: 10px;
@@ -51,6 +64,24 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-meta {
   flex-wrap: wrap;
   gap: 8px;
   margin-block: 10px var(--hg-page-gap);
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-page-meta='true'] {
+  inline-size: 100%;
+  justify-content: flex-start;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-command-bar='true'] {
+  isolation: isolate;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-primary-action='true'] {
+  min-block-size: 42px;
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--hg-accent) 15%, transparent);
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-primary-action='true']:is(:hover, :focus-visible) {
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--hg-accent) 22%, transparent);
 }
 
 body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
@@ -308,6 +339,21 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
 }
 
 @container wb-page-content (max-width: 520px) {
+  body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-page-header='true'] {
+    gap: 10px;
+    padding-block-end: 14px;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-page-header='true'] :is(h1, h2) {
+    max-inline-size: none;
+    font-size: clamp(24px, 8vw, 32px);
+    text-align: start;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-page-meta='true'] {
+    align-items: stretch;
+  }
+
   body.heritage-shell.wb-list-page #pageContent :is(
     .wb-list-toolbar,
     .wb-list-summary,

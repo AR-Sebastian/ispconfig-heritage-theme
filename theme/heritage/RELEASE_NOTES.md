@@ -1,14 +1,15 @@
-# ISPConfig HERITAGE 1.0.6
+# ISPConfig HERITAGE 1.0.7
 
-HERITAGE 1.0.6 establishes one responsive record-card system for every
-supported module. Technical identifiers no longer dominate phone layouts;
-their edit target moves to the primary business value while status and actions
-retain a predictable visual position.
+HERITAGE 1.0.7 establishes one page-composition language across every
+supported module. Page titles, status metadata, primary actions, notices and
+empty states now retain the same hierarchy from desktop to narrow phones.
 It targets ISPConfig 3.3.1p1 and keeps the original `default` theme as the
 required recovery path.
 
 Highlights:
 
+- unified page headers, status metadata and action groups;
+- severity-aware notices and centered content states;
 - consistent mobile record cards across clients, sites, mail, DNS, support and system;
 - compact two-column details on medium phone widths;
 - sticky table headings with correctly aligned filter rows;
