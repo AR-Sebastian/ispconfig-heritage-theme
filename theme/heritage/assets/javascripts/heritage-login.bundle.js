@@ -686,12 +686,30 @@
   }
 
   function markIdentityColumns() {
+    document.querySelectorAll('.wb-list-command-bar__actions').forEach(function (actions) {
+      var primaryActions = actions.querySelectorAll(':scope > .wb-list-command-bar__primary');
+      primaryActions.forEach(function (action, index) {
+        action.classList.toggle('hg-list-action--secondary', index > 0);
+      });
+    });
+
     document.querySelectorAll('.wb-data-table').forEach(function (table) {
       var headers = Array.prototype.slice.call(table.querySelectorAll('thead tr:first-child > th, thead tr:first-child > td'));
       if (!headers.length) return;
       var labels = headers.map(function (header) {
         return header.textContent.replace(/\s+/g, ' ').trim();
       });
+      var firstDataRow = table.querySelector('tbody > tr.wb-table-data-row');
+      var actionCell = firstDataRow ? firstDataRow.querySelector('.wb-table-actions') : null;
+      var actionIndex = actionCell ? Array.prototype.indexOf.call(firstDataRow.children, actionCell) : -1;
+      if (actionIndex >= 0 && headers[actionIndex]) {
+        headers[actionIndex].classList.add('wb-table-actions');
+        if (!headers[actionIndex].textContent.trim()) {
+          headers[actionIndex].textContent = (document.documentElement.lang || '').toLowerCase().indexOf('de') === 0
+            ? 'Aktionen'
+            : 'Actions';
+        }
+      }
       var identityIndex = labels.findIndex(function (label) {
         return /^(?:.*[\s_-])?(?:id|nr\.?|nummer)$/i.test(label);
       });

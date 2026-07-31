@@ -20092,6 +20092,8 @@ body.heritage-shell.wb-list-page .wb-table-workspace--finalized > .wb-table-view
 
 body.heritage-shell.wb-list-page .wb-data-table {
   inline-size: 100%;
+  min-inline-size: 100%;
+  table-layout: auto;
   color: var(--hg-text);
   background: transparent;
 }
@@ -20190,10 +20192,26 @@ body.heritage-shell.wb-list-page .wb-data-table :is(th, td).hg-table-column--ide
   display: none !important;
 }
 
+/* Legacy list templates distribute percentage widths across their data
+ * columns before an action column is appended. Clear those per-template width
+ * hints so the browser can reserve the shared action lane consistently. */
+body.heritage-shell.wb-list-page .wb-data-table :is(thead, tbody) > tr > :is(th, td):not(.wb-table-actions) {
+  width: auto !important;
+  inline-size: auto !important;
+}
+
+/* The compact identity chip is authored for record cards. On full tables the
+ * original identity column is intentionally folded into the primary link but
+ * must not be appended as an unspaced text fragment. */
+body.heritage-shell.wb-list-page .hg-record-identity {
+  display: none;
+}
+
 body.heritage-shell.wb-list-page .wb-data-table .wb-table-actions {
   position: sticky;
   inset-inline-end: 0;
   z-index: 2;
+  display: table-cell !important;
   box-sizing: border-box;
   inline-size: 104px;
   min-inline-size: 104px;
@@ -20227,6 +20245,22 @@ body.heritage-shell.wb-list-page .wb-data-table > thead .wb-table-actions {
 body.heritage-shell.wb-list-page .wb-row-actions {
   gap: 6px;
   justify-content: flex-end;
+}
+
+/* A list may expose more than one create path (DNS is the canonical case).
+ * Preserve one clear primary action and render sibling paths as calm
+ * alternatives instead of presenting a row of equally urgent red buttons. */
+body.heritage-shell.wb-list-page #pageContent .wb-list-command-bar__primary.hg-list-action--secondary {
+  color: var(--hg-accent-strong) !important;
+  border: 1px solid color-mix(in srgb, var(--hg-accent) 26%, var(--hg-border)) !important;
+  background: var(--hg-surface) !important;
+  box-shadow: none !important;
+}
+
+body.heritage-shell.wb-list-page #pageContent .wb-list-command-bar__primary.hg-list-action--secondary:is(:hover, :focus-visible) {
+  color: var(--hg-accent-contrast) !important;
+  border-color: var(--hg-accent) !important;
+  background: var(--hg-accent) !important;
 }
 
 body.heritage-shell.wb-list-page .wb-row-actions :is(a, button) {

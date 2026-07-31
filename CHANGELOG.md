@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.26 – 2026-07-31
+
+- Customer, website, mail and DNS lists now share one table contract.
+- Action columns stay aligned at the right edge and expose an explicit heading.
+- Legacy percentage widths no longer distort the current table geometry.
+- Desktop records avoid duplicate identity values while mobile cards retain their summaries.
+- Toolbars with several create paths distinguish primary and secondary actions.
+- Runtime coverage now spans 72 states across six surfaces, six widths and two colour schemes.
+
 ## 1.0.25 – 2026-07-31
 
 - Compact desktop navigation no longer exposes a horizontal scrollbar.
