@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='<tmpl_var name="html_language">'>
 <head>
-  <style id='workbench-branding-vars'>:root { --wb-accent: #d71920; --wb-action: #d71920; --wb-dark-logo: url('/themes/heritage/assets/images/ispconfig-workbench-logo-dark.svg'); } .wb-skip-link:focus, .wb-skip-link:focus-visible { transform: none !important; }</style>
+  <style id='workbench-branding-vars'>:root { --wb-accent: <tmpl_var name='workbench_accent_color'>; --wb-action: <tmpl_var name='workbench_accent_color'>; --wb-dark-logo: url('<tmpl_var name="workbench_dark_logo_url">'); } .wb-skip-link:focus, .wb-skip-link:focus-visible { transform: none !important; }</style>
   <meta charset='utf-8' />
 
   <title><tmpl_var name="company_name"><tmpl_var name="app_title"></title>
@@ -12,28 +12,28 @@
   <meta name='robots' content='noindex, nofollow' />
   <meta name='workbench-language-probe' content="<tmpl_var name='logout_txt'>|<tmpl_var name='globalsearch_searchfield_watermark_txt'>" />
 
-  <link rel='apple-touch-icon' sizes='180x180' href='/themes/heritage/assets/images/ispconfig-workbench-favicon.svg?ver=1'>
-  <link rel='icon' type='image/png' sizes='32x32' href='/themes/heritage/assets/images/ispconfig-workbench-favicon.svg?ver=1'>
-  <link rel='icon' type='image/png' sizes='16x16' href='/themes/heritage/assets/images/ispconfig-workbench-favicon.svg?ver=1'>
+  <link rel='apple-touch-icon' sizes='180x180' href='<tmpl_var name="workbench_favicon_url">'>
+  <link rel='icon' type='image/png' sizes='32x32' href='<tmpl_var name="workbench_favicon_url">'>
+  <link rel='icon' type='image/png' sizes='16x16' href='<tmpl_var name="workbench_favicon_url">'>
   <link rel='manifest' href='/themes/heritage/assets/favicon/site.webmanifest?ver=1'>
-  <link rel='mask-icon' href='/themes/heritage/assets/images/ispconfig-workbench-favicon.svg?ver=1' color='#d71920'>
-  <link rel='shortcut icon' href='/themes/heritage/assets/images/ispconfig-workbench-favicon.svg?ver=1'>
-  <meta name='msapplication-TileColor' content='#d71920'>
+  <link rel='mask-icon' href='<tmpl_var name="workbench_favicon_url">' color='<tmpl_var name="workbench_accent_color">'>
+  <link rel='shortcut icon' href='<tmpl_var name="workbench_favicon_url">'>
+  <meta name='msapplication-TileColor' content='<tmpl_var name="workbench_accent_color">'>
   <meta name='msapplication-config' content='/themes/heritage/assets/favicon/browserconfig.xml'>
-  <meta name='theme-color' content='#d71920'>
+  <meta name='theme-color' content='<tmpl_var name="workbench_accent_color">'>
   <script src='themes/heritage/assets/javascripts/workbench-early.js?ver=3'></script>
 
   <link rel='stylesheet' href='themes/heritage/assets/stylesheets/heritage-app.bundle.css?ver=2' />
 </head>
 
-<body class='wb-app-navigation-enabled' data-workbench-filter-reset="Reset filters" data-workbench-filter-reset-active="Reset active filters" data-workbench-search-clear="Clear search" data-workbench-filter-toggle="Toggle filters" data-workbench-filter-show="Show filters" data-workbench-filter-hide="Hide filters" data-workbench-pagination="Pagination" data-workbench-pagination-page="Page" data-workbench-pagination-summary="Page {current} of {total}" data-workbench-list-visible-results="{count} items on this page" data-workbench-table-actions="Actions" data-workbench-tab-change-discard="<tmpl_var name='tabchange_discard_enabled'>" data-workbench-tab-change-warning="<tmpl_var name='tabchange_warning_enabled'>" data-workbench-tab-change-warning-text="<tmpl_var name='global_tabchange_warning_txt'>" data-workbench-tab-change-discard-text="<tmpl_var name='global_tabchange_discard_txt'>" data-workbench-use-load-indicator="<tmpl_if name='use_loadindicator' value='y'>true<tmpl_else>false</tmpl_if>" data-workbench-use-combobox="<tmpl_if name='use_combobox' value='y'>true<tmpl_else>false</tmpl_if>">
-  <a class='wb-skip-link' href='#pageContent'>Skip to main content</a>
-  <div id='workbench-mobile-navigation' class='wb-mobile-navigation' role='dialog' aria-modal='true' aria-label='Open navigation' aria-hidden='true'>
+<body class='wb-app-navigation-enabled' data-workbench-filter-reset="{tmpl_var name='workbench_filter_reset_txt'}" data-workbench-filter-reset-active="{tmpl_var name='workbench_filter_reset_active_txt'}" data-workbench-search-clear="{tmpl_var name='workbench_search_clear_txt'}" data-workbench-filter-toggle="{tmpl_var name='workbench_filter_toggle_txt'}" data-workbench-filter-show="{tmpl_var name='workbench_filter_show_txt'}" data-workbench-filter-hide="{tmpl_var name='workbench_filter_hide_txt'}" data-workbench-pagination="{tmpl_var name='workbench_pagination_txt'}" data-workbench-pagination-page="{tmpl_var name='workbench_pagination_page_txt'}" data-workbench-pagination-summary="{tmpl_var name='workbench_pagination_summary_txt'}" data-workbench-list-visible-results="{tmpl_var name='workbench_list_visible_results_txt'}" data-workbench-table-actions="{tmpl_var name='workbench_table_actions_txt'}" data-workbench-tab-change-discard="<tmpl_var name='tabchange_discard_enabled'>" data-workbench-tab-change-warning="<tmpl_var name='tabchange_warning_enabled'>" data-workbench-tab-change-warning-text="<tmpl_var name='global_tabchange_warning_txt'>" data-workbench-tab-change-discard-text="<tmpl_var name='global_tabchange_discard_txt'>" data-workbench-use-load-indicator="<tmpl_if name='use_loadindicator' value='y'>true<tmpl_else>false</tmpl_if>" data-workbench-use-combobox="<tmpl_if name='use_combobox' value='y'>true<tmpl_else>false</tmpl_if>">
+  <a class='wb-skip-link' href='#pageContent'><tmpl_var name='workbench_skip_main_txt'></a>
+  <div id='workbench-mobile-navigation' class='wb-mobile-navigation' role='dialog' aria-modal='true' aria-label='{tmpl_var name="workbench_open_navigation_txt"}' aria-hidden='true'>
     <div class='wb-mobile-navigation__header'>
-      <strong>Open navigation</strong>
+      <strong><tmpl_var name='workbench_open_navigation_txt'></strong>
       <button type='button' class='wb-mobile-navigation__close' aria-label='{tmpl_var name="datalog_changes_close_txt"}'>&times;</button>
     </div>
-    <nav class='wb-mobile-navigation__content' aria-label='Open navigation'></nav>
+    <nav class='wb-mobile-navigation__content' aria-label='{tmpl_var name="workbench_open_navigation_txt"}'></nav>
     <div class='wb-app-navigation__footer'>
       <span class='wb-app-navigation__status' aria-hidden='true'></span>
       <span class='wb-app-navigation__user'><strong><tmpl_var name='cpuser'></strong><small>ISPConfig Heritage</small></span>
@@ -47,7 +47,7 @@
       <div id='inner-wrapper'>
         <div class='clear'>
           <div class='left clear'>
-            <button type='button' class='menu-btn left' aria-label='Open navigation' aria-controls='workbench-mobile-navigation' aria-expanded='false'>&#9776;</button>
+            <button type='button' class='menu-btn left' aria-label='{tmpl_var name="workbench_open_navigation_txt"}' aria-controls='workbench-mobile-navigation' aria-expanded='false'>&#9776;</button>
             <!-- logo -->
             <div id='logo' style="background: url({tmpl_var name="base64_logo_txt"}) no-repeat;width:{tmpl_var name="base64_logo_width"};height:{tmpl_var name="base64_logo_height"}"><a href='#'></a></div>
           </div>
@@ -60,7 +60,7 @@
 					  <div class='wb-global-search__field'>
 						<input id='globalsearch' type='search' class='form-control' aria-label='{tmpl_var name="globalsearch_searchfield_watermark_txt"}' placeholder='{tmpl_var name="globalsearch_searchfield_watermark_txt"}' autocomplete='off' title='Suche fokussieren: / oder Strg+K' data-wb-i18n-title-de='Suche fokussieren: / oder Strg+K' data-wb-i18n-title-en='Focus search: / or Ctrl+K' />
 						<kbd class='wb-search-shortcut' aria-hidden='true'>/</kbd>
-						<button type='button' class='wb-search-clear' id='globalsearch-clear' aria-label='Clear search' hidden>&times;</button>
+						<button type='button' class='wb-search-clear' id='globalsearch-clear' aria-label='{tmpl_var name="workbench_search_clear_txt"}' hidden>&times;</button>
 						<button type='submit' class='wb-shell-button wb-shell-button--icon wb-global-search-submit' title='{tmpl_var name="globalsearch_searchfield_watermark_txt"}' aria-label='{tmpl_var name="globalsearch_searchfield_watermark_txt"}'>
 						  <svg viewBox='0 0 24 24' aria-hidden='true' focusable='false'><circle cx='11' cy='11' r='6.2'></circle><path d='m16 16 4.5 4.5'></path></svg>
 						</button>
@@ -97,18 +97,18 @@
 			  </div>
 			</div>
 			<!-- END native datalog dialog -->
-			<div id="workbenchTabChangeDialog" class="wb-dialog wb-tab-change-dialog" role="dialog" aria-modal="true" aria-labelledby="workbenchTabChangeDialogTitle" aria-describedby="workbenchTabChangeDialogMessage" aria-hidden="true" tabindex="-1" hidden data-warning-message="This page contains unsaved changes." data-discard-message="Discard the unsaved changes and continue?">
+			<div id="workbenchTabChangeDialog" class="wb-dialog wb-tab-change-dialog" role="dialog" aria-modal="true" aria-labelledby="workbenchTabChangeDialogTitle" aria-describedby="workbenchTabChangeDialogMessage" aria-hidden="true" tabindex="-1" hidden data-warning-message="{tmpl_var name='workbench_tab_warning_message_txt'}" data-discard-message="{tmpl_var name='workbench_tab_discard_message_txt'}">
 			  <button type="button" class="wb-dialog__backdrop" data-workbench-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}" tabindex="-1"></button>
 			  <div class="wb-dialog__surface" role="document">
 			    <div class="wb-dialog__header">
-			      <h2 class="wb-dialog__title" id="workbenchTabChangeDialogTitle">Unsaved changes</h2>
+			      <h2 class="wb-dialog__title" id="workbenchTabChangeDialogTitle">{tmpl_var name='workbench_tab_change_title_txt'}</h2>
 			      <button type="button" class="wb-dialog__close" data-workbench-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}">&times;</button>
 			    </div>
 			    <div class="wb-dialog__body"><p id="workbenchTabChangeDialogMessage" data-workbench-tab-confirm-message></p></div>
 			    <div class="wb-dialog__footer">
-			      <button type="button" class="wb-dialog__action wb-dialog__action--secondary" data-workbench-tab-confirm-action="cancel" data-workbench-dialog-autofocus>Keep editing</button>
-			      <button type="button" class="wb-dialog__action wb-dialog__action--danger" data-workbench-tab-confirm-action="discard">Discard and continue</button>
-			      <button type="button" class="wb-dialog__action wb-dialog__action--primary" data-workbench-tab-confirm-action="save">Save and continue</button>
+			      <button type="button" class="wb-dialog__action wb-dialog__action--secondary" data-workbench-tab-confirm-action="cancel" data-workbench-dialog-autofocus>{tmpl_var name='workbench_tab_keep_editing_txt'}</button>
+			      <button type="button" class="wb-dialog__action wb-dialog__action--danger" data-workbench-tab-confirm-action="discard">{tmpl_var name='workbench_tab_discard_continue_txt'}</button>
+			      <button type="button" class="wb-dialog__action wb-dialog__action--primary" data-workbench-tab-confirm-action="save">{tmpl_var name='workbench_tab_save_continue_txt'}</button>
 			    </div>
 			  </div>
 			</div>
@@ -134,7 +134,7 @@
     </div>
   </div>
 
-  <script type='application/json' id='workbench-content-messages'>{}</script>
+  <script type='application/json' id='workbench-content-messages'><tmpl_var name='workbench_content_messages_json'></script>
   <script defer src='themes/heritage/assets/javascripts/heritage-app-before-chart.bundle.js?ver=1'></script>
   <script defer src="js/chartjs/chart.umd.js"></script>
   <script defer src='themes/heritage/assets/javascripts/heritage-app-after-chart.bundle.js?ver=1'></script>

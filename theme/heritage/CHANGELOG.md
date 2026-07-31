@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.32 – 2026-07-31
+
+- Replaced wide boolean columns for active, locked and remote access states with compact, accessible status indicators.
+- Shortened the visible `Remotezugriff` heading to `Remote` while retaining its complete accessible name.
+- Reserved stable widths for status and row-action columns, giving content fields more useful space.
+- Verified the full navigation at the 721-pixel boundary and the mobile drawer below 670 pixels in Light and Dark.
+
 ## 1.0.31 – 2026-07-31
 
 - Tools und Admin besitzen jetzt explizite, stabile Arbeitsflächen.
