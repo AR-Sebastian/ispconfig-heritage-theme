@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.25 – 2026-07-31
+
+- Compact desktop navigation no longer exposes a horizontal scrollbar.
+- Primary modules share available width evenly between 721 and 1180 pixels.
+- HERITAGE retains horizontal navigation below the legacy drawer breakpoint.
+- Runtime coverage adds a dedicated 740-pixel state in light and dark mode.
+
 ## 1.0.24 – 2026-07-31
 
 - Populated tables retain their own bounded horizontal scroll context.
