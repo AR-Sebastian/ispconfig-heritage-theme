@@ -1,6 +1,12 @@
-# ISPConfig HERITAGE 1.0.31
+# ISPConfig HERITAGE 1.0.32
 
-HERITAGE 1.0.31 completes the Tools and Admin V1 contract. Resynchronization,
+HERITAGE 1.0.32 completes compact status columns and the narrow-navigation
+boundary. Boolean active, locked and remote-access values now use concise,
+accessible indicators; content columns receive the recovered space while row
+actions remain fully usable. The complete main navigation remains present at
+721 pixels and switches to the mobile drawer only below 670 pixels.
+
+HERITAGE 1.0.31 completed the Tools and Admin V1 contract. Resynchronization,
 ISPConfig import, personal settings, users, additional PHP versions, firewall
 and IP addresses now expose consistent semantic workspaces. Dynamic navigation
 also clears stale table state before rendering a non-table view. Seven real

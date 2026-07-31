@@ -3877,6 +3877,29 @@
         if (!label && column) label = column.replace(/\b\w/g, function(letter) { return letter.toUpperCase(); });
         return label;
       });
+      var statusKinds = headers.map(function(label) {
+        var normalized = String(label || '').toLowerCase().replace(/[\s_-]+/g, ' ').trim();
+        if (/^(aktiv|active|enabled)$/.test(normalized)) return 'active';
+        if (/^(gesperrt|locked|blocked)$/.test(normalized)) return 'locked';
+        if (/^(remote|remotezugriff|remote zugriff|remote access)$/.test(normalized)) return 'remote';
+        return '';
+      });
+      statusKinds.forEach(function(kind, index) {
+        if (!kind) return;
+        var fullLabel = kind === 'remote' ? localized('Remotezugriff', 'Remote access') : headers[index];
+        if (kind === 'remote') headers[index] = 'Remote';
+        var visibleLabel = headerNodes[index] && (headerNodes[index].querySelector('a, button') || headerNodes[index]);
+        if (visibleLabel) {
+          visibleLabel.textContent = '';
+          var icon = document.createElement('span');
+          icon.className = 'wb-status-header-icon wb-status-header-icon--' + kind;
+          icon.setAttribute('aria-hidden', 'true');
+          visibleLabel.appendChild(icon);
+        }
+        headerNodes[index].setAttribute('aria-label', fullLabel);
+        headerNodes[index].setAttribute('title', fullLabel);
+      });
+      table.classList.toggle('wb-data-table--compact-status-columns', statusKinds.some(Boolean));
       headerNodes.forEach(function(header, index) {
         var html = header.innerHTML || '';
         var sortable = Boolean(header.querySelector('a[href], a[data-load-content], [data-sort], [data-order]')) ||
@@ -3885,6 +3908,8 @@
         header.classList.add('wb-table-header');
         header.classList.toggle('wb-table-header--sortable', sortable);
         header.classList.toggle('wb-table-header--actions', index === headerNodes.length - 1);
+        header.classList.toggle('wb-table-header--status', Boolean(statusKinds[index]));
+        if (statusKinds[index]) header.setAttribute('data-wb-status-kind', statusKinds[index]);
         if (headers[index]) header.setAttribute('data-wb-label', headers[index]);
         if (sortable && !header.getAttribute('aria-sort')) header.setAttribute('aria-sort', 'none');
       });
@@ -3975,6 +4000,31 @@
           cell.classList.toggle('wb-table-cell--empty', !cellText && !hasInteractive);
           cell.classList.toggle('wb-table-cell--numeric', /^[-+]?\d+(?:[.,]\d+)?(?:\s*[%a-z]+)?$/i.test(cellText));
           cell.classList.toggle('wb-table-cell--status', /^(yes|no|ja|nein|active|inactive|enabled|disabled|aktiv|inaktiv)$/i.test(cellText));
+          var statusKind = statusKinds[index];
+          if (statusKind && /^(?:0|1|yes|no|ja|nein|active|inactive|enabled|disabled|aktiv|inaktiv)$/i.test(cellText)) {
+            var enabled = /^(?:1|yes|ja|active|enabled|aktiv)$/i.test(cellText);
+            var stateLabel = statusKind === 'locked'
+              ? (enabled ? localized('Gesperrt', 'Locked') : localized('Nicht gesperrt', 'Not locked'))
+              : (enabled ? localized('Aktiv', 'Active') : localized('Inaktiv', 'Inactive'));
+            var statusTarget = cell.querySelector('a, button') || cell;
+            var indicator = document.createElement('span');
+            indicator.className = 'wb-status-indicator';
+            indicator.setAttribute('aria-hidden', 'true');
+            if (statusTarget !== cell) {
+              statusTarget.textContent = '';
+              statusTarget.setAttribute('aria-label', stateLabel);
+              statusTarget.setAttribute('title', stateLabel);
+              statusTarget.appendChild(indicator);
+            } else {
+              cell.textContent = '';
+              cell.setAttribute('aria-label', stateLabel);
+              cell.setAttribute('title', stateLabel);
+              cell.appendChild(indicator);
+            }
+            cell.classList.add('wb-table-cell--status', 'wb-table-cell--compact-status');
+            cell.setAttribute('data-wb-status-kind', statusKind);
+            cell.setAttribute('data-wb-status-state', enabled ? 'on' : 'off');
+          }
           if (index === 0) cell.classList.add('wb-table-cell--identity');
           if (index === cells.length - 1 || cell.classList.contains('wb-table-align-end') || cell.classList.contains('text-right')) {
             cell.classList.add('wb-table-actions');
@@ -4033,6 +4083,32 @@
           });
         });
       });
+      if (statusKinds.some(Boolean)) {
+        var oldStatusColgroup = table.querySelector(':scope > colgroup[data-wb-status-columns]');
+        if (oldStatusColgroup) oldStatusColgroup.remove();
+        var statusColgroup = document.createElement('colgroup');
+        statusColgroup.setAttribute('data-wb-status-columns', 'true');
+        headerNodes.forEach(function(header, index) {
+          var firstCell = body.querySelector(':scope > tr:not(.tbl_row_noresults) > :is(td, th):nth-child(' + (index + 1) + ')');
+          var hidden = window.getComputedStyle(header).display === 'none' || (firstCell && (
+            window.getComputedStyle(firstCell).display === 'none' ||
+            firstCell.classList.contains('hg-table-column--identity') ||
+            firstCell.classList.contains('wb-table-cell--identity')
+          ));
+          if (index === headerNodes.length - 1) hidden = false;
+          if (hidden) return;
+          var column = document.createElement('col');
+          if (statusKinds[index]) {
+            column.className = 'wb-table-col--status';
+            column.style.width = '68px';
+          } else if (index === headerNodes.length - 1) {
+            column.className = 'wb-table-col--actions';
+            column.style.width = '120px';
+          }
+          statusColgroup.appendChild(column);
+        });
+        table.insertBefore(statusColgroup, table.querySelector('thead, tbody, tfoot'));
+      }
       if (dataRowCount === 0 && wrapper && emptyStateSurface && emptyStateRow) {
         emptyStateSurface.classList.add('wb-empty-state--detached');
         wrapper.appendChild(emptyStateSurface);

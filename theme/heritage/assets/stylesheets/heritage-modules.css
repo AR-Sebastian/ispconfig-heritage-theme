@@ -250,3 +250,6 @@ body.heritage-shell.wb-monitor-page #pageContent .stateview > a:is(:hover, :focu
 body.heritage-shell[data-heritage-surface='list'] #pageContent .tbl_row_noresults td {
   min-height: 150px;
 }
+body.heritage-shell.wb-list-page .wb-data-table--compact-status-columns {
+  table-layout: fixed;
+}

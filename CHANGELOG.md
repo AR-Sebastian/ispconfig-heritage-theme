@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.31 – 2026-07-31
+## 1.0.32 – 2026-07-31
 
 - Tools and Admin now expose explicit, stable semantic workspaces.
 - Personal settings no longer inherit stale table state after dynamic navigation.
