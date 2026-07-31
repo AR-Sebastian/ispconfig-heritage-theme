@@ -172,11 +172,13 @@
 
   function decoratePageContext(host, pageName) {
     if (!host) return;
-    var hasTable = Boolean(host.querySelector(':scope > .table-wrapper > table.table, :scope > table.table, .table-wrapper > table.table, table.table'));
+    var dashboardPage = /(?:^|\/)dashboard\/dashboard\.php(?:$|\?)/.test(normalizePageName(pageName)) ||
+      Boolean(host.querySelector(':scope > .wb-dashlet, :scope > .dashboard-modules-wrapper, :scope > ul.modules'));
+    var hasTable = !dashboardPage && Boolean(host.querySelector(':scope > .table-wrapper > table.table, :scope > table.table, .table-wrapper > table.table, table.table'));
     var shellForm = host.closest('form#pageForm, form.form-horizontal');
-    var hasForm = Boolean(host.querySelector('form#pageForm, .form-horizontal .form-group')) ||
+    var hasForm = !dashboardPage && (Boolean(host.querySelector('form#pageForm, .form-horizontal .form-group')) ||
       Boolean(shellForm && host.querySelector('.form-group, .pnl_formsarea, .tab-content')) ||
-      /(?:_edit|_add|user_settings)\.php(?:$|\?)/.test(pageName || '');
+      /(?:_edit|_add|user_settings)\.php(?:$|\?)/.test(pageName || ''));
     var body = document.body;
     body.classList.toggle('wb-list-page', hasTable);
     body.classList.toggle('wb-form-page', hasForm);
@@ -605,7 +607,7 @@
       if (tableViewport) {
         tableViewport.classList.add('wb-table-viewport');
         tableViewport.setAttribute('data-workbench-table-viewport', 'true');
-        if (tableViewport.parentElement) tableViewport.parentElement.classList.add('wb-table-workspace');
+        if (tableViewport.parentElement && document.body.classList.contains('wb-list-page')) tableViewport.parentElement.classList.add('wb-table-workspace');
       }
       var headerNodes = Array.prototype.slice.call(table.querySelectorAll('thead > tr:first-child > th, thead > tr:first-child > td'));
       var headers = headerNodes.map(function(header) {

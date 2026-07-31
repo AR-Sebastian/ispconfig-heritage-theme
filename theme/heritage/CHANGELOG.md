@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.29 – 2026-07-31
+
+- Dashboard und Monitoring besitzen jetzt eine verbindliche reale Browserabnahme.
+- Eingebettete Kontingent-Tabellen klassifizieren das Dashboard nicht länger als Listenansicht.
+- Vier Systemdiagramme mit 60 Messpunkten werden sichtbar sowie per Maus und Tastatur geprüft.
+- Dashboard-Widgets, Monitoring-Panels und Aktualisierungssteuerung sind über sechs Breiten und beide Farbschemata abgesichert.
+
 ## 1.0.28 – 2026-07-31
 
 - Das Formularsystem erkennt jetzt die echte, von ISPConfig um den Inhaltsbereich gelegte Formularstruktur.

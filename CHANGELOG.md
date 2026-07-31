@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.29 – 2026-07-31
+
+- Dashboard and monitoring now have a real-browser V1 acceptance contract.
+- Embedded quota tables no longer classify the complete dashboard as a list page.
+- Four system charts with 60 measurement points are verified visually and through pointer and keyboard interaction.
+- Dashboard widgets, monitoring panels and refresh controls are protected across six widths and both colour schemes.
+
 ## 1.0.28 – 2026-07-31
 
 - The form system now recognizes ISPConfig's real outer page-form structure.

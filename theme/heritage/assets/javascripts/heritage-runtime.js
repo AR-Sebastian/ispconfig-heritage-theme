@@ -365,6 +365,10 @@
   function enhanceDashboard() {
     var host = document.getElementById('pageContent');
     if (!host || !document.body.classList.contains('wb-dashboard-page')) return;
+    /* Dashboard widgets may contain small quota tables. They are enhanced as
+     * tables, but must not reclassify the complete cockpit as a list page. */
+    host.classList.remove('wb-table-workspace', 'wb-table-workspace--finalized');
+    document.body.classList.remove('wb-list-page', 'wb-form-page');
     var german = (document.documentElement.lang || '').toLowerCase().indexOf('de') === 0;
     var sections = [
       {
