@@ -55,6 +55,9 @@ for (const shellName of ['main.tpl.htm', 'main_login.tpl.htm']) {
   const normalized = references.map(reference => reference.replace(/^\.\.\//, '').replace(/\?ver=\d+$/, ''));
   const duplicates = normalized.filter((reference, index) => normalized.indexOf(reference) !== index);
   if (duplicates.length) throw new Error(`${shellName} loads assets twice: ${[...new Set(duplicates)].join(', ')}`);
+  const scripts = [...markup.matchAll(/<script\s+([^>]*\s)?src=["'][^"']+["'][^>]*>/g)].map(match => match[0]);
+  const nonDeferred = scripts.filter(script => !script.includes('workbench-early.js') && !/(^|\s)defer(\s|=|>)/.test(script));
+  if (nonDeferred.length) throw new Error(`${shellName} has parser-blocking runtime scripts: ${nonDeferred.join(', ')}`);
 }
 const main = fs.readFileSync(path.join(theme, 'templates', 'main.tpl.htm'), 'utf8');
 const head = main.slice(0, main.toLowerCase().indexOf('</head>'));
