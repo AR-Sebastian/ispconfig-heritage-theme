@@ -23,10 +23,10 @@ On Linux, download the TAR.GZ archive and checksum file directly from the
 release:
 
 ```bash
-curl -fLO https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/download/v1.0.29/ispconfig-heritage-theme-1.0.29.tar.gz
-curl -fLO https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/download/v1.0.29/SHA256SUMS.txt
+curl -fLO https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/download/v1.0.30/ispconfig-heritage-theme-1.0.30.tar.gz
+curl -fLO https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/download/v1.0.30/SHA256SUMS.txt
 sha256sum -c --ignore-missing SHA256SUMS.txt
-sudo tar -xzf ispconfig-heritage-theme-1.0.29.tar.gz -C /usr/local/ispconfig/interface/web/themes/
+sudo tar -xzf ispconfig-heritage-theme-1.0.30.tar.gz -C /usr/local/ispconfig/interface/web/themes/
 ```
 
 Verification must report the archive as `OK`. Do not install after a checksum

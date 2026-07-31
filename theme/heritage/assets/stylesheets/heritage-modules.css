@@ -81,6 +81,7 @@ body.heritage-shell[data-heritage-module-family='extension'] #pageContent .wb-ex
   margin-block: 0;
 }
 
+
 body.heritage-shell[data-heritage-module-family='system'] #pageContent :is(
   .panel,
   .well,

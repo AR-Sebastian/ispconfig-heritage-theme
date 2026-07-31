@@ -1,11 +1,11 @@
 # Changelog
 
-## 1.0.29 – 2026-07-31
+## 1.0.30 – 2026-07-31
 
-- Dashboard and monitoring now have a real-browser V1 acceptance contract.
-- Embedded quota tables no longer classify the complete dashboard as a list page.
-- Four system charts with 60 measurement points are verified visually and through pointer and keyboard interaction.
-- Dashboard widgets, monitoring panels and refresh controls are protected across six widths and both colour schemes.
+- System configuration, Extension Installer, monitoring data and monitoring logs now share an explicit specialty-surface contract.
+- Dynamic monitoring views completely clear stale form profiles after navigation.
+- Long operational headings remain contained at compact intermediate widths.
+- Sixty browser states protect five specialty surfaces across six widths and both colour schemes.
 
 ## 1.0.28 – 2026-07-31
 

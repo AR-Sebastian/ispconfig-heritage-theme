@@ -4045,6 +4045,7 @@ body.wb-app-navigation-enabled.wb-monitor-page .panel_system { overflow: hidden;
 body.wb-app-navigation-enabled.wb-monitor-page .pnl_formarea { padding: 16px; }
 body.wb-app-navigation-enabled.wb-monitor-page .panel_system > .pnl_formarea { border: 0; border-radius: 0; box-shadow: none; }
 body.wb-app-navigation-enabled.wb-monitor-page .pnl_formarea > .fieldset-legend {
+  max-width: calc(100% + 32px);
   margin: -16px -16px 16px;
   padding: 13px 16px;
   color: var(--wb-text);
@@ -4054,6 +4055,7 @@ body.wb-app-navigation-enabled.wb-monitor-page .pnl_formarea > .fieldset-legend 
   font-weight: 820;
   letter-spacing: .055em;
   text-transform: uppercase;
+  overflow-wrap: anywhere;
 }
 
 body.wb-app-navigation-enabled.wb-monitor-page .wb-monitor-refresh {
@@ -4263,7 +4265,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled .wb-statistics-metric-
   body.wb-app-navigation-enabled.wb-monitor-page .wb-monitor-chart { min-height: 250px; }
   body.wb-app-navigation-enabled.wb-monitor-page .wb-monitor-chart__details { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   body.wb-app-navigation-enabled.wb-monitor-page .pnl_formarea { padding: 12px; }
-  body.wb-app-navigation-enabled.wb-monitor-page .pnl_formarea > .fieldset-legend { margin: -12px -12px 12px; }
+  body.wb-app-navigation-enabled.wb-monitor-page .pnl_formarea > .fieldset-legend { max-width: calc(100% + 24px); margin: -12px -12px 12px; }
   body.wb-app-navigation-enabled .wb-statistics-metrics { gap: 8px; }
   body.wb-app-navigation-enabled .wb-statistics-metric { padding: 12px; }
   body.wb-app-navigation-enabled .wb-statistics-metric__value { font-size: 16px; }
@@ -22072,6 +22074,7 @@ body.heritage-shell[data-heritage-module-family='extension'] #pageContent .wb-ex
 ) {
   margin-block: 0;
 }
+
 
 body.heritage-shell[data-heritage-module-family='system'] #pageContent :is(
   .panel,

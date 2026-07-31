@@ -1,10 +1,11 @@
-# ISPConfig HERITAGE 1.0.29
+# ISPConfig HERITAGE 1.0.30
 
-HERITAGE 1.0.29 closes the dashboard and monitoring V1 contract. Embedded
-quota tables no longer classify the complete cockpit as a list page. Four
-system charts, 60 interactive measurement points, dashboard composition and
-monitoring controls are verified across six viewport classes and both colour
-schemes, including pointer tooltips and keyboard exploration.
+HERITAGE 1.0.30 closes the specialty-surface V1 contract for system
+configuration, the retained Extension Installer, monitoring data and monitoring
+logs. Dynamic page changes no longer leak stale form profiles into operational
+views. Five real surfaces are verified across six viewport classes and both
+colour schemes, covering 60 browser states without page overflow or escaped
+controls.
 
 ## Previous releases
 
