@@ -1,13 +1,16 @@
-# ISPConfig HERITAGE 1.0.5
+# ISPConfig HERITAGE 1.0.6
 
-HERITAGE 1.0.5 completes the list and table workspace. Primary
-icons retain concise text labels, the horizontal navigation remains available
-down to 721 pixels, and light-theme quick-create actions use quiet surfaces.
+HERITAGE 1.0.6 establishes one responsive record-card system for every
+supported module. Technical identifiers no longer dominate phone layouts;
+their edit target moves to the primary business value while status and actions
+retain a predictable visual position.
 It targets ISPConfig 3.3.1p1 and keeps the original `default` theme as the
 required recovery path.
 
 Highlights:
 
+- consistent mobile record cards across clients, sites, mail, DNS, support and system;
+- compact two-column details on medium phone widths;
 - sticky table headings with correctly aligned filter rows;
 - localized row-action names instead of generic numbered tooltips;
 - visible and accessible sorting direction;

@@ -19,35 +19,69 @@
 
   function markIdentityColumns() {
     document.querySelectorAll('.wb-data-table').forEach(function (table) {
-      var headers = table.querySelectorAll('thead tr:first-child > th, thead tr:first-child > td');
+      var headers = Array.prototype.slice.call(table.querySelectorAll('thead tr:first-child > th, thead tr:first-child > td'));
       if (!headers.length) return;
-      var identityLabel = headers[0].textContent.trim();
-      var isCompactIdentity = /^(?:.*[\s_-])?id$/i.test(identityLabel);
-      if (!isCompactIdentity) return;
-
-      var primaryIndex = Array.prototype.findIndex.call(headers, function (header, index) {
-        if (!index) return false;
-        return /^(?:firmenname|company|domain(?:name)?|benutzername|username|e-?mail|name)$/i.test(header.textContent.replace(/\s+/g, ' ').trim());
+      var labels = headers.map(function (header) {
+        return header.textContent.replace(/\s+/g, ' ').trim();
       });
-      if (primaryIndex < 1) return;
+      var identityIndex = labels.findIndex(function (label) {
+        return /^(?:.*[\s_-])?(?:id|nr\.?|nummer)$/i.test(label);
+      });
+      var primaryPatterns = [
+        /^(?:firmenname|company(?: name)?|firma)$/i,
+        /^(?:domain(?:name)?|webseite|website|zone|zonenname)$/i,
+        /^(?:e-?mail(?:-adresse)?|mailbox|postfach|quelle|source)$/i,
+        /^(?:benutzername|username|login|name|titel|title)$/i,
+        /^(?:kunde|client|server(?:name)?|ziel|destination)$/i
+      ];
+      var primaryIndex = -1;
+      primaryPatterns.some(function (pattern) {
+        primaryIndex = labels.findIndex(function (label, index) {
+          return index !== identityIndex && pattern.test(label);
+        });
+        return primaryIndex >= 0;
+      });
+      if (primaryIndex < 0) {
+        primaryIndex = labels.findIndex(function (label, index) {
+          return index !== identityIndex && label && !/^(?:aktiv|active|status|gesperrt|locked|aktionen|actions?)$/i.test(label);
+        });
+      }
+      if (primaryIndex < 0) return;
 
       headers[primaryIndex].classList.add('hg-table-column--primary');
-
-      table.querySelectorAll('tr').forEach(function (row) {
-        var identity = row.children[0];
-        if (!identity) return;
-        if (row.closest('tbody')) {
-          var sourceLink = identity.querySelector('a[href]');
-          var primary = row.children[primaryIndex];
-          if (primary) primary.classList.add('hg-table-column--primary');
-          if (sourceLink && primary && !primary.querySelector('a, button, input') && primary.textContent.trim()) {
-            var promoted = sourceLink.cloneNode(false);
-            promoted.className = 'hg-record-primary-link';
-            promoted.textContent = primary.textContent.trim();
-            primary.replaceChildren(promoted);
-          }
+      if (identityIndex >= 0 && identityIndex !== primaryIndex) headers[identityIndex].classList.add('hg-table-column--identity');
+      headers.forEach(function (header, index) {
+        if (/^(?:aktiv|active|status|gesperrt|locked|enabled)$/i.test(labels[index])) {
+          header.classList.add('hg-table-column--status');
         }
-        identity.classList.add('hg-table-column--identity');
+      });
+
+      table.querySelectorAll('tbody > tr').forEach(function (row) {
+        if (!row.classList.contains('wb-table-data-row')) return;
+        var identity = identityIndex >= 0 ? row.children[identityIndex] : null;
+        var primary = row.children[primaryIndex];
+        if (!primary) return;
+        primary.classList.add('hg-table-column--primary');
+        if (identity && identity !== primary) identity.classList.add('hg-table-column--identity');
+
+        var sourceLink = (identity && identity.querySelector('a[href]')) || primary.querySelector('a[href]');
+        if (sourceLink && !primary.querySelector('a, button, input') && primary.textContent.trim()) {
+          var promoted = sourceLink.cloneNode(false);
+          promoted.className = 'hg-record-primary-link';
+          promoted.textContent = primary.textContent.trim();
+          primary.replaceChildren(promoted);
+        } else if (sourceLink && primary.contains(sourceLink)) {
+          sourceLink.classList.add('hg-record-primary-link');
+        }
+
+        headers.forEach(function (header, index) {
+          if (header.classList.contains('hg-table-column--status') && row.children[index]) {
+            row.children[index].classList.add('hg-table-column--status');
+          }
+        });
+        var recordName = primary.textContent.replace(/\s+/g, ' ').trim();
+        row.setAttribute('data-heritage-record-card', 'true');
+        if (recordName) row.setAttribute('aria-label', recordName);
       });
     });
   }

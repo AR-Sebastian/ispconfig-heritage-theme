@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "com.ispconfig.heritage-glass.theme",
   "name": "ISPConfig Heritage Glass",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "stage": "stable",
   "releaseDate": "2026-07-31",
   "compatibility": {
@@ -11,7 +11,7 @@
   },
   "packageDirectory": "heritage",
   "distributionMode": "standalone-theme",
-  "releaseTag": "v1.0.5",
+  "releaseTag": "v1.0.6",
   "supportedModules": [
     "login",
     "dashboard",

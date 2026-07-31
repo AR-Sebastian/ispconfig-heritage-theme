@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.6 – 2026-07-31
+
+- Einheitliches mobiles Datensatzkarten-System für alle unterstützten Module.
+- Technische Identitäten übergeben ihr Bearbeitungsziel an den fachlichen Primärwert.
+- Stabile Rollen für Primärwert, Status und Aktionsleiste.
+- Kompakte zweispaltige Details auf mittleren Smartphone-Breiten.
+
 ## 1.0.5 – 2026-07-31
 
 - Finished the list/table workspace with sticky headings and aligned filter rows.

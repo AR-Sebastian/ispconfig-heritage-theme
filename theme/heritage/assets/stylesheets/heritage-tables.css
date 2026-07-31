@@ -377,11 +377,17 @@ body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li 
 
   body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > .hg-table-column--primary {
     order: -10;
+    padding-block: 14px;
+    border-block-end: 1px solid var(--hg-border);
+    background: linear-gradient(90deg, var(--hg-accent-soft), transparent 72%);
   }
 
   body.heritage-shell.wb-list-page .hg-record-primary-link {
+    display: inline-flex;
+    align-items: center;
     color: var(--hg-text);
     font-weight: 780;
+    line-height: 1.35;
     text-decoration: none;
   }
 
@@ -390,6 +396,24 @@ body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li 
     color: var(--hg-accent);
     content: '\203A';
     font-size: 1.15em;
+  }
+
+  body.heritage-shell.wb-list-page .hg-record-primary-link:is(:hover, :focus-visible) {
+    color: var(--hg-accent-strong);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row[data-heritage-record-card='true'] {
+    border: 1px solid var(--hg-border);
+    border-radius: var(--hg-radius-lg);
+    background: var(--hg-surface);
+    box-shadow: var(--hg-shadow-xs);
+  }
+
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > .hg-table-column--status {
+    background: color-mix(in srgb, var(--hg-surface-subtle) 86%, transparent);
   }
 
   body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > .wb-table-cell--empty {
@@ -402,6 +426,10 @@ body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li 
     justify-content: flex-end;
     inline-size: 100%;
     max-inline-size: 100%;
+    min-block-size: 52px;
+    padding-block: 9px;
+    border-block-start: 1px solid var(--hg-border);
+    background: var(--hg-surface-subtle);
   }
 
   body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > .wb-table-actions::before {
