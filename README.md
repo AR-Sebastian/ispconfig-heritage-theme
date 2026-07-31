@@ -29,19 +29,19 @@ fachlichen Aktionen, APIs und Provisionierungsabläufe bleiben bei ISPConfig.
 - eigenständiges Paket ohne NEXT-, LIQUID- oder Workbench-Abhängigkeit;
 - atomare Installation mit Backup und Rollback.
 
-### Version 1.0.30
+### Version 1.0.31
 
 Geprüft mit ISPConfig 3.3.1p1 für Administrator-, Reseller-, Kunden- und
 Mailuser-Ansichten sowie Ubuntu 22.04/24.04 und Debian 12/13 mit Apache und
 Nginx. Das originale ISPConfig-Theme `default` muss als Rückfallebene
 installiert bleiben.
 
-**[HERITAGE 1.0.30 herunterladen](https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/latest)**
+**[HERITAGE 1.0.31 herunterladen](https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/latest)**
 
 ### Schnellstart
 
 ```bash
-git clone --branch v1.0.30 --depth 1 https://github.com/AR-Sebastian/ispconfig-heritage-theme.git
+git clone --branch v1.0.31 --depth 1 https://github.com/AR-Sebastian/ispconfig-heritage-theme.git
 cd ispconfig-heritage-theme
 sudo ./scripts/manage-theme.sh install
 sudo ./scripts/manage-theme.sh status
@@ -95,18 +95,18 @@ remain owned by ISPConfig.
 - standalone package without NEXT, LIQUID or Workbench dependencies;
 - atomic installation with backup and rollback.
 
-### Version 1.0.30
+### Version 1.0.31
 
 Validated with ISPConfig 3.3.1p1 for administrator, reseller, client and
 mail-user views, plus Ubuntu 22.04/24.04 and Debian 12/13 with Apache and Nginx.
 Keep ISPConfig's original `default` theme installed as the recovery path.
 
-**[Download HERITAGE 1.0.30](https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/latest)**
+**[Download HERITAGE 1.0.31](https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/latest)**
 
 ### Quick start
 
 ```bash
-git clone --branch v1.0.30 --depth 1 https://github.com/AR-Sebastian/ispconfig-heritage-theme.git
+git clone --branch v1.0.31 --depth 1 https://github.com/AR-Sebastian/ispconfig-heritage-theme.git
 cd ispconfig-heritage-theme
 sudo ./scripts/manage-theme.sh install
 sudo ./scripts/manage-theme.sh status

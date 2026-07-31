@@ -1,11 +1,11 @@
-# ISPConfig HERITAGE 1.0.30
+# ISPConfig HERITAGE 1.0.31
 
-HERITAGE 1.0.30 closes the specialty-surface V1 contract for system
-configuration, the retained Extension Installer, monitoring data and monitoring
-logs. Dynamic page changes no longer leak stale form profiles into operational
-views. Five real surfaces are verified across six viewport classes and both
-colour schemes, covering 60 browser states without page overflow or escaped
-controls.
+HERITAGE 1.0.31 completes the Tools and Admin V1 contract. Resynchronization,
+ISPConfig import, personal settings, users, additional PHP versions, firewall
+and IP addresses now expose consistent semantic workspaces. Dynamic navigation
+also clears stale table state before rendering a non-table view. Seven real
+surfaces are verified across six viewport classes and both colour schemes,
+covering 84 browser states.
 
 ## Previous releases
 
