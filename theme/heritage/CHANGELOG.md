@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.11 – 2026-07-31
+
+- Login and authenticated shells now share one current runtime cache contract.
+- A permanent V1 acceptance gate verifies packaged shell assets and module boundaries.
+- Numbered placeholder actions and obsolete runtime references block future releases.
+- Release validation now distinguishes automated contracts from manual visual evidence.
+
 ## 1.0.10 – 2026-07-31
 
 - Dashboard, monitoring, system, billing and extensions share one module composition.

@@ -1,6 +1,11 @@
-# ISPConfig HERITAGE 1.0.10
+# ISPConfig HERITAGE 1.0.11
 
-HERITAGE 1.0.10 establishes one specialty-module language for dashboard,
+HERITAGE 1.0.11 closes the V1 acceptance contract for every packaged shell,
+supported module boundary and public release artifact. The login and authenticated
+shells now share the same runtime cache generation, preventing a stale login asset
+after upgrades.
+
+HERITAGE 1.0.10 established one specialty-module language for dashboard,
 monitoring, system, billing and extensions. Their heroes, panels, tools and
 status regions now retain the same hierarchy from desktop to narrow phones.
 It targets ISPConfig 3.3.1p1 and keeps the original `default` theme as the
