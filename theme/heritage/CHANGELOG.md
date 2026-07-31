@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.17 – 2026-07-31
+
+- Application JavaScript now uses two reproducible ordered bundles around Chart.js.
+- Login JavaScript now uses one dedicated reproducible bundle.
+- Modular source scripts remain authoritative and independently maintainable.
+- Release validation rejects stale output and enforces bundle order and budgets.
+
 ## 1.0.16 – 2026-07-31
 
 - Application CSS now uses one reproducible ordered bundle instead of 25 requests.
