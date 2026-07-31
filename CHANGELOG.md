@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.19 – 2026-07-31
+
+- Wide tables reserve stable space for complete row-action groups.
+- Row actions align consistently at the trailing table edge.
+- Programmatic heading focus no longer resembles an interactive control.
+- Runtime coverage now validates both colour modes across desktop, tablet and mobile.
+
 ## 1.0.18 – 2026-07-31
 
 - Prevented the content observer from reacting recursively to its own UI enhancements.

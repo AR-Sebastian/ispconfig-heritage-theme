@@ -51,6 +51,14 @@ const largest = authored.map(file => ({file, size: fs.statSync(file).size})).sor
 if (total > 3600000) throw new Error(`Asset payload exceeds 3.6 MB source and bundle budget: ${total}`);
 if (largest.size > 225000) throw new Error(`Authored asset exceeds 225 KB: ${path.basename(largest.file)} (${largest.size})`);
 const styles = path.join(theme, 'assets', 'stylesheets');
+const tableAuthority = fs.readFileSync(path.join(styles, 'heritage-tables.css'), 'utf8');
+for (const contract of ['inline-size: 100%', ':has(.wb-row-actions > :nth-child(3))', 'justify-content: flex-end']) {
+  if (!tableAuthority.includes(contract)) throw new Error(`Table geometry contract is missing: ${contract}`);
+}
+const accessibilityAuthority = fs.readFileSync(path.join(styles, 'heritage-accessibility.css'), 'utf8');
+if (!accessibilityAuthority.includes("h1[data-workbench-page-focus='true']:focus-visible")) {
+  throw new Error('Programmatic page-heading focus contract is missing.');
+}
 const bundles = JSON.parse(fs.readFileSync(path.join(styles, 'heritage-css-bundles.json'), 'utf8'));
 for (const bundle of Object.values(bundles)) {
   const output = fs.readFileSync(path.join(styles, bundle.output), 'utf8').replace(/\r\n/g, '\n');

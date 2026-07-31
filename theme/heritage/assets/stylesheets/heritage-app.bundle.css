@@ -20087,6 +20087,7 @@ body.heritage-shell.wb-list-page .wb-table-workspace--finalized > .wb-table-view
 }
 
 body.heritage-shell.wb-list-page .wb-data-table {
+  inline-size: 100%;
   color: var(--hg-text);
   background: transparent;
 }
@@ -20189,9 +20190,28 @@ body.heritage-shell.wb-list-page .wb-data-table .wb-table-actions {
   position: sticky;
   inset-inline-end: 0;
   z-index: 2;
+  box-sizing: border-box;
+  inline-size: 104px;
+  min-inline-size: 104px;
+  white-space: nowrap;
   border-inline-start: 1px solid var(--hg-border);
   background: color-mix(in srgb, var(--hg-surface) 96%, transparent);
   box-shadow: -12px 0 22px color-mix(in srgb, var(--hg-page) 36%, transparent);
+}
+
+body.heritage-shell.wb-list-page .wb-data-table .wb-table-actions:has(.wb-row-actions > :nth-child(3)) {
+  inline-size: 148px;
+  min-inline-size: 148px;
+}
+
+body.heritage-shell.wb-list-page .wb-data-table .wb-table-actions:has(.wb-row-actions > :nth-child(4)) {
+  inline-size: 192px;
+  min-inline-size: 192px;
+}
+
+body.heritage-shell.wb-list-page .wb-data-table .wb-table-actions:has(.wb-row-actions > :nth-child(5)) {
+  inline-size: 236px;
+  min-inline-size: 236px;
 }
 
 body.heritage-shell.wb-list-page .wb-data-table > thead .wb-table-actions {
@@ -20201,6 +20221,7 @@ body.heritage-shell.wb-list-page .wb-data-table > thead .wb-table-actions {
 
 body.heritage-shell.wb-list-page .wb-row-actions {
   gap: 6px;
+  justify-content: flex-end;
 }
 
 body.heritage-shell.wb-list-page .wb-row-actions :is(a, button) {
@@ -22127,6 +22148,14 @@ body.wb-login-page.heritage-shell :is(a, button, input, select, textarea, [role=
   box-shadow: 0 0 0 5px color-mix(in srgb, var(--hg-accent) 14%, transparent);
 }
 
+/* Page changes move focus to the new heading so assistive technology announces
+ * it. The heading is not interactive, therefore it must not inherit the
+ * prominent control ring used by links, fields and buttons. */
+body.heritage-shell.wb-app-navigation-enabled #pageContent h1[data-workbench-page-focus='true']:focus-visible {
+  outline: 0;
+  box-shadow: none !important;
+}
+
 @media (pointer: coarse) {
   body.heritage-shell:is(.wb-app-navigation-enabled, .wb-login-page) :is(
     button,
@@ -22165,7 +22194,14 @@ body.wb-login-page.heritage-shell :is(a, button, input, select, textarea, [role=
     forced-color-adjust: auto;
   }
 
-  body.heritage-shell.wb-app-navigation-enabled :is(.wb-app-navigation__module.active, .wb-app-navigation__module[aria-current='page'], .wb-mobile-navigation__module.active, .wb-mobile-navigation__module[aria-current='page'], .wb-secondary-navigation a.active, .wb-secondary-navigation a[aria-current='page']) {
+  body.heritage-shell.wb-app-navigation-enabled :is(
+    .wb-app-navigation__module.active,
+    .wb-app-navigation__module[aria-current='page'],
+    .wb-mobile-navigation__module.active,
+    .wb-mobile-navigation__module[aria-current='page'],
+    .wb-secondary-navigation a.active,
+    .wb-secondary-navigation a[aria-current='page']
+  ) {
     border: 2px solid Highlight;
     color: HighlightText;
     background: Highlight;
@@ -22186,9 +22222,18 @@ body.wb-login-page.heritage-shell :is(a, button, input, select, textarea, [role=
     --hg-text-muted: color-mix(in srgb, currentColor 82%, transparent);
   }
 
-  body.heritage-shell :is(.wb-app-navigation__module, .wb-mobile-navigation__module, .wb-secondary-navigation a, .wb-surface, .wb-panel, .wb-card, .form-control, input, select, textarea, button, .btn) { border-width: 2px; }
-  body.heritage-shell :is(a, button, [role='button'], [role='tab']):focus-visible { outline-width: 4px; box-shadow: none; }
-  body.heritage-shell :is(.text-muted, .help-block, .wb-field-help, .wb-meta) { color: var(--hg-text) !important; }
+  body.heritage-shell :is(.wb-app-navigation__module, .wb-mobile-navigation__module, .wb-secondary-navigation a, .wb-surface, .wb-panel, .wb-card, .form-control, input, select, textarea, button, .btn) {
+    border-width: 2px;
+  }
+
+  body.heritage-shell :is(a, button, [role='button'], [role='tab']):focus-visible {
+    outline-width: 4px;
+    box-shadow: none;
+  }
+
+  body.heritage-shell :is(.text-muted, .help-block, .wb-field-help, .wb-meta) {
+    color: var(--hg-text) !important;
+  }
 }
 
 @media (prefers-reduced-transparency: reduce) {
