@@ -1,13 +1,17 @@
-# ISPConfig HERITAGE 1.0.7
+# ISPConfig HERITAGE 1.0.8
 
-HERITAGE 1.0.7 establishes one page-composition language across every
-supported module. Page titles, status metadata, primary actions, notices and
-empty states now retain the same hierarchy from desktop to narrow phones.
+HERITAGE 1.0.8 establishes one form language across every supported module.
+Sections, fields, supporting text, validation and action bars now retain the
+same hierarchy from desktop to narrow phones.
 It targets ISPConfig 3.3.1p1 and keeps the original `default` theme as the
 required recovery path.
 
 Highlights:
 
+- unified semantic form sections and field groups;
+- accessible required, invalid, disabled and supporting-text states;
+- predictable primary, secondary and destructive action order;
+- density-aware compact and long-form composition;
 - unified page headers, status metadata and action groups;
 - severity-aware notices and centered content states;
 - consistent mobile record cards across clients, sites, mail, DNS, support and system;
