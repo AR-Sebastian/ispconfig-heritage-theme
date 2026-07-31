@@ -1,0 +1,24 @@
+{
+  "applicationBeforeChart": {
+    "output": "heritage-app-before-chart.bundle.js",
+    "sources": [
+      "workbench-date-time.js", "workbench-native-interactions.js", "workbench-http.js", "workbench-core.js",
+      "workbench-field-search.js", "workbench-message-acknowledgement.js", "workbench-loading.js",
+      "workbench-content-states.js", "workbench-background.js", "workbench-icons.js", "workbench-feedback.js",
+      "workbench-navigation.js", "workbench-dashboard-metrics.js", "workbench-dashboard-layout.js",
+      "workbench-dialog.js", "workbench-disclosure.js", "workbench-form-state.js", "workbench-tabstrip.js",
+      "workbench-tab-confirm.js", "workbench-accessibility.js", "workbench-validation.js",
+      "workbench-submit-feedback.js", "workbench-list-filter.js", "workbench-statistics.js",
+      "workbench-wizard-preview.js", "workbench-advanced-controls.js", "workbench-upload-feedback.js",
+      "workbench-branding.js", "workbench-global-search.js", "workbench-theme.js", "workbench-select.js"
+    ]
+  },
+  "applicationAfterChart": {
+    "output": "heritage-app-after-chart.bundle.js",
+    "sources": ["workbench-monitoring.js", "heritage-runtime.js", "workbench-boot.js"]
+  },
+  "login": {
+    "output": "heritage-login.bundle.js",
+    "sources": ["workbench-feedback.js", "workbench-login.js", "workbench-theme.js", "heritage-runtime.js"]
+  }
+}

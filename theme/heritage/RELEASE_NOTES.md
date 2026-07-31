@@ -1,10 +1,16 @@
-# ISPConfig HERITAGE 1.0.16
+# ISPConfig HERITAGE 1.0.17
+
+HERITAGE 1.0.17 replaces the individually loaded application and login runtime
+scripts with reproducible ordered bundles. Chart.js remains an explicit external
+boundary between the application bundles, while the early colour and language
+bootstrap intentionally remains synchronous. Release validation proves source
+order, generated output, script topology and payload budgets.
+
+## Previous releases
 
 HERITAGE 1.0.16 replaces 25 application stylesheet requests and five login
 stylesheet requests with two deterministic bundles. Modular source files remain
-authoritative, and validation proves exact source order and current output.
-
-## Previous releases
+authoritative, and release validation proves exact source order and current output.
 
 HERITAGE 1.0.15 converts the complete post-bootstrap runtime to ordered deferred
 loading. Login, dashboard and module scripts can download in parallel while their
@@ -16,7 +22,7 @@ The early colour/language bootstrap remains the only intentional parser blocker.
 HERITAGE 1.0.14 closes package and loading hygiene for the stable V1 line. Every
 distributed asset must be referenced, cache-versioned and loaded only once per
 shell. Payload budgets and the single intentional early bootstrap are now enforced
-by validation, and an obsolete private test logo has been removed.
+by the release gate, and an obsolete private test logo has been removed.
 
 HERITAGE 1.0.13 establishes a shared accessibility authority across login and the
 authenticated application. Increased contrast, forced system colours, reduced
@@ -60,6 +66,7 @@ Highlights:
 - sticky table headings with correctly aligned filter rows;
 - localized row-action names instead of generic numbered tooltips;
 - visible and accessible sorting direction;
+- compact full-width mobile record cards with the business value as their primary edit target;
 - form-wide summaries for explicit validation errors;
 - compact per-tab error counters and first-error navigation;
 - compact six-column module destinations on wide dashboards;

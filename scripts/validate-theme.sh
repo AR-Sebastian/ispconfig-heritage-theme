@@ -8,7 +8,9 @@ required=(VERSION LICENSE.md THIRD_PARTY_NOTICES.md README.md \
   theme/heritage/LICENSE_SCOPE.md theme/heritage/THIRD_PARTY_NOTICES.md \
   theme/heritage/theme-manifest.json theme/heritage/ispconfig_version \
   theme/heritage/ISPC_VERSION theme/heritage/templates/main.tpl.htm \
-  theme/heritage/templates/main_login.tpl.htm)
+  theme/heritage/templates/main_login.tpl.htm \
+  theme/heritage/assets/stylesheets/heritage-css-bundles.json \
+  theme/heritage/assets/javascripts/heritage-js-bundles.json)
 for file in "${required[@]}"; do test -f "$root/$file" || { echo "Missing: $file" >&2; exit 1; }; done
 
 node -e "JSON.parse(require('fs').readFileSync(process.argv[1], 'utf8'))" "$theme/theme-manifest.json"
@@ -44,9 +46,9 @@ const assets = walk(path.join(theme, 'assets'));
 const unused = assets.filter(file => !corpus.includes(path.basename(file)));
 if (unused.length) throw new Error(`Unreferenced assets: ${unused.map(file => path.relative(theme, file)).join(', ')}`);
 const total = assets.reduce((sum, file) => sum + fs.statSync(file).size, 0);
-const authored = assets.filter(file => !file.endsWith('.bundle.css'));
+const authored = assets.filter(file => !/\.bundle\.(?:css|js)$/.test(file));
 const largest = authored.map(file => ({file, size: fs.statSync(file).size})).sort((a, b) => b.size - a.size)[0];
-if (total > 2800000) throw new Error(`Asset payload exceeds 2.8 MB source and bundle budget: ${total}`);
+if (total > 3600000) throw new Error(`Asset payload exceeds 3.6 MB source and bundle budget: ${total}`);
 if (largest.size > 225000) throw new Error(`Authored asset exceeds 225 KB: ${path.basename(largest.file)} (${largest.size})`);
 const styles = path.join(theme, 'assets', 'stylesheets');
 const bundles = JSON.parse(fs.readFileSync(path.join(styles, 'heritage-css-bundles.json'), 'utf8'));
@@ -62,6 +64,29 @@ for (const bundle of Object.values(bundles)) {
     cursor = index;
   }
 }
+const scriptsDirectory = path.join(theme, 'assets', 'javascripts');
+const scriptBundles = JSON.parse(fs.readFileSync(path.join(scriptsDirectory, 'heritage-js-bundles.json'), 'utf8'));
+for (const bundle of Object.values(scriptBundles)) {
+  const output = fs.readFileSync(path.join(scriptsDirectory, bundle.output), 'utf8').replace(/\r\n/g, '\n');
+  let cursor = -1;
+  for (const source of bundle.sources) {
+    const header = `/* source: ${source} */`;
+    const index = output.indexOf(header, cursor + 1);
+    if (index <= cursor) throw new Error(`Missing or unordered JavaScript source in ${bundle.output}: ${source}`);
+    const content = fs.readFileSync(path.join(scriptsDirectory, source), 'utf8').replace(/\r\n/g, '\n').trim();
+    if (!output.includes(content)) throw new Error(`Stale JavaScript source in ${bundle.output}: ${source}`);
+    cursor = index;
+  }
+}
+const bundleBudgets = {
+  'heritage-app-before-chart.bundle.js': 600000,
+  'heritage-app-after-chart.bundle.js': 75000,
+  'heritage-login.bundle.js': 75000
+};
+for (const [file, budget] of Object.entries(bundleBudgets)) {
+  const size = fs.statSync(path.join(scriptsDirectory, file)).size;
+  if (size > budget) throw new Error(`${file} exceeds its ${budget}-byte budget: ${size}`);
+}
 for (const shellName of ['main.tpl.htm', 'main_login.tpl.htm']) {
   const markup = fs.readFileSync(path.join(theme, 'templates', shellName), 'utf8');
   const references = [...markup.matchAll(/(?:src|href)=["']([^"']*themes\/heritage\/assets\/[^"']+)["']/g)].map(match => match[1]);
@@ -75,6 +100,9 @@ for (const shellName of ['main.tpl.htm', 'main_login.tpl.htm']) {
   const scripts = [...markup.matchAll(/<script\s+([^>]*\s)?src=["'][^"']+["'][^>]*>/g)].map(match => match[0]);
   const nonDeferred = scripts.filter(script => !script.includes('workbench-early.js') && !/(^|\s)defer(\s|=|>)/.test(script));
   if (nonDeferred.length) throw new Error(`${shellName} has parser-blocking runtime scripts: ${nonDeferred.join(', ')}`);
+  const themeScripts = scripts.filter(script => script.includes('themes/heritage/assets/javascripts/'));
+  const expected = shellName === 'main.tpl.htm' ? 3 : 2;
+  if (themeScripts.length !== expected) throw new Error(`${shellName} must expose exactly ${expected} theme runtime scripts.`);
 }
 const main = fs.readFileSync(path.join(theme, 'templates', 'main.tpl.htm'), 'utf8');
 const head = main.slice(0, main.toLowerCase().indexOf('</head>'));
