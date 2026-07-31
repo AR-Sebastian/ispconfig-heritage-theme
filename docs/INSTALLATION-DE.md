@@ -23,10 +23,10 @@ Lade für Linux bevorzugt das TAR.GZ-Archiv und die Prüfsummendatei direkt aus
 dem Release herunter:
 
 ```bash
-curl -fLO https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/download/v1.0.8/ispconfig-heritage-theme-1.0.8.tar.gz
-curl -fLO https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/download/v1.0.8/SHA256SUMS.txt
+curl -fLO https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/download/v1.0.9/ispconfig-heritage-theme-1.0.9.tar.gz
+curl -fLO https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/download/v1.0.9/SHA256SUMS.txt
 sha256sum -c --ignore-missing SHA256SUMS.txt
-sudo tar -xzf ispconfig-heritage-theme-1.0.8.tar.gz -C /usr/local/ispconfig/interface/web/themes/
+sudo tar -xzf ispconfig-heritage-theme-1.0.9.tar.gz -C /usr/local/ispconfig/interface/web/themes/
 ```
 
 Die Prüfung muss das Archiv ausdrücklich mit `OK` bestätigen. Bei einer

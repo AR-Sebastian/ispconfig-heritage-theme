@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.9 – 2026-07-31
+
+- Dialogs now share semantic tone, description and action-group contracts.
+- Feedback states use consistent severity styling and accessible live regions.
+- Temporary success and information messages expose a pause-aware lifetime indicator.
+- Desktop and mobile dialog actions retain a predictable safe-first hierarchy.
+
 ## 1.0.8 – 2026-07-31
 
 - Forms now expose one stable section, field and action hierarchy.
