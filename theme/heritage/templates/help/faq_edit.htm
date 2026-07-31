@@ -1,0 +1,26 @@
+<!-- WP-926 Bootstrap-removal batch 3: native override of help/faq_edit.
+     Native wb-field-group / wb-form-actions structure; shared template untouched.
+     All {tmpl_var} and data-* hooks verbatim. -->
+<section class="wb-content-panel wb-content-panel--form" data-wb-support-surface="faq-editor">
+            <div class="wb-field-group">
+                <label for="hf_section">{tmpl_var name='faq_section_txt'}</label>
+                <div><select name="hf_section" id="hf_section" class="form-control">
+                    {tmpl_var name='hf_section'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="hf_question">{tmpl_var name='faq_question_txt'}</label>
+                <div><input type="text" name="hf_question" id="hf_question" value="{tmpl_var name='hf_question'}" class="form-control" /></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="hf_answer">{tmpl_var name='faq_answer_txt'}</label>
+                <div><textarea class="form-control" name="hf_answer" id="hf_answer" rows='10' cols='30'>{tmpl_var name='hf_answer'}</textarea></div>
+            </div>
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="help/faq_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="help/faq_list.php" data-load-content="help/faq_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div>
+</section>

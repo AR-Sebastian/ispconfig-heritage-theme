@@ -1,0 +1,33 @@
+<!-- WP-965: native Workbench operations surface; controller contract unchanged. -->
+<div class="wb-alert wb-alert--info wb-config-context"><h4><tmpl_var name="config_for_txt"> {tmpl_var name='server_name'}</h4></div>
+
+
+
+            <div class="wb-field-group">
+                <label for="jailkit_chroot_home" >{tmpl_var name='jailkit_chroot_home_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="jailkit_chroot_home" id="jailkit_chroot_home" value="{tmpl_var name='jailkit_chroot_home'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="jailkit_chroot_app_sections" >{tmpl_var name='jailkit_chroot_app_sections_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="jailkit_chroot_app_sections" id="jailkit_chroot_app_sections" value="{tmpl_var name='jailkit_chroot_app_sections'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="jailkit_chroot_app_programs" >{tmpl_var name='jailkit_chroot_app_programs_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="jailkit_chroot_app_programs" id="jailkit_chroot_app_programs" value="{tmpl_var name='jailkit_chroot_app_programs'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="jailkit_chroot_cron_programs" >{tmpl_var name='jailkit_chroot_cron_programs_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="jailkit_chroot_cron_programs" id="jailkit_chroot_cron_programs" value="{tmpl_var name='jailkit_chroot_cron_programs'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="jailkit_chroot_authorized_keys_template" >{tmpl_var name='jailkit_chroot_authorized_keys_template_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="jailkit_chroot_authorized_keys_template" id="jailkit_chroot_authorized_keys_template" value="{tmpl_var name='jailkit_chroot_authorized_keys_template'}" class="form-control" /></div></div>
+	<div class="wb-field-group">
+		<label >{tmpl_var name='jailkit_hardlinks_txt'}</label>
+		<div class="wb-field-body"><select name="jailkit_hardlinks" id="jailkit_hardlinks" class="form-control">
+			<a data-workbench-tooltip="true" title="{tmpl_var name='tooltip_jailkit_hardlinks_txt'}">{tmpl_var name="jailkit_hardlinks"}</a>
+		</select></div>
+	</div>
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions"><div class="wb-form-actions__primary">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="admin/server_config_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="admin/server_config_list.php" data-load-content="admin/server_config_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div></div>

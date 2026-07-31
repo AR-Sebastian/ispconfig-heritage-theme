@@ -1,0 +1,39 @@
+<!-- WP-965: native Workbench operations surface; controller contract unchanged. -->
+<div class="wb-alert wb-alert--info wb-config-context"><h4><tmpl_var name="config_for_txt"> {tmpl_var name='server_name'}</h4></div>
+
+
+
+            <div class="wb-field-group">
+                <label for="bind_user" >{tmpl_var name='bind_user_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="bind_user" id="bind_user" value="{tmpl_var name='bind_user'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="bind_group" >{tmpl_var name='bind_group_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="bind_group" id="bind_group" value="{tmpl_var name='bind_group'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="bind_zonefiles_dir" >{tmpl_var name='bind_zonefiles_dir_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="bind_zonefiles_dir" id="bind_zonefiles_dir" value="{tmpl_var name='bind_zonefiles_dir'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="bind_keyfiles_dir" >{tmpl_var name='bind_keyfiles_dir_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="bind_keyfiles_dir" id="bind_keyfiles_dir" value="{tmpl_var name='bind_keyfiles_dir'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="bind_zonefiles_masterprefix" >{tmpl_var name='bind_zonefiles_masterprefix_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="bind_zonefiles_masterprefix" id="bind_zonefiles_masterprefix" value="{tmpl_var name='bind_zonefiles_masterprefix'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="bind_zonefiles_slaveprefix" >{tmpl_var name='bind_zonefiles_slaveprefix_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="bind_zonefiles_slaveprefix" id="bind_zonefiles_slaveprefix" value="{tmpl_var name='bind_zonefiles_slaveprefix'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="named_conf_path" >{tmpl_var name='named_conf_path_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="named_conf_path" id="named_conf_path" value="{tmpl_var name='named_conf_path'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="named_conf_local_path" >{tmpl_var name='named_conf_local_path_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="named_conf_local_path" id="named_conf_local_path" value="{tmpl_var name='named_conf_local_path'}" class="form-control" /></div></div>
+			<div class="wb-field-group">
+				<label for="disable_bind_log" >{tmpl_var name='disable_bind_log_txt'}</label>
+				<div class="wb-field-body">{tmpl_var name='disable_bind_log'}</div></div>
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions"><div class="wb-form-actions__primary">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="admin/server_config_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="admin/server_config_list.php" data-load-content="admin/server_config_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div></div>

@@ -1,0 +1,52 @@
+<!-- WP-940 Bootstrap-removal: native Workbench override; shared template unchanged. -->
+<div class="wb-field-group">
+	<label for="ca_list">{tmpl_var name='ca_list_txt'}</label>
+	<div><select name="ca_list" id="ca_list" class="form-control" data-json-sync="dns-caa" data-endpoint-name="dnsJson" data-request-type="ca_wildcard">{tmpl_var name='ca_list'}</select></div>
+</div>
+
+<div class="wildcard wb-field-group">
+	<label>{tmpl_var name='ca_wildcard_txt'}</label>
+	<div> <input type="checkbox" id="allow_wildcard" name="allow_wildcard" {tmpl_var name='allow_wildcard'}/></div>
+</div>
+
+<div class="wb-field-group">
+	<label for="name">{tmpl_var name='ca_domain_txt'}</label>
+	<div><input disabled type="text" name="name" id="name" value="{tmpl_var name='name'}" class="form-control" /></div>
+</div>
+
+<div class="wb-field-group">
+	<label for="additional">{tmpl_var name='ca_hostname_txt'}</label>
+	<div>
+		<input type="text" name="additional" id="additional" value="{tmpl_var name='additional'}" class="form-control" <tmpl_if name="edit_disabled">readonly</tmpl_if> />
+		<p class="formHint">{tmpl_var name='ca_hostname_note_txt'}</p>
+	</div>
+</div>
+
+<div class="wb-field-group">
+	<label for="options">{tmpl_var name='ca_options_txt'}</label>
+	<div>
+		<input type="text" name="options" id="options" value="{tmpl_var name='options'}" class="form-control" />
+		<p class="formHint">{tmpl_var name='ca_options_note_txt'}</p>
+	</div>
+</div>
+
+<div class="wb-field-group">
+	<label for="ttl">{tmpl_var name='ttl_txt'}</label>
+	<div><input type="text" name="ttl" id="ttl" value="{tmpl_var name='ttl'}" class="form-control" /></div>
+</div>
+
+<div class="wb-field-group">
+	<label>{tmpl_var name='active_txt'}</label>
+	<div>{tmpl_var name='active'}</div>
+</div>
+
+<input type="hidden" name="id" value="{tmpl_var name='id'}">
+<input type="hidden" name="zone" value="{tmpl_var name='zone'}" id="zone">
+<input type="hidden" name="type" value="{tmpl_var name='type'}">
+<input type="hidden" name="ca_issue" value="{tmpl_var name='ca_issue'}">
+<input type="hidden" name="ca_critical" value="{tmpl_var name='ca_critical'}">
+
+<div class="wb-form-actions">
+	<button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="dns/dns_caa_edit.php">{tmpl_var name='btn_save_txt'}</button>
+	<button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="dns/dns_soa_edit.php?id={tmpl_var name='zone'}&next_tab=dns_records" data-load-content="dns/dns_soa_edit.php?id={tmpl_var name='zone'}&next_tab=dns_records">{tmpl_var name='btn_cancel_txt'}</button>
+</div>

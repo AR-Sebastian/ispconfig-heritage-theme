@@ -1,0 +1,136 @@
+<!-- WP-945: native Workbench database form; shared template and service lifecycle unchanged. -->
+            <tmpl_if name="is_admin">
+                <div class="wb-field-group">
+                    <tmpl_if name="edit_disabled">
+                        <label for="server_id_disabled">{tmpl_var name='server_id_txt'}</label>
+                        <div ><select name="server_id_disabled" id="server_id_disabled" class="form-control" disabled="disabled">
+                            {tmpl_var name='server_id'}
+                        </select></div>
+                        <input type="hidden" name="server_id" value="{tmpl_var name='server_id_value'}" />
+                        <tmpl_else>
+                            <label for="server_id">{tmpl_var name='server_id_txt'}</label>
+                            <div ><select name="server_id" id="server_id" class="form-control">
+                                {tmpl_var name='server_id'}
+                            </select></div>
+                    </tmpl_if>
+                </div>
+            <tmpl_else>
+                <tmpl_if name="only_one_server">
+                    <input type="hidden" id="server_id" name="server_id" value="{tmpl_var name='server_id_value'}" />
+                <tmpl_else>
+                    <div class="wb-field-group">
+                        <tmpl_if name="edit_disabled">
+                            <label for="server_id_disabled">{tmpl_var name='server_id_txt'}</label>
+                            <div ><select name="server_id_disabled" id="server_id_disabled" class="form-control" disabled="disabled">
+                                {tmpl_var name='server_id'}
+                            </select></div>
+                            <input type="hidden" name="server_id" value="{tmpl_var name='server_id_value'}" />
+                            <tmpl_else>
+                                <label for="server_id">{tmpl_var name='server_id_txt'}</label>
+                                <div ><select name="server_id" id="server_id" class="form-control">
+                                    {tmpl_var name='server_id'}
+                                </select></div>
+                        </tmpl_if>
+                    </div>
+                </tmpl_if>
+            </tmpl_if>
+            <div class="wb-field-group">
+                <label for="parent_domain_id">{tmpl_var name='parent_domain_id_txt'}</label>
+                <div ><select name="parent_domain_id" id="parent_domain_id" class="form-control"<tmpl_if name="is_admin"> data-json-sync="database-users" data-endpoint-name="sitesJson" data-request-type="getdatabaseusers" data-json-option-targets="database_user_id,database_ro_user_id"</tmpl_if>>
+                    {tmpl_var name='parent_domain_id'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <tmpl_if name="type_value">
+                    <label for="type_disabled">{tmpl_var name='type_txt'}</label>
+                    <div ><select name="type_disabled" id="type_disabled" class="form-control" disabled="disabled" data-workbench-database-type-toggle="backup_interval,quota">
+                        {tmpl_var name='type'}
+                    </select></div>
+                    <input type="hidden" name="type" value="{tmpl_var name='type_value'}" data-workbench-database-type-toggle="backup_interval,quota" />
+                <tmpl_else>
+                    <label for="type">{tmpl_var name='type_txt'}</label>
+                    <div ><select name="type" id="type" class="form-control" data-workbench-database-type-toggle="backup_interval,quota">
+                        {tmpl_var name='type'}
+                    </select></div>
+                </tmpl_if>
+            </div>
+            <div class="wb-field-group">
+                <label for="backup_interval">{tmpl_var name='backup_interval_txt'}</label>
+                <div >
+                    <select name="backup_interval" id="backup_interval" class="form-control">
+                        {tmpl_var name='backup_interval'}
+                    </select>
+                </div>
+            </div>
+			<div class="wb-field-group">
+                <label for="database_name">{tmpl_var name='database_name_txt'}</label>
+                <div >
+					<div class="wb-field-composite">
+						<span class="wb-field-addon" id="database_name-desc">{tmpl_var name='database_name_prefix'}</span>
+						<tmpl_if name="edit_disabled">
+						<input type="text" name="database_name" id="database_name" value="{tmpl_var name='database_name'}" class="form-control" disabled="disabled" /><input name="database_name" type="hidden" value="{tmpl_var name='database_name'}" />
+						<tmpl_else>
+						<input type="text" name="database_name" id="database_name" value="{tmpl_var name='database_name'}" class="form-control" aria-describedby="database_name-desc" />
+						</tmpl_if>
+					</div>
+				</div>
+            </div>
+			<div class="wb-field-group">
+                <label for="database_quota">{tmpl_var name='limit_database_quota_txt'}</label>
+                <div ><div class="wb-field-composite"><input type="text" name="database_quota" id="quota" value="{tmpl_var name='database_quota'}" class="form-control" aria-describedby="database_quota-desc" /><span class="wb-field-addon" id="database_quota-desc">MB</span></div>
+                </div>
+            </div>
+            <div class="wb-field-group">
+                <label for="database_user_id">{tmpl_var name='database_user_txt'}</label>
+                <div ><select name="database_user_id" id="database_user_id" class="form-control">
+                    {tmpl_var name='database_user_id'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="database_ro_user_id">{tmpl_var name='database_ro_user_txt'}</label>
+                <div ><select name="database_ro_user_id" id="database_ro_user_id" class="form-control" aria-describedby="database_ro_user_id-help">
+                    {tmpl_var name='database_ro_user_id'}
+                </select>
+				<span id="database_ro_user_id-help" class="help-block">{tmpl_var name='optional_txt'}</span>
+				</div>
+            </div>
+            <div class="wb-field-group">
+                <tmpl_if name="edit_disabled">
+                    <label for="database_charset_disabled">{tmpl_var name='database_charset_txt'}</label>
+                    <div ><select name="database_charset_disabled" id="database_charset_disabled" class="form-control" disabled="disabled">
+                        {tmpl_var name='database_charset'}
+                    </select></div>
+                    <input type="hidden" name="database_charset" value="{tmpl_var name='database_charset_value'}" />
+                    <tmpl_else>
+                        <label for="database_charset">{tmpl_var name='database_charset_txt'} (MySQL)</label>
+                        <div ><select name="database_charset" id="database_charset" class="form-control">
+                            {tmpl_var name='database_charset'}
+                        </select></div>
+                </tmpl_if>
+            </div>
+	 <tmpl_unless name="disable_remote_db">
+            <div class="wb-field-group">
+                <label>{tmpl_var name='remote_access_txt'}</label>
+                <div >
+                    {tmpl_var name='remote_access'}
+                </div>
+            </div>
+            <div class="wb-field-group">
+                <label for="remote_ips">{tmpl_var name='remote_ips_txt'}</label>
+                <div ><input type="text" name="remote_ips" id="remote_ips" value="{tmpl_var name='remote_ips'}" class="form-control" data-workbench-field-search="true" data-search-endpoint="sitesJson" data-search-type="get_ipv4" data-search-results-limit='$ <tmpl_var name="globalsearch_resultslimit_of_txt"> % <tmpl_var name="globalsearch_resultslimit_results_txt">' data-search-results-prefix='<tmpl_var name="globalsearch_suggestions_text_txt">' data-search-no-results='<tmpl_var name="globalsearch_noresults_text_txt">' data-search-no-results-limit='<tmpl_var name="globalsearch_noresults_limit_txt">' data-search-min-chars="0" data-search-css-prefix="df-" data-search-fill-field="true" data-search-fill-with="fill_text" /></div>
+            </div>
+	 </tmpl_if>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='active_txt'}</label>
+                <div >
+                    {tmpl_var name='active'}
+                </div>
+            </div>
+
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="sites/database_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="sites/database_list.php" data-load-content="sites/database_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div>

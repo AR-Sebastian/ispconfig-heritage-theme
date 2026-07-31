@@ -1,0 +1,199 @@
+/*
+ * WP-770: structural Workbench markup boundary.
+ *
+ * ISPConfig and optional extensions still emit a small server-rendered markup
+ * vocabulary. This file supplies structure only; every visual decision still lives
+ * in the later Workbench surface, form, list, module and content layers.
+ */
+
+body.wb-app-navigation-enabled { overflow-x: clip; overflow-y: auto; }
+body.wb-app-navigation-enabled .left { float: left; }
+body.wb-app-navigation-enabled .right { float: right; }
+body.wb-app-navigation-enabled .clear::after { display: table; clear: both; content: ''; }
+body.wb-app-navigation-enabled .marginTop15 { margin-top: 15px; }
+body.wb-app-navigation-enabled .paddingX5 { padding-inline: 5px !important; }
+body.wb-app-navigation-enabled .width65 { width: 65px; }
+body.wb-app-navigation-enabled .control-label::after { content: ':'; }
+body.wb-app-navigation-enabled .control-label-plain::after { content: ''; }
+body.wb-app-navigation-enabled .inlineLabel { font-weight: 400; }
+body.wb-app-navigation-enabled #logo > a { display: block; width: 100%; height: 100%; }
+body.wb-app-navigation-enabled #passBar,
+body.wb-app-navigation-enabled #passText { display: inline-block; vertical-align: middle; }
+body.wb-app-navigation-enabled #passBar > div { height: 100%; padding: 0; }
+
+body.wb-app-navigation-enabled *,
+body.wb-app-navigation-enabled *::before,
+body.wb-app-navigation-enabled *::after { box-sizing: border-box; }
+body.wb-app-navigation-enabled img { max-width: 100%; height: auto; vertical-align: middle; }
+body.wb-app-navigation-enabled button,
+body.wb-app-navigation-enabled input,
+body.wb-app-navigation-enabled select,
+body.wb-app-navigation-enabled textarea { margin: 0; font: inherit; }
+body.wb-app-navigation-enabled button,
+body.wb-app-navigation-enabled [role='button'] { cursor: pointer; }
+body.wb-app-navigation-enabled .clearfix::before,
+body.wb-app-navigation-enabled .clearfix::after,
+body.wb-app-navigation-enabled .form-group::before,
+body.wb-app-navigation-enabled .form-group::after,
+body.wb-app-navigation-enabled .row::before,
+body.wb-app-navigation-enabled .row::after { display: table; content: ''; }
+body.wb-app-navigation-enabled .clearfix::after,
+body.wb-app-navigation-enabled .form-group::after,
+body.wb-app-navigation-enabled .row::after { clear: both; }
+body.wb-app-navigation-enabled .hide,
+body.wb-app-navigation-enabled .hidden,
+body.wb-app-navigation-enabled [hidden] { display: none !important; }
+body.wb-app-navigation-enabled .show { display: block !important; }
+body.wb-app-navigation-enabled .invisible { visibility: hidden; }
+body.wb-app-navigation-enabled .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  white-space: nowrap;
+}
+body.wb-app-navigation-enabled .text-left { text-align: left; }
+body.wb-app-navigation-enabled .text-center { text-align: center; }
+body.wb-app-navigation-enabled .text-right { text-align: right; }
+body.wb-app-navigation-enabled .pull-left { float: left !important; }
+body.wb-app-navigation-enabled .pull-right { float: right !important; }
+
+body.wb-app-navigation-enabled .row { display: flex; flex-wrap: wrap; margin-inline: -8px; }
+body.wb-app-navigation-enabled [class^='col-'],
+body.wb-app-navigation-enabled [class*=' col-'] { position: relative; width: 100%; min-height: 1px; padding-inline: 8px; }
+body.wb-app-navigation-enabled .col-xs-1 { width: 8.333333%; }
+body.wb-app-navigation-enabled .col-xs-2 { width: 16.666667%; }
+body.wb-app-navigation-enabled .col-xs-3 { width: 25%; }
+body.wb-app-navigation-enabled .col-xs-4 { width: 33.333333%; }
+body.wb-app-navigation-enabled .col-xs-5 { width: 41.666667%; }
+body.wb-app-navigation-enabled .col-xs-6 { width: 50%; }
+body.wb-app-navigation-enabled .col-xs-7 { width: 58.333333%; }
+body.wb-app-navigation-enabled .col-xs-8 { width: 66.666667%; }
+body.wb-app-navigation-enabled .col-xs-9 { width: 75%; }
+body.wb-app-navigation-enabled .col-xs-10 { width: 83.333333%; }
+body.wb-app-navigation-enabled .col-xs-11 { width: 91.666667%; }
+body.wb-app-navigation-enabled .col-xs-12 { width: 100%; }
+@media (min-width: 768px) {
+  body.wb-app-navigation-enabled .col-sm-1 { width: 8.333333%; }
+  body.wb-app-navigation-enabled .col-sm-2 { width: 16.666667%; }
+  body.wb-app-navigation-enabled .col-sm-3 { width: 25%; }
+  body.wb-app-navigation-enabled .col-sm-4 { width: 33.333333%; }
+  body.wb-app-navigation-enabled .col-sm-5 { width: 41.666667%; }
+  body.wb-app-navigation-enabled .col-sm-6 { width: 50%; }
+  body.wb-app-navigation-enabled .col-sm-7 { width: 58.333333%; }
+  body.wb-app-navigation-enabled .col-sm-8 { width: 66.666667%; }
+  body.wb-app-navigation-enabled .col-sm-9 { width: 75%; }
+  body.wb-app-navigation-enabled .col-sm-10 { width: 83.333333%; }
+  body.wb-app-navigation-enabled .col-sm-11 { width: 91.666667%; }
+  body.wb-app-navigation-enabled .col-sm-12 { width: 100%; }
+}
+@media (min-width: 992px) {
+  body.wb-app-navigation-enabled .col-md-1 { width: 8.333333%; }
+  body.wb-app-navigation-enabled .col-md-2 { width: 16.666667%; }
+  body.wb-app-navigation-enabled .col-md-3 { width: 25%; }
+  body.wb-app-navigation-enabled .col-md-4 { width: 33.333333%; }
+  body.wb-app-navigation-enabled .col-md-5 { width: 41.666667%; }
+  body.wb-app-navigation-enabled .col-md-6 { width: 50%; }
+  body.wb-app-navigation-enabled .col-md-7 { width: 58.333333%; }
+  body.wb-app-navigation-enabled .col-md-8 { width: 66.666667%; }
+  body.wb-app-navigation-enabled .col-md-9 { width: 75%; }
+  body.wb-app-navigation-enabled .col-md-10 { width: 83.333333%; }
+  body.wb-app-navigation-enabled .col-md-11 { width: 91.666667%; }
+  body.wb-app-navigation-enabled .col-md-12 { width: 100%; }
+}
+@media (min-width: 1200px) {
+  body.wb-app-navigation-enabled .col-lg-1 { width: 8.333333%; }
+  body.wb-app-navigation-enabled .col-lg-2 { width: 16.666667%; }
+  body.wb-app-navigation-enabled .col-lg-3 { width: 25%; }
+  body.wb-app-navigation-enabled .col-lg-4 { width: 33.333333%; }
+  body.wb-app-navigation-enabled .col-lg-5 { width: 41.666667%; }
+  body.wb-app-navigation-enabled .col-lg-6 { width: 50%; }
+  body.wb-app-navigation-enabled .col-lg-7 { width: 58.333333%; }
+  body.wb-app-navigation-enabled .col-lg-8 { width: 66.666667%; }
+  body.wb-app-navigation-enabled .col-lg-9 { width: 75%; }
+  body.wb-app-navigation-enabled .col-lg-10 { width: 83.333333%; }
+  body.wb-app-navigation-enabled .col-lg-11 { width: 91.666667%; }
+  body.wb-app-navigation-enabled .col-lg-12 { width: 100%; }
+}
+
+body.wb-app-navigation-enabled .form-control { display: block; width: 100%; padding: 6px 12px; line-height: 1.428571; }
+body.wb-app-navigation-enabled .form-control-static { min-height: 34px; margin: 0; padding-block: 7px; }
+body.wb-app-navigation-enabled .checkbox,
+body.wb-app-navigation-enabled .radio { position: relative; display: block; margin-block: 10px; }
+body.wb-app-navigation-enabled .checkbox label,
+body.wb-app-navigation-enabled .radio label { min-height: 20px; padding-left: 20px; cursor: pointer; }
+body.wb-app-navigation-enabled .checkbox input,
+body.wb-app-navigation-enabled .radio input { margin-left: -20px; }
+body.wb-app-navigation-enabled .input-group { position: relative; display: flex; width: 100%; align-items: stretch; }
+body.wb-app-navigation-enabled .input-group > .form-control { min-width: 0; flex: 1 1 auto; }
+body.wb-app-navigation-enabled .input-group-addon,
+body.wb-app-navigation-enabled .input-group-btn { display: flex; flex: 0 0 auto; align-items: center; }
+body.wb-app-navigation-enabled .btn {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border: 1px solid transparent;
+  background-image: none;
+  font-weight: 600;
+  line-height: 1.428571;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  user-select: none;
+}
+body.wb-app-navigation-enabled .btn-block { display: flex; width: 100%; }
+body.wb-app-navigation-enabled .btn-group { position: relative; display: inline-flex; vertical-align: middle; }
+body.wb-app-navigation-enabled .btn-group > .btn + .btn { margin-left: -1px; }
+
+body.wb-app-navigation-enabled .table { width: 100%; max-width: 100%; margin-bottom: 20px; border-collapse: collapse; border-spacing: 0; }
+body.wb-app-navigation-enabled .table > thead > tr > th,
+body.wb-app-navigation-enabled .table > tbody > tr > th,
+body.wb-app-navigation-enabled .table > tfoot > tr > th,
+body.wb-app-navigation-enabled .table > thead > tr > td,
+body.wb-app-navigation-enabled .table > tbody > tr > td,
+body.wb-app-navigation-enabled .table > tfoot > tr > td { padding: 8px; border-top: 1px solid var(--wb-border); line-height: 1.428571; vertical-align: top; }
+body.wb-app-navigation-enabled .table > thead > tr > th { border-bottom: 2px solid var(--wb-border); vertical-align: bottom; }
+body.wb-app-navigation-enabled .table-responsive { min-height: .01%; overflow-x: auto; }
+
+body.wb-app-navigation-enabled .nav { margin: 0; padding-left: 0; list-style: none; }
+body.wb-app-navigation-enabled .nav > li { position: relative; display: block; }
+body.wb-app-navigation-enabled .nav > li > a { position: relative; display: block; }
+body.wb-app-navigation-enabled .tab-content > .tab-pane { display: none; }
+body.wb-app-navigation-enabled .tab-content > .active { display: block; }
+body.wb-app-navigation-enabled .collapse { display: none; }
+body.wb-app-navigation-enabled .collapse.in { display: block; }
+body.wb-app-navigation-enabled .wb-collapse { display: none; }
+body.wb-app-navigation-enabled .wb-collapse.in { display: block; }
+body.wb-app-navigation-enabled tr.collapse.in { display: table-row; }
+body.wb-app-navigation-enabled .collapsing { position: relative; height: 0; overflow: hidden; transition: height .2s ease; }
+body.wb-app-navigation-enabled .fade { opacity: 0; transition: opacity .15s linear; }
+body.wb-app-navigation-enabled .fade.in { opacity: 1; }
+body.wb-app-navigation-enabled .dropdown { position: relative; }
+body.wb-app-navigation-enabled .dropdown-menu { position: absolute; z-index: 1000; display: none; min-width: 160px; margin: 2px 0 0; padding: 5px 0; list-style: none; }
+body.wb-app-navigation-enabled .open > .dropdown-menu { display: block; }
+body.wb-app-navigation-enabled .modal { position: fixed; inset: 0; z-index: 1050; display: none; overflow: hidden; outline: 0; }
+body.wb-app-navigation-enabled .modal.in { display: block; overflow-x: hidden; overflow-y: auto; }
+body.wb-app-navigation-enabled .modal-dialog { position: relative; margin: 30px auto; }
+body.wb-app-navigation-enabled .modal-backdrop { position: fixed; inset: 0; z-index: 1040; background: #000; }
+body.wb-app-navigation-enabled .modal-backdrop.fade { opacity: 0; }
+body.wb-app-navigation-enabled .close { float: right; padding: 0; border: 0; background: transparent; font-size: 21px; font-weight: 700; line-height: 1; }
+
+@media (max-width: 767px) {
+  body.wb-app-navigation-enabled .hidden-xs { display: none !important; }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  body.wb-app-navigation-enabled .hidden-sm { display: none !important; }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  body.wb-app-navigation-enabled .hidden-md { display: none !important; }
+}
+@media (min-width: 1200px) {
+  body.wb-app-navigation-enabled .hidden-lg { display: none !important; }
+}

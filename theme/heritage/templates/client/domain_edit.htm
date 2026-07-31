@@ -1,0 +1,25 @@
+<!-- WP-961: native Workbench customer-domain assignment form. -->
+<p><tmpl_var name="list_desc_txt"></p>
+<div class="wb-field-group">
+    <label for="domain">{tmpl_var name='domain_txt'}</label>
+    <tmpl_if name="edit_disabled">
+        <div><input type="text" name="domain" id="domain" value="{tmpl_var name='domain'}" class="form-control" readonly="readonly" /></div>
+    <tmpl_else>
+        <div><input type="text" name="domain" id="domain" value="{tmpl_var name='domain'}" class="form-control" /></div>
+    </tmpl_if>
+</div>
+<div class="wb-field-group">
+    <label for="client_group_id">{tmpl_var name='client_txt'}</label>
+    <div><select name="client_group_id" id="client_group_id" class="form-control">{tmpl_var name='client_group_id'}</select></div>
+</div>
+<input type="hidden" name="id" value="{tmpl_var name='id'}">
+<input type="hidden" name="type" value="local">
+<div class="wb-form-actions">
+    <tmpl_if name='id'><tmpl_if name='show_delete_on_forms' op="==" value="y">
+        <a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="client/domain_del.php?id={tmpl_var name='id'}&_csrf_id={tmpl_var name='_csrf_id'}&_csrf_key={tmpl_var name='_csrf_key'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete"></span></a>
+    </tmpl_if></tmpl_if>
+    <div class="wb-form-actions__primary">
+        <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="client/domain_edit.php">{tmpl_var name='btn_save_txt'}</button>
+        <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="client/domain_list.php" data-load-content="client/domain_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+    </div>
+</div>

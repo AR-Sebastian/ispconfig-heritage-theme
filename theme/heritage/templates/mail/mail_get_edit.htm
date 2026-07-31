@@ -1,0 +1,52 @@
+<!-- WP-935 Bootstrap-removal: native override of mail/mail_get_edit.
+     Native wb-field-group / wb-form-actions; shared template untouched.
+     All template variables and data-* hooks preserved verbatim. -->
+            <div class="wb-field-group">
+                <label for="type">{tmpl_var name='type_txt'}</label>
+                <div><select name="type" id="type" class="form-control">
+                    {tmpl_var name='type'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="source_server">{tmpl_var name='source_server_txt'}</label>
+                <div><input type="text" name="source_server" id="source_server" value="{tmpl_var name='source_server'}" class="form-control" /></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="source_username">{tmpl_var name='source_username_txt'}</label>
+                <div><input type="text" name="source_username" id="source_username" value="{tmpl_var name='source_username'}" class="form-control" /></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="source_password">{tmpl_var name='source_password_txt'}</label>
+                <div><input type="password" name="source_password" id="source_password" value="{tmpl_var name='source_password'}" class="form-control" /></div>
+            </div>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='source_delete_txt'}</label>
+                <div>
+                    {tmpl_var name='source_delete'} {tmpl_var name="source_delete_note_txt"}
+                </div>
+            </div>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='source_read_all_txt'}</label>
+                <div>
+                    {tmpl_var name='source_read_all'}
+                </div>
+            </div>
+            <div class="wb-field-group">
+                <label for="destination">{tmpl_var name='destination_txt'}</label>
+                <div><select name="destination" id="destination" class="form-control">
+                    {tmpl_var name='destination'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='active_txt'}</label>
+                <div>
+                    {tmpl_var name='active'}
+                </div>
+            </div>
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="mail/mail_get_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="mail/mail_get_list.php" data-load-content="mail/mail_get_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div>

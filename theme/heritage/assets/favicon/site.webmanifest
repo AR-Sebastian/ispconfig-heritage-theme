@@ -1,0 +1,14 @@
+{
+  "name": "ISPConfig Heritage Glass",
+  "short_name": "HERITAGE",
+  "icons": [
+    {
+      "src": "/themes/heritage/assets/images/ispconfig-workbench-favicon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#cc151c",
+  "background_color": "#f8fafc",
+  "display": "standalone"
+}

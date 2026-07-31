@@ -1,0 +1,106 @@
+/*
+ * ISPConfig Heritage accessibility authority
+ *
+ * Keyboard focus, assistive content, forced-colour support and coarse-pointer
+ * targets. This layer does not alter controller behaviour.
+ */
+
+body.heritage-shell.wb-app-navigation-enabled :is(
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  [role='button'],
+  [role='tab'],
+  [tabindex]
+):focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--hg-accent) 72%, white);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--hg-accent) 14%, transparent);
+}
+
+body.heritage-shell.wb-app-navigation-enabled :is(
+  [aria-disabled='true'],
+  :disabled
+) {
+  cursor: not-allowed;
+  opacity: .58;
+}
+
+body.heritage-shell.wb-app-navigation-enabled .wb-visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  .table-responsive,
+  .wb-table-scroll,
+  .wb-table-viewport,
+  .wb-owned-scroll-region
+)[role='region']:focus-visible {
+  border-radius: var(--hg-radius-md);
+  outline-offset: 4px;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent [aria-invalid='true'] {
+  border-color: var(--hg-danger);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--hg-danger) 14%, transparent);
+}
+
+@media (pointer: coarse) {
+  body.heritage-shell.wb-app-navigation-enabled :is(
+    button,
+    .btn,
+    [role='button'],
+    [role='tab'],
+    .wb-action-control
+  ) {
+    min-height: 44px;
+  }
+}
+
+@media (forced-colors: active) {
+  body.heritage-shell.wb-app-navigation-enabled :is(
+    a,
+    button,
+    input,
+    select,
+    textarea,
+    [role='button'],
+    [role='tab']
+  ):focus-visible {
+    outline: 3px solid Highlight;
+    box-shadow: none;
+    forced-color-adjust: auto;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled :is(
+    .wb-status-pill,
+    .badge,
+    .label,
+    .alert,
+    .wb-feedback
+  ) {
+    border: 1px solid CanvasText;
+    forced-color-adjust: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.heritage-shell.wb-app-navigation-enabled *,
+  body.heritage-shell.wb-app-navigation-enabled *::before,
+  body.heritage-shell.wb-app-navigation-enabled *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

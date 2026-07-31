@@ -1,0 +1,57 @@
+<!-- WP-947: native Workbench reporting/access surface; shared lifecycle unchanged. -->
+<tmpl_if name="config_error_msg">
+    <div>
+        <p>
+          <div id="errormsg" class="wb-alert wb-alert--danger wb-alert--dismissible" role="alert" data-wb-ack-url="sites/message_ack.php?relation=web_domain:{tmpl_var name='id'}&amp;_csrf_id={tmpl_var name='_csrf_id_msg'}&amp;_csrf_key={tmpl_var name='_csrf_key_msg'}">
+            <button type="button" class="wb-alert__dismiss" data-workbench-dismiss="alert" aria-label="Schließen" data-wb-i18n-aria-label-de="Schließen" data-wb-i18n-aria-label-en="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="wb-config-error-time">{tmpl_var name='config_error_tstamp'} :&nbsp;</div>
+            <div class="wb-config-error-message">{tmpl_var name='config_error_msg'}</div>
+          </div>
+        </p>
+      </div>
+</tmpl_if>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='stats_user_txt'}</label>
+				<div class="wb-field-body"><div class="checkbox">&nbsp; &nbsp;admin</div></div>
+            </div>
+			<div class="wb-field-group">
+                <label for="stats_password">{tmpl_var name='stats_password_txt'}</label>
+                <div class="wb-field-body">
+				<div class="wb-field-composite">
+					<input type="password" name="stats_password" id="stats_password" value="{tmpl_var name='stats_password'}" class="form-control" autocomplete="off" data-workbench-password-check="stats_password:repeat_password" data-workbench-password-strength="true" />
+					<span class="wb-input-group-actions">
+						<button class="wb-input-group-action" type="button" data-generate-password="true" data-password-field="stats_password" data-repeat-password-field="repeat_password">{tmpl_var name='generate_password_txt'}</button>
+					</span>
+				</div>
+				</div>
+            </div>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='password_strength_txt'}</label>
+                <div class="wb-field-body">
+                <div id="passBar"></div>
+                <span id="passText">&nbsp;</span>
+                </div>
+            </div>
+            <div class="wb-field-group">
+                <label for="repeat_password">{tmpl_var name='repeat_password_txt'}</label>
+                <div class="wb-field-body"><input type="password" name="repeat_password" id="repeat_password" value="" autocomplete="off" class="form-control" data-workbench-password-check="stats_password:repeat_password" /></div></div>
+            <div class="wb-field-group">
+				<div class="wb-field-body">
+					<div id="confirmpasswordError" hidden class="confirmpassworderror">{tmpl_var name='password_mismatch_txt'}</div>
+					<div id="confirmpasswordOK" hidden class="confirmpasswordok">{tmpl_var name='password_match_txt'}</div>
+				</div>
+			</div>
+            <div class="wb-field-group">
+                <label for="stats_type">{tmpl_var name='stats_type_txt'}</label>
+                <div class="wb-field-body"><select name="stats_type" id="stats_type" class="form-control" >
+                    {tmpl_var name='stats_type'}
+                </select></div>
+            </div>
+
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions"><div class="wb-form-actions__primary">
+            <button class="wb-input-group-action formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="sites/web_vhost_domain_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="wb-input-group-action formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="sites/web_vhost_domain_list.php" data-load-content="sites/web_vhost_domain_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div></div>

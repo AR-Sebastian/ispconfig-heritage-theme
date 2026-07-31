@@ -1,0 +1,133 @@
+<!-- WP-965: native Workbench operations surface; controller contract unchanged. -->
+<div class="wb-alert wb-alert--info wb-config-context"><h4><tmpl_var name="config_for_txt"> {tmpl_var name='server_name'}</h4></div>
+            <tmpl_if name="missing_utils">
+                <div class="wb-alert wb-alert--warning">
+                    {tmpl_var name='backup_missing_utils_txt'} {tmpl_var name='missing_utils'}
+                </div>
+            </tmpl_if>
+
+
+
+            <div class="wb-field-group">
+                <label >{tmpl_var name='auto_network_configuration_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='auto_network_configuration'} {tmpl_var name='network_config_warning_txt'}
+                </div>
+            </div>
+            <div class="wb-field-group">
+                <label for="ip_address" >{tmpl_var name='ip_address_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="ip_address" id="ip_address" value="{tmpl_var name='ip_address'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="netmask" >{tmpl_var name='netmask_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="netmask" id="netmask" value="{tmpl_var name='netmask'}" class="form-control" /></div></div>
+	    <div class="wb-field-group">
+		<label for="v6_prefix" >{tmpl_var name='v6_prefix_txt'}</label>
+		<div class="wb-field-body"><input type="text" name="v6_prefix" id="v6_prefix" value="{tmpl_var name='v6_prefix'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="gateway" >{tmpl_var name='gateway_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="gateway" id="gateway" value="{tmpl_var name='gateway'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="hostname" >{tmpl_var name='hostname_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="hostname" id="hostname" value="{tmpl_var name='hostname'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="nameservers" >{tmpl_var name='nameservers_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="nameservers" id="nameservers" value="{tmpl_var name='nameservers'}" class="form-control" /></div><p class="formHint">{tmpl_var name='nameservers_hint_txt'}</p>
+            </div>
+            <div class="wb-field-group">
+                <label for="firewall" >{tmpl_var name='firewall_txt'}</label>
+                <div class="wb-field-body"><select name="firewall" id="firewall" class="form-control">
+                    {tmpl_var name='firewall'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="loglevel" >{tmpl_var name='loglevel_txt'}</label>
+                <div class="wb-field-body"><select name="loglevel" id="loglevel" class="form-control">
+                    {tmpl_var name='loglevel'}
+                </select></div>
+            </div>
+			<div class="wb-field-group">
+                <label for="admin_notify_events" >{tmpl_var name='admin_notify_events_txt'}</label>
+                <div class="wb-field-body"><select name="admin_notify_events" id="admin_notify_events" class="form-control">
+                    {tmpl_var name='admin_notify_events'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="backup_dir" >{tmpl_var name='backup_dir_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="backup_dir" id="backup_dir" value="{tmpl_var name='backup_dir'}" class="form-control" /></div></div>
+			<div class="wb-field-group">
+                <label >{tmpl_var name='backup_dir_is_mount_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='backup_dir_is_mount'}
+                </div>
+            </div>
+            <div class="wb-field-group">
+                <label for="backup_mode" >{tmpl_var name='backup_mode_txt'}</label>
+                <div class="wb-field-body"><select name="backup_mode" id="backup_mode" class="form-control">
+                    {tmpl_var name='backup_mode'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="backup_tmp" >{tmpl_var name='backup_tmp_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="backup_tmp" id="backup_tmp" value="{tmpl_var name='backup_tmp'}" class="form-control" /></div>
+			</div>
+			<div class="wb-field-group">
+                <label for="backup_time" >{tmpl_var name='backup_time_txt'}</label>
+                <div class="wb-field-body wb-field-body--compact"><select name="backup_time" id="backup_time" class="form-control">
+                    {tmpl_var name='backup_time'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label >{tmpl_var name='backup_delete_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='backup_delete'}
+                </div>
+            </div>
+            <div class="wb-field-group">
+                <label for="sysbackup_copies" >{tmpl_var name='sysbackup_copies_txt'}</label>
+                <div class="wb-field-body wb-field-body--compact"><input type="text" name="sysbackup_copies" id="sysbackup_copies" value="{tmpl_var name='sysbackup_copies'}" class="form-control" /></div>
+                <div class="wb-field-body wb-field-body--medium">{tmpl_var name='sysbackup_copies_note_txt'}</div>
+            </div>
+			<div class="wb-field-group">
+                <label for="log_retention" >{tmpl_var name='log_retention_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="log_retention" id="log_retention" value="{tmpl_var name='log_retention'}" class="form-control" /></div>
+			</div>
+			<div class="wb-field-group">
+                <label for="monit_url" >{tmpl_var name='monit_url_txt'}</label>
+                <div class="wb-field-body wb-field-body--medium"><input type="text" name="monit_url" id="monit_url" value="{tmpl_var name='monit_url'}" class="form-control" />&nbsp;{tmpl_var name='monit_url_note_txt'} <a href="#" data-workbench-noop="true" class="addPlaceholder">[SERVERNAME]</a></div>
+            </div>
+			<div class="wb-field-group">
+                <label for="monit_user" >{tmpl_var name='monit_user_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="monit_user" id="monit_user" value="{tmpl_var name='monit_user'}" class="form-control" /></div></div>
+			<div class="wb-field-group">
+                <label for="monit_password" >{tmpl_var name='monit_password_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="monit_password" id="monit_password" value="{tmpl_var name='monit_password'}" class="form-control" /></div></div>
+			<div class="wb-field-group">
+                <label for="munin_url" >{tmpl_var name='munin_url_txt'}</label>
+                <div class="wb-field-body wb-field-body--medium"><input type="text" name="munin_url" id="munin_url" value="{tmpl_var name='munin_url'}" class="form-control" />&nbsp;{tmpl_var name='munin_url_note_txt'} <a href="#" data-workbench-noop="true" class="addPlaceholder">[SERVERNAME]</a></div>
+            </div>
+			<div class="wb-field-group">
+                <label for="munin_user" >{tmpl_var name='munin_user_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="munin_user" id="munin_user" value="{tmpl_var name='munin_user'}" class="form-control" /></div></div>
+			<div class="wb-field-group">
+                <label for="munin_password" >{tmpl_var name='munin_password_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="munin_password" id="munin_password" value="{tmpl_var name='munin_password'}" class="form-control" /></div></div>
+			<div class="wb-field-group">
+                <label >{tmpl_var name='monitor_system_updates_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='monitor_system_updates'}
+                </div>
+            </div>
+			<div class="wb-field-group">
+                <label >{tmpl_var name='migration_mode_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='migration_mode'}
+                </div>
+            </div>
+
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions"><div class="wb-form-actions__primary">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="admin/server_config_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="admin/server_config_list.php" data-load-content="admin/server_config_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div></div>

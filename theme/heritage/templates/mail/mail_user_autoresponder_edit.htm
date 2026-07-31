@@ -1,0 +1,26 @@
+<!-- WP-956: native Workbench autoresponder form. -->
+<div class="wb-field-group">
+    <label for="autoresponder_subject">{tmpl_var name='autoresponder_subject_txt'}</label>
+    <div><input class="form-control" type="text" name="autoresponder_subject" id="autoresponder_subject" value="{tmpl_var name='autoresponder_subject'}" /></div>
+</div>
+<div class="wb-field-group">
+    <label for="autoresponder_text">{tmpl_var name='autoresponder_text_txt'}</label>
+    <div><textarea class="form-control" name="autoresponder_text" id="autoresponder_text" rows='15' cols='30'>{tmpl_var name='autoresponder_text'}</textarea></div>
+</div>
+<div class="wb-field-group">
+    <label for="autoresponder">{tmpl_var name='autoresponder_active'}</label>
+    <div><input type="checkbox" value="y" id="autoresponder" name="autoresponder" data-autoresponder-reset="true" {tmpl_var name='ar_active'} /></div>
+</div>
+<div class="wb-field-group">
+    <label for="autoresponder_start_date">{tmpl_var name='autoresponder_start_date_txt'}</label>
+    <div>{tmpl_var name='autoresponder_start_date'}</div>
+</div>
+<div class="wb-field-group">
+    <label for="autoresponder_end_date">{tmpl_var name='autoresponder_end_date_txt'}</label>
+    <div>{tmpl_var name='autoresponder_end_date'}</div>
+</div>
+<input type="hidden" name="id" value="{tmpl_var name='id'}">
+<div class="wb-form-actions">
+    <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="mail/mail_user_edit.php">{tmpl_var name='btn_save_txt'}</button>
+    <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="mail/mail_user_list.php" data-load-content="mail/mail_user_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+</div>

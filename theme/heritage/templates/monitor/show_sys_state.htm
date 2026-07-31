@@ -1,0 +1,51 @@
+<!-- WP-965: native Workbench operations surface; controller contract unchanged. -->
+<section class="wb-monitor-workspace">
+    <header class="wb-monitor-hero">
+        <span class="wb-module-eyebrow">ISPConfig Monitor</span>
+        <h1><tmpl_var name="list_head_txt"></h1>
+        <p><tmpl_var name="list_desc_txt"></p>
+    </header>
+    <section class="wb-monitor-refresh-panel" aria-labelledby="wb-monitor-refresh-title">
+        <label id="wb-monitor-refresh-title" for="refreshinterval"><tmpl_var name="monTransRefreshsq"></label>
+        <select name="refreshinterval" id="refreshinterval" class="form-control" data-load-content-refresh="monitor/show_sys_state.php?state={tmpl_var name="state_type"}">
+            {tmpl_var name='refresh'}
+        </select>
+    </section>
+
+    <section class="pnl_formarea wb-monitor-status-panel" aria-label="<tmpl_var name='list_head_txt'>">
+        <div class="stateview"><tmpl_var name="state_data"></div>
+    </section>
+
+    <tmpl_if name="loadchart_data">
+    <div class="pnl_formarea wb-monitor-chart-panel">
+        <p class="wb-list-section-heading"><tmpl_var name="label_chart_title"></p>
+        <div class="wb-monitor-chart-grid">
+            <article class="wb-monitor-chart" data-wb-chart-card>
+                <header><span><tmpl_var name="loadchart_label"></span><strong data-wb-chart-value="loadchart">&ndash;</strong></header>
+                <div class="wb-monitor-chart__viewport"><canvas id="loadchart"></canvas></div>
+                <button type="button" class="wb-monitor-chart__toggle" data-wb-monitor-chart-toggle="loadchart" aria-expanded="false">Details</button>
+                <dl class="wb-monitor-chart__details" data-wb-monitor-chart-details="loadchart" hidden></dl>
+            </article>
+            <article class="wb-monitor-chart" data-wb-chart-card>
+                <header><span><tmpl_var name="memchart_label"></span><strong data-wb-chart-value="memchart">&ndash;</strong></header>
+                <div class="wb-monitor-chart__viewport"><canvas id="memchart"></canvas></div>
+                <button type="button" class="wb-monitor-chart__toggle" data-wb-monitor-chart-toggle="memchart" aria-expanded="false">Details</button>
+                <dl class="wb-monitor-chart__details" data-wb-monitor-chart-details="memchart" hidden></dl>
+            </article>
+            <article class="wb-monitor-chart" data-wb-chart-card>
+                <header><span><tmpl_var name="rxchart_label"></span><strong data-wb-chart-value="rxchart">&ndash;</strong></header>
+                <div class="wb-monitor-chart__viewport"><canvas id="rxchart"></canvas></div>
+                <button type="button" class="wb-monitor-chart__toggle" data-wb-monitor-chart-toggle="rxchart" aria-expanded="false">Details</button>
+                <dl class="wb-monitor-chart__details" data-wb-monitor-chart-details="rxchart" hidden></dl>
+            </article>
+            <article class="wb-monitor-chart" data-wb-chart-card>
+                <header><span><tmpl_var name="txchart_label"></span><strong data-wb-chart-value="txchart">&ndash;</strong></header>
+                <div class="wb-monitor-chart__viewport"><canvas id="txchart"></canvas></div>
+                <button type="button" class="wb-monitor-chart__toggle" data-wb-monitor-chart-toggle="txchart" aria-expanded="false">Details</button>
+                <dl class="wb-monitor-chart__details" data-wb-monitor-chart-details="txchart" hidden></dl>
+            </article>
+        </div>
+    </div>
+    <script type="application/json" data-wb-monitor-chart-data>{tmpl_var name='monitor_chart_json'}</script>
+    </tmpl_if>
+</section>

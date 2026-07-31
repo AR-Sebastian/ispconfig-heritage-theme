@@ -1,0 +1,74 @@
+<!-- WP-992: native Workbench Extension Installer edit surface. -->
+<section class="wb-extension-workspace" data-wb-extension-page="edit">
+    <header class="wb-extension-hero">
+        <span class="wb-module-eyebrow">ISPConfig</span>
+        <h1><tmpl_var name="extension_edit_heading_txt">: <tmpl_var name="title"></h1>
+    </header>
+
+    <tmpl_if name="msg">
+        <div class="wb-alert wb-alert--success" role="status"><tmpl_var name="msg"></div>
+    </tmpl_if>
+    <tmpl_if name="error">
+        <div class="wb-alert wb-alert--danger" role="alert">
+            <strong><tmpl_var name="error_txt"></strong>
+            <ul class="wb-error-list"><tmpl_var name="error"></ul>
+        </div>
+    </tmpl_if>
+
+    <section class="wb-content-panel">
+        <div class="wb-form-grid">
+            <div class="wb-field-group">
+                <label for="title"><tmpl_var name="title_txt"></label>
+                <input type="text" name="title" id="title" value="{tmpl_var name='title'}" disabled />
+            </div>
+            <div class="wb-field-group">
+                <label for="_name"><tmpl_var name="name_txt"></label>
+                <input type="text" name="_name" id="_name" value="{tmpl_var name='name'}" disabled />
+                <input type="hidden" name="name" id="name" value="{tmpl_var name='name'}" />
+            </div>
+            <div class="wb-field-group">
+                <label for="server_name"><tmpl_var name="server_id_txt"></label>
+                <input type="text" name="server_name" id="server_name" value="{tmpl_var name='server_name'}" disabled />
+                <input type="hidden" name="server_id" id="server_id" value="{tmpl_var name='server_id'}" />
+            </div>
+            <div class="wb-field-group">
+                <label for="version"><tmpl_var name="version_txt"></label>
+                <div class="wb-field-composite">
+                    <input type="text" name="version" id="version" value="{tmpl_var name='version'}" disabled />
+                    <tmpl_if name="show_update">
+                        <span class="wb-field-addon"><tmpl_var name="repo_version_txt"></span>
+                        <input type="text" name="repo_version" id="repo_version" value="{tmpl_var name='repo_version'}" disabled />
+                        <button class="formbutton-success" type="button" data-workbench-load-content="admin/extension_edit.php?name={tmpl_var name='name'}&action=update&server_id={tmpl_var name='server_id'}" data-load-content="admin/extension_edit.php?name={tmpl_var name='name'}&action=update&server_id={tmpl_var name='server_id'}"><tmpl_var name="update_extension_txt"></button>
+                    </tmpl_if>
+                </div>
+            </div>
+            <tmpl_if name="repo_license" op="==" value="y">
+                <div class="wb-field-group">
+                    <label for="license"><tmpl_var name="license_txt"></label>
+                    <input type="text" name="license" id="license" value="{tmpl_var name='license'}" />
+                </div>
+            </tmpl_if>
+            <div class="wb-field-group wb-field-group--checkbox">
+                <input type="checkbox" name="active" id="active" value="1" {tmpl_if name='active'} checked="checked"{/tmpl_if} />
+                <label for="active"><tmpl_var name="active_txt"></label>
+            </div>
+            <tmpl_if name="free_limits">
+                <div class="wb-field-group wb-field-group--full">
+                    <span class="wb-field-label"><tmpl_var name="free_limits_txt"></span>
+                    <p class="wb-help-text"><tmpl_var name="free_limits"></p>
+                </div>
+            </tmpl_if>
+            <tmpl_if name="postinstall_info">
+                <div class="wb-field-group wb-field-group--full">
+                    <span class="wb-field-label"><tmpl_var name="postinstall_info_txt"></span>
+                    <p class="wb-help-text"><tmpl_var name="postinstall_info"></p>
+                </div>
+            </tmpl_if>
+        </div>
+        <input type="hidden" name="action" value="edit" />
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="admin/extension_edit.php"><tmpl_var name="btn_save_txt"></button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="admin/extension_install_list.php" data-load-content="admin/extension_install_list.php"><tmpl_var name="btn_cancel_txt"></button>
+        </div>
+    </section>
+</section>

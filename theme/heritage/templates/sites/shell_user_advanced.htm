@@ -1,0 +1,29 @@
+<!-- WP-946: native Workbench access form; shared template and server lifecycle unchanged. -->
+		<div class="wb-field-group">
+			<label for="puser">{tmpl_var name='puser_txt'}</label>
+			<div class="wb-field-body"><input type="text" name="puser" id="puser" value="{tmpl_var name='puser'}" class="form-control" /></div>
+		</div>
+		<div class="wb-field-group">
+			<label for="pgroup">{tmpl_var name='pgroup_txt'}</label>
+			<div class="wb-field-body"><input type="text" name="pgroup" id="pgroup" value="{tmpl_var name='pgroup'}" class="form-control" /></div>
+		</div>
+		<div class="wb-field-group">
+			<label for="shell">{tmpl_var name='shell_txt'}</label>
+			<div class="wb-field-body"><input type="text" name="shell" id="shell" value="{tmpl_var name='shell'}" class="form-control" /></div>
+		</div>
+		<tmpl_if name="is_jailkit">
+		<input type="hidden" name="dir" id="dir" value="{tmpl_var name='dir'}">
+		</tmpl_else>
+		<div class="wb-field-group">
+			<label for="dir">{tmpl_var name='dir_txt'}</label>
+			<div class="wb-field-body"><input type="text" name="dir" id="dir" value="{tmpl_var name='dir'}" class="form-control" /></div>
+		</div>
+		</tmpl_if>
+
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions"><div class="wb-form-actions__primary">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="sites/shell_user_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="sites/shell_user_list.php" data-load-content="sites/shell_user_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div></div>

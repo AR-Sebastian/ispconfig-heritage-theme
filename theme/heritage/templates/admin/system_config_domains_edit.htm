@@ -1,0 +1,32 @@
+<!-- WP-965: native Workbench operations surface; controller contract unchanged. -->
+<!-- WP-926 Bootstrap-removal batch 2: native override of admin/system_config_domains_edit.
+     Native wb-field-group / wb-form-actions structure; shared template untouched.
+     tmpl_if wrappers, all {tmpl_var} and data-* hooks verbatim (including the
+     upstream malformed textarea attribute `height: 250px"`, preserved as-is). -->
+<tmpl_if name="list_head_txt">
+<div class='page-header'>
+        <h1><tmpl_var name="list_head_txt"></h1>
+</div>
+</tmpl_if>
+<tmpl_if name="list_desc_txt"><p><tmpl_var name="list_desc_txt"></p></tmpl_if>
+
+            <div class="wb-field-group">
+                <div>
+                    {tmpl_var name='use_domain_module'}
+                </div>
+                <div>
+                    <p><strong>{tmpl_var name='use_domain_module_txt'}</strong></p>
+                    <p>{tmpl_var name='use_domain_module_hint'}</p>
+                </div>
+            </div>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='new_domain_txt'}</label>
+                <div><textarea class="form-control" name="new_domain_html" id="new_domain_html" height: 250px">{tmpl_var name='new_domain_html'}</textarea></div>
+            </div>
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="admin/system_config_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="admin/users_list.php" data-load-content="admin/users_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div>

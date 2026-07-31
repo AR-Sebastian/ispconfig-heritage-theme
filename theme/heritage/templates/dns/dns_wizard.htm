@@ -1,0 +1,90 @@
+<!-- WP-943: native DNS onboarding wizard; backend contract unchanged. -->
+<div class="page-header"><h1><tmpl_var name="list_head_txt"></h1></div>
+
+<div class="wb-dns-onboarding">
+	<tmpl_if name="error">
+		<div class="wb-notice wb-notice--danger">
+			<span class="wb-notice__icon" aria-hidden="true"></span>
+			<div><strong><tmpl_var name="error_txt"></strong><ul class="wb-clean-list"><tmpl_var name="error"></ul></div>
+		</div>
+	</tmpl_if>
+
+	<section class="wb-form-section">
+		<div class="wb-field-group">
+			<label for="template_id">{tmpl_var name='template_id_txt'}</label>
+			<div><select name="template_id" id="template_id" class="form-control" data-submit-on-change="dns/dns_wizard.php" data-submit-form="pageForm">{tmpl_var name='template_id_option'}</select></div>
+		</div>
+		<tmpl_if name="is_admin">
+			<div class="wb-field-group">
+				<label for="server_id">{tmpl_var name='server_id_txt'}</label>
+				<div><select name="server_id" id="server_id" class="form-control">{tmpl_var name='server_id'}</select></div>
+			</div>
+			<tmpl_unless name="domain_option">
+				<div class="wb-field-group">
+					<label for="client_group_id">{tmpl_var name='client_txt'}</label>
+					<div><select name="client_group_id" id="client_group_id" class="form-control">{tmpl_var name='client_group_id'}</select></div>
+				</div>
+			</tmpl_unless>
+		<tmpl_else>
+			<tmpl_if name="only_one_server">
+				<input type="hidden" id="server_id" name="server_id" value="{tmpl_var name='server_id_value'}" />
+			<tmpl_else>
+				<div class="wb-field-group">
+					<label for="server_id">{tmpl_var name='server_id_txt'}</label>
+					<div><select name="server_id" id="server_id" class="form-control">{tmpl_var name='server_id'}</select></div>
+				</div>
+			</tmpl_if>
+		</tmpl_if>
+		<tmpl_if name="is_reseller">
+			<tmpl_unless name="domain_option">
+				<div class="wb-field-group">
+					<label for="client_group_id">{tmpl_var name='client_txt'}</label>
+					<div><select name="client_group_id" id="client_group_id" class="form-control">{tmpl_var name='client_group_id'}</select></div>
+				</div>
+			</tmpl_unless>
+		</tmpl_if>
+	</section>
+
+	<section class="wb-form-section">
+		<tmpl_if name="DOMAIN_VISIBLE">
+			<div class="wb-field-group">
+				<label for="domain">{tmpl_var name='domain_txt'}</label>
+				<tmpl_if name="domain_option">
+					<div><select name="domain" id="domain" class="form-control">{tmpl_var name='domain_option'}</select></div>
+				<tmpl_else>
+					<div><input type="text" name="domain" id="domain" value="{tmpl_var name='domain'}" class="form-control" /></div>
+				</tmpl_if>
+			</div>
+		</tmpl_if>
+		<tmpl_if name="IP_VISIBLE">
+			<div class="wb-field-group">
+				<label for="ip">{tmpl_var name='ip_txt'}</label>
+				<div><input type="text" name="ip" id="ip" value="{tmpl_var name='ip'}" class="form-control" data-workbench-field-search="true" data-search-endpoint="dnsJson" data-search-type="get_ipv4" data-search-results-limit='$ <tmpl_var name="globalsearch_resultslimit_of_txt"> % <tmpl_var name="globalsearch_resultslimit_results_txt">' data-search-results-prefix='<tmpl_var name="globalsearch_suggestions_text_txt">' data-search-no-results='<tmpl_var name="globalsearch_noresults_text_txt">' data-search-no-results-limit='<tmpl_var name="globalsearch_noresults_limit_txt">' data-search-min-chars="0" data-search-css-prefix="df-" data-search-fill-field="true" data-search-fill-with="fill_text" /></div>
+			</div>
+		</tmpl_if>
+		<tmpl_if name="IPV6_VISIBLE">
+			<div class="wb-field-group">
+				<label for="ipv6">{tmpl_var name='ipv6_txt'}</label>
+				<div><input type="text" name="ipv6" id="ipv6" value="{tmpl_var name='ipv6'}" class="form-control" data-workbench-field-search="true" data-search-endpoint="dnsJson" data-search-type="get_ipv6" data-search-results-limit='$ <tmpl_var name="globalsearch_resultslimit_of_txt"> % <tmpl_var name="globalsearch_resultslimit_results_txt">' data-search-results-prefix='<tmpl_var name="globalsearch_suggestions_text_txt">' data-search-no-results='<tmpl_var name="globalsearch_noresults_text_txt">' data-search-no-results-limit='<tmpl_var name="globalsearch_noresults_limit_txt">' data-search-min-chars="0" data-search-css-prefix="df-" data-search-fill-field="true" data-search-fill-with="fill_text" /></div>
+			</div>
+		</tmpl_if>
+		<tmpl_if name="NS1_VISIBLE"><div class="wb-field-group"><label for="ns1">{tmpl_var name='ns1_txt'}</label><div><input type="text" name="ns1" id="ns1" value="{tmpl_var name='ns1'}" class="form-control" /></div></div></tmpl_if>
+		<tmpl_if name="NS2_VISIBLE"><div class="wb-field-group"><label for="ns2">{tmpl_var name='ns2_txt'}</label><div><input type="text" name="ns2" id="ns2" value="{tmpl_var name='ns2'}" class="form-control" /></div></div></tmpl_if>
+		<tmpl_if name="EMAIL_VISIBLE"><div class="wb-field-group"><label for="email">{tmpl_var name='email_txt'}</label><div><input type="text" name="email" id="email" value="{tmpl_var name='email'}" class="form-control" /></div></div></tmpl_if>
+	</section>
+
+	<section class="wb-form-section">
+		<tmpl_if name="DKIM_VISIBLE">
+			<div class="wb-field-group"><label for="dkim">{tmpl_var name='dkim_txt'}</label><div><input type="checkbox" disabled readonly checked><input name="dkim" type="hidden" maxlength="255" type="text" /></div></div>
+		</tmpl_if>
+		<tmpl_if name="DNSSEC_VISIBLE">
+			<div class="wb-field-group"><label for="dnssec">{tmpl_var name='dnssec_txt'}</label><div><input type="checkbox" id="dnssec" name="dnssec" value="Y"></div></div>
+		</tmpl_if>
+	</section>
+</div>
+
+<input type="hidden" name="create" value="0" />
+<div class="wb-form-actions">
+	<button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" name="btn_create" data-workbench-action="set-hidden-submit" data-hidden-field="create" data-hidden-value="1" data-submit-form="pageForm" data-form-action="dns/dns_wizard.php">{tmpl_var name='btn_save_txt'}</button>
+	<button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="dns/dns_soa_list.php" data-load-content="dns/dns_soa_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+</div>

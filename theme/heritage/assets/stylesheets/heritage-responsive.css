@@ -1,0 +1,123 @@
+/*
+ * ISPConfig Heritage responsive authority
+ *
+ * Fluid composition for the final V1 surfaces. Component internals continue
+ * to use their dedicated layers; this file owns only cross-component flow.
+ */
+
+body.heritage-shell.wb-app-navigation-enabled :is(
+  #main-wrapper,
+  #inner-wrapper,
+  #content,
+  #pageContent,
+  #pageForm
+) {
+  min-width: 0;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent {
+  width: 100%;
+  max-width: var(--hg-content-max, 1600px);
+  margin-inline: auto;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  img,
+  svg,
+  video,
+  canvas
+) {
+  max-width: 100%;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  .wb-page-header,
+  .wb-list-command-bar,
+  .wb-list-command-bar__actions,
+  .wb-form-actions,
+  .button-group,
+  .btn-group
+) {
+  min-width: 0;
+}
+
+@container wb-page-content (max-width: 760px) {
+  body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-header {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-header__actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-header__actions > :not(.wb-action-control--icon) {
+    flex: 1 1 auto;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+    .wb-form-grid,
+    .wb-detail-grid,
+    .wb-form-section__grid
+  ) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-list-command-bar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+    align-items: center;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-list-command-bar__meta {
+    min-width: 0;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-list-command-bar__actions {
+    display: contents;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-list-page-size {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-list-page-size :is(
+    .wb-select,
+    .wb-select__control,
+    .wb-page-size-select
+  ) {
+    min-inline-size: 88px !important;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-list-command-bar__primary {
+    width: 100%;
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+    .wb-page-header__actions,
+    .wb-form-actions
+  ) {
+    flex-wrap: wrap;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-form-actions > :not(.wb-action-control--icon) {
+    flex: 1 1 140px;
+  }
+}
+
+@media (max-width: 390px) {
+  body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-list-command-bar {
+    grid-template-columns: minmax(0, 1fr) minmax(74px, auto);
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-list-result-count {
+    white-space: normal;
+  }
+}

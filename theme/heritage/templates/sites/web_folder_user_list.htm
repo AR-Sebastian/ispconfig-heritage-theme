@@ -1,0 +1,54 @@
+<!-- WP-947: native Workbench reporting/access surface; shared lifecycle unchanged. -->
+<div class='page-header'>
+	<h1><tmpl_var name="list_head_txt"></h1>
+</div>
+<section class="wb-table-workspace">
+    <div class="wb-list-toolbar">
+        <div class="wb-list-toolbar__context">
+            <span class="wb-list-toolbar__eyebrow">{tmpl_var name="toolsarea_head_txt"}</span>
+            <strong><tmpl_var name="list_head_txt"></strong>
+        </div>
+        <button class="formbutton-success" type="button" data-workbench-load-content="sites/web_folder_user_edit.php" data-load-content="sites/web_folder_user_edit.php">{tmpl_var name="add_new_record_txt"}</button>
+    </div>
+
+<table class="table wb-data-table">
+                <thead>
+                    <tr>
+                        <th class="tiny-col" data-column="active"><tmpl_var name="active_txt"></th>
+                        <th data-column="web_folder_id"><tmpl_var name="web_folder_id_txt"></th>
+                        <th data-column="username"><tmpl_var name="username_txt"></th>
+                        <th class="wb-table-actions-column wb-table-align-end">{tmpl_var name='search_limit'}</th>
+                    </tr>
+                    <tr>
+                        <td><select class="form-control" name="search_active" data-submit-on-change="sites/web_folder_user_list.php" data-submit-form="pageForm">{tmpl_var name='search_active'}</select></td>
+                        <td><select class="form-control" name="search_web_folder_id" data-submit-on-change="sites/web_folder_user_list.php" data-submit-form="pageForm">{tmpl_var name='search_web_folder_id'}</select></td>
+                        <td><input class="form-control" type="text" name="search_username" value="{tmpl_var name='search_username'}" /></td>
+                        <td class="wb-table-align-end">
+                            <button type="button" class="formbutton-default formbutton-narrow" name="Filter" id="Filter" value="{tmpl_var name="filter_txt"}" data-submit-form="pageForm" data-form-action="sites/web_folder_user_list.php"><span class="icon icon-filter"></span></button>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                <tmpl_loop name="records">
+                    <tr>
+                        <td><a href="#" data-workbench-load-content="sites/web_folder_user_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_folder_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="active"}</a></td>
+                        <td><a href="#" data-workbench-load-content="sites/web_folder_user_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_folder_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="web_folder_id"}</a></td>
+                        <td><a href="#" data-workbench-load-content="sites/web_folder_user_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_folder_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="username"}</a></td>
+                        <td class="wb-table-align-end">
+                            <a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="sites/web_folder_user_del.php?id={tmpl_var name='id'}&_csrf_id={tmpl_var name='csrf_id'}&_csrf_key={tmpl_var name='csrf_key'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete"></span></a>
+                        </td>
+                    </tr>
+                </tmpl_loop>
+                <tmpl_unless name="records">
+                    <tr class="tbl_row_noresults tbl_row_<tmpl_if name='__EVEN__'}even<tmpl_else>uneven</tmpl_if>">
+                        <td colspan="4">{tmpl_var name='globalsearch_noresults_text_txt'}</td>
+                    </tr>
+                </tmpl_unless>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4"><tmpl_var name="paging"></td>
+                    </tr>
+                </tfoot>
+            </table>
+</section>

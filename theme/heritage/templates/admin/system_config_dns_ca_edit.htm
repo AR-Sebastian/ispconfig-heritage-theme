@@ -1,0 +1,42 @@
+<!-- WP-965: native Workbench operations surface; controller contract unchanged. -->
+<tmpl_if name="edit_record">
+<tmpl_if name="error">
+    <div class="wb-alert wb-alert--danger wb-config-error-block">{tmpl_var name='error'}</div>
+</tmpl_if>
+<input type="hidden" name="id" value="{tmpl_var name='id'}">
+<div class="wb-field-group">
+	<label for="ca_name" >{tmpl_var name='ca_name_txt'}</label>
+	<div class='wb-field-span wb-field-span--half'><input type='text' class="form-control" name="ca_name" id="ca_name" value="{tmpl_var name='ca_name'}"/></div>
+</div>
+
+<div class="wb-field-group">
+	<label for="ca_issue" >{tmpl_var name='ca_issue_txt'}</label>
+	<div class="wb-field-body wb-field-body--medium"><input name="ca_issue" id="ca_issue" value="{tmpl_var name='ca_issue'}" size="" maxlength="" type="text" class="form-control" /></div>
+</div>
+
+<div class="wb-field-group">
+    <label >{tmpl_var name='ca_wildcard_txt'}</label>
+	<div class="wb-field-body wb-field-body--medium"><input type="checkbox" value="{tmpl_var name='ca_wildcard'}" id="ca_wildcard" name="ca_wildcard" <tmpl_if name='ca_wildcard' op='==' value='Y'>checked</tmpl_if> /></div>
+</div>
+
+<div class="wb-field-group">
+    <label >{tmpl_var name='ca_critical_txt'}</label>
+	<div class="wb-field-body wb-field-body--medium"><input type="checkbox" value="{tmpl_var name='ca_critical'}" id="ca_critical" name="ca_critical" <tmpl_if name='ca_critical'>checked</tmpl_if> /></div>
+</div>
+<!--
+<div class="wb-field-group">
+	<label for="ca_iodef" >{tmpl_var name='ca_iodef_txt'}</label>
+	<div class="wb-field-body wb-field-body--medium"><textarea class="form-control" name="ca_iodef" id="ca_iodef" rows='5' cols='30'>{tmpl_var name='ca_iodef'}</textarea></div>
+</div>
+-->
+<div class="wb-field-group">
+    <label >{tmpl_var name='active_txt'}</label>
+	<div class="wb-field-body wb-field-body--medium"><input type="checkbox" value="{tmpl_var name='active'}" id="active" name="active" <tmpl_if name='active' op='==' value='Y'>checked</tmpl_if> /></div>
+</div>
+
+</div>
+<div class="wb-form-actions"><div class="wb-form-actions__primary">
+	<button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-change-tab="dns_ca" data-tab-target="admin/system_config_edit.php?action=save&id={tmpl_var name='id'}" data-tab-force="true">{tmpl_var name='btn_save_txt'}</button>
+	<button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="admin/system_config_edit.php?next_tab=dns_ca" data-load-content="admin/system_config_edit.php?next_tab=dns_ca">{tmpl_var name='btn_cancel_txt'}</button>
+</div></div>
+</tmpl_if>

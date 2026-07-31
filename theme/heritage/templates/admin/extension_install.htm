@@ -1,0 +1,41 @@
+<!-- WP-992: native Workbench Extension Installer install surface. -->
+<section class="wb-extension-workspace" data-wb-extension-page="install">
+    <header class="wb-extension-hero">
+        <span class="wb-module-eyebrow">ISPConfig</span>
+        <h1><tmpl_var name="extension_install_heading_txt"></h1>
+        <p><tmpl_var name="extension_install_desc_txt"></p>
+    </header>
+
+    <tmpl_if name="msg">
+        <div class="wb-alert wb-alert--success" role="status"><tmpl_var name="msg"></div>
+    </tmpl_if>
+    <tmpl_if name="error">
+        <div class="wb-alert wb-alert--danger" role="alert">
+            <strong><tmpl_var name="error_txt"></strong>
+            <ul class="wb-error-list"><tmpl_var name="error"></ul>
+        </div>
+    </tmpl_if>
+
+    <section class="wb-content-panel">
+        <div class="wb-form-grid">
+            <div class="wb-field-group">
+                <label for="title"><tmpl_var name="title_txt"></label>
+                <input type="text" name="title" id="title" value="{tmpl_var name='title'}" disabled />
+            </div>
+            <div class="wb-field-group">
+                <label for="_name"><tmpl_var name="name_txt"></label>
+                <input type="text" name="_name" id="_name" value="{tmpl_var name='name'}" disabled />
+                <input type="hidden" name="name" id="name" value="{tmpl_var name='name'}" />
+            </div>
+            <div class="wb-field-group">
+                <label for="server_id"><tmpl_var name="server_id_txt"></label>
+                <select name="server_id" id="server_id">{tmpl_var name='server_id'}</select>
+            </div>
+        </div>
+        <input type="hidden" name="action" value="install" />
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="admin/extension_edit.php"><tmpl_var name="btn_install_txt"></button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="admin/extension_repo_list.php" data-load-content="admin/extension_repo_list.php"><tmpl_var name="btn_cancel_txt"></button>
+        </div>
+    </section>
+</section>

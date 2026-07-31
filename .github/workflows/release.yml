@@ -1,0 +1,31 @@
+name: Build release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+      - name: Install release tooling
+        run: sudo apt-get update && sudo apt-get install --yes zip
+      - name: Validate tag and version
+        run: test "${GITHUB_REF_NAME#v}" = "$(tr -d '[:space:]' < VERSION)"
+      - name: Build assets
+        run: bash scripts/build-release.sh
+      - name: Publish assets
+        uses: softprops/action-gh-release@v3
+        with:
+          files: |
+            dist/ispconfig-heritage-theme-*.zip
+            dist/ispconfig-heritage-theme-*.tar.gz
+            dist/SHA256SUMS.txt

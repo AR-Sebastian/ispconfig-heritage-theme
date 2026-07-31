@@ -1,0 +1,62 @@
+<!-- WP-945: native Workbench database form; shared template and service lifecycle unchanged. -->
+            <tmpl_if name="is_admin">
+                <div class="wb-field-group">
+                    <label for="client_group_id">{tmpl_var name='client_txt'}</label>
+                    <div ><select name="client_group_id" id="client_group_id" class="form-control">
+                        {tmpl_var name='client_group_id'}
+                    </select></div>
+                </div>
+            </tmpl_if>
+            <tmpl_if name="is_reseller">
+                <div class="wb-field-group">
+                    <label for="client_group_id">{tmpl_var name='client_txt'}</label>
+                    <div ><select name="client_group_id" id="client_group_id" class="form-control">
+                        {tmpl_var name='client_group_id'}
+                    </select></div>
+                </div>
+            </tmpl_if>
+			<div class="wb-field-group">
+                <label for="database_user">{tmpl_var name='database_user_txt'}</label>
+                <div >
+					<div class="wb-field-composite">
+						<span class="wb-field-addon" id="database_user-desc">{tmpl_var name='database_user_prefix'}</span>
+						<input type="text" name="database_user" id="database_user" value="{tmpl_var name='database_user'}" class="form-control" aria-describedby="database_user-desc" />
+					</div>
+				</div>
+            </div>
+			<div class="wb-field-group">
+                <label for="database_password">{tmpl_var name='database_password_txt'}</label>
+                <div >
+				<div class="wb-field-composite">
+					<input type="password" name="database_password" id="database_password" value="{tmpl_var name='database_password'}" class="form-control" autocomplete="off" data-workbench-password-check="database_password:repeat_password" data-workbench-password-strength="true" />
+					<span class="wb-input-group-actions">
+						<button class="wb-input-group-action" type="button" data-generate-password="true" data-password-field="database_password" data-repeat-password-field="repeat_password">{tmpl_var name='generate_password_txt'}</button>
+					</span>
+				</div>
+				</div>
+            </div>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='password_strength_txt'}</label>
+                <div class="checkbox">
+                <div id="passBar"></div>
+                <span id="passText">&nbsp;</span>
+                </div>
+            </div>
+            <div class="wb-field-group">
+                <label for="repeat_password">{tmpl_var name='repeat_password_txt'}</label>
+                <div ><input type="password" name="repeat_password" id="repeat_password" value="" class="form-control" autocomplete="off" data-workbench-password-check="database_password:repeat_password" /></div>
+            </div>
+            <div class="wb-field-group">
+				<div >
+					<div id="confirmpasswordError" hidden class="confirmpassworderror">{tmpl_var name='password_mismatch_txt'}</div>
+					<div id="confirmpasswordOK" hidden class="confirmpasswordok">{tmpl_var name='password_match_txt'}</div>
+				</div>
+			</div>
+
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="sites/database_user_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="sites/database_user_list.php" data-load-content="sites/database_user_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div>

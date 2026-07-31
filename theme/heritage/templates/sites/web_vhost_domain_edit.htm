@@ -1,0 +1,291 @@
+<!-- WP-948: native Workbench website core surface; shared lifecycle unchanged. -->
+<tmpl_if name="config_error_msg">
+<div>
+    <p>
+        <div id="errormsg" class="wb-alert wb-alert--danger wb-alert--dismissible" role="alert" data-wb-ack-url="sites/message_ack.php?relation=web_domain:{tmpl_var name='id'}&amp;_csrf_id={tmpl_var name='_csrf_id_msg'}&amp;_csrf_key={tmpl_var name='_csrf_key_msg'}">
+            <button type="button" class="wb-alert__dismiss" data-workbench-dismiss="alert" aria-label="Schließen" data-wb-i18n-aria-label-de="Schließen" data-wb-i18n-aria-label-en="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="wb-config-error-time">{tmpl_var name='config_error_tstamp'} :&nbsp;</div>
+            <div class="wb-config-error-message">{tmpl_var name='config_error_msg'}</div>
+        </div>
+    </p>
+  </div>
+</tmpl_if>
+
+
+        {tmpl_hook name="begin_form"}
+    <tmpl_if name="vhostdomain_type" value="domain">
+            <tmpl_if name="is_admin">
+                <div class="wb-field-group">
+                    <tmpl_if name="edit_disabled">
+                        <label for="server_id_disabled">{tmpl_var name='server_id_txt'}</label>
+                        <div class="wb-field-body"><select name="server_id_disabled" id="server_id_disabled" class="form-control" disabled="disabled">
+                            {tmpl_var name='server_id'}
+                        </select></div>
+                        <input type="hidden" name="server_id" value="{tmpl_var name='server_id_value'}" />
+                        <tmpl_else>
+                            <label for="server_id">{tmpl_var name='server_id_txt'}</label>
+                            <div class="wb-field-body"><select name="server_id" id="server_id" class="form-control">
+                                {tmpl_var name='server_id'}
+                            </select></div>
+                    </tmpl_if>
+                </div>
+                <tmpl_unless name="domain_option">
+                    <div class="wb-field-group">
+                        <label for="client_group_id">{tmpl_var name='client_group_id_txt'}</label>
+                        <div class="wb-field-body"><select name="client_group_id" id="client_group_id" class="form-control">
+                            {tmpl_var name='client_group_id'}
+                        </select></div>
+                    </div>
+                </tmpl_unless>
+            <tmpl_else>
+                <tmpl_if name="only_one_server">
+                    <input type="hidden" id="server_id" name="server_id" value="{tmpl_var name='server_id_value'}" />
+                <tmpl_else>
+                    <div class="wb-field-group">
+                        <tmpl_if name="edit_disabled">
+                            <label for="server_id_disabled">{tmpl_var name='server_id_txt'}</label>
+                            <div class="wb-field-body"><select name="server_id_disabled" id="server_id_disabled" class="form-control" disabled="disabled">
+                                {tmpl_var name='server_id'}
+                            </select></div>
+                            <input type="hidden" name="server_id" value="{tmpl_var name='server_id_value'}" />
+                        <tmpl_else>
+                            <label for="server_id">{tmpl_var name='server_id_txt'}</label>
+                            <div class="wb-field-body"><select name="server_id" id="server_id" class="form-control">
+                                {tmpl_var name='server_id'}
+                            </select></div>
+                        </tmpl_if>
+                    </div>
+                </tmpl_if>
+            </tmpl_if>
+            <tmpl_if name="is_reseller">
+                <tmpl_unless name="domain_option">
+                    <div class="wb-field-group">
+                        <label for="client_group_id">{tmpl_var name='client_group_id_txt'}</label>
+                        <div class="wb-field-body"><select name="client_group_id" id="client_group_id" class="form-control">
+                            {tmpl_var name='client_group_id'}
+                        </select></div>
+                    </div>
+                </tmpl_unless>
+            </tmpl_if>
+            <tmpl_if name="domain_option">
+                <input type="hidden" id="client_group_id" name="client_group_id" value="{tmpl_var name='client_group_id_value'}" />
+            </tmpl_if>
+            <div class="wb-field-group">
+                <label for="ip_address">{tmpl_var name='ip_address_txt'}</label>
+                <div class="wb-field-body"><select name="ip_address" id="ip_address" class="form-control">
+                    {tmpl_var name='ip_address'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="ipv6_address">{tmpl_var name='ipv6_address_txt'}</label>
+                <div class="wb-field-body"><select name="ipv6_address" id="ipv6_address" class="form-control">
+                    {tmpl_var name='ipv6_address'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="domain">{tmpl_var name='domain_txt'}</label>
+                <tmpl_if name="domain_option">
+                    <div class="wb-field-body"><select name="domain" id="domain" class="form-control">
+                        {tmpl_var name='domain_option'}
+                    </select></div>
+                    <tmpl_else>
+                        <div class="wb-field-body"><input type="text" name="domain" id="domain" value="{tmpl_var name='domain'}" class="form-control" /></div></tmpl_if>
+            </div>
+            <tmpl_if name="web_aliasdomains_info">
+            <div class="wb-field-group">
+                   <label for="web_aliasdomains">{tmpl_var name='dependent_domains_txt'}</label>
+                   <div class="wb-field-body">
+                        <textarea name="web_aliasdomains" id="web_aliasdomains" class="form-control" disabled="disabled">
+<tmpl_loop name="web_aliasdomains_info">{tmpl_var name='domain'} ({tmpl_var name='type'}<tmpl_if name='active' value='n'>, inactive</tmpl_if><tmpl_if name='redirect_type'>, redirects to: {tmpl_var name='redirect_path'}</tmpl_if>)
+</tmpl_loop>
+                        </textarea>
+                   </div>
+            </div>
+            </tmpl_if>
+			<tmpl_if name="edit_disabled">
+				<div class="wb-field-group">
+					<label for="document_root" readonly >{tmpl_var name='document_root_txt'}</label>
+					<div class="wb-field-body">
+                        <div class="checkbox">{tmpl_var name='document_root'}</div>
+                    </div>
+				</div>
+			</tmpl_if>
+            <div class="wb-field-group">
+                <label for="hd_quota">{tmpl_var name='hd_quota_txt'}</label>
+                <div class="wb-field-body"><div class="wb-field-composite"><input type="text" name="hd_quota" id="hd_quota" value="{tmpl_var name='hd_quota'}" class="form-control" /><span class="wb-field-addon" id="quota-desc">MB</span></div></div>
+			</div>
+		</tmpl_if>
+		<tmpl_if name="vhostdomain_type" value="subdomain">
+            <input type="hidden" name="server_id" id="server_id" value="{tmpl_var name='server_id_value'}" />
+            <tmpl_if name="domain_option">
+            <div class="wb-field-group">
+                <label for="parent_domain_id">{tmpl_var name='parent_domain_id_txt'}</label>
+                <div class="wb-field-body"><select id="parent_domain_id" name="parent_domain_id" class="form-control">{tmpl_var name='parent_domain_id'}</select></div>
+            </div>
+            </tmpl_if>
+            <div class="wb-field-group">
+                <label for="domain">{tmpl_var name='host_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="domain" id="domain" value="{tmpl_var name='domain'}" class="form-control" /></div></div>
+            <tmpl_if name="domain_option">
+            <div class="wb-field-group">
+                <label for="sel_domain">{tmpl_var name='domain_txt'}</label>
+                    <div class="wb-field-body"><select name="sel_domain" id="sel_domain" class="form-control">
+                        {tmpl_var name='domain_option'}
+                    </select></div>
+            </div>
+            <tmpl_else>
+            <div class="wb-field-group">
+                <label for="parent_domain_id">{tmpl_var name='domain_txt'}</label>
+                <div class="wb-field-body"><select id="parent_domain_id" name="parent_domain_id" class="form-control">{tmpl_var name='parent_domain_id'}</select></div>
+            </div>
+            </tmpl_if>
+            <div class="wb-field-group">
+                <label for="web_folder">{tmpl_var name='web_folder_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="web_folder" id="web_folder" value="{tmpl_var name='web_folder'}" class="form-control"<tmpl_if name='fixed_folder' op='==' value='y'>readonly="readonly"</tmpl_if> /></div>
+            </div>
+		</tmpl_if>
+		<tmpl_if name="vhostdomain_type" value="aliasdomain">
+            <input type="hidden" name="server_id" id="server_id" value="{tmpl_var name='server_id_value'}" />
+            <div class="wb-field-group">
+                <label for="domain">{tmpl_var name='domain_txt'}</label>
+                <tmpl_if name="domain_option">
+                    <div class="wb-field-body"><select name="domain" id="domain" class="form-control">
+                        {tmpl_var name='domain_option'}
+                    </select></div>
+                    <tmpl_else>
+                        <div class="wb-field-body"><input type="text" name="domain" id="domain" value="{tmpl_var name='domain'}" class="form-control" /></div></tmpl_if>
+            </div>
+            <div class="wb-field-group">
+                <label for="parent_domain_id">{tmpl_var name='parent_domain_id_txt'}</label>
+                <div class="wb-field-body"><select name="parent_domain_id" id="parent_domain_id" class="form-control">
+                    {tmpl_var name='parent_domain_id'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="web_folder">{tmpl_var name='web_folder_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="web_folder" id="web_folder" value="{tmpl_var name='web_folder'}" class="form-control"<tmpl_if name='fixed_folder' op='==' value='y'> readonly="readonly"</tmpl_if> /></div>
+            </div>
+		</tmpl_if>
+            <div class="wb-field-group">
+                <label for="traffic_quota">{tmpl_var name='traffic_quota_txt'}</label>
+                <div class="wb-field-body"><div class="wb-field-composite"><input type="text" name="traffic_quota" id="traffic_quota" value="{tmpl_var name='traffic_quota'}" class="form-control" /><span class="wb-field-addon" id="quota-desc">MB</span></div></div><tmpl_var name='traffic_quota_exceeded_txt'>
+            </div>
+            <tmpl_if name="limit_cgi" op="==" value="y"><div class="wb-field-group">
+                <label>{tmpl_var name='cgi_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='cgi'}
+                </div>
+            </div></tmpl_if>
+            <tmpl_if name="limit_ssi" op="==" value="y"><div class="wb-field-group">
+                <label>{tmpl_var name='ssi_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='ssi'}
+                </div>
+            </div></tmpl_if>
+            <tmpl_if name="limit_perl" op="==" value="y"><div class="wb-field-group apache">
+                <label>{tmpl_var name='perl_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='perl'}
+                </div>
+            </div></tmpl_if>
+            <tmpl_if name="limit_ruby" op="==" value="y"><div class="wb-field-group apache">
+                <label>{tmpl_var name='ruby_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='ruby'}
+                </div>
+            </div></tmpl_if>
+            <tmpl_if name="limit_python" op="==" value="y"><div class="wb-field-group apache">
+                <label>{tmpl_var name='python_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='python'}
+                </div>
+            </div></tmpl_if>
+            <tmpl_if name="force_suexec" op="==" value="n"><div class="wb-field-group apache">
+                <label>{tmpl_var name='suexec_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='suexec'}
+                </div>
+            </div></tmpl_if>
+            <tmpl_if name="limit_hterror" op="==" value="y"><div class="wb-field-group">
+                <label>{tmpl_var name='errordocs_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='errordocs'}
+                </div>
+            </div></tmpl_if>
+
+            <div class="wb-field-group">
+                <label for="subdomain">{tmpl_var name='subdomain_txt'}</label>
+                <div class="wb-field-body"><select name="subdomain" id="subdomain" class="form-control">
+                    {tmpl_var name='subdomain'}
+                </select></div>
+            </div>
+            <tmpl_if name="limit_ssl" op="==" value="y"><div class="wb-field-group">
+                <label>{tmpl_var name='ssl_txt'}</label>
+                <div class="wb-field-body" data-uncheck-fields="ssl_letsencrypt">
+                    {tmpl_var name='ssl'}
+                </div>
+            </div>
+            <tmpl_if name="limit_ssl_letsencrypt" op="==" value="y">
+            <div class="wb-field-group">
+                <label>{tmpl_var name='ssl_letsencrypt_txt'}</label>
+                <div class="wb-field-body" data-check-fields="ssl">
+                    {tmpl_var name='ssl_letsencrypt'}
+                </div>
+            </div></tmpl_if>
+            </tmpl_if>
+            <div class="wb-field-group">
+                <label for="php">{tmpl_var name='php_txt'}</label>
+                <div class="wb-field-body"><select name="php" id="php" class="form-control">
+                    {tmpl_var name='php'}
+                </select></div>
+            </div>
+            {tmpl_hook name="field_server_php_id"}
+            <div class="wb-field-group server_php_id">
+                <label for="server_php_id">{tmpl_var name='server_php_id_txt'}</label>
+                <div class="wb-field-body"><select name="server_php_id" id="server_php_id" class="form-control">
+                    {tmpl_var name='server_php_id'}
+                </select></div>
+                <tmpl_if name="server_php_id_default_hidden_warning_confirmed">
+                    <input type="hidden" id="server_php_id_default_hidden_warning_confirmed" name="server_php_id_default_hidden_warning_confirmed" value="{tmpl_var name='server_php_id_default_hidden_warning_confirmed'}" />
+                </tmpl_if>
+            </div>
+            <tmpl_if name="limit_directive_snippets" op="==" value="y"><div class="wb-field-group">
+				<label for="directive_snippets_id">{tmpl_var name='directive_snippets_id_txt'}</label>
+				<div class="wb-field-body"><select name="directive_snippets_id" id="directive_snippets_id" class="form-control">
+					{tmpl_var name='directive_snippets_id'}
+				</select></div>
+			</div></tmpl_if>
+			<tmpl_if name="is_pagespeed_enabled" op="==" value="y">
+				<div class="wb-field-group nginx pagespeed">
+					<label>{tmpl_var name='enable_pagespeed_txt'}</label>
+					<div class="wb-field-body">{tmpl_var name="enable_pagespeed"}</div>
+				</div>
+			</tmpl_if>
+<!--
+			{tmpl_hook name="field_enable_pagespeed"}
+			<div class="wb-field-group nginx pagespeed">
+				<label>{tmpl_var name='enable_pagespeed_txt'}</label>
+				<div class="wb-field-body">
+					{tmpl_var name="enable_pagespeed"}
+				</div>
+			</div>
+-->
+            {tmpl_hook name="field_active"}
+            <div class="wb-field-group">
+                <label>{tmpl_var name='active_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='active'}
+                </div>
+            </div>
+			{tmpl_hook name="end_form"}
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}" data-json-sync="sites-vhost-main" data-directive-snippet-label="{tmpl_var name='select_directive_snippet_txt'}"<tmpl_if name="readonly_tab"> data-vhost-readonly-tab="true"</tmpl_if>>
+
+        <div class="wb-form-actions">
+          <tmpl_if name='id'><tmpl_if name='show_delete_on_forms' op="==" value="y">
+            <a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="sites/web_vhost_domain_del.php?id={tmpl_var name='id'}&_csrf_id={tmpl_var name='_csrf_id'}&_csrf_key={tmpl_var name='_csrf_key'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete"></span></a>
+          </tmpl_if></tmpl_if>
+          <div class="wb-form-actions__primary">
+            <button id="dom-edit-submit" class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="sites/web_vhost_domain_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="sites/web_vhost_domain_list.php" data-load-content="sites/web_vhost_domain_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div></div>

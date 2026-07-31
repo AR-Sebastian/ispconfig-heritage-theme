@@ -1,0 +1,36 @@
+<!-- WP-965: native Workbench operations surface; controller contract unchanged. -->
+<tmpl_if name="list_head_txt">
+<div class='page-header'>
+        <h1><tmpl_var name="list_head_txt"></h1>
+</div>
+</tmpl_if>
+<tmpl_if name="list_desc_txt"><p><tmpl_var name="list_desc_txt"></p></tmpl_if>
+
+<div class="wb-field-group">
+	<label for="default_dnsserver" >{tmpl_var name='default_dnsserver_txt'}</label>
+	<div class="wb-field-body"><select name="default_dnsserver" id="default_dnsserver" class="form-control">
+		{tmpl_var name='default_dnsserver'}
+	</select></div>
+</div>
+
+<div class="wb-field-group">
+  <label >{tmpl_var name=dns_external_slave_server_txt'}</label>
+  <div class="wb-field-body">
+	<input type="text" name="dns_external_slave_fqdn" id="dns_external_slave_fqdn" value="{tmpl_var name='dns_external_slave_fqdn'}" size="" maxlength="" class="form-control" />
+  </div>
+</div>
+
+<div class="wb-field-group">
+  <label >{tmpl_var name=dns_show_zoneexport_txt'}</label>
+  <div class="wb-field-body">
+    {tmpl_var name='dns_show_zoneexport'}
+  </div>
+</div>
+
+
+<input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+<div class="wb-form-actions"><div class="wb-form-actions__primary">
+    <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="admin/system_config_edit.php">{tmpl_var name='btn_save_txt'}</button>
+    <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="admin/users_list.php" data-load-content="admin/users_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+</div></div>

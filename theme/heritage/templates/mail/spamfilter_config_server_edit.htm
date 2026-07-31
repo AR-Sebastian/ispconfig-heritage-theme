@@ -1,0 +1,14 @@
+<!-- WP-957: native Workbench spamfilter network form. -->
+<header class="wb-form-heading"><h1><tmpl_var name="list_head_txt"></h1><p><tmpl_var name="list_desc_txt"></p></header>
+<fieldset id="wf_area_spamfilter_config" class="wb-form-panel">
+    <div class="wb-field-group"><label for="ip_address">{tmpl_var name='ip_address_txt'}</label><div><input class="form-control" type="text" id="ip_address" name="ip_address" value="{tmpl_var name='ip_address'}"></div></div>
+    <div class="wb-field-group"><label for="netmask">{tmpl_var name='netmask_txt'}</label><div><input class="form-control" type="text" id="netmask" name="netmask" value="{tmpl_var name='netmask'}"></div></div>
+    <div class="wb-field-group"><label for="gateway">{tmpl_var name='gateway_txt'}</label><div><input class="form-control" type="text" id="gateway" name="gateway" value="{tmpl_var name='gateway'}"></div></div>
+    <div class="wb-field-group"><label for="hostname">{tmpl_var name='hostname_txt'}</label><div><input class="form-control" type="text" id="hostname" name="hostname" value="{tmpl_var name='hostname'}"></div></div>
+    <div class="wb-field-group"><label for="nameservers">{tmpl_var name='nameservers_txt'}</label><div><input class="form-control" type="text" id="nameservers" name="nameservers" value="{tmpl_var name='nameservers'}"></div></div>
+</fieldset>
+<input type="hidden" name="id" value="{tmpl_var name='id'}">
+<div class="wb-form-actions">
+    <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="mail/spamfilter_config_edit.php">{tmpl_var name='btn_save_txt'}</button>
+    <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="mail/spamfilter_config_list.php" data-load-content="mail/spamfilter_config_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+</div>

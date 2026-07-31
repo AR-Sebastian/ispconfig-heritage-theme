@@ -1,0 +1,32 @@
+<!-- WP-1002: native Workbench monitoring log surface; controller contract unchanged. -->
+<section class="wb-monitor-workspace">
+    <header class="wb-monitor-hero">
+        <span class="wb-module-eyebrow">ISPConfig Monitor</span>
+        <h1><tmpl_var name="list_head_txt"></h1>
+        <p><tmpl_var name="list_desc_txt"></p>
+    </header>
+
+    <div class="wb-content-panel wb-content-panel--monitor">
+        <div class="wb-field-group">
+            <div class="wb-field-span wb-field-span--full">
+                <label for="refreshinterval"><tmpl_var name="monTransRefreshsq"></label>
+                <select
+                    name="refreshinterval"
+                    id="refreshinterval"
+                    class="form-control"
+                    data-load-content-refresh="monitor/show_log.php?log={tmpl_var name='log_id'}">
+                    {tmpl_var name='refresh'}
+                </select>
+            </div>
+        </div>
+
+        <section class="wb-monitor-log" aria-label="<tmpl_var name='monTransDate'>">
+            <header class="wb-monitor-log__header">
+                <h2 class="wb-list-section-heading"><tmpl_var name="monTransDate"><tmpl_var name="time"></h2>
+            </header>
+            <div class="codeview wb-monitor-log__content">
+                <pre><tmpl_var name="log_data"></pre>
+            </div>
+        </section>
+    </div>
+</section>

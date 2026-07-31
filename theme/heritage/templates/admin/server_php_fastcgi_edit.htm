@@ -1,0 +1,19 @@
+<!-- WP-965: native Workbench operations surface; controller contract unchanged. -->
+<!-- WP-926 Bootstrap-removal batch 2: native override of admin/server_php_fastcgi_edit.
+     Native wb-field-group / wb-form-actions structure; shared template untouched.
+     All {tmpl_var} and data-* hooks verbatim. -->
+            <div class="wb-field-group">
+                <label for="php_fastcgi_binary">{tmpl_var name='php_fastcgi_binary_txt'}</label>
+                <div><input type="text" name="php_fastcgi_binary" id="php_fastcgi_binary" value="{tmpl_var name='php_fastcgi_binary'}" class="form-control" /></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="php_fastcgi_ini_dir">{tmpl_var name='php_fastcgi_ini_dir_txt'}</label>
+                <div><input type="text" name="php_fastcgi_ini_dir" id="php_fastcgi_ini_dir" value="{tmpl_var name='php_fastcgi_ini_dir'}" class="form-control" /></div>
+            </div>
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="admin/server_php_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="admin/server_php_list.php" data-load-content="admin/server_php_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div>

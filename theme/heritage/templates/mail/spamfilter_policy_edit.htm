@@ -1,0 +1,26 @@
+<!-- WP-934 Bootstrap-removal: native override of mail/spamfilter_policy_edit.
+     Native wb-field-group / wb-form-actions; shared template untouched.
+     All template variables and data-* hooks preserved verbatim. -->
+            <div class="wb-field-group">
+                <label for="policy_name">{tmpl_var name='policy_name_txt'}</label>
+                <div><input type="text" name="policy_name" id="policy_name" value="{tmpl_var name='policy_name'}" class="form-control" /></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="virus_lover">{tmpl_var name='virus_lover_txt'}</label>
+                <div><select name="virus_lover" id="virus_lover" class="form-control">
+                    {tmpl_var name='virus_lover'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="spam_lover">{tmpl_var name='spam_lover_txt'}</label>
+                <div><select name="spam_lover" id="spam_lover" class="form-control">
+                    {tmpl_var name='spam_lover'}
+                </select></div>
+            </div>
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="mail/spamfilter_policy_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="mail/spamfilter_policy_list.php" data-load-content="mail/spamfilter_policy_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div>

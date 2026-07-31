@@ -1,0 +1,65 @@
+<!-- WP-947: native Workbench reporting/access surface; shared lifecycle unchanged. -->
+<div class='page-header'>
+	<h1><tmpl_var name="list_head_txt"></h1>
+</div>
+<p><tmpl_var name="list_desc_txt"></p>
+<section class="wb-table-workspace">
+    <div class="wb-list-toolbar">
+        <div class="wb-list-toolbar__context">
+            <strong><tmpl_var name="list_head_txt"></strong>
+        </div>
+    </div>
+
+	<table class="table wb-data-table">
+		<thead>
+			<tr>
+				<th data-column="domain"><tmpl_var name="domain_txt"></th>
+				<th data-column="this_month"><tmpl_var name="this_month_txt"></th>
+				<th data-column="last_month"><tmpl_var name="last_month_txt"></th>
+				<th data-column="this_year"><tmpl_var name="this_year_txt"></th>
+				<th data-column="last_year"><tmpl_var name="last_year_txt"></th>
+				<th class="wb-table-actions-column wb-table-align-end">{tmpl_var name='search_limit'}</th>
+			</tr>
+			<tr>
+				<td><input class="form-control" type="text" name="search_domain" value="{tmpl_var name='search_domain'}" /></td>
+				<td class="this_month wb-table-filter-helper"><tmpl_var name="in_out_txt"></td>
+				<td class="last_month wb-table-filter-helper"><tmpl_var name="in_out_txt"></td>
+				<td class="this_year wb-table-filter-helper"><tmpl_var name="in_out_txt"></td>
+				<td class="last_year wb-table-filter-helper"><tmpl_var name="in_out_txt"></td>
+				<td class="wb-table-align-end wb-table-filter-helper">
+					<button type="button" class="formbutton-default formbutton-narrow" name="Filter" id="Filter" value="{tmpl_var name="filter_txt"}" data-submit-form="pageForm" data-form-action="sites/ftp_sites_stats.php"><span class="icon icon-filter"></span></button>
+				</td>
+			</tr>
+		</thead>
+		<tbody>
+		<tmpl_loop name="records">
+			<tr>
+				<td><a target="_blank" href="http://{tmpl_var name="domain"}/stats">{tmpl_var name="domain"}</a></td>
+				<td><a href="#" data-workbench-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}&type={tmpl_var name='vhostdomain_type'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}&type={tmpl_var name='vhostdomain_type'}">{tmpl_var name="this_month_in"}/{tmpl_var name="this_month_out"}</a></td>
+				<td><a href="#" data-workbench-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}&type={tmpl_var name='vhostdomain_type'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}&type={tmpl_var name='vhostdomain_type'}">{tmpl_var name="last_month_in"}/{tmpl_var name="last_month_out"}</a></td>
+				<td><a href="#" data-workbench-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}&type={tmpl_var name='vhostdomain_type'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}&type={tmpl_var name='vhostdomain_type'}">{tmpl_var name="this_year_in"}/{tmpl_var name="this_year_out"}</a></td>
+				<td><a href="#" data-workbench-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}&type={tmpl_var name='vhostdomain_type'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}&type={tmpl_var name='vhostdomain_type'}">{tmpl_var name="last_year_in"}/{tmpl_var name="last_year_out"}</a></td>
+				<td class="wb-table-align-end"></td>
+			</tr>
+		</tmpl_loop>
+		<tmpl_unless name="records">
+			<tr class="tbl_row_noresults tbl_row_<tmpl_if name='__EVEN__'}even<tmpl_else>uneven</tmpl_if>">
+				<td colspan="6">{tmpl_var name='globalsearch_noresults_text_txt'}</td>
+			</tr>
+		</tmpl_unless>
+			<tr data-workbench-summary-row="true">
+				<td><a href="#" data-workbench-noop="true" data-workbench-summary-cell="true">{tmpl_var name="sum_txt"}</a></td>
+				<td><a href="#" data-workbench-noop="true" data-workbench-summary-cell="true">{tmpl_var name="sum_this_month"}</a></td>
+				<td><a href="#" data-workbench-noop="true" data-workbench-summary-cell="true">{tmpl_var name="sum_last_month"}</a></td>
+				<td><a href="#" data-workbench-noop="true" data-workbench-summary-cell="true">{tmpl_var name="sum_this_year"}</a></td>
+				<td><a href="#" data-workbench-noop="true" data-workbench-summary-cell="true">{tmpl_var name="sum_last_year"}</a></td>
+				<td class="wb-table-align-end"></td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="6"><tmpl_var name="paging"></td>
+			</tr>
+		</tfoot>
+	</table>
+</section>

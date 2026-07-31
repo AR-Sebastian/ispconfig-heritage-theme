@@ -1,0 +1,569 @@
+/*
+ * WP-366: authoritative authenticated control surfaces.
+ *
+ * Native ISPConfig fields remain the source of truth. This layer owns only
+ * the presentation of advanced text fields, date/time helpers and searchable
+ * selects after the shared form workspace has established its geometry.
+ */
+
+body.wb-form-page #pageForm.wb-modern-form textarea.wb-textarea-field {
+  min-height: 132px;
+  padding: 12px 14px;
+  resize: vertical;
+  line-height: 1.55;
+  tab-size: 2;
+}
+
+body.wb-form-page #pageForm.wb-modern-form textarea.wb-code-field {
+  min-height: 210px;
+  overflow: auto;
+  color: color-mix(in srgb, var(--wb-text) 94%, var(--wb-action));
+  border-color: color-mix(in srgb, var(--wb-action) 18%, var(--wb-border));
+  background: color-mix(in srgb, var(--wb-surface-muted) 92%, var(--wb-action));
+  font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', monospace;
+  font-size: 13px;
+  white-space: pre;
+}
+
+body.wb-form-page #pageForm.wb-modern-form textarea.wb-code-field:focus {
+  border-color: var(--wb-action);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--wb-action) 15%, transparent);
+}
+
+body.wb-form-page #pageForm.wb-modern-form textarea.wb-readonly-field {
+  cursor: text;
+  opacity: .88;
+}
+
+.wb-date-time-control {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  align-items: stretch;
+}
+
+.wb-date-time-control > .form-control {
+  min-width: 0;
+  padding-right: 52px !important;
+  flex: 1 1 auto;
+}
+
+.wb-date-time-control__trigger {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  display: inline-grid !important;
+  width: 36px !important;
+  min-width: 36px !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  padding: 0 !important;
+  place-items: center;
+  color: var(--wb-text-muted) !important;
+  border: 1px solid transparent !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  transform: translateY(-50%) !important;
+}
+
+.wb-date-time-control__trigger:hover,
+.wb-date-time-control__trigger:focus-visible {
+  color: var(--wb-action) !important;
+  border-color: color-mix(in srgb, var(--wb-action) 32%, var(--wb-border)) !important;
+  background: color-mix(in srgb, var(--wb-action) 7%, var(--wb-surface)) !important;
+}
+
+.wb-date-time-control__trigger:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--wb-action) 38%, transparent);
+  outline-offset: 1px;
+}
+
+.wb-date-time-control__trigger svg {
+  width: 19px;
+  height: 19px;
+}
+
+.wb-date-time-control__native {
+  position: absolute;
+  right: 8px;
+  bottom: 2px;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  opacity: .001;
+  pointer-events: none;
+}
+
+.wb-date-time-control__text--invalid:not(:focus) {
+  border-color: color-mix(in srgb, var(--wb-warning) 58%, var(--wb-border)) !important;
+}
+
+.wb-select {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  min-width: 0;
+  color: var(--wb-text);
+  vertical-align: middle;
+}
+
+.wb-select__native {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.wb-select__control {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 22px;
+  align-items: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 7px 10px 7px 12px;
+  color: var(--wb-text);
+  text-align: left;
+  border: 1px solid var(--wb-border);
+  border-radius: var(--wb-radius-sm, 9px);
+  background: var(--wb-field-bg, var(--wb-surface));
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.wb-select__control:hover {
+  border-color: color-mix(in srgb, var(--wb-action) 55%, var(--wb-border));
+}
+
+.wb-select__control:focus-visible,
+.wb-select.is-open .wb-select__control {
+  border-color: var(--wb-action);
+  outline: 2px solid color-mix(in srgb, var(--wb-action) 38%, transparent);
+  outline-offset: 1px;
+}
+
+.wb-select__control:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.wb-select__value {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wb-select__value--placeholder { color: var(--wb-text-muted); }
+
+.wb-select__value--multiple {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  white-space: normal;
+}
+
+.wb-select__chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 2px 8px;
+  color: var(--wb-text);
+  border: 1px solid color-mix(in srgb, var(--wb-action) 30%, var(--wb-border));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--wb-action) 12%, var(--wb-surface));
+}
+
+.wb-select__arrow {
+  display: grid;
+  width: 18px;
+  height: 18px;
+  place-items: center;
+  color: var(--wb-text-muted);
+  transition: transform .16s ease;
+}
+
+.wb-select__arrow svg { width: 16px; height: 16px; }
+.wb-select.is-open .wb-select__arrow { transform: rotate(180deg); }
+
+.wb-select__panel {
+  position: absolute;
+  z-index: 10020;
+  top: calc(100% + 6px);
+  left: 0;
+  width: max(100%, 260px);
+  max-width: min(520px, calc(100vw - 28px));
+  padding: 8px;
+  color: var(--wb-text);
+  border: 1px solid var(--wb-border);
+  border-radius: var(--wb-radius-md, 12px);
+  background: var(--wb-surface);
+  box-shadow: var(--wb-shadow-lg, 0 18px 45px rgba(15, 23, 42, .2));
+  overflow: hidden;
+}
+
+.wb-select__panel[hidden] { display: none !important; }
+
+.wb-select__search {
+  width: 100%;
+  min-height: 40px;
+  margin: 0 0 7px;
+  padding: 7px 10px;
+  color: var(--wb-text);
+  border: 1px solid var(--wb-border);
+  border-radius: 8px;
+  outline: 0;
+  background: var(--wb-field-bg, var(--wb-surface));
+}
+
+.wb-select__search:focus {
+  border-color: var(--wb-action);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--wb-action) 25%, transparent);
+}
+
+.wb-select__list {
+  display: block;
+  max-height: min(300px, 48vh);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+body > .wb-select__panel {
+  z-index: 10080;
+  box-shadow: 0 24px 70px color-mix(in srgb, var(--wb-text) 20%, transparent);
+}
+
+body > .wb-select__panel .wb-select__list {
+  max-height: min(300px, calc(var(--wb-select-overlay-max-height, 48vh) - 60px));
+}
+
+.wb-select__group { display: block; }
+
+.wb-select__group + .wb-select__group {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--wb-border);
+}
+
+.wb-select__group-label {
+  padding: 7px 10px 4px;
+  color: var(--wb-text-muted);
+  font-size: .76rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.wb-select__option {
+  display: block;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 10px;
+  color: var(--wb-text);
+  text-align: left;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.wb-select__option:hover,
+.wb-select__option:focus-visible {
+  color: var(--wb-action-contrast);
+  outline: 0;
+  background: var(--wb-action);
+}
+
+.wb-select__option.is-selected {
+  color: var(--wb-action);
+  background: color-mix(in srgb, var(--wb-action) 13%, var(--wb-surface));
+  font-weight: 700;
+}
+
+.wb-select__option.is-selected:hover,
+.wb-select__option.is-selected:focus-visible {
+  color: var(--wb-action-contrast);
+  background: var(--wb-action);
+}
+
+.wb-select__option:disabled {
+  opacity: .48;
+  cursor: not-allowed;
+}
+
+.wb-select__empty {
+  padding: 14px 10px;
+  color: var(--wb-text-muted);
+  text-align: center;
+}
+
+.wb-select--compact {
+  width: auto;
+  min-width: 0;
+}
+
+.wb-select--compact .wb-select__control {
+  min-height: 36px;
+  padding: 6px 8px 6px 10px;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 760;
+}
+
+.wb-select--compact .wb-select__panel,
+.wb-select__panel--compact {
+  right: 0;
+  left: auto;
+  width: max(100%, 92px);
+  min-width: 92px;
+  max-width: min(180px, calc(100vw - 28px));
+  padding: 5px;
+}
+
+.wb-select--compact .wb-select__list,
+.wb-select__panel--compact .wb-select__list {
+  max-height: min(220px, 42vh);
+}
+
+.wb-select--compact .wb-select__option,
+.wb-select__panel--compact .wb-select__option {
+  min-height: 34px;
+  padding: 7px 9px;
+  font-size: 12px;
+  font-weight: 760;
+}
+
+.wb-select--page-size {
+  width: 72px;
+  min-width: 72px;
+}
+
+.wb-select__panel--page-size {
+  width: max(92px, min(100%, 128px));
+}
+
+html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form textarea.wb-code-field,
+html[data-wb-theme='dark'] .wb-select__control,
+html[data-wb-theme='dark'] .wb-select__search,
+html[data-wb-theme='dark'] .wb-select__panel,
+html[data-wb-theme='dark'] body > .wb-select__panel {
+  color: var(--wb-text);
+  border-color: var(--wb-border);
+  background: var(--wb-surface);
+}
+
+@media (max-width: 720px) {
+  body.wb-form-page #pageForm.wb-modern-form textarea.wb-code-field {
+    min-height: 180px;
+    font-size: 12px;
+  }
+
+  .wb-select__panel {
+    position: fixed;
+    z-index: 10040;
+    top: auto;
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    width: auto;
+    max-width: none;
+  }
+
+  .wb-select__list { max-height: min(52vh, 420px); }
+  .wb-select__option { min-height: 46px; }
+
+  .wb-select--compact .wb-select__panel,
+  .wb-select__panel--compact {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    bottom: auto;
+    left: auto;
+    width: max(100%, 92px);
+    max-width: min(180px, calc(100vw - 28px));
+  }
+
+  .wb-select--compact .wb-select__list { max-height: min(220px, 42vh); }
+  .wb-select--compact .wb-select__option { min-height: 34px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wb-select__arrow { transition: none; }
+}
+
+/* WP-604: portaled select overlay hardening for list controls. */
+body > .wb-select__panel {
+  box-sizing: border-box;
+  color: var(--wb-text);
+  border-color: var(--wb-border);
+  background: var(--wb-surface);
+}
+
+body > .wb-select__panel--compact,
+body > .wb-select__panel--page-size {
+  padding: 6px;
+}
+
+body > .wb-select__panel--page-size {
+  width: 108px !important;
+  inline-size: 108px !important;
+  min-width: 92px !important;
+  min-inline-size: 92px !important;
+  max-width: min(128px, calc(100vw - 28px)) !important;
+  max-inline-size: min(128px, calc(100vw - 28px)) !important;
+  overflow: hidden;
+  border-radius: 14px;
+  box-shadow: 0 18px 44px color-mix(in srgb, #0f172a 18%, transparent);
+}
+
+body > .wb-select__panel--page-size .wb-select__search {
+  display: none !important;
+}
+
+body > .wb-select__panel--page-size .wb-select__list {
+  max-height: min(228px, 44vh);
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--wb-action) 36%, transparent) transparent;
+}
+
+body > .wb-select__panel--page-size .wb-select__list::-webkit-scrollbar { width: 8px; }
+body > .wb-select__panel--page-size .wb-select__list::-webkit-scrollbar-track { background: transparent; }
+body > .wb-select__panel--page-size .wb-select__list::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--wb-action) 36%, transparent);
+  background-clip: padding-box;
+}
+
+body > .wb-select__panel--page-size .wb-select__option {
+  min-height: 40px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  justify-content: flex-start;
+  font-weight: 820;
+  white-space: nowrap;
+}
+
+body > .wb-select__panel--page-size .wb-select__option.is-selected {
+  color: var(--wb-action);
+  background: color-mix(in srgb, var(--wb-action) 14%, var(--wb-surface));
+}
+
+body > .wb-select__panel--page-size .wb-select__option:is(:hover, :focus-visible) {
+  color: var(--wb-action-contrast);
+  background: var(--wb-action);
+}
+
+html[data-wb-theme='dark'] body > .wb-select__panel--page-size .wb-select__option.is-selected {
+  color: color-mix(in srgb, var(--wb-action) 54%, #fff);
+  background: color-mix(in srgb, var(--wb-action) 18%, var(--wb-surface));
+}
+
+/* WP-635: compact table dropdown convergence.
+ * Page-size controls can come from different templates or addons. Once the
+ * controller detects a page-size-like select, the overlay must stay compact,
+ * free of the searchable field and detached from wide table scrollbars. */
+body.wb-list-page .wb-select--page-size .wb-select__control {
+  min-width: 72px;
+  max-width: 84px;
+  justify-self: end;
+}
+
+body > .wb-select__panel--page-size {
+  display: block;
+  overscroll-behavior: contain;
+}
+
+body > .wb-select__panel--page-size .wb-select__option {
+  display: flex;
+  align-items: center;
+}
+
+body > .wb-select__panel--page-size .wb-select__option::after {
+  width: 8px;
+  height: 8px;
+  margin-left: auto;
+  border-radius: 999px;
+  background: transparent;
+  content: '';
+}
+
+body > .wb-select__panel--page-size .wb-select__option.is-selected::after {
+  background: currentColor;
+  box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 14%, transparent);
+}
+
+@media (max-width: 720px) {
+  body > .wb-select__panel--page-size {
+    position: fixed !important;
+    inline-size: 108px !important;
+    max-inline-size: min(128px, calc(100vw - 28px)) !important;
+  }
+}
+
+/* WP-658: resilient premium overlay layer.
+ *
+ * Selects are used inside tables, forms, branding settings and addons. The
+ * visual shell must never expose a full-width table popup, a white native
+ * panel or clipped controls while the viewport is being resized.
+ */
+.wb-select,
+.wb-select__control,
+:where(.wb-select__panel) {
+  box-sizing: border-box;
+}
+
+:where(.wb-select__panel) {
+  min-inline-size: min(100%, 220px);
+}
+
+body > .wb-select__panel {
+  position: fixed !important;
+  max-block-size: min(420px, calc(100vh - 24px));
+  overflow: hidden;
+}
+
+body > .wb-select__panel:not(.wb-select__panel--page-size):not(.wb-select__panel--compact) {
+  inline-size: min(max(var(--wb-select-overlay-width, 300px), 220px), calc(100vw - 24px)) !important;
+}
+
+body > .wb-select__panel .wb-select__search,
+body > .wb-select__panel .wb-select__option {
+  color: var(--wb-text) !important;
+  background-color: transparent;
+}
+
+body > .wb-select__panel .wb-select__option:is(:hover, :focus-visible) {
+  color: var(--wb-action-contrast) !important;
+  background: var(--wb-action) !important;
+}
+
+html[data-wb-theme='dark'] body > .wb-select__panel,
+html[data-wb-theme='dark'] body > .wb-select__panel .wb-select__search {
+  color-scheme: dark;
+  color: var(--wb-text) !important;
+  border-color: color-mix(in srgb, var(--wb-action) 12%, var(--wb-border)) !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--wb-surface-muted) 78%, var(--wb-surface)), var(--wb-surface)) !important;
+}
+
+@media (max-width: 520px) {
+  body > .wb-select__panel:not(.wb-select__panel--compact):not(.wb-select__panel--page-size) {
+    inset-inline: 12px !important;
+    inline-size: auto !important;
+    max-inline-size: none !important;
+  }
+
+  body > .wb-select__panel--page-size {
+    right: 12px !important;
+    left: auto !important;
+  }
+}

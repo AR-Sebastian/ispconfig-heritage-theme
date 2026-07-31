@@ -1,0 +1,31 @@
+<!-- WP-958: native Workbench mailbox delivery/filter form. -->
+<div class="wb-field-group">
+    <label>{tmpl_var name='move_junk_txt'}</label>
+    <div><select name="move_junk" id="move_junk" class="disableChangeEvent form-control">{tmpl_var name='move_junk'}</select></div>
+</div>
+<div class="wb-field-group">
+    <label for="purge_trash_days">{tmpl_var name='purge_trash_days_txt'}</label>
+    <div>
+        <tmpl_if name="show_config_info">
+            <input type="text" name="purge_trash_days" id="purge_trash_days" value="{tmpl_var name='purge_trash_days'}" class="form-control" data-workbench-tooltip="true" title="{tmpl_var name='tooltip_purge_trash_days_txt'}">
+        <tmpl_else>
+            <input type="text" name="purge_trash_days" id="purge_trash_days" value="{tmpl_var name='purge_trash_days'}" class="form-control">
+        </tmpl_if>
+    </div>
+</div>
+<div class="wb-field-group">
+    <label for="purge_junk_days">{tmpl_var name='purge_junk_days_txt'}</label>
+    <div>
+        <tmpl_if name="show_config_info">
+            <input type="text" name="purge_junk_days" id="purge_junk_days" value="{tmpl_var name='purge_junk_days'}" class="form-control" data-workbench-tooltip="true" title="{tmpl_var name='tooltip_purge_junk_days_txt'}">
+        <tmpl_else>
+            <input type="text" name="purge_junk_days" id="purge_junk_days" value="{tmpl_var name='purge_junk_days'}" class="form-control">
+        </tmpl_if>
+    </div>
+</div>
+<section class="wb-form-panel wb-form-panel--embedded-table">{tmpl_var name='filter_records'}</section>
+<input type="hidden" name="id" value="{tmpl_var name='id'}">
+<div class="wb-form-actions">
+    <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="mail/mail_user_edit.php">{tmpl_var name='btn_save_txt'}</button>
+    <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="mail/mail_user_list.php" data-load-content="mail/mail_user_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+</div>

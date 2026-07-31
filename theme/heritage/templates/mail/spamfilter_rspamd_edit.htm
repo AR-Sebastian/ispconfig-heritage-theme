@@ -1,0 +1,28 @@
+<!-- WP-935 Bootstrap-removal: native override of mail/spamfilter_rspamd_edit.
+     Native wb-field-group / wb-form-actions; shared template untouched.
+     All template variables and data-* hooks preserved verbatim. -->
+            <div class="wb-field-group">
+                <label for="rspamd_spam_greylisting_level">{tmpl_var name='rspamd_spam_greylisting_level_txt'}</label>
+                <div><input type="text" name="rspamd_spam_greylisting_level" id="rspamd_spam_greylisting_level" value="{tmpl_var name='rspamd_spam_greylisting_level'}" class="form-control" /></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="rspamd_spam_tag_level">{tmpl_var name='rspamd_spam_tag_level_txt'}</label>
+                <div><input type="text" name="rspamd_spam_tag_level" id="rspamd_spam_tag_level" value="{tmpl_var name='rspamd_spam_tag_level'}" class="form-control" /></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="rspamd_spam_tag_method">{tmpl_var name='rspamd_spam_tag_method_txt'}</label>
+                <div><select name="rspamd_spam_tag_method" id="rspamd_spam_tag_method" class="form-control">
+                    {tmpl_var name='rspamd_spam_tag_method'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="rspamd_spam_kill_level">{tmpl_var name='rspamd_spam_kill_level_txt'}</label>
+                <div><input type="text" name="rspamd_spam_kill_level" id="rspamd_spam_kill_level" value="{tmpl_var name='rspamd_spam_kill_level'}" class="form-control" /></div>
+            </div>
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="mail/spamfilter_policy_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="mail/spamfilter_policy_list.php" data-load-content="mail/spamfilter_policy_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div>

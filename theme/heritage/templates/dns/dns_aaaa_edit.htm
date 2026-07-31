@@ -1,0 +1,30 @@
+<!-- WP-939 Bootstrap-removal: native Workbench override; shared template unchanged. -->
+            <div class="wb-field-group">
+                <label for="name">{tmpl_var name='name_txt'}</label>
+                <div>
+                    <input type="text" name="name" id="name" value="{tmpl_var name='name'}" class="form-control" />
+                    <p class="formHint">{tmpl_var name='name_hint_txt'}</p>
+                </div>
+            </div>
+            <div class="wb-field-group">
+                <label for="data">{tmpl_var name='data_txt'}</label>
+                <div><input type="text" name="data" id="data" value="{tmpl_var name='data'}" class="form-control" data-workbench-field-search="true" data-search-endpoint="dnsJson" data-search-type="get_ipv6" data-search-results-limit='$ <tmpl_var name="globalsearch_resultslimit_of_txt"> % <tmpl_var name="globalsearch_resultslimit_results_txt">' data-search-results-prefix='<tmpl_var name="globalsearch_suggestions_text_txt">' data-search-no-results='<tmpl_var name="globalsearch_noresults_text_txt">' data-search-no-results-limit='<tmpl_var name="globalsearch_noresults_limit_txt">' data-search-min-chars="0" data-search-css-prefix="df-" data-search-fill-field="true" data-search-fill-with="fill_text" /></div></div>
+            <div class="wb-field-group">
+                <label for="ttl">{tmpl_var name='ttl_txt'}</label>
+                <div><input type="text" name="ttl" id="ttl" value="{tmpl_var name='ttl'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='active_txt'}</label>
+                <div>
+                    {tmpl_var name='active'}
+                </div>
+            </div>
+
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+        <input type="hidden" name="zone" value="{tmpl_var name='zone'}">
+        <input type="hidden" name="type" value="{tmpl_var name='type'}">
+
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="dns/dns_aaaa_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="dns/dns_soa_edit.php?id={tmpl_var name='zone'}&next_tab=dns_records" data-load-content="dns/dns_soa_edit.php?id={tmpl_var name='zone'}&next_tab=dns_records">{tmpl_var name='btn_cancel_txt'}</button>
+        </div>

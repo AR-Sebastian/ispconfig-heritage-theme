@@ -1,0 +1,66 @@
+<!-- WP-940 Bootstrap-removal: native Workbench override; shared template unchanged. -->
+            <div class="wb-field-group">
+                <label for="name">{tmpl_var name='name_txt'}</label>
+                <div><input type="text" name="name" id="name" value="{tmpl_var name='name'}" class="form-control" /></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="data">{tmpl_var name='data_txt'}</label>
+				<div><input type="text" name="data" id="data" value="{tmpl_var name='data'}" readonly class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="spf_mechanism">{tmpl_var name='spf_mechanism_txt'}</label>
+                <div><select name="spf_mechanism" id="spf_mechanism" class="form-control">
+                    {tmpl_var name='spf_mechanism'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='spf_mx_txt'}</label>
+                <div><input type="checkbox" value="1" id="spf_mx" name="spf_mx" {tmpl_var name = 'spf_mx_active'} /></div>
+            </div>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='spf_a_txt'}</label>
+                <div><input type="checkbox" value="1" id="spf_a" name="spf_a" {tmpl_var name = 'spf_a_active'} /></div>
+            </div>
+			<div class="wb-field-group">
+				<label for="spf_ip">{tmpl_var name='spf_ip_txt'}</label>
+				<div>
+					<input type="text" name="spf_ip" id="spf_ip" value="{tmpl_var name='spf_ip'}" class="form-control" />
+					<p class="formHint">{tmpl_var name='spf_ip_note_txt'}</p>
+				</div>
+			</div>
+			<div class="wb-field-group">
+				<label for="spf_hostname">{tmpl_var name='spf_hostname_txt'}</label>
+				<div>
+					<input type="text" name="spf_hostname" id="spf_hostname" value="{tmpl_var name='spf_hostname'}" class="form-control" />
+					<p class="formHint">{tmpl_var name='spf_hostname_note_txt'}</p>
+				</div>
+			</div>
+			<div class="wb-field-group">
+				<label for="spf_domain">{tmpl_var name='spf_domain_txt'}</label>
+				<div>
+					<input type="text" name="spf_domain" id="spf_domain" value="{tmpl_var name='spf_domain'}" class="form-control" />
+					<p class="formHint">{tmpl_var name='spf_domain_note_txt'}</p>
+				</div>
+			</div>
+            <div class="wb-field-group">
+                <label for="ttl">{tmpl_var name='ttl_txt'}</label>
+                <div><input type="text" name="ttl" id="ttl" value="{tmpl_var name='ttl'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='active_txt'}</label>
+                 <div>
+                    <input type="checkbox" value="1" id="active" name="active" {tmpl_var name='active'} />
+                </div>
+            </div>
+
+
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+        <input type="hidden" name="zone" value="{tmpl_var name='zone'}" id="zone">
+        <input type="hidden" name="type" value="{tmpl_var name='type'}">
+
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="dns/dns_spf_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <tmpl_if name="is_admin">
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_edit_as_txt_record_txt'}" data-workbench-load-content="dns/dns_txt_edit.php?id={tmpl_var name='id'}&zone={tmpl_var name='zone'}&edit_raw=1" data-load-content="dns/dns_txt_edit.php?id={tmpl_var name='id'}&zone={tmpl_var name='zone'}&edit_raw=1">{tmpl_var name='btn_edit_as_txt_record_txt'}</button>
+            </tmpl_if>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="dns/dns_soa_edit.php?id={tmpl_var name='zone'}&next_tab=dns_records" data-load-content="dns/dns_soa_edit.php?id={tmpl_var name='zone'}&next_tab=dns_records">{tmpl_var name='btn_cancel_txt'}</button>
+        </div>

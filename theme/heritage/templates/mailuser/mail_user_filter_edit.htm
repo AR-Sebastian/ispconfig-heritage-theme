@@ -1,0 +1,29 @@
+<!-- WP-971: native Workbench mailuser surface; controller contract unchanged. -->
+            <div class="wb-field-group">
+                <label for="rulename" class="wb-field-label">{tmpl_var name='rulename_txt'}</label>
+                <div class="wb-field-body"><input type="text" id="rulename" name="rulename" value="{tmpl_var name='rulename'}" class="form-control"></div></div>
+            <div class="wb-field-group">
+                <label for="source" class="wb-field-label">{tmpl_var name='source_txt'}</label>
+                <div class="wb-field-body"><select id="source" name="source" class="form-control">{tmpl_var name='source'}</select></div>
+                <div class="wb-field-body"><select id="op" name="op" class="form-control" data-workbench-sync-visibility="regex_hint" data-visible-value="regex">{tmpl_var name='op'}</select></div>
+                <div class="wb-field-body"><input type="text" id="searchterm" name="searchterm" value="{tmpl_var name='searchterm'}" class="form-control"></div></div>
+            <div class="wb-field-group">
+                <div class="wb-field-body"></div><div class="wb-field-body"><small id="regex_hint" class="text-muted" hidden style="display:none;">{tmpl_var name='regex_hint_txt'}</small></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="action" class="wb-field-label">{tmpl_var name='action_txt'}</label>
+                <div class="wb-field-body"><select id="action" name="action" class="form-control">{tmpl_var name='action'}</select></div>
+                <div class="wb-field-body"><input type="text" id="target" name="target" value="{tmpl_var name='target'}" class="form-control"></div></div>
+            <div class="wb-field-group">
+                <label for="active" class="wb-field-label">{tmpl_var name='active_txt'}</label>
+                <div class="wb-field-body"><div class="checkbox"><label>{tmpl_var name='active'}</label></div></div>
+            </div>
+
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+        <input name="mailuser_id" type="hidden" value="{tmpl_var name='mailuser_id'}">
+
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="mailuser/mail_user_filter_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="mailuser/mail_user_filter_list.php" data-load-content="mailuser/mail_user_filter_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div>

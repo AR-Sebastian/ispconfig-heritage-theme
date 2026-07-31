@@ -1,0 +1,842 @@
+/* WP-365: authoritative authentication surface for login, OTP and recovery. */
+body.wb-login-page {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--wb-text);
+  background: var(--wb-bg);
+  color-scheme: light;
+  -webkit-tap-highlight-color: color-mix(in srgb, var(--wb-action) 24%, transparent);
+}
+
+html[data-wb-theme='dark'] body.wb-login-page { color-scheme: dark; }
+
+body.wb-login-page,
+body.wb-login-page *,
+body.wb-login-page *::before,
+body.wb-login-page *::after { box-sizing: border-box; }
+
+body.wb-login-page img { max-width: 100%; border: 0; }
+body.wb-login-page a { color: var(--wb-action); text-decoration: none; }
+body.wb-login-page button,
+body.wb-login-page input,
+body.wb-login-page select,
+body.wb-login-page textarea { margin: 0; font: inherit; }
+body.wb-login-page button { cursor: pointer; }
+body.wb-login-page [hidden] { display: none !important; }
+
+.wb-login-shell {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: minmax(360px, .92fr) minmax(460px, 1.08fr);
+  align-items: stretch;
+}
+
+.wb-login-hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 48px clamp(38px, 8vw, 116px);
+  overflow: hidden;
+  color: #fff;
+  background-color: #0d1525;
+  background-image:
+    radial-gradient(circle at 82% 78%, color-mix(in srgb, var(--wb-action) 20%, transparent), transparent 34%),
+    linear-gradient(145deg, #0d1525 0%, #111c30 62%, #0c1422 100%);
+}
+
+.wb-login-hero::before,
+.wb-login-hero::after {
+  position: absolute;
+  z-index: -1;
+  right: -220px;
+  bottom: -190px;
+  width: 560px;
+  height: 560px;
+  border: 1px solid rgba(255, 255, 255, .05);
+  border-radius: 50%;
+  content: '';
+}
+
+.wb-login-hero::before {
+  right: -130px;
+  bottom: -115px;
+  width: 390px;
+  height: 390px;
+}
+
+.wb-login-hero::after {
+  box-shadow: 0 0 0 88px rgba(255, 255, 255, .018), 0 0 0 176px rgba(255, 255, 255, .012);
+}
+
+.wb-login-hero__logo {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  max-width: min(100%, 226px);
+  align-self: flex-start;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .18);
+}
+
+.wb-login-hero__logo img {
+  display: block;
+  width: 194px;
+  height: auto;
+  max-height: 52px;
+  object-fit: contain;
+}
+
+.wb-login-hero__copy { position: relative; z-index: 1; max-width: 470px; }
+.wb-login-hero__kicker { margin-bottom: 18px; color: color-mix(in srgb, var(--wb-action) 52%, #fff); font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.wb-login-hero__copy h1 { margin: 0 0 22px; color: #fff; font-size: clamp(44px, 5vw, 72px); line-height: .96; letter-spacing: -.055em; }
+.wb-login-hero__copy p { max-width: 440px; color: #c5d2e8; font-size: 15px; line-height: 1.6; }
+.wb-login-hero__copy ul { margin: 24px 0 0; padding: 0; list-style: none; color: #e5edf8; font-size: 14px; line-height: 2.5; }
+.wb-login-hero__copy li::before { display: inline-grid; width: 22px; height: 22px; margin-right: 10px; place-items: center; border-radius: 50%; color: #6ee7b7; background: rgba(16, 185, 129, .16); content: '\2713'; font-weight: 800; }
+.wb-login-hero__footer { position: relative; z-index: 1; display: flex; align-items: center; gap: 9px; color: #8da6c8; }
+.wb-login-hero__status { width: 8px; height: 8px; border-radius: 50%; background: #34d399; box-shadow: 0 0 0 5px rgba(52, 211, 153, .12); }
+
+.wb-login-card {
+  position: relative;
+  width: min(100% - 64px, 472px);
+  align-self: center;
+  margin: auto;
+  padding: 38px;
+  border: 1px solid var(--wb-border);
+  border-radius: 18px;
+  color: var(--wb-text);
+  background: var(--wb-surface);
+  box-shadow: 0 24px 60px rgba(28, 42, 70, .14);
+  text-align: left;
+}
+
+html[data-wb-theme='dark'] .wb-login-card { box-shadow: 0 24px 60px rgba(0, 0, 0, .35); }
+.wb-login-theme-toggle {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: inline-grid;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid var(--wb-border);
+  border-radius: 10px;
+  color: var(--wb-text);
+  background: var(--wb-surface-muted);
+  box-shadow: none;
+}
+.wb-login-theme-toggle svg { display: block; width: 20px; height: 20px; }
+.wb-login-theme-toggle:hover,
+.wb-login-theme-toggle:focus-visible {
+  border-color: color-mix(in srgb, var(--wb-action) 45%, var(--wb-border));
+  outline: 0;
+  color: var(--wb-action);
+  background: color-mix(in srgb, var(--wb-action) 8%, var(--wb-surface));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--wb-action) 14%, transparent);
+}
+.wb-login-badge { display: inline-flex; margin-bottom: 16px; padding: 5px 10px; border-radius: 999px; color: var(--wb-action); background: color-mix(in srgb, var(--wb-action) 10%, transparent); font-size: 11px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+html[data-wb-theme='dark'] .wb-login-badge { color: color-mix(in srgb, var(--wb-action) 48%, #fff); }
+.wb-login-card h2 { margin: 0; color: var(--wb-text); font-size: clamp(26px, 3vw, 32px); letter-spacing: -.035em; }
+.wb-login-subtitle { margin: 10px 0 24px; color: var(--wb-muted); }
+.wb-login-card[data-wb-remembered-user='true'] .wb-login-subtitle::after {
+  display: inline-flex;
+  margin-left: 8px;
+  padding: 3px 8px;
+  border: 1px solid color-mix(in srgb, var(--wb-success-ink) 28%, var(--wb-border));
+  border-radius: 999px;
+  color: var(--wb-success-ink);
+  background: color-mix(in srgb, var(--wb-success-ink) 10%, transparent);
+  content: 'Benutzer gemerkt';
+  font-size: 10px;
+  font-weight: 820;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+.wb-login-form-surface { text-align: left; }
+.wb-login-form-surface fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+.wb-login-form-surface .wb-auth-form { margin: 0; }
+.wb-login-form-surface .wb-auth-field { position: relative; margin-bottom: 17px; }
+.wb-login-form-surface label,
+.wb-login-form-surface label[data-wb-login-label] { display: block; margin: 0 0 7px; color: var(--wb-text); font-size: 12px; font-weight: 800; letter-spacing: .015em; }
+
+.wb-login-form-surface .form-control,
+.wb-login-form-surface input[type='text'],
+.wb-login-form-surface input[type='email'],
+.wb-login-form-surface input[type='password'] {
+  width: 100%;
+  min-height: 48px;
+  padding: 11px 13px;
+  border: 1px solid var(--wb-border);
+  border-radius: 10px;
+  color: var(--wb-text);
+  background: var(--wb-surface-muted);
+  box-shadow: inset 0 1px 1px rgba(16, 24, 40, .025);
+  transition: border-color .16s ease, box-shadow .16s ease, background .16s ease;
+}
+
+.wb-login-form-surface .form-control:focus,
+.wb-login-form-surface input:focus { border-color: var(--wb-action); outline: 0; background: var(--wb-surface); box-shadow: 0 0 0 3px color-mix(in srgb, var(--wb-action) 16%, transparent); }
+.wb-login-form-surface :is(.wb-auth-composite, .input-group) { display: flex; width: 100%; gap: 8px; }
+.wb-login-form-surface :is(.wb-auth-composite, .input-group) .form-control { width: 1%; flex: 1 1 auto; }
+.wb-login-form-surface :is(.wb-auth-addon, .input-group-btn) { display: flex; width: auto; }
+.wb-login-form-surface :is(.wb-auth-addon, .input-group-btn) :is(button, .btn) { min-height: 48px; border: 1px solid var(--wb-border); border-radius: 10px; color: var(--wb-text); background: var(--wb-surface-muted); }
+.wb-password-field { position: relative; }
+.wb-password-field .form-control { padding-right: 48px; }
+.wb-password-field .wb-password-toggle { position: absolute; right: 8px; bottom: 8px; display: inline-grid; width: 32px; height: 32px; padding: 0; place-items: center; border: 0; border-radius: 7px; color: var(--wb-muted); background: transparent; }
+.wb-password-field .wb-password-toggle:hover,
+.wb-password-field .wb-password-toggle:focus-visible { color: var(--wb-action); background: color-mix(in srgb, var(--wb-action) 8%, var(--wb-surface-muted)); }
+.wb-login-form-surface .wb-auth-code { height: 58px; text-align: center; font-size: 24px; font-weight: 800; letter-spacing: .24em; font-variant-numeric: tabular-nums; }
+.wb-auth-context-title { margin: 0 0 7px !important; font-size: 19px !important; }
+.wb-auth-context-copy { margin: 0 0 20px; color: var(--wb-muted); line-height: 1.55; }
+.wb-login-form-surface :is(.wb-auth-actions, .right) { display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 20px; }
+
+.wb-login-form-surface .wb-auth-primary,
+.wb-login-form-surface .btn-primary,
+.wb-login-form-surface input[type='submit'] { width: 100%; min-height: 46px; border: 1px solid var(--wb-action); border-radius: 10px; color: var(--wb-action-contrast) !important; background: var(--wb-action); font-weight: 800; box-shadow: 0 8px 18px color-mix(in srgb, var(--wb-action) 20%, transparent); }
+.wb-login-form-surface .wb-auth-primary:hover,
+.wb-login-form-surface .wb-auth-primary:focus-visible,
+.wb-login-form-surface .btn-primary:hover,
+.wb-login-form-surface input[type='submit']:hover { color: #fff; background: color-mix(in srgb, var(--wb-action) 84%, #000); }
+.wb-login-form-surface .wb-auth-secondary,
+.wb-login-form-surface .btn-link,
+.wb-login-form-surface .right .formbutton-default[type='button'] { width: auto; min-height: 38px; align-self: center; padding: 7px 10px; border: 0; color: var(--wb-action); background: transparent; box-shadow: none; font-weight: 750; }
+.wb-login-form-surface .wb-auth-secondary:hover,
+.wb-login-form-surface .btn-link:hover,
+.wb-login-form-surface .right .formbutton-default[type='button']:hover { color: color-mix(in srgb, var(--wb-action) 82%, #000); background: color-mix(in srgb, var(--wb-action) 8%, transparent); text-decoration: none; }
+.wb-login-form-surface input[type='submit'][disabled] { cursor: wait; opacity: .78; }
+.wb-login-form-surface .checkbox {
+  margin: 14px 0 0;
+  color: var(--wb-text);
+  font-size: 13px;
+}
+.wb-login-form-surface .checkbox input {
+  margin-right: 6px;
+  accent-color: var(--wb-action);
+}
+.wb-login-form-surface .wb-login-stay-option,
+.wb-login-form-surface .wb-login-remember-option {
+  padding: 12px 13px;
+  border: 1px solid color-mix(in srgb, var(--wb-action) 18%, var(--wb-border));
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--wb-action) 5%, var(--wb-surface-muted));
+}
+.wb-login-form-surface .wb-login-stay-option + .wb-login-remember-option { margin-top: 9px; }
+.wb-login-form-surface .wb-login-stay-option label,
+.wb-login-form-surface .wb-login-remember-option label {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+.wb-login-form-surface .wb-login-stay-option input,
+.wb-login-form-surface .wb-login-remember-option input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  flex: 0 0 auto;
+}
+.wb-login-form-surface .wb-login-stay-option small,
+.wb-login-form-surface .wb-login-remember-option small {
+  display: block;
+  margin: 7px 0 0 27px;
+  color: var(--wb-muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
+.wb-login-password-manager-hint {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin: 13px 0 0;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--wb-action) 18%, var(--wb-border));
+  border-radius: 12px;
+  color: var(--wb-muted);
+  background: color-mix(in srgb, var(--wb-action) 5%, var(--wb-surface-muted));
+}
+.wb-login-password-manager-hint span {
+  display: inline-grid;
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--wb-action-contrast);
+  background: var(--wb-action);
+  font-size: 11px;
+  font-weight: 900;
+}
+.wb-login-password-manager-hint small {
+  color: inherit;
+  font-size: 11px;
+  line-height: 1.45;
+}
+.wb-login-form-surface .alert,
+.wb-auth-feedback { display: flex; align-items: flex-start; gap: 10px; margin: 0 0 18px; padding: 11px 13px; border: 1px solid currentColor; border-radius: 10px; font-size: 13px; line-height: 1.45; }
+.wb-login-form-surface .alert .wb-feedback__icon,
+.wb-auth-feedback .wb-feedback__icon { display: inline-grid; width: 22px; height: 22px; min-width: 22px; flex: 0 0 22px; place-items: center; border-radius: 999px; color: currentColor; background: color-mix(in srgb, currentColor 12%, transparent); overflow: hidden; }
+.wb-login-form-surface .alert .wb-feedback__icon svg,
+.wb-auth-feedback .wb-feedback__icon svg { display: block; width: 14px !important; height: 14px !important; max-width: 14px !important; max-height: 14px !important; flex: 0 0 14px; fill: none !important; stroke: currentColor !important; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.wb-login-form-surface .alert :where(img, svg):not(.wb-feedback__icon svg) { display: inline-block !important; width: 22px !important; height: 22px !important; max-width: 22px !important; max-height: 22px !important; object-fit: contain; }
+.wb-login-form-surface .alert :where(path, polygon, polyline, rect, circle, line) { vector-effect: non-scaling-stroke; }
+.wb-login-form-surface #passBar { min-height: 8px; overflow: hidden; border-radius: 999px; background: var(--wb-surface-muted); box-shadow: inset 0 0 0 1px var(--wb-border); }
+.wb-login-form-surface #passText { display: block; margin-top: 6px; color: var(--wb-muted); font-size: 12px; }
+.wb-login-security { display: flex; align-items: flex-start; gap: 9px; margin-top: 22px; padding-top: 17px; border-top: 1px solid var(--wb-border); color: var(--wb-muted); font-size: 11px; line-height: 1.45; }
+.wb-login-security svg { width: 17px; height: 17px; flex: 0 0 auto; color: var(--wb-action); }
+.wb-login-disclaimer { margin-top: 18px; color: var(--wb-muted); }
+.wb-login-card[data-wb-auth-mode='otp'] .wb-login-badge::after { content: ' \00b7  2FA'; }
+.wb-login-card[data-wb-auth-mode='reset'] .wb-login-badge::after { content: ' \00b7  Wiederherstellung'; }
+.wb-login-is-submitting .wb-login-form-surface { opacity: .72; }
+.wb-login-is-submitting::after { position: absolute; inset: 0 0 auto; height: 3px; border-radius: 18px 18px 0 0; background: linear-gradient(90deg, transparent, var(--wb-action), transparent); background-size: 220% 100%; content: ''; animation: wb-auth-progress 1.15s linear infinite; }
+
+@keyframes wb-auth-progress { to { background-position: -220% 0; } }
+
+@media (max-width: 820px) {
+  .wb-login-shell { grid-template-columns: 1fr; }
+  .wb-login-hero { min-height: 300px; padding: 26px 24px 58px; }
+  .wb-login-hero__copy { margin-top: 38px; }
+  .wb-login-hero__copy h1 { font-size: 42px; }
+  .wb-login-hero__copy p,
+  .wb-login-hero__copy ul,
+  .wb-login-hero__footer { display: none; }
+  .wb-login-card { width: min(100% - 28px, 472px); margin: -42px auto 28px; padding: 30px 25px; }
+}
+
+@media (max-width: 520px) {
+  .wb-login-hero { min-height: 220px; padding: 22px 18px 50px; }
+  .wb-login-hero__logo { padding: 9px 12px; }
+  .wb-login-hero__logo img { width: 150px; max-height: 38px; }
+  .wb-login-hero__copy { margin-top: 28px; }
+  .wb-login-hero__copy h1 { max-width: 280px; font-size: 34px; }
+  .wb-login-card { width: calc(100% - 20px); margin-bottom: 18px; padding: 27px 19px 23px; border-radius: 15px; }
+  .wb-login-theme-toggle { top: 12px; right: 12px; }
+  .wb-login-form-surface .input-group { display: grid; }
+  .wb-login-form-surface .input-group .form-control,
+  .wb-login-form-surface .input-group-btn .btn { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wb-login-is-submitting::after { animation: none; }
+}
+
+/* WP-626: premium login error and saved-session polish.
+ *
+ * Legacy ISPConfig login errors can still inject image placeholders or
+ * unbounded SVGs. The authentication surface owns the complete feedback
+ * presentation so a failed login never becomes a giant black triangle again. */
+.wb-login-form-surface :where(.alert, .wb-auth-feedback) {
+  position: relative;
+  isolation: isolate;
+  min-height: 48px;
+  align-items: center;
+  padding: 12px 14px 12px 44px;
+  border-color: color-mix(in srgb, var(--wb-danger) 34%, var(--wb-border));
+  color: var(--wb-danger-ink);
+  background: color-mix(in srgb, var(--wb-danger) 8%, var(--wb-surface));
+  box-shadow: 0 10px 26px color-mix(in srgb, var(--wb-danger) 8%, transparent);
+}
+
+.wb-login-form-surface :where(.alert, .wb-auth-feedback)::before {
+  position: absolute;
+  top: 12px;
+  left: 14px;
+  display: inline-grid;
+  width: 20px;
+  height: 20px;
+  place-items: center;
+  border-radius: 999px;
+  color: var(--wb-action-contrast);
+  background: var(--wb-danger);
+  content: '!';
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.wb-login-form-surface :where(.alert, .wb-auth-feedback) :where(img, svg, object, picture) {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  max-width: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+}
+
+.wb-login-form-surface :where(.alert, .wb-auth-feedback) :where(canvas, iframe, embed, video) {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  max-width: 0 !important;
+  max-height: 0 !important;
+  overflow: hidden !important;
+}
+
+.wb-login-form-surface :where(.wb-login-stay-option, .wb-login-remember-option) {
+  border-color: color-mix(in srgb, var(--wb-border) 82%, transparent);
+  color: var(--wb-text);
+  background: color-mix(in srgb, var(--wb-surface-muted) 62%, var(--wb-surface));
+}
+
+.wb-login-form-surface :where(.wb-login-stay-option, .wb-login-remember-option):has(input:checked) {
+  border-color: color-mix(in srgb, var(--wb-success-ink) 24%, var(--wb-border));
+  background: color-mix(in srgb, var(--wb-success-ink) 8%, var(--wb-surface));
+}
+
+.wb-login-form-surface :where(.wb-login-stay-option, .wb-login-remember-option) input {
+  accent-color: var(--wb-action);
+}
+
+/* WP-638: login legacy error-box quarantine.
+ *
+ * Failed login responses still contain the historic `.box.box_error` fragment
+ * inside the modern alert. The old fragment can carry icon backgrounds or
+ * generated shapes that escape the login card. Keep the server message, but
+ * remove the legacy visual shell completely. */
+.wb-login-form-surface .alert :where(
+  .box,
+  .box_error,
+  .box_warning,
+  .box_success,
+  .box_info
+) {
+  display: block !important;
+  width: auto !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: inherit !important;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+.wb-login-form-surface .alert-danger > :where(.box.box_error, .box_error) {
+  display: contents !important;
+}
+
+.wb-login-form-surface .alert-danger > :where(svg, img, canvas, object, picture, iframe, embed, video),
+.wb-login-form-surface .alert-danger > :where(.alert-label, .alert-icon, .icon, [class*='icon']) {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+}
+
+.wb-login-form-surface .alert :where(
+  .box,
+  .box_error,
+  .box_warning,
+  .box_success,
+  .box_info
+)::before,
+.wb-login-form-surface .alert :where(
+  .box,
+  .box_error,
+  .box_warning,
+  .box_success,
+  .box_info
+)::after {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  content: none !important;
+}
+
+.wb-login-form-surface .alert-danger {
+  display: block !important;
+  padding-left: 58px !important;
+  overflow: hidden;
+}
+
+/* WP-649: direct legacy login feedback quarantine.
+ *
+ * Some failed-login responses expose the old `.box_error` surface directly
+ * instead of nesting it inside `.alert`. That path could still show a giant
+ * browser placeholder or SVG triangle. Treat every legacy feedback box inside
+ * the modern login form as text-only feedback and let Workbench draw the icon.
+ */
+.wb-login-form-surface > :where(
+  .box,
+  .box_error,
+  .box_warning,
+  .box_success,
+  .box_info
+),
+.wb-login-form-surface form > :where(
+  .box,
+  .box_error,
+  .box_warning,
+  .box_success,
+  .box_info
+) {
+  position: relative !important;
+  display: grid !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  min-height: 48px !important;
+  max-height: 120px !important;
+  align-items: center !important;
+  margin: 0 0 18px !important;
+  padding: 12px 14px 12px 44px !important;
+  overflow: hidden !important;
+  border: 1px solid color-mix(in srgb, var(--wb-danger) 34%, var(--wb-border)) !important;
+  border-radius: 14px !important;
+  color: var(--wb-danger-ink) !important;
+  background: color-mix(in srgb, var(--wb-danger) 8%, var(--wb-surface)) !important;
+  background-image: none !important;
+  box-shadow: 0 10px 26px color-mix(in srgb, var(--wb-danger) 8%, transparent) !important;
+  font-size: 13px !important;
+  font-weight: 650 !important;
+  line-height: 1.42 !important;
+  text-shadow: none !important;
+}
+
+.wb-login-form-surface > :where(.box, .box_error, .box_warning, .box_success, .box_info)::before,
+.wb-login-form-surface form > :where(.box, .box_error, .box_warning, .box_success, .box_info)::before {
+  position: absolute;
+  top: 13px;
+  left: 14px;
+  display: inline-grid !important;
+  width: 20px !important;
+  height: 20px !important;
+  place-items: center;
+  border-radius: 999px;
+  color: var(--wb-action-contrast);
+  background: var(--wb-danger);
+  content: '!' !important;
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.wb-login-form-surface > :where(.box, .box_error, .box_warning, .box_success, .box_info)::after,
+.wb-login-form-surface form > :where(.box, .box_error, .box_warning, .box_success, .box_info)::after,
+.wb-login-form-surface > :where(.box, .box_error, .box_warning, .box_success, .box_info) :where(img, svg, canvas, object, picture, iframe, embed, video, .icon, [class*='icon']),
+.wb-login-form-surface form > :where(.box, .box_error, .box_warning, .box_success, .box_info) :where(img, svg, canvas, object, picture, iframe, embed, video, .icon, [class*='icon']) {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  content: none !important;
+}
+
+/* WP-656: login feedback DOM normalization.
+ *
+ * CSS quarantine is the fallback. The login helper now also converts legacy
+ * alert/error markup into text-only feedback at runtime, so server-side error
+ * messages remain visible while old icon placeholders cannot flash or reserve
+ * oversized space before the modern card settles. */
+.wb-login-form-surface .wb-login-feedback-normalized {
+  position: relative !important;
+  display: block !important;
+  width: 100% !important;
+  min-height: 48px !important;
+  margin: 0 0 18px !important;
+  padding: 12px 14px 12px 44px !important;
+  overflow: hidden !important;
+  border: 1px solid color-mix(in srgb, var(--wb-danger) 34%, var(--wb-border)) !important;
+  border-radius: 14px !important;
+  color: var(--wb-danger-ink) !important;
+  background: color-mix(in srgb, var(--wb-danger) 8%, var(--wb-surface)) !important;
+  background-image: none !important;
+  box-shadow: 0 10px 26px color-mix(in srgb, var(--wb-danger) 8%, transparent) !important;
+  max-height: none !important;
+  white-space: normal !important;
+}
+
+.wb-login-form-surface .wb-login-feedback-normalized::before {
+  position: absolute;
+  top: 13px;
+  left: 14px;
+  display: inline-grid !important;
+  width: 20px !important;
+  height: 20px !important;
+  place-items: center;
+  border-radius: 999px;
+  color: var(--wb-action-contrast);
+  background: var(--wb-danger);
+  content: '!' !important;
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.wb-login-form-surface .wb-login-feedback-text {
+  display: block;
+  min-width: 0;
+  color: inherit;
+  font: inherit;
+}
+
+/* WP-717: login feedback hard stop.
+ *
+ * Failed-login responses may contain arbitrary historic HTML while the page is
+ * still settling. The normalized feedback node is now a strict text-only
+ * region: only `.wb-login-feedback-text` may consume space. This prevents
+ * oversized placeholder artwork, legacy SVGs or broken media boxes from
+ * flashing inside the premium login card.
+ */
+.wb-login-form-surface .wb-login-feedback-normalized > :not(.wb-login-feedback-text),
+.wb-login-form-surface .wb-login-feedback-normalized :where(svg, img, canvas, object, picture, iframe, embed, video, .icon, [class*='icon'], [style*='clip-path'], [style*='polygon']) {
+  display: none !important;
+  inline-size: 0 !important;
+  block-size: 0 !important;
+  min-inline-size: 0 !important;
+  min-block-size: 0 !important;
+  max-inline-size: 0 !important;
+  max-block-size: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+  visibility: hidden !important;
+}
+
+.wb-login-form-surface .wb-login-feedback-normalized,
+.wb-login-form-surface :where(.alert, .box_error, .box_warning, .box_success, .box_info) {
+  contain: layout paint;
+}
+
+.wb-login-form-surface .wb-login-feedback-normalized .wb-login-feedback-text {
+  position: relative;
+  z-index: 1;
+  display: block !important;
+  inline-size: 100%;
+  max-inline-size: 100%;
+  overflow-wrap: anywhere;
+}
+
+.wb-login-form-surface .wb-login-feedback-normalized::before {
+  z-index: 2;
+}
+
+/* WP-731: final login demo finish.
+ *
+ * This is the authentication authority layer. The login page should now feel
+ * intentionally designed rather than like old ISPConfig form fragments inside
+ * a new shell: normal options are calm, danger is reserved for failed login,
+ * password-manager guidance is informational, and mobile receives its own
+ * compact composition.
+ */
+body.wb-login-page {
+  --wb-login-option-border: color-mix(in srgb, var(--wb-text-muted) 12%, var(--wb-border));
+  --wb-login-option-bg: color-mix(in srgb, var(--wb-surface-muted) 72%, var(--wb-surface));
+  --wb-login-option-active: color-mix(in srgb, var(--wb-success-ink) 8%, var(--wb-surface));
+}
+
+.wb-login-card {
+  overflow: hidden;
+}
+
+.wb-login-badge {
+  color: color-mix(in srgb, var(--wb-action) 72%, var(--wb-text)) !important;
+  background: color-mix(in srgb, var(--wb-action) 7%, var(--wb-surface)) !important;
+}
+
+.wb-login-form-surface .form-control,
+.wb-login-form-surface input[type='text'],
+.wb-login-form-surface input[type='email'],
+.wb-login-form-surface input[type='password'] {
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--wb-surface-muted) 78%, var(--wb-surface));
+}
+
+.wb-login-form-surface .form-control:focus,
+.wb-login-form-surface input:focus {
+  border-color: color-mix(in srgb, var(--wb-action) 52%, var(--wb-border));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--wb-action) 12%, transparent);
+}
+
+.wb-login-form-surface .wb-login-stay-option,
+.wb-login-form-surface .wb-login-remember-option,
+.wb-login-password-manager-hint {
+  border-color: var(--wb-login-option-border) !important;
+  background: var(--wb-login-option-bg) !important;
+  box-shadow: none !important;
+}
+
+.wb-login-form-surface :where(.wb-login-stay-option, .wb-login-remember-option):has(input:checked) {
+  border-color: color-mix(in srgb, var(--wb-success-ink) 28%, var(--wb-border)) !important;
+  background: var(--wb-login-option-active) !important;
+}
+
+.wb-login-form-surface .wb-login-stay-option input,
+.wb-login-form-surface .wb-login-remember-option input {
+  inline-size: 18px;
+  block-size: 18px;
+  border-radius: 6px;
+  accent-color: var(--wb-success-ink);
+}
+
+.wb-login-password-manager-hint span {
+  color: #fff !important;
+  background: var(--wb-success-ink) !important;
+}
+
+.wb-login-form-surface .wb-auth-primary,
+.wb-login-form-surface .btn-primary,
+.wb-login-form-surface input[type='submit'] {
+  min-height: 52px;
+  border-radius: 14px;
+  letter-spacing: -.01em;
+}
+
+.wb-login-form-surface .wb-auth-secondary,
+.wb-login-form-surface .btn-link,
+.wb-login-form-surface .right .formbutton-default[type='button'] {
+  justify-self: center;
+  border-radius: 999px;
+}
+
+.wb-login-form-surface .wb-login-feedback-normalized,
+.wb-login-form-surface :where(.alert, .box_error, .box_warning, .box_success, .box_info) {
+  border-radius: 14px !important;
+}
+
+html[data-wb-theme='dark'] body.wb-login-page {
+  --wb-login-option-border: color-mix(in srgb, #fff 10%, var(--wb-border));
+  --wb-login-option-bg: color-mix(in srgb, var(--wb-surface-muted) 86%, #fff 1%);
+  --wb-login-option-active: color-mix(in srgb, var(--wb-success-ink) 10%, var(--wb-surface));
+}
+
+html[data-wb-theme='dark'] .wb-login-badge {
+  color: color-mix(in srgb, var(--wb-action) 35%, #fff) !important;
+}
+
+@media (max-width: 820px) {
+  .wb-login-shell {
+    min-height: 100svh;
+    background:
+      radial-gradient(circle at 0 0, color-mix(in srgb, var(--wb-action) 8%, transparent), transparent 36%),
+      var(--wb-bg);
+  }
+
+  .wb-login-hero {
+    min-height: 238px;
+    justify-content: start;
+    padding: 24px 20px 70px;
+  }
+
+  .wb-login-hero__logo {
+    max-width: 186px;
+    padding: 10px 13px;
+    border-radius: 14px;
+  }
+
+  .wb-login-hero__copy {
+    margin-top: 34px;
+  }
+
+  .wb-login-hero__copy h1 {
+    max-width: 420px;
+    font-size: clamp(34px, 8vw, 48px);
+  }
+
+  .wb-login-card {
+    width: min(100% - 28px, 480px);
+    margin-top: -58px;
+    border-radius: 24px;
+  }
+}
+
+@media (max-width: 520px) {
+  .wb-login-hero {
+    min-height: 186px;
+    padding: 18px 14px 54px;
+  }
+
+  .wb-login-hero__copy {
+    display: none;
+  }
+
+  .wb-login-card {
+    width: calc(100% - 18px);
+    margin-top: -42px;
+    padding: 24px 18px 22px;
+    border-radius: 22px;
+  }
+
+  .wb-login-card h2 {
+    padding-right: 46px;
+    font-size: 28px;
+  }
+
+  .wb-login-subtitle {
+    margin-bottom: 20px;
+  }
+
+  .wb-login-form-surface .wb-login-stay-option,
+  .wb-login-form-surface .wb-login-remember-option,
+  .wb-login-password-manager-hint {
+    padding: 11px 12px;
+  }
+}
+
+/* WP-758: login authority pass.
+ *
+ * The failed-login surface is text-only. If a historic template manages to
+ * inject a placeholder, SVG or browser media fallback before the login helper
+ * normalizes the DOM, it is clipped to zero and cannot reserve visual space.
+ */
+.wb-login-form-surface :where(.alert, .box, .box_error, .box_warning, .box_success, .box_info) {
+  max-block-size: none !important;
+  overflow: hidden !important;
+}
+
+.wb-login-form-surface :where(.alert, .box, .box_error, .box_warning, .box_success, .box_info) > :where(
+  svg,
+  img,
+  object,
+  picture,
+  canvas,
+  iframe,
+  embed,
+  video,
+  [class*='icon'],
+  [style*='clip-path'],
+  [style*='polygon']
+) {
+  position: absolute !important;
+  inset: auto !important;
+  display: block !important;
+  inline-size: 0 !important;
+  block-size: 0 !important;
+  min-inline-size: 0 !important;
+  min-block-size: 0 !important;
+  max-inline-size: 0 !important;
+  max-block-size: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}

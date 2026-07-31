@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <style id='workbench-branding-vars'>:root { --wb-accent: <tmpl_var name='workbench_accent_color'>; --wb-action: <tmpl_var name='workbench_accent_color'>; --wb-dark-logo: url('<tmpl_var name="workbench_dark_logo_url">'); }</style>
+  <meta charset='utf-8' />
+
+  <title><tmpl_var name="company_name"><tmpl_var name="app_title"></title>
+
+  <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=yes'>
+  <meta name='description' lang='en' content='' />
+  <meta name='keywords' lang='en' content='' />
+  <meta name='workbench-language-probe' content="<tmpl_var name='login_txt'>|<tmpl_var name='username_txt'>" />
+
+ <link rel='apple-touch-icon' sizes='180x180' href='<tmpl_var name="workbench_favicon_url">'>
+ <link rel='icon' type='image/png' sizes='32x32' href='<tmpl_var name="workbench_favicon_url">'>
+ <link rel='icon' type='image/png' sizes='16x16' href='<tmpl_var name="workbench_favicon_url">'>
+ <link rel='manifest' href='/themes/heritage/assets/favicon/site.webmanifest'>
+ <link rel='mask-icon' href='<tmpl_var name="workbench_favicon_url">' color='<tmpl_var name="workbench_accent_color">'>
+ <link rel='shortcut icon' href='<tmpl_var name="workbench_favicon_url">'>
+ <meta name='msapplication-TileColor' content='<tmpl_var name="workbench_accent_color">'>
+ <meta name='msapplication-config' content='/themes/heritage/assets/favicon/browserconfig.xml'>
+ <meta name='theme-color' content='<tmpl_var name="workbench_accent_color">'>
+ <script src='../themes/heritage/assets/javascripts/workbench-early.js?ver=1'></script>
+
+  <link rel='stylesheet' href='../themes/heritage/assets/stylesheets/workbench.css?ver=146' />
+  <link rel='stylesheet' href='../themes/heritage/assets/stylesheets/workbench-auth.css?ver=19' />
+  <link rel='stylesheet' href='../themes/heritage/assets/stylesheets/heritage-tokens.css?ver=1' />
+  <link rel='stylesheet' href='../themes/heritage/assets/stylesheets/heritage-auth.css?ver=3' />
+</head>
+
+<body class="wb-login-page">
+<main class="wb-login-shell">
+  <aside class="wb-login-hero">
+    <div class="wb-login-hero__logo"><img src="../themes/heritage/assets/images/ispconfig-workbench-logo.svg" alt="ISPConfig"></div>
+    <div class="wb-login-hero__copy">
+      <div class="wb-login-hero__kicker" data-wb-i18n-de="Sicherer Zugang" data-wb-i18n-en="Secure access">Sicherer Zugang</div>
+      <h1 aria-label="Deine Server. Ein klarer Einstieg." data-wb-i18n-aria-label-de="Deine Server. Ein klarer Einstieg." data-wb-i18n-aria-label-en="Your servers. A clear start."><span data-wb-i18n-de="Deine Server." data-wb-i18n-en="Your servers.">Deine Server.</span><br><span data-wb-i18n-de="Ein klarer" data-wb-i18n-en="A clear">Ein klarer</span><br><span data-wb-i18n-de="Einstieg." data-wb-i18n-en="start.">Einstieg.</span></h1>
+      <p data-wb-i18n-de="Ein moderner, fokussierter Einstieg in deine zentrale Serververwaltung." data-wb-i18n-en="A modern, focused entry point to your central server management.">Ein moderner, fokussierter Einstieg in deine zentrale Serververwaltung.</p>
+      <ul>
+        <li data-wb-i18n-de="Zentrale Verwaltung deiner Dienste" data-wb-i18n-en="Central management of your services">Zentrale Verwaltung deiner Dienste</li>
+        <li data-wb-i18n-de="Sichere Anmeldung und geschützte Sitzung" data-wb-i18n-en="Secure sign-in and protected session">Sichere Anmeldung und geschützte Sitzung</li>
+        <li data-wb-i18n-de="Optimiert für Desktop, Tablet und Smartphone" data-wb-i18n-en="Optimized for desktop, tablet and smartphone">Optimiert für Desktop, Tablet und Smartphone</li>
+      </ul>
+    </div>
+    <div class="wb-login-hero__footer">
+      <span class="wb-login-hero__status" aria-hidden="true"></span>
+      <small><strong>ISPConfig Heritage</strong> &middot; <span data-wb-i18n-de="sichere Serververwaltung" data-wb-i18n-en="secure server management">sichere Serververwaltung</span></small>
+    </div>
+  </aside>
+  <section class="wb-login-card" aria-labelledby="wb-login-title">
+    <button type="button" class="wb-theme-toggle wb-login-theme-toggle" aria-label="Zum dunklen Design wechseln" data-wb-i18n-aria-label-de="Zum dunklen Design wechseln" data-wb-i18n-aria-label-en="Switch to dark theme"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.7 15.3A8.5 8.5 0 0 1 8.7 3.3 8.5 8.5 0 1 0 20.7 15.3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <div class="wb-login-badge">ISPConfig Heritage</div>
+    <h2 id="wb-login-title" data-wb-i18n-de="Willkommen zurück" data-wb-i18n-en="Welcome back">Willkommen zurück</h2>
+    <p class="wb-login-subtitle" data-wb-i18n-de="Melde dich sicher an deiner Serververwaltung an." data-wb-i18n-en="Sign in securely to your server management.">Melde dich sicher an deiner Serververwaltung an.</p>
+    <div class="wb-login-form-surface">
+      <tmpl_dyninclude name="content_tpl">
+    </div>
+    <div class="wb-login-security" aria-label="Sicherheitshinweis" data-wb-i18n-aria-label-de="Sicherheitshinweis" data-wb-i18n-aria-label-en="Security notice">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5.5 5.8v5.1c0 4.3 2.7 8.1 6.5 9.6 3.8-1.5 6.5-5.3 6.5-9.6V5.8L12 3Z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m9.2 12 1.8 1.8 3.8-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span data-wb-i18n-de="Zugangsdaten werden nur an diese ISPConfig-Instanz übertragen." data-wb-i18n-en="Credentials are sent only to this ISPConfig instance.">Zugangsdaten werden nur an diese ISPConfig-Instanz übertragen.</span>
+    </div>
+    <div class="wb-login-disclaimer"><small><tmpl_var name="custom_login"></small></div>
+  </section>
+</main>
+  <script src='../themes/heritage/assets/javascripts/workbench-feedback.js?ver=9'></script>
+  <script src='../themes/heritage/assets/javascripts/workbench-login.js?ver=8'></script>
+  <script src='../themes/heritage/assets/javascripts/workbench-theme.js?ver=14'></script>
+  <script src='../themes/heritage/assets/javascripts/heritage-runtime.js?ver=1'></script>
+</body>
+
+</html>

@@ -1,0 +1,263 @@
+<!-- WP-965: native Workbench operations surface; controller contract unchanged. -->
+<tmpl_if name="workbench_logo_management">
+  <section class="wb-branding-manager" id="workbench-branding-manager" data-wb-branding-editor
+    data-endpoint-name="brandingAction"
+    data-light-max-bytes="46080"
+    data-branding-max-bytes="1048576"
+    data-csrf-id="{tmpl_var name='workbench_logo_csrf_id'}"
+    data-csrf-key="{tmpl_var name='workbench_logo_csrf_key'}"
+    data-saving="{tmpl_var name='workbench_branding_saving_txt'}"
+    data-resetting="{tmpl_var name='workbench_branding_resetting_txt'}"
+    data-saved="{tmpl_var name='workbench_branding_saved_txt'}"
+    data-reset="{tmpl_var name='workbench_branding_reset_complete_txt'}"
+    data-default-state="{tmpl_var name='workbench_logo_default_state_txt'}"
+    data-custom-state="{tmpl_var name='workbench_logo_custom_state_txt'}"
+    data-asset-default="{tmpl_var name='workbench_branding_asset_default_txt'}"
+    data-asset-custom="{tmpl_var name='workbench_branding_asset_custom_txt'}"
+    data-light-type-error="{tmpl_var name='workbench_logo_type_error_txt'}"
+    data-light-size-error="{tmpl_var name='workbench_logo_size_error_txt'}"
+    data-branding-type-error="{tmpl_var name='workbench_branding_type_error_txt'}"
+    data-branding-size-error="{tmpl_var name='workbench_branding_size_error_txt'}"
+    data-request-error="{tmpl_var name='workbench_logo_request_error_txt'}"
+    data-default-light-logo="{tmpl_var name='workbench_logo_default_src'}"
+    data-default-dark-logo="{tmpl_var name='workbench_default_dark_logo_url'}"
+    data-default-favicon="{tmpl_var name='workbench_default_favicon_url'}">
+    <header class="wb-branding-manager__header">
+      <div>
+        <p class="wb-branding-manager__eyebrow">{tmpl_var name='workbench_branding_eyebrow_txt'}</p>
+        <h3>{tmpl_var name='workbench_branding_title_txt'}</h3>
+        <p>{tmpl_var name='workbench_branding_intro_txt'}</p>
+      </div>
+      <span class="wb-branding-manager__state" data-wb-branding-state>{tmpl_var name='workbench_logo_state_txt'}</span>
+    </header>
+    <div class="wb-branding-manager__grid">
+      <label class="wb-branding-manager__asset" for="workbench-light-logo-file">
+        <span>{tmpl_var name='workbench_light_logo_txt'}</span>
+        <strong class="wb-branding-manager__asset-state" data-wb-light-state>{tmpl_var name='workbench_light_logo_asset_state_txt'}</strong>
+        <img class="wb-branding-manager__logo-preview" data-wb-light-preview src="{tmpl_var name='workbench_logo_src'}" alt="{tmpl_var name='workbench_logo_current_alt_txt'}">
+        <input id="workbench-light-logo-file" name="light_logo_file" type="file" class="no-page-form-change" accept="image/png,image/jpeg,image/webp">
+        <small>{tmpl_var name='workbench_logo_hint_txt'}</small>
+      </label>
+      <label class="wb-branding-manager__asset" for="workbench-dark-logo-file">
+        <span>{tmpl_var name='workbench_dark_logo_txt'}</span>
+        <strong class="wb-branding-manager__asset-state" data-wb-dark-state>{tmpl_var name='workbench_dark_logo_asset_state_txt'}</strong>
+        <img class="wb-branding-manager__logo-preview" data-wb-dark-preview src="{tmpl_var name='workbench_dark_logo_url'}" alt="">
+        <input id="workbench-dark-logo-file" name="dark_logo_file" type="file" class="no-page-form-change" accept="image/png,image/jpeg,image/webp">
+        <small>{tmpl_var name='workbench_dark_logo_hint_txt'}</small>
+      </label>
+      <label class="wb-branding-manager__asset" for="workbench-favicon-file">
+        <span>{tmpl_var name='workbench_favicon_txt'}</span>
+        <strong class="wb-branding-manager__asset-state" data-wb-favicon-state>{tmpl_var name='workbench_favicon_asset_state_txt'}</strong>
+        <img class="wb-branding-manager__favicon-preview" data-wb-favicon-preview src="{tmpl_var name='workbench_favicon_url'}" alt="">
+        <input id="workbench-favicon-file" name="favicon_file" type="file" class="no-page-form-change" accept="image/png,image/x-icon,image/vnd.microsoft.icon">
+        <small>{tmpl_var name='workbench_favicon_hint_txt'}</small>
+      </label>
+      <label class="wb-branding-manager__color" for="workbench-accent-color">
+        <span>{tmpl_var name='workbench_accent_color_txt'}</span>
+        <strong class="wb-branding-manager__asset-state" data-wb-accent-state>{tmpl_var name='workbench_accent_asset_state_txt'}</strong>
+        <span class="wb-branding-manager__color-control">
+          <input id="workbench-accent-color" name="accent_color" type="color" value="{tmpl_var name='workbench_accent_color'}">
+          <code data-wb-accent-value>{tmpl_var name='workbench_accent_color'}</code>
+        </span>
+        <small>{tmpl_var name='workbench_accent_color_hint_txt'}</small>
+      </label>
+    </div>
+    <footer class="wb-branding-manager__footer">
+      <p class="wb-branding-manager__status" data-wb-branding-status role="status" aria-live="polite"></p>
+      <div class="wb-branding-manager__actions">
+        <button class="formbutton-success" type="button" data-wb-branding-save>{tmpl_var name='workbench_branding_save_txt'}</button>
+        <button class="formbutton-default" type="button" data-wb-branding-reset>{tmpl_var name='workbench_branding_reset_txt'}</button>
+      </div>
+    </footer>
+  </section>
+</tmpl_if>
+<section class="wb-settings-section">
+  <header class="wb-settings-section__header">
+    <h3 data-wb-i18n-de="Identität der Oberfläche" data-wb-i18n-en="Interface identity">{tmpl_var name='workbench_settings_identity_title_txt'}</h3>
+    <p data-wb-i18n-de="Firmenname und öffentliche Anmeldeinformationen konfigurieren." data-wb-i18n-en="Configure the company name and the public login information.">{tmpl_var name='workbench_settings_identity_intro_txt'}</p>
+  </header>
+<div class="wb-field-group">
+  <label for="page_title" >{tmpl_var name='company_name_txt'}</label>
+  <div class="wb-field-body"><input type="text" name="company_name" id="company_name" value="{tmpl_var name='company_name'}" size="" maxlength="" class="form-control" /></div>
+</div>
+<div class="wb-field-group">
+  <label for="page_title" >{tmpl_var name='custom_login_text_txt'}</label>
+  <div class="wb-field-body"><input type="text" name="custom_login_text" id="custom_login_text" value="{tmpl_var name='custom_login_text'}" size="" maxlength="" class="form-control" /></div>
+</div>
+<div class="wb-field-group">
+  <label for="page_title" >{tmpl_var name='custom_login_link_txt'}</label>
+  <div class="wb-field-body"><input type="text" name="custom_login_link" id="custom_login_link" value="{tmpl_var name='custom_login_link'}" size="" maxlength="" class="form-control" /></div>
+</div>
+</section>
+<details class="wb-settings-section wb-settings-section--compatibility">
+  <summary>
+    <span data-wb-i18n-de="Kompatibilitätseinstellungen" data-wb-i18n-en="Compatibility settings">{tmpl_var name='workbench_settings_legacy_title_txt'}</span>
+    <small data-wb-i18n-de="Ältere Dashboard-Feeds und die Platzierung der Widgets." data-wb-i18n-en="Legacy dashboard feeds and dashlet placement.">{tmpl_var name='workbench_settings_legacy_intro_txt'}</small>
+  </summary>
+  <div class="wb-settings-section__body">
+<div class="wb-field-group">
+  <label for="dashboard_atom_url_admin" >{tmpl_var name='dashboard_atom_url_admin_txt'}</label>
+  <div class="wb-field-body"><input type="text" name="dashboard_atom_url_admin" id="dashboard_atom_url_admin" value="{tmpl_var name='dashboard_atom_url_admin'}" size="" maxlength="" class="form-control" /></div>
+</div>
+<div class="wb-field-group">
+  <label for="dashboard_atom_url_reseller" >{tmpl_var name='dashboard_atom_url_reseller_txt'}</label>
+  <div class="wb-field-body"><input type="text" name="dashboard_atom_url_reseller" id="dashboard_atom_url_reseller" value="{tmpl_var name='dashboard_atom_url_reseller'}" size="" maxlength="" class="form-control" /></div>
+</div>
+<div class="wb-field-group">
+  <label for="dashboard_atom_url_client" >{tmpl_var name='dashboard_atom_url_client_txt'}</label>
+  <div class="wb-field-body"><input type="text" name="dashboard_atom_url_client" id="dashboard_atom_url_client" value="{tmpl_var name='dashboard_atom_url_client'}" size="" maxlength="" class="form-control" /></div>
+</div>
+<div class="wb-field-group">
+  <label for="admin_dashlets_left" >{tmpl_var name='admin_dashlets_left_txt'}</label>
+  <div class="wb-field-body"><input type="text" name="admin_dashlets_left" id="admin_dashlets_left" value="{tmpl_var name='admin_dashlets_left'}" size="" maxlength="" class="form-control" />{tmpl_var name='available_dashlets_note_txt'} {tmpl_var name="available_dashlets_txt"}</div>
+</div>
+<div class="wb-field-group">
+  <label for="admin_dashlets_right" >{tmpl_var name='admin_dashlets_right_txt'}</label>
+  <div class="wb-field-body"><input type="text" name="admin_dashlets_right" id="admin_dashlets_right" value="{tmpl_var name='admin_dashlets_right'}" size="" maxlength="" class="form-control" />{tmpl_var name='available_dashlets_note_txt'} {tmpl_var name="available_dashlets_txt"}
+  </div>
+</div>
+<div class="wb-field-group">
+  <label for="reseller_dashlets_left" >{tmpl_var name='reseller_dashlets_left_txt'}</label>
+  <div class="wb-field-body"><input type="text" name="reseller_dashlets_left" id="reseller_dashlets_left" value="{tmpl_var name='reseller_dashlets_left'}" size="" maxlength="" class="form-control" />{tmpl_var name='available_dashlets_note_txt'} {tmpl_var name="available_dashlets_txt"}
+  </div>
+</div>
+<div class="wb-field-group">
+  <label for="reseller_dashlets_right" >{tmpl_var name='reseller_dashlets_right_txt'}</label>
+  <div class="wb-field-body"><input type="text" name="reseller_dashlets_right" id="reseller_dashlets_right" value="{tmpl_var name='reseller_dashlets_right'}" size="" maxlength="" class="form-control" />{tmpl_var name='available_dashlets_note_txt'} {tmpl_var name="available_dashlets_txt"}
+  </div>
+</div>
+<div class="wb-field-group">
+  <label for="client_dashlets_left" >{tmpl_var name='client_dashlets_left_txt'}</label>
+  <div class="wb-field-body"><input type="text" name="client_dashlets_left" id="client_dashlets_left" value="{tmpl_var name='client_dashlets_left'}" size="" maxlength="" class="form-control" />{tmpl_var name='available_dashlets_note_txt'} {tmpl_var name="available_dashlets_txt"}
+  </div>
+</div>
+<div class="wb-field-group">
+  <label for="client_dashlets_right" >{tmpl_var name='client_dashlets_right_txt'}</label>
+  <div class="wb-field-body"><input type="text" name="client_dashlets_right" id="client_dashlets_right" value="{tmpl_var name='client_dashlets_right'}" size="" maxlength="" class="form-control" />{tmpl_var name='available_dashlets_note_txt'} {tmpl_var name="available_dashlets_txt"}
+  </div>
+</div>
+  </div>
+</details>
+<section class="wb-settings-section">
+  <header class="wb-settings-section__header">
+    <h3 data-wb-i18n-de="Verhalten der Oberfläche" data-wb-i18n-en="Interface behavior">{tmpl_var name='workbench_settings_behavior_title_txt'}</h3>
+    <p data-wb-i18n-de="Navigationswarnungen und Erweiterungen der Oberfläche konfigurieren." data-wb-i18n-en="Configure navigation warnings and interface enhancements.">{tmpl_var name='workbench_settings_behavior_intro_txt'}</p>
+  </header>
+<div class="wb-field-group">
+  <label >{tmpl_var name='tab_change_discard_txt'}</label>
+  <div class="wb-field-body">
+    {tmpl_var name='tab_change_discard'}
+  </div>
+</div>
+<div class="wb-field-group">
+  <label >{tmpl_var name='tab_change_warning_txt'}</label>
+  <div class="wb-field-body">
+    {tmpl_var name='tab_change_warning'}<br/>{tmpl_var name='tab_change_warning_note_txt'}
+  </div>
+</div>
+<div class="wb-field-group">
+  <label >{tmpl_var name='use_loadindicator_txt'}</label>
+  <div class="wb-field-body">
+    {tmpl_var name='use_loadindicator'}<br/>{tmpl_var name='f5_to_reload_js_txt'}
+  </div>
+</div>
+<div class="wb-field-group">
+  <label >{tmpl_var name='use_combobox_txt'}</label>
+  <div class="wb-field-body">
+    {tmpl_var name='use_combobox'}<br/>{tmpl_var name='f5_to_reload_js_txt'}
+  </div>
+</div>
+<div class="wb-field-group">
+  <label >{tmpl_var name='show_support_messages_txt'}</label>
+  <div class="wb-field-body">
+    {tmpl_var name='show_support_messages'}
+  </div>
+</div>
+<div class="wb-field-group">
+  <label >{tmpl_var name='show_delete_on_forms_txt'}</label>
+  <div class="wb-field-body">
+    {tmpl_var name='show_delete_on_forms'}
+  </div>
+</div>
+</section>
+<section class="wb-settings-section">
+  <header class="wb-settings-section__header"><h3 data-wb-i18n-de="Kundennummerierung" data-wb-i18n-en="Customer numbering">{tmpl_var name='workbench_settings_customer_title_txt'}</h3></header>
+<div class="wb-field-group">
+  <label for="customer_no_template" >{tmpl_var name='customer_no_template_txt'}</label>
+  <div class="wb-field-body"><input type="text" name="customer_no_template" id="customer_no_template" value="{tmpl_var name='customer_no_template'}" class="form-control" /></div>
+</div>
+<div class="wb-field-group">
+  <label for="customer_no_start" >{tmpl_var name='customer_no_start_txt'}</label>
+  <div class="wb-field-body"><input type="text" name="customer_no_start" id="customer_no_start" value="{tmpl_var name='customer_no_start'}" class="form-control" /></div>
+</div>
+<div class="wb-field-group">
+  <label for="customer_no_counter" >{tmpl_var name='customer_no_counter_txt'}</label>
+  <div class="wb-field-body"><input type="text" name="customer_no_counter" id="customer_no_counter" value="{tmpl_var name='customer_no_counter'}" class="form-control" /></div>
+</div>
+</section>
+<section class="wb-settings-section">
+  <header class="wb-settings-section__header"><h3 data-wb-i18n-de="Sitzung und Sicherheit" data-wb-i18n-en="Session and security">{tmpl_var name='workbench_settings_security_title_txt'}</h3></header>
+<div class="wb-field-group">
+  <label for="session_timeout" >{tmpl_var name='session_timeout_txt'}</label>
+  <div class="wb-field-body"><input type="text" name="session_timeout" id="session_timeout" value="{tmpl_var name='session_timeout'}" class="form-control" /></div>
+</div>
+<div class="wb-field-group">
+  <label >{tmpl_var name='session_allow_endless_txt'}</label>
+  <div class="wb-field-body">
+    {tmpl_var name='session_allow_endless'}
+  </div>
+</div>
+<div class="wb-field-group">
+  <label for="min_password_length" >{tmpl_var name='min_password_length_txt'}</label>
+  <div class="wb-field-body"><input type="text" name="min_password_length" id="min_password_length" value="{tmpl_var name='min_password_length'}" class="form-control" /></div>
+</div>
+<div class="wb-field-group">
+  <label for="min_password_strength" >{tmpl_var name='min_password_strength_txt'}</label>
+  <div class="wb-field-body"><select name="min_password_strength" id="min_password_strength" class="form-control">
+    {tmpl_var name='min_password_strength'}
+    </select>
+  </div>
+</div>
+<div class="wb-field-group">
+  <label >{tmpl_var name='maintenance_mode_txt'}</label>
+  <div class="wb-field-body">
+    {tmpl_var name='maintenance_mode'}
+  </div>
+</div>
+<div class="wb-field-group">
+  <label >{tmpl_var name='maintenance_mode_exclude_ips_txt'}</label>
+  <div class="wb-field-body">
+    <input type="text" name="maintenance_mode_exclude_ips" id="maintenance_mode_exclude_ips" value="{tmpl_var name='maintenance_mode_exclude_ips'}" class="form-control" />
+  </div>
+</div>
+<div class="wb-field-group">
+  <label for="force_password_change_days" >{tmpl_var name='force_password_change_days_txt'}</label>
+  <div class="wb-field-body"><input type="text" name="force_password_change_days" id="force_password_change_days" value="{tmpl_var name='force_password_change_days'}" class="form-control" /></div>
+</div>
+</section>
+<tmpl_if name="msg">
+  <div id="OKMsg">
+    <p>
+      <tmpl_var name="msg">
+    </p>
+  </div>
+</tmpl_if>
+<tmpl_if name="error">
+  <div class='wb-alert wb-alert--danger'>
+    <div class='alert-label'>
+      <strong><tmpl_var name="error_txt"></strong>
+      </div>
+    <div class='alert-content'>
+      <ul class="wb-clean-list">
+        <tmpl_var name="error">
+      </ul>
+    </div>
+  </div>
+</tmpl_if>
+<input type="hidden" name="id" id="id" value="{tmpl_var name='id'}">
+<div class="wb-form-actions">
+  <div class="wb-form-actions__primary">
+    <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="admin/system_config_edit.php">{tmpl_var name='btn_save_txt'}</button>
+    <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="admin/server_list.php" data-load-content="admin/server_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+  </div>
+</div>

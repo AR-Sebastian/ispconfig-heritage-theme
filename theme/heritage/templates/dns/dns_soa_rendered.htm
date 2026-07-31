@@ -1,0 +1,13 @@
+<!-- WP-969: native Workbench rendered-zone surface; controller contract unchanged. -->
+<section class="wb-content-panel wb-content-panel--dns-zone" aria-live="polite">
+    {tmpl_if name='rendered_zone'}
+        <p class="wb-section-heading">{tmpl_var name='rendered_zone_txt'}</p>
+        <pre class="wb-code-surface">{tmpl_var name='rendered_zone'}</pre>
+    {tmpl_else}
+        <div class="wb-alert wb-alert--info">{tmpl_var name='rendered_zone_unavailable_txt'}</div>
+    {/tmpl_if}
+</section>
+
+<div class="wb-form-hidden">
+    <input type="hidden" name="id" value="{tmpl_var name='id'}">
+</div>

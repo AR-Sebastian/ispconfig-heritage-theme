@@ -1,0 +1,48 @@
+<!-- WP-965: native Workbench operations surface; controller contract unchanged. -->
+            <div class="wb-field-group">
+                <label for="name" >{tmpl_var name='name_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="name" id="name" value="{tmpl_var name='name'}" class="form-control" /></div>
+            </div>
+			<div class="wb-field-group">
+                <label for="type" >{tmpl_var name='type_txt'}</label>
+                <div class="wb-field-body"><select name="type" id="type" class="form-control" data-workbench-visibility-rules=".nginx=nginx;.php=nginx|apache;.directive-customer-viewable=nginx|apache">
+                    {tmpl_var name='type'}
+                </select></div>
+            </div>
+			<div class="wb-field-group">
+                <label for="snippet" >{tmpl_var name='snippet_txt'}</label>
+                <div class="wb-field-body"><textarea class="form-control" name="snippet" id="snippet" rows='10' cols='50'>{tmpl_var name='snippet'}</textarea>
+                &nbsp; Nginx {tmpl_var name='variables_txt'}: <a href="#" data-workbench-noop="true" class="addPlaceholder">{DOCROOT}</a>, <a href="#" data-workbench-noop="true" class="addPlaceholder">{DOMAIN}</a>, <a href="#" data-workbench-noop="true" class="addPlaceholder">{FASTCGIPASS}</a>, <a href="#" data-workbench-noop="true" class="addPlaceholder">{PHPFALLBACKFASTCGIPASS}</a><br />
+				&nbsp; Apache {tmpl_var name='variables_txt'}: <a href="#" data-workbench-noop="true" class="addPlaceholder">{DOCROOT}</a>, <a href="#" data-workbench-noop="true" class="addPlaceholder">{DOCROOT_CLIENT}</a>, <a href="#" data-workbench-noop="true" class="addPlaceholder">{DOMAIN}</a> <br />
+				&nbsp; PHP {tmpl_var name='variables_txt'}: <a href="#" data-workbench-noop="true" class="addPlaceholder">{WEBROOT}</a>
+				</div>
+            </div>
+            <div class="wb-field-group php">
+                <label >{tmpl_var name='required_php_snippets_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='required_php_snippets'}
+                </div>
+            </div>
+            <div class="wb-field-group directive-customer-viewable">
+                <label >{tmpl_var name='customer_viewable_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='customer_viewable'}
+                </div>
+            </div>
+            <div class="wb-field-group">
+                <label >{tmpl_var name='active_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='active'}
+                </div>
+            </div>
+			<div class="wb-field-group">
+				<label for="update_sites" >{tmpl_var name='update_sites_txt'}</label>
+				<div class="wb-field-body">{tmpl_var name='update_sites'}</div>
+			</div>
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions"><div class="wb-form-actions__primary">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="admin/directive_snippets_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="admin/directive_snippets_list.php" data-load-content="admin/directive_snippets_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div></div>

@@ -1,0 +1,27 @@
+<!-- WP-965: native Workbench operations surface; controller contract unchanged. -->
+            <div class="wb-field-group">
+                <label for="server_id" >{tmpl_var name='server_id_txt'}</label>
+                <div class="wb-field-body"><select name="server_id" id="server_id" class="form-control">
+                    {tmpl_var name='server_id'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="tcp_port" >{tmpl_var name='tcp_port_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="tcp_port" id="tcp_port" value="{tmpl_var name='tcp_port'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="udp_port" >{tmpl_var name='udp_port_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="udp_port" id="udp_port" value="{tmpl_var name='udp_port'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label >{tmpl_var name='active_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='active'}
+                </div>
+            </div>
+
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions"><div class="wb-form-actions__primary">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="admin/firewall_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="admin/firewall_list.php" data-load-content="admin/firewall_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div></div>

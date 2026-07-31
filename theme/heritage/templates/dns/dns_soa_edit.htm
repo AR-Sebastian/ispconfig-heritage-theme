@@ -1,0 +1,186 @@
+<!-- WP-942: native Workbench SOA editor; shared template and DNS lifecycle remain unchanged. -->
+<tmpl_if name="config_error_msg">
+	<div class="wb-notice wb-notice--danger">
+		<span class="wb-notice__icon" aria-hidden="true"></span>
+		<div>
+			<strong><tmpl_var name="configuration_error_txt"></strong>
+			<div>
+				<span class="wb-config-error-time">{tmpl_var name='config_error_tstamp'} :&nbsp;</span>
+				<span class="wb-config-error-message">{tmpl_var name='config_error_msg'}</span>
+			</div>
+		</div>
+	</div>
+</tmpl_if>
+
+<div class="wb-soa-editor">
+	<section class="wb-form-section wb-soa-editor__section">
+		<tmpl_if name="is_admin">
+			<div class="wb-field-group">
+				<tmpl_if name="edit_disabled">
+					<label for="server_id_disabled">{tmpl_var name='server_id_txt'}</label>
+					<div><select name="server_id_disabled" id="server_id_disabled" class="form-control" disabled="disabled">
+						{tmpl_var name='server_id'}
+					</select></div>
+					<input type="hidden" name="server_id" value="{tmpl_var name='server_id_value'}" />
+				<tmpl_else>
+					<label for="server_id">{tmpl_var name='server_id_txt'}</label>
+					<div><select name="server_id" id="server_id" class="form-control">
+						{tmpl_var name='server_id'}
+					</select></div>
+				</tmpl_if>
+			</div>
+			<tmpl_unless name="domain_option">
+				<div class="wb-field-group">
+					<label for="client_group_id">{tmpl_var name='client_txt'}</label>
+					<div><select name="client_group_id" id="client_group_id" class="form-control">
+						{tmpl_var name='client_group_id'}
+					</select></div>
+				</div>
+			</tmpl_unless>
+		<tmpl_else>
+			<tmpl_if name="only_one_server">
+				<input type="hidden" id="server_id" name="server_id" value="{tmpl_var name='server_id_value'}" />
+			<tmpl_else>
+				<div class="wb-field-group">
+					<tmpl_if name="edit_disabled">
+						<label for="server_id_disabled">{tmpl_var name='server_id_txt'}</label>
+						<div><select name="server_id_disabled" id="server_id_disabled" class="form-control" disabled="disabled">
+							{tmpl_var name='client_server_id'}
+						</select></div>
+						<input type="hidden" name="server_id" value="{tmpl_var name='server_id_value'}" />
+					<tmpl_else>
+						<label for="server_id">{tmpl_var name='server_id_txt'}</label>
+						<div><select name="server_id" id="server_id" class="form-control">
+							{tmpl_var name='client_server_id'}
+						</select></div>
+					</tmpl_if>
+				</div>
+			</tmpl_if>
+		</tmpl_if>
+
+		<tmpl_if name="is_reseller">
+			<tmpl_unless name="domain_option">
+				<div class="wb-field-group">
+					<label for="client_group_id">{tmpl_var name='client_txt'}</label>
+					<div><select name="client_group_id" id="client_group_id" class="form-control">
+						{tmpl_var name='client_group_id'}
+					</select></div>
+				</div>
+			</tmpl_unless>
+		</tmpl_if>
+
+		<div class="wb-field-group">
+			<label for="origin">{tmpl_var name='origin_txt'}</label>
+			<tmpl_if name="domain_option">
+				<div>
+					<select name="origin" id="origin" class="form-control">{tmpl_var name='domain_option'}</select>
+					<p class="formHint">{tmpl_var name='eg_domain_tld'}</p>
+				</div>
+			<tmpl_else>
+				<div>
+					<input type="text" name="origin" id="origin" value="{tmpl_var name='origin'}" class="form-control" />
+					<p class="formHint">{tmpl_var name='eg_domain_tld'}</p>
+				</div>
+			</tmpl_if>
+		</div>
+
+		<div class="wb-field-group">
+			<label for="ns">{tmpl_var name='ns_txt'}</label>
+			<div>
+				<input type="text" name="ns" id="ns" value="{tmpl_var name='ns'}" class="form-control" />
+				<p class="formHint">{tmpl_var name='eg_ns1_domain_tld'}</p>
+			</div>
+		</div>
+
+		<div class="wb-field-group">
+			<label for="mbox">{tmpl_var name='mbox_txt'}</label>
+			<div>
+				<input type="text" name="mbox" id="mbox" value="{tmpl_var name='mbox'}" class="form-control" />
+				<p class="formHint">{tmpl_var name='eg_webmaster_domain_tld'}</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="wb-form-section wb-soa-editor__section wb-soa-editor__timing">
+		<div class="wb-field-group">
+			<label for="refresh">{tmpl_var name='refresh_txt'}</label>
+			<div><input type="text" name="refresh" id="refresh" value="{tmpl_var name='refresh'}" class="form-control" inputmode="numeric" /><p class="formHint">{tmpl_var name='seconds_txt'}</p></div>
+		</div>
+		<div class="wb-field-group">
+			<label for="retry">{tmpl_var name='retry_txt'}</label>
+			<div><input type="text" name="retry" id="retry" value="{tmpl_var name='retry'}" class="form-control" inputmode="numeric" /><p class="formHint">{tmpl_var name='seconds_txt'}</p></div>
+		</div>
+		<div class="wb-field-group">
+			<label for="expire">{tmpl_var name='expire_txt'}</label>
+			<div><input type="text" name="expire" id="expire" value="{tmpl_var name='expire'}" class="form-control" inputmode="numeric" /><p class="formHint">{tmpl_var name='seconds_txt'}</p></div>
+		</div>
+		<div class="wb-field-group">
+			<label for="minimum">{tmpl_var name='minimum_txt'}</label>
+			<div><input type="text" name="minimum" id="minimum" value="{tmpl_var name='minimum'}" class="form-control" inputmode="numeric" /><p class="formHint">{tmpl_var name='seconds_txt'}</p></div>
+		</div>
+		<div class="wb-field-group">
+			<label for="ttl">{tmpl_var name='ttl_txt'}</label>
+			<div><input type="text" name="ttl" id="ttl" value="{tmpl_var name='ttl'}" class="form-control" inputmode="numeric" /><p class="formHint">{tmpl_var name='seconds_txt'}</p></div>
+		</div>
+	</section>
+
+	<section class="wb-form-section wb-soa-editor__section">
+		<div class="wb-field-group">
+			<label for="xfer">{tmpl_var name='xfer_txt'}</label>
+			<div><input type="text" name="xfer" id="xfer" value="{tmpl_var name='xfer'}" class="form-control" data-workbench-field-search="true" data-search-endpoint="dnsJson" data-search-type="get_ipv4" data-search-results-limit='$ <tmpl_var name="globalsearch_resultslimit_of_txt"> % <tmpl_var name="globalsearch_resultslimit_results_txt">' data-search-results-prefix='<tmpl_var name="globalsearch_suggestions_text_txt">' data-search-no-results='<tmpl_var name="globalsearch_noresults_text_txt">' data-search-no-results-limit='<tmpl_var name="globalsearch_noresults_limit_txt">' data-search-min-chars="0" data-search-css-prefix="df-" data-search-fill-field="true" data-search-fill-with="fill_text" /></div>
+		</div>
+		<div class="wb-field-group">
+			<label for="also_notify">{tmpl_var name='also_notify_txt'}</label>
+			<div><input type="text" name="also_notify" id="also_notify" value="{tmpl_var name='also_notify'}" class="form-control" data-workbench-field-search="true" data-search-endpoint="dnsJson" data-search-type="get_ipv4" data-search-results-limit='$ <tmpl_var name="globalsearch_resultslimit_of_txt"> % <tmpl_var name="globalsearch_resultslimit_results_txt">' data-search-results-prefix='<tmpl_var name="globalsearch_suggestions_text_txt">' data-search-no-results='<tmpl_var name="globalsearch_noresults_text_txt">' data-search-no-results-limit='<tmpl_var name="globalsearch_noresults_limit_txt">' data-search-min-chars="0" data-search-css-prefix="df-" data-search-fill-field="true" data-search-fill-with="fill_text" /></div>
+		</div>
+		<tmpl_if name="is_admin">
+			<div class="wb-field-group">
+				<label for="update_acl">{tmpl_var name='update_acl_txt'}</label>
+				<div><input type="text" name="update_acl" id="update_acl" value="{tmpl_var name='update_acl'}" class="form-control" /></div>
+			</div>
+		</tmpl_if>
+	</section>
+
+	<section class="wb-form-section wb-soa-editor__section">
+		<div class="wb-field-group">
+			<label for="serial">{tmpl_var name='serial_txt'}</label>
+			<div><textarea readonly="true" rows="1" id="serial" name="serial" class="form-control">{tmpl_var name='serial'}</textarea></div>
+		</div>
+		<div class="wb-field-group">
+			<label>{tmpl_var name='active_txt'}</label>
+			<div>{tmpl_var name='active'}</div>
+		</div>
+	</section>
+
+	<tmpl_if name="show_dnssec">
+		<section class="wb-form-section wb-soa-editor__section wb-soa-editor__dnssec">
+			<div class="wb-field-group">
+				<label>{tmpl_var name='dnssec_wanted_txt'}</label>
+				<div>
+					{tmpl_var name='dnssec_wanted'}
+					<p class="formHint">{tmpl_var name='dnssec_wanted_info'}</p>
+					<span hidden data-workbench-confirm-uncheck="dnssec_wanted" data-confirm-message="{tmpl_var name='dnssec_wanted_info'}"></span>
+				</div>
+			</div>
+			<div class="wb-field-group">
+				<label for="dnssec_algo">{tmpl_var name='dnssec_algo_txt'}</label>
+				<div>{tmpl_var name='dnssec_algo'}</div>
+			</div>
+			<div class="wb-field-group">
+				<label for="dnssec_info">{tmpl_var name='dnssec_info_txt'}</label>
+				<div><textarea readonly="true" rows="5" id="dnssec_info" name="dnssec_info" class="form-control">{tmpl_var name='dnssec_info'}</textarea></div>
+			</div>
+		</section>
+	</tmpl_if>
+</div>
+
+<input type="hidden" name="id" value="{tmpl_var name='id'}">
+<input name="serial" type="hidden" value="{tmpl_var name='serial'}">
+
+<div class="wb-form-actions wb-form-actions--has-danger">
+	<tmpl_if name='id'><tmpl_if name='show_delete_on_forms' op="==" value="y">
+		<a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="dns/dns_soa_del.php?id={tmpl_var name='id'}&_csrf_id={tmpl_var name='_csrf_id'}&_csrf_key={tmpl_var name='_csrf_key'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete"></span></a>
+	</tmpl_if></tmpl_if>
+	<button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="dns/dns_soa_edit.php">{tmpl_var name='btn_save_txt'}</button>
+	<button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="dns/dns_soa_list.php" data-load-content="dns/dns_soa_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+</div>

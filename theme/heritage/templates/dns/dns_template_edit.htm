@@ -1,0 +1,29 @@
+<!-- WP-943: native DNS template editor; placeholders and save contract unchanged. -->
+<div class="wb-dns-template-editor">
+	<section class="wb-form-section">
+		<div class="wb-field-group"><label for="name">{tmpl_var name='name_txt'}</label><div><input type="text" name="name" id="name" value="{tmpl_var name='name'}" class="form-control" /></div></div>
+		<div class="wb-field-group"><label>{tmpl_var name='fields_txt'}</label><div>{tmpl_var name='fields'}</div></div>
+		<div class="wb-field-group">
+			<label for="template">{tmpl_var name='template_txt'}</label>
+			<div>
+				<textarea class="form-control" name="template" id="template" rows="15" cols="40">{tmpl_var name='template'}</textarea>
+				<div class="formHint wb-dns-template-editor__tokens">
+					DNS {tmpl_var name='placeholder_txt'}:
+					<a href="#" data-workbench-noop="true" class="addPlaceholder">{DOMAIN}</a>,
+					<a href="#" data-workbench-noop="true" class="addPlaceholder">{IP}</a>,
+					<a href="#" data-workbench-noop="true" class="addPlaceholder">{IPV6}</a>,
+					<a href="#" data-workbench-noop="true" class="addPlaceholder">{NS1}</a>,
+					<a href="#" data-workbench-noop="true" class="addPlaceholder">{NS2}</a>,
+					<a href="#" data-workbench-noop="true" class="addPlaceholder">{EMAIL}</a>
+				</div>
+			</div>
+		</div>
+		<div class="wb-field-group"><label>{tmpl_var name='visible_txt'}</label><div>{tmpl_var name='visible'}</div></div>
+	</section>
+</div>
+
+<input type="hidden" name="id" value="{tmpl_var name='id'}">
+<div class="wb-form-actions">
+	<button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="dns/dns_template_edit.php">{tmpl_var name='btn_save_txt'}</button>
+	<button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="dns/dns_template_list.php" data-load-content="dns/dns_template_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+</div>

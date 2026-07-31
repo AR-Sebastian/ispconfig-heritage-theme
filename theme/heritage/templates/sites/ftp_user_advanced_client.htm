@@ -1,0 +1,16 @@
+<!-- WP-946: native Workbench access form; shared template and server lifecycle unchanged. -->
+            <div class="wb-field-group">
+                <label for="dir">{tmpl_var name='dir_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="dir" id="dir" value="{tmpl_var name='dir'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="expires">{tmpl_var name='expires_txt'}</label>
+                <div class="wb-field-body">{tmpl_var name='expires'}</div>
+            </div>
+
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions"><div class="wb-form-actions__primary">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="sites/ftp_user_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="sites/ftp_user_list.php" data-load-content="sites/ftp_user_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div></div>

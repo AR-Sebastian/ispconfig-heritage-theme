@@ -1,0 +1,106 @@
+/* Heritage Glass design tokens
+ *
+ * Brand/accent values orient and trigger actions. Semantic states retain their
+ * own colors so an ISPConfig red accent never makes ordinary UI look unsafe. */
+
+:root {
+  --hg-accent: var(--wb-action, #d71920);
+  --hg-accent-hover: color-mix(in srgb, var(--hg-accent) 86%, #000);
+  --hg-accent-soft: color-mix(in srgb, var(--hg-accent) 7%, transparent);
+  --hg-accent-line: color-mix(in srgb, var(--hg-accent) 28%, transparent);
+  --hg-canvas: #f3f5f8;
+  --hg-surface: #ffffff;
+  --hg-surface-subtle: #f7f8fa;
+  --hg-surface-raised: rgba(255, 255, 255, .91);
+  --hg-text: #121a2a;
+  --hg-text-muted: #5d687c;
+  --hg-border: #dfe4eb;
+  --hg-border-strong: #cbd3df;
+  --hg-success: #148447;
+  --hg-success-soft: #e8f6ee;
+  --hg-warning: #9b6200;
+  --hg-warning-soft: #fff5db;
+  --hg-danger: #bc2630;
+  --hg-danger-soft: #fff0f1;
+  --hg-info: #1768c4;
+  --hg-info-soft: #eef6ff;
+  --hg-radius-sm: 7px;
+  --hg-radius-md: 11px;
+  --hg-radius-lg: 15px;
+  --hg-radius-xl: 20px;
+  --hg-radius-pill: 999px;
+  --hg-control-height: 40px;
+  --hg-font-xs: 11px;
+  --hg-font-sm: 12px;
+  --hg-font-md: 14px;
+  --hg-font-lg: 17px;
+  --hg-leading-tight: 1.2;
+  --hg-leading-normal: 1.5;
+  --hg-leading-relaxed: 1.65;
+  --hg-icon-sm: 15px;
+  --hg-icon-md: 18px;
+  --hg-icon-lg: 22px;
+  --hg-shadow-xs: 0 2px 7px rgba(24, 39, 75, .045);
+  --hg-shadow-sm: 0 6px 20px rgba(24, 39, 75, .06);
+  --hg-shadow-md: 0 14px 38px rgba(24, 39, 75, .085);
+  --hg-focus-ring: 0 0 0 3px color-mix(in srgb, var(--hg-accent) 18%, transparent);
+
+  --wb-bg: var(--hg-canvas);
+  --wb-surface: var(--hg-surface);
+  --wb-surface-muted: var(--hg-surface-subtle);
+  --wb-text: var(--hg-text);
+  --wb-muted: var(--hg-text-muted);
+  --wb-text-muted: var(--hg-text-muted);
+  --wb-border: var(--hg-border);
+  --wb-success: var(--hg-success);
+  --wb-warning: var(--hg-warning);
+  --wb-danger: var(--hg-danger);
+  --wb-info: var(--hg-info);
+  --wb-shadow: var(--hg-shadow-md);
+  --wb-shadow-sm: var(--hg-shadow-sm);
+  --wb-radius: var(--hg-radius-md);
+}
+
+html[data-wb-theme='dark'] {
+  --hg-accent-hover: color-mix(in srgb, var(--hg-accent) 82%, #fff);
+  --hg-accent-soft: color-mix(in srgb, var(--hg-accent) 10%, transparent);
+  --hg-accent-line: color-mix(in srgb, var(--hg-accent) 34%, transparent);
+  --hg-canvas: #080d18;
+  --hg-surface: #111a2c;
+  --hg-surface-subtle: #162137;
+  --hg-surface-raised: rgba(17, 26, 44, .91);
+  --hg-text: #f3f6fc;
+  --hg-text-muted: #aab6cb;
+  --hg-border: #2a3650;
+  --hg-border-strong: #3a4865;
+  --hg-success: #53cf83;
+  --hg-success-soft: rgba(46, 173, 96, .13);
+  --hg-warning: #f2bc5d;
+  --hg-warning-soft: rgba(212, 145, 31, .14);
+  --hg-danger: #ff8189;
+  --hg-danger-soft: rgba(220, 53, 65, .14);
+  --hg-info: #72b2ff;
+  --hg-info-soft: rgba(56, 132, 226, .14);
+  --hg-shadow-xs: 0 2px 8px rgba(0, 0, 0, .18);
+  --hg-shadow-sm: 0 8px 24px rgba(0, 0, 0, .22);
+  --hg-shadow-md: 0 18px 48px rgba(0, 0, 0, .3);
+}
+
+html,
+body {
+  color: var(--hg-text);
+  background: var(--hg-canvas);
+}
+
+body {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  font-size: var(--hg-font-md);
+  line-height: var(--hg-leading-normal);
+  text-rendering: optimizeLegibility;
+}
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 0;
+  box-shadow: var(--hg-focus-ring) !important;
+}

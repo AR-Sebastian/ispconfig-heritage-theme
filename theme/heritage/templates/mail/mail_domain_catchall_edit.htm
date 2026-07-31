@@ -1,0 +1,40 @@
+<!-- WP-994: native catchall compound; functional template contract unchanged. -->
+            <div class="wb-field-group">
+                <label for="email_domain">{tmpl_var name='source_txt'}</label>
+                <div>
+					<div class="wb-field-composite">
+						<span class="wb-field-addon" id="domain-desc">* @</span>
+						<select name="email_domain" id="email_domain" class="form-control" aria-describedby="domain-desc">{tmpl_var name='email_domain'}</select>
+					</div>
+				</div>
+            </div>
+            <div class="wb-field-group">
+                <label for="destination">{tmpl_var name='destination_txt'}</label>
+                <div><input type="text" name="destination" id="destination" value="{tmpl_var name='destination'}" class="form-control" /></div>
+            </div>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='send_as_txt'}</label>
+                <div>
+                    {tmpl_var name='allow_send_as'} <small> {tmpl_var name='send_as_exp'}</small>
+                </div>
+            </div>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='greylisting_txt'}</label>
+                <div>
+                    {tmpl_var name='greylisting'}
+                </div>
+            </div>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='active_txt'}</label>
+                <div>
+                    {tmpl_var name='active'}
+                </div>
+            </div>
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+        <input type="hidden" name="type" value="catchall">
+
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="mail/mail_domain_catchall_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="mail/mail_domain_catchall_list.php" data-load-content="mail/mail_domain_catchall_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div>

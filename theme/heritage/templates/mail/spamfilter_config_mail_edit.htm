@@ -1,0 +1,21 @@
+<!-- WP-957: native Workbench mail-stack configuration form. -->
+<header class="wb-form-heading"><h1><tmpl_var name="list_head_txt"></h1><p><tmpl_var name="list_desc_txt"></p></header>
+<fieldset id="wf_area_spamfilter_config" class="wb-form-panel">
+    <div class="wb-field-group"><label for="module">{tmpl_var name='module_txt'}</label><div><select class="form-control" id="module" name="module">{tmpl_var name='module'}</select></div></div>
+    <div class="wb-field-group"><label for="maildir_path">{tmpl_var name='maildir_path_txt'}</label><div><input class="form-control" type="text" id="maildir_path" name="maildir_path" value="{tmpl_var name='maildir_path'}"></div></div>
+    <div class="wb-field-group"><label for="homedir_path">{tmpl_var name='homedir_path_txt'}</label><div><input class="form-control" type="text" id="homedir_path" name="homedir_path" value="{tmpl_var name='homedir_path'}"></div></div>
+    <div class="wb-field-group"><label for="mailuser_uid">{tmpl_var name='mailuser_uid_txt'}</label><div><input class="form-control" type="text" id="mailuser_uid" name="mailuser_uid" value="{tmpl_var name='mailuser_uid'}"></div></div>
+    <div class="wb-field-group"><label for="mailuser_gid">{tmpl_var name='mailuser_gid_txt'}</label><div><input class="form-control" type="text" id="mailuser_gid" name="mailuser_gid" value="{tmpl_var name='mailuser_gid'}"></div></div>
+    <div class="wb-field-group"><label for="mailuser_name">{tmpl_var name='mailuser_name_txt'}</label><div><input class="form-control" type="text" id="mailuser_name" name="mailuser_name" value="{tmpl_var name='mailuser_name'}"></div></div>
+    <div class="wb-field-group"><label for="mailuser_group">{tmpl_var name='mailuser_group_txt'}</label><div><input class="form-control" type="text" id="mailuser_group" name="mailuser_group" value="{tmpl_var name='mailuser_group'}"></div></div>
+    <div class="wb-field-group"><label for="relayhost">{tmpl_var name='relayhost_txt'}</label><div><input class="form-control" type="text" id="relayhost" name="relayhost" value="{tmpl_var name='relayhost'}"></div></div>
+    <div class="wb-field-group"><label for="relayhost_user">{tmpl_var name='relayhost_user_txt'}</label><div><input class="form-control" type="text" id="relayhost_user" name="relayhost_user" value="{tmpl_var name='relayhost_user'}"></div></div>
+    <div class="wb-field-group"><label for="relayhost_password">{tmpl_var name='relayhost_password_txt'}</label><div><input class="form-control" type="text" id="relayhost_password" name="relayhost_password" value="{tmpl_var name='relayhost_password'}"></div></div>
+    <div class="wb-field-group"><label for="mailbox_size_limit">{tmpl_var name='mailbox_size_limit_txt'}</label><div><input class="form-control" type="text" id="mailbox_size_limit" name="mailbox_size_limit" value="{tmpl_var name='mailbox_size_limit'}"></div></div>
+    <div class="wb-field-group"><label for="message_size_limit">{tmpl_var name='message_size_limit_txt'}</label><div><input class="form-control" type="text" id="message_size_limit" name="message_size_limit" value="{tmpl_var name='message_size_limit'}"></div></div>
+</fieldset>
+<input type="hidden" name="id" value="{tmpl_var name='id'}">
+<div class="wb-form-actions">
+    <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="mail/spamfilter_config_edit.php">{tmpl_var name='btn_save_txt'}</button>
+    <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="mail/spamfilter_config_list.php" data-load-content="mail/spamfilter_config_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+</div>

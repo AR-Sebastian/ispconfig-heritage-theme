@@ -1,0 +1,242 @@
+/*
+ * ISPConfig Heritage transient and component states
+ *
+ * This layer owns the final composition of tabs, feedback, empty states,
+ * dialogs, popovers and compact status elements. Behaviour remains native.
+ */
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  [role='tablist'],
+  .nav-tabs
+) {
+  display: flex;
+  max-width: 100%;
+  align-items: stretch;
+  gap: 3px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 5px 0;
+  border-bottom: 1px solid var(--hg-border);
+  scrollbar-width: thin;
+  scroll-snap-type: inline proximity;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  [role='tab'],
+  .nav-tabs > li > a
+) {
+  min-height: 45px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 15px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 9px 9px 0 0;
+  color: var(--hg-text-muted);
+  background: transparent;
+  scroll-snap-align: start;
+  white-space: nowrap;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  [role='tab']:hover,
+  [role='tab']:focus-visible,
+  .nav-tabs > li > a:hover,
+  .nav-tabs > li > a:focus-visible
+) {
+  color: var(--hg-text);
+  background: color-mix(in srgb, var(--hg-accent) 5%, var(--hg-surface));
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  [role='tab'][aria-selected='true'],
+  .nav-tabs > li.active > a
+) {
+  color: var(--hg-accent);
+  border-bottom-color: var(--hg-accent);
+  background: color-mix(in srgb, var(--hg-accent) 4%, var(--hg-surface));
+  font-weight: 780;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  .alert,
+  .alert-notification,
+  .wb-feedback,
+  .wb-content-state
+) {
+  position: relative;
+  display: grid;
+  min-height: 58px;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 15px 13px 17px;
+  border: 1px solid var(--hg-border);
+  border-inline-start-width: 4px;
+  border-radius: var(--hg-radius-md);
+  color: var(--hg-text);
+  box-shadow: var(--hg-shadow-xs);
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent > .wb-feedback-stack {
+  width: 100%;
+  min-width: 0;
+  grid-column: 1 / -1;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent > .wb-feedback-stack > :is(
+  .alert,
+  .alert-notification,
+  .wb-feedback,
+  .wb-content-state
+) {
+  width: 100%;
+  min-width: 0;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  .alert,
+  .alert-notification,
+  .wb-feedback,
+  .wb-content-state
+) :is(.close, [data-dismiss='alert'], [data-wb-dismiss]) {
+  display: inline-grid;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  place-items: center;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  color: currentColor;
+  background: transparent;
+  opacity: .72;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  .alert,
+  .alert-notification,
+  .wb-feedback,
+  .wb-content-state
+) :is(.close, [data-dismiss='alert'], [data-wb-dismiss]):is(:hover, :focus-visible) {
+  background: color-mix(in srgb, currentColor 8%, transparent);
+  opacity: 1;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  .wb-table-empty-row td,
+  .wb-empty-state,
+  .wb-dashboard-empty-state
+) {
+  min-height: 150px;
+  align-content: center;
+  justify-content: center;
+  padding: clamp(24px, 4vw, 48px);
+  color: var(--hg-text-muted);
+  text-align: center;
+  background:
+    radial-gradient(circle at 50% 0, color-mix(in srgb, var(--hg-accent) 5%, transparent), transparent 52%),
+    var(--hg-surface);
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  .wb-table-empty-row,
+  .wb-empty-state,
+  .wb-dashboard-empty-state
+) :is(h2, h3, strong) {
+  color: var(--hg-text);
+}
+
+body.heritage-shell.wb-app-navigation-enabled .wb-dialog {
+  z-index: 10040;
+}
+
+body.heritage-shell.wb-app-navigation-enabled .wb-dialog__backdrop {
+  background: rgba(5, 10, 20, .52);
+  backdrop-filter: blur(7px) saturate(112%);
+}
+
+body.heritage-shell.wb-app-navigation-enabled .wb-dialog__surface {
+  width: min(580px, calc(100vw - 32px));
+  max-height: min(82vh, 760px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--hg-border) 88%, transparent);
+  background: color-mix(in srgb, var(--hg-surface) 97%, transparent);
+  box-shadow: 0 28px 90px rgba(5, 10, 20, .28);
+  backdrop-filter: blur(24px) saturate(135%);
+}
+
+body.heritage-shell.wb-app-navigation-enabled .wb-dialog__body {
+  min-height: 0;
+  overflow: auto;
+}
+
+body.heritage-shell.wb-app-navigation-enabled :is(
+  .dropdown-menu,
+  .wb-owned-enhanced-select__panel,
+  .wb-select__menu,
+  .popover
+) {
+  z-index: 10050;
+  max-height: min(62vh, 520px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+body.heritage-shell.wb-app-navigation-enabled :is(
+  .tooltip,
+  .wb-native-tooltip
+) {
+  z-index: 10060;
+  pointer-events: none;
+}
+
+body.heritage-shell.wb-app-navigation-enabled :is(
+  .badge,
+  .label,
+  .wb-status-pill,
+  .wb-form-state
+) {
+  min-height: 24px;
+  align-items: center;
+  padding: 4px 8px;
+  border: 1px solid var(--hg-border);
+  border-radius: var(--hg-radius-pill);
+  font-size: 10px;
+  font-weight: 760;
+  line-height: 1.25;
+}
+
+@media (max-width: 620px) {
+  body.heritage-shell.wb-app-navigation-enabled .wb-dialog {
+    align-items: end;
+    padding: 0;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled .wb-dialog__surface {
+    width: 100%;
+    max-width: none;
+    max-height: min(88vh, 760px);
+    margin: 0;
+    border-width: 1px 0 0;
+    border-radius: var(--hg-radius-xl) var(--hg-radius-xl) 0 0;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+    [role='tab'],
+    .nav-tabs > li > a
+  ) {
+    min-height: 43px;
+    padding-inline: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.heritage-shell.wb-app-navigation-enabled .wb-dialog__surface {
+    transition: none;
+  }
+}

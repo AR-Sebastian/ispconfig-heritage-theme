@@ -1,0 +1,476 @@
+/* ISPConfig Heritage Glass
+ *
+ * Interaction surfaces and transient states. This layer intentionally keeps
+ * the native event model intact and only standardises visual feedback.
+ */
+
+body.heritage-shell.wb-app-navigation-enabled :where(
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  [tabindex]:not([tabindex='-1'])
+):focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--hg-accent) 72%, #fff);
+  outline-offset: 2px;
+  box-shadow: var(--hg-focus-ring);
+}
+
+body.heritage-shell.wb-app-navigation-enabled :where(
+  button,
+  .btn,
+  [role='button']
+):active:not(:disabled) {
+  transform: translateY(0) scale(.985);
+}
+
+body.heritage-shell.wb-app-navigation-enabled :where(
+  button,
+  .btn,
+  [role='button']
+):disabled,
+body.heritage-shell.wb-app-navigation-enabled :where(
+  button,
+  .btn,
+  [role='button']
+)[aria-disabled='true'] {
+  filter: saturate(.45);
+  opacity: .56;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Header controls and theme switch */
+
+body.heritage-shell.wb-app-navigation-enabled :is(
+  .wb-theme-toggle,
+  .notification,
+  .wb-header-action
+) {
+  display: inline-grid;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
+  place-items: center;
+  padding: 0;
+  color: var(--hg-text-muted);
+  border: 1px solid var(--hg-border);
+  border-radius: 11px;
+  background: var(--hg-surface);
+  box-shadow: var(--hg-shadow-xs);
+}
+
+body.heritage-shell.wb-app-navigation-enabled :is(
+  .wb-theme-toggle,
+  .notification,
+  .wb-header-action
+):is(:hover, :focus-visible) {
+  color: var(--hg-accent);
+  border-color: color-mix(in srgb, var(--hg-accent) 24%, var(--hg-border));
+  background: var(--hg-accent-soft);
+}
+
+body.heritage-shell.wb-app-navigation-enabled :is(
+  .wb-theme-toggle,
+  .notification,
+  .wb-header-action
+) :is(svg, .wb-svg-icon) {
+  width: 19px;
+  height: 19px;
+}
+
+/* Global command search */
+
+body.heritage-shell.wb-app-navigation-enabled #searchform .wb-global-search__field {
+  min-height: 44px;
+  border-color: var(--hg-border);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--hg-surface) 90%, transparent);
+  box-shadow: var(--hg-shadow-xs);
+  backdrop-filter: blur(16px);
+}
+
+body.heritage-shell.wb-app-navigation-enabled #searchform .wb-global-search__field:focus-within {
+  border-color: color-mix(in srgb, var(--hg-accent) 40%, var(--hg-border));
+  background: var(--hg-surface);
+  box-shadow: var(--hg-focus-ring), var(--hg-shadow-sm);
+}
+
+body.heritage-shell.wb-app-navigation-enabled #searchform .wb-global-search-submit {
+  color: var(--hg-text-muted);
+  border-radius: 10px;
+  background: transparent;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #searchform .wb-global-search-submit:is(:hover, :focus-visible) {
+  color: var(--hg-accent);
+  background: var(--hg-accent-soft);
+}
+
+body.heritage-shell.wb-app-navigation-enabled .wb-global-search-results {
+  overflow: hidden;
+  margin-block-start: 8px;
+  padding: 8px;
+  border: 1px solid var(--hg-border);
+  border-radius: var(--hg-radius-lg);
+  background: color-mix(in srgb, var(--hg-surface) 94%, transparent);
+  box-shadow: var(--hg-shadow-lg);
+  backdrop-filter: blur(24px) saturate(140%);
+}
+
+body.heritage-shell.wb-app-navigation-enabled .wb-global-search-result {
+  min-height: 58px;
+  border-radius: 11px;
+}
+
+body.heritage-shell.wb-app-navigation-enabled :is(
+  .wb-global-search-result:hover,
+  .wb-global-search-result:focus-visible,
+  .wb-global-search-result--active
+) {
+  color: var(--hg-accent);
+  border-color: color-mix(in srgb, var(--hg-accent) 16%, var(--hg-border));
+  background: var(--hg-accent-soft);
+  box-shadow: inset 3px 0 var(--hg-accent);
+}
+
+body.heritage-shell.wb-app-navigation-enabled .wb-global-search-result mark {
+  color: inherit;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--hg-accent) 14%, transparent);
+}
+
+/* Menus, popovers and tooltips */
+
+body.heritage-shell.wb-app-navigation-enabled :is(
+  .dropdown-menu,
+  .wb-owned-enhanced-select__panel,
+  .wb-select__menu,
+  .popover
+) {
+  overflow: hidden;
+  padding: 7px;
+  color: var(--hg-text);
+  border: 1px solid var(--hg-border);
+  border-radius: var(--hg-radius-md);
+  background: color-mix(in srgb, var(--hg-surface) 95%, transparent);
+  box-shadow: var(--hg-shadow-md);
+  backdrop-filter: blur(20px) saturate(135%);
+}
+
+body.heritage-shell.wb-app-navigation-enabled :is(
+  .dropdown-menu,
+  .wb-owned-enhanced-select__panel,
+  .wb-select__menu
+) :is(
+  a,
+  button,
+  .wb-owned-enhanced-select__option,
+  .wb-select__option
+) {
+  display: flex;
+  min-height: 38px;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 10px;
+  color: var(--hg-text);
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  font-size: 12px;
+}
+
+body.heritage-shell.wb-app-navigation-enabled :is(
+  .dropdown-menu,
+  .wb-owned-enhanced-select__panel,
+  .wb-select__menu
+) :is(
+  a,
+  button,
+  .wb-owned-enhanced-select__option,
+  .wb-select__option
+):is(:hover, :focus-visible, [aria-selected='true'], .active) {
+  color: var(--hg-accent);
+  background: var(--hg-accent-soft);
+}
+
+body.heritage-shell.wb-app-navigation-enabled :is(
+  .dropdown-menu .divider,
+  .wb-select__separator
+) {
+  height: 1px;
+  margin: 6px 4px;
+  background: var(--hg-border);
+}
+
+body.heritage-shell.wb-app-navigation-enabled :is(
+  .tooltip-inner,
+  .wb-native-tooltip
+) {
+  max-width: min(300px, calc(100vw - 24px));
+  padding: 7px 10px;
+  color: #f8fafc;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 8px;
+  background: #111827;
+  box-shadow: 0 10px 28px rgba(2, 6, 23, .25);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+body.heritage-shell.wb-app-navigation-enabled .popover-title {
+  padding: 11px 12px;
+  color: var(--hg-text);
+  border-bottom: 1px solid var(--hg-border);
+  background: var(--hg-surface-subtle);
+  font-size: 12px;
+  font-weight: 780;
+}
+
+body.heritage-shell.wb-app-navigation-enabled .popover-content {
+  padding: 12px;
+  color: var(--hg-text-muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+/* Dialogs */
+
+body.heritage-shell.wb-app-navigation-enabled .modal-backdrop.in {
+  opacity: .42;
+  backdrop-filter: blur(5px);
+}
+
+body.heritage-shell.wb-app-navigation-enabled :is(
+  .modal-content,
+  .wb-dialog__surface
+) {
+  overflow: hidden;
+  color: var(--hg-text);
+  border: 1px solid var(--hg-border);
+  border-radius: var(--hg-radius-xl);
+  background: var(--hg-surface);
+  box-shadow: var(--hg-shadow-lg);
+}
+
+body.heritage-shell.wb-app-navigation-enabled :is(
+  .modal-header,
+  .wb-dialog__header
+) {
+  min-height: 62px;
+  padding: 16px 19px;
+  border-bottom: 1px solid var(--hg-border);
+  background:
+    linear-gradient(90deg, var(--hg-accent-soft), transparent 48%),
+    var(--hg-surface);
+}
+
+body.heritage-shell.wb-app-navigation-enabled :is(
+  .modal-title,
+  .wb-dialog__title
+) {
+  color: var(--hg-text);
+  font-size: 17px;
+  font-weight: 820;
+  letter-spacing: -.02em;
+}
+
+body.heritage-shell.wb-app-navigation-enabled :is(
+  .modal-body,
+  .wb-dialog__body
+) {
+  padding: clamp(18px, 2.4vw, 28px);
+  color: var(--hg-text);
+  background: var(--hg-surface);
+}
+
+body.heritage-shell.wb-app-navigation-enabled :is(
+  .modal-footer,
+  .wb-dialog__footer
+) {
+  display: flex;
+  min-height: 66px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 11px 18px;
+  border-top: 1px solid var(--hg-border);
+  background: var(--hg-surface-subtle);
+}
+
+body.heritage-shell.wb-app-navigation-enabled :is(
+  .modal-header .close,
+  .wb-dialog__close
+) {
+  display: inline-grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  color: var(--hg-text-muted);
+  border: 1px solid var(--hg-border);
+  border-radius: 9px;
+  background: var(--hg-surface);
+  opacity: 1;
+}
+
+body.heritage-shell.wb-app-navigation-enabled :is(
+  .modal-header .close,
+  .wb-dialog__close
+):is(:hover, :focus-visible) {
+  color: var(--hg-danger);
+  border-color: color-mix(in srgb, var(--hg-danger) 25%, var(--hg-border));
+  background: var(--hg-danger-soft);
+}
+
+/* Row actions and icon controls */
+
+body.heritage-shell.wb-list-page #pageContent :is(
+  .wb-table-actions,
+  .wb-table-actions-column,
+  .buttons-icons
+) {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  gap: 6px;
+}
+
+body.heritage-shell.wb-list-page #pageContent :is(
+  .wb-table-actions,
+  .wb-table-actions-column,
+  .buttons-icons
+) :is(
+  a,
+  button,
+  .btn,
+  .wb-action-control
+) {
+  display: inline-grid;
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  place-items: center;
+  padding: 0;
+  color: var(--hg-text-muted);
+  border: 1px solid var(--hg-border);
+  border-radius: 10px;
+  background: var(--hg-surface);
+  box-shadow: none;
+}
+
+body.heritage-shell.wb-list-page #pageContent :is(
+  .wb-table-actions,
+  .wb-table-actions-column,
+  .buttons-icons
+) :is(
+  a,
+  button,
+  .btn,
+  .wb-action-control
+):is(:hover, :focus-visible) {
+  color: var(--hg-accent);
+  border-color: color-mix(in srgb, var(--hg-accent) 26%, var(--hg-border));
+  background: var(--hg-accent-soft);
+  transform: translateY(-1px);
+}
+
+body.heritage-shell.wb-list-page #pageContent :is(
+  .wb-table-actions,
+  .wb-table-actions-column,
+  .buttons-icons
+) :is(
+  .btn-danger,
+  .btn-delete,
+  .wb-action-control--danger,
+  [data-action='delete']
+) {
+  color: var(--hg-danger);
+  border-color: color-mix(in srgb, var(--hg-danger) 20%, var(--hg-border));
+  background: var(--hg-danger-soft);
+}
+
+body.heritage-shell.wb-list-page #pageContent :is(
+  .wb-table-actions,
+  .wb-table-actions-column,
+  .buttons-icons
+) :is(svg, .wb-svg-icon, i) {
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1;
+}
+
+/* Loading and feedback */
+
+body.heritage-shell.wb-app-navigation-enabled .wb-request-status[data-workbench-delayed='true'] {
+  position: relative;
+  overflow: hidden;
+}
+
+body.heritage-shell.wb-app-navigation-enabled .wb-request-status[data-workbench-delayed='true']::after {
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--hg-accent), transparent);
+  background-size: 220% 100%;
+  content: '';
+  animation: hg-progress 1.1s linear infinite;
+}
+
+body.heritage-shell.wb-app-navigation-enabled [aria-busy='true'] {
+  cursor: progress;
+}
+
+body.heritage-shell.wb-app-navigation-enabled [aria-busy='true'] :is(
+  button,
+  .btn,
+  a
+) {
+  pointer-events: none;
+}
+
+@keyframes hg-progress {
+  to { background-position: -220% 0; }
+}
+
+@media (max-width: 620px) {
+  body.heritage-shell.wb-app-navigation-enabled .wb-global-search-results {
+    position: fixed;
+    inset: calc(var(--hg-header-height, 72px) + 6px) 10px auto;
+    width: auto;
+    max-height: min(68vh, 560px);
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled :is(
+    .modal-footer,
+    .wb-dialog__footer
+  ) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled :is(
+    .modal-footer,
+    .wb-dialog__footer
+  ) > * {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.heritage-shell.wb-app-navigation-enabled *,
+  body.heritage-shell.wb-app-navigation-enabled *::before,
+  body.heritage-shell.wb-app-navigation-enabled *::after {
+    scroll-behavior: auto !important;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled .wb-request-status[data-workbench-delayed='true']::after {
+    animation: none;
+    background: var(--hg-accent);
+  }
+}

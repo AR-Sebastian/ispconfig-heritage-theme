@@ -1,0 +1,41 @@
+<!-- WP-943: native DNS zone import; upload and parser contract unchanged. -->
+<div class="page-header"><h1><tmpl_var name="zone_file_import_txt"></h1></div>
+<p><tmpl_var name="list_desc_txt"></p>
+
+<div class="wb-dns-onboarding wb-dns-import">
+	<section class="wb-form-section">
+		<tmpl_if name="is_admin">
+			<div class="wb-field-group"><label for="server_id">{tmpl_var name='server_id_txt'}</label><div><select name="server_id" id="server_id" class="form-control">{tmpl_var name='server_id'}</select></div></div>
+			<div class="wb-field-group"><label for="client_group_id">{tmpl_var name='client_txt'}</label><div><select name="client_group_id" id="client_group_id" class="form-control">{tmpl_var name='client_group_id'}</select></div></div>
+		<tmpl_else>
+			<tmpl_if name="only_one_server">
+				<input type="hidden" id="server_id" name="server_id" value="{tmpl_var name='server_id_value'}" />
+			<tmpl_else>
+				<div class="wb-field-group"><label for="server_id">{tmpl_var name='server_id_txt'}</label><div><select name="server_id" id="server_id" class="form-control">{tmpl_var name='server_id'}</select></div></div>
+			</tmpl_if>
+		</tmpl_if>
+
+		<div class="wb-field-group">
+			<label for="domain">{tmpl_var name='domain_txt'}</label>
+			<tmpl_if name="domain_option">
+				<div><select name="domain" id="domain" class="form-control">{tmpl_var name='domain_option'}</select></div>
+			<tmpl_else>
+				<div><input type="text" name="domain" id="domain" value="{tmpl_var name='domain'}" class="form-control" /></div>
+			</tmpl_if>
+			<p class="formHint"><tmpl_var name='domain_field_desc_txt' ></p>
+		</div>
+		<div class="wb-field-group"><label for="ignore_ns_records">{tmpl_var name='ignore_ns_records_txt'}</label><div><input type="checkbox" id="ignore_ns_records" value="1" checked name="ignore_ns_records" /></div></div>
+		<div class="wb-field-group"><label for="file">{tmpl_var name='zonefile_to_import_txt'}</label><div><input name="file" id="file" size="30" type="file" class="fileUpload" /></div></div>
+	</section>
+
+	<tmpl_if name="msg"><div id="OKMsg" class="wb-notice wb-notice--success"><span class="wb-notice__icon" aria-hidden="true"></span><p><tmpl_var name="msg"></p></div></tmpl_if>
+	<tmpl_if name="error">
+		<div id="errorMsg" class="wb-notice wb-notice--danger"><span class="wb-notice__icon" aria-hidden="true"></span><div><strong><tmpl_var name="error_txt"></strong><ul class="wb-clean-list"><tmpl_var name="error"></ul></div></div>
+	</tmpl_if>
+</div>
+
+<input type="hidden" name="id" value="{tmpl_var name='id'}">
+<div class="wb-form-actions">
+	<button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="dns/dns_import.php" data-form-upload="true">{tmpl_var name='btn_save_txt'}</button>
+	<button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="dns/dns_soa_list.php" data-load-content="dns/dns_soa_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+</div>

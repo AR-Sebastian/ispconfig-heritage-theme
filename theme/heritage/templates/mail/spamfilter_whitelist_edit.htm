@@ -1,0 +1,34 @@
+<!-- WP-934 Bootstrap-removal: native override of mail/spamfilter_whitelist_edit.
+     Native wb-field-group / wb-form-actions; shared template untouched.
+     Legacy commented-out per-server field omitted; all active template
+     variables and data-* hooks preserved verbatim. -->
+            <div class="wb-field-group">
+                <label for="rid">{tmpl_var name='rid_txt'}</label>
+                <div><select name="rid" id="rid" class="form-control">
+                    {tmpl_var name='rid'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="email">{tmpl_var name='email_txt'}</label>
+                <div><input type="text" name="email" id="email" value="{tmpl_var name='email'}" class="form-control" /></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="priority">{tmpl_var name='priority_txt'}</label>
+                <div><select name="priority" id="priority" class="form-control">
+                    {tmpl_var name='priority'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='active_txt'}</label>
+                <div>
+                    {tmpl_var name='active'}
+                </div>
+            </div>
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+        <input type="hidden" name="wb" value="{tmpl_var name='wb'}">
+
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="mail/spamfilter_whitelist_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="mail/spamfilter_whitelist_list.php" data-load-content="mail/spamfilter_whitelist_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div>

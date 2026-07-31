@@ -1,0 +1,41 @@
+<!-- WP-940 Bootstrap-removal: native Workbench override; shared template unchanged. -->
+            <div class="wb-field-group">
+                <label for="name">{tmpl_var name='name_txt'}</label>
+                <div><input type="text" name="name" id="name" value="{tmpl_var name='name'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="order">{tmpl_var name='order_txt'}</label>
+                <div><input type="text" name="order" id="order" value="{tmpl_var name='aux'}" class="form-control" placeholder="100" /></div></div>
+            <div class="wb-field-group">
+                <label for="pref">{tmpl_var name='pref_txt'}</label>
+                <div><input type="text" name="pref" id="pref" value="{tmpl_var name='pref'}" class="form-control" placeholder="100" /></div></div>
+            <div class="wb-field-group">
+                <label for="flags">{tmpl_var name='flags_txt'}</label>
+                <div><input type="text" name="flags" id="flags" value="{tmpl_var name='flags'}" class="form-control" placeholder="s" /></div></div>
+            <div class="wb-field-group">
+                <label for="service">{tmpl_var name='service_txt'}</label>
+                <div><input type="text" name="service" id="service" value="{tmpl_var name='service'}" class="form-control" placeholder="http+I2R" /></div></div>
+            <div class="wb-field-group">
+                <label for="regexp">{tmpl_var name='regexp_txt'}</label>
+                <div><input type="text" name="regexp" id="regexp" value="{tmpl_var name='regexp'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="replacement">{tmpl_var name='replacement_txt'}</label>
+                <div><input type="text" name="replacement" id="replacement" value="{tmpl_var name='replacement'}" class="form-control" placeholder="_http._tcp.foo.com." /></div></div>
+            <div class="wb-field-group">
+                <label for="ttl">{tmpl_var name='ttl_txt'}</label>
+                <div><input type="text" name="ttl" id="ttl" value="{tmpl_var name='ttl'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='active_txt'}</label>
+                <div>
+                    {tmpl_var name='active'}
+                </div>
+            </div>
+
+
+	<input type="hidden" name="id" value="{tmpl_var name='id'}">
+	<input type="hidden" name="zone" value="{tmpl_var name='zone'}">
+	<input type="hidden" name="type" value="{tmpl_var name='type'}">
+
+        <div class="wb-form-actions">
+	<button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="dns/dns_naptr_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="dns/dns_soa_edit.php?id={tmpl_var name='zone'}&next_tab=dns_records" data-load-content="dns/dns_soa_edit.php?id={tmpl_var name='zone'}&next_tab=dns_records">{tmpl_var name='btn_cancel_txt'}</button>
+        </div>

@@ -1,0 +1,40 @@
+<!-- WP-965: native Workbench operations surface; controller contract unchanged. -->
+<div class="wb-field-group">
+    <label for="server_id" >{tmpl_var name='server_id_txt'}</label>
+    <div class="wb-field-body">
+        <select name="server_id" id="server_id" class="form-control">
+            {tmpl_var name='server_id'}
+        </select>
+    </div>
+</div>
+
+<div class="wb-field-group">
+    <label for="source_ip" >{tmpl_var name='source_txt'}</label>
+    <div class="wb-field-body">
+        <select name="source_ip" id="source_ip" class="form-control">
+            {tmpl_var name='source_ip'}
+        </select>
+    </div>
+</div>
+
+<div class="wb-field-group">
+    <label for="destination_ip" >{tmpl_var name='destination_txt'}</label>
+    <div class="wb-field-body">
+        <input type="text" name="destination_ip" id=destination_ip" value="{tmpl_var name='destination_ip'}" class="form-control" />
+    </div>
+</div>
+
+<div class="wb-field-group">
+    <label >{tmpl_var name='active_txt'}</label>
+    <div class="wb-field-body">
+        {tmpl_var name='active'}
+    </div>
+</div>
+
+<div class="wb-field-group">
+    <input type="hidden" name="id" value="{tmpl_var name='id'}">
+  <div class="wb-form-actions"><div class="wb-form-actions__primary">
+        <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="admin/server_ip_map_edit.php">{tmpl_var name='btn_save_txt'}</button>
+        <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="admin/server_ip_map_list.php" data-load-content="admin/server_ip_map_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+    </div></div>
+</div>

@@ -1,0 +1,24 @@
+<!-- WP-947: native Workbench reporting/access surface; shared lifecycle unchanged. -->
+            <div class="wb-field-group">
+                <label for="parent_domain_id">{tmpl_var name='parent_domain_id_txt'}</label>
+                <div class="wb-field-body"><select name="parent_domain_id" id="parent_domain_id" class="form-control">
+                    {tmpl_var name='parent_domain_id'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="path">{tmpl_var name='path_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="path" id="path" value="{tmpl_var name='path'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='active_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='active'}
+                </div>
+            </div>
+
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions"><div class="wb-form-actions__primary">
+            <button class="wb-input-group-action formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="sites/web_folder_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="wb-input-group-action formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="sites/web_folder_list.php" data-load-content="sites/web_folder_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div></div>

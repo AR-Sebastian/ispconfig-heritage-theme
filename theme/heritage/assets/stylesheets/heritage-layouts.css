@@ -1,0 +1,326 @@
+/* ISPConfig Heritage Glass
+ *
+ * Page-level composition for dashboard, lists and forms. This layer does not
+ * alter application behaviour; it turns the shared runtime primitives into a
+ * coherent Heritage workspace.
+ */
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent {
+  --hg-page-gap: clamp(14px, 1.5vw, 22px);
+  display: flow-root;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 24px;
+  align-items: end;
+  margin-block-end: 10px;
+  padding-block-end: 18px;
+  border-bottom: 1px solid var(--hg-border);
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-header__eyebrow {
+  color: var(--hg-accent);
+  font-size: 10px;
+  font-weight: 820;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-header > h1 {
+  max-width: 28ch;
+  margin: 2px 0 0;
+  font-size: clamp(25px, 3vw, 38px);
+  line-height: 1.05;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-header__actions {
+  display: flex;
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-meta {
+  display: flex;
+  min-height: 34px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-block: 10px var(--hg-page-gap);
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  .wb-form-state,
+  .wb-submit-feedback
+) {
+  min-height: 32px;
+  padding: 6px 11px;
+  border: 1px solid var(--hg-border);
+  border-radius: var(--hg-radius-pill);
+  background: color-mix(in srgb, var(--hg-surface) 88%, transparent);
+  box-shadow: var(--hg-shadow-xs);
+}
+
+/* Lists */
+
+body.heritage-shell.wb-list-page #pageContent > .table-wrapper {
+  position: relative;
+  overflow: clip;
+  margin-block: var(--hg-page-gap);
+  border-radius: var(--hg-radius-xl);
+  background: var(--hg-surface);
+  box-shadow: var(--hg-shadow-sm);
+}
+
+body.heritage-shell.wb-list-page #pageContent > .table-wrapper > :is(
+  .table-responsive,
+  .table-scroll-wrapper
+) {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+body.heritage-shell.wb-list-page #pageContent :is(
+  .wb-list-toolbar,
+  .wb-list-summary,
+  .wb-table-commandbar
+) {
+  display: flex;
+  min-height: 62px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--hg-border);
+  background:
+    linear-gradient(90deg, var(--hg-accent-soft), transparent 38%),
+    var(--hg-surface);
+}
+
+body.heritage-shell.wb-list-page #pageContent :is(
+  .wb-list-toolbar,
+  .wb-list-summary,
+  .wb-table-commandbar
+) > :last-child {
+  margin-inline-start: auto;
+}
+
+body.heritage-shell.wb-list-page #pageContent :is(
+  .wb-filter-row,
+  tr.filter,
+  tr[class*='filter']
+) {
+  background: var(--hg-surface-subtle);
+}
+
+body.heritage-shell.wb-list-page #pageContent :is(
+  .wb-filter-row,
+  tr.filter,
+  tr[class*='filter']
+) > :is(td, th) {
+  height: auto;
+  padding: 9px 8px;
+  border-block: 1px solid var(--hg-border);
+  background: var(--hg-surface-subtle);
+  vertical-align: middle;
+}
+
+body.heritage-shell.wb-list-page #pageContent :is(
+  .wb-filter-row,
+  tr.filter,
+  tr[class*='filter']
+) > :is(td, th):empty {
+  min-width: 0;
+  padding-inline: 0;
+  border-color: var(--hg-border);
+}
+
+body.heritage-shell.wb-list-page #pageContent :is(
+  .wb-filter-row,
+  tr.filter,
+  tr[class*='filter']
+) :is(input, select) {
+  width: 100%;
+  min-width: 92px;
+  min-height: 38px;
+}
+
+body.heritage-shell.wb-list-page #pageContent :is(
+  .pagination,
+  .wb-pagination
+) {
+  display: flex;
+  min-height: 58px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  margin: 0;
+  padding: 10px 14px;
+  border-top: 1px solid var(--hg-border);
+  background: var(--hg-surface);
+}
+
+body.heritage-shell.wb-list-page #pageContent :is(
+  .pagination,
+  .wb-pagination
+) :is(a, button, span) {
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: 10px;
+}
+
+body.heritage-shell.wb-list-page #pageContent .wb-content-state {
+  min-height: 270px;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+/* Forms */
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form {
+  display: grid;
+  gap: var(--hg-page-gap);
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell {
+  overflow: clip;
+  border: 1px solid var(--hg-border);
+  border-radius: var(--hg-radius-xl);
+  background: var(--hg-surface);
+  box-shadow: var(--hg-shadow-sm);
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs {
+  min-height: 55px;
+  margin: 0;
+  padding: 0 12px;
+  background:
+    linear-gradient(180deg, var(--hg-surface), var(--hg-surface-subtle));
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell > .tab-content {
+  padding: clamp(18px, 2.3vw, 32px);
+  border: 0;
+  background: var(--hg-surface);
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+  fieldset,
+  .panel,
+  .wb-content-panel
+) {
+  margin-block-end: var(--hg-page-gap);
+  padding: clamp(16px, 2vw, 26px);
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+  legend,
+  .panel-heading,
+  .wb-content-panel__header
+) {
+  margin-block-end: 18px;
+  padding-block-end: 12px;
+  border-bottom: 1px solid var(--hg-border);
+  font-size: 15px;
+  font-weight: 780;
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .form-group {
+  display: grid;
+  grid-template-columns: minmax(145px, .38fr) minmax(220px, 1fr);
+  gap: 10px clamp(14px, 2vw, 28px);
+  align-items: start;
+  margin-block-end: 16px;
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .form-group > :is(
+  label,
+  .control-label
+) {
+  padding-block-start: 10px;
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .form-group > :is(
+  .form-control,
+  .input-group,
+  .controls,
+  div
+) {
+  min-width: 0;
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+  .button-wrapper,
+  .form-actions,
+  .wb-form-actions
+) {
+  position: sticky;
+  z-index: 12;
+  bottom: 10px;
+  display: flex;
+  min-height: 64px;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--hg-border);
+  border-radius: var(--hg-radius-lg);
+  background: color-mix(in srgb, var(--hg-surface) 88%, transparent);
+  box-shadow: var(--hg-shadow-md);
+  backdrop-filter: blur(18px) saturate(130%);
+}
+
+@container wb-page-content (max-width: 760px) {
+  body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-header {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-header__actions {
+    grid-column: 1;
+    grid-row: auto;
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-header__actions > * {
+    flex: 1 1 180px;
+  }
+
+  body.heritage-shell.wb-form-page #pageForm.wb-modern-form .form-group {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+
+  body.heritage-shell.wb-form-page #pageForm.wb-modern-form .form-group > :is(
+    label,
+    .control-label
+  ) {
+    padding-block-start: 0;
+  }
+}
+
+@container wb-page-content (max-width: 520px) {
+  body.heritage-shell.wb-list-page #pageContent :is(
+    .wb-list-toolbar,
+    .wb-list-summary,
+    .wb-table-commandbar
+  ) > * {
+    flex: 1 1 100%;
+  }
+
+  body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+    .button-wrapper,
+    .form-actions,
+    .wb-form-actions
+  ) > * {
+    flex: 1 1 100%;
+  }
+}

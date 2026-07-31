@@ -1,0 +1,54 @@
+<!-- WP-965: native Workbench operations surface; controller contract unchanged. -->
+            <div class="wb-field-group">
+                <label for="remote_username" >{tmpl_var name='username_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="remote_username" id="username" value="{tmpl_var name='remote_username'}" class="form-control" /></div></div>
+
+            <div class="wb-field-group">
+                <label for="remote_password" >{tmpl_var name='password_txt'}</label>
+                <div class="wb-field-body">
+					<div class="wb-field-composite">
+						<input type="password" name="remote_password" id="password" value="{tmpl_var name='remote_password'}" class="form-control" autocomplete="off" data-workbench-password-check="password:repeat_password" data-workbench-password-strength="true" />
+						<span class="wb-input-group-actions">
+							<button class="formbutton-default" type="button" data-generate-password="true" data-password-field="password" data-repeat-password-field="repeat_password">{tmpl_var name='generate_password_txt'}</button>
+						</span>
+					</div><!-- /input-group -->
+				</div>
+            </div>
+            <div class="wb-field-group">
+                <label >{tmpl_var name='password_strength_txt'}</label>
+                <div class="wb-field-body">
+                <div id="passBar"></div>
+                <span id="passText">&nbsp;</span>
+                </div>
+            </div>
+            <div class="wb-field-group">
+                <label for="repeat_password" >{tmpl_var name='repeat_password_txt'}</label>
+                <div class="wb-field-body"><input type="password" name="repeat_password" id="repeat_password" value="" class="form-control" autocomplete="off" data-workbench-password-check="password:repeat_password" /></div></div>
+            <div class="wb-field-group">
+				<div class="wb-field-body wb-field-body--offset">
+					<div id="confirmpasswordError" hidden class="confirmpassworderror">{tmpl_var name='password_mismatch_txt'}</div>
+					<div id="confirmpasswordOK" hidden class="confirmpasswordok">{tmpl_var name='password_match_txt'}</div>
+				</div>
+			</div>
+            <div class="wb-field-group">
+                <label >{tmpl_var name='remote_access_txt'}</label>
+                <div class="wb-field-body">{tmpl_var name='remote_access'}</div></div>
+            <div class="wb-field-group">
+                <label for="remote_ips" >{tmpl_var name='remote_ips_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="remote_ips" id="remote_ips" value="{tmpl_var name='remote_ips'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label >{tmpl_var name='function_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='remote_functions'}
+                </div>
+            </div>
+
+
+
+        <input type="hidden" name="remote_userid" value="{tmpl_var name='id'}">
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions"><div class="wb-form-actions__primary">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="admin/remote_user_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="admin/remote_user_list.php" data-load-content="admin/remote_user_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div></div>

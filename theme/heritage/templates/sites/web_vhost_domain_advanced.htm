@@ -1,0 +1,165 @@
+<!-- WP-948: native Workbench website core surface; shared lifecycle unchanged. -->
+<tmpl_if name="config_error_msg">
+  <div>
+      <p>
+        <div id="errormsg" class="wb-alert wb-alert--danger wb-alert--dismissible" role="alert" data-wb-ack-url="sites/message_ack.php?relation=web_domain:{tmpl_var name='id'}&amp;_csrf_id={tmpl_var name='_csrf_id_msg'}&amp;_csrf_key={tmpl_var name='_csrf_key_msg'}">
+          <button type="button" class="wb-alert__dismiss" data-workbench-dismiss="alert" aria-label="Schließen" data-wb-i18n-aria-label-de="Schließen" data-wb-i18n-aria-label-en="Close"><span aria-hidden="true">&times;</span></button>
+          <div class="wb-config-error-time">{tmpl_var name='config_error_tstamp'} :&nbsp;</div>
+          <div class="wb-config-error-message">{tmpl_var name='config_error_msg'}</div>
+        </div>
+      </p>
+    </div>
+</tmpl_if>
+<input name="document_root" id="document_root" value="{tmpl_var name='document_root'}" size="30" maxlength="255" type="hidden" class="textInput" />
+<div class="wb-field-group">
+  <label for="added_date">{tmpl_var name='added_date_txt'}</label>
+  <div class="wb-field-body"><input type="text" name="added_date" id="added_date" value="{tmpl_var name='added_date'}" class="form-control" /></div>
+</div>
+<div class="wb-field-group">
+  <label for="added_by">{tmpl_var name='added_by_txt'}</label>
+  <div class="wb-field-body"><input type="text" name="added_by" id="added_by" value="{tmpl_var name='added_by'}" class="form-control" /></div>
+</div>
+<div class="wb-field-group">
+  <label for="system_user">{tmpl_var name='system_user_txt'}</label>
+  <div class="wb-field-body">
+    <div class="checkbox">&nbsp; &nbsp;{tmpl_var name='system_user'}</div>
+  </div>
+  <input name="system_user" id="system_user" value="{tmpl_var name='system_user'}" type="hidden" />
+</div>
+<div class="wb-field-group">
+  <label for="system_group">{tmpl_var name='system_group_txt'}</label>
+  <div class="wb-field-body">
+    <div class="checkbox">&nbsp; &nbsp;{tmpl_var name='system_group'}</div>
+  </div>
+  <input name="system_group" id="system_group" value="{tmpl_var name='system_group'}" type="hidden" />
+</div>
+<div class="wb-field-group">
+  <label for="log_retention">{tmpl_var name='log_retention_txt'}</label>
+  <div class="wb-field-body"><input name="log_retention" id="log_retention" value="{tmpl_var name='log_retention'}" type="text" class="form-control" /></div>
+</div>
+<div class="wb-field-group apache">
+  <label for="allow_override">{tmpl_var name='allow_override_txt'}</label>
+  <div class="wb-field-body"><input type="text" name="allow_override" id="allow_override" value="{tmpl_var name='allow_override'}" class="form-control" /></div>
+</div>
+<div class="wb-field-group nginx">
+  <label for="http_port">{tmpl_var name='http_port_txt'}</label>
+  <div class="wb-field-body"><input name="http_port" id="http_port" value="{tmpl_var name='http_port'}" type="text" class="form-control" /></div>
+</div>
+<div class="wb-field-group nginx">
+  <label for="https_port">{tmpl_var name='https_port_txt'}</label>
+  <div class="wb-field-body"><input name="https_port" id="https_port" value="{tmpl_var name='https_port'}" type="text" class="form-control" /></div>
+</div>
+<div class="wb-field-group">
+  <label>{tmpl_var name='proxy_protocol_txt'}</label>
+  <div class="wb-field-body">
+    {tmpl_var name='proxy_protocol'}
+  </div>
+</div>
+<div class="phpfpm">
+  <div class="wb-field-group">
+    <label>{tmpl_var name='php_fpm_use_socket_txt'}</label>
+    <div class="wb-field-body">
+      {tmpl_var name='php_fpm_use_socket'}
+    </div>
+  </div>
+  <div class="wb-field-group">
+    <label>{tmpl_var name='php_fpm_chroot_txt'}</label>
+    <div class="wb-field-body">
+      {tmpl_var name='php_fpm_chroot'}
+    </div>
+  </div>
+  <div class="wb-field-group">
+    <label for="pm">{tmpl_var name='pm_txt'}</label>
+    <div class="wb-field-body"><select name="pm" id="pm" class="form-control" data-pm-mode-control="true">
+      {tmpl_var name='pm'}
+      </select>
+    </div>
+  </div>
+  <div class="wb-field-group">
+    <label for="pm_max_children">{tmpl_var name='pm_max_children_txt'}</label>
+    <div class="wb-field-body"><input type="text" name="pm_max_children" id="pm_max_children" value="{tmpl_var name='pm_max_children'}" class="form-control" /></div>
+  </div>
+  <div class="wb-field-group pm_dynamic">
+    <label for="pm_start_servers">{tmpl_var name='pm_start_servers_txt'}</label>
+    <div class="wb-field-body"><input type="text" name="pm_start_servers" id="pm_start_servers" value="{tmpl_var name='pm_start_servers'}" class="form-control" /></div>
+  </div>
+  <div class="wb-field-group pm_dynamic">
+    <label for="pm_min_spare_servers">{tmpl_var name='pm_min_spare_servers_txt'}</label>
+    <div class="wb-field-body"><input type="text" name="pm_min_spare_servers" id="pm_min_spare_servers" value="{tmpl_var name='pm_min_spare_servers'}" class="form-control" /></div>
+  </div>
+  <div class="wb-field-group pm_dynamic">
+    <label for="pm_max_spare_servers">{tmpl_var name='pm_max_spare_servers_txt'}</label>
+    <div class="wb-field-body"><input type="text" name="pm_max_spare_servers" id="pm_max_spare_servers" value="{tmpl_var name='pm_max_spare_servers'}" class="form-control" /></div>
+  </div>
+  <div class="wb-field-group pm_ondemand">
+    <label for="pm_process_idle_timeout">{tmpl_var name='pm_process_idle_timeout_txt'}</label>
+    <div class="wb-field-body"><input type="text" name="pm_process_idle_timeout" id="pm_process_idle_timeout" value="{tmpl_var name='pm_process_idle_timeout'}" class="form-control" /></div>
+    <div class="wb-field-affix">&nbsp;s
+    </div>
+  </div>
+  <div class="wb-field-group">
+    <label for="pm_max_requests">{tmpl_var name='pm_max_requests_txt'}</label>
+    <div class="wb-field-body"><input type="text" name="pm_max_requests" id="pm_max_requests" value="{tmpl_var name='pm_max_requests'}" class="form-control" /></div>
+  </div>
+</div>
+<div class="wb-field-group">
+    <label>{tmpl_var name='disable_symlinknotowner_txt'}</label>
+    <div class="wb-field-body">
+        <a data-workbench-tooltip="true" title="{tmpl_var name='tooltip_disable_symlinknotowner_txt'}">{tmpl_var name='disable_symlinknotowner'}</a>
+    </div>
+</div>
+<div class="wb-field-group php">
+  <label for="php_open_basedir">{tmpl_var name='php_open_basedir_txt'}</label>
+  <div class="wb-field-body"><input type="text" name="php_open_basedir" id="php_open_basedir" value="{tmpl_var name='php_open_basedir'}" class="form-control" /></div>
+</div>
+<div class="wb-field-group php">
+  <label for="custom_php_ini">{tmpl_var name='custom_php_ini_txt'}</label>
+  <div class="wb-field-body"><textarea class="form-control" name="custom_php_ini" id="custom_php_ini" rows='10' cols='50'>{tmpl_var name='custom_php_ini'}</textarea>
+    <b>{tmpl_var name="available_php_directive_snippets_txt"}</b><br><br>&nbsp;{tmpl_var name="php_directive_snippets_txt"}
+  </div>
+</div>
+<div class="wb-field-group apache">
+  <label for="apache_directives">{tmpl_var name='apache_directives_txt'}</label>
+  <div class="wb-field-body"><textarea class="form-control" name="apache_directives" id="apache_directives" rows='10' cols='50'>{tmpl_var name='apache_directives'}</textarea>
+    <b>{tmpl_var name="available_apache_directive_snippets_txt"}</b><br><br>&nbsp;{tmpl_var name="apache_directive_snippets_txt"}<br>----<br><b>&nbsp;{tmpl_var name='variables_txt'}:</b> <a href="#" data-workbench-noop="true" class="addPlaceholder">{DOCROOT}</a>,  <a href="#" data-workbench-noop="true" class="addPlaceholder">{DOCROOT_CLIENT}</a>,  <a href="#" data-workbench-noop="true" class="addPlaceholder">{DOMAIN}</a>
+  </div>
+</div>
+<div class="wb-field-group nginx">
+  <label for="nginx_directives">{tmpl_var name='nginx_directives_txt'}</label>
+  <div class="wb-field-body"><textarea class="form-control" name="nginx_directives" id="nginx_directives" rows='10' cols='50'>{tmpl_var name='nginx_directives'}</textarea>
+    <b>{tmpl_var name="available_nginx_directive_snippets_txt"}</b><br><br>&nbsp;{tmpl_var name="nginx_directive_snippets_txt"}<br>----<br><b>&nbsp;{tmpl_var name='variables_txt'}:</b> <a href="#" data-workbench-noop="true" class="addPlaceholder">{DOCROOT}</a>,  <a href="#" data-workbench-noop="true" class="addPlaceholder">{DOCROOT_CLIENT}</a>,  <a href="#" data-workbench-noop="true" class="addPlaceholder">{DOMAIN}</a>,  <a href="#" data-workbench-noop="true" class="addPlaceholder">{FASTCGIPASS}</a>, <a href="#" data-workbench-noop="true" class="addPlaceholder">{PHPFALLBACKFASTCGIPASS}</a>
+  </div>
+</div>
+<div class="wb-field-group proxy">
+  <label for="proxy_directives">{tmpl_var name='proxy_directives_txt'}</label>
+  <div class="wb-field-body"><textarea class="form-control" name="proxy_directives" id="proxy_directives" rows='10'>{tmpl_var name='proxy_directives'}</textarea>
+    <b>{tmpl_var name="available_proxy_directive_snippets_txt"}</b><br><br>&nbsp;{tmpl_var name="proxy_directive_snippets_txt"}
+  </div>
+</div>
+<div class="jailkit">
+  <div class="wb-field-group">
+    <label>{tmpl_var name='jailkit_chroot_app_sections_txt'}</label>
+    <div class="wb-field-body">
+      <input name="jailkit_chroot_app_sections" id="jailkit_chroot_app_sections" value="{tmpl_var name='jailkit_chroot_app_sections'}" data-workbench-tooltip="true" title="{tmpl_var name='tooltip_jailkit_chroot_app_sections_txt'}" type="text" class="form-control" />
+    </div>
+  </div>
+  <div class="wb-field-group">
+    <label>{tmpl_var name='jailkit_chroot_app_programs_txt'}</label>
+    <div class="wb-field-body">
+      <input name="jailkit_chroot_app_programs" id="jailkit_chroot_app_programs" value="{tmpl_var name='jailkit_chroot_app_programs'}" data-workbench-tooltip="true" title="{tmpl_var name='tooltip_jailkit_chroot_app_programs_txt'}" type="text" class="form-control" />
+    </div>
+  </div>
+  <div class="wb-field-group">
+    <label>{tmpl_var name='delete_unused_jailkit_txt'}</label>
+    <div class="wb-field-body">
+      <a data-workbench-tooltip="true" title="{tmpl_var name='tooltip_delete_unused_jailkit_txt'}">{tmpl_var name='delete_unused_jailkit'}</a>
+    </div>
+  </div>
+</div>
+<input type="hidden" name="id" value="{tmpl_var name='id'}" data-json-sync="sites-vhost-advanced">
+<div class="wb-form-actions">
+  <div class="wb-form-actions__primary">
+    <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="sites/web_vhost_domain_edit.php">{tmpl_var name='btn_save_txt'}</button>
+    <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="sites/web_vhost_domain_list.php" data-load-content="sites/web_vhost_domain_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<!-- WP-926 Bootstrap-removal batch 3: native override of mail/mail_aliasdomain_edit.
+     Native wb-field-group / wb-form-actions structure; shared template untouched.
+     All {tmpl_var}, autofocus and data-* hooks verbatim. NOTE: the first field's
+     label for="destination" is an upstream mismatch (the select is id="source"),
+     preserved verbatim (not corrected here). -->
+            <div class="wb-field-group">
+                <label for="destination">{tmpl_var name='source_txt'}</label>
+                <div><select name="source" id="source" class="form-control" autofocus>
+                    {tmpl_var name='source_domain'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="destination">{tmpl_var name='destination_txt'}</label>
+                <div><select name="destination" id="destination" class="form-control">
+                    {tmpl_var name='destination_domain'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='active_txt'}</label>
+                <div>
+                    {tmpl_var name='active'}
+                </div>
+            </div>
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+        <input type="hidden" name="type" value="aliasdomain">
+
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="mail/mail_aliasdomain_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="mail/mail_aliasdomain_list.php" data-load-content="mail/mail_aliasdomain_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div>

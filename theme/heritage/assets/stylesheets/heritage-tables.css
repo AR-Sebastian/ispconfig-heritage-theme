@@ -1,0 +1,374 @@
+/* ISPConfig Heritage Glass — table-system authority.
+ *
+ * The shared Workbench adapters provide semantics and lifecycle behavior.
+ * This layer owns the Heritage composition only: command bar, filter row,
+ * records, actions, empty states, pagination and responsive record cards.
+ */
+
+body.heritage-shell.wb-list-page #pageContent.wb-table-workspace--finalized {
+  --hg-table-gap: 12px;
+  container: hg-table-workspace / inline-size;
+}
+
+body.heritage-shell.wb-list-page #pageContent.wb-table-workspace--finalized > .wb-list-section-heading {
+  margin-block: 0 10px;
+  padding-inline-start: 14px;
+  border-inline-start: 3px solid var(--hg-accent);
+  color: var(--hg-text);
+  font-size: var(--hg-font-lg);
+  line-height: 1.25;
+}
+
+body.heritage-shell.wb-list-page #pageContent.wb-table-workspace--finalized > .wb-list-command-bar {
+  gap: 12px 18px;
+  margin-block-end: var(--hg-table-gap);
+  padding: 12px 14px;
+  border: 1px solid var(--hg-border);
+  border-radius: var(--hg-radius-lg);
+  background: var(--hg-surface);
+  box-shadow: var(--hg-shadow-xs);
+}
+
+body.heritage-shell.wb-list-page .wb-list-command-bar__meta,
+body.heritage-shell.wb-list-page .wb-list-command-bar__actions {
+  min-block-size: 42px;
+}
+
+body.heritage-shell.wb-list-page .wb-list-result-count {
+  color: var(--hg-text-muted);
+  border-color: var(--hg-border);
+  background: var(--hg-surface-subtle);
+}
+
+body.heritage-shell.wb-list-page :is(
+  .wb-list-command-bar__primary,
+  .wb-filter-toggle,
+  .wb-filter-reset
+) {
+  min-block-size: 42px;
+  border-radius: var(--hg-radius-md);
+}
+
+body.heritage-shell.wb-list-page .wb-filter-toolbar {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body.heritage-shell.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport {
+  border: 1px solid var(--hg-border);
+  border-radius: var(--hg-radius-lg) var(--hg-radius-lg) 0 0;
+  background: var(--hg-surface);
+  box-shadow: var(--hg-shadow-sm);
+}
+
+body.heritage-shell.wb-list-page .wb-data-table {
+  color: var(--hg-text);
+  background: transparent;
+}
+
+body.heritage-shell.wb-list-page .wb-data-table > thead > tr:first-child > :is(th, td) {
+  block-size: 48px;
+  padding: 12px 16px;
+  color: var(--hg-text-muted);
+  border-block: 0 1px;
+  border-color: var(--hg-border);
+  background: var(--hg-surface-subtle);
+  font-size: var(--hg-font-xs);
+  font-weight: 700;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+}
+
+body.heritage-shell.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] > :is(th, td) {
+  padding: 10px 8px;
+  border-block: 0 1px;
+  border-color: var(--hg-border);
+  background: color-mix(in srgb, var(--hg-surface-subtle) 76%, var(--hg-surface));
+}
+
+body.heritage-shell.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] > :is(th, td):first-child {
+  padding-inline-start: 16px;
+}
+
+body.heritage-shell.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] > :is(th, td):last-child {
+  padding-inline-end: 16px;
+}
+
+body.heritage-shell.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] :is(
+  input,
+  select,
+  .form-control,
+  .wb-select__control
+) {
+  min-block-size: 40px !important;
+  color: var(--hg-text) !important;
+  border: 1px solid var(--hg-border) !important;
+  border-radius: var(--hg-radius-md) !important;
+  background: var(--hg-surface) !important;
+  box-shadow: none !important;
+}
+
+body.heritage-shell.wb-list-page .wb-data-table > tbody > tr {
+  transition: background-color .16s ease, box-shadow .16s ease;
+}
+
+body.heritage-shell.wb-list-page .wb-data-table > tbody > tr > :is(th, td) {
+  padding: 14px 16px;
+  color: var(--hg-text);
+  border-block: 0 1px;
+  border-color: var(--hg-border);
+  background: transparent;
+  vertical-align: middle;
+}
+
+body.heritage-shell.wb-list-page .wb-data-table > tbody > tr:is(:hover, :focus-within) {
+  background: color-mix(in srgb, var(--hg-accent) 5%, var(--hg-surface));
+  box-shadow: inset 3px 0 0 color-mix(in srgb, var(--hg-accent) 68%, transparent);
+}
+
+body.heritage-shell.wb-list-page .wb-data-table :is(th, td).hg-table-column--identity {
+  display: none !important;
+}
+
+body.heritage-shell.wb-list-page .wb-data-table .wb-table-actions {
+  position: sticky;
+  inset-inline-end: 0;
+  z-index: 2;
+  border-inline-start: 1px solid var(--hg-border);
+  background: color-mix(in srgb, var(--hg-surface) 96%, transparent);
+  box-shadow: -12px 0 22px color-mix(in srgb, var(--hg-page) 36%, transparent);
+}
+
+body.heritage-shell.wb-list-page .wb-data-table > thead .wb-table-actions {
+  z-index: 4;
+  background: var(--hg-surface-subtle);
+}
+
+body.heritage-shell.wb-list-page .wb-row-actions {
+  gap: 6px;
+}
+
+body.heritage-shell.wb-list-page .wb-row-actions :is(a, button) {
+  inline-size: 38px;
+  min-inline-size: 38px;
+  block-size: 38px;
+  border-radius: 10px;
+}
+
+body.heritage-shell.wb-list-page .wb-empty-state--table {
+  min-block-size: clamp(180px, 25cqi, 280px);
+  padding: clamp(24px, 5cqi, 54px);
+}
+
+body.heritage-shell.wb-list-page .wb-table-workspace--finalized > .wb-table-footer {
+  min-block-size: 62px;
+  padding: 10px 14px;
+  color: var(--hg-text-muted);
+  border: 1px solid var(--hg-border);
+  border-block-start: 0;
+  border-radius: 0 0 var(--hg-radius-lg) var(--hg-radius-lg);
+  background: var(--hg-surface);
+  box-shadow: var(--hg-shadow-sm);
+}
+
+body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li > :is(a, span) {
+  min-inline-size: 38px;
+  block-size: 38px;
+  border: 1px solid var(--hg-border);
+  border-radius: 10px;
+  color: var(--hg-text-muted);
+  background: var(--hg-surface-subtle);
+}
+
+body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > .active > :is(a, span),
+body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li > :is(a, span)[aria-current='page'] {
+  color: var(--hg-accent-contrast);
+  border-color: var(--hg-accent);
+  background: var(--hg-accent);
+}
+
+@container hg-table-workspace (max-width: 760px) {
+  body.heritage-shell.wb-list-page #pageContent.wb-table-workspace--finalized > .wb-list-command-bar {
+    padding: 12px;
+  }
+
+  body.heritage-shell.wb-list-page .wb-list-command-bar__actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body.heritage-shell.wb-list-page .wb-data-table > tbody > tr {
+    gap: 0;
+    margin-block-end: 12px;
+    padding: 6px 14px;
+    border: 1px solid var(--hg-border);
+    border-radius: var(--hg-radius-lg);
+    background: var(--hg-surface);
+    box-shadow: var(--hg-shadow-xs);
+  }
+
+  body.heritage-shell.wb-list-page .wb-data-table > tbody > tr > :is(th, td) {
+    min-block-size: 42px;
+    padding: 9px 0;
+    border-block-end: 1px solid var(--hg-border);
+  }
+
+  body.heritage-shell.wb-list-page .wb-data-table > tbody > tr > :is(th, td):last-child {
+    border-block-end: 0;
+  }
+
+  body.heritage-shell.wb-list-page .wb-data-table .wb-table-actions {
+    position: static;
+    border-inline-start: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized > .wb-table-footer {
+    border-block-start: 1px solid var(--hg-border);
+    border-radius: var(--hg-radius-lg);
+  }
+}
+
+/* Viewport fallback for old list layouts whose intrinsic table width prevents
+ * their container query from becoming narrow enough. Heritage must still
+ * present records as complete cards on phones. */
+@media (max-width: 760px) {
+  body.heritage-shell.wb-list-page #pageContent.wb-table-workspace--finalized > .wb-list-command-bar {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: stretch;
+  }
+
+  body.heritage-shell.wb-list-page .wb-list-command-bar__meta {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
+  }
+
+  body.heritage-shell.wb-list-page .wb-list-command-bar__actions,
+  body.heritage-shell.wb-list-page .wb-list-command-bar__actions > :is(
+    .wb-list-command-bar__primary,
+    .wb-filter-toolbar
+  ),
+  body.heritage-shell.wb-list-page .wb-filter-toggle {
+    inline-size: 100% !important;
+    max-inline-size: 100% !important;
+  }
+
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table,
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > :is(thead, tbody, tfoot) {
+    display: block !important;
+    inline-size: 100% !important;
+    min-inline-size: 0 !important;
+    background: transparent !important;
+  }
+
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr:first-child:not([data-workbench-filter-row]) {
+    position: absolute !important;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-workbench-filter-row] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+    margin-block-end: 12px;
+    padding: 12px;
+    border: 1px solid var(--hg-border);
+    border-radius: var(--hg-radius-lg);
+    background: var(--hg-surface-subtle);
+  }
+
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-workbench-filter-row][hidden] {
+    display: none !important;
+  }
+
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-workbench-filter-row] > :is(th, td) {
+    display: block !important;
+    inline-size: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr);
+    overflow: hidden;
+  }
+
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > :is(th, td) {
+    display: grid !important;
+    grid-template-columns: minmax(112px, 40%) minmax(0, 1fr);
+    gap: 12px;
+    inline-size: 100%;
+    max-inline-size: none;
+    color: var(--hg-text);
+    text-align: start;
+    overflow-wrap: anywhere;
+  }
+
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > :is(th, td)::before {
+    align-self: start;
+    color: var(--hg-text-muted);
+    content: attr(data-wb-label);
+    font-size: var(--hg-font-xs);
+    font-weight: 700;
+    letter-spacing: .025em;
+    text-transform: uppercase;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > .hg-table-column--identity {
+    display: none !important;
+  }
+
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > .wb-table-cell--empty {
+    display: none !important;
+  }
+
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > .wb-table-actions {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-end;
+    inline-size: 100%;
+    max-inline-size: 100%;
+  }
+
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > .wb-table-actions::before {
+    margin-inline-end: auto;
+  }
+
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > :is(.wb-table-empty-row, .wb-table-empty-row > td) {
+    display: block !important;
+    inline-size: 100% !important;
+    width: 100% !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.heritage-shell.wb-list-page .wb-data-table > tbody > tr {
+    transition: none;
+  }
+}

@@ -1,0 +1,33 @@
+<!-- WP-932 Bootstrap-removal: native override of mail/mail_blacklist_edit.
+     Native wb-field-group / wb-form-actions structure; shared template untouched.
+     All template variables and data-* hooks preserved verbatim. -->
+            <div class="wb-field-group">
+                <label for="server_id">{tmpl_var name='server_id_txt'}</label>
+                <div><select name="server_id" id="server_id" class="form-control">
+                    {tmpl_var name='server_id'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="source">{tmpl_var name='source_txt'}</label>
+                <div><input type="text" name="source" id="source" value="{tmpl_var name='source'}" class="form-control" /></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="type">{tmpl_var name='type_txt'}</label>
+                <div><select name="type" id="type" class="form-control">
+                    {tmpl_var name='type'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='active_txt'}</label>
+                <div>
+                    {tmpl_var name='active'}
+                </div>
+            </div>
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+        <input name="access" type="hidden" value="{tmpl_var name='access'}">
+
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="mail/mail_blacklist_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="mail/mail_blacklist_list.php" data-load-content="mail/mail_blacklist_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div>

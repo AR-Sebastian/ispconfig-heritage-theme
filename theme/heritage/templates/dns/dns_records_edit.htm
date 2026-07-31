@@ -1,0 +1,14 @@
+<!-- WP-945 preflight: native DNS record container; rendered record list contract unchanged. -->
+<div class="wb-dns-records">
+	<tmpl_if name="config_error_msg">
+		<div class="wb-notice wb-notice--danger">
+			<span class="wb-notice__icon" aria-hidden="true"></span>
+			<div>
+				<strong><tmpl_var name="configuration_error_txt"></strong>
+				<div><span class="wb-config-error-time">{tmpl_var name='config_error_tstamp'} :&nbsp;</span><span class="wb-config-error-message">{tmpl_var name='config_error_msg'}</span></div>
+			</div>
+		</div>
+	</tmpl_if>
+	{tmpl_var name='dns_records'}
+	<input type="hidden" name="id" value="{tmpl_var name='id'}">
+</div>

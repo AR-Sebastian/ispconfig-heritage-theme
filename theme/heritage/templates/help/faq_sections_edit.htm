@@ -1,0 +1,22 @@
+<!--
+  WP-925 Bootstrap-removal pilot: native, Bootstrap-free variant of the shared
+  help/faq_sections_edit.htm. Resolved by tpl.inc.php::_fileSearch() for the
+  active workbench theme; the shared template stays untouched and keeps serving
+  the default theme. Uses the native .wb-field-group / .wb-form-actions structure
+  instead of the shared template's Bootstrap grid. All
+  {tmpl_var} placeholders and data-* hooks are preserved verbatim so the
+  controller and workbench-content-states.js behave exactly as before.
+-->
+<section class="wb-content-panel wb-content-panel--form" data-wb-support-surface="faq-section-editor">
+            <div class="wb-field-group">
+                <label for="hfs_name">{tmpl_var name='faq_section_name_txt'}</label>
+                <div><input type="text" name="hfs_name" id="hfs_name" value="{tmpl_var name='hfs_name'}" class="form-control" /></div>
+            </div>
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="help/faq_sections_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="help/faq_sections_list.php" data-load-content="help/faq_sections_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div>
+</section>

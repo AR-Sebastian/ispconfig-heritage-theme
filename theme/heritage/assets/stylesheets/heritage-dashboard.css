@@ -1,0 +1,485 @@
+/*
+ * ISPConfig Heritage dashboard
+ *
+ * This file is the sole Heritage authority for dashboard composition. The
+ * shared dashboard layer supplies behaviour and semantic building blocks;
+ * spacing, sizing and responsive presentation are owned here.
+ */
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout {
+  --hg-dashboard-gap: clamp(12px, 1.25vw, 18px);
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-flow: row;
+  align-items: stretch;
+  gap: var(--hg-dashboard-gap);
+}
+
+body.heritage-shell.wb-dashboard-page .hg-dashboard-section {
+  display: flex;
+  min-width: 0;
+  grid-column: 1 / -1;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-block: 10px -3px;
+  padding-inline: 2px;
+}
+
+body.heritage-shell.wb-dashboard-page .hg-dashboard-section[data-heritage-dashboard-section='modules'] {
+  order: 10;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet-module-atomic {
+  order: 11;
+}
+
+body.heritage-shell.wb-dashboard-page .hg-dashboard-section[data-heritage-dashboard-section='metrics'] {
+  order: 20;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet-metric-atomic {
+  order: 21;
+}
+
+body.heritage-shell.wb-dashboard-page .hg-dashboard-section[data-heritage-dashboard-section='capacity'] {
+  order: 30;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > :is(
+  .wb-dashlet-limits,
+  .wb-dashlet-quota,
+  .wb-dashlet-mailquota,
+  .wb-dashlet-databasequota
+) {
+  order: 31;
+}
+
+body.heritage-shell.wb-dashboard-page .hg-dashboard-section[hidden] {
+  display: none;
+}
+
+body.heritage-shell.wb-dashboard-page .hg-dashboard-section strong {
+  color: var(--hg-text);
+  font-size: 15px;
+  letter-spacing: -.015em;
+}
+
+body.heritage-shell.wb-dashboard-page .hg-dashboard-section span {
+  color: var(--hg-text-muted);
+  font-size: 12px;
+  text-align: end;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > :is(
+  .page-header,
+  .wb-dashboard-hero,
+  .wb-dashboard-overview,
+  .wb-dashboard-toolbar,
+  .wb-dashboard-feedback,
+  .wb-dashboard-empty-state,
+  .wb-page-meta,
+  .wb-page-notices,
+  #errormsg,
+  #warningmsg,
+  #infomsg
+) {
+  grid-column: 1 / -1;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > :is(
+  .wb-page-meta,
+  .wb-page-notices
+):empty {
+  display: none;
+}
+
+body.heritage-shell.wb-dashboard-page .wb-dashboard-hero {
+  min-height: 0;
+  align-items: end;
+  padding-block-end: clamp(12px, 1.2vw, 18px);
+}
+
+body.heritage-shell.wb-dashboard-page .wb-dashboard-hero h1 {
+  max-width: 18ch;
+  letter-spacing: -.035em;
+}
+
+body.heritage-shell.wb-dashboard-page .wb-dashboard-overview {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--hg-dashboard-gap);
+}
+
+body.heritage-shell.wb-dashboard-page .wb-dashboard-overview__item {
+  min-height: 70px;
+  padding: 13px 16px;
+  border: 1px solid color-mix(in srgb, var(--hg-border) 82%, transparent);
+  border-radius: var(--hg-radius-lg);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--hg-accent) 2.5%, transparent), transparent 60%),
+    var(--hg-surface);
+  box-shadow: var(--hg-shadow-xs);
+}
+
+body.heritage-shell.wb-dashboard-page .wb-dashboard-toolbar {
+  min-height: 58px;
+  padding: 9px 12px;
+  border-color: color-mix(in srgb, var(--hg-border) 88%, transparent);
+  border-radius: var(--hg-radius-lg);
+  box-shadow: var(--hg-shadow-xs);
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet {
+  min-width: 0;
+  min-height: 148px;
+  align-content: start;
+  padding: clamp(14px, 1.3vw, 18px);
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--hg-border) 88%, transparent);
+  border-radius: var(--hg-radius-xl);
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--wb-dashlet-accent) 2.5%, transparent), transparent 58%),
+    var(--hg-surface);
+  box-shadow: var(--hg-shadow-sm);
+  transition:
+    border-color var(--hg-duration-fast) var(--hg-ease),
+    box-shadow var(--hg-duration-fast) var(--hg-ease),
+    transform var(--hg-duration-fast) var(--hg-ease);
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet-size-1x1 {
+  grid-column: span 3;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet-size-1x2 {
+  grid-column: span 3;
+  min-height: 312px;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet-size-2x2 {
+  grid-column: span 6;
+  min-height: 312px;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet-module-atomic.wb-dashlet-size-1x1 {
+  grid-column: span 4;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet-metric-atomic.wb-dashlet-size-1x1 {
+  grid-column: span 3;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet::before {
+  width: 3px;
+  height: auto;
+  inset: 18px auto 18px 0;
+  border-radius: 0 999px 999px 0;
+  background: var(--wb-dashboard-accent-calm, var(--hg-accent));
+  opacity: .42;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet:is(:hover, :focus-within) {
+  border-color: color-mix(in srgb, var(--wb-dashlet-accent) 24%, var(--hg-border));
+  box-shadow: var(--hg-shadow-md);
+  transform: translateY(-2px);
+}
+
+body.heritage-shell.wb-dashboard-page .wb-dashlet__header {
+  min-height: 34px;
+  margin-block-end: 10px;
+  padding-block-end: 9px;
+}
+
+body.heritage-shell.wb-dashboard-page .wb-dashlet-module-atomic {
+  grid-template-rows: auto 1fr;
+}
+
+body.heritage-shell.wb-dashboard-page .wb-dashlet-module-atomic .wb-module-launcher {
+  min-height: 72px;
+  align-items: center;
+}
+
+body.heritage-shell.wb-dashboard-page .wb-dashlet-module-atomic .wb-module-launcher__icon {
+  width: 38px;
+  height: 38px;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet-metric-atomic {
+  min-height: 258px;
+  grid-template-rows: auto 1fr;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet-metric-atomic .wb-dashboard-single-metric {
+  height: auto;
+  block-size: auto;
+  min-height: 0;
+  align-self: start;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet-metric-atomic .wb-dashboard-metric-card {
+  height: auto;
+  block-size: auto;
+  min-height: 188px;
+  min-block-size: 188px;
+  grid-template-rows: auto auto 88px auto auto;
+  align-self: start;
+  gap: 7px;
+  padding: 0 !important;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet-metric-atomic[data-wb-metric-viewport='compact'] .wb-dashboard-metric-card {
+  grid-template-rows: 30px 24px 88px auto auto;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout .wb-dashboard-metric-card__header {
+  min-height: 30px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout .wb-dashboard-metric-card__label {
+  display: block;
+  color: var(--hg-text-muted);
+  font-size: 10px;
+  font-weight: 760;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout .wb-dashboard-metric-card__value {
+  font-size: clamp(24px, 2.25vw, 34px);
+  letter-spacing: -.04em;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout .wb-dashboard-metric-card__meta {
+  display: block !important;
+  min-height: 18px;
+  margin: 0;
+  overflow: hidden;
+  color: var(--hg-text-muted);
+  font-size: 10px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout .wb-dashboard-metric-card__trend {
+  min-height: 24px;
+  align-self: start;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout :is(
+  .wb-dashboard-metric-chart,
+  .wb-dashboard-sparkline
+) {
+  block-size: 88px !important;
+  min-height: 88px;
+  min-block-size: 88px;
+  border-radius: var(--hg-radius-md);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--wb-dashlet-accent) 6%, transparent), transparent);
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout :is(
+  .wb-dashboard-metric-chart,
+  .wb-dashboard-sparkline
+) :is(svg, canvas) {
+  width: 100% !important;
+  max-width: 100%;
+  height: 88px !important;
+  block-size: 88px !important;
+  min-block-size: 88px;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout .wb-dashboard-metric-card__details {
+  margin-block-start: 8px;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-wb-dashboard-cockpit='metric'][data-wb-metric-viewport='compact'] .wb-dashboard-metric-card__meta {
+  display: block !important;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout .wb-dashboard-metric-card__toggle {
+  display: flex;
+  min-height: 36px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 7px 10px;
+  border: 1px solid var(--hg-border);
+  border-radius: var(--hg-radius-sm);
+  color: var(--hg-text);
+  background: var(--hg-surface-subtle);
+  font-size: 11px;
+  font-weight: 720;
+  cursor: pointer;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout .wb-dashboard-metric-card__toggle::after {
+  content: '+';
+  color: var(--hg-accent);
+  font-size: 16px;
+  line-height: 1;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout .wb-dashboard-metric-card__toggle[aria-expanded='true']::after {
+  content: '−';
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout .wb-dashboard-metric-card__details {
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 5px 12px;
+  padding: 10px;
+  border: 1px solid var(--hg-border);
+  border-radius: var(--hg-radius-sm);
+  background: var(--hg-surface-subtle);
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout .wb-dashboard-metric-card__details:not([hidden]) {
+  display: grid !important;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-wb-dashboard-cockpit='metric'][data-wb-metric-viewport='compact'] .wb-dashboard-metric-card__details:not([hidden]) {
+  display: grid !important;
+}
+
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet-limits {
+  grid-column: 1 / -1;
+  min-height: 0;
+}
+
+body.heritage-shell.wb-dashboard-page .wb-dashlet-limits:not(.wb-dashlet-limits--expanded) .table-wrapper {
+  display: none;
+}
+
+body.heritage-shell.wb-dashboard-page .wb-dashboard-layout-edit > .wb-dashlet {
+  outline: 1px dashed color-mix(in srgb, var(--hg-accent) 38%, var(--hg-border));
+  outline-offset: -5px;
+}
+
+body.heritage-shell.wb-dashboard-page .wb-dashboard-layout-edit > .wb-dashlet--dragging {
+  z-index: 2;
+  opacity: .72;
+  box-shadow: var(--hg-shadow-lg);
+  transform: scale(.985);
+}
+
+@container wb-page-content (max-width: 1080px) {
+  body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet-limits {
+    grid-column: 1 / -1;
+  }
+}
+
+@container wb-page-content (max-width: 760px) {
+  body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  body.heritage-shell.wb-dashboard-page .wb-dashboard-overview {
+    grid-template-columns: 1fr;
+  }
+
+  body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > :is(
+    .wb-dashlet-size-1x1,
+    .wb-dashlet-size-1x2,
+    .wb-dashlet-size-2x2,
+    .wb-dashlet-limits
+  ) {
+    grid-column: span 1;
+  }
+
+  body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > :is(
+    .wb-dashlet-size-2x2,
+    .wb-dashlet-limits
+  ) {
+    grid-column: 1 / -1;
+  }
+}
+
+@container wb-page-content (max-width: 520px) {
+  body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > :is(
+    .wb-dashlet,
+    .wb-dashlet-size-1x1,
+    .wb-dashlet-size-1x2,
+    .wb-dashlet-size-2x2,
+    .wb-dashlet-limits
+  ) {
+    grid-column: 1 / -1;
+    min-height: 0;
+  }
+
+  body.heritage-shell.wb-dashboard-page .wb-dashboard-hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  body.heritage-shell.wb-dashboard-page .wb-dashboard-hero :is(
+    h1,
+    .wb-dashboard-hero__title,
+    .wb-dashboard-hero__description
+  ) {
+    width: 100%;
+    max-width: none;
+    grid-column: 1;
+  }
+
+  body.heritage-shell.wb-dashboard-page .wb-dashboard-toolbar {
+    align-items: stretch;
+  }
+
+  body.heritage-shell.wb-dashboard-page .wb-dashboard-toolbar__actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  body.heritage-shell.wb-dashboard-page .wb-dashboard-toolbar__actions > * {
+    width: 100%;
+  }
+
+  body.heritage-shell.wb-dashboard-page .hg-dashboard-section {
+    display: grid;
+    gap: 3px;
+    align-items: start;
+  }
+
+  body.heritage-shell.wb-dashboard-page .hg-dashboard-section span {
+    text-align: start;
+  }
+
+  body.heritage-shell.wb-dashboard-page .wb-dashlet-metric-atomic {
+    min-height: 236px;
+  }
+}
+
+@media (max-width: 600px) {
+  body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashboard-hero {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 8px;
+  }
+
+  body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashboard-hero > * {
+    width: 100%;
+    max-width: none;
+    grid-column: 1 / -1;
+    justify-self: stretch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet {
+    transition: none;
+  }
+}

@@ -1,0 +1,26 @@
+<!-- WP-939 Bootstrap-removal: native Workbench override; shared template unchanged. -->
+            <div class="wb-field-group">
+                <label for="name">{tmpl_var name='name_txt'}</label>
+                <div><input type="text" name="name" id="name" value="{tmpl_var name='name'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="data">{tmpl_var name='data_txt'}</label>
+                <div><input type="text" name="data" id="data" value="{tmpl_var name='data'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="ttl">{tmpl_var name='ttl_txt'}</label>
+                <div><input type="text" name="ttl" id="ttl" value="{tmpl_var name='ttl'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='active_txt'}</label>
+                <div>
+                    {tmpl_var name='active'}
+                </div>
+            </div>
+
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+        <input type="hidden" name="zone" value="{tmpl_var name='zone'}">
+        <input type="hidden" name="type" value="{tmpl_var name='type'}">
+
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="dns/dns_ptr_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="dns/dns_soa_edit.php?id={tmpl_var name='zone'}&next_tab=dns_records" data-load-content="dns/dns_soa_edit.php?id={tmpl_var name='zone'}&next_tab=dns_records">{tmpl_var name='btn_cancel_txt'}</button>
+        </div>

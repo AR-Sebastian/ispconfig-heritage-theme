@@ -1,0 +1,28 @@
+<!-- WP-965: native Workbench operations surface; controller contract unchanged. -->
+<tmpl_if name="edit_record">
+<tmpl_else>
+<div class="wb-table-workspace">
+<table class="table wb-data-table">
+	<thead >
+		<tr>
+			<th data-column="active"><tmpl_var name="active_txt"></th>
+			<th data-column="name"><tmpl_var name="ca_name_txt"></th>
+			<th></th>
+		</tr>
+
+	</thead>
+	<tbody>
+		<tmpl_loop name="ca_records">
+			<tr>
+				<td>{tmpl_var name="active"}</td>
+				<td>{tmpl_var name="name"}</td>
+				<td class="wb-table-align-end">
+					<button class="formbutton-default formbutton-narrow" type="button" data-change-tab="dns_ca" data-tab-target="admin/system_config_edit.php?action=edit&id={tmpl_var name='ca_id'}" data-tab-force="true"><span class="icon icon-edit"></span></button>
+					<button class="formbutton-danger formbutton-narrow" type="button" data-change-tab="dns_ca" data-tab-target="admin/system_config_edit.php?action=delete&id={tmpl_var name='ca_id'}" data-tab-force="true"><span class="icon icon-delete"></span></button>
+				</td>
+			</tr>
+		</tmpl_loop>
+	</tbody>
+</table>
+</div>
+</tmpl_if>

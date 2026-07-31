@@ -1,0 +1,33 @@
+<!-- WP-973: native Workbench residual mail surface; controller contract unchanged. -->
+<tmpl_if name="config_error_msg">
+<div class="wb-alert wb-alert--danger">
+    <p>
+      <tmpl_var name="configuration_error_txt">
+        <div>
+          <div class="wb-config-error-time">{tmpl_var name='config_error_tstamp'} :&nbsp;</div>
+          <div class="wb-config-error-message">{tmpl_var name='config_error_msg'}</div>
+        </div>
+    </p>
+  </div>
+</tmpl_if>
+
+            <div class="wb-field-group">
+                <label for="backup_interval" class="wb-field-label">{tmpl_var name='backup_interval_txt'}</label>
+                <div class="wb-field-body"><select name="backup_interval" id="backup_interval" class="form-control">
+                    {tmpl_var name='backup_interval'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="backup_copies" class="wb-field-label">{tmpl_var name='backup_copies_txt'}</label>
+                <div class="wb-field-body"><select name="backup_copies" id="backup_copies" class="form-control">
+                    {tmpl_var name='backup_copies'}
+                </select></div>
+            </div>
+
+        {tmpl_var name='backup_records'}
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="mail/mail_user_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="mail/mail_user_list.php" data-load-content="mail/mail_user_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div>

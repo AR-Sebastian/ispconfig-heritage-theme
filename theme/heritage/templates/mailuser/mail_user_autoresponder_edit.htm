@@ -1,0 +1,28 @@
+<!-- WP-971: native Workbench mailuser surface; controller contract unchanged. -->
+            <div class="wb-field-group">
+                <label for="autoresponder_subject" class="wb-field-label">{tmpl_var name='autoresponder_subject_txt'}</label>
+                <div class="wb-field-body"><input class="form-control" type="text" name="autoresponder_subject" id="autoresponder_subject" value="{tmpl_var name='autoresponder_subject'}" /></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="autoresponder_text" class="wb-field-label">{tmpl_var name='autoresponder_text_txt'}</label>
+                <div class="wb-field-body"><textarea class="form-control" name="autoresponder_text" id="autoresponder_text" rows='15' cols='30'>{tmpl_var name='autoresponder_text'}</textarea></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="autoresponder" class="wb-field-label">{tmpl_var name='autoresponder_active'}</label>
+                <div class="wb-field-body"><input type="checkbox" value="y" id="autoresponder" name="autoresponder" data-autoresponder-reset="true" {tmpl_var name='ar_active'} /></div>
+			</div>
+            <div class="wb-field-group">
+                <label for="autoresponder_start_date" class="wb-field-label">{tmpl_var name='autoresponder_start_date_txt'}</label>
+                <div class="wb-field-body">{tmpl_var name='autoresponder_start_date'}</div>
+            </div>
+            <div class="wb-field-group">
+                <label for="autoresponder_end_date" class="wb-field-label">{tmpl_var name='autoresponder_end_date_txt'}</label>
+                <div class="wb-field-body">{tmpl_var name='autoresponder_end_date'}</div>
+            </div>
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button"
+                    value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="mailuser/mail_user_autoresponder_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="mailuser/index.php" data-load-content="mailuser/index.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div>

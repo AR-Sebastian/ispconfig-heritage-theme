@@ -1,0 +1,75 @@
+<!-- WP-931 Bootstrap-removal: native override of dns/dns_slave_edit.
+     Native wb-field-group / wb-form-actions structure; shared template untouched.
+     All template variables, conditionals and data-* hooks preserved verbatim. -->
+            <tmpl_if name="is_admin">
+                <div class="wb-field-group">
+                    <tmpl_if name="edit_disabled">
+                        <label for="server_id_disabled">{tmpl_var name='server_id_txt'}</label>
+                        <div><select name="server_id_disabled" id="server_id_disabled" class="form-control" disabled="disabled">
+                            {tmpl_var name='server_id'}
+                        </select></div>
+                        <input type="hidden" name="server_id" value="{tmpl_var name='server_id_value'}" />
+                    <tmpl_else>
+                            <label for="server_id">{tmpl_var name='server_id_txt'}</label>
+                            <div><select name="server_id" id="server_id" class="form-control">
+                                {tmpl_var name='server_id'}
+                            </select></div>
+                    </tmpl_if>
+                </div>
+                <tmpl_unless name="domain_option">
+                    <div class="wb-field-group">
+                        <label for="client_group_id">{tmpl_var name='client_txt'}</label>
+                        <div><select name="client_group_id" id="client_group_id" class="form-control">
+                            {tmpl_var name='client_group_id'}
+                        </select></div>
+                    </div>
+                </tmpl_unless>
+            </tmpl_if>
+            <tmpl_if name="is_reseller">
+                <tmpl_unless name="domain_option">
+                    <div class="wb-field-group">
+                        <label for="client_group_id">{tmpl_var name='client_txt'}</label>
+                        <div><select name="client_group_id" id="client_group_id" class="form-control">
+                            {tmpl_var name='client_group_id'}
+                        </select></div>
+                    </div>
+                </tmpl_unless>
+            </tmpl_if>
+            <div class="wb-field-group">
+                <label for="origin">{tmpl_var name='origin_txt'}</label>
+                <tmpl_if name="domain_option">
+                    <div><select name="origin" id="origin" class="form-control">
+                        {tmpl_var name='domain_option'}
+                    </select></div>
+                    <tmpl_else>
+                        <div>
+							<input type="text" name="origin" id="origin" value="{tmpl_var name='origin'}" class="form-control" />
+							<p class="formHint">{tmpl_var name='eg_domain_tld'}</p>
+						</div></tmpl_if>
+
+            </div>
+            <div class="wb-field-group">
+                <label for="ns">{tmpl_var name='ns_txt'}</label>
+                <div>
+					<input type="text" name="ns" id="ns" value="{tmpl_var name='ns'}" class="form-control" data-workbench-field-search="true" data-search-endpoint="dnsJson" data-search-type="get_ipv4" data-search-results-limit='$ <tmpl_var name="globalsearch_resultslimit_of_txt"> % <tmpl_var name="globalsearch_resultslimit_results_txt">' data-search-results-prefix='<tmpl_var name="globalsearch_suggestions_text_txt">' data-search-no-results='<tmpl_var name="globalsearch_noresults_text_txt">' data-search-no-results-limit='<tmpl_var name="globalsearch_noresults_limit_txt">' data-search-min-chars="0" data-search-css-prefix="df-" data-search-fill-field="true" data-search-fill-with="fill_text" />
+					<p class="formHint">{tmpl_var name='ipv4_form_txt'}</p>
+				</div>
+            </div>
+            <div class="wb-field-group">
+                <label for="xfer">{tmpl_var name='xfer_txt'}</label>
+                <div><input type="text" name="xfer" id="xfer" value="{tmpl_var name='xfer'}" class="form-control" data-workbench-field-search="true" data-search-endpoint="dnsJson" data-search-type="get_ipv4" data-search-results-limit='$ <tmpl_var name="globalsearch_resultslimit_of_txt"> % <tmpl_var name="globalsearch_resultslimit_results_txt">' data-search-results-prefix='<tmpl_var name="globalsearch_suggestions_text_txt">' data-search-no-results='<tmpl_var name="globalsearch_noresults_text_txt">' data-search-no-results-limit='<tmpl_var name="globalsearch_noresults_limit_txt">' data-search-min-chars="0" data-search-css-prefix="df-" data-search-fill-field="true" data-search-fill-with="fill_text" /></div></div>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='active_txt'}</label>
+                <div>
+                    {tmpl_var name='active'}
+                </div>
+            </div>
+
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+        <input name="serial" type="hidden" value="{tmpl_var name='serial'}">
+
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="dns/dns_slave_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="dns/dns_slave_list.php" data-load-content="dns/dns_slave_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div>

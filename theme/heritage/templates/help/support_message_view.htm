@@ -1,0 +1,19 @@
+<!-- WP-970: native Workbench help surface; controller contract unchanged. -->
+<section class="wb-content-panel wb-content-panel--detail" data-wb-support-surface="message-detail">
+            <div class="wb-field-group">
+                <label for="subject" class="wb-field-label">{tmpl_var name='subject_txt'}</label>
+                <p>{tmpl_var name='subject'}</p>
+            </div>
+            <div class="wb-field-group">
+                <label for="message" class="wb-field-label">{tmpl_var name='message_txt'}</label>
+                <p>{tmpl_var name='message'}</p>
+            </div>
+			<div class="wb-field-group">
+                <label for="message" class="wb-field-label">{tmpl_var name='date_txt'}</label>
+                <p>{tmpl_var name='date'}</p>
+            </div>
+
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='reply_txt'}" data-workbench-load-content="help/support_message_edit.php?reply={tmpl_var name='id'}" data-load-content="help/support_message_edit.php?reply={tmpl_var name='id'}">{tmpl_var name='reply_txt'}</button>
+        </div>
+</section>

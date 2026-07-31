@@ -1,0 +1,56 @@
+<!-- WP-965: native Workbench operations surface; controller contract unchanged. -->
+            <div class="wb-field-group">
+                <label for="server_name" >{tmpl_var name='server_name_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="server_name" id="server_name" value="{tmpl_var name='server_name'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label >{tmpl_var name='mail_server_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='mail_server'}
+                </div>
+            </div>
+            <div class="wb-field-group">
+                <label >{tmpl_var name='web_server_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='web_server'}
+                </div>
+            </div>
+            <div class="wb-field-group">
+                <label >{tmpl_var name='dns_server_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='dns_server'}
+                </div>
+            </div>
+            <div class="wb-field-group">
+                <label >{tmpl_var name='file_server_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='file_server'}
+                </div>
+            </div>
+            <div class="wb-field-group">
+                <label >{tmpl_var name='db_server_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='db_server'}
+                </div>
+            </div>
+             <tmpl_if name="id" op="!=" value="1">
+                <div class="wb-field-group">
+                 <label for="mirror_server_id" >{tmpl_var name='mirror_server_id_txt'}</label>
+                 <div class="wb-field-body"><select name="mirror_server_id" id="server_id" class="form-control">
+                     {tmpl_var name='mirror_server_id'}
+                 </select></div>
+                </div>
+            </tmpl_if>
+            <div class="wb-field-group">
+                <label for="active" >{tmpl_var name='active_txt'}</label>
+                <div class="wb-field-body"><select name="active" id="active" class="form-control">
+                    {tmpl_var name='active'}
+                </select></div>
+            </div>
+
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions"><div class="wb-form-actions__primary">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="admin/server_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="admin/server_list.php" data-load-content="admin/server_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div></div>

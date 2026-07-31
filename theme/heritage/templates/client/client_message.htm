@@ -1,0 +1,41 @@
+<!-- WP-963: native Workbench client surface; controller contract unchanged. -->
+<div class='page-header'>
+	<h1><tmpl_var name="page_head_txt"></h1>
+</div>
+            <tmpl_if name="okmsg">
+                <div id="OKMsg"><p><tmpl_var name="okmsg"></p></div>
+            </tmpl_if>
+            <tmpl_if name="error">
+							<div class='wb-alert wb-alert--danger'>
+								<div class='alert-label'>
+									<strong><tmpl_var name="error_txt"></strong>
+									</div>
+								<div class='alert-content'>
+									<ul class="wb-clean-list">
+										<tmpl_var name="error">
+									</ul>
+								</div>
+							</div>
+            </tmpl_if>
+            <div class="wb-field-group">
+                <label for="sender" >{tmpl_var name='sender_txt'}</label>
+                <div class="wb-field-control"><input type="text" name="sender" id="sender" value="{tmpl_var name='sender'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="recipient" >{tmpl_var name='recipient_txt'}</label>
+                <div class="wb-field-control"><select name="recipient" id="recipient" class="form-control">
+                    {tmpl_var name='recipient'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="subject" >{tmpl_var name='subject_txt'}</label>
+                <div class="wb-field-control"><input type="text" name="subject" id="subject" value="{tmpl_var name='subject'}" class="form-control" /></div></div>
+            <div class="wb-field-group">
+                <label for="message" >{tmpl_var name='message_txt'}</label>
+                <div class="wb-field-control"><textarea class="form-control" name="message" id="message" rows="10">{tmpl_var name='message'}</textarea></div>
+				<div class="wb-field-caption"></div><div class="wb-field-control wb-field-control--text">{tmpl_var name='variables_txt'}: {tmpl_var name="message_variables"} <br />{tmpl_var name='variables_description_txt'}</div>
+            </div>
+
+        <div class="wb-form-actions"><div class="wb-form-actions__primary">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_send_txt'}" data-submit-form="pageForm" data-form-action="client/client_message.php">{tmpl_var name='btn_send_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="client/client_list.php" data-load-content="client/client_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div></div>

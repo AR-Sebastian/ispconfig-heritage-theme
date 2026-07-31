@@ -1,0 +1,33 @@
+<!-- WP-965: native Workbench operations surface; controller contract unchanged. -->
+<div class='page-header'>
+	<h1>
+		<tmpl_var name="do_osupdate_caption">
+	</h1>
+</div>
+<section class="wb-content-panel wb-spacious-panel">
+		<div class="wb-alert wb-alert--warning">
+			<p>
+				<tmpl_var name="do_osupdate_desc">
+			</p>
+		</div>
+		<div class="wb-field-group">
+			<label for="server_select" >{tmpl_var name='select_server_txt'}</label>
+			<div class="wb-field-body"><select name="server_select" id="server" class="form-control" data-hide-ok-message="OKMsg">
+					{tmpl_var name='server_option'}
+				</select></div>
+		</div>
+
+		<tmpl_if name="msg">
+			<div id="OKMsg">
+				<p>
+					<tmpl_var name="msg">
+				</p>
+			</div>
+		</tmpl_if>
+
+		<div class="wb-form-actions">
+			<div class="wb-form-actions__primary">
+				<button class="formbutton-success" type="button" value="{tmpl_var name='btn_do_txt'}" data-submit-form="pageForm" data-form-action="admin/remote_action_osupdate.php">{tmpl_var name='btn_do_txt'}</button>
+			</div>
+		</div>
+</section>

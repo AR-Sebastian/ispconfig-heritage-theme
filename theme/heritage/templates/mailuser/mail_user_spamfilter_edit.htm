@@ -1,0 +1,21 @@
+<!-- WP-971: native Workbench mailuser surface; controller contract unchanged. -->
+            <div class="wb-field-group">
+                <label class="wb-field-label">{tmpl_var name='email_txt'}</label>
+                <div class="wb-field-body">
+					<div class="checkbox">{tmpl_var name='email'}</div>
+				</div>
+            </div>
+            <div class="wb-field-group">
+                <label for="policy" class="wb-field-label">{tmpl_var name='policy_txt'}</label>
+                <div class="wb-field-body"><select name="policy" id="policy" class="form-control">
+                    {tmpl_var name='policy'}
+                </select></div>
+            </div>
+
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="mailuser/mail_user_spamfilter_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="mailuser/index.php" data-load-content="mailuser/index.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div>

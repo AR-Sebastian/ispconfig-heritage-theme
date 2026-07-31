@@ -1,0 +1,593 @@
+/* ISPConfig Heritage Glass
+ *
+ * Detail-workspace primitives for real ISPConfig forms. The selectors enhance
+ * existing semantic markup and progressive Workbench classes only.
+ */
+
+body.heritage-shell.wb-form-page #pageContent .breadcrumb {
+  display: flex;
+  min-height: 30px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 0 12px;
+  padding: 0;
+  color: var(--hg-text-muted);
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  font-size: 11px;
+}
+
+body.heritage-shell.wb-form-page #pageContent .breadcrumb > li {
+  display: inline-flex;
+  min-width: 0;
+  align-items: center;
+  gap: 5px;
+}
+
+body.heritage-shell.wb-form-page #pageContent .breadcrumb > li + li::before {
+  padding: 0 2px;
+  color: color-mix(in srgb, var(--hg-text-muted) 62%, transparent);
+  content: '\203A';
+}
+
+body.heritage-shell.wb-form-page #pageContent .breadcrumb :is(a, .active) {
+  overflow: hidden;
+  max-width: 32ch;
+  color: inherit;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.heritage-shell.wb-form-page #pageContent .breadcrumb a:is(:hover, :focus-visible) {
+  color: var(--hg-accent);
+}
+
+/* Section cards */
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form,
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell {
+  overflow: visible;
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell > :is(.nav-tabs, .wb-tabstrip) {
+  position: sticky;
+  z-index: 18;
+  top: calc(var(--hg-header-height, 70px) + var(--hg-module-height, 68px) - 1px);
+  margin-inline: -1px;
+  padding-inline: clamp(10px, 1.6vw, 20px);
+  border: 1px solid var(--hg-border);
+  border-radius: var(--hg-radius-lg) var(--hg-radius-lg) 0 0;
+  background: color-mix(in srgb, var(--hg-surface) 92%, transparent);
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--hg-shadow-color, #14213d) 7%, transparent);
+  backdrop-filter: blur(18px) saturate(140%);
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell :is(.nav-tabs, .wb-form-tabs) > li > a {
+  position: relative;
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell :is(.nav-tabs, .wb-form-tabs) > li.active > a::after {
+  position: absolute;
+  right: 15px;
+  bottom: 5px;
+  left: 15px;
+  height: 2px;
+  border-radius: var(--hg-radius-pill);
+  background: var(--hg-accent);
+  content: '';
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+  .wb-content-panel,
+  .panel,
+  fieldset,
+  .well
+) {
+  position: relative;
+  overflow: clip;
+  border-color: var(--hg-border);
+  background:
+    radial-gradient(circle at 100% 0, color-mix(in srgb, var(--hg-accent) 2.5%, transparent), transparent 28rem),
+    var(--hg-surface);
+  box-shadow: var(--hg-shadow-xs);
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+  .wb-content-panel,
+  .panel,
+  fieldset
+)::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in srgb, var(--hg-accent) 34%, transparent) 18%,
+    color-mix(in srgb, var(--hg-accent) 34%, transparent) 82%,
+    transparent
+  );
+  content: '';
+  pointer-events: none;
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-content-panel__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 6px 16px;
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-content-panel__header > :is(h1, h2, h3) {
+  color: var(--hg-text);
+  font-size: 15px;
+  font-weight: 790;
+  letter-spacing: -.015em;
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-content-panel__header > p {
+  grid-column: 1 / -1;
+  max-width: 72ch;
+  color: var(--hg-text-muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+/* Fields and compound controls */
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+  .form-group,
+  .ctrlHolder,
+  .wb-field-group
+) {
+  position: relative;
+  min-width: 0;
+  border-radius: var(--hg-radius-md);
+  transition: background .16s ease, box-shadow .16s ease;
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+  .form-group,
+  .ctrlHolder,
+  .wb-field-group
+):focus-within {
+  background: color-mix(in srgb, var(--hg-accent) 2.5%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--hg-accent) 8%, transparent);
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-field-group {
+  scroll-margin-top: calc(var(--hg-header-height, 70px) + var(--hg-module-height, 68px) + 72px);
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-field-group.hg-field-group--disabled {
+  opacity: .72;
+  background: var(--hg-surface-subtle);
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(input, select, textarea)::placeholder {
+  color: color-mix(in srgb, var(--hg-text-muted) 76%, transparent);
+  opacity: 1;
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(input, select, textarea):user-invalid {
+  border-color: color-mix(in srgb, var(--hg-danger) 58%, var(--hg-border));
+  box-shadow: 0 0 0 3px var(--hg-danger-soft);
+}
+
+/* Wide detail workspaces use two balanced field rails. This keeps long
+ * operational forms scannable without changing field order or submission
+ * semantics. Rich editors, summaries and action rows retain the full width. */
+@media (min-width: 1100px) {
+  body.heritage-shell.wb-form-page #pageForm.wb-modern-form
+  .tab-pane.active.wb-form-section {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 10px 18px;
+  }
+
+  body.heritage-shell.wb-form-page #pageForm.wb-modern-form
+  .tab-pane.active.wb-form-section > :not(.wb-field-group),
+  body.heritage-shell.wb-form-page #pageForm.wb-modern-form
+  .tab-pane.active.wb-form-section > :is(
+    .wb-form-section-summary,
+    .wb-form-actions,
+    .clear,
+    fieldset,
+    hr,
+    .alert,
+    .panel,
+    .wb-content-panel,
+    .wb-field-group--textarea,
+    .wb-field-group--code,
+    .wb-field-group--editor
+  ) {
+    grid-column: 1 / -1;
+  }
+
+  body.heritage-shell.wb-form-page #pageForm.wb-modern-form
+  .tab-pane.active.wb-form-section > .wb-field-group {
+    min-height: 60px;
+    margin: 0 !important;
+    grid-template-columns: minmax(118px, 32%) minmax(0, 1fr);
+  }
+
+  body.heritage-shell.wb-form-page #pageForm.wb-modern-form
+  .tab-pane.active.wb-form-section > .wb-field-group--boolean {
+    min-height: 52px;
+  }
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+  .input-group,
+  .input-group-btn,
+  .input-group-addon
+) {
+  min-height: var(--hg-control-height);
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .input-group {
+  display: flex;
+  align-items: stretch;
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-actions {
+  position: sticky;
+  z-index: 14;
+  bottom: 12px;
+  margin-block-start: 18px;
+  border-color: color-mix(in srgb, var(--hg-border) 88%, transparent);
+  background: color-mix(in srgb, var(--hg-surface) 94%, transparent);
+  box-shadow: var(--hg-shadow-md);
+  backdrop-filter: blur(18px) saturate(140%);
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-actions :is(
+  .wb-form-action--primary,
+  .wb-action-control--primary
+) {
+  min-width: 108px;
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .input-group > :is(
+  .form-control,
+  input,
+  select
+) {
+  min-width: 0;
+  flex: 1 1 auto;
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form .input-group :is(
+  .input-group-addon,
+  .input-group-btn > .btn,
+  .input-group-btn > button
+) {
+  display: inline-flex;
+  min-width: 42px;
+  align-items: center;
+  justify-content: center;
+  margin-inline-start: -1px;
+  padding-inline: 12px;
+  color: var(--hg-text-muted);
+  border: 1px solid var(--hg-border);
+  border-radius: 0 var(--hg-radius-sm) var(--hg-radius-sm) 0;
+  background: var(--hg-surface-subtle);
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form textarea {
+  min-height: 112px;
+  resize: vertical;
+  line-height: 1.55;
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+  .help-block,
+  .form-text,
+  .field-help,
+  .wb-field-help
+) {
+  display: block;
+  margin-block-start: 6px;
+  color: var(--hg-text-muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+  .has-error,
+  .wb-field-error
+) :is(input, select, textarea, .form-control) {
+  border-color: color-mix(in srgb, var(--hg-danger) 54%, var(--hg-border));
+  box-shadow: 0 0 0 3px var(--hg-danger-soft);
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+  .has-success,
+  .wb-field-valid
+) :is(input, select, textarea, .form-control) {
+  border-color: color-mix(in srgb, var(--hg-success) 40%, var(--hg-border));
+}
+
+/* Boolean controls */
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form input[type='checkbox'][role='switch'] {
+  position: relative;
+  width: 42px;
+  min-width: 42px;
+  height: 24px;
+  min-height: 24px;
+  margin: 7px 0;
+  padding: 0;
+  appearance: none;
+  border: 1px solid var(--hg-border-strong);
+  border-radius: var(--hg-radius-pill);
+  background: var(--hg-surface-subtle);
+  box-shadow: inset 0 1px 3px rgba(24, 39, 75, .08);
+  cursor: pointer;
+  transition: border-color .16s ease, background .16s ease, box-shadow .16s ease;
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form input[type='checkbox'][role='switch']::before {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--hg-surface);
+  box-shadow: 0 2px 6px rgba(24, 39, 75, .22);
+  content: '';
+  transition: transform .16s ease;
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form input[type='checkbox'][role='switch']:checked {
+  border-color: var(--hg-accent);
+  background: var(--hg-accent);
+  box-shadow: 0 5px 14px color-mix(in srgb, var(--hg-accent) 20%, transparent);
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form input[type='checkbox'][role='switch']:checked::before {
+  transform: translateX(18px);
+}
+
+body.heritage-shell.wb-form-page #pageForm.wb-modern-form input[type='checkbox'][role='switch']:focus-visible {
+  outline: none;
+  box-shadow: var(--hg-focus-ring);
+}
+
+/* Status, quota and progress */
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-status-chip {
+  display: inline-flex;
+  min-height: 25px;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 9px;
+  color: var(--hg-text-muted);
+  border: 1px solid var(--hg-border);
+  border-radius: var(--hg-radius-pill);
+  background: var(--hg-surface-subtle);
+  font-size: 10px;
+  font-weight: 760;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-status-chip::before {
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border-radius: 50%;
+  background: currentColor;
+  content: '';
+  opacity: .75;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  .label-success,
+  .badge-success,
+  .wb-status-chip--success
+) {
+  color: var(--hg-success);
+  border-color: color-mix(in srgb, var(--hg-success) 24%, var(--hg-border));
+  background: var(--hg-success-soft);
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  .label-warning,
+  .badge-warning,
+  .wb-status-chip--warning
+) {
+  color: var(--hg-warning);
+  border-color: color-mix(in srgb, var(--hg-warning) 24%, var(--hg-border));
+  background: var(--hg-warning-soft);
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  .label-danger,
+  .badge-danger,
+  .wb-status-chip--danger
+) {
+  color: var(--hg-danger);
+  border-color: color-mix(in srgb, var(--hg-danger) 24%, var(--hg-border));
+  background: var(--hg-danger-soft);
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(.progress, .wb-progress) {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 8px;
+  border: 0;
+  border-radius: var(--hg-radius-pill);
+  background: color-mix(in srgb, var(--hg-text-muted) 10%, var(--hg-surface-subtle));
+  box-shadow: inset 0 1px 2px rgba(24, 39, 75, .08);
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  .progress-bar,
+  .progress > .bar
+) {
+  min-width: 2px;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--hg-accent), var(--hg-info));
+  box-shadow: none;
+  transition: width .3s ease;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent .progress-bar-success {
+  background: var(--hg-success);
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent .progress-bar-warning {
+  background: var(--hg-warning);
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent .progress-bar-danger {
+  background: var(--hg-danger);
+}
+
+/* Context and quick-action surfaces already emitted by modules/add-ons. */
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  .list-group,
+  .wb-quick-actions,
+  .wb-context-panel
+) {
+  overflow: clip;
+  margin: 0 0 var(--hg-page-gap, 18px);
+  padding: 8px;
+  border: 1px solid var(--hg-border);
+  border-radius: var(--hg-radius-lg);
+  background: var(--hg-surface);
+  box-shadow: var(--hg-shadow-xs);
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  .list-group-item,
+  .wb-quick-action
+) {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 9px 10px;
+  color: var(--hg-text);
+  border: 0;
+  border-bottom: 1px solid var(--hg-border);
+  border-radius: 8px;
+  background: transparent;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  .list-group-item,
+  .wb-quick-action
+):last-child {
+  border-bottom: 0;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  .list-group-item,
+  .wb-quick-action
+):is(:hover, :focus-visible) {
+  color: var(--hg-accent);
+  background: var(--hg-accent-soft);
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  .list-group-item,
+  .wb-quick-action
+)::after {
+  margin-inline-start: auto;
+  color: var(--hg-text-muted);
+  content: '\203A';
+  font-size: 18px;
+  line-height: 1;
+}
+
+@container wb-page-content (min-width: 1120px) {
+  body.heritage-shell.wb-form-page #pageForm.wb-modern-form .tab-content > .active:has(
+    > .wb-context-panel
+  ) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
+    gap: var(--hg-page-gap);
+    align-items: start;
+  }
+
+  body.heritage-shell.wb-form-page #pageForm.wb-modern-form .tab-content > .active > .wb-context-panel {
+    position: sticky;
+    top: calc(var(--hg-header-height, 72px) + var(--hg-module-height, 68px) + 18px);
+  }
+}
+
+@container wb-page-content (max-width: 620px) {
+  body.heritage-shell.wb-form-page #pageContent .breadcrumb {
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  body.heritage-shell.wb-form-page #pageContent .breadcrumb::-webkit-scrollbar {
+    display: none;
+  }
+
+  body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell > .tab-content {
+    padding: 14px;
+  }
+
+  body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell > :is(.nav-tabs, .wb-tabstrip) {
+    top: var(--hg-header-height, 64px);
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+  }
+
+  body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell > :is(.nav-tabs, .wb-tabstrip)::-webkit-scrollbar {
+    display: none;
+  }
+
+  body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-actions {
+    bottom: 8px;
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
+
+  body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-actions > * {
+    width: 100%;
+  }
+
+  body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+    .wb-content-panel,
+    .panel,
+    fieldset,
+    .well
+  ) {
+    padding: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+    .form-group,
+    .ctrlHolder,
+    .wb-field-group,
+    input[type='checkbox'][role='switch'],
+    input[type='checkbox'][role='switch']::before
+  ),
+  body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+    .progress-bar,
+    .progress > .bar
+  ) {
+    transition: none;
+  }
+}

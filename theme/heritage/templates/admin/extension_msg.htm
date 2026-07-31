@@ -1,0 +1,16 @@
+<!-- WP-992: native Workbench Extension Installer result surface. -->
+<section class="wb-extension-workspace" data-wb-extension-page="message">
+    <header class="wb-extension-hero">
+        <span class="wb-module-eyebrow">ISPConfig</span>
+        <h1><tmpl_var name="extension_heading_txt"></h1>
+    </header>
+    <section class="wb-content-panel">
+        <div class="wb-alert wb-alert--success" role="status">
+            <p><tmpl_var name="message_txt"></p>
+            <tmpl_if name="info_text"><p><tmpl_var name="info_text"></p></tmpl_if>
+        </div>
+        <div class="wb-form-actions">
+            <a class="formbutton-success" data-workbench-load-content="{tmpl_var name='next_link'}" data-load-content="{tmpl_var name='next_link'}"><tmpl_var name="btn_next_txt"> &gt;</a>
+        </div>
+    </section>
+</section>

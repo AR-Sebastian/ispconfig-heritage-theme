@@ -1,0 +1,15 @@
+<!-- WP-965: native Workbench operations surface; controller contract unchanged. -->
+<section class="wb-monitor-workspace">
+    <header class="wb-monitor-hero">
+        <span class="wb-module-eyebrow">ISPConfig Monitor</span>
+        <h1><tmpl_var name="list_head_txt"></h1>
+        <p><tmpl_var name="list_desc_txt"></p>
+    </header>
+    <div class="wb-monitor-embed">
+        <tmpl_if name='munin_url'>
+            <iframe src="{tmpl_var name='munin_url'}" title="{tmpl_var name='list_head_txt'}"></iframe>
+        <tmpl_else>
+            <div class="wb-monitor-empty" role="status"><p>{tmpl_var name="no_munin_url_defined_txt"} {tmpl_var name="no_permissions_to_view_munin_txt"}</p></div>
+        </tmpl_if>
+    </div>
+</section>

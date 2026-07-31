@@ -1,0 +1,14 @@
+<!-- WP-975: native Workbench dashboard news widget; source contract unchanged. -->
+<section class="wb-dashboard-news" aria-labelledby="wb-dashboard-news-title">
+  <header id="wb-dashboard-news-title" class="wb-dashboard-news__title">{tmpl_var name='latest_news_txt'}</header>
+  <ul class="wb-dashboard-news__list">
+    <tmpl_loop name="news">
+      <li class="wb-dashboard-news__item">
+        <a href="{tmpl_var name="link"}" target="_blank" rel="noopener noreferrer" class="wb-news-link">
+          <span class="wb-news-date">{tmpl_var name="date"}</span>
+          <span class="wb-news-title">{tmpl_var name="title"}</span>
+        </a>
+      </li>
+    </tmpl_loop>
+  </ul>
+</section>

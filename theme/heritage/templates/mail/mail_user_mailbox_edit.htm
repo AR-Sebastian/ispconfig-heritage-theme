@@ -1,0 +1,94 @@
+<!-- WP-958: native Workbench mailbox form. -->
+<div class="wb-field-group">
+    <label for="name">{tmpl_var name='name_txt'}</label>
+    <div><input type="text" name="name" id="name" value="{tmpl_var name='name'}" class="form-control" autofocus /><small>{tmpl_var name='name_optional_txt'}</small></div>
+</div>
+<div class="wb-field-group wb-field-group--required">
+    <label><em>*</em> {tmpl_var name='email_txt'}</label>
+    <div>
+        <div class="wb-field-composite">
+            <input type="text" id="email_local_part" name="email_local_part" value="{tmpl_var name='email_local_part'}" class="form-control" data-email-domain-sync="true" />
+            <span class="wb-field-addon">@</span>
+            <div class="wb-field-composite__control"><select name="email_domain" id="email_domain" class="form-control wb-domain-select">{tmpl_var name='email_domain'}</select></div>
+            <div class="wb-input-group-actions"><a class="formbutton-narrow" href="#" data-copy-email-address="true" data-local-field="email_local_part" data-domain-field="email_domain" title=""><span class="fa fa-clone"></span></a></div>
+        </div>
+        <tmpl_if name="mail_addresses"><small>{tmpl_var name='mail_addresses_txt'}: <tmpl_loop name="mail_addresses">{tmpl_var name='source'} ({tmpl_var name='type'})<tmpl_unless name="__LAST__">, </tmpl_unless></tmpl_loop></small></tmpl_if>
+    </div>
+</div>
+<tmpl_if name="enable_custom_login">
+    <div class="wb-field-group">
+        <label for="login">{tmpl_var name='login_txt'}</label>
+        <div><input type="text" id="login" name="login" value="{tmpl_var name='login'}" class="form-control" /></div>
+    </div>
+</tmpl_if>
+<div class="wb-field-group wb-field-group--with-action">
+    <label for="password">{tmpl_var name='password_txt'}</label>
+    <div class="wb-field-composite">
+        <input type="password" name="password" id="password" value="{tmpl_var name='password'}" title="{tmpl_var name='password_click_to_set_txt'}" class="form-control" autocomplete="off" data-workbench-password-check="password:repeat_password" data-workbench-password-strength="true" />
+        <span class="wb-input-group-actions"><button type="button" data-generate-password="true" data-password-field="password" data-repeat-password-field="repeat_password">{tmpl_var name='generate_password_txt'}</button></span>
+    </div>
+</div>
+<div class="wb-field-group">
+    <label>{tmpl_var name='password_strength_txt'}</label>
+    <div class="checkbox"><div id="passBar"></div><span id="passText">&nbsp;</span></div>
+</div>
+<div class="wb-field-group">
+    <label for="repeat_password">{tmpl_var name='repeat_password_txt'}</label>
+    <div>
+        <input type="password" name="repeat_password" id="repeat_password" value="" title="{tmpl_var name='password_click_to_set_txt'}" class="form-control" autocomplete="off" data-workbench-password-check="password:repeat_password" />
+        <tmpl_if name="mailbox_show_last_access" op="==" value="y"><tmpl_if name="id">{tmpl_var name='last_accessed_txt'}: {tmpl_var name='last_access'}</tmpl_if></tmpl_if>
+    </div>
+</div>
+<div class="wb-field-group wb-field-group--notice">
+    <span></span>
+    <div><div id="confirmpasswordError" hidden class="confirmpassworderror">{tmpl_var name='password_mismatch_txt'}</div><div id="confirmpasswordOK" hidden class="confirmpasswordok">{tmpl_var name='password_match_txt'}</div></div>
+</div>
+<div class="wb-field-group wb-field-group--with-affix">
+    <label for="quota">{tmpl_var name='quota_txt'}</label>
+    <div>
+        <div class="wb-field-composite"><input type="text" name="quota" id="quota" value="{tmpl_var name='quota'}" class="form-control" aria-describedby="quota-desc" /><span class="wb-field-addon" id="quota-desc">MB</span></div>
+        {tmpl_if name="quota" op="!=" value="0"}
+        <div class="progress"><div class='progress-bar-striped progress-bar progress-bar-{tmpl_if name="used_percentage" op="<" value="50"}success{tmpl_elseif name="used_percentage" op="<" value="75"}warning{tmpl_else}danger{/tmpl_if}' role='progressbar' aria-valuemin='0' aria-valuemax='100' aria-valuenow='{tmpl_var name="used_percentage"}' style='width:{tmpl_var name="used_percentage"}%'><span>{tmpl_var name='used_txt'}: {tmpl_var name='used'} / {tmpl_var name="used_percentage"}%</span><span class='sr-only'>{tmpl_var name='used'} {tmpl_var name='of_txt'} {tmpl_var name='quota'}</span></div></div>
+        {tmpl_else}{tmpl_var name='used_txt'}: {tmpl_var name='used'}{/tmpl_if}
+    </div>
+</div>
+<div class="wb-field-group">
+    <label for="name">{tmpl_var name='cc_txt'}</label>
+    <div><input type="text" name="cc" id="cc" value="{tmpl_var name='cc'}" class="form-control" /><small>{tmpl_var name='name_optional_txt'} {tmpl_var name='cc_note_txt'}</small></div>
+</div>
+<div class="wb-field-group">
+    <label>{tmpl_var name='forward_in_lda_txt'}</label>
+    <div><a data-workbench-tooltip="true" title="{tmpl_var name='tooltip_forward_in_lda_txt'}">{tmpl_var name='forward_in_lda'}</a></div>
+</div>
+<div class="wb-field-group">
+    <label for="sender_name">{tmpl_var name='sender_cc_txt'}</label>
+    <div><input type="text" name="sender_cc" id="sender_cc" value="{tmpl_var name='sender_cc'}" class="form-control" /><small>{tmpl_var name='name_optional_txt'} {tmpl_var name='sender_cc_note_txt'}</small></div>
+</div>
+<tmpl_if name="is_admin">
+    <div class="wb-field-group">
+        <label for="imap_prefix">{tmpl_var name='imap_prefix_txt'}</label>
+        <div><input type="text" name="imap_prefix" id="imap_prefix" value="{tmpl_var name='imap_prefix'}" data-workbench-tooltip="true" title="{tmpl_var name='tooltip_imap_prefix_txt'}" class="form-control" /><small>{tmpl_var name='name_optional_txt'}</small></div>
+    </div>
+</tmpl_if>
+<div class="wb-field-group">
+    <label for="policy">{tmpl_var name='policy_txt'}</label>
+    <div><select name="policy" id="policy" class="form-control">{tmpl_var name='policy'}</select></div>
+</div>
+<section class="wb-form-panel wb-form-panel--technical">
+    <div class="wb-field-group"><label>{tmpl_var name='postfix_txt'}</label><div><a data-workbench-tooltip="true" title="{tmpl_var name='tooltip_postfix_txt'}">{tmpl_var name='postfix'}</a></div></div>
+    <div class="wb-field-group"><label>{tmpl_var name='disablesmtp_txt'}</label><div><a data-workbench-tooltip="true" title="{tmpl_var name='tooltip_disablesmtp_txt'}">{tmpl_var name='disablesmtp'}</a></div></div>
+    <div class="wb-field-group"><label>{tmpl_var name='disabledeliver_txt'}</label><div><a data-workbench-tooltip="true" title="{tmpl_var name='tooltip_disabledeliver_txt'}">{tmpl_var name='disabledeliver'}</a></div></div>
+    <div class="wb-field-group"><label>{tmpl_var name='greylisting_txt'}</label><div>{tmpl_var name='greylisting'}</div></div>
+    <div class="wb-field-group"><label>{tmpl_var name='disableimap_txt'}</label><div>{tmpl_var name='disableimap'}</div></div>
+    <div class="wb-field-group"><label>{tmpl_var name='disablepop3_txt'}</label><div>{tmpl_var name='disablepop3'}</div></div>
+</section>
+<input type="hidden" name="id" value="{tmpl_var name='id'}">
+<div class="wb-form-actions">
+    <tmpl_if name='id'><tmpl_if name='show_delete_on_forms' op="==" value="y">
+        <a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="mail/mail_user_del.php?id={tmpl_var name='id'}&_csrf_id={tmpl_var name='_csrf_id'}&_csrf_key={tmpl_var name='_csrf_key'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete"></span></a>
+    </tmpl_if></tmpl_if>
+    <div class="wb-form-actions__primary">
+        <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="mail/mail_user_edit.php">{tmpl_var name='btn_save_txt'}</button>
+        <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="mail/mail_user_list.php" data-load-content="mail/mail_user_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+    </div>
+</div>

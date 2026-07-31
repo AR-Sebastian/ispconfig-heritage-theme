@@ -1,0 +1,87 @@
+<!-- WP-946: native Workbench access form; shared template and server lifecycle unchanged. -->
+            <div class="wb-field-group">
+                <tmpl_if name="edit_disabled">
+                    <label for="parent_domain_id">{tmpl_var name='parent_domain_id_txt'}</label>
+                    <div class="wb-field-body"><select name="parent_domain_id" id="parent_domain_id" class="form-control" disabled="disabled">
+                        {tmpl_var name='parent_domain_id'}
+                    </select></div>
+                    <input type="hidden" name="parent_domain_id" value="{tmpl_var name='parent_domain_id_value'}" />
+                <tmpl_else>
+                        <label for="parent_domain_id">{tmpl_var name='parent_domain_id_txt'}</label>
+                        <div class="wb-field-body"><select name="parent_domain_id" id="parent_domain_id" class="form-control">
+                            {tmpl_var name='parent_domain_id'}
+                        </select></div>
+                </tmpl_if>
+            </div>
+			<div class="wb-field-group">
+                <label for="username">{tmpl_var name='username_txt'}</label>
+                <div class="wb-field-body">
+					<div class="wb-field-composite">
+						<span class="wb-field-addon" id="username-desc">{tmpl_var name='username_prefix'}</span>
+						<input type="text" name="username" id="username" value="{tmpl_var name='username'}" class="form-control" aria-describedby="username-desc" />
+						<a class="formbutton-narrow" href="#" data-copy-composed-value="true" data-copy-source-prefix="username-desc" data-copy-source-value="username" title="{tmpl_var name='copy_to_clipboard_txt'}">
+							<span class="fa fa-clone"></span>
+						</a>
+
+					</div>
+				</div>
+            </div>
+			<tmpl_if name="ssh_authentication" op="!=" value="key">
+			<div class="wb-field-group">
+                <label for="password">{tmpl_var name='password_txt'}</label>
+                <div class="wb-field-body">
+				<div class="wb-field-composite">
+					<input type="password" name="password" id="password" value="{tmpl_var name='password'}" class="form-control" autocomplete="off" data-workbench-password-check="password:repeat_password" data-workbench-password-strength="true" />
+					<span class="wb-input-group-actions">
+						<button class="wb-input-group-action" type="button" data-generate-password="true" data-password-field="password" data-repeat-password-field="repeat_password">{tmpl_var name='generate_password_txt'}</button>
+					</span>
+				</div>
+				</div>
+            </div>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='password_strength_txt'}</label>
+                <div class="wb-field-body">
+                <div id="passBar"></div>
+                <span id="passText">&nbsp;</span>
+                </div>
+            </div>
+            <div class="wb-field-group">
+                <label for="repeat_password">{tmpl_var name='repeat_password_txt'}</label>
+                <div class="wb-field-body"><input type="password" name="repeat_password" id="repeat_password" value="" class="form-control" autocomplete="off" data-workbench-password-check="password:repeat_password" /></div></div>
+            <div class="wb-field-group">
+				<div class="wb-field-body">
+					<div id="confirmpasswordError" hidden class="confirmpassworderror">{tmpl_var name='password_mismatch_txt'}</div>
+					<div id="confirmpasswordOK" hidden class="confirmpasswordok">{tmpl_var name='password_match_txt'}</div>
+				</div>
+			</div>
+			</tmpl_if>
+            <div class="wb-field-group">
+                <label for="chroot">{tmpl_var name='chroot_txt'}</label>
+                <div class="wb-field-body"><select name="chroot" id="chroot" class="form-control">
+                    {tmpl_var name='chroot'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="quota_size">{tmpl_var name='quota_size_txt'}</label>
+                <div class="wb-field-body"><div class="wb-field-composite"><input type="text" name="quota_size" id="quota_size" value="{tmpl_var name='quota_size'}" class="form-control" aria-describedby="quota_size-desc" /><span class="wb-field-addon" id="quota_size-desc">MB</span></div></div>
+            </div>
+			<tmpl_if name="ssh_authentication" op="!=" value="password">
+            <div class="wb-field-group">
+                <label for="ssh_rsa">{tmpl_var name='ssh_rsa_txt'}</label>
+                <div class="wb-field-body"><textarea class="form-control" name="ssh_rsa" id="ssh_rsa" rows="10" cols="30">{tmpl_var name='ssh_rsa'}</textarea></div>
+            </div>
+			</tmpl_if>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='active_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='active'}
+                </div>
+            </div>
+
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions"><div class="wb-form-actions__primary">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="sites/shell_user_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="sites/shell_user_list.php" data-load-content="sites/shell_user_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div></div>

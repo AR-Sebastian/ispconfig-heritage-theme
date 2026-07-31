@@ -1,0 +1,20 @@
+<!-- WP-965: native Workbench operations surface; controller contract unchanged. -->
+<section class="wb-content-panel wb-content-panel--operation-result">
+	<tmpl_if name="list_head_txt">
+		<header class="wb-content-panel__header">
+			<h1><tmpl_var name="list_head_txt"></h1>
+		</header>
+	</tmpl_if>
+
+	<tmpl_if name='success'>
+		<div class="wb-alert wb-alert--success" role="status"><tmpl_var name='success_txt'></div>
+	<tmpl_else>
+		<div class="wb-alert wb-alert--danger" role="alert"><tmpl_var name='error_txt'></div>
+	</tmpl_if>
+
+	<div class="wb-form-actions">
+		<div class="wb-form-actions__secondary">
+			<button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="monitor/dataloghistory_list.php" data-load-content="monitor/dataloghistory_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+		</div>
+	</div>
+</section>

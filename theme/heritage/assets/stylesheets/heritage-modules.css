@@ -1,0 +1,169 @@
+/*
+ * ISPConfig Heritage module composition
+ *
+ * Shared authority for specialty workspaces that do not use the normal
+ * list/form header pipeline. It intentionally contains presentation only.
+ */
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  .wb-monitor-workspace,
+  .wb-extension-workspace,
+  .wb-statistics-workspace,
+  .wb-specialty-workspace
+) {
+  width: 100%;
+  max-width: var(--hg-content-max, 1600px);
+  margin-inline: auto;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  .wb-monitor-hero,
+  .wb-extension-hero
+) {
+  min-height: 96px;
+  align-content: end;
+  padding: 20px 0 17px;
+  border-bottom: 1px solid var(--hg-border);
+  background: transparent;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  .wb-monitor-hero,
+  .wb-extension-hero
+) h1 {
+  max-width: 22ch;
+  margin: 0;
+  color: var(--hg-text);
+  font-size: clamp(28px, 3vw, 38px);
+  font-weight: 820;
+  letter-spacing: -.045em;
+  overflow-wrap: anywhere;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-refresh-panel {
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr) minmax(220px, 320px);
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--hg-border);
+  border-radius: var(--hg-radius-md);
+  background: var(--hg-surface);
+  box-shadow: var(--hg-shadow-xs);
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-refresh-panel::before {
+  display: none;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-refresh-panel label {
+  color: var(--hg-text);
+  font-size: 12px;
+  font-weight: 760;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-status-panel {
+  overflow: hidden;
+  border-radius: var(--hg-radius-md);
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-status-panel .alert {
+  margin: 0;
+  border-radius: inherit;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-chart-panel {
+  padding: 15px;
+  border: 1px solid var(--hg-border);
+  border-radius: var(--hg-radius-lg);
+  background: var(--hg-surface);
+  box-shadow: var(--hg-shadow-sm);
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-chart-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-chart {
+  min-height: 250px;
+  border-color: var(--hg-border);
+  border-radius: var(--hg-radius-md);
+  background: var(--hg-surface);
+  box-shadow: none;
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-chart > header {
+  min-height: 52px;
+  padding: 10px 13px;
+  border-bottom-color: var(--hg-border);
+  background: var(--hg-surface-muted);
+}
+
+body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-chart__details > div {
+  background: var(--hg-surface-muted);
+}
+
+@container wb-page-content (max-width: 820px) {
+  body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-chart-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 620px) {
+  body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-refresh-panel {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+    .wb-monitor-hero,
+    .wb-extension-hero
+  ) {
+    min-height: auto;
+    padding-block: 14px;
+  }
+}
+/* Specialized module composition */
+
+body.heritage-shell #pageContent .hg-redundant-heading {
+  display: none;
+}
+
+body.heritage-shell.wb-form-page #pageForm .hg-single-tab-shell > .wb-tabstrip,
+body.heritage-shell.wb-form-page #pageForm .hg-single-tab-shell > .nav-tabs {
+  display: none;
+}
+
+body.heritage-shell.wb-form-page #pageForm .hg-single-tab-shell > .tab-content {
+  border-start-start-radius: var(--hg-radius-xl);
+  border-start-end-radius: var(--hg-radius-xl);
+}
+
+body.heritage-shell.wb-monitor-page #pageContent .statusDevice > a,
+body.heritage-shell.wb-monitor-page #pageContent .stateview > a {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  padding: 7px 12px;
+  color: var(--hg-text);
+  border: 1px solid var(--hg-border);
+  border-radius: var(--hg-radius-md);
+  background: color-mix(in srgb, var(--hg-surface) 88%, transparent);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+body.heritage-shell.wb-monitor-page #pageContent .statusDevice > a:is(:hover, :focus-visible),
+body.heritage-shell.wb-monitor-page #pageContent .stateview > a:is(:hover, :focus-visible) {
+  color: var(--hg-accent);
+  border-color: color-mix(in srgb, var(--hg-accent) 34%, var(--hg-border));
+  background: color-mix(in srgb, var(--hg-accent) 7%, var(--hg-surface));
+}
+
+body.heritage-shell[data-heritage-surface='list'] #pageContent .tbl_row_noresults td {
+  min-height: 150px;
+}

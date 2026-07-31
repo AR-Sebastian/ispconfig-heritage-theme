@@ -1,0 +1,43 @@
+<!-- WP-992: native Workbench available extensions list. -->
+<section class="wb-extension-workspace" data-wb-extension-page="available">
+    <header class="wb-extension-hero">
+        <span class="wb-module-eyebrow">ISPConfig</span>
+        <h1><tmpl_var name="available_extensions_list_head_txt"></h1>
+        <p><tmpl_var name="available_extensions_list_desc_txt"></p>
+    </header>
+
+    <section class="wb-table-workspace" aria-labelledby="wb-extension-available-title">
+        <div class="wb-list-toolbar">
+            <div class="wb-list-toolbar__context">
+                <strong id="wb-extension-available-title"><tmpl_var name="available_extensions_list_head_txt"></strong>
+            </div>
+        </div>
+        <table class="table wb-data-table">
+            <thead>
+                <tr>
+                    <th data-column="name"><tmpl_var name="name_txt"></th>
+                    <th data-column="version"><tmpl_var name="version_txt"></th>
+                    <th data-column="date"><tmpl_var name="date_txt"></th>
+                    <th data-column="title"><tmpl_var name="title_txt"></th>
+                    <th class="wb-table-actions-column wb-table-align-end"><span class="wb-visually-hidden"><tmpl_var name="install_extension_txt"></span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tmpl_loop name="records">
+                    <tr>
+                        <td data-wb-label="{tmpl_var name='name_txt'}"><a href="#" data-workbench-load-content="admin/extension_edit.php?name={tmpl_var name='name'}&action=install" data-load-content="admin/extension_edit.php?name={tmpl_var name='name'}&action=install">{tmpl_var name="name"}</a></td>
+                        <td data-wb-label="{tmpl_var name='version_txt'}"><a href="#" data-workbench-load-content="admin/extension_edit.php?name={tmpl_var name='name'}&action=install" data-load-content="admin/extension_edit.php?name={tmpl_var name='name'}&action=install">{tmpl_var name="version"}</a></td>
+                        <td data-wb-label="{tmpl_var name='date_txt'}"><a href="#" data-workbench-load-content="admin/extension_edit.php?name={tmpl_var name='name'}&action=install" data-load-content="admin/extension_edit.php?name={tmpl_var name='name'}&action=install">{tmpl_var name="date"}</a></td>
+                        <td data-wb-label="{tmpl_var name='title_txt'}"><a href="#" data-workbench-load-content="admin/extension_edit.php?name={tmpl_var name='name'}&action=install" data-load-content="admin/extension_edit.php?name={tmpl_var name='name'}&action=install">{tmpl_var name="title"}</a></td>
+                        <td class="wb-table-align-end" data-wb-label="{tmpl_var name='install_extension_txt'}">
+                            <button class="wb-row-action wb-row-action--primary" type="button" data-workbench-load-content="admin/extension_edit.php?name={tmpl_var name='name'}&action=install" data-load-content="admin/extension_edit.php?name={tmpl_var name='name'}&action=install" title="{tmpl_var name='install_extension_txt'}"><span class="icon icon-add" aria-hidden="true"></span><span>{tmpl_var name="install_extension_txt"}</span></button>
+                        </td>
+                    </tr>
+                </tmpl_loop>
+                <tmpl_unless name="records">
+                    <tr class="tbl_row_noresults"><td colspan="5">{tmpl_var name='globalsearch_noresults_text_txt'}</td></tr>
+                </tmpl_unless>
+            </tbody>
+        </table>
+    </section>
+</section>

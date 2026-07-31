@@ -1,0 +1,87 @@
+<!-- WP-948: native Workbench website core surface; shared lifecycle unchanged. -->
+			<tmpl_if name="childdomain_type" value="subdomain">
+            <tmpl_if name="domain_option">
+            <div class="wb-field-group">
+                <label for="parent_domain_id">{tmpl_var name='parent_domain_id_txt'}</label>
+                <div class="wb-field-body"><select id="parent_domain_id" name="parent_domain_id" class="form-control" data-json-sync="sites-childdomain-redirect">{tmpl_var name='parent_domain_id'}</select></div>
+            </div>
+            </tmpl_if>
+            <div class="wb-field-group">
+                <label for="domain">{tmpl_var name='host_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="domain" id="domain" value="{tmpl_var name='domain'}" class="form-control" /></div></div>
+            <tmpl_if name="domain_option">
+            <div class="wb-field-group">
+                <label for="sel_domain">{tmpl_var name='domain_txt'}</label>
+                    <div class="wb-field-body"><select name="sel_domain" id="sel_domain" class="form-control">
+                        {tmpl_var name='domain_option'}
+                    </select></div>
+            </div>
+            <tmpl_else>
+            <div class="wb-field-group">
+                <label for="parent_domain_id">{tmpl_var name='domain_txt'}</label>
+                <div class="wb-field-body"><select id="parent_domain_id" name="parent_domain_id" class="form-control" data-json-sync="sites-childdomain-redirect">{tmpl_var name='parent_domain_id'}</select></div>
+            </div>
+            </tmpl_if>
+			<tmpl_else>
+            <div class="wb-field-group">
+                <tmpl_if name="domain_option">
+                    <label for="domain">{tmpl_var name='domain_txt'}</label>
+                    <div class="wb-field-body"><select name="domain" id="domain" class="form-control">
+                        {tmpl_var name='domain_option'}
+                    </select></div>
+                <tmpl_else>
+                    <label for="domain">{tmpl_var name='domain_txt'}</label>
+                    <div class="wb-field-body"><input type="text" name="domain" id="domain" value="{tmpl_var name='domain'}" class="form-control" /></div></tmpl_if>
+            </div>
+            <div class="wb-field-group">
+                <label for="parent_domain_id">{tmpl_var name='parent_domain_id_txt'}</label>
+                <div class="wb-field-body"><select id="parent_domain_id" name="parent_domain_id" class="form-control" data-json-sync="sites-childdomain-redirect">
+                    {tmpl_var name='parent_domain_id'}
+                </select></div>
+            </div>
+			</tmpl_if>
+            <div class="wb-field-group">
+                <label for="redirect_type">{tmpl_var name='redirect_type_txt'}</label>
+                <div class="wb-field-body"><select name="redirect_type" id="redirect_type" class="form-control">
+                    {tmpl_var name='redirect_type'}
+                </select></div>
+            </div>
+            <div class="wb-field-group">
+                <label for="redirect_path">{tmpl_var name='redirect_path_txt'}</label>
+                <div class="wb-field-body"><input type="text" name="redirect_path" id="redirect_path" value="{tmpl_var name='redirect_path'}" class="form-control" /></div></div>
+			<tmpl_if name="childdomain_type" value="aliasdomain">
+            <div class="wb-field-group">
+                <label for="subdomain">{tmpl_var name='subdomain_txt'}</label>
+                <div class="wb-field-body"><select name="subdomain" id="subdomain" class="form-control">
+                    {tmpl_var name='subdomain'}
+                </select></div>
+            </div>
+			<div class="wb-field-group">
+                <label for="seo_redirect">{tmpl_var name='seo_redirect_txt'}</label>
+                <div class="wb-field-body"><select name="seo_redirect" id="seo_redirect" class="form-control">
+                    {tmpl_var name='seo_redirect'}
+                </select></div>
+            </div>
+			</tmpl_if>
+			<tmpl_if name="limit_ssl_letsencrypt" op="==" value="y">
+				<div class="wb-field-group">
+                <label>{tmpl_var name='ssl_letsencrypt_exclude_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='ssl_letsencrypt_exclude'}
+                </div>
+            </div>
+			</tmpl_if>
+            <div class="wb-field-group">
+                <label>{tmpl_var name='active_txt'}</label>
+                <div class="wb-field-body">
+                    {tmpl_var name='active'}
+                </div>
+            </div>
+
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions"><div class="wb-form-actions__primary">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="sites/web_childdomain_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="sites/web_childdomain_list.php" data-load-content="sites/web_childdomain_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div></div>

@@ -1,0 +1,11 @@
+<!-- Workbench primary navigation: every module keeps its stable identity,
+     including the currently active module. This allows the app shell to
+     reselect cached entries without another server round-trip. -->
+<nav id="main-navigation" class="wb-source-navigation" aria-label="Hauptmodule" data-wb-i18n-aria-label-de="Hauptmodule" data-wb-i18n-aria-label-en="Main modules">
+  <tmpl_loop name="nav_top">
+    <a href="#" class="wb-source-navigation__item<tmpl_if name="active"> active</tmpl_if>" data-workbench-module="<tmpl_var name='module'>"<tmpl_if name="active"> aria-current="page"</tmpl_if> data-icon-class="<tmpl_var name='icon'>">
+      <div class="<tmpl_var name='icon'>"></div>
+      <div class="title"><tmpl_var name="title"></div>
+    </a>
+  </tmpl_loop>
+</nav>

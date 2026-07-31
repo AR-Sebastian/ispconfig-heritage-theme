@@ -1,0 +1,46 @@
+<!-- WP-970: native Workbench help surface; controller contract unchanged. -->
+<div class='page-header' data-wb-support-surface="faq-sections">
+	<h1><tmpl_var name="faq_faq_sections_txt"></h1>
+</div>
+<p><tmpl_var name="list_desc_txt"></p>
+<section class="wb-table-workspace">
+    <div class="wb-list-toolbar">
+        <div class="wb-list-toolbar__context">
+            <span class="wb-list-toolbar__eyebrow">{tmpl_var name="toolsarea_head_txt"}</span>
+            <strong><tmpl_var name="faq_sections_txt"></strong>
+        </div>
+        <button class="formbutton-success" type="button" data-workbench-load-content="help/faq_sections_edit.php" data-load-content="help/faq_sections_edit.php">{tmpl_var name="faq_new_section_txt"}</button>
+    </div>
+<table class="table wb-data-table">
+                <thead class="dark wb-field-group-sm">
+                    <tr>
+                        <th>{tmpl_var name="faq_section_name_txt"}</th>
+                        <th class="wb-table-align-end">{tmpl_var name="faq_delete_txt"}</th>
+                        <th class="wb-table-align-end">{tmpl_var name="faq_edit_txt"}</th>
+                    </tr>
+                </thead>
+				<tbody>
+                <tmpl_loop name="records">
+                    <tr>
+                        <td><b>{tmpl_var name='hfs_name'}</b></td>
+                        <td class="wb-table-align-end">
+                            <a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="help/faq_sections_delete.php?id={tmpl_var name='id'}&_csrf_id={tmpl_var name='csrf_id'}&_csrf_key={tmpl_var name='csrf_key'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete"></span></a>
+                        </td>
+                        <td class="wb-table-align-end">
+                            <a class="formbutton-default formbutton-narrow" data-workbench-load-content="help/faq_sections_edit.php?id={tmpl_var name='id'}" data-load-content="help/faq_sections_edit.php?id={tmpl_var name='id'}"><span class="icon icon-edit"></span></a>
+                        </td>
+                    </tr>
+                </tmpl_loop>
+                <tmpl_unless name="records">
+                    <tr class="tbl_row_noresults tbl_row_<tmpl_if name='__EVEN__'}even<tmpl_else>uneven</tmpl_if>">
+                        <td colspan="3">{tmpl_var name='globalsearch_noresults_text_txt'}</td>
+                    </tr>
+                </tmpl_unless>
+				</tbody>
+				<tfoot>
+                    <tr>
+                        <td colspan="3"><tmpl_var name="paging"></td>
+                    </tr>
+                </tfoot>
+            </table>
+</section>

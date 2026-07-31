@@ -1,0 +1,17 @@
+<!-- WP-965: native Workbench operations surface; controller contract unchanged. -->
+<!-- WP-926 Bootstrap-removal batch 1: native override of admin/server_php_sort_edit.
+     Native .wb-field-group / .wb-form-actions structure; shared template untouched
+     (keeps serving the default theme). All {tmpl_var}, data-* and tooltip hooks
+     verbatim. NOTE: label for="name" vs input id="sortprio" is a pre-existing
+     upstream mismatch, preserved verbatim (not corrected here). -->
+            <div class="wb-field-group">
+                <label for="name">{tmpl_var name='sortprio_txt'}</label>
+                <div><input type="number" name="sortprio" id="sortprio" data-workbench-tooltip-html="true" data-workbench-tooltip="true" data-workbench-tooltip-placement="top"  title="{tmpl_var name='sortprio_long_txt'}" value="{tmpl_var name='sortprio'}" class="form-control" /></div>
+            </div>
+
+        <input type="hidden" name="id" value="{tmpl_var name='id'}">
+
+        <div class="wb-form-actions">
+            <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="admin/server_php_edit.php">{tmpl_var name='btn_save_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="admin/server_php_list.php" data-load-content="admin/server_php_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        </div>

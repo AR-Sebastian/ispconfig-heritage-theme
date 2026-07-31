@@ -1,0 +1,46 @@
+	<tmpl_if name="form_hint">
+		<div class='page-header'>
+			<h1><tmpl_var name="form_hint"></h1>
+		</div>
+	</tmpl_if>
+	<tmpl_if name="msg">
+		<div class='wb-alert wb-alert--info' role='status'><div class='wb-alert__body'><tmpl_var name="msg"></div></div>
+	</tmpl_if>
+	<tmpl_if name="error">
+		<div class='wb-alert wb-alert--danger' role='alert'>
+			<div class='wb-alert__title'><strong>
+					<tmpl_var name="error_txt">
+				</strong></div>
+			<div class='wb-alert__body'>
+				<ul style="list-style-type:none">
+					<tmpl_var name="error">
+				</ul>
+			</div>
+		</div>
+	</tmpl_if>
+
+	<!-- content in tabs -->
+	<div class='content-tab-wrapper wb-form-tabs-shell'>
+		<!-- tabs -->
+		<ul class='wb-form-tabs' role='tablist'>
+			<tmpl_loop name="formTab">
+				<li<tmpl_if name="active"> class='active'</tmpl_if>>
+					<a href='#' role='tab'<tmpl_if name="active"> aria-selected='true'</tmpl_if> data-change-tab="<tmpl_var name='name'>" data-tab-target="<tmpl_var name='app_module'>/<tmpl_var name='form_action'>">
+						<tmpl_var name='title'>
+					</a>
+					</li>
+			</tmpl_loop>
+		</ul>
+
+		<div id="tabbox_content" class="tab-content">
+			<div class='tab-pane active fade in'>
+				<tmpl_dyninclude name="content_tpl">
+			</div>
+		</div>
+
+		<input type="hidden" name="_csrf_id" value="{tmpl_var name='_csrf_id'}" />
+		<input type="hidden" name="_csrf_key" value="{tmpl_var name='_csrf_key'}" />
+		<input type="hidden" name="_active_tab" value="{tmpl_var name='form_active_tab'}">
+		<input type="hidden" name="next_tab" value="">
+		<input type="hidden" name="phpsessid" value="{tmpl_var name='phpsessid'}">
+	</div>

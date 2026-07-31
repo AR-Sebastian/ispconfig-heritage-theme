@@ -1,0 +1,19 @@
+<!-- WP-961: native Workbench customer-circle form. -->
+<tmpl_if name="list_head_txt"><div class="page-header"><h1><tmpl_var name="list_head_txt"></h1></div></tmpl_if>
+<tmpl_if name="list_desc_txt"><p><tmpl_var name="list_desc_txt"></p></tmpl_if>
+<div class="wb-field-group wb-field-group--required">
+    <label for="circle_name">{tmpl_var name='circle_name_txt'}*</label>
+    <div><input type="text" name="circle_name" id="circle_name" value="{tmpl_var name='circle_name'}" class="form-control" /></div>
+</div>
+<div class="wb-field-group">
+    <label for="description">{tmpl_var name='description_txt'}</label>
+    <div><textarea class="form-control" name="description" id="description" rows="10" cols="30">{tmpl_var name='description'}</textarea></div>
+</div>
+<div class="wb-field-group"><label>{tmpl_var name='active_txt'}</label><div>{tmpl_var name='active'}</div></div>
+<div class="wb-field-group wb-field-group--embedded-table"><label>{tmpl_var name='client_ids_txt'}</label><div>{tmpl_var name='client_ids'}</div></div>
+{tmpl_var name='required_fields_txt'}
+<input type="hidden" name="id" value="{tmpl_var name='id'}">
+<div class="wb-form-actions">
+    <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="client/client_circle_edit.php">{tmpl_var name='btn_save_txt'}</button>
+    <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="client/client_circle_list.php" data-load-content="client/client_circle_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+</div>
