@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.6 – 2026-07-31
+
+- Mobile list rows now share one semantic record-card hierarchy across modules.
+- Technical identity columns yield their edit target to the primary business value.
+- Status fields, primary values and action footers receive stable responsive roles.
+- Medium phone widths use compact two-column record details.
+
 ## 1.0.5 – 2026-07-31
 
 - Table headings and visible filters remain aligned while scrolling.
