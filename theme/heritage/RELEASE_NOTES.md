@@ -1,6 +1,11 @@
-# ISPConfig HERITAGE 1.0.12
+# ISPConfig HERITAGE 1.0.13
 
-HERITAGE 1.0.12 closes language parity and live asset delivery for the stable V1
+HERITAGE 1.0.13 establishes a shared accessibility authority across login and the
+authenticated application. Increased contrast, forced system colours, reduced
+motion and reduced transparency now retain clear focus, navigation and control
+states without changing ISPConfig behaviour.
+
+HERITAGE 1.0.12 closed language parity and live asset delivery for the stable V1
 line. Theme-owned German and English labels are checked as pairs, dynamically
 loaded module fragments are localized again, and the installed server must deliver
 every asset referenced by both shells without a missing or empty response.

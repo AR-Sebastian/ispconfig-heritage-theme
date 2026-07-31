@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.13 – 2026-07-31
+
+- Login and authenticated surfaces now share one accessibility authority.
+- Increased contrast, forced system colours and reduced transparency are supported.
+- Active navigation remains identifiable without relying on colour alone.
+- Reduced motion covers both login and authenticated shells.
+
 ## 1.0.12 – 2026-07-31
 
 - German and English theme-owned labels now have a permanent parity gate.
