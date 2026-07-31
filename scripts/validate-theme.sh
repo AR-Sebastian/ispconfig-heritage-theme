@@ -65,6 +65,10 @@ for (const bundle of Object.values(bundles)) {
   }
 }
 const scriptsDirectory = path.join(theme, 'assets', 'javascripts');
+const runtime = fs.readFileSync(path.join(scriptsDirectory, 'heritage-runtime.js'), 'utf8');
+for (const contract of ['contentObserver.disconnect()', 'window.setTimeout(enhanceObservedContent, 24)', 'observeContent();']) {
+  if (!runtime.includes(contract)) throw new Error(`Runtime observer stability contract is missing: ${contract}`);
+}
 const scriptBundles = JSON.parse(fs.readFileSync(path.join(scriptsDirectory, 'heritage-js-bundles.json'), 'utf8'));
 for (const bundle of Object.values(scriptBundles)) {
   const output = fs.readFileSync(path.join(scriptsDirectory, bundle.output), 'utf8').replace(/\r\n/g, '\n');

@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.18 – 2026-07-31
+
+- Prevented the content observer from reacting recursively to its own UI enhancements.
+- Debounced mutation bursts and suspended observation during theme-owned DOM updates.
+- Added targeted browser coverage for six representative surfaces at desktop, tablet and mobile sizes.
+- All 18 runtime surfaces pass without overflow, escaped content or browser errors.
+
 ## 1.0.17 – 2026-07-31
 
 - Application JavaScript is delivered as two reproducible ordered bundles around Chart.js.

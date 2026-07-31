@@ -625,7 +625,19 @@
 
     var pageContent = document.getElementById('pageContent');
     if (pageContent) {
-      new MutationObserver(function () {
+      var contentEnhancementTimer = 0;
+      var contentObserver;
+      var observeContent = function () {
+        contentObserver.observe(pageContent, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          attributeFilter: ['class', 'disabled', 'aria-invalid']
+        });
+      };
+      var enhanceObservedContent = function () {
+        contentEnhancementTimer = 0;
+        contentObserver.disconnect();
         enhancePageComposition();
         markIdentityColumns();
         localizeComponentLabels();
@@ -633,12 +645,13 @@
         enhanceAccessibility();
         enhanceForms();
         enhanceTables();
-      }).observe(pageContent, {
-        childList: true,
-        subtree: true,
-        attributes: true,
-        attributeFilter: ['class', 'disabled', 'aria-invalid']
+        observeContent();
+      };
+      contentObserver = new MutationObserver(function () {
+        window.clearTimeout(contentEnhancementTimer);
+        contentEnhancementTimer = window.setTimeout(enhanceObservedContent, 24);
       });
+      observeContent();
     }
 
   }
