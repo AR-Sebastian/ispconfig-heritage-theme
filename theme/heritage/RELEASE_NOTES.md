@@ -1,6 +1,11 @@
-# ISPConfig HERITAGE 1.0.11
+# ISPConfig HERITAGE 1.0.12
 
-HERITAGE 1.0.11 closes the V1 acceptance contract for every packaged shell,
+HERITAGE 1.0.12 closes language parity and live asset delivery for the stable V1
+line. Theme-owned German and English labels are checked as pairs, dynamically
+loaded module fragments are localized again, and the installed server must deliver
+every asset referenced by both shells without a missing or empty response.
+
+HERITAGE 1.0.11 closed the V1 acceptance contract for every packaged shell,
 supported module boundary and public release artifact. The login and authenticated
 shells now share the same runtime cache generation, preventing a stale login asset
 after upgrades.

@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.12 – 2026-07-31
+
+- German and English theme-owned labels now have a permanent parity gate.
+- Dynamically loaded module fragments must retain localization support.
+- Live installation verification checks every shell asset for HTTP 200 and content.
+- Installed manifest and login route are verified against the exact release version.
+
 ## 1.0.11 – 2026-07-31
 
 - Login and authenticated shells now share one current runtime cache contract.

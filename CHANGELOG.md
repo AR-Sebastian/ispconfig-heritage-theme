@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.12 – 2026-07-31
+
+- German and English labels now have an explicit parity contract.
+- Dynamic module localization is protected by the stable release gate.
+- All 66 shell assets passed live HTTP delivery verification.
+
 ## 1.0.11 – 2026-07-31
 
 - Login and authenticated shells now use the same current runtime cache key.
