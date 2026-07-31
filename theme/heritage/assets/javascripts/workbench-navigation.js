@@ -10,7 +10,7 @@
   var currentPageTarget = '';
   var userCollapsedModule = '';
   var collapsedModules = {};
-  var desktopQuery = window.matchMedia('(min-width: 1025px)');
+  var desktopQuery = window.matchMedia('(min-width: 721px)');
   var dashboardTarget = 'dashboard/dashboard.php';
   var cachedPrimaryNavigation = [];
   var legacy = window.ISPConfig;
@@ -31,6 +31,27 @@
     link.removeAttribute('id');
     link.classList.add(className);
     return link;
+  }
+
+  function applyCompactPrimaryLabel(link) {
+    var module = linkModule(link);
+    var labels = isGermanInterface() ? {
+      dashboard: 'Start',
+      sites: 'Web',
+      billing: 'Rechnungen',
+      monitor: 'Status'
+    } : {
+      dashboard: 'Home',
+      sites: 'Web',
+      billing: 'Billing',
+      monitor: 'Status'
+    };
+    var label = labels[module];
+    var node = label && link.querySelector('.title');
+    if (!node) return;
+    node.textContent = label;
+    link.setAttribute('aria-label', label);
+    link.setAttribute('title', label);
   }
 
   function linkContentTarget(link) {
@@ -781,11 +802,12 @@
     primary.forEach(function (source) {
       var item = document.createElement('li');
       var link = cloneLink(source, 'wb-mobile-navigation__module');
-    if (linkModule(link) === 'dashboard') {
+      applyCompactPrimaryLabel(link);
+      if (linkModule(link) === 'dashboard') {
         link.dataset.workbenchDirectDashboard = 'true';
         setLinkContentTarget(link, dashboardTarget);
         link.setAttribute('href', '#');
-        link.setAttribute('aria-label', isGermanInterface() ? '\u00dcbersicht' : 'Overview');
+        link.setAttribute('aria-label', isGermanInterface() ? 'Start' : 'Home');
       }
       item.appendChild(link);
       list.appendChild(item);

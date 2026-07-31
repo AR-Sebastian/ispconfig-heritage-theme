@@ -1,8 +1,8 @@
-# ISPConfig HERITAGE 1.0.1
+# ISPConfig HERITAGE 1.0.2
 
-HERITAGE 1.0.1 expands the dashboard into the unused contextual-navigation
-column and provides a denser four-column module-widget layout on wide screens.
-Contextual navigation on module pages remains unchanged.
+HERITAGE 1.0.2 refines navigation for split-screen and tablet use. Primary
+icons retain concise text labels, the horizontal navigation remains available
+down to 721 pixels, and light-theme quick-create actions use quiet surfaces.
 It targets ISPConfig 3.3.1p1 and keeps the original `default` theme as the
 required recovery path.
 

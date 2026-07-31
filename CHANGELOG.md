@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.2 – 2026-07-31
+
+- Kept the horizontal icon-and-label navigation down to 721 pixels.
+- Added a compact tablet navigation geometry for split-screen Surface use.
+- Shortened selected primary German labels without changing module identities.
+- Reworked light-theme quick-create buttons into quiet, light action surfaces.
+
 ## 1.0.1 – 2026-07-31
 
 - Reclaimed the unused contextual-navigation column on the dashboard.
