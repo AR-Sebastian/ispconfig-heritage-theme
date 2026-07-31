@@ -616,11 +616,15 @@
         if (!label && column) label = column.replace(/\b\w/g, function(letter) { return letter.toUpperCase(); });
         return label;
       });
-      var statusKinds = headers.map(function(label) {
+      var statusKinds = headers.map(function(label, index) {
         var normalized = String(label || '').toLowerCase().replace(/[\s_-]+/g, ' ').trim();
+        var dataColumn = String(headerNodes[index] && headerNodes[index].getAttribute('data-column') || '').toLowerCase().trim();
         if (/^(aktiv|active|enabled)$/.test(normalized)) return 'active';
         if (/^(gesperrt|locked|blocked)$/.test(normalized)) return 'locked';
         if (/^(remote|remotezugriff|remote zugriff|remote access)$/.test(normalized)) return 'remote';
+        if (/^(?:mail|web|dns|file|db)_server$/.test(dataColumn)) return 'service';
+        if (/^disable(?:smtp|deliver|imap|pop3)$/.test(dataColumn)) return 'disabled';
+        if (/^(?:customer_viewable|backup_encrypted)$/.test(dataColumn)) return 'boolean';
         return '';
       });
       statusKinds.forEach(function(kind, index) {
@@ -742,9 +746,12 @@
           var statusKind = statusKinds[index];
           if (statusKind && /^(?:0|1|yes|no|ja|nein|active|inactive|enabled|disabled|aktiv|inaktiv)$/i.test(cellText)) {
             var enabled = /^(?:1|yes|ja|active|enabled|aktiv)$/i.test(cellText);
+            var fullStatusLabel = headerNodes[index] && (headerNodes[index].getAttribute('aria-label') || headerNodes[index].getAttribute('title')) || headers[index] || '';
             var stateLabel = statusKind === 'locked'
               ? (enabled ? localized('Gesperrt', 'Locked') : localized('Nicht gesperrt', 'Not locked'))
-              : (enabled ? localized('Aktiv', 'Active') : localized('Inaktiv', 'Inactive'));
+              : statusKind === 'active' || statusKind === 'remote'
+                ? (enabled ? localized('Aktiv', 'Active') : localized('Inaktiv', 'Inactive'))
+                : fullStatusLabel + ': ' + (enabled ? localized('Ja', 'Yes') : localized('Nein', 'No'));
             var statusTarget = cell.querySelector('a, button') || cell;
             var indicator = document.createElement('span');
             indicator.className = 'wb-status-indicator';
@@ -829,10 +836,11 @@
         statusColgroup.setAttribute('data-wb-status-columns', 'true');
         headerNodes.forEach(function(header, index) {
           var firstCell = body.querySelector(':scope > tr:not(.tbl_row_noresults) > :is(td, th):nth-child(' + (index + 1) + ')');
+          var headerColumn = String(header.getAttribute('data-column') || '').toLowerCase().trim();
           var hidden = window.getComputedStyle(header).display === 'none' || (firstCell && (
             window.getComputedStyle(firstCell).display === 'none' ||
             firstCell.classList.contains('hg-table-column--identity') ||
-            firstCell.classList.contains('wb-table-cell--identity')
+            (index === 0 && /(?:^|_)id$/.test(headerColumn))
           ));
           if (index === headerNodes.length - 1) hidden = false;
           if (hidden) return;

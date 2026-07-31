@@ -1,6 +1,11 @@
-# ISPConfig HERITAGE 1.0.32
+# ISPConfig HERITAGE 1.0.33
 
-HERITAGE 1.0.32 completes compact status columns and the narrow-navigation
+HERITAGE 1.0.33 extends compact states to all five server capabilities and the
+SMTP, delivery, IMAP and POP3 states of mailbox lists. Enabled services use a
+calm success semantic, while enabled disable-flags are intentionally warnings.
+This gives server names and mailbox content substantially more useful width.
+
+HERITAGE 1.0.32 completed compact status columns and the narrow-navigation
 boundary. Boolean active, locked and remote-access values now use concise,
 accessible indicators; content columns receive the recovered space while row
 actions remain fully usable. The complete main navigation remains present at
