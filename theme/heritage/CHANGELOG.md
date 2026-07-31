@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.2 – 2026-07-31
+
+- Improved split-screen and tablet navigation down to 721 pixels.
+- Primary labels remain visible below their icons and use concise wording.
+- Quick-create controls now match the light navigation surface.
+
 ## 1.0.1 – 2026-07-31
 
 - Dashboard uses the full application width when no contextual navigation exists.

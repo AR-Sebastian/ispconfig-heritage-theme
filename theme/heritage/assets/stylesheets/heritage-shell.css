@@ -167,7 +167,7 @@ body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__modules > l
   border-inline-start: 1px solid var(--hg-glass-line);
 }
 
-body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__module {
+  body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__module {
   position: relative;
   display: grid;
   width: 100%;
@@ -224,6 +224,28 @@ body.heritage-shell.wb-app-navigation-enabled :is(
   .wb-mobile-navigation__module[aria-current='page']
 )::before {
   transform: scaleX(1);
+}
+
+/* Quiet quick-create actions in the light navigation. The plus remains easy
+ * to discover without reading as a dark or destructive control. */
+body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__quick-action {
+  color: var(--wb-action) !important;
+  border-color: color-mix(in srgb, var(--wb-action) 22%, var(--hg-glass-line)) !important;
+  background: color-mix(in srgb, var(--wb-action) 4%, var(--hg-glass)) !important;
+  box-shadow: 0 2px 7px rgba(24, 39, 75, .055);
+}
+
+body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__quick-action:is(:hover, :focus-visible) {
+  color: var(--wb-action-contrast) !important;
+  border-color: var(--wb-action) !important;
+  background: var(--wb-action) !important;
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--wb-action) 18%, transparent);
+}
+
+html[data-wb-theme='dark'] body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__quick-action {
+  color: color-mix(in srgb, var(--wb-action) 74%, #fff) !important;
+  border-color: color-mix(in srgb, var(--wb-action) 28%, rgba(255, 255, 255, .1)) !important;
+  background: color-mix(in srgb, var(--wb-action) 7%, #172236) !important;
 }
 
 body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__secondary {
@@ -330,7 +352,44 @@ body.heritage-shell.wb-login-page {
     var(--hg-canvas);
 }
 
-@media (max-width: 1024px) {
+@media (min-width: 721px) and (max-width: 1180px) {
+  body.heritage-shell.wb-app-navigation-enabled #inner-wrapper > .clear:first-child {
+    grid-template-columns: minmax(120px, 156px) minmax(190px, 1fr) auto;
+    padding-inline: 14px 212px;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled .wb-app-navigation__footer {
+    right: 10px;
+    width: 194px;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__content {
+    padding-inline: 4px;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__modules {
+    min-width: 720px;
+    justify-content: flex-start;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__modules > li {
+    min-width: 72px;
+    max-width: 112px;
+    flex-basis: 88px;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__module {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    font-size: 10px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 720px) {
   body.heritage-shell.wb-app-navigation-enabled #main-wrapper {
     padding-block-start: var(--hg-header-height);
     padding-inline-start: 0;
@@ -403,7 +462,7 @@ body.heritage-shell.wb-login-page {
     border-bottom: 1px solid rgba(255, 255, 255, .055);
   }
 
-  body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__module {
+body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__module {
     display: flex;
     min-height: 52px;
     justify-content: flex-start;
