@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.15 – 2026-07-31
+
+- All post-bootstrap login and application scripts use ordered deferred loading.
+- Runtime downloads no longer serialize parser progress at the end of each shell.
+- Public validation rejects new non-deferred runtime scripts.
+- The deliberate early colour and language bootstrap remains synchronous.
+
 ## 1.0.14 – 2026-07-31
 
 - Removed a private, unreferenced image from the distribution.
