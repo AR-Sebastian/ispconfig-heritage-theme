@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.7 – 2026-07-31
+
+- Page headers, status metadata and action groups now share one semantic composition.
+- Notices receive stable severity roles and aligned full-width presentation.
+- Empty, loading and error states use one centered responsive workspace.
+- Mobile page titles and actions retain a predictable left-aligned hierarchy.
+
 ## 1.0.6 – 2026-07-31
 
 - Mobile list rows now share one semantic record-card hierarchy across modules.

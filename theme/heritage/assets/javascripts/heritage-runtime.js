@@ -240,6 +240,56 @@
     });
   }
 
+  function enhancePageComposition() {
+    var host = document.getElementById('pageContent');
+    if (!host) return;
+    var german = (document.documentElement.lang || '').toLowerCase().indexOf('de') === 0;
+    var heading = host.querySelector(':scope > .wb-page-header, :scope > .page-header');
+    var title = heading && heading.querySelector('h1, h2');
+
+    if (heading) {
+      heading.setAttribute('data-heritage-page-header', 'true');
+      if (title && !title.id) title.id = 'heritage-page-title';
+      if (title) host.setAttribute('aria-labelledby', title.id);
+      var headingActions = heading.querySelector('.wb-page-header__actions');
+      if (headingActions) {
+        headingActions.setAttribute('role', 'group');
+        headingActions.setAttribute('aria-label', german ? 'Seitenaktionen' : 'Page actions');
+      }
+    }
+
+    var meta = host.querySelector(':scope > .wb-page-meta');
+    if (meta) {
+      meta.setAttribute('data-heritage-page-meta', 'true');
+      meta.setAttribute('aria-label', german ? 'Seitenstatus' : 'Page status');
+    }
+
+    host.querySelectorAll(':scope > .wb-page-notices, :scope > .wb-feedback-stack').forEach(function (stack) {
+      stack.setAttribute('data-heritage-notice-stack', 'true');
+      stack.setAttribute('aria-label', german ? 'Meldungen' : 'Messages');
+    });
+    host.querySelectorAll('.alert, .alert-notification, .wb-feedback').forEach(function (notice) {
+      var severity = notice.classList.contains('alert-danger') || notice.classList.contains('wb-feedback--danger') ? 'danger' :
+        (notice.classList.contains('alert-warning') || notice.classList.contains('wb-feedback--warning') ? 'warning' :
+          (notice.classList.contains('alert-success') || notice.classList.contains('wb-feedback--success') ? 'success' : 'info'));
+      notice.setAttribute('data-heritage-notice', severity);
+    });
+
+    host.querySelectorAll('.wb-list-command-bar').forEach(function (bar) {
+      bar.setAttribute('data-heritage-command-bar', 'true');
+      bar.setAttribute('role', 'toolbar');
+      bar.setAttribute('aria-label', german ? 'Listenaktionen' : 'List actions');
+      var primary = bar.querySelector('.wb-list-command-bar__primary, .btn-primary');
+      if (primary) primary.setAttribute('data-heritage-primary-action', 'true');
+    });
+
+    host.querySelectorAll('.wb-content-state').forEach(function (state) {
+      state.setAttribute('data-heritage-content-state', 'true');
+      state.setAttribute('role', state.classList.contains('wb-content-state--error') ? 'alert' : 'status');
+      state.setAttribute('aria-live', state.classList.contains('wb-content-state--error') ? 'assertive' : 'polite');
+    });
+  }
+
   function enhanceDashboard() {
     var host = document.getElementById('pageContent');
     if (!host || !document.body.classList.contains('wb-dashboard-page')) return;
@@ -492,6 +542,7 @@
       if (homeLink) homeLink.setAttribute('aria-label', 'Übersicht');
     }
     syncThemeToggleLabel();
+    enhancePageComposition();
     markIdentityColumns();
     localizeComponentLabels();
     syncModuleContext();
@@ -510,6 +561,7 @@
     var pageContent = document.getElementById('pageContent');
     if (pageContent) {
       new MutationObserver(function () {
+        enhancePageComposition();
         markIdentityColumns();
         localizeComponentLabels();
         syncModuleContext();
@@ -527,6 +579,7 @@
   }
 
   document.addEventListener('workbench:navigation-complete', function () {
+    enhancePageComposition();
     markIdentityColumns();
     localizeComponentLabels();
     syncModuleContext();
