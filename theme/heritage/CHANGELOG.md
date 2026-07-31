@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.27 – 2026-07-31
+
+- Die Tabellen-V1-Abnahme umfasst jetzt 13 reale ISPConfig-Oberflächen.
+- Datenbanken, FTP, Cronjobs, Postfächer, Support, Server und Remote-Benutzer ergänzen die Referenzmatrix.
+- Historische XMPP- und vServer-Spalten werden in keiner responsiven Darstellung mehr präsentiert.
+- 156 Laufzeitzustände schützen Tabellengeometrie, Aktionen, Identitäten und Altmodulgrenzen.
+
 ## 1.0.26 – 2026-07-31
 
 - Kunden-, Webseiten-, E-Mail- und DNS-Listen folgen demselben Tabellenvertrag.
