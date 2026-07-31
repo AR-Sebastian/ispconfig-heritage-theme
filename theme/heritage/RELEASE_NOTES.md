@@ -1,10 +1,10 @@
-# ISPConfig HERITAGE 1.0.24
+# ISPConfig HERITAGE 1.0.25
 
-HERITAGE 1.0.24 closes the trailing edge of wide data tables. Populated tables
-now keep their own horizontal scroll context even when ISPConfig retains a
-dormant legacy empty row, so sticky action controls remain completely visible
-inside the table surface. Runtime validation measures both action-cell bounds
-and the visible table viewport across every supported presentation state.
+HERITAGE 1.0.25 removes the intermediate primary-navigation scroll state.
+Between 721 and 1180 pixels, modules share the available horizontal space,
+retain icon-above-label composition and no longer inherit the older drawer
+breakpoint. A dedicated 740-pixel browser state protects the compact desktop
+layout in addition to desktop, tablet and mobile coverage.
 
 ## Previous releases
 

@@ -23210,6 +23210,20 @@ body.heritage-shell.wb-login-page {
 }
 
 @media (min-width: 721px) and (max-width: 1180px) {
+  body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation {
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled :is(
+    .menu-btn,
+    .wb-mobile-navigation__close,
+    .wb-navigation-overlay
+  ) {
+    display: none !important;
+  }
+
   body.heritage-shell.wb-app-navigation-enabled #inner-wrapper > .clear:first-child {
     grid-template-columns: minmax(120px, 156px) minmax(190px, 1fr) auto;
     padding-inline: 14px 212px;
@@ -23222,19 +23236,18 @@ body.heritage-shell.wb-login-page {
 
   body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__content {
     padding-inline: 4px;
-    overflow-x: auto;
-    scrollbar-width: thin;
+    overflow-x: hidden;
   }
 
   body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__modules {
-    min-width: 720px;
+    min-width: 0;
     justify-content: flex-start;
   }
 
   body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__modules > li {
-    min-width: 72px;
-    max-width: 112px;
-    flex-basis: 88px;
+    min-width: 0;
+    max-width: none;
+    flex: 1 1 0;
   }
 
   body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__module {
@@ -23245,6 +23258,11 @@ body.heritage-shell.wb-login-page {
     justify-items: center !important;
     font-size: 10px;
     text-align: center;
+  }
+
+  body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__module > .title {
+    padding-inline: 2px;
+    font-size: clamp(8px, 1.02vw, 10px);
   }
 }
 
