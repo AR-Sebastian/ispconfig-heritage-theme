@@ -114,7 +114,7 @@ body.heritage-shell.wb-list-page .wb-data-table > thead > tr:first-child > [aria
   content: '\2193';
 }
 
-body.heritage-shell.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] > :is(th, td) {
+body.heritage-shell.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] > :is(th, td) {
   position: sticky;
   z-index: 3;
   top: 48px;
@@ -124,15 +124,15 @@ body.heritage-shell.wb-list-page .wb-data-table > thead > tr[data-workbench-filt
   background: color-mix(in srgb, var(--hg-surface-subtle) 76%, var(--hg-surface));
 }
 
-body.heritage-shell.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] > :is(th, td):first-child {
+body.heritage-shell.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] > :is(th, td):first-child {
   padding-inline-start: 16px;
 }
 
-body.heritage-shell.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] > :is(th, td):last-child {
+body.heritage-shell.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] > :is(th, td):last-child {
   padding-inline-end: 16px;
 }
 
-body.heritage-shell.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] :is(
+body.heritage-shell.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] :is(
   input,
   select,
   .form-control,
@@ -369,7 +369,7 @@ body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li 
     background: transparent !important;
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr:first-child:not([data-workbench-filter-row]) {
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr:first-child:not([data-heritage-filter-row]) {
     position: absolute !important;
     inline-size: 1px;
     block-size: 1px;
@@ -378,7 +378,7 @@ body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li 
     white-space: nowrap;
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-workbench-filter-row] {
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row] {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr);
     gap: 8px;
@@ -389,11 +389,11 @@ body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li 
     background: var(--hg-surface-subtle);
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-workbench-filter-row][hidden] {
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row][hidden] {
     display: none !important;
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-workbench-filter-row] > :is(th, td) {
+  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row] > :is(th, td) {
     display: block !important;
     position: static;
     inline-size: 100%;

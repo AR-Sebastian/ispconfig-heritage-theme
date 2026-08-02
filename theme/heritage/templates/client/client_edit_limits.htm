@@ -1,6 +1,6 @@
 <div class="wb-form-panel wb-form-panel--limits">
 
-	<div class="wb-form-sections" data-workbench-master-template-lock="true" data-template-master-control="template_master" data-template-lock-message="{tmpl_var name='err_msg_master_tpl_set'}" data-template-lock-exempt="#template_master,#template_additional,#default_mailserver,#tpl_add_btn,#default_webserver,#default_dbserver,#default_dnsserver,#default_slave_dnsserver,#customer_no_template,#customer_no_start,#customer_no_counter,#parent_client_id,#reseller">
+	<div class="wb-form-sections" data-heritage-master-template-lock="true" data-template-master-control="template_master" data-template-lock-message="{tmpl_var name='err_msg_master_tpl_set'}" data-template-lock-exempt="#template_master,#template_additional,#default_mailserver,#tpl_add_btn,#default_webserver,#default_dbserver,#default_dnsserver,#default_slave_dnsserver,#customer_no_template,#customer_no_start,#customer_no_counter,#parent_client_id,#reseller">
         <fieldset class="wb-form-fieldset">
                 <div class="wb-field-group">
                     <label for="template_master" >{tmpl_var name='template_master_txt'}</label>
@@ -15,7 +15,7 @@
                     </select></div>
                 </div>
 				<div class="wb-form-actions"><div class="wb-form-actions__primary">
-					<button id="tpl_add_btn" class="formbutton-success" type="button" data-workbench-action="add-additional-template">{tmpl_var name="add_additional_template_txt"}</button>
+					<button id="tpl_add_btn" class="formbutton-success" type="button" data-heritage-action="add-additional-template">{tmpl_var name="add_additional_template_txt"}</button>
 				</div></div>
                 <div class="wb-field-group">
                     <label >{tmpl_var name='active_template_additional_txt'}</label>
@@ -45,7 +45,7 @@
   <div class="wb-limit-section">
     <div class="wb-limit-section__header" role="tab" id="headingWeb">
       <h4 class="wb-limit-section__title">
-        <a role="button" data-workbench-collapse="true" data-parent="#accordion" href="#collapseWeb" aria-expanded="true" aria-controls="collapseWeb">
+        <a role="button" data-heritage-collapse="true" data-parent="#accordion" href="#collapseWeb" aria-expanded="true" aria-controls="collapseWeb">
           {tmpl_var name='web_limits_txt'}
         </a>
       </h4>
@@ -174,7 +174,7 @@
   <div class="wb-limit-section">
     <div class="wb-limit-section__header" role="tab" id="headingMail">
       <h4 class="wb-limit-section__title">
-        <a class="collapsed" role="button" data-workbench-collapse="true" data-parent="#accordion" href="#collapseMail" aria-expanded="false" aria-controls="collapseMail">
+        <a class="collapsed" role="button" data-heritage-collapse="true" data-parent="#accordion" href="#collapseMail" aria-expanded="false" aria-controls="collapseMail">
           {tmpl_var name='email_limits_txt'}
         </a>
       </h4>
@@ -252,7 +252,7 @@
   <div class="wb-limit-section">
     <div class="wb-limit-section__header" role="tab" id="headingDB">
       <h4 class="wb-limit-section__title">
-        <a class="collapsed" role="button" data-workbench-collapse="true" data-parent="#accordion" href="#collapseDB" aria-expanded="false" aria-controls="collapseDB">
+        <a class="collapsed" role="button" data-heritage-collapse="true" data-parent="#accordion" href="#collapseDB" aria-expanded="false" aria-controls="collapseDB">
           {tmpl_var name='database_limits_txt'}
         </a>
       </h4>
@@ -289,7 +289,7 @@
   <div class="wb-limit-section">
     <div class="wb-limit-section__header" role="tab" id="headingCron">
       <h4 class="wb-limit-section__title">
-        <a class="collapsed" role="button" data-workbench-collapse="true" data-parent="#accordion" href="#collapseCron" aria-expanded="false" aria-controls="collapseCron">
+        <a class="collapsed" role="button" data-heritage-collapse="true" data-parent="#accordion" href="#collapseCron" aria-expanded="false" aria-controls="collapseCron">
           {tmpl_var name='cron_job_limits_txt'}
         </a>
       </h4>
@@ -316,7 +316,7 @@
   <div class="wb-limit-section">
     <div class="wb-limit-section__header" role="tab" id="headingDNS">
       <h4 class="wb-limit-section__title">
-        <a class="collapsed" role="button" data-workbench-collapse="true" data-parent="#accordion" href="#collapseDNS" aria-expanded="false" aria-controls="collapseDNS">
+        <a class="collapsed" role="button" data-heritage-collapse="true" data-parent="#accordion" href="#collapseDNS" aria-expanded="false" aria-controls="collapseDNS">
           {tmpl_var name='dns_servers_txt'}
         </a>
       </h4>
@@ -354,7 +354,7 @@
   <div class="wb-limit-section">
     <div class="wb-limit-section__header" role="tab" id="heading{tmpl_var name='section_id'}">
       <h4 class="wb-limit-section__title">
-        <a class="collapsed" role="button" data-workbench-collapse="true" data-parent="#accordion" href="#collapse{tmpl_var name='section_id'}" aria-expanded="false" aria-controls="collapse{tmpl_var name='section_id'}">
+        <a class="collapsed" role="button" data-heritage-collapse="true" data-parent="#accordion" href="#collapse{tmpl_var name='section_id'}" aria-expanded="false" aria-controls="collapse{tmpl_var name='section_id'}">
           {tmpl_var name='section_title'}
         </a>
       </h4>
@@ -377,7 +377,7 @@
 
         <div class="wb-form-actions"><div class="wb-form-actions__primary">
             <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="client/client_edit.php">{tmpl_var name='btn_save_txt'}</button>
-            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="{tmpl_var name='session_module'}/client_list.php" data-load-content="{tmpl_var name='session_module'}/client_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-heritage-load-content="{tmpl_var name='session_module'}/client_list.php" data-load-content="{tmpl_var name='session_module'}/client_list.php">{tmpl_var name='btn_cancel_txt'}</button>
         </div></div>
     </div>
 </div>

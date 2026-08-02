@@ -257,7 +257,6 @@
     toggleDetails(button);
   });
 })(window, document);
-;
 
 /* source: heritage-runtime.js */
 (function () {
@@ -817,7 +816,7 @@
         else if (header.matches('.sorting, [data-sortable="true"]')) header.setAttribute('aria-sort', 'none');
       });
 
-      var filterRow = table.querySelector('thead > tr[data-workbench-filter-row]');
+      var filterRow = table.querySelector('thead > tr[data-heritage-filter-row]');
       if (filterRow) {
         filterRow.setAttribute('aria-label', german ? 'Tabellenfilter' : 'Table filters');
         filterRow.querySelectorAll('input, select').forEach(function (control) {
@@ -1002,7 +1001,7 @@
     event.stopImmediatePropagation();
 
     var host = document.getElementById('pageContent');
-    var row = host && host.querySelector('thead tr[data-workbench-filter-row]');
+    var row = host && host.querySelector('thead tr[data-heritage-filter-row]');
     if (!row) return;
 
     row.querySelectorAll('input, select').forEach(function (control) {
@@ -1020,7 +1019,6 @@
     markShell();
   }
 }());
-;
 
 /* source: heritage-boot.js */
 (function(window, document) {
@@ -1039,13 +1037,13 @@
     if (!runtime || !document.body) return false;
 
     var body = document.body;
-    runtime.tabChangeDiscard = body.getAttribute('data-workbench-tab-change-discard') || '';
-    runtime.tabChangeWarning = body.getAttribute('data-workbench-tab-change-warning') || '';
-    runtime.tabChangeWarningTxt = body.getAttribute('data-workbench-tab-change-warning-text') || '';
-    runtime.tabChangeDiscardTxt = body.getAttribute('data-workbench-tab-change-discard-text') || '';
+    runtime.tabChangeDiscard = body.getAttribute('data-heritage-tab-change-discard') || '';
+    runtime.tabChangeWarning = body.getAttribute('data-heritage-tab-change-warning') || '';
+    runtime.tabChangeWarningTxt = body.getAttribute('data-heritage-tab-change-warning-text') || '';
+    runtime.tabChangeDiscardTxt = body.getAttribute('data-heritage-tab-change-discard-text') || '';
 
-    if (flag(body.getAttribute('data-workbench-use-load-indicator'))) runtime.setOption('useLoadIndicator', true);
-    if (flag(body.getAttribute('data-workbench-use-combobox'))) runtime.setOption('useComboBox', true);
+    if (flag(body.getAttribute('data-heritage-use-load-indicator'))) runtime.setOption('useLoadIndicator', true);
+    if (flag(body.getAttribute('data-heritage-use-combobox'))) runtime.setOption('useComboBox', true);
 
     return true;
   }
@@ -1064,4 +1062,3 @@
     bootWorkbench();
   }
 })(window, document);
-;

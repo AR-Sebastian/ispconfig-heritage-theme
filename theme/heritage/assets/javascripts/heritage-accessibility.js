@@ -102,7 +102,7 @@
     if (!target || !target.isConnected || dialogIsOpen() || document.visibilityState === 'hidden') return false;
     var temporaryTabindex = !target.hasAttribute('tabindex');
     if (temporaryTabindex) target.setAttribute('tabindex', '-1');
-    target.setAttribute('data-workbench-page-focus', 'true');
+    target.setAttribute('data-heritage-page-focus', 'true');
     try { target.focus({ preventScroll: true }); }
     catch (error) { target.focus(); }
     if (typeof target.scrollIntoView === 'function') {
@@ -110,7 +110,7 @@
     }
     target.addEventListener('blur', function cleanup() {
       if (temporaryTabindex) target.removeAttribute('tabindex');
-      target.removeAttribute('data-workbench-page-focus');
+      target.removeAttribute('data-heritage-page-focus');
     }, { once: true });
     return document.activeElement === target;
   }

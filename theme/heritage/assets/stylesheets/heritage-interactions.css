@@ -444,12 +444,12 @@ body.heritage-shell.wb-list-page #pageContent :is(
 
 /* Loading and feedback */
 
-body.heritage-shell.wb-app-navigation-enabled .wb-request-status[data-workbench-delayed='true'] {
+body.heritage-shell.wb-app-navigation-enabled .wb-request-status[data-heritage-delayed='true'] {
   position: relative;
   overflow: hidden;
 }
 
-body.heritage-shell.wb-app-navigation-enabled .wb-request-status[data-workbench-delayed='true']::after {
+body.heritage-shell.wb-app-navigation-enabled .wb-request-status[data-heritage-delayed='true']::after {
   position: absolute;
   inset: auto 0 0;
   height: 2px;
@@ -514,7 +514,7 @@ body.heritage-shell.wb-app-navigation-enabled [aria-busy='true'] :is(
     scroll-behavior: auto !important;
   }
 
-  body.heritage-shell.wb-app-navigation-enabled .wb-request-status[data-workbench-delayed='true']::after {
+  body.heritage-shell.wb-app-navigation-enabled .wb-request-status[data-heritage-delayed='true']::after {
     animation: none;
     background: var(--hg-accent);
   }

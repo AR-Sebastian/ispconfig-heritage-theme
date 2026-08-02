@@ -44,6 +44,10 @@ if grep -RIEq 'window\.workbench[A-Za-z0-9_]*' "$theme/assets/javascripts"; then
   echo 'Theme contains a global runtime symbol in the obsolete Workbench namespace.' >&2
   exit 1
 fi
+if grep -RIEq 'data-workbench-' "$theme/templates" "$theme/assets/stylesheets" "$theme/assets/javascripts"; then
+  echo 'Theme contains a DOM contract in the obsolete Workbench namespace.' >&2
+  exit 1
+fi
 while IFS= read -r -d '' file; do node --check "$file"; done < <(find "$theme" -type f -name '*.js' -print0)
 
 node - "$theme" "$version" <<'NODE'
@@ -155,10 +159,10 @@ for (const contract of ['inline-size: 100%', ':has(.wb-row-actions > :nth-child(
   if (!tableAuthority.includes(contract)) throw new Error(`Table geometry contract is missing: ${contract}`);
 }
 const accessibilityAuthority = fs.readFileSync(path.join(styles, 'heritage-accessibility.css'), 'utf8');
-if (!accessibilityAuthority.includes("h1[data-workbench-page-focus='true']:focus-visible")) {
+if (!accessibilityAuthority.includes("h1[data-heritage-page-focus='true']:focus-visible")) {
   throw new Error('Programmatic page-heading focus contract is missing.');
 }
-if (!accessibilityAuthority.includes("#pageContent:is([data-workbench-page-focus='true']")) {
+if (!accessibilityAuthority.includes("#pageContent:is([data-heritage-page-focus='true']")) {
   throw new Error('Programmatic page-container focus contract is missing.');
 }
 const bundles = JSON.parse(fs.readFileSync(path.join(styles, 'heritage-css-bundles.json'), 'utf8'));

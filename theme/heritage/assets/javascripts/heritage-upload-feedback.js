@@ -52,7 +52,7 @@
     var root = document.getElementById('pageContent');
     if (!root) return;
     var feedback = ensureFeedback(root);
-    feedback.removeAttribute('data-workbench-delayed');
+    feedback.removeAttribute('data-heritage-delayed');
     feedback.dataset.state = state;
     feedback.setAttribute('role', state === 'failed' ? 'alert' : 'status');
     feedback.querySelector('.wb-submit-feedback__label').textContent = label;
@@ -126,7 +126,7 @@
         ? 'Der Upload dauert etwas l\u00e4nger. Die Datei wird weiterhin verarbeitet.'
         : 'The upload is taking a little longer. The file is still being processed.');
       var feedback = document.querySelector('#pageContent > .wb-upload-feedback');
-      if (feedback) feedback.setAttribute('data-workbench-delayed', 'true');
+      if (feedback) feedback.setAttribute('data-heritage-delayed', 'true');
     }, 7000);
 
     var request;

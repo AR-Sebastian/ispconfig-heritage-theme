@@ -38,7 +38,7 @@
     document.body.classList.remove('wb-module-transition-active');
     moduleItems.forEach(function(item) {
       item.removeAttribute('aria-busy');
-      item.removeAttribute('data-workbench-delayed');
+      item.removeAttribute('data-heritage-delayed');
       item.classList.remove('wb-module-transition-source');
       var state = item.querySelector('.wb-module-transition');
       if (state) state.remove();
@@ -69,7 +69,7 @@
     moduleTransitionTimer = window.setTimeout(finishModuleTransition, 30000);
     moduleSlowTimer = window.setTimeout(function() {
       moduleItems.forEach(function(item) {
-        item.setAttribute('data-workbench-delayed', 'true');
+        item.setAttribute('data-heritage-delayed', 'true');
         var label = item.querySelector('.wb-module-transition .sr-only');
         if (label) label.textContent = localized('Modul wird weiterhin geladen', 'Module is still loading');
       });
@@ -145,7 +145,7 @@
         var current = content();
         var currentStatus = current && current.querySelector(':scope > .wb-request-status');
         if (!currentStatus || legacy.requestsRunning < 1) return;
-        currentStatus.setAttribute('data-workbench-delayed', 'true');
+        currentStatus.setAttribute('data-heritage-delayed', 'true');
         currentStatus.textContent = localized('Die Anfrage dauert etwas länger. Sie wird weiterhin verarbeitet.', 'This request is taking a little longer. It is still being processed.');
       }, 7000);
     }

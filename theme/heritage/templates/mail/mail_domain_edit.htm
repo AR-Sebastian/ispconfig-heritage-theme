@@ -92,7 +92,7 @@
 </tmpl_if>
 
 <section class="wb-form-panel wb-form-panel--technical">
-    <button class="formbutton-default wb-form-panel-trigger" type="button" data-workbench-collapse="true" data-target="#toggle-dkim" aria-expanded="false" aria-controls="toggle-dkim">
+    <button class="formbutton-default wb-form-panel-trigger" type="button" data-heritage-collapse="true" data-target="#toggle-dkim" aria-expanded="false" aria-controls="toggle-dkim">
         {tmpl_var name='dkim_settings_txt'}
     </button>
     <div id="toggle-dkim" class="collapse wb-form-panel__body">
@@ -110,7 +110,7 @@
         </div>
         <div class="wb-field-group wb-field-group--with-action">
             <span></span>
-            <div><a class="formbutton-default" id="dkim-button" value="{tmpl_var name='dkim_generate_txt'}" href="#" data-workbench-action="create-dkim">{tmpl_var name='dkim_generate_txt'}</a></div>
+            <div><a class="formbutton-default" id="dkim-button" value="{tmpl_var name='dkim_generate_txt'}" href="#" data-heritage-action="create-dkim">{tmpl_var name='dkim_generate_txt'}</a></div>
         </div>
         <textarea class="form-control" name="dkim_public" hidden id="dkim_public" rows="5" cols="30" readonly>{tmpl_var name='dkim_public'}</textarea>
         <div class="wb-field-group">
@@ -128,6 +128,6 @@
     </tmpl_if></tmpl_if>
     <div class="wb-form-actions__primary">
         <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="mail/mail_domain_edit.php">{tmpl_var name='btn_save_txt'}</button>
-        <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="mail/mail_domain_list.php" data-load-content="mail/mail_domain_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-heritage-load-content="mail/mail_domain_list.php" data-load-content="mail/mail_domain_list.php">{tmpl_var name='btn_cancel_txt'}</button>
     </div>
 </div>

@@ -36,12 +36,12 @@
                 <tbody>
                     <tmpl_loop name="records">
                         <tr>
-                            <td><a href="#" data-workbench-tooltip="true" title='{tmpl_var name="domain"}' data-workbench-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="domain"}</a></td>
-                            <td><a href="#" data-workbench-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="system_user"}</a></td>
-                            <td><a href="#" data-workbench-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="used"}</a></td>
-                            <td><a href="#" data-workbench-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="soft"}</a></td>
-                            <td><a href="#" data-workbench-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="hard"}</a></td>
-                            <td><a href="#" data-workbench-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="files"}</a></td>
+                            <td><a href="#" data-heritage-tooltip="true" title='{tmpl_var name="domain"}' data-heritage-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="domain"}</a></td>
+                            <td><a href="#" data-heritage-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="system_user"}</a></td>
+                            <td><a href="#" data-heritage-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="used"}</a></td>
+                            <td><a href="#" data-heritage-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="soft"}</a></td>
+                            <td><a href="#" data-heritage-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="hard"}</a></td>
+                            <td><a href="#" data-heritage-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="files"}</a></td>
                             <td colspan="2">{tmpl_if name="progressbar" op="!=" value="-1"}<div class="progress wb-quota-progress">
                                 <div class='progress-bar-striped progress-bar-{tmpl_if name="percentage" op="<" value="50"}success{tmpl_elseif name="percentage" op="<" value="75"}warning{tmpl_else}danger{/tmpl_if}' role="progressbar" style="width: {tmpl_var name="progressbar"}%;" aria-valuenow="{tmpl_var name="percentage"}" aria-valuemin="0" aria-valuemax="100"><span>{tmpl_var name="percentage"}%</span></div>
                         </div>{/tmpl_if}</td>

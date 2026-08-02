@@ -122,6 +122,16 @@ Keep ISPConfig's original `default` theme installed as the recovery path.
 
 **[Download HERITAGE 1.0.34](https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/latest)**
 
+### Development validation
+
+After changing a modular stylesheet or script, rebuild the committed bundles
+and run the complete release gate:
+
+```bash
+node scripts/build-bundles.js
+bash scripts/validate-theme.sh
+```
+
 ### Quick start
 
 ```bash

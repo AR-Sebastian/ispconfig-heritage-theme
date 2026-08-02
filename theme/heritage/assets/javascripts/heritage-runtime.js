@@ -555,7 +555,7 @@
         else if (header.matches('.sorting, [data-sortable="true"]')) header.setAttribute('aria-sort', 'none');
       });
 
-      var filterRow = table.querySelector('thead > tr[data-workbench-filter-row]');
+      var filterRow = table.querySelector('thead > tr[data-heritage-filter-row]');
       if (filterRow) {
         filterRow.setAttribute('aria-label', german ? 'Tabellenfilter' : 'Table filters');
         filterRow.querySelectorAll('input, select').forEach(function (control) {
@@ -740,7 +740,7 @@
     event.stopImmediatePropagation();
 
     var host = document.getElementById('pageContent');
-    var row = host && host.querySelector('thead tr[data-workbench-filter-row]');
+    var row = host && host.querySelector('thead tr[data-heritage-filter-row]');
     if (!row) return;
 
     row.querySelectorAll('input, select').forEach(function (control) {

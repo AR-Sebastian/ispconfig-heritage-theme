@@ -32,9 +32,9 @@ body.wb-app-navigation-enabled #pageContent .wb-page-header > h1 {
   grid-column: 1;
   min-width: 0;
 }
-body.wb-app-navigation-enabled #pageContent [data-workbench-page-focus='true'] { scroll-margin-block-start: 82px; }
-body.wb-app-navigation-enabled #pageContent h1[data-workbench-page-focus='true']:focus { outline: none; }
-body.wb-app-navigation-enabled #pageContent h1[data-workbench-page-focus='true']:focus-visible { border-radius: 5px; outline: 2px solid color-mix(in srgb, var(--wb-action) 58%, transparent); outline-offset: 5px; }
+body.wb-app-navigation-enabled #pageContent [data-heritage-page-focus='true'] { scroll-margin-block-start: 82px; }
+body.wb-app-navigation-enabled #pageContent h1[data-heritage-page-focus='true']:focus { outline: none; }
+body.wb-app-navigation-enabled #pageContent h1[data-heritage-page-focus='true']:focus-visible { border-radius: 5px; outline: 2px solid color-mix(in srgb, var(--wb-action) 58%, transparent); outline-offset: 5px; }
 
 body.wb-app-navigation-enabled #pageContent .wb-page-header__eyebrow {
   margin: 0;
@@ -153,10 +153,10 @@ body.wb-app-navigation-enabled #pageContent :is(.wb-notice, .wb-feedback)::befor
   content: '';
 }
 
-body.wb-app-navigation-enabled #pageContent :is(.wb-notice--danger, .wb-feedback[data-workbench-tone='danger']) { --wb-notice-color: var(--wb-danger); }
-body.wb-app-navigation-enabled #pageContent :is(.wb-notice--warning, .wb-feedback[data-workbench-tone='warning']) { --wb-notice-color: var(--wb-warning); }
-body.wb-app-navigation-enabled #pageContent :is(.wb-notice--success, .wb-feedback[data-workbench-tone='success']) { --wb-notice-color: var(--wb-success); }
-body.wb-app-navigation-enabled #pageContent :is(.wb-notice--info, .wb-feedback[data-workbench-tone='info']) { --wb-notice-color: var(--wb-info, var(--wb-action)); }
+body.wb-app-navigation-enabled #pageContent :is(.wb-notice--danger, .wb-feedback[data-heritage-tone='danger']) { --wb-notice-color: var(--wb-danger); }
+body.wb-app-navigation-enabled #pageContent :is(.wb-notice--warning, .wb-feedback[data-heritage-tone='warning']) { --wb-notice-color: var(--wb-warning); }
+body.wb-app-navigation-enabled #pageContent :is(.wb-notice--success, .wb-feedback[data-heritage-tone='success']) { --wb-notice-color: var(--wb-success); }
+body.wb-app-navigation-enabled #pageContent :is(.wb-notice--info, .wb-feedback[data-heritage-tone='info']) { --wb-notice-color: var(--wb-info, var(--wb-action)); }
 
 body.wb-app-navigation-enabled #pageContent :is(.wb-notice__icon, .wb-feedback__icon) {
   display: inline-grid;
@@ -173,7 +173,7 @@ body.wb-app-navigation-enabled #pageContent .wb-notice__icon::before { content: 
 body.wb-app-navigation-enabled #pageContent :is(.wb-notice--danger, .wb-notice--warning) .wb-notice__icon::before { content: '!'; }
 body.wb-app-navigation-enabled #pageContent .wb-notice--success .wb-notice__icon::before { content: '\2713'; }
 body.wb-app-navigation-enabled #pageContent .wb-feedback__icon svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-body.wb-app-navigation-enabled #pageContent :is(.wb-notice, .wb-feedback) > :not(.wb-notice__icon, .wb-feedback__icon, .wb-feedback__action, .close, [data-workbench-dismiss]) { grid-column: 2; min-width: 0; }
+body.wb-app-navigation-enabled #pageContent :is(.wb-notice, .wb-feedback) > :not(.wb-notice__icon, .wb-feedback__icon, .wb-feedback__action, .close, [data-heritage-dismiss]) { grid-column: 2; min-width: 0; }
 body.wb-app-navigation-enabled #pageContent .wb-feedback__content { display: flow-root; min-width: 0; overflow-wrap: anywhere; }
 body.wb-app-navigation-enabled #pageContent .wb-feedback__content > :first-child { margin-top: 0; }
 body.wb-app-navigation-enabled #pageContent .wb-feedback__content > :last-child { margin-bottom: 0; }
@@ -183,13 +183,13 @@ body.wb-app-navigation-enabled #pageContent .wb-feedback__content a { color: inh
 body.wb-app-navigation-enabled #pageContent .wb-feedback > :is(.alert-label, .alert-content) { color: inherit; font-size: 12px; line-height: 1.5; }
 body.wb-app-navigation-enabled #pageContent .wb-feedback > .alert-label { font-weight: 800; }
 body.wb-app-navigation-enabled #pageContent :is(.wb-notice, .wb-feedback) p:last-child { margin-bottom: 0; }
-body.wb-app-navigation-enabled #pageContent .wb-feedback > :is(.close, [data-workbench-dismiss]) { grid-column: 3; grid-row: 1; width: 28px; height: 28px; margin: -2px; border-radius: 7px; }
+body.wb-app-navigation-enabled #pageContent .wb-feedback > :is(.close, [data-heritage-dismiss]) { grid-column: 3; grid-row: 1; width: 28px; height: 28px; margin: -2px; border-radius: 7px; }
 body.wb-app-navigation-enabled #pageContent .wb-feedback__action { display: inline-flex; min-height: 32px; align-items: center; justify-content: center; grid-column: 2; width: max-content; margin-top: 8px; padding: 6px 10px; color: inherit; border: 1px solid color-mix(in srgb, currentColor 28%, var(--wb-border)); border-radius: 8px; background: color-mix(in srgb, currentColor 6%, var(--wb-surface)); font-size: 12px; font-weight: 780; line-height: 1.2; text-decoration: none; }
 body.wb-app-navigation-enabled #pageContent .wb-feedback__action:is(:hover, :focus-visible) { color: inherit; border-color: color-mix(in srgb, currentColor 52%, var(--wb-border)); background: color-mix(in srgb, currentColor 11%, var(--wb-surface)); text-decoration: none; }
 body.wb-app-navigation-enabled #pageContent > .wb-feedback-stack { display: grid; gap: 8px; margin: 0 0 14px; }
 body.wb-app-navigation-enabled #pageContent > .wb-feedback-stack:empty { display: none; }
 body.wb-app-navigation-enabled #pageContent > .wb-feedback-stack > .wb-feedback { margin: 0; }
-body.wb-app-navigation-enabled #pageContent > .wb-feedback-stack > .wb-feedback[data-workbench-dismiss-paused='true'] { box-shadow: 0 0 0 2px color-mix(in srgb, currentColor 10%, transparent); }
+body.wb-app-navigation-enabled #pageContent > .wb-feedback-stack > .wb-feedback[data-heritage-dismiss-paused='true'] { box-shadow: 0 0 0 2px color-mix(in srgb, currentColor 10%, transparent); }
 
 body.wb-app-navigation-enabled :is(.wb-form-state, .wb-submit-feedback) {
   display: inline-flex;
@@ -215,7 +215,7 @@ body.wb-app-navigation-enabled .wb-submit-feedback:is([data-state='saved'], [dat
 body.wb-app-navigation-enabled .wb-form-state[data-state='dirty'],
 body.wb-app-navigation-enabled .wb-submit-feedback[data-state='review'] { color: var(--wb-warning-ink); border-color: color-mix(in srgb, var(--wb-warning) 38%, var(--wb-border)); background: color-mix(in srgb, var(--wb-warning) 8%, var(--wb-surface)); }
 body.wb-app-navigation-enabled .wb-submit-feedback:is([data-state='saving'], [data-state='uploading']) { color: var(--wb-action); border-color: color-mix(in srgb, var(--wb-action) 35%, var(--wb-border)); background: color-mix(in srgb, var(--wb-action) 7%, var(--wb-surface)); }
-body.wb-app-navigation-enabled :is(.wb-request-status, .wb-submit-feedback)[data-workbench-delayed='true'] { color: var(--wb-text); border-color: color-mix(in srgb, var(--wb-action) 24%, var(--wb-border)); background: color-mix(in srgb, var(--wb-action) 4%, var(--wb-surface)); }
+body.wb-app-navigation-enabled :is(.wb-request-status, .wb-submit-feedback)[data-heritage-delayed='true'] { color: var(--wb-text); border-color: color-mix(in srgb, var(--wb-action) 24%, var(--wb-border)); background: color-mix(in srgb, var(--wb-action) 4%, var(--wb-surface)); }
 body.wb-app-navigation-enabled .wb-submit-feedback:is([data-state='saved'], [data-state='complete']) { color: var(--wb-success-ink); border-color: color-mix(in srgb, var(--wb-success) 34%, var(--wb-border)); background: color-mix(in srgb, var(--wb-success) 7%, var(--wb-surface)); }
 body.wb-app-navigation-enabled .wb-submit-feedback[data-state='failed'] { color: var(--wb-danger-ink); border-color: color-mix(in srgb, var(--wb-danger) 34%, var(--wb-border)); background: color-mix(in srgb, var(--wb-danger) 7%, var(--wb-surface)); }
 body.wb-app-navigation-enabled :is(.wb-submit-source, .wb-upload-source)[aria-busy='true'] { cursor: wait; opacity: .72; }

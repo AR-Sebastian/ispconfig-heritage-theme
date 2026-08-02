@@ -1,7 +1,7 @@
 <div class="wb-list-toolbar">
     <p class="wb-list-section-heading">{tmpl_var name="toolsarea_head_txt"}</p>
 
-            <button class="formbutton-success" type="button" data-workbench-load-content="mail/mail_user_filter_edit.php?mailuser_id={tmpl_var name='parent_id'}" data-load-content="mail/mail_user_filter_edit.php?mailuser_id={tmpl_var name='parent_id'}">{tmpl_var name="add_new_record_txt"}</button>
+            <button class="formbutton-success" type="button" data-heritage-load-content="mail/mail_user_filter_edit.php?mailuser_id={tmpl_var name='parent_id'}" data-load-content="mail/mail_user_filter_edit.php?mailuser_id={tmpl_var name='parent_id'}">{tmpl_var name="add_new_record_txt"}</button>
 
 
 
@@ -24,7 +24,7 @@
             <tbody>
                 <tmpl_loop name="records">
                     <tr>
-                        <td><a href="#" data-workbench-load-content="mail/mail_user_filter_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_filter_edit.php?id={tmpl_var name='id'}">{tmpl_var name="rulename"}</a></td>
+                        <td><a href="#" data-heritage-load-content="mail/mail_user_filter_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_filter_edit.php?id={tmpl_var name='id'}">{tmpl_var name="rulename"}</a></td>
                         <td class="wb-table-align-end">
                             <a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="mail/mail_user_filter_del.php?id={tmpl_var name='id'}&_csrf_id={tmpl_var name='csrf_id'}&_csrf_key={tmpl_var name='csrf_key'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete"></span></a>
                         </td>

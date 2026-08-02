@@ -8,7 +8,7 @@
             <span class="wb-list-toolbar__eyebrow">{tmpl_var name="toolsarea_head_txt"}</span>
             <strong><tmpl_var name="list_head_txt"></strong>
         </div>
-        <button class="formbutton-success" type="button" data-workbench-load-content="sites/database_edit.php" data-load-content="sites/database_edit.php">{tmpl_var name="add_new_record_txt"}</button>
+        <button class="formbutton-success" type="button" data-heritage-load-content="sites/database_edit.php" data-load-content="sites/database_edit.php">{tmpl_var name="add_new_record_txt"}</button>
     </div>
 
 <table class="table wb-data-table">
@@ -43,15 +43,15 @@
                 <tbody>
                     <tmpl_loop name="records">
                         <tr <tmpl_if name="warn_inactive"> class="danger" </tmpl_if> >
-                            <td><a href="#" data-workbench-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}">{tmpl_var name="active"}</a></td>
-                            <td><a href="#" data-workbench-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}">{tmpl_var name="remote_access"}</a></td>
+                            <td><a href="#" data-heritage-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}">{tmpl_var name="active"}</a></td>
+                            <td><a href="#" data-heritage-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}">{tmpl_var name="remote_access"}</a></td>
 <!--
-                            <td><a href="#" data-workbench-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}">{tmpl_var name="type"}</a></td>
+                            <td><a href="#" data-heritage-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}">{tmpl_var name="type"}</a></td>
 -->
-                            <td><a href="#" data-workbench-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-workbench-tooltip="true" data-workbench-tooltip-placement="bottom" title="{tmpl_var name='server_id'}">{tmpl_var name="server_id"}</a></td>
-							<td><a href="#" data-workbench-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-workbench-tooltip="true" data-workbench-tooltip-placement="bottom" title="{tmpl_var name='parent_domain_id'}">{tmpl_var name="parent_domain_id"}</a></td>
-                            <td><a href="#" data-workbench-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-workbench-tooltip="true" data-workbench-tooltip-placement="bottom" title="{tmpl_var name='database_user_id'}">{tmpl_var name="database_user_id"}</a></td>
-                            <td><a href="#" data-workbench-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}">{tmpl_var name="database_name"}</a></td>
+                            <td><a href="#" data-heritage-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-heritage-tooltip="true" data-heritage-tooltip-placement="bottom" title="{tmpl_var name='server_id'}">{tmpl_var name="server_id"}</a></td>
+							<td><a href="#" data-heritage-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-heritage-tooltip="true" data-heritage-tooltip-placement="bottom" title="{tmpl_var name='parent_domain_id'}">{tmpl_var name="parent_domain_id"}</a></td>
+                            <td><a href="#" data-heritage-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-heritage-tooltip="true" data-heritage-tooltip-placement="bottom" title="{tmpl_var name='database_user_id'}">{tmpl_var name="database_user_id"}</a></td>
+                            <td><a href="#" data-heritage-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}">{tmpl_var name="database_name"}</a></td>
                             <td class="wb-table-align-end">
                                 <tmpl_if name="show_phpmyadmin_link">
                                     <a class="formbutton-default formbutton-narrow" href="sites/database_phpmyadmin.php?id={tmpl_var name='id'}" target="phpmyadmin"><span class="icon icon-dbadmin"></span></a>
@@ -59,7 +59,7 @@
                                 <tmpl_if name="show_phppgadmin_link">
                                     <a class="formbutton-default formbutton-narrow" href="sites/database_phppgadmin.php?id={tmpl_var name='id'}" target="phppgadmin"><span class="icon icon-dbadmin"></span></a>
                                 </tmpl_if>
-                                <a class="formbutton-default formbutton-narrow" data-workbench-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}"><span class="icon icon-edit"></span></a>
+                                <a class="formbutton-default formbutton-narrow" data-heritage-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}"><span class="icon icon-edit"></span></a>
                                 <a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="sites/database_del.php?id={tmpl_var name='id'}&_csrf_id={tmpl_var name='csrf_id'}&_csrf_key={tmpl_var name='csrf_key'}&amp;phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete"></span></a>
                             </td>
                         </tr>

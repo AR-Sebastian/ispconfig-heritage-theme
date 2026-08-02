@@ -151,25 +151,25 @@
     element.dispatchEvent(new Event(name, { bubbles: true, cancelable: true }));
   }
 
-  var WORKBENCH_CONTENT_CONTRACTS = {
+  var HERITAGE_CONTENT_CONTRACTS = {
     load: {
-      native: 'data-workbench-load-content',
+      native: 'data-heritage-load-content',
       legacy: 'data-load-content',
-      selector: 'a[data-workbench-load-content],button[data-workbench-load-content],a[data-load-content],button[data-load-content]'
+      selector: 'a[data-heritage-load-content],button[data-heritage-load-content],a[data-load-content],button[data-load-content]'
     },
     template: {
-      native: 'data-workbench-load-content-template',
+      native: 'data-heritage-load-content-template',
       legacy: 'data-load-content-template'
     },
     target: {
-      native: 'data-workbench-load-content-into',
+      native: 'data-heritage-load-content-into',
       legacy: 'data-load-content-into',
-      selector: '[data-workbench-load-content-into],[data-load-content-into]'
+      selector: '[data-heritage-load-content-into],[data-load-content-into]'
     },
     module: {
-      native: 'data-workbench-module',
+      native: 'data-heritage-module',
       legacy: 'data-capp',
-      selector: 'a[data-workbench-module],button[data-workbench-module],a[data-capp],button[data-capp]'
+      selector: 'a[data-heritage-module],button[data-heritage-module],a[data-capp],button[data-capp]'
     }
   };
 
@@ -188,10 +188,10 @@
 
   function normalizeWorkbenchContentContracts(root) {
     root = root || document;
-    mirrorAttribute(root, '[' + WORKBENCH_CONTENT_CONTRACTS.load.legacy + ']', WORKBENCH_CONTENT_CONTRACTS.load.legacy, WORKBENCH_CONTENT_CONTRACTS.load.native);
-    mirrorAttribute(root, '[' + WORKBENCH_CONTENT_CONTRACTS.template.legacy + ']', WORKBENCH_CONTENT_CONTRACTS.template.legacy, WORKBENCH_CONTENT_CONTRACTS.template.native);
-    mirrorAttribute(root, '[' + WORKBENCH_CONTENT_CONTRACTS.target.legacy + ']', WORKBENCH_CONTENT_CONTRACTS.target.legacy, WORKBENCH_CONTENT_CONTRACTS.target.native);
-    mirrorAttribute(root, '[' + WORKBENCH_CONTENT_CONTRACTS.module.legacy + ']', WORKBENCH_CONTENT_CONTRACTS.module.legacy, WORKBENCH_CONTENT_CONTRACTS.module.native);
+    mirrorAttribute(root, '[' + HERITAGE_CONTENT_CONTRACTS.load.legacy + ']', HERITAGE_CONTENT_CONTRACTS.load.legacy, HERITAGE_CONTENT_CONTRACTS.load.native);
+    mirrorAttribute(root, '[' + HERITAGE_CONTENT_CONTRACTS.template.legacy + ']', HERITAGE_CONTENT_CONTRACTS.template.legacy, HERITAGE_CONTENT_CONTRACTS.template.native);
+    mirrorAttribute(root, '[' + HERITAGE_CONTENT_CONTRACTS.target.legacy + ']', HERITAGE_CONTENT_CONTRACTS.target.legacy, HERITAGE_CONTENT_CONTRACTS.target.native);
+    mirrorAttribute(root, '[' + HERITAGE_CONTENT_CONTRACTS.module.legacy + ']', HERITAGE_CONTENT_CONTRACTS.module.legacy, HERITAGE_CONTENT_CONTRACTS.module.native);
     return root;
   }
 
@@ -239,9 +239,9 @@
 
     function markDone() {
       if (!control) return;
-      control.setAttribute('data-workbench-copy-state', 'done');
+      control.setAttribute('data-heritage-copy-state', 'done');
       window.setTimeout(function() {
-        control.removeAttribute('data-workbench-copy-state');
+        control.removeAttribute('data-heritage-copy-state');
       }, 1400);
     }
 
@@ -274,8 +274,8 @@
 
   function initSslClientDataHelpers(root) {
     queryAll(root || document, '[data-ssl-client-helper]').forEach(function(helper) {
-      if (helper.getAttribute('data-workbench-initialized') === 'true') return;
-      helper.setAttribute('data-workbench-initialized', 'true');
+      if (helper.getAttribute('data-heritage-initialized') === 'true') return;
+      helper.setAttribute('data-heritage-initialized', 'true');
       var idFieldName = helper.getAttribute('data-record-field') || 'id';
       var idField = query(document, 'input[name="' + cssEscape(idFieldName) + '"]');
       if (idField && Number(idField.value) > 0) {
@@ -332,7 +332,7 @@
   }
 
   function syncVisibilityRules(control) {
-    var rules = control && control.getAttribute('data-workbench-visibility-rules');
+    var rules = control && control.getAttribute('data-heritage-visibility-rules');
     if (!rules) return false;
     var value = String(control.value || '');
     splitList(rules, ';').forEach(function(rule) {
@@ -350,7 +350,7 @@
   }
 
   function syncDeclaredVisibility(control) {
-    var targetId = control && control.getAttribute('data-workbench-sync-visibility');
+    var targetId = control && control.getAttribute('data-heritage-sync-visibility');
     var target = targetId ? document.getElementById(targetId) : null;
     if (!target) return false;
     var expected = control.getAttribute('data-visible-value') || '';
@@ -361,7 +361,7 @@
   }
 
   function syncDatabaseTypeFields(control) {
-    var targets = control && control.getAttribute('data-workbench-database-type-toggle');
+    var targets = control && control.getAttribute('data-heritage-database-type-toggle');
     if (!targets) return false;
     var hide = String(control.value || '') === 'postgresql';
     targets.split(',').forEach(function(id) {
@@ -375,15 +375,15 @@
   }
 
   function initDisabledHiddenClones(root) {
-    queryAll(root || document, 'select[data-workbench-disabled-clone-hidden]').forEach(function(select) {
-      if (select.getAttribute('data-workbench-hidden-clone-initialized') === 'true') return;
+    queryAll(root || document, 'select[data-heritage-disabled-clone-hidden]').forEach(function(select) {
+      if (select.getAttribute('data-heritage-hidden-clone-initialized') === 'true') return;
       var originalName = select.getAttribute('name') || '';
       if (!originalName) return;
       var hidden = document.createElement('input');
       hidden.type = 'hidden';
       hidden.name = originalName;
       hidden.value = select.value || '';
-      select.setAttribute('data-workbench-hidden-clone-initialized', 'true');
+      select.setAttribute('data-heritage-hidden-clone-initialized', 'true');
       select.name = originalName + '_disabled';
       if (select.id) select.id = select.id + '_disabled';
       select.insertAdjacentElement('afterend', hidden);
@@ -391,11 +391,11 @@
   }
 
   function initConfirmUncheck(root) {
-    queryAll(root || document, '[data-workbench-confirm-uncheck]').forEach(function(marker) {
-      if (marker.getAttribute('data-workbench-confirm-initialized') === 'true') return;
-      var field = document.getElementById(marker.getAttribute('data-workbench-confirm-uncheck') || '');
+    queryAll(root || document, '[data-heritage-confirm-uncheck]').forEach(function(marker) {
+      if (marker.getAttribute('data-heritage-confirm-initialized') === 'true') return;
+      var field = document.getElementById(marker.getAttribute('data-heritage-confirm-uncheck') || '');
       if (!field) return;
-      marker.setAttribute('data-workbench-confirm-initialized', 'true');
+      marker.setAttribute('data-heritage-confirm-initialized', 'true');
       field.addEventListener('click', function(event) {
         if (field.checked) return;
         if (window.confirm(marker.getAttribute('data-confirm-message') || '')) return;
@@ -419,11 +419,11 @@
   }
 
   function initDefaultPasswords(root) {
-    queryAll(root || document, '[data-workbench-default-password]').forEach(function(input) {
-      if (input.getAttribute('data-workbench-default-password-initialized') === 'true') return;
-      input.setAttribute('data-workbench-default-password-initialized', 'true');
+    queryAll(root || document, '[data-heritage-default-password]').forEach(function(input) {
+      if (input.getAttribute('data-heritage-default-password-initialized') === 'true') return;
+      input.setAttribute('data-heritage-default-password-initialized', 'true');
       if (input.value) return;
-      input.value = generateWorkbenchPassword(input.getAttribute('data-workbench-default-password'));
+      input.value = generateWorkbenchPassword(input.getAttribute('data-heritage-default-password'));
     });
   }
 
@@ -460,9 +460,9 @@
   }
 
   function initMasterTemplateLocks(root) {
-    queryAll(root || document, '[data-workbench-master-template-lock]').forEach(function(region) {
-      if (region.getAttribute('data-workbench-master-template-lock-initialized') === 'true') return;
-      region.setAttribute('data-workbench-master-template-lock-initialized', 'true');
+    queryAll(root || document, '[data-heritage-master-template-lock]').forEach(function(region) {
+      if (region.getAttribute('data-heritage-master-template-lock-initialized') === 'true') return;
+      region.setAttribute('data-heritage-master-template-lock-initialized', 'true');
       region.addEventListener('click', function(event) {
         handleMasterTemplateLock(region, event, true);
       }, true);
@@ -490,8 +490,8 @@
       if (typeof afterChange === 'function') afterChange();
     };
 
-    if (source.getAttribute('data-workbench-disclosure-initialized') !== 'true') {
-      source.setAttribute('data-workbench-disclosure-initialized', 'true');
+    if (source.getAttribute('data-heritage-disclosure-initialized') !== 'true') {
+      source.setAttribute('data-heritage-disclosure-initialized', 'true');
       source.addEventListener('change', update);
     }
     update();
@@ -500,12 +500,12 @@
 
   function syncPasswordValidation(control) {
     if (!control || !control.getAttribute) return;
-    var contract = control.getAttribute('data-workbench-password-check') || '';
+    var contract = control.getAttribute('data-heritage-password-check') || '';
     if (!contract) return;
     var parts = contract.split(':');
     var passwordId = parts[0] || control.id || 'password';
     var repeatId = parts[1] || 'repeat_password';
-    if (control.getAttribute('data-workbench-password-strength') === 'true' && typeof window.pass_check === 'function') {
+    if (control.getAttribute('data-heritage-password-strength') === 'true' && typeof window.pass_check === 'function') {
       window.pass_check(control.value || '');
     }
     if (typeof window.checkPassMatch === 'function') {
@@ -514,8 +514,8 @@
   }
 
   function initStaticSelectMirrors(root) {
-    queryAll(root || document, 'select[data-workbench-static-select-mirror]').forEach(function(select) {
-      if (select.getAttribute('data-workbench-static-select-initialized') === 'true') return;
+    queryAll(root || document, 'select[data-heritage-static-select-mirror]').forEach(function(select) {
+      if (select.getAttribute('data-heritage-static-select-initialized') === 'true') return;
       var name = select.getAttribute('name') || '';
       if (!name) return;
       var selected = select.options && select.selectedIndex >= 0 ? select.options[select.selectedIndex] : null;
@@ -527,7 +527,7 @@
       hidden.type = 'hidden';
       hidden.name = name;
       hidden.value = select.value || '';
-      select.setAttribute('data-workbench-static-select-initialized', 'true');
+      select.setAttribute('data-heritage-static-select-initialized', 'true');
       select.insertAdjacentElement('beforebegin', text);
       select.insertAdjacentElement('beforebegin', hidden);
       select.remove();
@@ -1000,9 +1000,9 @@
   }
 
   function initDeclaredVisibility(root) {
-    queryAll(root || document, '[data-workbench-sync-visibility]').forEach(syncDeclaredVisibility);
-    queryAll(root || document, '[data-workbench-visibility-rules]').forEach(syncVisibilityRules);
-    queryAll(root || document, '[data-workbench-database-type-toggle]').forEach(syncDatabaseTypeFields);
+    queryAll(root || document, '[data-heritage-sync-visibility]').forEach(syncDeclaredVisibility);
+    queryAll(root || document, '[data-heritage-visibility-rules]').forEach(syncVisibilityRules);
+    queryAll(root || document, '[data-heritage-database-type-toggle]').forEach(syncDatabaseTypeFields);
     retireLegacyPhpOptions(root);
     initStaticSelectMirrors(root);
     initDefaultPasswords(root);
@@ -1016,7 +1016,7 @@
       ? window.heritageLanguage()
       : String(document.documentElement.getAttribute('lang') || 'en').toLowerCase().split('-')[0];
     var german = language === 'de';
-    queryAll(root || document, '[data-workbench-field-search]').forEach(function(input) {
+    queryAll(root || document, '[data-heritage-field-search]').forEach(function(input) {
       var endpointName = input.getAttribute('data-search-endpoint') || '';
       var endpoint = endpointName ? workbenchEndpoint(endpointName) : (input.getAttribute('data-search-src') || input.getAttribute('data-src') || '');
       endpoint = endpointWithQuery(endpoint, 'type', input.getAttribute('data-search-type') || '');
@@ -1365,7 +1365,7 @@
       initDeclaredVisibility(host);
       ISPConfig.enhanceDateTime(queryAll(host, 'input[data-input-element="date"]'), { pickTime: false, format: 'DD.MM.YYYY' });
       ISPConfig.enhanceDateTime(queryAll(host, 'input[data-input-element="datetime"]'), { pickTime: true, format: 'DD.MM.YYYY HH:mm' });
-      ISPConfig.enhanceTooltip(queryAll(host, '[data-workbench-tooltip]'), {});
+      ISPConfig.enhanceTooltip(queryAll(host, '[data-heritage-tooltip]'), {});
       initSslClientDataHelpers(host);
       initDependentJsonSync(host);
       var autofocus = query(host, 'input[autofocus]');
@@ -1571,7 +1571,7 @@
       var remove = document.createElement('a');
       remove.href = '#';
       remove.className = 'wb-template-remove';
-      remove.setAttribute('data-workbench-template-remove', 'true');
+      remove.setAttribute('data-heritage-template-remove', 'true');
       remove.setAttribute('aria-label', 'Remove template');
       var glyph = document.createElement('span');
       glyph.setAttribute('aria-hidden', 'true');
@@ -1768,13 +1768,13 @@
   };
 
   document.addEventListener('input', function(event) {
-    if (event.target && event.target.hasAttribute && event.target.hasAttribute('data-workbench-password-check')) {
+    if (event.target && event.target.hasAttribute && event.target.hasAttribute('data-heritage-password-check')) {
       syncPasswordValidation(event.target);
     }
   });
 
   document.addEventListener('keyup', function(event) {
-    if (event.target && event.target.hasAttribute && event.target.hasAttribute('data-workbench-password-check')) {
+    if (event.target && event.target.hasAttribute && event.target.hasAttribute('data-heritage-password-check')) {
       syncPasswordValidation(event.target);
     }
   });
@@ -1782,7 +1782,7 @@
   document.addEventListener('change', function(event) {
     var target = event.target;
     if (!target) return;
-    var changeAction = target.getAttribute('data-workbench-change-action');
+    var changeAction = target.getAttribute('data-heritage-change-action');
     if (changeAction === 'hide-ok-message') {
       var message = document.getElementById(target.getAttribute('data-target') || 'OKMsg');
       if (message) {
@@ -1822,7 +1822,7 @@
       ISPConfig.loadOptionInto(optionTarget, optionTemplate ? controlUrl(optionTemplate, target) : endpointWithQueryTemplate(workbenchEndpoint(optionEndpoint), optionQuery, target));
       return;
     }
-    var contentTemplate = workbenchContractValue(target, WORKBENCH_CONTENT_CONTRACTS.template);
+    var contentTemplate = workbenchContractValue(target, HERITAGE_CONTENT_CONTRACTS.template);
     if (contentTemplate) {
       event.preventDefault();
       ISPConfig.navigateTo(controlUrl(contentTemplate, target));
@@ -1831,13 +1831,13 @@
     if (target.hasAttribute('data-json-sync')) {
       runDependentJsonSync(target);
     }
-    if (target.hasAttribute('data-workbench-sync-visibility')) {
+    if (target.hasAttribute('data-heritage-sync-visibility')) {
       syncDeclaredVisibility(target);
     }
-    if (target.hasAttribute('data-workbench-visibility-rules')) {
+    if (target.hasAttribute('data-heritage-visibility-rules')) {
       syncVisibilityRules(target);
     }
-    if (target.hasAttribute('data-workbench-database-type-toggle')) {
+    if (target.hasAttribute('data-heritage-database-type-toggle')) {
       syncDatabaseTypeFields(target);
     }
     if (matches(target, 'select') && query(document, '#pageForm .table #Filter') && !target.classList.contains('disableChangeEvent')) {
@@ -1859,21 +1859,21 @@
   });
 
   document.addEventListener('click', function(event) {
-    var loadControl = closest(event.target, WORKBENCH_CONTENT_CONTRACTS.load.selector);
-    var loadIntoControl = closest(event.target, WORKBENCH_CONTENT_CONTRACTS.target.selector);
-    var moduleControl = closest(event.target, WORKBENCH_CONTENT_CONTRACTS.module.selector);
+    var loadControl = closest(event.target, HERITAGE_CONTENT_CONTRACTS.load.selector);
+    var loadIntoControl = closest(event.target, HERITAGE_CONTENT_CONTRACTS.target.selector);
+    var moduleControl = closest(event.target, HERITAGE_CONTENT_CONTRACTS.module.selector);
     var submitControl = closest(event.target, 'a[data-submit-form],button[data-submit-form]');
     var passwordControl = closest(event.target, '[data-generate-password]');
     var confirmControl = closest(event.target, '[data-confirm-action]');
     var copyControl = closest(event.target, '[data-copy-email-address],[data-copy-composed-value],[data-copy-value]');
     var sslClientDataControl = closest(event.target, '[data-ssl-client-data-action]');
     var tabControl = closest(event.target, '[data-change-tab]');
-    var workbenchActionControl = closest(event.target, '[data-workbench-action]');
-    var noopControl = closest(event.target, '[data-workbench-noop]');
+    var workbenchActionControl = closest(event.target, '[data-heritage-action]');
+    var noopControl = closest(event.target, '[data-heritage-noop]');
     var sortHeader = closest(event.target, 'th[data-column]');
     var placeholder = closest(event.target, '.addPlaceholder');
     var placeholderContent = closest(event.target, '.addPlaceholderContent');
-    var additionalTemplateRemove = closest(event.target, '#template_additional_list [data-workbench-template-remove]');
+    var additionalTemplateRemove = closest(event.target, '#template_additional_list [data-heritage-template-remove]');
     var checkFields = closest(event.target, '[data-check-fields] > input[type="checkbox"]');
     var uncheckFields = closest(event.target, '[data-uncheck-fields] > input[type="checkbox"]');
 
@@ -1943,7 +1943,7 @@
     }
 
     if (workbenchActionControl) {
-      var workbenchAction = workbenchActionControl.getAttribute('data-workbench-action');
+      var workbenchAction = workbenchActionControl.getAttribute('data-heritage-action');
       if (workbenchAction === 'add-additional-template') ISPConfig.addAdditionalTemplate();
       if (workbenchAction === 'reset-autoresponder-dates') window.AR_ResetDates();
       if (workbenchAction === 'create-dkim') createDkimRecord(workbenchActionControl);
@@ -1961,20 +1961,20 @@
     }
 
     if (loadIntoControl) {
-      var targetId = workbenchContractValue(loadIntoControl, WORKBENCH_CONTENT_CONTRACTS.target);
-      var targetContent = workbenchContractValue(loadIntoControl, WORKBENCH_CONTENT_CONTRACTS.load);
+      var targetId = workbenchContractValue(loadIntoControl, HERITAGE_CONTENT_CONTRACTS.target);
+      var targetContent = workbenchContractValue(loadIntoControl, HERITAGE_CONTENT_CONTRACTS.load);
       if (targetId && targetContent) ISPConfig.refreshContentInto(targetId, targetContent);
       return;
     }
 
     if (loadControl) {
-      var content = workbenchContractValue(loadControl, WORKBENCH_CONTENT_CONTRACTS.load);
+      var content = workbenchContractValue(loadControl, HERITAGE_CONTENT_CONTRACTS.load);
       if (content) ISPConfig.navigateTo(content);
       return;
     }
 
     if (moduleControl) {
-      var module = workbenchContractValue(moduleControl, WORKBENCH_CONTENT_CONTRACTS.module);
+      var module = workbenchContractValue(moduleControl, HERITAGE_CONTENT_CONTRACTS.module);
       if (module) ISPConfig.capp(module);
       return;
     }

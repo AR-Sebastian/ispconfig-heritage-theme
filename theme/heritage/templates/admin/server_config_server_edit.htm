@@ -92,7 +92,7 @@
 			</div>
 			<div class="wb-field-group">
                 <label for="monit_url" >{tmpl_var name='monit_url_txt'}</label>
-                <div class="wb-field-body wb-field-body--medium"><input type="text" name="monit_url" id="monit_url" value="{tmpl_var name='monit_url'}" class="form-control" />&nbsp;{tmpl_var name='monit_url_note_txt'} <a href="#" data-workbench-noop="true" class="addPlaceholder">[SERVERNAME]</a></div>
+                <div class="wb-field-body wb-field-body--medium"><input type="text" name="monit_url" id="monit_url" value="{tmpl_var name='monit_url'}" class="form-control" />&nbsp;{tmpl_var name='monit_url_note_txt'} <a href="#" data-heritage-noop="true" class="addPlaceholder">[SERVERNAME]</a></div>
             </div>
 			<div class="wb-field-group">
                 <label for="monit_user" >{tmpl_var name='monit_user_txt'}</label>
@@ -102,7 +102,7 @@
                 <div class="wb-field-body"><input type="text" name="monit_password" id="monit_password" value="{tmpl_var name='monit_password'}" class="form-control" /></div></div>
 			<div class="wb-field-group">
                 <label for="munin_url" >{tmpl_var name='munin_url_txt'}</label>
-                <div class="wb-field-body wb-field-body--medium"><input type="text" name="munin_url" id="munin_url" value="{tmpl_var name='munin_url'}" class="form-control" />&nbsp;{tmpl_var name='munin_url_note_txt'} <a href="#" data-workbench-noop="true" class="addPlaceholder">[SERVERNAME]</a></div>
+                <div class="wb-field-body wb-field-body--medium"><input type="text" name="munin_url" id="munin_url" value="{tmpl_var name='munin_url'}" class="form-control" />&nbsp;{tmpl_var name='munin_url_note_txt'} <a href="#" data-heritage-noop="true" class="addPlaceholder">[SERVERNAME]</a></div>
             </div>
 			<div class="wb-field-group">
                 <label for="munin_user" >{tmpl_var name='munin_user_txt'}</label>
@@ -128,5 +128,5 @@
 
         <div class="wb-form-actions"><div class="wb-form-actions__primary">
             <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="admin/server_config_edit.php">{tmpl_var name='btn_save_txt'}</button>
-            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="admin/server_config_list.php" data-load-content="admin/server_config_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-heritage-load-content="admin/server_config_list.php" data-load-content="admin/server_config_list.php">{tmpl_var name='btn_cancel_txt'}</button>
         </div></div>

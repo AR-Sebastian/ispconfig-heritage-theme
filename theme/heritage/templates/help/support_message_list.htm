@@ -8,7 +8,7 @@
             <span class="wb-list-toolbar__eyebrow">{tmpl_var name="toolsarea_head_txt"}</span>
             <strong><tmpl_var name="list_head_txt"></strong>
         </div>
-        <button class="formbutton-success" type="button" data-workbench-load-content="help/support_message_edit.php" data-load-content="help/support_message_edit.php">{tmpl_var name="add_new_record_txt"}</button>
+        <button class="formbutton-success" type="button" data-heritage-load-content="help/support_message_edit.php" data-load-content="help/support_message_edit.php">{tmpl_var name="add_new_record_txt"}</button>
     </div>
 <table class="table wb-data-table">
                 <thead class="dark wb-field-group-sm">
@@ -30,9 +30,9 @@
                 <tbody>
                     <tmpl_loop name="records">
                         <tr>
-                            <tmpl_if name="is_admin"><td><a href="#" data-workbench-load-content="help/support_message_edit.php?id={tmpl_var name='id'}" data-load-content="help/support_message_edit.php?id={tmpl_var name='id'}">{tmpl_var name="sender_id"}</a></td></tmpl_if>
-                            <td><a href="#" data-workbench-load-content="help/support_message_edit.php?id={tmpl_var name='id'}" data-load-content="help/support_message_edit.php?id={tmpl_var name='id'}">{tmpl_var name="subject"}</a></td>
-							<td><a href="#" data-workbench-load-content="help/support_message_edit.php?id={tmpl_var name='id'}" data-load-content="help/support_message_edit.php?id={tmpl_var name='id'}">{tmpl_var name="tstamp"}</a></td>
+                            <tmpl_if name="is_admin"><td><a href="#" data-heritage-load-content="help/support_message_edit.php?id={tmpl_var name='id'}" data-load-content="help/support_message_edit.php?id={tmpl_var name='id'}">{tmpl_var name="sender_id"}</a></td></tmpl_if>
+                            <td><a href="#" data-heritage-load-content="help/support_message_edit.php?id={tmpl_var name='id'}" data-load-content="help/support_message_edit.php?id={tmpl_var name='id'}">{tmpl_var name="subject"}</a></td>
+							<td><a href="#" data-heritage-load-content="help/support_message_edit.php?id={tmpl_var name='id'}" data-load-content="help/support_message_edit.php?id={tmpl_var name='id'}">{tmpl_var name="tstamp"}</a></td>
                             <td class="wb-table-align-end">
                                 <a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="help/support_message_del.php?id={tmpl_var name='id'}&_csrf_id={tmpl_var name='csrf_id'}&_csrf_key={tmpl_var name='csrf_key'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete"></span></a>
                             </td>

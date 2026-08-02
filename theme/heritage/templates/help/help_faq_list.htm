@@ -6,7 +6,7 @@
                     <h3>{tmpl_var name='hf_question'}</h3>
                     <tmpl_if name='is_admin'>
                         <div class="wb-faq-item__actions">
-                            <a href="#" data-workbench-load-content="help/faq_edit.php?id={tmpl_var name='id'}" data-load-content="help/faq_edit.php?id={tmpl_var name='id'}">{tmpl_var name="edit_txt"}</a>
+                            <a href="#" data-heritage-load-content="help/faq_edit.php?id={tmpl_var name='id'}" data-load-content="help/faq_edit.php?id={tmpl_var name='id'}">{tmpl_var name="edit_txt"}</a>
                             <a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="help/faq_delete.php?id={tmpl_var name='id'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete"></span></a>
                         </div>
                     </tmpl_if>

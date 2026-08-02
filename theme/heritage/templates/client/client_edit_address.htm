@@ -25,7 +25,7 @@
                 <label for="password" >{tmpl_var name='password_txt'}</label>
                 <div class="wb-field-control">
 				<div class="wb-field-control-row">
-					<input type="password" name="password" id="password" value="{tmpl_var name='password'}" title="{tmpl_var name='password_click_to_set_txt'}" class="form-control" autocomplete="off" data-workbench-password-check="password:repeat_password" data-workbench-password-strength="true" />
+					<input type="password" name="password" id="password" value="{tmpl_var name='password'}" title="{tmpl_var name='password_click_to_set_txt'}" class="form-control" autocomplete="off" data-heritage-password-check="password:repeat_password" data-heritage-password-strength="true" />
 					<span class="wb-field-action">
 						<button class="formbutton-default" type="button" data-generate-password="true" data-password-field="password" data-repeat-password-field="repeat_password">{tmpl_var name='generate_password_txt'}</button>
 					</span>
@@ -41,7 +41,7 @@
             </div>
             <div class="wb-field-group">
                 <label for="repeat_password" >{tmpl_var name='repeat_password_txt'}</label>
-                <div class="wb-field-control"><input type="password" name="repeat_password" id="repeat_password" value="" title="{tmpl_var name='password_click_to_set_txt'}" class="form-control" autocomplete="off" data-workbench-password-check="password:repeat_password" /></div></div>
+                <div class="wb-field-control"><input type="password" name="repeat_password" id="repeat_password" value="" title="{tmpl_var name='password_click_to_set_txt'}" class="form-control" autocomplete="off" data-heritage-password-check="password:repeat_password" /></div></div>
             <div class="wb-field-group">
 				<div class="wb-field-control wb-field-control--offset">
 					<div id="confirmpasswordError" hidden class="confirmpassworderror">{tmpl_var name='password_mismatch_txt'}</div>
@@ -149,5 +149,5 @@
 
         <div class="wb-form-actions"><div class="wb-form-actions__primary">
             <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="client/client_edit.php">{tmpl_var name='btn_save_txt'}</button>
-            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="{tmpl_var name='session_module'}/client_list.php" data-load-content="{tmpl_var name='session_module'}/client_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-heritage-load-content="{tmpl_var name='session_module'}/client_list.php" data-load-content="{tmpl_var name='session_module'}/client_list.php">{tmpl_var name='btn_cancel_txt'}</button>
         </div></div>

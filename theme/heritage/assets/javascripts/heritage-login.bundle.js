@@ -38,7 +38,7 @@
     content = document.createElement('div');
     content.className = 'wb-feedback__content';
     Array.prototype.slice.call(alert.childNodes).forEach(function(node) {
-      if (node.nodeType === 1 && node.matches('.close, [data-workbench-dismiss], .wb-feedback__icon, .wb-feedback__action')) return;
+      if (node.nodeType === 1 && node.matches('.close, [data-heritage-dismiss], .wb-feedback__icon, .wb-feedback__action')) return;
       content.appendChild(node);
     });
     alert.appendChild(content);
@@ -62,7 +62,7 @@
     icon.setAttribute('aria-hidden', 'true');
     icon.appendChild(svgFromMarkup(icons[state]));
     alert.prepend(icon);
-    var dismiss = alert.querySelector(':scope > .close, :scope > [data-workbench-dismiss]');
+    var dismiss = alert.querySelector(':scope > .close, :scope > [data-heritage-dismiss]');
     if (dismiss) {
       if (dismiss.tagName === 'BUTTON' && !dismiss.getAttribute('type')) dismiss.setAttribute('type', 'button');
       if (!dismiss.getAttribute('aria-label') || /^(?:close|schlie(?:ß|ss)en)$/i.test(dismiss.getAttribute('aria-label'))) {
@@ -75,8 +75,8 @@
   function enhanceDialog(dialog) {
     dialog.classList.add('wb-dialog--enhanced');
     dialog.setAttribute('data-heritage-dialog', 'true');
-    var dangerAction = dialog.querySelector('.wb-dialog__action--danger, .btn-danger, [data-workbench-tab-confirm-action="discard"]');
-    var primaryAction = dialog.querySelector('.wb-dialog__action--primary, .btn-primary, [data-workbench-tab-confirm-action="save"]');
+    var dangerAction = dialog.querySelector('.wb-dialog__action--danger, .btn-danger, [data-heritage-tab-confirm-action="discard"]');
+    var primaryAction = dialog.querySelector('.wb-dialog__action--primary, .btn-primary, [data-heritage-tab-confirm-action="save"]');
     dialog.setAttribute('data-heritage-dialog-tone', dangerAction ? 'warning' : (primaryAction ? 'action' : 'neutral'));
     var body = dialog.querySelector('.wb-dialog__body');
     if (body && !dialog.getAttribute('aria-describedby')) {
@@ -134,11 +134,11 @@
       window.clearTimeout(controller.timer);
       controller.timer = null;
       controller.remaining = Math.max(500, controller.remaining - (Date.now() - controller.started));
-      alert.setAttribute('data-workbench-dismiss-paused', 'true');
+      alert.setAttribute('data-heritage-dismiss-paused', 'true');
     };
     controller.resume = function() {
       if (controller.timer || !alert.isConnected) return;
-      alert.removeAttribute('data-workbench-dismiss-paused');
+      alert.removeAttribute('data-heritage-dismiss-paused');
       controller.started = Date.now();
       controller.timer = window.setTimeout(function() { dismissGenerated(alert); }, controller.remaining);
     };
@@ -190,14 +190,14 @@
     }
 
     var toneName = ['success', 'danger', 'warning', 'info'].indexOf(state) > -1 ? state : 'info';
-    var duplicate = Array.prototype.find.call(stack.querySelectorAll('[data-workbench-generated-feedback]'), function(item) {
-      return item.getAttribute('data-workbench-feedback-message') === text &&
-        item.getAttribute('data-workbench-feedback-tone') === toneName;
+    var duplicate = Array.prototype.find.call(stack.querySelectorAll('[data-heritage-generated-feedback]'), function(item) {
+      return item.getAttribute('data-heritage-feedback-message') === text &&
+        item.getAttribute('data-heritage-feedback-tone') === toneName;
     });
     if (duplicate) {
       if (!duplicate.querySelector(':scope > .wb-feedback__action')) {
         var duplicateAction = actionControl(options);
-        var duplicateDismiss = duplicate.querySelector(':scope > [data-workbench-dismiss]');
+        var duplicateDismiss = duplicate.querySelector(':scope > [data-heritage-dismiss]');
         if (duplicateAction) duplicate.insertBefore(duplicateAction, duplicateDismiss || null);
       }
       stack.prepend(duplicate);
@@ -206,16 +206,16 @@
     }
     var alert = document.createElement('div');
     alert.className = 'alert alert-' + toneName;
-    alert.setAttribute('data-workbench-generated-feedback', 'true');
-    alert.setAttribute('data-workbench-feedback-message', text);
-    alert.setAttribute('data-workbench-feedback-tone', toneName);
+    alert.setAttribute('data-heritage-generated-feedback', 'true');
+    alert.setAttribute('data-heritage-feedback-message', text);
+    alert.setAttribute('data-heritage-feedback-tone', toneName);
     var content = document.createElement('p');
     content.textContent = text;
     var action = actionControl(options);
     var dismiss = document.createElement('button');
     dismiss.type = 'button';
     dismiss.className = 'close';
-    dismiss.setAttribute('data-workbench-dismiss', 'alert');
+    dismiss.setAttribute('data-heritage-dismiss', 'alert');
     dismiss.setAttribute('aria-label', localized('Schließen', 'Close'));
     dismiss.textContent = '×';
     alert.appendChild(content);
@@ -225,7 +225,7 @@
     enhanceAlert(alert);
     scheduleGeneratedDismiss(alert, toneName);
 
-    Array.prototype.slice.call(stack.querySelectorAll('[data-workbench-generated-feedback]')).slice(3).forEach(function(oldAlert) {
+    Array.prototype.slice.call(stack.querySelectorAll('[data-heritage-generated-feedback]')).slice(3).forEach(function(oldAlert) {
       dismissGenerated(oldAlert);
     });
     return alert;
@@ -234,18 +234,18 @@
   function connectivityFeedback(online) {
     var host = document.getElementById('pageContent');
     if (!host) return null;
-    var current = host.querySelector('[data-workbench-connectivity-feedback]');
+    var current = host.querySelector('[data-heritage-connectivity-feedback]');
     if (current) current.remove();
     if (online) {
       var restored = show(localized('Verbindung wiederhergestellt.', 'Connection restored.'), 'success');
-      if (restored) restored.setAttribute('data-workbench-connectivity-feedback', 'online');
+      if (restored) restored.setAttribute('data-heritage-connectivity-feedback', 'online');
       return restored;
     }
     var offline = show(
       localized('Keine Netzwerkverbindung. Lesevorgänge können nach dem Wiederherstellen der Verbindung erneut versucht werden.', 'No network connection. Read operations can be retried after the connection is restored.'),
       'warning'
     );
-    if (offline) offline.setAttribute('data-workbench-connectivity-feedback', 'offline');
+    if (offline) offline.setAttribute('data-heritage-connectivity-feedback', 'offline');
     return offline;
   }
 
@@ -272,7 +272,7 @@
     return Boolean(host && host.querySelector(
       '.wb-content-state--error, ' +
       '.wb-submit-feedback[data-state="failed"], ' +
-      '.alert-danger:not([data-workbench-generated-feedback])'
+      '.alert-danger:not([data-heritage-generated-feedback])'
     ));
   }
 
@@ -312,7 +312,6 @@
   window.heritageFeedback = { enhance: enhance, show: show, report: report, connectivity: connectivityFeedback };
   window.heritageFeedbackInstalled = true;
 }(window, document));
-;
 
 /* source: heritage-login.js */
 (function () {
@@ -442,7 +441,6 @@
     });
   });
 }());
-;
 
 /* source: heritage-theme.js */
 (function () {
@@ -663,7 +661,6 @@
   window.heritageChartTheme = { apply: applyChartTheme };
   window.heritageApplyAccentContrast = applyAccessibleAction;
 }());
-;
 
 /* source: heritage-runtime.js */
 (function () {
@@ -1223,7 +1220,7 @@
         else if (header.matches('.sorting, [data-sortable="true"]')) header.setAttribute('aria-sort', 'none');
       });
 
-      var filterRow = table.querySelector('thead > tr[data-workbench-filter-row]');
+      var filterRow = table.querySelector('thead > tr[data-heritage-filter-row]');
       if (filterRow) {
         filterRow.setAttribute('aria-label', german ? 'Tabellenfilter' : 'Table filters');
         filterRow.querySelectorAll('input, select').forEach(function (control) {
@@ -1408,7 +1405,7 @@
     event.stopImmediatePropagation();
 
     var host = document.getElementById('pageContent');
-    var row = host && host.querySelector('thead tr[data-workbench-filter-row]');
+    var row = host && host.querySelector('thead tr[data-heritage-filter-row]');
     if (!row) return;
 
     row.querySelectorAll('input, select').forEach(function (control) {
@@ -1426,4 +1423,3 @@
     markShell();
   }
 }());
-;

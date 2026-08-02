@@ -77,7 +77,7 @@
     if (!root || !root.isConnected) root = host();
     if (!root) return null;
     var feedback = ensureFeedback(root);
-    feedback.removeAttribute('data-workbench-delayed');
+    feedback.removeAttribute('data-heritage-delayed');
     feedback.dataset.state = state;
     feedback.setAttribute('role', state === 'failed' ? 'alert' : 'status');
     feedback.querySelector('.wb-submit-feedback__label').textContent = label;
@@ -106,7 +106,7 @@
         'Das Speichern dauert etwas l\u00e4nger. Die Anfrage wird weiterhin verarbeitet.',
         'Saving is taking a little longer. The request is still being processed.'
       ));
-      if (feedback) feedback.setAttribute('data-workbench-delayed', 'true');
+      if (feedback) feedback.setAttribute('data-heritage-delayed', 'true');
     }, 7000);
     return true;
   }

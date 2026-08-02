@@ -285,7 +285,7 @@
     if (node.dataset.wbModulesDecorated === 'true') return;
     Array.prototype.forEach.call(node.querySelectorAll('.modules > li'), function (launcher) {
       var title = launcher.querySelector('.title');
-      var action = launcher.querySelector('a.button[data-workbench-module], a.button[data-capp]');
+      var action = launcher.querySelector('a.button[data-heritage-module], a.button[data-capp]');
       launcher.classList.add('wb-module-launcher');
       if (title && !launcher.querySelector('.wb-module-launcher__meta')) {
         var meta = document.createElement('span');
@@ -326,9 +326,9 @@
       var title = titleNode ? titleNode.textContent.replace(/\s+/g, ' ').trim() : t('moduleWidget') + ' ' + (index + 1);
       var moduleLink = item.querySelector('[data-capp]');
       var moduleName = moduleLink ? moduleLink.getAttribute('data-capp') : '';
-      var navigationItems = Array.prototype.slice.call(document.querySelectorAll('#workbench-mobile-navigation [data-workbench-module], #main-navigation [data-workbench-module]'));
+      var navigationItems = Array.prototype.slice.call(document.querySelectorAll('#workbench-mobile-navigation [data-heritage-module], #main-navigation [data-heritage-module]'));
       var matchingNavigationItems = navigationItems.filter(function (candidate) {
-        return candidate.getAttribute('data-workbench-module') === moduleName;
+        return candidate.getAttribute('data-heritage-module') === moduleName;
       });
       var completeTitle = matchingNavigationItems.map(function (candidate) {
         var navigationTitle = candidate.querySelector('.title');

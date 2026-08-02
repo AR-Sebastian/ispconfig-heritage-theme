@@ -293,10 +293,10 @@ body.wb-app-navigation-enabled .wb-statistics-metric--warning .wb-statistics-met
 body.wb-app-navigation-enabled .wb-statistics-table { min-width: 0; overflow: hidden; border: 1px solid var(--wb-border); border-radius: 13px; background: var(--wb-surface); box-shadow: var(--wb-shadow); }
 body.wb-app-navigation-enabled #pageContent .wb-statistics-data-table { margin: 0; border: 0; }
 body.wb-app-navigation-enabled #pageContent .wb-statistics-data-table > thead > tr:first-child > th { padding-top: 15px; padding-bottom: 12px; }
-body.wb-app-navigation-enabled #pageContent .wb-statistics-data-table > thead > tr[data-workbench-filter-row] > :is(td, th) { color: var(--wb-text-muted) !important; }
+body.wb-app-navigation-enabled #pageContent .wb-statistics-data-table > thead > tr[data-heritage-filter-row] > :is(td, th) { color: var(--wb-text-muted) !important; }
 body.wb-app-navigation-enabled #pageContent .wb-statistics-data-table .wb-table-filter-helper { color: var(--wb-text-muted) !important; font-weight: 740; }
-body.wb-app-navigation-enabled #pageContent .wb-statistics-data-table [data-workbench-summary-row] > td { color: var(--wb-text); background: color-mix(in srgb, var(--wb-action) 5%, var(--wb-surface)); font-weight: 800; }
-body.wb-app-navigation-enabled #pageContent .wb-statistics-data-table [data-workbench-summary-cell] { color: inherit; font-weight: inherit; text-decoration: none; }
+body.wb-app-navigation-enabled #pageContent .wb-statistics-data-table [data-heritage-summary-row] > td { color: var(--wb-text); background: color-mix(in srgb, var(--wb-action) 5%, var(--wb-surface)); font-weight: 800; }
+body.wb-app-navigation-enabled #pageContent .wb-statistics-data-table [data-heritage-summary-cell] { color: inherit; font-weight: inherit; text-decoration: none; }
 body.wb-app-navigation-enabled #pageContent .wb-statistics-data-table .progress { position: relative; min-width: 118px; height: 9px !important; margin: 6px 0; overflow: hidden; border-radius: 99px; background: var(--wb-surface-muted); }
 body.wb-app-navigation-enabled #pageContent .wb-statistics-data-table .progress-bar-striped { min-width: 2px; border-radius: 99px; }
 body.wb-app-navigation-enabled #pageContent .wb-statistics-data-table .progress span { position: absolute; clip: rect(0 0 0 0); }

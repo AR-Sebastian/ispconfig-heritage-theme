@@ -56,8 +56,8 @@
   function recordRows(table) {
     return Array.prototype.filter.call(table.querySelectorAll('tbody > tr'), function (row) {
       if (row.classList.contains('tbl_row_noresults')) return false;
-      if (row.hasAttribute('data-workbench-summary-row')) return false;
-      if (row.querySelector('[data-workbench-summary-cell]')) return false;
+      if (row.hasAttribute('data-heritage-summary-row')) return false;
+      if (row.querySelector('[data-heritage-summary-cell]')) return false;
       return row.querySelectorAll('td').length > 1;
     });
   }
@@ -102,7 +102,7 @@
       link.href = '#';
       link.className = 'wb-statistics-navigation__item';
       link.textContent = label;
-      link.setAttribute('data-workbench-load-content', report.path);
+      link.setAttribute('data-heritage-load-content', report.path);
       link.setAttribute('aria-label', t('open', { name: label }));
       if (report.key === active.key) {
         link.classList.add('is-active');
@@ -172,11 +172,11 @@
     enhance(event.detail && event.detail.page);
   });
   document.addEventListener('click', function (event) {
-    var launcher = event.target && event.target.closest ? event.target.closest('.wb-statistics-launcher[data-workbench-load-content], .wb-statistics-launcher[data-load-content]') : null;
+    var launcher = event.target && event.target.closest ? event.target.closest('.wb-statistics-launcher[data-heritage-load-content], .wb-statistics-launcher[data-load-content]') : null;
     var current = app();
     if (!launcher || !current || typeof current.capp !== 'function') return;
     event.preventDefault();
-    var path = launcher.getAttribute('data-workbench-load-content') || launcher.getAttribute('data-load-content');
+    var path = launcher.getAttribute('data-heritage-load-content') || launcher.getAttribute('data-load-content');
     launcher.setAttribute('aria-busy', 'true');
     current.workbenchActiveModule = 'sites';
     var request = current.capp('sites', path);

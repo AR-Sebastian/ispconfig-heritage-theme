@@ -76,7 +76,7 @@
       clear = document.createElement('button');
       clear.type = 'button';
       clear.className = 'wb-search-clear';
-      clear.setAttribute('aria-label', document.body.getAttribute('data-workbench-search-clear') || tr('Suche leeren', 'Clear search'));
+      clear.setAttribute('aria-label', document.body.getAttribute('data-heritage-search-clear') || tr('Suche leeren', 'Clear search'));
       clear.textContent = '\u00d7';
       input.parentNode.appendChild(clear);
     }

@@ -34,10 +34,10 @@
                 <tmpl_loop name="records">
                     <tr>
                         <td><a target="_blank" href="http://{tmpl_var name="domain"}/stats">{tmpl_var name="domain"}</a></td>
-                        <td><a href="#" data-workbench-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="this_month"}</a></td>
-                        <td><a href="#" data-workbench-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="last_month"}</a></td>
-                        <td><a href="#" data-workbench-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="this_year"}</a></td>
-                        <td><a href="#" data-workbench-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="last_year"}</a></td>
+                        <td><a href="#" data-heritage-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="this_month"}</a></td>
+                        <td><a href="#" data-heritage-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="last_month"}</a></td>
+                        <td><a href="#" data-heritage-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="this_year"}</a></td>
+                        <td><a href="#" data-heritage-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="last_year"}</a></td>
                         <td class="wb-table-align-end"></td>
                     </tr>
                 </tmpl_loop>
@@ -46,12 +46,12 @@
                         <td colspan="6">{tmpl_var name='globalsearch_noresults_text_txt'}</td>
                     </tr>
                 </tmpl_unless>
-                    <tr data-workbench-summary-row="true">
-                        <td><a href="#" data-workbench-noop="true" data-workbench-summary-cell="true">{tmpl_var name="sum_txt"}</a></td>
-                        <td><a href="#" data-workbench-noop="true" data-workbench-summary-cell="true">{tmpl_var name="sum_this_month"}</a></td>
-                        <td><a href="#" data-workbench-noop="true" data-workbench-summary-cell="true">{tmpl_var name="sum_last_month"}</a></td>
-                        <td><a href="#" data-workbench-noop="true" data-workbench-summary-cell="true">{tmpl_var name="sum_this_year"}</a></td>
-                        <td><a href="#" data-workbench-noop="true" data-workbench-summary-cell="true">{tmpl_var name="sum_last_year"}</a></td>
+                    <tr data-heritage-summary-row="true">
+                        <td><a href="#" data-heritage-noop="true" data-heritage-summary-cell="true">{tmpl_var name="sum_txt"}</a></td>
+                        <td><a href="#" data-heritage-noop="true" data-heritage-summary-cell="true">{tmpl_var name="sum_this_month"}</a></td>
+                        <td><a href="#" data-heritage-noop="true" data-heritage-summary-cell="true">{tmpl_var name="sum_last_month"}</a></td>
+                        <td><a href="#" data-heritage-noop="true" data-heritage-summary-cell="true">{tmpl_var name="sum_this_year"}</a></td>
+                        <td><a href="#" data-heritage-noop="true" data-heritage-summary-cell="true">{tmpl_var name="sum_last_year"}</a></td>
                         <td class="wb-table-align-end"></td>
                     </tr>
                 </tbody>

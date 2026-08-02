@@ -188,11 +188,11 @@ body.wb-app-navigation-enabled #searchform {
  * account areas at once. These guards also neutralise late legacy fragments
  * from modules that still try to render account/logout affordances in the
  * topbar. */
-body.wb-app-navigation-enabled .wb-header-actions :where(.wb-user-summary, .wb-user-menu, .wb-account-menu, .cpuser, [data-workbench-account], [data-workbench-user], [href*='login/logout.php']) {
+body.wb-app-navigation-enabled .wb-header-actions :where(.wb-user-summary, .wb-user-menu, .wb-account-menu, .cpuser, [data-heritage-account], [data-heritage-user], [href*='login/logout.php']) {
   display: none !important;
 }
 
-body.wb-app-navigation-enabled #headerbar :where(.wb-user-summary, .wb-user-menu, .wb-account-menu, .cpuser, [data-workbench-account], [data-workbench-user], [href*='login/logout.php']) {
+body.wb-app-navigation-enabled #headerbar :where(.wb-user-summary, .wb-user-menu, .wb-account-menu, .cpuser, [data-heritage-account], [data-heritage-user], [href*='login/logout.php']) {
   display: none !important;
 }
 
@@ -1037,8 +1037,8 @@ body.wb-app-navigation-enabled :where(
   .wb-user-menu,
   .wb-account-menu,
   .cpuser,
-  [data-workbench-account],
-  [data-workbench-user],
+  [data-heritage-account],
+  [data-heritage-user],
   .user,
   .username,
   .user-info,

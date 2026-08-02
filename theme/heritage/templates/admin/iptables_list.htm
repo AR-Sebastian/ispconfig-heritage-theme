@@ -7,7 +7,7 @@
             <span class="wb-list-toolbar__eyebrow">Tools</span>
             <strong><tmpl_var name="list_head_txt"></strong>
         </div>
-        <button class="formbutton-success" type="button" data-workbench-load-content="admin/iptables_edit.php" data-load-content="admin/iptables_edit.php">{tmpl_var name="add_new_rule_txt"}</button>
+        <button class="formbutton-success" type="button" data-heritage-load-content="admin/iptables_edit.php" data-load-content="admin/iptables_edit.php">{tmpl_var name="add_new_rule_txt"}</button>
     </div>
 
 <table class="table wb-data-table">
@@ -40,14 +40,14 @@
                 <tbody>
                     <tmpl_loop name="records">
                         <tr>
-                            <td><a href="#" data-workbench-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}" data-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}">{tmpl_var name="active"}</a></td>
-                            <td><a href="#" data-workbench-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}" data-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}">{tmpl_var name="server_id"}</a></td>
-                            <td><a href="#" data-workbench-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}" data-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}">{tmpl_var name="table"}</a></td>
-                            <td><a href="#" data-workbench-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}" data-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}">{tmpl_var name="protocol"}</a></td>
-                            <td><a href="#" data-workbench-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}" data-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}">{tmpl_var name="singleport"}</a></td>
-                            <td><a href="#" data-workbench-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}" data-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}">{tmpl_var name="multiport"}</a></td>
-                            <td><a href="#" data-workbench-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}" data-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}">{tmpl_var name="state"}</a></td>
-                            <td><a href="#" data-workbench-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}" data-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}">{tmpl_var name="target"}</a></td>
+                            <td><a href="#" data-heritage-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}" data-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}">{tmpl_var name="active"}</a></td>
+                            <td><a href="#" data-heritage-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}" data-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}">{tmpl_var name="server_id"}</a></td>
+                            <td><a href="#" data-heritage-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}" data-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}">{tmpl_var name="table"}</a></td>
+                            <td><a href="#" data-heritage-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}" data-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}">{tmpl_var name="protocol"}</a></td>
+                            <td><a href="#" data-heritage-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}" data-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}">{tmpl_var name="singleport"}</a></td>
+                            <td><a href="#" data-heritage-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}" data-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}">{tmpl_var name="multiport"}</a></td>
+                            <td><a href="#" data-heritage-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}" data-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}">{tmpl_var name="state"}</a></td>
+                            <td><a href="#" data-heritage-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}" data-load-content="admin/iptables_edit.php?id={tmpl_var name='id'}">{tmpl_var name="target"}</a></td>
                             <td class="wb-table-align-end">
                                 <a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="admin/iptables_del.php?id={tmpl_var name='id'}&_csrf_id={tmpl_var name='csrf_id'}&_csrf_key={tmpl_var name='csrf_key'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete"></span></a>
                             </td>

@@ -8,7 +8,7 @@
             <span class="wb-list-toolbar__eyebrow">{tmpl_var name="toolsarea_head_txt"}</span>
             <strong><tmpl_var name="list_head_txt"></strong>
         </div>
-        <button class="formbutton-success" type="button" data-workbench-load-content="sites/web_childdomain_edit.php?type={tmpl_var name='childdomain_type'}" data-load-content="sites/web_childdomain_edit.php?type={tmpl_var name='childdomain_type'}"><tmpl_if name='childdomain_type' op='==' value='aliasdomain'>{tmpl_var name="add_new_aliasdomain_txt"}</tmpl_else>{tmpl_var name="add_new_subdomain_txt"}</tmpl_if></button>
+        <button class="formbutton-success" type="button" data-heritage-load-content="sites/web_childdomain_edit.php?type={tmpl_var name='childdomain_type'}" data-load-content="sites/web_childdomain_edit.php?type={tmpl_var name='childdomain_type'}"><tmpl_if name='childdomain_type' op='==' value='aliasdomain'>{tmpl_var name="add_new_aliasdomain_txt"}</tmpl_else>{tmpl_var name="add_new_subdomain_txt"}</tmpl_if></button>
     </div>
 
 <table class="table wb-data-table">
@@ -33,10 +33,10 @@
                 <tbody>
                     <tmpl_loop name="records">
                         <tr <tmpl_if name="warn_inactive"> class="danger" </tmpl_if> >
-                            <td><a href="#" data-workbench-load-content="sites/web_childdomain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_childdomain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="active"}</a></td>
-                            <td><a href="#" data-workbench-load-content="sites/web_childdomain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_childdomain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="server_id"}</a></td>
-                            <td><a href="#" data-workbench-load-content="sites/web_childdomain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_childdomain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="parent_domain_id"}</a></td>
-                            <td><a href="#" data-workbench-load-content="sites/web_childdomain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_childdomain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="domain"}</a></td>
+                            <td><a href="#" data-heritage-load-content="sites/web_childdomain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_childdomain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="active"}</a></td>
+                            <td><a href="#" data-heritage-load-content="sites/web_childdomain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_childdomain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="server_id"}</a></td>
+                            <td><a href="#" data-heritage-load-content="sites/web_childdomain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_childdomain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="parent_domain_id"}</a></td>
+                            <td><a href="#" data-heritage-load-content="sites/web_childdomain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_childdomain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="domain"}</a></td>
                             <td class="wb-table-align-end">
                                 <a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="sites/web_childdomain_del.php?id={tmpl_var name='id'}&_csrf_id={tmpl_var name='csrf_id'}&_csrf_key={tmpl_var name='csrf_key'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete"></span></a>
                             </td>

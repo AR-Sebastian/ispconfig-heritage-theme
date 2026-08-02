@@ -25,7 +25,7 @@
                 <tbody>
                     <tmpl_loop name="records">
                         <tr>
-                            <td><a href="#" data-workbench-load-content="admin/server_config_edit.php?id={tmpl_var name='id'}" data-load-content="admin/server_config_edit.php?id={tmpl_var name='id'}">{tmpl_var name="server_name"}</a></td>
+                            <td><a href="#" data-heritage-load-content="admin/server_config_edit.php?id={tmpl_var name='id'}" data-load-content="admin/server_config_edit.php?id={tmpl_var name='id'}">{tmpl_var name="server_name"}</a></td>
                             <td class="wb-table-align-end">
                                 <a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="admin/server_config_del.php?id={tmpl_var name='id'}&_csrf_id={tmpl_var name='csrf_id'}&_csrf_key={tmpl_var name='csrf_key'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete"></span></a>
                             </td>

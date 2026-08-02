@@ -23,7 +23,7 @@
   function focus(dialog) {
     var target = resolveDialog(dialog) || openDialog;
     if (!isOpen(target)) return false;
-    var preferred = target.querySelector('[data-workbench-dialog-autofocus]:not([disabled]):not([hidden])');
+    var preferred = target.querySelector('[data-heritage-dialog-autofocus]:not([disabled]):not([hidden])');
     var elements = focusable(target);
     (preferred || elements[0] || target).focus();
     return target.contains(document.activeElement);
@@ -35,7 +35,7 @@
     if (openDialog && openDialog !== target) close(openDialog, false);
     if (target.parentElement !== document.body) {
       document.body.appendChild(target);
-      target.setAttribute('data-workbench-dialog-portaled', 'true');
+      target.setAttribute('data-heritage-dialog-portaled', 'true');
     }
     returnFocus = trigger && trigger.nodeType === 1 ? trigger : document.activeElement;
     openDialog = target;
@@ -72,13 +72,13 @@
   }
 
   document.addEventListener('click', function (event) {
-    var trigger = event.target.closest('[data-workbench-dialog]');
+    var trigger = event.target.closest('[data-heritage-dialog]');
     if (trigger) {
       event.preventDefault();
-      open(trigger.getAttribute('data-workbench-dialog'), trigger);
+      open(trigger.getAttribute('data-heritage-dialog'), trigger);
       return;
     }
-    var closeControl = event.target.closest('[data-workbench-dialog-close]');
+    var closeControl = event.target.closest('[data-heritage-dialog-close]');
     if (closeControl && closeControl.closest('.wb-dialog')) {
       event.preventDefault();
       close(closeControl.closest('.wb-dialog'), true);

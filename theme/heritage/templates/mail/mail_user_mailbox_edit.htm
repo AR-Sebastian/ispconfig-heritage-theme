@@ -23,7 +23,7 @@
 <div class="wb-field-group wb-field-group--with-action">
     <label for="password">{tmpl_var name='password_txt'}</label>
     <div class="wb-field-composite">
-        <input type="password" name="password" id="password" value="{tmpl_var name='password'}" title="{tmpl_var name='password_click_to_set_txt'}" class="form-control" autocomplete="off" data-workbench-password-check="password:repeat_password" data-workbench-password-strength="true" />
+        <input type="password" name="password" id="password" value="{tmpl_var name='password'}" title="{tmpl_var name='password_click_to_set_txt'}" class="form-control" autocomplete="off" data-heritage-password-check="password:repeat_password" data-heritage-password-strength="true" />
         <span class="wb-input-group-actions"><button type="button" data-generate-password="true" data-password-field="password" data-repeat-password-field="repeat_password">{tmpl_var name='generate_password_txt'}</button></span>
     </div>
 </div>
@@ -34,7 +34,7 @@
 <div class="wb-field-group">
     <label for="repeat_password">{tmpl_var name='repeat_password_txt'}</label>
     <div>
-        <input type="password" name="repeat_password" id="repeat_password" value="" title="{tmpl_var name='password_click_to_set_txt'}" class="form-control" autocomplete="off" data-workbench-password-check="password:repeat_password" />
+        <input type="password" name="repeat_password" id="repeat_password" value="" title="{tmpl_var name='password_click_to_set_txt'}" class="form-control" autocomplete="off" data-heritage-password-check="password:repeat_password" />
         <tmpl_if name="mailbox_show_last_access" op="==" value="y"><tmpl_if name="id">{tmpl_var name='last_accessed_txt'}: {tmpl_var name='last_access'}</tmpl_if></tmpl_if>
     </div>
 </div>
@@ -57,7 +57,7 @@
 </div>
 <div class="wb-field-group">
     <label>{tmpl_var name='forward_in_lda_txt'}</label>
-    <div><a data-workbench-tooltip="true" title="{tmpl_var name='tooltip_forward_in_lda_txt'}">{tmpl_var name='forward_in_lda'}</a></div>
+    <div><a data-heritage-tooltip="true" title="{tmpl_var name='tooltip_forward_in_lda_txt'}">{tmpl_var name='forward_in_lda'}</a></div>
 </div>
 <div class="wb-field-group">
     <label for="sender_name">{tmpl_var name='sender_cc_txt'}</label>
@@ -66,7 +66,7 @@
 <tmpl_if name="is_admin">
     <div class="wb-field-group">
         <label for="imap_prefix">{tmpl_var name='imap_prefix_txt'}</label>
-        <div><input type="text" name="imap_prefix" id="imap_prefix" value="{tmpl_var name='imap_prefix'}" data-workbench-tooltip="true" title="{tmpl_var name='tooltip_imap_prefix_txt'}" class="form-control" /><small>{tmpl_var name='name_optional_txt'}</small></div>
+        <div><input type="text" name="imap_prefix" id="imap_prefix" value="{tmpl_var name='imap_prefix'}" data-heritage-tooltip="true" title="{tmpl_var name='tooltip_imap_prefix_txt'}" class="form-control" /><small>{tmpl_var name='name_optional_txt'}</small></div>
     </div>
 </tmpl_if>
 <div class="wb-field-group">
@@ -74,9 +74,9 @@
     <div><select name="policy" id="policy" class="form-control">{tmpl_var name='policy'}</select></div>
 </div>
 <section class="wb-form-panel wb-form-panel--technical">
-    <div class="wb-field-group"><label>{tmpl_var name='postfix_txt'}</label><div><a data-workbench-tooltip="true" title="{tmpl_var name='tooltip_postfix_txt'}">{tmpl_var name='postfix'}</a></div></div>
-    <div class="wb-field-group"><label>{tmpl_var name='disablesmtp_txt'}</label><div><a data-workbench-tooltip="true" title="{tmpl_var name='tooltip_disablesmtp_txt'}">{tmpl_var name='disablesmtp'}</a></div></div>
-    <div class="wb-field-group"><label>{tmpl_var name='disabledeliver_txt'}</label><div><a data-workbench-tooltip="true" title="{tmpl_var name='tooltip_disabledeliver_txt'}">{tmpl_var name='disabledeliver'}</a></div></div>
+    <div class="wb-field-group"><label>{tmpl_var name='postfix_txt'}</label><div><a data-heritage-tooltip="true" title="{tmpl_var name='tooltip_postfix_txt'}">{tmpl_var name='postfix'}</a></div></div>
+    <div class="wb-field-group"><label>{tmpl_var name='disablesmtp_txt'}</label><div><a data-heritage-tooltip="true" title="{tmpl_var name='tooltip_disablesmtp_txt'}">{tmpl_var name='disablesmtp'}</a></div></div>
+    <div class="wb-field-group"><label>{tmpl_var name='disabledeliver_txt'}</label><div><a data-heritage-tooltip="true" title="{tmpl_var name='tooltip_disabledeliver_txt'}">{tmpl_var name='disabledeliver'}</a></div></div>
     <div class="wb-field-group"><label>{tmpl_var name='greylisting_txt'}</label><div>{tmpl_var name='greylisting'}</div></div>
     <div class="wb-field-group"><label>{tmpl_var name='disableimap_txt'}</label><div>{tmpl_var name='disableimap'}</div></div>
     <div class="wb-field-group"><label>{tmpl_var name='disablepop3_txt'}</label><div>{tmpl_var name='disablepop3'}</div></div>
@@ -88,6 +88,6 @@
     </tmpl_if></tmpl_if>
     <div class="wb-form-actions__primary">
         <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="mail/mail_user_edit.php">{tmpl_var name='btn_save_txt'}</button>
-        <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="mail/mail_user_list.php" data-load-content="mail/mail_user_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+        <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-heritage-load-content="mail/mail_user_list.php" data-load-content="mail/mail_user_list.php">{tmpl_var name='btn_cancel_txt'}</button>
     </div>
 </div>

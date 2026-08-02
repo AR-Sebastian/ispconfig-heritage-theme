@@ -28,10 +28,10 @@
 
   function configure(target, mode) {
     target.dataset.mode = mode;
-    target.querySelector('[data-workbench-tab-confirm-message]').textContent = mode === 'discard'
+    target.querySelector('[data-heritage-tab-confirm-message]').textContent = mode === 'discard'
       ? target.dataset.discardMessage
       : target.dataset.warningMessage;
-    target.querySelector('[data-workbench-tab-confirm-action="save"]').hidden = mode !== 'warning';
+    target.querySelector('[data-heritage-tab-confirm-action="save"]').hidden = mode !== 'warning';
   }
 
   function open(anchor, mode) {
@@ -77,11 +77,11 @@
   }, true);
 
   document.addEventListener('click', function (event) {
-    var action = event.target.closest('#workbenchTabChangeDialog [data-workbench-tab-confirm-action]');
+    var action = event.target.closest('#workbenchTabChangeDialog [data-heritage-tab-confirm-action]');
     if (!action) return;
     event.preventDefault();
     event.stopPropagation();
-    var value = action.getAttribute('data-workbench-tab-confirm-action');
+    var value = action.getAttribute('data-heritage-tab-confirm-action');
     if (value === 'cancel') cancel();
     else commit(value);
   });

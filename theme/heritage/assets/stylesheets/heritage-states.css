@@ -155,7 +155,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-feedba
   animation: hg-feedback-life var(--hg-feedback-duration, 7000ms) linear forwards;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-feedback][data-workbench-dismiss-paused='true']::after {
+body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-feedback][data-heritage-dismiss-paused='true']::after {
   animation-play-state: paused;
 }
 

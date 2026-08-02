@@ -177,16 +177,16 @@ body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr:first-child > 
   white-space: nowrap;
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr[data-workbench-filter-row] {
+body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr[data-heritage-filter-row] {
   background: color-mix(in srgb, var(--wb-surface-muted) 78%, var(--wb-surface));
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr[data-workbench-filter-row] > :is(th, td) {
+body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr[data-heritage-filter-row] > :is(th, td) {
   padding: 0.72rem var(--wb-table-cell-padding-inline);
   border-bottom: 1px solid color-mix(in srgb, var(--wb-border) 76%, transparent);
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr[data-workbench-filter-row] :is(input, select, .form-control, .wb-select__control) {
+body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr[data-heritage-filter-row] :is(input, select, .form-control, .wb-select__control) {
   inline-size: 100%;
   min-inline-size: 0 !important;
   min-block-size: 2.65rem !important;
@@ -368,8 +368,8 @@ body > .wb-select__panel:not(.wb-select__panel--page-size) {
 }
 
 html[data-wb-theme='dark'] body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr:first-child > :is(th, td),
-html[data-wb-theme='dark'] body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr[data-workbench-filter-row],
-html[data-wb-theme='dark'] body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr[data-workbench-filter-row] :is(input, select, .form-control, .wb-select__control),
+html[data-wb-theme='dark'] body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr[data-heritage-filter-row],
+html[data-wb-theme='dark'] body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr[data-heritage-filter-row] :is(input, select, .form-control, .wb-select__control),
 html[data-wb-theme='dark'] body.wb-list-page #pageContent .wb-table-footer {
   color: var(--wb-text) !important;
   background: color-mix(in srgb, var(--wb-surface-muted) 84%, var(--wb-surface)) !important;
@@ -493,13 +493,13 @@ body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr:first-child > 
   background: color-mix(in srgb, var(--wb-surface-muted) 86%, var(--wb-surface)) !important;
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr[data-workbench-filter-row] {
+body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr[data-heritage-filter-row] {
   position: sticky;
   top: 3.15rem;
   z-index: 2;
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr[data-workbench-filter-row] > :is(th, td) {
+body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr[data-heritage-filter-row] > :is(th, td) {
   border-color: color-mix(in srgb, var(--wb-border) 72%, transparent) !important;
   background: color-mix(in srgb, var(--wb-surface-muted) 78%, var(--wb-surface)) !important;
 }
@@ -678,7 +678,7 @@ body.wb-list-page .wb-table-workspace--finalized .wb-data-table--empty {
 }
 
 body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr:first-child > :is(th, td),
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-workbench-filter-row] > :is(th, td),
+body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row] > :is(th, td),
 body.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > tr > :is(th, td) {
   box-sizing: border-box;
 }
@@ -689,13 +689,13 @@ body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr:fir
   text-overflow: ellipsis;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-workbench-filter-row] {
+body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row] {
   position: static;
   top: auto;
   z-index: auto;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-workbench-filter-row] :where(input, select, textarea, .form-control, .wb-select__control) {
+body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row] :where(input, select, textarea, .form-control, .wb-select__control) {
   min-inline-size: 0 !important;
   max-inline-size: 100% !important;
 }
@@ -785,7 +785,7 @@ html[data-wb-theme='dark'] body.wb-list-page .wb-table-workspace--finalized .wb-
     min-inline-size: 100% !important;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-workbench-filter-row] {
+  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row] {
     position: static;
     top: auto;
   }
@@ -851,7 +851,7 @@ html[data-wb-theme='dark'] body.wb-list-page .wb-table-workspace--finalized .wb-
     background: transparent !important;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr:first-child:not([data-workbench-filter-row]) {
+  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr:first-child:not([data-heritage-filter-row]) {
     position: absolute !important;
     inline-size: 1px;
     block-size: 1px;
@@ -860,7 +860,7 @@ html[data-wb-theme='dark'] body.wb-list-page .wb-table-workspace--finalized .wb-
     white-space: nowrap;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-workbench-filter-row] {
+  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row] {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr);
     gap: 0.65rem;
@@ -872,11 +872,11 @@ html[data-wb-theme='dark'] body.wb-list-page .wb-table-workspace--finalized .wb-
     background: color-mix(in srgb, var(--wb-surface-muted) 76%, var(--wb-surface)) !important;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-workbench-filter-row][hidden] {
+  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row][hidden] {
     display: none !important;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-workbench-filter-row] > :is(th, td) {
+  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row] > :is(th, td) {
     display: block !important;
     inline-size: 100%;
     padding: 0;
@@ -1338,7 +1338,7 @@ body.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-ta
   text-overflow: clip;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-workbench-filter-row] :where(.form-control, input, select, .wb-select, .wb-select__control) {
+body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row] :where(.form-control, input, select, .wb-select, .wb-select__control) {
   min-inline-size: 0 !important;
 }
 
@@ -1376,7 +1376,7 @@ body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport::after {
 
 body.wb-list-page .wb-table-workspace--finalized > .wb-table-footer,
 body.wb-list-page #pageContent .wb-table-workspace--finalized > .wb-table-footer,
-body.wb-list-page #pageContent > .wb-list-footer[data-workbench-list-footer='true'] {
+body.wb-list-page #pageContent > .wb-list-footer[data-heritage-list-footer='true'] {
   position: relative;
   z-index: 2;
   margin-top: 0;
@@ -1387,13 +1387,13 @@ body.wb-list-page #pageContent > .wb-list-footer[data-workbench-list-footer='tru
   box-shadow: 0 24px 48px color-mix(in srgb, #0f172a 7%, transparent);
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-workbench-filter-row] {
+body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row] {
   position: relative;
   top: auto;
   z-index: 4;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-workbench-filter-row] :where(input, select, .form-control, .wb-select__control) {
+body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row] :where(input, select, .form-control, .wb-select__control) {
   min-block-size: 2.7rem !important;
   border-radius: 0.82rem !important;
 }

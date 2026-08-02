@@ -21,11 +21,11 @@
     <tbody>
         <tmpl_loop name="records">
         <tr>
-            <td><a href="#" data-workbench-tooltip="true" data-workbench-tooltip-placement="auto" title='{tmpl_var
-                        name="email"}' data-workbench-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="email"}</a></td>
-            <td><a href="#" data-workbench-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="name"}</a></td>
-            <td><a href="#" data-workbench-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="used"}</a></td>
-            <td><a href="#" data-workbench-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="quota"}</a></td>
+            <td><a href="#" data-heritage-tooltip="true" data-heritage-tooltip-placement="auto" title='{tmpl_var
+                        name="email"}' data-heritage-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="email"}</a></td>
+            <td><a href="#" data-heritage-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="name"}</a></td>
+            <td><a href="#" data-heritage-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="used"}</a></td>
+            <td><a href="#" data-heritage-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="quota"}</a></td>
             <td colspan="2">
                 {tmpl_if name="quota" op="!=" value="0"}<div class="progress wb-quota-progress"><div class='progress-bar-striped progress-bar-{tmpl_if name="percentage_sort" op="<" value="50"}success{tmpl_elseif name="percentage_sort" op="<" value="75"}warning{tmpl_else}danger{/tmpl_if}' role="progressbar" style="width: {tmpl_var name="progressbar"}%;" aria-valuenow="{tmpl_var name="percentage_sort"}" aria-valuemin="0" aria-valuemax="100"><span>{tmpl_var name="percentage"}</span></div></div>{/tmpl_if}
             </td>

@@ -2,7 +2,7 @@
   <div>
       <p>
         <div id="errormsg" class="wb-alert wb-alert--danger wb-alert--dismissible" role="alert" data-wb-ack-url="sites/message_ack.php?relation=web_domain:{tmpl_var name='id'}&amp;_csrf_id={tmpl_var name='_csrf_id_msg'}&amp;_csrf_key={tmpl_var name='_csrf_key_msg'}">
-          <button type="button" class="wb-alert__dismiss" data-workbench-dismiss="alert" aria-label="Schließen" data-wb-i18n-aria-label-de="Schließen" data-wb-i18n-aria-label-en="Close"><span aria-hidden="true">&times;</span></button>
+          <button type="button" class="wb-alert__dismiss" data-heritage-dismiss="alert" aria-label="Schließen" data-wb-i18n-aria-label-de="Schließen" data-wb-i18n-aria-label-en="Close"><span aria-hidden="true">&times;</span></button>
           <div class="wb-config-error-time">{tmpl_var name='config_error_tstamp'} :&nbsp;</div>
           <div class="wb-config-error-message">{tmpl_var name='config_error_msg'}</div>
         </div>
@@ -34,7 +34,7 @@
   <div class="wb-form-section">
     <div class="wb-form-section__header" role="tab" id="headingCompression">
     <h4 class="wb-form-section__title">
-      <a class="collapsed" role="button" data-workbench-collapse="true" data-parent="#accordion" href="#collapseCompression" aria-expanded="false" aria-controls="collapseCompression">
+      <a class="collapsed" role="button" data-heritage-collapse="true" data-parent="#accordion" href="#collapseCompression" aria-expanded="false" aria-controls="collapseCompression">
       {tmpl_var name='backup_compression_options_txt'}
       </a>
     </h4>
@@ -68,7 +68,7 @@
   <div class="wb-form-section">
   <div class="wb-form-section__header" role="tab" id="headingEncryption">
     <h4 class="wb-form-section__title">
-      <a class="collapsed" role="button" data-workbench-collapse="true" data-parent="#accordion" href="#collapseEncryption" aria-expanded="false" aria-controls="collapseEncryption">
+      <a class="collapsed" role="button" data-heritage-collapse="true" data-parent="#accordion" href="#collapseEncryption" aria-expanded="false" aria-controls="collapseEncryption">
       {tmpl_var name='backup_encryption_options_txt'}
       </a>
     </h4>
@@ -103,6 +103,6 @@
 <div class="wb-form-actions">
   <div class="wb-form-actions__primary">
     <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="sites/web_vhost_domain_edit.php">{tmpl_var name='btn_save_txt'}</button>
-    <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="sites/web_vhost_domain_list.php" data-load-content="sites/web_vhost_domain_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+    <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-heritage-load-content="sites/web_vhost_domain_list.php" data-load-content="sites/web_vhost_domain_list.php">{tmpl_var name='btn_cancel_txt'}</button>
   </div>
 </div>

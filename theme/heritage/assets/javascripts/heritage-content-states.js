@@ -28,7 +28,7 @@
       control.className,
       control.getAttribute('href'),
       control.getAttribute('data-load-content'),
-      control.getAttribute('data-workbench-load-content'),
+      control.getAttribute('data-heritage-load-content'),
       control.getAttribute('data-confirm-action'),
       control.getAttribute('name'),
       control.getAttribute('value')
@@ -103,7 +103,7 @@
   }
 
   function moduleAttribute(control) {
-    return control ? (control.getAttribute('data-workbench-module') || control.getAttribute('data-capp') || '') : '';
+    return control ? (control.getAttribute('data-heritage-module') || control.getAttribute('data-capp') || '') : '';
   }
 
   function pageFromUrl() {
@@ -132,7 +132,7 @@
     var initial = pageFromUrl() || (content && content.getAttribute('data-startpage')) || 'dashboard/dashboard.php';
     if (!window.history.state || !window.history.state[historyKey]) window.history.replaceState({ workbenchContent: initial }, '', urlFor(initial));
     document.addEventListener('click', function(event) {
-      var trigger = event.target.closest('a[data-workbench-module],button[data-workbench-module],a[data-capp],button[data-capp]');
+      var trigger = event.target.closest('a[data-heritage-module],button[data-heritage-module],a[data-capp],button[data-capp]');
       if (!trigger) return;
       var target = moduleAttribute(trigger);
       if (!target || trigger.getAttribute('data-submit-form') || trigger.getAttribute('data-form-action')) return;
@@ -238,7 +238,7 @@
   function moduleLabelFromPageName(pageName) {
     var moduleName = moduleFromPageName(pageName);
     if (!moduleName) return '';
-    var direct = document.querySelector('#main-navigation a[data-workbench-module="' + moduleName + '"] .title, #main-navigation a[data-workbench-module="' + moduleName + '"], #main-navigation a[data-capp="' + moduleName + '"] .title, #main-navigation a[data-capp="' + moduleName + '"]');
+    var direct = document.querySelector('#main-navigation a[data-heritage-module="' + moduleName + '"] .title, #main-navigation a[data-heritage-module="' + moduleName + '"], #main-navigation a[data-capp="' + moduleName + '"] .title, #main-navigation a[data-capp="' + moduleName + '"]');
     var label = direct && direct.textContent.replace(/\s+/g, ' ').trim();
     if (label) return label;
     var labels = {
@@ -372,11 +372,11 @@
   function decorateTableFilters(host) {
     if (!host) return;
     Array.prototype.forEach.call(host.querySelectorAll('.table-wrapper > table > thead > tr:nth-child(2)'), function(row) {
-      if (row.getAttribute('data-workbench-filter-row') === 'true') return;
-      row.setAttribute('data-workbench-filter-row', 'true');
+      if (row.getAttribute('data-heritage-filter-row') === 'true') return;
+      row.setAttribute('data-heritage-filter-row', 'true');
       var headerCells = Array.prototype.slice.call(row.parentElement ? row.parentElement.querySelectorAll('tr:first-child > th, tr:first-child > td') : []);
       Array.prototype.forEach.call(row.querySelectorAll('input, select'), function(control) {
-        control.setAttribute('data-workbench-filter', 'true');
+        control.setAttribute('data-heritage-filter', 'true');
         if (!control.getAttribute('aria-label')) {
           var name = control.getAttribute('name') || '';
           var cell = control.closest('th, td');
@@ -405,11 +405,11 @@
         toolbar.setAttribute('role', 'search');
         var toolbarTitle = document.createElement('strong');
         toolbarTitle.className = 'wb-filter-toolbar__title';
-        toolbarTitle.textContent = document.body.getAttribute('data-workbench-filter-toggle') || localized('Filter', 'Filters');
+        toolbarTitle.textContent = document.body.getAttribute('data-heritage-filter-toggle') || localized('Filter', 'Filters');
         var toggle = document.createElement('button');
         toggle.type = 'button'; toggle.className = 'wb-filter-toggle';
-        var showLabel = document.body.getAttribute('data-workbench-filter-show') || localized('Filter anzeigen', 'Show filters');
-        var hideLabel = document.body.getAttribute('data-workbench-filter-hide') || localized('Filter ausblenden', 'Hide filters');
+        var showLabel = document.body.getAttribute('data-heritage-filter-show') || localized('Filter anzeigen', 'Show filters');
+        var hideLabel = document.body.getAttribute('data-heritage-filter-hide') || localized('Filter ausblenden', 'Hide filters');
         toggle.appendChild(iconElement('wb-filter-toggle__icon'));
         toggle.appendChild(element('span', 'wb-filter-toggle__label'));
         toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-controls', 'wb-filter-row-' + Math.random().toString(36).slice(2));
@@ -446,8 +446,8 @@
       }
       var reset = document.createElement('button');
       reset.type = 'button'; reset.className = 'wb-filter-reset';
-      var resetLabel = document.body.getAttribute('data-workbench-filter-reset') || localized('Filter zurücksetzen', 'Reset filters');
-      var resetActiveLabel = document.body.getAttribute('data-workbench-filter-reset-active') || localized('Filter zurücksetzen (%s)', 'Reset filters (%s)');
+      var resetLabel = document.body.getAttribute('data-heritage-filter-reset') || localized('Filter zurücksetzen', 'Reset filters');
+      var resetActiveLabel = document.body.getAttribute('data-heritage-filter-reset-active') || localized('Filter zurücksetzen (%s)', 'Reset filters (%s)');
       reset.textContent = resetLabel; reset.setAttribute('aria-label', resetLabel);
       function syncFilterCount() {
         var count = Array.prototype.filter.call(row.querySelectorAll('input, select'), function(control) { return control.tagName === 'SELECT' ? control.selectedIndex > 0 : Boolean(control.value); }).length;
@@ -505,7 +505,7 @@
     var result = document.createElement('span');
     var resultTemplate = document.body.dataset.workbenchListVisibleResults || localized('{count} Einträge auf dieser Seite', '{count} items on this page');
     var dataRows = Array.prototype.filter.call(tableWrapper.querySelectorAll('table > tbody > tr'), function(row) {
-      return !row.classList.contains('tbl_row_noresults') && !row.hasAttribute('data-workbench-summary-row');
+      return !row.classList.contains('tbl_row_noresults') && !row.hasAttribute('data-heritage-summary-row');
     });
     bar.className = 'wb-list-command-bar';
     bar.setAttribute('aria-label', host.querySelector(':scope > .page-header h1')?.textContent.trim() || localized('Listenaktionen', 'List actions'));
@@ -577,7 +577,7 @@
       pageSizeLabel.textContent = pageSize.getAttribute('aria-label') || (((document.documentElement.lang || '').toLowerCase().indexOf('de') === 0) ? 'Pro Seite' : 'Per page');
       pageSizeGroup.appendChild(pageSizeLabel);
       pageSizeGroup.appendChild(pageSizeShell);
-      pageSize.setAttribute('data-workbench-toolbar-control', 'true');
+      pageSize.setAttribute('data-heritage-toolbar-control', 'true');
       if (pageSizeCell) {
         pageSizeCell.classList.add('wb-page-size-source-cell');
         pageSizeCell.setAttribute('aria-hidden', 'true');
@@ -600,13 +600,13 @@
   function decorateDataTables(host) {
     if (!host) return;
     Array.prototype.forEach.call(host.querySelectorAll('.table-wrapper > table.table, .wb-table-workspace > table.table'), function(table) {
-      if (table.getAttribute('data-workbench-table') === 'true') return;
-      table.setAttribute('data-workbench-table', 'true');
+      if (table.getAttribute('data-heritage-table') === 'true') return;
+      table.setAttribute('data-heritage-table', 'true');
       table.classList.add('wb-data-table');
       var tableViewport = table.closest('.table-wrapper');
       if (tableViewport) {
         tableViewport.classList.add('wb-table-viewport');
-        tableViewport.setAttribute('data-workbench-table-viewport', 'true');
+        tableViewport.setAttribute('data-heritage-table-viewport', 'true');
         if (tableViewport.parentElement && document.body.classList.contains('wb-list-page')) tableViewport.parentElement.classList.add('wb-table-workspace');
       }
       var headerNodes = Array.prototype.slice.call(table.querySelectorAll('thead > tr:first-child > th, thead > tr:first-child > td'));
@@ -662,7 +662,7 @@
       var body = table.querySelector('tbody');
       if (!body) return;
       var dataRowCount = Array.prototype.filter.call(body.querySelectorAll(':scope > tr'), function(row) {
-        return !row.classList.contains('tbl_row_noresults') && !row.hasAttribute('data-workbench-summary-row');
+        return !row.classList.contains('tbl_row_noresults') && !row.hasAttribute('data-heritage-summary-row');
       }).length;
       var paginationLabel = document.body.dataset.workbenchPagination || localized('Seitennavigation', 'Pagination');
       var resultTemplate = document.body.dataset.workbenchListVisibleResults || localized('{count} Einträge auf dieser Seite', '{count} items on this page');
@@ -1035,7 +1035,7 @@
   function scrubResidualInlineStyle(node, style) {
     if (!node || !style || node.dataset.wbPreserveInlineStyle === 'true') return false;
     if (/^(?:canvas|svg|path|circle|rect|line|polyline|polygon|img|picture|source|video|meter|progress)$/i.test(node.tagName || '')) return false;
-    if (node.closest('[data-workbench-preserve-style="true"], .wb-chart-card, .wb-sparkline, .wb-stat-visual, .wb-logo, #logo, .notification_text')) return false;
+    if (node.closest('[data-heritage-preserve-style="true"], .wb-chart-card, .wb-sparkline, .wb-stat-visual, .wb-logo, #logo, .notification_text')) return false;
     if (node.closest('#topnav-container, #workbench-mobile-navigation, .wb-app-navigation, .wb-header-actions')) return false;
 
     var properties = [];
@@ -1429,7 +1429,7 @@
     });
 
     var strengthBar = scope.querySelector('#passBar');
-    var strengthInput = scope.querySelector('[data-workbench-password-strength="true"]');
+    var strengthInput = scope.querySelector('[data-heritage-password-strength="true"]');
     if (strengthBar && strengthInput) {
       var strengthGroup = strengthBar.closest('.wb-field-group');
       var strengthText = scope.querySelector('#passText');
@@ -1521,13 +1521,13 @@
         });
         wireFormHelp(group, controls, forms.indexOf(form) + 1, groupIndex + 1);
       });
-      form.setAttribute('data-workbench-field-count', String(fieldCount));
+      form.setAttribute('data-heritage-field-count', String(fieldCount));
       form.classList.toggle('wb-modern-form--dense', fieldCount > 12);
       form.classList.toggle('wb-modern-form--long', fieldCount > 20);
       form.classList.toggle('wb-modern-form--huge', fieldCount > 38);
       var tabCount = scope.querySelectorAll('.content-tab-wrapper > .wb-form-tabs > li').length;
       form.classList.toggle('wb-modern-form--tabbed', tabCount > 1);
-      form.setAttribute('data-workbench-tab-count', String(tabCount));
+      form.setAttribute('data-heritage-tab-count', String(tabCount));
       form.classList.toggle('wb-modern-form--has-upload', !!scope.querySelector('.wb-field-group--file'));
       form.classList.toggle('wb-modern-form--has-secrets', !!scope.querySelector('.wb-field-group--secret'));
       form.classList.toggle('wb-modern-form--has-choices', !!scope.querySelector('.wb-field-group--choice'));
@@ -1607,14 +1607,14 @@
   }
 
   document.addEventListener('click', function(event) {
-    var trigger = event.target.closest('#main-navigation a[data-workbench-module], #workbench-mobile-navigation a[data-workbench-module], #main-navigation a[data-capp], #workbench-mobile-navigation a[data-capp]');
+    var trigger = event.target.closest('#main-navigation a[data-heritage-module], #workbench-mobile-navigation a[data-heritage-module], #main-navigation a[data-capp], #workbench-mobile-navigation a[data-capp]');
     if (!trigger) return;
     var moduleName = moduleAttribute(trigger);
     if (!moduleName) return;
     var api = runtime();
     if (api) api.workbenchActiveModule = moduleName;
     document.querySelectorAll('#main-navigation a[aria-current="page"]').forEach(function(link) { link.removeAttribute('aria-current'); });
-    document.querySelectorAll('#main-navigation a[data-workbench-module], #main-navigation a[data-capp]').forEach(function(link) {
+    document.querySelectorAll('#main-navigation a[data-heritage-module], #main-navigation a[data-capp]').forEach(function(link) {
       if (moduleAttribute(link) === moduleName) link.setAttribute('aria-current', 'page');
     });
   });
@@ -1658,13 +1658,13 @@
     state.appendChild(element('strong', 'wb-content-state__title', messages.error));
     state.appendChild(element('span', 'wb-content-state__description', messages.error_description || ''));
     var detail = element('span', 'wb-visually-hidden', diagnostic || '');
-    detail.setAttribute('data-workbench-error-detail', 'true');
+    detail.setAttribute('data-heritage-error-detail', 'true');
     state.appendChild(detail);
     if (token) {
       var retry = element('button', 'wb-content-state__retry', messages.retry);
       retry.type = 'button';
-      retry.setAttribute('data-workbench-retry', token);
-      retry.setAttribute('data-workbench-retry-owner', '94');
+      retry.setAttribute('data-heritage-retry', token);
+      retry.setAttribute('data-heritage-retry-owner', '94');
       retry.addEventListener('click', function(event) {
         event.preventDefault();
         event.stopPropagation();
@@ -1827,7 +1827,7 @@
       node.classList.remove('active');
       node.removeAttribute('aria-current');
     });
-    host.querySelectorAll('[data-workbench-module], [data-capp]').forEach(function(link) {
+    host.querySelectorAll('[data-heritage-module], [data-capp]').forEach(function(link) {
       var active = moduleAttribute(link) === String(moduleName);
       link.classList.toggle('active', active);
       if (active) link.setAttribute('aria-current', 'page');
@@ -1970,7 +1970,7 @@
     var trigger = event.target.closest('.wb-content-state__retry');
     if (!trigger) return;
     event.preventDefault();
-    var token = trigger.getAttribute('data-workbench-retry');
+    var token = trigger.getAttribute('data-heritage-retry');
     retryContentRequest(token);
   });
 

@@ -162,7 +162,6 @@
   window.heritageDateTime = { enhance: enhance, enhanceAll: enhanceAll, parse: parse, format: format, toNative: toNative, fromNative: fromNative };
   window.heritageDateTimeInstalled = true;
 }());
-;
 
 /* source: heritage-native-interactions.js */
 (function () {
@@ -189,7 +188,7 @@
 
   function triggersFor(target) {
     if (!target || !target.id) return [];
-    return Array.from(document.querySelectorAll('[data-workbench-collapse]')).filter(function (trigger) {
+    return Array.from(document.querySelectorAll('[data-heritage-collapse]')).filter(function (trigger) {
       return selectorFor(trigger) === '#' + target.id;
     });
   }
@@ -344,14 +343,14 @@
   function synchronize(root) {
     var host = root && root.querySelectorAll ? root : document;
     host.querySelectorAll('[data-dismiss="alert"], [data-bs-dismiss="alert"]').forEach(function (trigger) {
-      trigger.setAttribute('data-workbench-dismiss', 'alert');
+      trigger.setAttribute('data-heritage-dismiss', 'alert');
       trigger.removeAttribute('data-dismiss');
       trigger.removeAttribute('data-bs-dismiss');
     });
     host.querySelectorAll('.wb-row-action[title]').forEach(function(element) {
-      element.setAttribute('data-workbench-tooltip', 'true');
+      element.setAttribute('data-heritage-tooltip', 'true');
     });
-    host.querySelectorAll('[data-workbench-tooltip]').forEach(function (element) {
+    host.querySelectorAll('[data-heritage-tooltip]').forEach(function (element) {
       initializeTooltip(element);
     });
     host.querySelectorAll('.collapse, .wb-collapse').forEach(function (target) {
@@ -363,13 +362,13 @@
   }
 
   document.addEventListener('click', function (event) {
-    var alertControl = event.target.closest('[data-workbench-dismiss="alert"]');
+    var alertControl = event.target.closest('[data-heritage-dismiss="alert"]');
     if (alertControl) {
       event.preventDefault();
       dismissAlert(alertControl);
       return;
     }
-    var collapseControl = event.target.closest('[data-workbench-collapse]');
+    var collapseControl = event.target.closest('[data-heritage-collapse]');
     if (collapseControl) {
       event.preventDefault();
       toggleCollapse(collapseControl);
@@ -377,22 +376,22 @@
   });
 
   document.addEventListener('pointerover', function(event) {
-    var control = event.target.closest('[data-workbench-native-tooltip="true"]');
+    var control = event.target.closest('[data-heritage-native-tooltip="true"]');
     if (control) showTooltip(control);
   });
 
   document.addEventListener('pointerout', function(event) {
-    var control = event.target.closest('[data-workbench-native-tooltip="true"]');
+    var control = event.target.closest('[data-heritage-native-tooltip="true"]');
     if (control && !control.contains(event.relatedTarget) && !control.contains(document.activeElement)) hideTooltip(control);
   });
 
   document.addEventListener('focusin', function(event) {
-    var control = event.target.closest('[data-workbench-native-tooltip="true"]');
+    var control = event.target.closest('[data-heritage-native-tooltip="true"]');
     if (control) showTooltip(control);
   });
 
   document.addEventListener('focusout', function(event) {
-    var control = event.target.closest('[data-workbench-native-tooltip="true"]');
+    var control = event.target.closest('[data-heritage-native-tooltip="true"]');
     if (control && !control.contains(event.relatedTarget)) hideTooltip(control);
   });
 
@@ -434,7 +433,6 @@
   };
   window.heritageInteractionsInstalled = true;
 }());
-;
 
 /* source: heritage-http.js */
 (function(window) {
@@ -647,7 +645,6 @@
     HttpError: HttpError
   };
 })(window);
-;
 
 /* source: heritage-core.js */
 (function(window, document) {
@@ -803,25 +800,25 @@
     element.dispatchEvent(new Event(name, { bubbles: true, cancelable: true }));
   }
 
-  var WORKBENCH_CONTENT_CONTRACTS = {
+  var HERITAGE_CONTENT_CONTRACTS = {
     load: {
-      native: 'data-workbench-load-content',
+      native: 'data-heritage-load-content',
       legacy: 'data-load-content',
-      selector: 'a[data-workbench-load-content],button[data-workbench-load-content],a[data-load-content],button[data-load-content]'
+      selector: 'a[data-heritage-load-content],button[data-heritage-load-content],a[data-load-content],button[data-load-content]'
     },
     template: {
-      native: 'data-workbench-load-content-template',
+      native: 'data-heritage-load-content-template',
       legacy: 'data-load-content-template'
     },
     target: {
-      native: 'data-workbench-load-content-into',
+      native: 'data-heritage-load-content-into',
       legacy: 'data-load-content-into',
-      selector: '[data-workbench-load-content-into],[data-load-content-into]'
+      selector: '[data-heritage-load-content-into],[data-load-content-into]'
     },
     module: {
-      native: 'data-workbench-module',
+      native: 'data-heritage-module',
       legacy: 'data-capp',
-      selector: 'a[data-workbench-module],button[data-workbench-module],a[data-capp],button[data-capp]'
+      selector: 'a[data-heritage-module],button[data-heritage-module],a[data-capp],button[data-capp]'
     }
   };
 
@@ -840,10 +837,10 @@
 
   function normalizeWorkbenchContentContracts(root) {
     root = root || document;
-    mirrorAttribute(root, '[' + WORKBENCH_CONTENT_CONTRACTS.load.legacy + ']', WORKBENCH_CONTENT_CONTRACTS.load.legacy, WORKBENCH_CONTENT_CONTRACTS.load.native);
-    mirrorAttribute(root, '[' + WORKBENCH_CONTENT_CONTRACTS.template.legacy + ']', WORKBENCH_CONTENT_CONTRACTS.template.legacy, WORKBENCH_CONTENT_CONTRACTS.template.native);
-    mirrorAttribute(root, '[' + WORKBENCH_CONTENT_CONTRACTS.target.legacy + ']', WORKBENCH_CONTENT_CONTRACTS.target.legacy, WORKBENCH_CONTENT_CONTRACTS.target.native);
-    mirrorAttribute(root, '[' + WORKBENCH_CONTENT_CONTRACTS.module.legacy + ']', WORKBENCH_CONTENT_CONTRACTS.module.legacy, WORKBENCH_CONTENT_CONTRACTS.module.native);
+    mirrorAttribute(root, '[' + HERITAGE_CONTENT_CONTRACTS.load.legacy + ']', HERITAGE_CONTENT_CONTRACTS.load.legacy, HERITAGE_CONTENT_CONTRACTS.load.native);
+    mirrorAttribute(root, '[' + HERITAGE_CONTENT_CONTRACTS.template.legacy + ']', HERITAGE_CONTENT_CONTRACTS.template.legacy, HERITAGE_CONTENT_CONTRACTS.template.native);
+    mirrorAttribute(root, '[' + HERITAGE_CONTENT_CONTRACTS.target.legacy + ']', HERITAGE_CONTENT_CONTRACTS.target.legacy, HERITAGE_CONTENT_CONTRACTS.target.native);
+    mirrorAttribute(root, '[' + HERITAGE_CONTENT_CONTRACTS.module.legacy + ']', HERITAGE_CONTENT_CONTRACTS.module.legacy, HERITAGE_CONTENT_CONTRACTS.module.native);
     return root;
   }
 
@@ -891,9 +888,9 @@
 
     function markDone() {
       if (!control) return;
-      control.setAttribute('data-workbench-copy-state', 'done');
+      control.setAttribute('data-heritage-copy-state', 'done');
       window.setTimeout(function() {
-        control.removeAttribute('data-workbench-copy-state');
+        control.removeAttribute('data-heritage-copy-state');
       }, 1400);
     }
 
@@ -926,8 +923,8 @@
 
   function initSslClientDataHelpers(root) {
     queryAll(root || document, '[data-ssl-client-helper]').forEach(function(helper) {
-      if (helper.getAttribute('data-workbench-initialized') === 'true') return;
-      helper.setAttribute('data-workbench-initialized', 'true');
+      if (helper.getAttribute('data-heritage-initialized') === 'true') return;
+      helper.setAttribute('data-heritage-initialized', 'true');
       var idFieldName = helper.getAttribute('data-record-field') || 'id';
       var idField = query(document, 'input[name="' + cssEscape(idFieldName) + '"]');
       if (idField && Number(idField.value) > 0) {
@@ -984,7 +981,7 @@
   }
 
   function syncVisibilityRules(control) {
-    var rules = control && control.getAttribute('data-workbench-visibility-rules');
+    var rules = control && control.getAttribute('data-heritage-visibility-rules');
     if (!rules) return false;
     var value = String(control.value || '');
     splitList(rules, ';').forEach(function(rule) {
@@ -1002,7 +999,7 @@
   }
 
   function syncDeclaredVisibility(control) {
-    var targetId = control && control.getAttribute('data-workbench-sync-visibility');
+    var targetId = control && control.getAttribute('data-heritage-sync-visibility');
     var target = targetId ? document.getElementById(targetId) : null;
     if (!target) return false;
     var expected = control.getAttribute('data-visible-value') || '';
@@ -1013,7 +1010,7 @@
   }
 
   function syncDatabaseTypeFields(control) {
-    var targets = control && control.getAttribute('data-workbench-database-type-toggle');
+    var targets = control && control.getAttribute('data-heritage-database-type-toggle');
     if (!targets) return false;
     var hide = String(control.value || '') === 'postgresql';
     targets.split(',').forEach(function(id) {
@@ -1027,15 +1024,15 @@
   }
 
   function initDisabledHiddenClones(root) {
-    queryAll(root || document, 'select[data-workbench-disabled-clone-hidden]').forEach(function(select) {
-      if (select.getAttribute('data-workbench-hidden-clone-initialized') === 'true') return;
+    queryAll(root || document, 'select[data-heritage-disabled-clone-hidden]').forEach(function(select) {
+      if (select.getAttribute('data-heritage-hidden-clone-initialized') === 'true') return;
       var originalName = select.getAttribute('name') || '';
       if (!originalName) return;
       var hidden = document.createElement('input');
       hidden.type = 'hidden';
       hidden.name = originalName;
       hidden.value = select.value || '';
-      select.setAttribute('data-workbench-hidden-clone-initialized', 'true');
+      select.setAttribute('data-heritage-hidden-clone-initialized', 'true');
       select.name = originalName + '_disabled';
       if (select.id) select.id = select.id + '_disabled';
       select.insertAdjacentElement('afterend', hidden);
@@ -1043,11 +1040,11 @@
   }
 
   function initConfirmUncheck(root) {
-    queryAll(root || document, '[data-workbench-confirm-uncheck]').forEach(function(marker) {
-      if (marker.getAttribute('data-workbench-confirm-initialized') === 'true') return;
-      var field = document.getElementById(marker.getAttribute('data-workbench-confirm-uncheck') || '');
+    queryAll(root || document, '[data-heritage-confirm-uncheck]').forEach(function(marker) {
+      if (marker.getAttribute('data-heritage-confirm-initialized') === 'true') return;
+      var field = document.getElementById(marker.getAttribute('data-heritage-confirm-uncheck') || '');
       if (!field) return;
-      marker.setAttribute('data-workbench-confirm-initialized', 'true');
+      marker.setAttribute('data-heritage-confirm-initialized', 'true');
       field.addEventListener('click', function(event) {
         if (field.checked) return;
         if (window.confirm(marker.getAttribute('data-confirm-message') || '')) return;
@@ -1071,11 +1068,11 @@
   }
 
   function initDefaultPasswords(root) {
-    queryAll(root || document, '[data-workbench-default-password]').forEach(function(input) {
-      if (input.getAttribute('data-workbench-default-password-initialized') === 'true') return;
-      input.setAttribute('data-workbench-default-password-initialized', 'true');
+    queryAll(root || document, '[data-heritage-default-password]').forEach(function(input) {
+      if (input.getAttribute('data-heritage-default-password-initialized') === 'true') return;
+      input.setAttribute('data-heritage-default-password-initialized', 'true');
       if (input.value) return;
-      input.value = generateWorkbenchPassword(input.getAttribute('data-workbench-default-password'));
+      input.value = generateWorkbenchPassword(input.getAttribute('data-heritage-default-password'));
     });
   }
 
@@ -1112,9 +1109,9 @@
   }
 
   function initMasterTemplateLocks(root) {
-    queryAll(root || document, '[data-workbench-master-template-lock]').forEach(function(region) {
-      if (region.getAttribute('data-workbench-master-template-lock-initialized') === 'true') return;
-      region.setAttribute('data-workbench-master-template-lock-initialized', 'true');
+    queryAll(root || document, '[data-heritage-master-template-lock]').forEach(function(region) {
+      if (region.getAttribute('data-heritage-master-template-lock-initialized') === 'true') return;
+      region.setAttribute('data-heritage-master-template-lock-initialized', 'true');
       region.addEventListener('click', function(event) {
         handleMasterTemplateLock(region, event, true);
       }, true);
@@ -1142,8 +1139,8 @@
       if (typeof afterChange === 'function') afterChange();
     };
 
-    if (source.getAttribute('data-workbench-disclosure-initialized') !== 'true') {
-      source.setAttribute('data-workbench-disclosure-initialized', 'true');
+    if (source.getAttribute('data-heritage-disclosure-initialized') !== 'true') {
+      source.setAttribute('data-heritage-disclosure-initialized', 'true');
       source.addEventListener('change', update);
     }
     update();
@@ -1152,12 +1149,12 @@
 
   function syncPasswordValidation(control) {
     if (!control || !control.getAttribute) return;
-    var contract = control.getAttribute('data-workbench-password-check') || '';
+    var contract = control.getAttribute('data-heritage-password-check') || '';
     if (!contract) return;
     var parts = contract.split(':');
     var passwordId = parts[0] || control.id || 'password';
     var repeatId = parts[1] || 'repeat_password';
-    if (control.getAttribute('data-workbench-password-strength') === 'true' && typeof window.pass_check === 'function') {
+    if (control.getAttribute('data-heritage-password-strength') === 'true' && typeof window.pass_check === 'function') {
       window.pass_check(control.value || '');
     }
     if (typeof window.checkPassMatch === 'function') {
@@ -1166,8 +1163,8 @@
   }
 
   function initStaticSelectMirrors(root) {
-    queryAll(root || document, 'select[data-workbench-static-select-mirror]').forEach(function(select) {
-      if (select.getAttribute('data-workbench-static-select-initialized') === 'true') return;
+    queryAll(root || document, 'select[data-heritage-static-select-mirror]').forEach(function(select) {
+      if (select.getAttribute('data-heritage-static-select-initialized') === 'true') return;
       var name = select.getAttribute('name') || '';
       if (!name) return;
       var selected = select.options && select.selectedIndex >= 0 ? select.options[select.selectedIndex] : null;
@@ -1179,7 +1176,7 @@
       hidden.type = 'hidden';
       hidden.name = name;
       hidden.value = select.value || '';
-      select.setAttribute('data-workbench-static-select-initialized', 'true');
+      select.setAttribute('data-heritage-static-select-initialized', 'true');
       select.insertAdjacentElement('beforebegin', text);
       select.insertAdjacentElement('beforebegin', hidden);
       select.remove();
@@ -1652,9 +1649,9 @@
   }
 
   function initDeclaredVisibility(root) {
-    queryAll(root || document, '[data-workbench-sync-visibility]').forEach(syncDeclaredVisibility);
-    queryAll(root || document, '[data-workbench-visibility-rules]').forEach(syncVisibilityRules);
-    queryAll(root || document, '[data-workbench-database-type-toggle]').forEach(syncDatabaseTypeFields);
+    queryAll(root || document, '[data-heritage-sync-visibility]').forEach(syncDeclaredVisibility);
+    queryAll(root || document, '[data-heritage-visibility-rules]').forEach(syncVisibilityRules);
+    queryAll(root || document, '[data-heritage-database-type-toggle]').forEach(syncDatabaseTypeFields);
     retireLegacyPhpOptions(root);
     initStaticSelectMirrors(root);
     initDefaultPasswords(root);
@@ -1668,7 +1665,7 @@
       ? window.heritageLanguage()
       : String(document.documentElement.getAttribute('lang') || 'en').toLowerCase().split('-')[0];
     var german = language === 'de';
-    queryAll(root || document, '[data-workbench-field-search]').forEach(function(input) {
+    queryAll(root || document, '[data-heritage-field-search]').forEach(function(input) {
       var endpointName = input.getAttribute('data-search-endpoint') || '';
       var endpoint = endpointName ? workbenchEndpoint(endpointName) : (input.getAttribute('data-search-src') || input.getAttribute('data-src') || '');
       endpoint = endpointWithQuery(endpoint, 'type', input.getAttribute('data-search-type') || '');
@@ -2017,7 +2014,7 @@
       initDeclaredVisibility(host);
       ISPConfig.enhanceDateTime(queryAll(host, 'input[data-input-element="date"]'), { pickTime: false, format: 'DD.MM.YYYY' });
       ISPConfig.enhanceDateTime(queryAll(host, 'input[data-input-element="datetime"]'), { pickTime: true, format: 'DD.MM.YYYY HH:mm' });
-      ISPConfig.enhanceTooltip(queryAll(host, '[data-workbench-tooltip]'), {});
+      ISPConfig.enhanceTooltip(queryAll(host, '[data-heritage-tooltip]'), {});
       initSslClientDataHelpers(host);
       initDependentJsonSync(host);
       var autofocus = query(host, 'input[autofocus]');
@@ -2223,7 +2220,7 @@
       var remove = document.createElement('a');
       remove.href = '#';
       remove.className = 'wb-template-remove';
-      remove.setAttribute('data-workbench-template-remove', 'true');
+      remove.setAttribute('data-heritage-template-remove', 'true');
       remove.setAttribute('aria-label', 'Remove template');
       var glyph = document.createElement('span');
       glyph.setAttribute('aria-hidden', 'true');
@@ -2420,13 +2417,13 @@
   };
 
   document.addEventListener('input', function(event) {
-    if (event.target && event.target.hasAttribute && event.target.hasAttribute('data-workbench-password-check')) {
+    if (event.target && event.target.hasAttribute && event.target.hasAttribute('data-heritage-password-check')) {
       syncPasswordValidation(event.target);
     }
   });
 
   document.addEventListener('keyup', function(event) {
-    if (event.target && event.target.hasAttribute && event.target.hasAttribute('data-workbench-password-check')) {
+    if (event.target && event.target.hasAttribute && event.target.hasAttribute('data-heritage-password-check')) {
       syncPasswordValidation(event.target);
     }
   });
@@ -2434,7 +2431,7 @@
   document.addEventListener('change', function(event) {
     var target = event.target;
     if (!target) return;
-    var changeAction = target.getAttribute('data-workbench-change-action');
+    var changeAction = target.getAttribute('data-heritage-change-action');
     if (changeAction === 'hide-ok-message') {
       var message = document.getElementById(target.getAttribute('data-target') || 'OKMsg');
       if (message) {
@@ -2474,7 +2471,7 @@
       ISPConfig.loadOptionInto(optionTarget, optionTemplate ? controlUrl(optionTemplate, target) : endpointWithQueryTemplate(workbenchEndpoint(optionEndpoint), optionQuery, target));
       return;
     }
-    var contentTemplate = workbenchContractValue(target, WORKBENCH_CONTENT_CONTRACTS.template);
+    var contentTemplate = workbenchContractValue(target, HERITAGE_CONTENT_CONTRACTS.template);
     if (contentTemplate) {
       event.preventDefault();
       ISPConfig.navigateTo(controlUrl(contentTemplate, target));
@@ -2483,13 +2480,13 @@
     if (target.hasAttribute('data-json-sync')) {
       runDependentJsonSync(target);
     }
-    if (target.hasAttribute('data-workbench-sync-visibility')) {
+    if (target.hasAttribute('data-heritage-sync-visibility')) {
       syncDeclaredVisibility(target);
     }
-    if (target.hasAttribute('data-workbench-visibility-rules')) {
+    if (target.hasAttribute('data-heritage-visibility-rules')) {
       syncVisibilityRules(target);
     }
-    if (target.hasAttribute('data-workbench-database-type-toggle')) {
+    if (target.hasAttribute('data-heritage-database-type-toggle')) {
       syncDatabaseTypeFields(target);
     }
     if (matches(target, 'select') && query(document, '#pageForm .table #Filter') && !target.classList.contains('disableChangeEvent')) {
@@ -2511,21 +2508,21 @@
   });
 
   document.addEventListener('click', function(event) {
-    var loadControl = closest(event.target, WORKBENCH_CONTENT_CONTRACTS.load.selector);
-    var loadIntoControl = closest(event.target, WORKBENCH_CONTENT_CONTRACTS.target.selector);
-    var moduleControl = closest(event.target, WORKBENCH_CONTENT_CONTRACTS.module.selector);
+    var loadControl = closest(event.target, HERITAGE_CONTENT_CONTRACTS.load.selector);
+    var loadIntoControl = closest(event.target, HERITAGE_CONTENT_CONTRACTS.target.selector);
+    var moduleControl = closest(event.target, HERITAGE_CONTENT_CONTRACTS.module.selector);
     var submitControl = closest(event.target, 'a[data-submit-form],button[data-submit-form]');
     var passwordControl = closest(event.target, '[data-generate-password]');
     var confirmControl = closest(event.target, '[data-confirm-action]');
     var copyControl = closest(event.target, '[data-copy-email-address],[data-copy-composed-value],[data-copy-value]');
     var sslClientDataControl = closest(event.target, '[data-ssl-client-data-action]');
     var tabControl = closest(event.target, '[data-change-tab]');
-    var workbenchActionControl = closest(event.target, '[data-workbench-action]');
-    var noopControl = closest(event.target, '[data-workbench-noop]');
+    var workbenchActionControl = closest(event.target, '[data-heritage-action]');
+    var noopControl = closest(event.target, '[data-heritage-noop]');
     var sortHeader = closest(event.target, 'th[data-column]');
     var placeholder = closest(event.target, '.addPlaceholder');
     var placeholderContent = closest(event.target, '.addPlaceholderContent');
-    var additionalTemplateRemove = closest(event.target, '#template_additional_list [data-workbench-template-remove]');
+    var additionalTemplateRemove = closest(event.target, '#template_additional_list [data-heritage-template-remove]');
     var checkFields = closest(event.target, '[data-check-fields] > input[type="checkbox"]');
     var uncheckFields = closest(event.target, '[data-uncheck-fields] > input[type="checkbox"]');
 
@@ -2595,7 +2592,7 @@
     }
 
     if (workbenchActionControl) {
-      var workbenchAction = workbenchActionControl.getAttribute('data-workbench-action');
+      var workbenchAction = workbenchActionControl.getAttribute('data-heritage-action');
       if (workbenchAction === 'add-additional-template') ISPConfig.addAdditionalTemplate();
       if (workbenchAction === 'reset-autoresponder-dates') window.AR_ResetDates();
       if (workbenchAction === 'create-dkim') createDkimRecord(workbenchActionControl);
@@ -2613,20 +2610,20 @@
     }
 
     if (loadIntoControl) {
-      var targetId = workbenchContractValue(loadIntoControl, WORKBENCH_CONTENT_CONTRACTS.target);
-      var targetContent = workbenchContractValue(loadIntoControl, WORKBENCH_CONTENT_CONTRACTS.load);
+      var targetId = workbenchContractValue(loadIntoControl, HERITAGE_CONTENT_CONTRACTS.target);
+      var targetContent = workbenchContractValue(loadIntoControl, HERITAGE_CONTENT_CONTRACTS.load);
       if (targetId && targetContent) ISPConfig.refreshContentInto(targetId, targetContent);
       return;
     }
 
     if (loadControl) {
-      var content = workbenchContractValue(loadControl, WORKBENCH_CONTENT_CONTRACTS.load);
+      var content = workbenchContractValue(loadControl, HERITAGE_CONTENT_CONTRACTS.load);
       if (content) ISPConfig.navigateTo(content);
       return;
     }
 
     if (moduleControl) {
-      var module = workbenchContractValue(moduleControl, WORKBENCH_CONTENT_CONTRACTS.module);
+      var module = workbenchContractValue(moduleControl, HERITAGE_CONTENT_CONTRACTS.module);
       if (module) ISPConfig.capp(module);
       return;
     }
@@ -2698,7 +2695,6 @@
     });
   });
 })(window, document);
-;
 
 /* source: heritage-field-search.js */
 (function(window, document) {
@@ -3034,7 +3030,6 @@
   window.heritageFieldSearch = { enhance: enhance, destroy: destroy };
   window.heritageFieldSearchInstalled = true;
 })(window, document);
-;
 
 /* source: heritage-message-acknowledgement.js */
 (function (window, document) {
@@ -3074,7 +3069,6 @@
   window.heritageMessageAcknowledgementInstalled = true;
   document.addEventListener('DOMContentLoaded', function () { enhance(document); });
 })(window, document);
-;
 
 /* source: heritage-loading.js */
 (function(window, document) {
@@ -3117,7 +3111,7 @@
     document.body.classList.remove('wb-module-transition-active');
     moduleItems.forEach(function(item) {
       item.removeAttribute('aria-busy');
-      item.removeAttribute('data-workbench-delayed');
+      item.removeAttribute('data-heritage-delayed');
       item.classList.remove('wb-module-transition-source');
       var state = item.querySelector('.wb-module-transition');
       if (state) state.remove();
@@ -3148,7 +3142,7 @@
     moduleTransitionTimer = window.setTimeout(finishModuleTransition, 30000);
     moduleSlowTimer = window.setTimeout(function() {
       moduleItems.forEach(function(item) {
-        item.setAttribute('data-workbench-delayed', 'true');
+        item.setAttribute('data-heritage-delayed', 'true');
         var label = item.querySelector('.wb-module-transition .sr-only');
         if (label) label.textContent = localized('Modul wird weiterhin geladen', 'Module is still loading');
       });
@@ -3224,7 +3218,7 @@
         var current = content();
         var currentStatus = current && current.querySelector(':scope > .wb-request-status');
         if (!currentStatus || legacy.requestsRunning < 1) return;
-        currentStatus.setAttribute('data-workbench-delayed', 'true');
+        currentStatus.setAttribute('data-heritage-delayed', 'true');
         currentStatus.textContent = localized('Die Anfrage dauert etwas länger. Sie wird weiterhin verarbeitet.', 'This request is taking a little longer. It is still being processed.');
       }, 7000);
     }
@@ -3256,7 +3250,6 @@
 
   legacy.workbenchLoadingInstalled = true;
 })(window, document);
-;
 
 /* source: heritage-content-states.js */
 (function(window, document) {
@@ -3289,7 +3282,7 @@
       control.className,
       control.getAttribute('href'),
       control.getAttribute('data-load-content'),
-      control.getAttribute('data-workbench-load-content'),
+      control.getAttribute('data-heritage-load-content'),
       control.getAttribute('data-confirm-action'),
       control.getAttribute('name'),
       control.getAttribute('value')
@@ -3364,7 +3357,7 @@
   }
 
   function moduleAttribute(control) {
-    return control ? (control.getAttribute('data-workbench-module') || control.getAttribute('data-capp') || '') : '';
+    return control ? (control.getAttribute('data-heritage-module') || control.getAttribute('data-capp') || '') : '';
   }
 
   function pageFromUrl() {
@@ -3393,7 +3386,7 @@
     var initial = pageFromUrl() || (content && content.getAttribute('data-startpage')) || 'dashboard/dashboard.php';
     if (!window.history.state || !window.history.state[historyKey]) window.history.replaceState({ workbenchContent: initial }, '', urlFor(initial));
     document.addEventListener('click', function(event) {
-      var trigger = event.target.closest('a[data-workbench-module],button[data-workbench-module],a[data-capp],button[data-capp]');
+      var trigger = event.target.closest('a[data-heritage-module],button[data-heritage-module],a[data-capp],button[data-capp]');
       if (!trigger) return;
       var target = moduleAttribute(trigger);
       if (!target || trigger.getAttribute('data-submit-form') || trigger.getAttribute('data-form-action')) return;
@@ -3499,7 +3492,7 @@
   function moduleLabelFromPageName(pageName) {
     var moduleName = moduleFromPageName(pageName);
     if (!moduleName) return '';
-    var direct = document.querySelector('#main-navigation a[data-workbench-module="' + moduleName + '"] .title, #main-navigation a[data-workbench-module="' + moduleName + '"], #main-navigation a[data-capp="' + moduleName + '"] .title, #main-navigation a[data-capp="' + moduleName + '"]');
+    var direct = document.querySelector('#main-navigation a[data-heritage-module="' + moduleName + '"] .title, #main-navigation a[data-heritage-module="' + moduleName + '"], #main-navigation a[data-capp="' + moduleName + '"] .title, #main-navigation a[data-capp="' + moduleName + '"]');
     var label = direct && direct.textContent.replace(/\s+/g, ' ').trim();
     if (label) return label;
     var labels = {
@@ -3633,11 +3626,11 @@
   function decorateTableFilters(host) {
     if (!host) return;
     Array.prototype.forEach.call(host.querySelectorAll('.table-wrapper > table > thead > tr:nth-child(2)'), function(row) {
-      if (row.getAttribute('data-workbench-filter-row') === 'true') return;
-      row.setAttribute('data-workbench-filter-row', 'true');
+      if (row.getAttribute('data-heritage-filter-row') === 'true') return;
+      row.setAttribute('data-heritage-filter-row', 'true');
       var headerCells = Array.prototype.slice.call(row.parentElement ? row.parentElement.querySelectorAll('tr:first-child > th, tr:first-child > td') : []);
       Array.prototype.forEach.call(row.querySelectorAll('input, select'), function(control) {
-        control.setAttribute('data-workbench-filter', 'true');
+        control.setAttribute('data-heritage-filter', 'true');
         if (!control.getAttribute('aria-label')) {
           var name = control.getAttribute('name') || '';
           var cell = control.closest('th, td');
@@ -3666,11 +3659,11 @@
         toolbar.setAttribute('role', 'search');
         var toolbarTitle = document.createElement('strong');
         toolbarTitle.className = 'wb-filter-toolbar__title';
-        toolbarTitle.textContent = document.body.getAttribute('data-workbench-filter-toggle') || localized('Filter', 'Filters');
+        toolbarTitle.textContent = document.body.getAttribute('data-heritage-filter-toggle') || localized('Filter', 'Filters');
         var toggle = document.createElement('button');
         toggle.type = 'button'; toggle.className = 'wb-filter-toggle';
-        var showLabel = document.body.getAttribute('data-workbench-filter-show') || localized('Filter anzeigen', 'Show filters');
-        var hideLabel = document.body.getAttribute('data-workbench-filter-hide') || localized('Filter ausblenden', 'Hide filters');
+        var showLabel = document.body.getAttribute('data-heritage-filter-show') || localized('Filter anzeigen', 'Show filters');
+        var hideLabel = document.body.getAttribute('data-heritage-filter-hide') || localized('Filter ausblenden', 'Hide filters');
         toggle.appendChild(iconElement('wb-filter-toggle__icon'));
         toggle.appendChild(element('span', 'wb-filter-toggle__label'));
         toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-controls', 'wb-filter-row-' + Math.random().toString(36).slice(2));
@@ -3707,8 +3700,8 @@
       }
       var reset = document.createElement('button');
       reset.type = 'button'; reset.className = 'wb-filter-reset';
-      var resetLabel = document.body.getAttribute('data-workbench-filter-reset') || localized('Filter zurücksetzen', 'Reset filters');
-      var resetActiveLabel = document.body.getAttribute('data-workbench-filter-reset-active') || localized('Filter zurücksetzen (%s)', 'Reset filters (%s)');
+      var resetLabel = document.body.getAttribute('data-heritage-filter-reset') || localized('Filter zurücksetzen', 'Reset filters');
+      var resetActiveLabel = document.body.getAttribute('data-heritage-filter-reset-active') || localized('Filter zurücksetzen (%s)', 'Reset filters (%s)');
       reset.textContent = resetLabel; reset.setAttribute('aria-label', resetLabel);
       function syncFilterCount() {
         var count = Array.prototype.filter.call(row.querySelectorAll('input, select'), function(control) { return control.tagName === 'SELECT' ? control.selectedIndex > 0 : Boolean(control.value); }).length;
@@ -3766,7 +3759,7 @@
     var result = document.createElement('span');
     var resultTemplate = document.body.dataset.workbenchListVisibleResults || localized('{count} Einträge auf dieser Seite', '{count} items on this page');
     var dataRows = Array.prototype.filter.call(tableWrapper.querySelectorAll('table > tbody > tr'), function(row) {
-      return !row.classList.contains('tbl_row_noresults') && !row.hasAttribute('data-workbench-summary-row');
+      return !row.classList.contains('tbl_row_noresults') && !row.hasAttribute('data-heritage-summary-row');
     });
     bar.className = 'wb-list-command-bar';
     bar.setAttribute('aria-label', host.querySelector(':scope > .page-header h1')?.textContent.trim() || localized('Listenaktionen', 'List actions'));
@@ -3838,7 +3831,7 @@
       pageSizeLabel.textContent = pageSize.getAttribute('aria-label') || (((document.documentElement.lang || '').toLowerCase().indexOf('de') === 0) ? 'Pro Seite' : 'Per page');
       pageSizeGroup.appendChild(pageSizeLabel);
       pageSizeGroup.appendChild(pageSizeShell);
-      pageSize.setAttribute('data-workbench-toolbar-control', 'true');
+      pageSize.setAttribute('data-heritage-toolbar-control', 'true');
       if (pageSizeCell) {
         pageSizeCell.classList.add('wb-page-size-source-cell');
         pageSizeCell.setAttribute('aria-hidden', 'true');
@@ -3861,13 +3854,13 @@
   function decorateDataTables(host) {
     if (!host) return;
     Array.prototype.forEach.call(host.querySelectorAll('.table-wrapper > table.table, .wb-table-workspace > table.table'), function(table) {
-      if (table.getAttribute('data-workbench-table') === 'true') return;
-      table.setAttribute('data-workbench-table', 'true');
+      if (table.getAttribute('data-heritage-table') === 'true') return;
+      table.setAttribute('data-heritage-table', 'true');
       table.classList.add('wb-data-table');
       var tableViewport = table.closest('.table-wrapper');
       if (tableViewport) {
         tableViewport.classList.add('wb-table-viewport');
-        tableViewport.setAttribute('data-workbench-table-viewport', 'true');
+        tableViewport.setAttribute('data-heritage-table-viewport', 'true');
         if (tableViewport.parentElement && document.body.classList.contains('wb-list-page')) tableViewport.parentElement.classList.add('wb-table-workspace');
       }
       var headerNodes = Array.prototype.slice.call(table.querySelectorAll('thead > tr:first-child > th, thead > tr:first-child > td'));
@@ -3923,7 +3916,7 @@
       var body = table.querySelector('tbody');
       if (!body) return;
       var dataRowCount = Array.prototype.filter.call(body.querySelectorAll(':scope > tr'), function(row) {
-        return !row.classList.contains('tbl_row_noresults') && !row.hasAttribute('data-workbench-summary-row');
+        return !row.classList.contains('tbl_row_noresults') && !row.hasAttribute('data-heritage-summary-row');
       }).length;
       var paginationLabel = document.body.dataset.workbenchPagination || localized('Seitennavigation', 'Pagination');
       var resultTemplate = document.body.dataset.workbenchListVisibleResults || localized('{count} Einträge auf dieser Seite', '{count} items on this page');
@@ -4296,7 +4289,7 @@
   function scrubResidualInlineStyle(node, style) {
     if (!node || !style || node.dataset.wbPreserveInlineStyle === 'true') return false;
     if (/^(?:canvas|svg|path|circle|rect|line|polyline|polygon|img|picture|source|video|meter|progress)$/i.test(node.tagName || '')) return false;
-    if (node.closest('[data-workbench-preserve-style="true"], .wb-chart-card, .wb-sparkline, .wb-stat-visual, .wb-logo, #logo, .notification_text')) return false;
+    if (node.closest('[data-heritage-preserve-style="true"], .wb-chart-card, .wb-sparkline, .wb-stat-visual, .wb-logo, #logo, .notification_text')) return false;
     if (node.closest('#topnav-container, #workbench-mobile-navigation, .wb-app-navigation, .wb-header-actions')) return false;
 
     var properties = [];
@@ -4690,7 +4683,7 @@
     });
 
     var strengthBar = scope.querySelector('#passBar');
-    var strengthInput = scope.querySelector('[data-workbench-password-strength="true"]');
+    var strengthInput = scope.querySelector('[data-heritage-password-strength="true"]');
     if (strengthBar && strengthInput) {
       var strengthGroup = strengthBar.closest('.wb-field-group');
       var strengthText = scope.querySelector('#passText');
@@ -4782,13 +4775,13 @@
         });
         wireFormHelp(group, controls, forms.indexOf(form) + 1, groupIndex + 1);
       });
-      form.setAttribute('data-workbench-field-count', String(fieldCount));
+      form.setAttribute('data-heritage-field-count', String(fieldCount));
       form.classList.toggle('wb-modern-form--dense', fieldCount > 12);
       form.classList.toggle('wb-modern-form--long', fieldCount > 20);
       form.classList.toggle('wb-modern-form--huge', fieldCount > 38);
       var tabCount = scope.querySelectorAll('.content-tab-wrapper > .wb-form-tabs > li').length;
       form.classList.toggle('wb-modern-form--tabbed', tabCount > 1);
-      form.setAttribute('data-workbench-tab-count', String(tabCount));
+      form.setAttribute('data-heritage-tab-count', String(tabCount));
       form.classList.toggle('wb-modern-form--has-upload', !!scope.querySelector('.wb-field-group--file'));
       form.classList.toggle('wb-modern-form--has-secrets', !!scope.querySelector('.wb-field-group--secret'));
       form.classList.toggle('wb-modern-form--has-choices', !!scope.querySelector('.wb-field-group--choice'));
@@ -4868,14 +4861,14 @@
   }
 
   document.addEventListener('click', function(event) {
-    var trigger = event.target.closest('#main-navigation a[data-workbench-module], #workbench-mobile-navigation a[data-workbench-module], #main-navigation a[data-capp], #workbench-mobile-navigation a[data-capp]');
+    var trigger = event.target.closest('#main-navigation a[data-heritage-module], #workbench-mobile-navigation a[data-heritage-module], #main-navigation a[data-capp], #workbench-mobile-navigation a[data-capp]');
     if (!trigger) return;
     var moduleName = moduleAttribute(trigger);
     if (!moduleName) return;
     var api = runtime();
     if (api) api.workbenchActiveModule = moduleName;
     document.querySelectorAll('#main-navigation a[aria-current="page"]').forEach(function(link) { link.removeAttribute('aria-current'); });
-    document.querySelectorAll('#main-navigation a[data-workbench-module], #main-navigation a[data-capp]').forEach(function(link) {
+    document.querySelectorAll('#main-navigation a[data-heritage-module], #main-navigation a[data-capp]').forEach(function(link) {
       if (moduleAttribute(link) === moduleName) link.setAttribute('aria-current', 'page');
     });
   });
@@ -4919,13 +4912,13 @@
     state.appendChild(element('strong', 'wb-content-state__title', messages.error));
     state.appendChild(element('span', 'wb-content-state__description', messages.error_description || ''));
     var detail = element('span', 'wb-visually-hidden', diagnostic || '');
-    detail.setAttribute('data-workbench-error-detail', 'true');
+    detail.setAttribute('data-heritage-error-detail', 'true');
     state.appendChild(detail);
     if (token) {
       var retry = element('button', 'wb-content-state__retry', messages.retry);
       retry.type = 'button';
-      retry.setAttribute('data-workbench-retry', token);
-      retry.setAttribute('data-workbench-retry-owner', '94');
+      retry.setAttribute('data-heritage-retry', token);
+      retry.setAttribute('data-heritage-retry-owner', '94');
       retry.addEventListener('click', function(event) {
         event.preventDefault();
         event.stopPropagation();
@@ -5088,7 +5081,7 @@
       node.classList.remove('active');
       node.removeAttribute('aria-current');
     });
-    host.querySelectorAll('[data-workbench-module], [data-capp]').forEach(function(link) {
+    host.querySelectorAll('[data-heritage-module], [data-capp]').forEach(function(link) {
       var active = moduleAttribute(link) === String(moduleName);
       link.classList.toggle('active', active);
       if (active) link.setAttribute('aria-current', 'page');
@@ -5231,7 +5224,7 @@
     var trigger = event.target.closest('.wb-content-state__retry');
     if (!trigger) return;
     event.preventDefault();
-    var token = trigger.getAttribute('data-workbench-retry');
+    var token = trigger.getAttribute('data-heritage-retry');
     retryContentRequest(token);
   });
 
@@ -5260,7 +5253,6 @@
 
   legacy.workbenchContentStatesInstalled = true;
 })(window, document);
-;
 
 /* source: heritage-background.js */
 (function(window, document) {
@@ -5433,7 +5425,6 @@
 
   legacy.workbenchBackgroundInstalled = true;
 })(window, document);
-;
 
 /* source: heritage-icons.js */
 (function(window, document) {
@@ -5532,7 +5523,7 @@
       });
       if (!name) return;
       node.classList.add('wb-svg-icon');
-      node.setAttribute('data-workbench-icon', name);
+      node.setAttribute('data-heritage-icon', name);
       node.replaceChildren(svgIcon(name));
       accessibleName(node, name);
     });
@@ -5549,7 +5540,6 @@
   window.heritageIcons = { render: render, names: Object.keys(paths) };
   window.heritageIconsInstalled = true;
 })(window, document);
-;
 
 /* source: heritage-feedback.js */
 (function (window, document) {
@@ -5589,7 +5579,7 @@
     content = document.createElement('div');
     content.className = 'wb-feedback__content';
     Array.prototype.slice.call(alert.childNodes).forEach(function(node) {
-      if (node.nodeType === 1 && node.matches('.close, [data-workbench-dismiss], .wb-feedback__icon, .wb-feedback__action')) return;
+      if (node.nodeType === 1 && node.matches('.close, [data-heritage-dismiss], .wb-feedback__icon, .wb-feedback__action')) return;
       content.appendChild(node);
     });
     alert.appendChild(content);
@@ -5613,7 +5603,7 @@
     icon.setAttribute('aria-hidden', 'true');
     icon.appendChild(svgFromMarkup(icons[state]));
     alert.prepend(icon);
-    var dismiss = alert.querySelector(':scope > .close, :scope > [data-workbench-dismiss]');
+    var dismiss = alert.querySelector(':scope > .close, :scope > [data-heritage-dismiss]');
     if (dismiss) {
       if (dismiss.tagName === 'BUTTON' && !dismiss.getAttribute('type')) dismiss.setAttribute('type', 'button');
       if (!dismiss.getAttribute('aria-label') || /^(?:close|schlie(?:ß|ss)en)$/i.test(dismiss.getAttribute('aria-label'))) {
@@ -5626,8 +5616,8 @@
   function enhanceDialog(dialog) {
     dialog.classList.add('wb-dialog--enhanced');
     dialog.setAttribute('data-heritage-dialog', 'true');
-    var dangerAction = dialog.querySelector('.wb-dialog__action--danger, .btn-danger, [data-workbench-tab-confirm-action="discard"]');
-    var primaryAction = dialog.querySelector('.wb-dialog__action--primary, .btn-primary, [data-workbench-tab-confirm-action="save"]');
+    var dangerAction = dialog.querySelector('.wb-dialog__action--danger, .btn-danger, [data-heritage-tab-confirm-action="discard"]');
+    var primaryAction = dialog.querySelector('.wb-dialog__action--primary, .btn-primary, [data-heritage-tab-confirm-action="save"]');
     dialog.setAttribute('data-heritage-dialog-tone', dangerAction ? 'warning' : (primaryAction ? 'action' : 'neutral'));
     var body = dialog.querySelector('.wb-dialog__body');
     if (body && !dialog.getAttribute('aria-describedby')) {
@@ -5685,11 +5675,11 @@
       window.clearTimeout(controller.timer);
       controller.timer = null;
       controller.remaining = Math.max(500, controller.remaining - (Date.now() - controller.started));
-      alert.setAttribute('data-workbench-dismiss-paused', 'true');
+      alert.setAttribute('data-heritage-dismiss-paused', 'true');
     };
     controller.resume = function() {
       if (controller.timer || !alert.isConnected) return;
-      alert.removeAttribute('data-workbench-dismiss-paused');
+      alert.removeAttribute('data-heritage-dismiss-paused');
       controller.started = Date.now();
       controller.timer = window.setTimeout(function() { dismissGenerated(alert); }, controller.remaining);
     };
@@ -5741,14 +5731,14 @@
     }
 
     var toneName = ['success', 'danger', 'warning', 'info'].indexOf(state) > -1 ? state : 'info';
-    var duplicate = Array.prototype.find.call(stack.querySelectorAll('[data-workbench-generated-feedback]'), function(item) {
-      return item.getAttribute('data-workbench-feedback-message') === text &&
-        item.getAttribute('data-workbench-feedback-tone') === toneName;
+    var duplicate = Array.prototype.find.call(stack.querySelectorAll('[data-heritage-generated-feedback]'), function(item) {
+      return item.getAttribute('data-heritage-feedback-message') === text &&
+        item.getAttribute('data-heritage-feedback-tone') === toneName;
     });
     if (duplicate) {
       if (!duplicate.querySelector(':scope > .wb-feedback__action')) {
         var duplicateAction = actionControl(options);
-        var duplicateDismiss = duplicate.querySelector(':scope > [data-workbench-dismiss]');
+        var duplicateDismiss = duplicate.querySelector(':scope > [data-heritage-dismiss]');
         if (duplicateAction) duplicate.insertBefore(duplicateAction, duplicateDismiss || null);
       }
       stack.prepend(duplicate);
@@ -5757,16 +5747,16 @@
     }
     var alert = document.createElement('div');
     alert.className = 'alert alert-' + toneName;
-    alert.setAttribute('data-workbench-generated-feedback', 'true');
-    alert.setAttribute('data-workbench-feedback-message', text);
-    alert.setAttribute('data-workbench-feedback-tone', toneName);
+    alert.setAttribute('data-heritage-generated-feedback', 'true');
+    alert.setAttribute('data-heritage-feedback-message', text);
+    alert.setAttribute('data-heritage-feedback-tone', toneName);
     var content = document.createElement('p');
     content.textContent = text;
     var action = actionControl(options);
     var dismiss = document.createElement('button');
     dismiss.type = 'button';
     dismiss.className = 'close';
-    dismiss.setAttribute('data-workbench-dismiss', 'alert');
+    dismiss.setAttribute('data-heritage-dismiss', 'alert');
     dismiss.setAttribute('aria-label', localized('Schließen', 'Close'));
     dismiss.textContent = '×';
     alert.appendChild(content);
@@ -5776,7 +5766,7 @@
     enhanceAlert(alert);
     scheduleGeneratedDismiss(alert, toneName);
 
-    Array.prototype.slice.call(stack.querySelectorAll('[data-workbench-generated-feedback]')).slice(3).forEach(function(oldAlert) {
+    Array.prototype.slice.call(stack.querySelectorAll('[data-heritage-generated-feedback]')).slice(3).forEach(function(oldAlert) {
       dismissGenerated(oldAlert);
     });
     return alert;
@@ -5785,18 +5775,18 @@
   function connectivityFeedback(online) {
     var host = document.getElementById('pageContent');
     if (!host) return null;
-    var current = host.querySelector('[data-workbench-connectivity-feedback]');
+    var current = host.querySelector('[data-heritage-connectivity-feedback]');
     if (current) current.remove();
     if (online) {
       var restored = show(localized('Verbindung wiederhergestellt.', 'Connection restored.'), 'success');
-      if (restored) restored.setAttribute('data-workbench-connectivity-feedback', 'online');
+      if (restored) restored.setAttribute('data-heritage-connectivity-feedback', 'online');
       return restored;
     }
     var offline = show(
       localized('Keine Netzwerkverbindung. Lesevorgänge können nach dem Wiederherstellen der Verbindung erneut versucht werden.', 'No network connection. Read operations can be retried after the connection is restored.'),
       'warning'
     );
-    if (offline) offline.setAttribute('data-workbench-connectivity-feedback', 'offline');
+    if (offline) offline.setAttribute('data-heritage-connectivity-feedback', 'offline');
     return offline;
   }
 
@@ -5823,7 +5813,7 @@
     return Boolean(host && host.querySelector(
       '.wb-content-state--error, ' +
       '.wb-submit-feedback[data-state="failed"], ' +
-      '.alert-danger:not([data-workbench-generated-feedback])'
+      '.alert-danger:not([data-heritage-generated-feedback])'
     ));
   }
 
@@ -5863,7 +5853,6 @@
   window.heritageFeedback = { enhance: enhance, show: show, report: report, connectivity: connectivityFeedback };
   window.heritageFeedbackInstalled = true;
 }(window, document));
-;
 
 /* source: heritage-navigation.js */
 (function () {
@@ -5923,22 +5912,22 @@
   }
 
   function linkContentTarget(link) {
-    return link ? (link.getAttribute('data-workbench-load-content') || link.getAttribute('data-load-content') || link.getAttribute('href') || '') : '';
+    return link ? (link.getAttribute('data-heritage-load-content') || link.getAttribute('data-load-content') || link.getAttribute('href') || '') : '';
   }
 
   function setLinkContentTarget(link, target) {
     if (!link) return;
-    link.setAttribute('data-workbench-load-content', target);
+    link.setAttribute('data-heritage-load-content', target);
     link.removeAttribute('data-load-content');
   }
 
   function linkModule(link) {
-    return link ? (link.getAttribute('data-workbench-module') || link.getAttribute('data-capp') || '') : '';
+    return link ? (link.getAttribute('data-heritage-module') || link.getAttribute('data-capp') || '') : '';
   }
 
   function setLinkModule(link, module) {
     if (!link) return;
-    link.setAttribute('data-workbench-module', module);
+    link.setAttribute('data-heritage-module', module);
     link.removeAttribute('data-capp');
   }
 
@@ -6220,7 +6209,7 @@
   }
 
   function primaryNavigationSources() {
-    var live = Array.from(document.querySelectorAll('#main-navigation a[data-workbench-module], #main-navigation a[data-capp]')).filter(function (source) {
+    var live = Array.from(document.querySelectorAll('#main-navigation a[data-heritage-module], #main-navigation a[data-capp]')).filter(function (source) {
       return linkModule(source) !== 'vm';
     });
     if (live.length) {
@@ -6509,7 +6498,7 @@
       userCollapsedModule = '';
     }
 
-    document.querySelectorAll('#main-navigation a[data-workbench-module], #main-navigation a[data-capp]').forEach(function (link) {
+    document.querySelectorAll('#main-navigation a[data-heritage-module], #main-navigation a[data-capp]').forEach(function (link) {
       var active = activeModule && linkModule(link) === activeModule;
       link.classList.toggle('active', Boolean(active));
       if (active) link.setAttribute('aria-current', 'page');
@@ -6518,7 +6507,7 @@
       if (item) item.classList.toggle('active', Boolean(active));
     });
 
-    panel.querySelectorAll('.wb-mobile-navigation__module[data-workbench-module], .wb-mobile-navigation__module[data-capp]').forEach(function (link) {
+    panel.querySelectorAll('.wb-mobile-navigation__module[data-heritage-module], .wb-mobile-navigation__module[data-capp]').forEach(function (link) {
       var active = activeModule && linkModule(link) === activeModule;
       var submenu = link.closest('li') && link.closest('li').querySelector('.wb-mobile-navigation__secondary');
       link.classList.toggle('active', Boolean(active));
@@ -6705,7 +6694,7 @@
     panel.dataset.workbenchNavigationReady = 'true';
 
     if (isOpen() && pendingModule) {
-      var pendingLink = Array.from(panel.querySelectorAll('[data-workbench-module], [data-capp]')).find(function (link) {
+      var pendingLink = Array.from(panel.querySelectorAll('[data-heritage-module], [data-capp]')).find(function (link) {
         return linkModule(link) === pendingModule;
       });
       var submenuLink = pendingLink && pendingLink.closest('li').querySelector('.wb-mobile-navigation__secondary a');
@@ -6815,7 +6804,7 @@
       var api = runtime();
       syncActiveNavigationState(pendingModule + '/');
       render();
-      link = Array.from(panel.querySelectorAll('.wb-mobile-navigation__module[data-workbench-module], .wb-mobile-navigation__module[data-capp]')).find(function (candidate) {
+      link = Array.from(panel.querySelectorAll('.wb-mobile-navigation__module[data-heritage-module], .wb-mobile-navigation__module[data-capp]')).find(function (candidate) {
         return linkModule(candidate) === module;
       }) || link;
       submenu = link.closest('li') && link.closest('li').querySelector('.wb-mobile-navigation__secondary');
@@ -6858,7 +6847,7 @@
     if (event.key === 'Escape' && isOpen()) close(true);
   });
   document.addEventListener('click', function (event) {
-    var brandLink = event.target.closest('#logo a, .wb-app-navigation__brand-logo a, #main-navigation a[data-workbench-module="dashboard"], #main-navigation a[data-capp="dashboard"]');
+    var brandLink = event.target.closest('#logo a, .wb-app-navigation__brand-logo a, #main-navigation a[data-heritage-module="dashboard"], #main-navigation a[data-capp="dashboard"]');
     if (!brandLink) return;
     event.preventDefault();
     loadDashboardFromNavigation();
@@ -6906,7 +6895,6 @@
   };
   window.heritageNavigationInstalled = true;
 }());
-;
 
 /* source: heritage-dashboard-metrics.js */
 (function (window, document) {
@@ -7276,7 +7264,6 @@
     toggleDetails(button);
   });
 })(window, document);
-;
 
 /* source: heritage-dashboard-layout.js */
 (function () {
@@ -7566,7 +7553,7 @@
     if (node.dataset.wbModulesDecorated === 'true') return;
     Array.prototype.forEach.call(node.querySelectorAll('.modules > li'), function (launcher) {
       var title = launcher.querySelector('.title');
-      var action = launcher.querySelector('a.button[data-workbench-module], a.button[data-capp]');
+      var action = launcher.querySelector('a.button[data-heritage-module], a.button[data-capp]');
       launcher.classList.add('wb-module-launcher');
       if (title && !launcher.querySelector('.wb-module-launcher__meta')) {
         var meta = document.createElement('span');
@@ -7607,9 +7594,9 @@
       var title = titleNode ? titleNode.textContent.replace(/\s+/g, ' ').trim() : t('moduleWidget') + ' ' + (index + 1);
       var moduleLink = item.querySelector('[data-capp]');
       var moduleName = moduleLink ? moduleLink.getAttribute('data-capp') : '';
-      var navigationItems = Array.prototype.slice.call(document.querySelectorAll('#workbench-mobile-navigation [data-workbench-module], #main-navigation [data-workbench-module]'));
+      var navigationItems = Array.prototype.slice.call(document.querySelectorAll('#workbench-mobile-navigation [data-heritage-module], #main-navigation [data-heritage-module]'));
       var matchingNavigationItems = navigationItems.filter(function (candidate) {
-        return candidate.getAttribute('data-workbench-module') === moduleName;
+        return candidate.getAttribute('data-heritage-module') === moduleName;
       });
       var completeTitle = matchingNavigationItems.map(function (candidate) {
         var navigationTitle = candidate.querySelector('.title');
@@ -8479,7 +8466,6 @@
   else installDashboardEnhancer();
   window.heritageDashboardLayout = { enhance: enhance, storageKey: STORAGE_KEY };
 }());
-;
 
 /* source: heritage-dialog.js */
 (function () {
@@ -8507,7 +8493,7 @@
   function focus(dialog) {
     var target = resolveDialog(dialog) || openDialog;
     if (!isOpen(target)) return false;
-    var preferred = target.querySelector('[data-workbench-dialog-autofocus]:not([disabled]):not([hidden])');
+    var preferred = target.querySelector('[data-heritage-dialog-autofocus]:not([disabled]):not([hidden])');
     var elements = focusable(target);
     (preferred || elements[0] || target).focus();
     return target.contains(document.activeElement);
@@ -8519,7 +8505,7 @@
     if (openDialog && openDialog !== target) close(openDialog, false);
     if (target.parentElement !== document.body) {
       document.body.appendChild(target);
-      target.setAttribute('data-workbench-dialog-portaled', 'true');
+      target.setAttribute('data-heritage-dialog-portaled', 'true');
     }
     returnFocus = trigger && trigger.nodeType === 1 ? trigger : document.activeElement;
     openDialog = target;
@@ -8556,13 +8542,13 @@
   }
 
   document.addEventListener('click', function (event) {
-    var trigger = event.target.closest('[data-workbench-dialog]');
+    var trigger = event.target.closest('[data-heritage-dialog]');
     if (trigger) {
       event.preventDefault();
-      open(trigger.getAttribute('data-workbench-dialog'), trigger);
+      open(trigger.getAttribute('data-heritage-dialog'), trigger);
       return;
     }
-    var closeControl = event.target.closest('[data-workbench-dialog-close]');
+    var closeControl = event.target.closest('[data-heritage-dialog-close]');
     if (closeControl && closeControl.closest('.wb-dialog')) {
       event.preventDefault();
       close(closeControl.closest('.wb-dialog'), true);
@@ -8607,7 +8593,6 @@
   };
   window.heritageDialogInstalled = true;
 }());
-;
 
 /* source: heritage-disclosure.js */
 (function () {
@@ -8693,7 +8678,6 @@
   window.heritageDisclosure = { enhance: enhance };
   window.heritageDisclosureInstalled = true;
 }());
-;
 
 /* source: heritage-form-state.js */
 (function () {
@@ -8901,7 +8885,6 @@
   };
   window.heritageFormStateInstalled = true;
 }());
-;
 
 /* source: heritage-tabstrip.js */
 (function () {
@@ -9039,7 +9022,6 @@
   window.heritageTabstrip = { enhance: enhance, update: update, revealActive: revealActive };
   window.heritageTabstripInstalled = true;
 }());
-;
 
 /* source: heritage-tab-confirm.js */
 (function () {
@@ -9072,10 +9054,10 @@
 
   function configure(target, mode) {
     target.dataset.mode = mode;
-    target.querySelector('[data-workbench-tab-confirm-message]').textContent = mode === 'discard'
+    target.querySelector('[data-heritage-tab-confirm-message]').textContent = mode === 'discard'
       ? target.dataset.discardMessage
       : target.dataset.warningMessage;
-    target.querySelector('[data-workbench-tab-confirm-action="save"]').hidden = mode !== 'warning';
+    target.querySelector('[data-heritage-tab-confirm-action="save"]').hidden = mode !== 'warning';
   }
 
   function open(anchor, mode) {
@@ -9121,11 +9103,11 @@
   }, true);
 
   document.addEventListener('click', function (event) {
-    var action = event.target.closest('#workbenchTabChangeDialog [data-workbench-tab-confirm-action]');
+    var action = event.target.closest('#workbenchTabChangeDialog [data-heritage-tab-confirm-action]');
     if (!action) return;
     event.preventDefault();
     event.stopPropagation();
-    var value = action.getAttribute('data-workbench-tab-confirm-action');
+    var value = action.getAttribute('data-heritage-tab-confirm-action');
     if (value === 'cancel') cancel();
     else commit(value);
   });
@@ -9141,7 +9123,6 @@
   };
   window.heritageTabConfirmInstalled = true;
 }());
-;
 
 /* source: heritage-accessibility.js */
 (function () {
@@ -9248,7 +9229,7 @@
     if (!target || !target.isConnected || dialogIsOpen() || document.visibilityState === 'hidden') return false;
     var temporaryTabindex = !target.hasAttribute('tabindex');
     if (temporaryTabindex) target.setAttribute('tabindex', '-1');
-    target.setAttribute('data-workbench-page-focus', 'true');
+    target.setAttribute('data-heritage-page-focus', 'true');
     try { target.focus({ preventScroll: true }); }
     catch (error) { target.focus(); }
     if (typeof target.scrollIntoView === 'function') {
@@ -9256,7 +9237,7 @@
     }
     target.addEventListener('blur', function cleanup() {
       if (temporaryTabindex) target.removeAttribute('tabindex');
-      target.removeAttribute('data-workbench-page-focus');
+      target.removeAttribute('data-heritage-page-focus');
     }, { once: true });
     return document.activeElement === target;
   }
@@ -9353,7 +9334,6 @@
   };
   window.heritageAccessibilityInstalled = true;
 }());
-;
 
 /* source: heritage-validation.js */
 (function () {
@@ -9417,7 +9397,7 @@
     var body = group && group.querySelector(':scope > .wb-field-body');
     if (error && body && !body.contains(error)) {
       body.appendChild(error);
-      error.setAttribute('data-workbench-field-error-aligned', 'true');
+      error.setAttribute('data-heritage-field-error-aligned', 'true');
     }
     return error;
   }
@@ -9465,7 +9445,7 @@
     alert.setAttribute('role', 'alert');
     alert.setAttribute('tabindex', '-1');
     alert.setAttribute('aria-live', 'assertive');
-    alert.querySelectorAll('[data-workbench-validation-list]').forEach(function (node) { node.remove(); });
+    alert.querySelectorAll('[data-heritage-validation-list]').forEach(function (node) { node.remove(); });
 
     var title = alert.querySelector('.alert-label strong, .alert-label, h1, h2, h3, h4');
     if (!title) {
@@ -9520,7 +9500,6 @@
   window.heritageValidation = { enhance: enhance, revealAndFocus: revealAndFocus };
   window.heritageValidationInstalled = true;
 }());
-;
 
 /* source: heritage-submit-feedback.js */
 (function () {
@@ -9602,7 +9581,7 @@
     if (!root || !root.isConnected) root = host();
     if (!root) return null;
     var feedback = ensureFeedback(root);
-    feedback.removeAttribute('data-workbench-delayed');
+    feedback.removeAttribute('data-heritage-delayed');
     feedback.dataset.state = state;
     feedback.setAttribute('role', state === 'failed' ? 'alert' : 'status');
     feedback.querySelector('.wb-submit-feedback__label').textContent = label;
@@ -9631,7 +9610,7 @@
         'Das Speichern dauert etwas l\u00e4nger. Die Anfrage wird weiterhin verarbeitet.',
         'Saving is taking a little longer. The request is still being processed.'
       ));
-      if (feedback) feedback.setAttribute('data-workbench-delayed', 'true');
+      if (feedback) feedback.setAttribute('data-heritage-delayed', 'true');
     }, 7000);
     return true;
   }
@@ -9731,7 +9710,6 @@
   };
   window.heritageSubmitFeedbackInstalled = true;
 }());
-;
 
 /* source: heritage-list-filter.js */
 (function(window, document) {
@@ -9794,7 +9772,6 @@
   window.heritageListFilter = { isActive: function() { return Boolean(active); } };
   legacy.workbenchListFilterInstalled = true;
 })(window, document);
-;
 
 /* source: heritage-statistics.js */
 (function (window, document) {
@@ -9855,8 +9832,8 @@
   function recordRows(table) {
     return Array.prototype.filter.call(table.querySelectorAll('tbody > tr'), function (row) {
       if (row.classList.contains('tbl_row_noresults')) return false;
-      if (row.hasAttribute('data-workbench-summary-row')) return false;
-      if (row.querySelector('[data-workbench-summary-cell]')) return false;
+      if (row.hasAttribute('data-heritage-summary-row')) return false;
+      if (row.querySelector('[data-heritage-summary-cell]')) return false;
       return row.querySelectorAll('td').length > 1;
     });
   }
@@ -9901,7 +9878,7 @@
       link.href = '#';
       link.className = 'wb-statistics-navigation__item';
       link.textContent = label;
-      link.setAttribute('data-workbench-load-content', report.path);
+      link.setAttribute('data-heritage-load-content', report.path);
       link.setAttribute('aria-label', t('open', { name: label }));
       if (report.key === active.key) {
         link.classList.add('is-active');
@@ -9971,11 +9948,11 @@
     enhance(event.detail && event.detail.page);
   });
   document.addEventListener('click', function (event) {
-    var launcher = event.target && event.target.closest ? event.target.closest('.wb-statistics-launcher[data-workbench-load-content], .wb-statistics-launcher[data-load-content]') : null;
+    var launcher = event.target && event.target.closest ? event.target.closest('.wb-statistics-launcher[data-heritage-load-content], .wb-statistics-launcher[data-load-content]') : null;
     var current = app();
     if (!launcher || !current || typeof current.capp !== 'function') return;
     event.preventDefault();
-    var path = launcher.getAttribute('data-workbench-load-content') || launcher.getAttribute('data-load-content');
+    var path = launcher.getAttribute('data-heritage-load-content') || launcher.getAttribute('data-load-content');
     launcher.setAttribute('aria-busy', 'true');
     current.workbenchActiveModule = 'sites';
     var request = current.capp('sites', path);
@@ -9990,7 +9967,6 @@
   window.heritageStatistics = { enhance: enhance, reports: reports.slice() };
   runtime.workbenchStatisticsInstalled = true;
 })(window, document);
-;
 
 /* source: heritage-wizard-preview.js */
 (function(window, document) {
@@ -10032,7 +10008,6 @@
   window.heritageWizardPreview = { isActive: function() { return Boolean(active); } };
   legacy.workbenchWizardPreviewInstalled = true;
 })(window, document);
-;
 
 /* source: heritage-advanced-controls.js */
 (function () {
@@ -10193,7 +10168,6 @@
   });
   window.WorkbenchAdvancedControls = { decorate: decorate };
 })();
-;
 
 /* source: heritage-upload-feedback.js */
 (function (window, document) {
@@ -10250,7 +10224,7 @@
     var root = document.getElementById('pageContent');
     if (!root) return;
     var feedback = ensureFeedback(root);
-    feedback.removeAttribute('data-workbench-delayed');
+    feedback.removeAttribute('data-heritage-delayed');
     feedback.dataset.state = state;
     feedback.setAttribute('role', state === 'failed' ? 'alert' : 'status');
     feedback.querySelector('.wb-submit-feedback__label').textContent = label;
@@ -10324,7 +10298,7 @@
         ? 'Der Upload dauert etwas l\u00e4nger. Die Datei wird weiterhin verarbeitet.'
         : 'The upload is taking a little longer. The file is still being processed.');
       var feedback = document.querySelector('#pageContent > .wb-upload-feedback');
-      if (feedback) feedback.setAttribute('data-workbench-delayed', 'true');
+      if (feedback) feedback.setAttribute('data-heritage-delayed', 'true');
     }, 7000);
 
     var request;
@@ -10353,7 +10327,6 @@
   };
   legacy.workbenchUploadFeedbackInstalled = true;
 })(window, document);
-;
 
 /* source: heritage-branding.js */
 (function (window, document) {
@@ -10576,7 +10549,6 @@
   else init();
   document.addEventListener('workbench:navigation-complete', init);
 })(window, document);
-;
 
 /* source: heritage-global-search.js */
 (function (window, document) {
@@ -10657,7 +10629,7 @@
       clear = document.createElement('button');
       clear.type = 'button';
       clear.className = 'wb-search-clear';
-      clear.setAttribute('aria-label', document.body.getAttribute('data-workbench-search-clear') || tr('Suche leeren', 'Clear search'));
+      clear.setAttribute('aria-label', document.body.getAttribute('data-heritage-search-clear') || tr('Suche leeren', 'Clear search'));
       clear.textContent = '\u00d7';
       input.parentNode.appendChild(clear);
     }
@@ -11107,7 +11079,6 @@
   window.heritageGlobalSearch = { init: init };
   window.heritageGlobalSearchInstalled = true;
 }(window, document));
-;
 
 /* source: heritage-theme.js */
 (function () {
@@ -11328,7 +11299,6 @@
   window.heritageChartTheme = { apply: applyChartTheme };
   window.heritageApplyAccentContrast = applyAccessibleAction;
 }());
-;
 
 /* source: heritage-select.js */
 (function () {
@@ -11745,4 +11715,3 @@
   window.heritageSelect = { enhance: enhance, destroy: destroy, open: open, close: close };
   window.heritageSelectInstalled = true;
 }());
-;

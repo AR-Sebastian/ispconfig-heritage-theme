@@ -43,13 +43,13 @@
             </div>
 			<div class="wb-field-group">
                 <label >{tmpl_var name='content_filter_txt'}</label>
-                <div class="wb-field-body"><select name="content_filter" id="content_filter" class="form-control" data-workbench-visibility-rules=".rspamd=rspamd">
+                <div class="wb-field-body"><select name="content_filter" id="content_filter" class="form-control" data-heritage-visibility-rules=".rspamd=rspamd">
                         {tmpl_var name='content_filter'}
                     </select></div>
             </div>
 			<div class="wb-field-group rspamd">
                 <label for="rspamd_dmarc_enforcement" >{tmpl_var name='rspamd_dmarc_enforcement_txt'}</label>
-                <div class="wb-field-body" data-workbench-tooltip="true" title="{tmpl_var name='tooltip_rspamd_dmarc_enforcement_txt'}"><select name="rspamd_dmarc_enforcement" id="rspamd_dmarc_enforcement" class="form-control">
+                <div class="wb-field-body" data-heritage-tooltip="true" title="{tmpl_var name='tooltip_rspamd_dmarc_enforcement_txt'}"><select name="rspamd_dmarc_enforcement" id="rspamd_dmarc_enforcement" class="form-control">
                         {tmpl_var name='rspamd_dmarc_enforcement'}
                     </select></div>
             </div>
@@ -65,26 +65,26 @@
             </div>
 			<div class="wb-field-group rspamd">
                 <label for="rspamd_password" >{tmpl_var name='rspamd_password_txt'}</label>
-                <div class="wb-field-body"><input type="text" name="rspamd_password" id="rspamd_password" value="{tmpl_var name='rspamd_password'}" class="form-control" data-workbench-default-password="8" /></div>
+                <div class="wb-field-body"><input type="text" name="rspamd_password" id="rspamd_password" value="{tmpl_var name='rspamd_password'}" class="form-control" data-heritage-default-password="8" /></div>
 			</div>
 			<div class="wb-field-group rspamd">
                 <label for="rspamd_redis_servers" >{tmpl_var name='rspamd_redis_servers_txt'}</label>
-                <div class="wb-field-body" data-workbench-tooltip="true" title="{tmpl_var name='tooltip_rspamd_redis_servers_txt'}">
+                <div class="wb-field-body" data-heritage-tooltip="true" title="{tmpl_var name='tooltip_rspamd_redis_servers_txt'}">
 			<input type="text" name="rspamd_redis_servers" id="rspamd_redis_servers" value="{tmpl_var name='rspamd_redis_servers'}" class="form-control" /></div>
 			</div>
 			<div class="wb-field-group rspamd">
                 <label for="rspamd_redis_password" >{tmpl_var name='rspamd_redis_password_txt'}</label>
-                <div class="wb-field-body" data-workbench-tooltip="true" title="{tmpl_var name='tooltip_rspamd_redis_password_txt'}">
+                <div class="wb-field-body" data-heritage-tooltip="true" title="{tmpl_var name='tooltip_rspamd_redis_password_txt'}">
 			<input type="text" name="rspamd_redis_password" id="rspamd_redis_password" value="{tmpl_var name='rspamd_redis_password'}" class="form-control" /></div>
 			</div>
 			<div class="wb-field-group rspamd">
                 <label for="rspamd_redis_bayes_servers" >{tmpl_var name='rspamd_redis_bayes_servers_txt'}</label>
-                <div class="wb-field-body" data-workbench-tooltip="true" title="{tmpl_var name='tooltip_rspamd_redis_bayes_servers_txt'}">
+                <div class="wb-field-body" data-heritage-tooltip="true" title="{tmpl_var name='tooltip_rspamd_redis_bayes_servers_txt'}">
 			<input type="text" name="rspamd_redis_bayes_servers" id="rspamd_redis_bayes_servers" value="{tmpl_var name='rspamd_redis_bayes_servers'}" class="form-control" /></div>
 			</div>
 			<div class="wb-field-group rspamd">
                 <label for="rspamd_redis_bayes_password" >{tmpl_var name='rspamd_redis_bayes_password_txt'}</label>
-                <div class="wb-field-body" data-workbench-tooltip="true" title="{tmpl_var name='tooltip_rspamd_redis_bayes_password_txt'}">
+                <div class="wb-field-body" data-heritage-tooltip="true" title="{tmpl_var name='tooltip_rspamd_redis_bayes_password_txt'}">
 			<input type="text" name="rspamd_redis_bayes_password" id="rspamd_redis_bayes_password" value="{tmpl_var name='rspamd_redis_bayes_password'}" class="form-control" /></div>
 			</div>
             <div class="wb-field-group">
@@ -134,7 +134,7 @@
             </div></div>
             <div class="wb-field-group">
                 <label >{tmpl_var name='reject_unknown_txt'}</label>
-                <div class="wb-field-body"><a data-workbench-tooltip="true" title="{tmpl_var name='tooltip_reject_unknown_txt'}">
+                <div class="wb-field-body"><a data-heritage-tooltip="true" title="{tmpl_var name='tooltip_reject_unknown_txt'}">
                     <select name="reject_unknown" id="reject_unknown" class="form-control">
                         {tmpl_var name='reject_unknown'}
                     </select></a>
@@ -143,7 +143,7 @@
             <div class="wb-field-group">
                 <label >{tmpl_var name='stress_adaptive_txt'}</label>
                 <div class="wb-field-body">
-                    <a data-workbench-tooltip="true" title="{tmpl_var name='tooltip_stress_adaptive_txt'}">{tmpl_var name="stress_adaptive"}</a>
+                    <a data-heritage-tooltip="true" title="{tmpl_var name='tooltip_stress_adaptive_txt'}">{tmpl_var name="stress_adaptive"}</a>
                 </div>
             </div>
             <div class="wb-field-group">
@@ -199,5 +199,5 @@
 
         <div class="wb-form-actions"><div class="wb-form-actions__primary">
             <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="admin/server_config_edit.php">{tmpl_var name='btn_save_txt'}</button>
-            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="admin/server_config_list.php" data-load-content="admin/server_config_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-heritage-load-content="admin/server_config_list.php" data-load-content="admin/server_config_list.php">{tmpl_var name='btn_cancel_txt'}</button>
         </div></div>

@@ -94,7 +94,7 @@
       });
       if (!name) return;
       node.classList.add('wb-svg-icon');
-      node.setAttribute('data-workbench-icon', name);
+      node.setAttribute('data-heritage-icon', name);
       node.replaceChildren(svgIcon(name));
       accessibleName(node, name);
     });

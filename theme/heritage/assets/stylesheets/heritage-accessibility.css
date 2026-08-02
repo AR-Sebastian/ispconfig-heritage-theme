@@ -64,8 +64,8 @@ body.wb-login-page.heritage-shell :is(a, button, input, select, textarea, [role=
 /* Page changes move focus to the new heading so assistive technology announces
  * it. The heading is not interactive, therefore it must not inherit the
  * prominent control ring used by links, fields and buttons. */
-body.heritage-shell.wb-app-navigation-enabled #pageContent:is([data-workbench-page-focus='true'], h1[data-workbench-page-focus='true']):focus-visible,
-body.heritage-shell.wb-app-navigation-enabled #pageContent h1[data-workbench-page-focus='true']:focus-visible {
+body.heritage-shell.wb-app-navigation-enabled #pageContent:is([data-heritage-page-focus='true'], h1[data-heritage-page-focus='true']):focus-visible,
+body.heritage-shell.wb-app-navigation-enabled #pageContent h1[data-heritage-page-focus='true']:focus-visible {
   outline: 0;
   box-shadow: none !important;
 }

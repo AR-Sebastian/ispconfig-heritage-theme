@@ -37,7 +37,7 @@
                     <tmpl_if name="show_update">
                         <span class="wb-field-addon"><tmpl_var name="repo_version_txt"></span>
                         <input type="text" name="repo_version" id="repo_version" value="{tmpl_var name='repo_version'}" disabled />
-                        <button class="formbutton-success" type="button" data-workbench-load-content="admin/extension_edit.php?name={tmpl_var name='name'}&action=update&server_id={tmpl_var name='server_id'}" data-load-content="admin/extension_edit.php?name={tmpl_var name='name'}&action=update&server_id={tmpl_var name='server_id'}"><tmpl_var name="update_extension_txt"></button>
+                        <button class="formbutton-success" type="button" data-heritage-load-content="admin/extension_edit.php?name={tmpl_var name='name'}&action=update&server_id={tmpl_var name='server_id'}" data-load-content="admin/extension_edit.php?name={tmpl_var name='name'}&action=update&server_id={tmpl_var name='server_id'}"><tmpl_var name="update_extension_txt"></button>
                     </tmpl_if>
                 </div>
             </div>
@@ -67,7 +67,7 @@
         <input type="hidden" name="action" value="edit" />
         <div class="wb-form-actions">
             <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="admin/extension_edit.php"><tmpl_var name="btn_save_txt"></button>
-            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="admin/extension_install_list.php" data-load-content="admin/extension_install_list.php"><tmpl_var name="btn_cancel_txt"></button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-heritage-load-content="admin/extension_install_list.php" data-load-content="admin/extension_install_list.php"><tmpl_var name="btn_cancel_txt"></button>
         </div>
     </section>
 </section>

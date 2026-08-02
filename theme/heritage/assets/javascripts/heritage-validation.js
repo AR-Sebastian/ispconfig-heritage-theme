@@ -59,7 +59,7 @@
     var body = group && group.querySelector(':scope > .wb-field-body');
     if (error && body && !body.contains(error)) {
       body.appendChild(error);
-      error.setAttribute('data-workbench-field-error-aligned', 'true');
+      error.setAttribute('data-heritage-field-error-aligned', 'true');
     }
     return error;
   }
@@ -107,7 +107,7 @@
     alert.setAttribute('role', 'alert');
     alert.setAttribute('tabindex', '-1');
     alert.setAttribute('aria-live', 'assertive');
-    alert.querySelectorAll('[data-workbench-validation-list]').forEach(function (node) { node.remove(); });
+    alert.querySelectorAll('[data-heritage-validation-list]').forEach(function (node) { node.remove(); });
 
     var title = alert.querySelector('.alert-label strong, .alert-label, h1, h2, h3, h4');
     if (!title) {

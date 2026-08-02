@@ -22,7 +22,7 @@
 
   function triggersFor(target) {
     if (!target || !target.id) return [];
-    return Array.from(document.querySelectorAll('[data-workbench-collapse]')).filter(function (trigger) {
+    return Array.from(document.querySelectorAll('[data-heritage-collapse]')).filter(function (trigger) {
       return selectorFor(trigger) === '#' + target.id;
     });
   }
@@ -177,14 +177,14 @@
   function synchronize(root) {
     var host = root && root.querySelectorAll ? root : document;
     host.querySelectorAll('[data-dismiss="alert"], [data-bs-dismiss="alert"]').forEach(function (trigger) {
-      trigger.setAttribute('data-workbench-dismiss', 'alert');
+      trigger.setAttribute('data-heritage-dismiss', 'alert');
       trigger.removeAttribute('data-dismiss');
       trigger.removeAttribute('data-bs-dismiss');
     });
     host.querySelectorAll('.wb-row-action[title]').forEach(function(element) {
-      element.setAttribute('data-workbench-tooltip', 'true');
+      element.setAttribute('data-heritage-tooltip', 'true');
     });
-    host.querySelectorAll('[data-workbench-tooltip]').forEach(function (element) {
+    host.querySelectorAll('[data-heritage-tooltip]').forEach(function (element) {
       initializeTooltip(element);
     });
     host.querySelectorAll('.collapse, .wb-collapse').forEach(function (target) {
@@ -196,13 +196,13 @@
   }
 
   document.addEventListener('click', function (event) {
-    var alertControl = event.target.closest('[data-workbench-dismiss="alert"]');
+    var alertControl = event.target.closest('[data-heritage-dismiss="alert"]');
     if (alertControl) {
       event.preventDefault();
       dismissAlert(alertControl);
       return;
     }
-    var collapseControl = event.target.closest('[data-workbench-collapse]');
+    var collapseControl = event.target.closest('[data-heritage-collapse]');
     if (collapseControl) {
       event.preventDefault();
       toggleCollapse(collapseControl);
@@ -210,22 +210,22 @@
   });
 
   document.addEventListener('pointerover', function(event) {
-    var control = event.target.closest('[data-workbench-native-tooltip="true"]');
+    var control = event.target.closest('[data-heritage-native-tooltip="true"]');
     if (control) showTooltip(control);
   });
 
   document.addEventListener('pointerout', function(event) {
-    var control = event.target.closest('[data-workbench-native-tooltip="true"]');
+    var control = event.target.closest('[data-heritage-native-tooltip="true"]');
     if (control && !control.contains(event.relatedTarget) && !control.contains(document.activeElement)) hideTooltip(control);
   });
 
   document.addEventListener('focusin', function(event) {
-    var control = event.target.closest('[data-workbench-native-tooltip="true"]');
+    var control = event.target.closest('[data-heritage-native-tooltip="true"]');
     if (control) showTooltip(control);
   });
 
   document.addEventListener('focusout', function(event) {
-    var control = event.target.closest('[data-workbench-native-tooltip="true"]');
+    var control = event.target.closest('[data-heritage-native-tooltip="true"]');
     if (control && !control.contains(event.relatedTarget)) hideTooltip(control);
   });
 

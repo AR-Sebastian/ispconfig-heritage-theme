@@ -26,7 +26,7 @@
   <link rel='stylesheet' href='themes/heritage/assets/stylesheets/heritage-app.bundle.css?ver=1.0.34' />
 </head>
 
-<body class='wb-app-navigation-enabled' data-workbench-filter-reset="{tmpl_var name='workbench_filter_reset_txt'}" data-workbench-filter-reset-active="{tmpl_var name='workbench_filter_reset_active_txt'}" data-workbench-search-clear="{tmpl_var name='workbench_search_clear_txt'}" data-workbench-filter-toggle="{tmpl_var name='workbench_filter_toggle_txt'}" data-workbench-filter-show="{tmpl_var name='workbench_filter_show_txt'}" data-workbench-filter-hide="{tmpl_var name='workbench_filter_hide_txt'}" data-workbench-pagination="{tmpl_var name='workbench_pagination_txt'}" data-workbench-pagination-page="{tmpl_var name='workbench_pagination_page_txt'}" data-workbench-pagination-summary="{tmpl_var name='workbench_pagination_summary_txt'}" data-workbench-list-visible-results="{tmpl_var name='workbench_list_visible_results_txt'}" data-workbench-table-actions="{tmpl_var name='workbench_table_actions_txt'}" data-workbench-tab-change-discard="<tmpl_var name='tabchange_discard_enabled'>" data-workbench-tab-change-warning="<tmpl_var name='tabchange_warning_enabled'>" data-workbench-tab-change-warning-text="<tmpl_var name='global_tabchange_warning_txt'>" data-workbench-tab-change-discard-text="<tmpl_var name='global_tabchange_discard_txt'>" data-workbench-use-load-indicator="<tmpl_if name='use_loadindicator' value='y'>true<tmpl_else>false</tmpl_if>" data-workbench-use-combobox="<tmpl_if name='use_combobox' value='y'>true<tmpl_else>false</tmpl_if>">
+<body class='wb-app-navigation-enabled' data-heritage-filter-reset="{tmpl_var name='workbench_filter_reset_txt'}" data-heritage-filter-reset-active="{tmpl_var name='workbench_filter_reset_active_txt'}" data-heritage-search-clear="{tmpl_var name='workbench_search_clear_txt'}" data-heritage-filter-toggle="{tmpl_var name='workbench_filter_toggle_txt'}" data-heritage-filter-show="{tmpl_var name='workbench_filter_show_txt'}" data-heritage-filter-hide="{tmpl_var name='workbench_filter_hide_txt'}" data-heritage-pagination="{tmpl_var name='workbench_pagination_txt'}" data-heritage-pagination-page="{tmpl_var name='workbench_pagination_page_txt'}" data-heritage-pagination-summary="{tmpl_var name='workbench_pagination_summary_txt'}" data-heritage-list-visible-results="{tmpl_var name='workbench_list_visible_results_txt'}" data-heritage-table-actions="{tmpl_var name='workbench_table_actions_txt'}" data-heritage-tab-change-discard="<tmpl_var name='tabchange_discard_enabled'>" data-heritage-tab-change-warning="<tmpl_var name='tabchange_warning_enabled'>" data-heritage-tab-change-warning-text="<tmpl_var name='global_tabchange_warning_txt'>" data-heritage-tab-change-discard-text="<tmpl_var name='global_tabchange_discard_txt'>" data-heritage-use-load-indicator="<tmpl_if name='use_loadindicator' value='y'>true<tmpl_else>false</tmpl_if>" data-heritage-use-combobox="<tmpl_if name='use_combobox' value='y'>true<tmpl_else>false</tmpl_if>">
   <a class='wb-skip-link' href='#pageContent'><tmpl_var name='workbench_skip_main_txt'></a>
   <div id='workbench-mobile-navigation' class='wb-mobile-navigation' role='dialog' aria-modal='true' aria-label='{tmpl_var name="workbench_open_navigation_txt"}' aria-hidden='true'>
     <div class='wb-mobile-navigation__header'>
@@ -37,7 +37,7 @@
     <div class='wb-app-navigation__footer'>
       <span class='wb-app-navigation__status' aria-hidden='true'></span>
       <span class='wb-app-navigation__user'><strong><tmpl_var name='cpuser'></strong><small>ISPConfig Heritage</small></span>
-      <button type='button' class='wb-app-navigation__logout' data-workbench-load-content='login/logout.php' aria-label='{tmpl_var name="logout_txt"} {tmpl_var name="cpuser"}' title='{tmpl_var name="logout_txt"}'><svg viewBox='0 0 24 24' aria-hidden='true' focusable='false'><path d='M14 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9M10 12h11m-5-5 5 5-5 5'/></svg></button>
+      <button type='button' class='wb-app-navigation__logout' data-heritage-load-content='login/logout.php' aria-label='{tmpl_var name="logout_txt"} {tmpl_var name="cpuser"}' title='{tmpl_var name="logout_txt"}'><svg viewBox='0 0 24 24' aria-hidden='true' focusable='false'><path d='M14 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9M10 12h11m-5-5 5 5-5 5'/></svg></button>
     </div>
   </div>
   <button type='button' class='wb-navigation-overlay' aria-label='{tmpl_var name="datalog_changes_close_txt"}' aria-hidden='true' tabindex='-1'></button>
@@ -71,17 +71,17 @@
           </div>
 		  <div class='wb-header-actions'>
 					<button type='button' class='wb-theme-toggle' aria-label='Zum dunklen Design wechseln' data-wb-i18n-aria-label-de='Zum dunklen Design wechseln' data-wb-i18n-aria-label-en='Switch to dark theme'><svg viewBox='0 0 24 24' aria-hidden='true' focusable='false'><path d='M20.7 15.3A8.5 8.5 0 0 1 8.7 3.3 8.5 8.5 0 1 0 20.7 15.3Z' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
-					<button type="button" class="notification" data-workbench-dialog="datalogModal" aria-haspopup="dialog" aria-controls="datalogModal" aria-expanded="false" style="display: none;">
+					<button type="button" class="notification" data-heritage-dialog="datalogModal" aria-haspopup="dialog" aria-controls="datalogModal" aria-expanded="false" style="display: none;">
 	            <span class="notification_text">{tmpl_var name="datalog_changes_count"}</span>
             </button>
 		  </div>
 			<!-- Native read-only HERITAGE datalog dialog. -->
 			<div id="datalogModal" class="wb-dialog" role="dialog" aria-modal="true" aria-labelledby="datalogModalTitle" aria-hidden="true" tabindex="-1" hidden>
-			  <button type="button" class="wb-dialog__backdrop" data-workbench-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}" tabindex="-1"></button>
+			  <button type="button" class="wb-dialog__backdrop" data-heritage-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}" tabindex="-1"></button>
 			  <div class="wb-dialog__surface" role="document">
 			      <div class="wb-dialog__header">
 			        <h2 class="wb-dialog__title" id="datalogModalTitle">{tmpl_var name="datalog_changes_txt"}</h2>
-			        <button type="button" class="wb-dialog__close" data-workbench-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}">&times;</button>
+			        <button type="button" class="wb-dialog__close" data-heritage-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}">&times;</button>
 			      </div>
 			      <div class="wb-dialog__body">
 			        <ul>
@@ -92,23 +92,23 @@
 			        <p class="wb-dialog__supporting-text">{tmpl_var name="datalog_changes_end_txt"}</p>
 			      </div>
 			      <div class="wb-dialog__footer">
-			        <button type="button" class="wb-dialog__action wb-dialog__action--secondary" data-workbench-dialog-close data-workbench-dialog-autofocus>{tmpl_var name="datalog_changes_close_txt"}</button>
+			        <button type="button" class="wb-dialog__action wb-dialog__action--secondary" data-heritage-dialog-close data-heritage-dialog-autofocus>{tmpl_var name="datalog_changes_close_txt"}</button>
 			      </div>
 			  </div>
 			</div>
 			<!-- END native datalog dialog -->
 			<div id="workbenchTabChangeDialog" class="wb-dialog wb-tab-change-dialog" role="dialog" aria-modal="true" aria-labelledby="workbenchTabChangeDialogTitle" aria-describedby="workbenchTabChangeDialogMessage" aria-hidden="true" tabindex="-1" hidden data-warning-message="{tmpl_var name='workbench_tab_warning_message_txt'}" data-discard-message="{tmpl_var name='workbench_tab_discard_message_txt'}">
-			  <button type="button" class="wb-dialog__backdrop" data-workbench-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}" tabindex="-1"></button>
+			  <button type="button" class="wb-dialog__backdrop" data-heritage-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}" tabindex="-1"></button>
 			  <div class="wb-dialog__surface" role="document">
 			    <div class="wb-dialog__header">
 			      <h2 class="wb-dialog__title" id="workbenchTabChangeDialogTitle">{tmpl_var name='workbench_tab_change_title_txt'}</h2>
-			      <button type="button" class="wb-dialog__close" data-workbench-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}">&times;</button>
+			      <button type="button" class="wb-dialog__close" data-heritage-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}">&times;</button>
 			    </div>
-			    <div class="wb-dialog__body"><p id="workbenchTabChangeDialogMessage" data-workbench-tab-confirm-message></p></div>
+			    <div class="wb-dialog__body"><p id="workbenchTabChangeDialogMessage" data-heritage-tab-confirm-message></p></div>
 			    <div class="wb-dialog__footer">
-			      <button type="button" class="wb-dialog__action wb-dialog__action--secondary" data-workbench-tab-confirm-action="cancel" data-workbench-dialog-autofocus>{tmpl_var name='workbench_tab_keep_editing_txt'}</button>
-			      <button type="button" class="wb-dialog__action wb-dialog__action--danger" data-workbench-tab-confirm-action="discard">{tmpl_var name='workbench_tab_discard_continue_txt'}</button>
-			      <button type="button" class="wb-dialog__action wb-dialog__action--primary" data-workbench-tab-confirm-action="save">{tmpl_var name='workbench_tab_save_continue_txt'}</button>
+			      <button type="button" class="wb-dialog__action wb-dialog__action--secondary" data-heritage-tab-confirm-action="cancel" data-heritage-dialog-autofocus>{tmpl_var name='workbench_tab_keep_editing_txt'}</button>
+			      <button type="button" class="wb-dialog__action wb-dialog__action--danger" data-heritage-tab-confirm-action="discard">{tmpl_var name='workbench_tab_discard_continue_txt'}</button>
+			      <button type="button" class="wb-dialog__action wb-dialog__action--primary" data-heritage-tab-confirm-action="save">{tmpl_var name='workbench_tab_save_continue_txt'}</button>
 			    </div>
 			  </div>
 			</div>

@@ -2306,7 +2306,7 @@ body.wb-app-navigation-enabled .wb-branding-manager__footer {
 }
 
 body.wb-app-navigation-enabled .wb-branding-manager__reset,
-body.wb-app-navigation-enabled .wb-branding-manager [data-workbench-logo-reset] {
+body.wb-app-navigation-enabled .wb-branding-manager [data-heritage-logo-reset] {
   color: var(--wb-text);
   border-color: color-mix(in srgb, var(--wb-status-warning) 22%, var(--wb-border));
   background: color-mix(in srgb, var(--wb-status-warning) 8%, var(--wb-surface));
@@ -3578,36 +3578,36 @@ html[data-wb-theme='dark'] body.wb-form-page.wb-form-profile--embedded-tables #p
  * slower than they are. Technical editors and upload/branding surfaces retain
  * their dedicated sizing rules.
  */
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] {
   --wb-form-final-control-height: 2.75rem;
   --wb-form-final-label-width: clamp(10rem, 18cqi, 14rem);
   --wb-form-final-row-gap: clamp(0.72rem, 1.25cqi, 1rem);
   --wb-form-content-width: 78rem;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .content-tab-wrapper > .nav-tabs {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .nav-tabs {
   min-block-size: 3.55rem;
   padding: 0.5rem;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .content-tab-wrapper > .nav-tabs > li > a {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .nav-tabs > li > a {
   min-block-size: 2.4rem;
   padding-block: 0.55rem;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .content-tab-wrapper > .tab-content {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .tab-content {
   padding: clamp(0.85rem, 1.55vw, 1.35rem);
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group {
   padding-block: clamp(0.68rem, 1.1cqi, 0.9rem);
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group > :where(.control-label, label) {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group > :where(.control-label, label) {
   padding-block-start: 0.62rem;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .help-block,
   .help-inline,
   .form-text,
@@ -3620,7 +3620,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   line-height: 1.48;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group:has(
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group:has(
   > .wb-field-body > :is(input[type='checkbox'], input[type='radio'], .checkbox, .radio)
 ) {
   padding-block: 0.58rem;
@@ -3632,30 +3632,30 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
  * state, focus and actions remain obvious without turning every field into a
  * badge, card or accent surface.
  */
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] {
   --wb-form-final-control-height: 2.7rem;
   --wb-form-final-row-gap: clamp(0.75rem, 1.6cqi, 1.35rem);
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group {
   padding: clamp(0.68rem, 1.25cqi, 0.92rem) 0.3rem;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group::before {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group::before {
   inline-size: 2px;
   opacity: 0;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group:focus-within {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group:focus-within {
   border-radius: 0.75rem;
   background: color-mix(in srgb, var(--wb-action) 3%, var(--wb-surface)) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group:focus-within::before {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group:focus-within::before {
   opacity: 0.55;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group--required > :where(
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group--required > :where(
   .control-label,
   label,
   .wb-field-label
@@ -3673,7 +3673,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   text-transform: none;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .wb-field-control.form-control,
   input.wb-field-control:not([type='checkbox']):not([type='radio']),
   select.wb-field-control,
@@ -3685,18 +3685,18 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   border-radius: 0.78rem !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .wb-field-control.form-control,
   input.wb-field-control:not([type='checkbox']):not([type='radio']),
   select.wb-field-control,
   textarea.wb-field-control,
   .wb-select__control
 ):is(:hover, :focus, :focus-visible),
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-select.is-open .wb-select__control {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-select.is-open .wb-select__control {
   box-shadow: 0 0 0 0.13rem color-mix(in srgb, var(--wb-action) 11%, transparent) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .wb-field-group--secret,
   .wb-field-group--file,
   .wb-field-group--enhanced-select,
@@ -3705,7 +3705,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   background: transparent !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group--choice :where(
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group--choice :where(
   label,
   .checkbox,
   .radio
@@ -3713,20 +3713,20 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   border-radius: 0.72rem !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-form-actions {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-form-actions {
   padding: 0.55rem;
   border-radius: 0.9rem !important;
   background: color-mix(in srgb, var(--wb-surface) 94%, transparent) !important;
   box-shadow: 0 0.75rem 2rem color-mix(in srgb, #020617 9%, transparent) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-form-action-control {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-form-action-control {
   min-block-size: 2.7rem !important;
   border-radius: 0.72rem !important;
 }
 
 body.wb-form-page:is(.wb-form-profile--system-config, .wb-form-profile--server-config, .wb-form-profile--limits)
-  #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group {
+  #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group {
   padding-inline: clamp(0.65rem, 1.2cqi, 1rem);
   border-color: color-mix(in srgb, var(--wb-border) 54%, transparent) !important;
   border-radius: 0.78rem;
@@ -3734,7 +3734,7 @@ body.wb-form-page:is(.wb-form-profile--system-config, .wb-form-profile--server-c
 }
 
 @container wb-form (max-width: 760px) {
-  body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group {
+  body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group {
     padding-block: 0.72rem;
   }
 }
@@ -4455,13 +4455,13 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form :where(
 }
 
 /* premium form finalization contract */
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'],
-body.wb-form-page [data-workbench-form-finalized='true'] {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'],
+body.wb-form-page [data-heritage-form-finalized='true'] {
   color-scheme: light;
 }
 
-html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'],
-html[data-wb-theme='dark'] body.wb-form-page [data-workbench-form-finalized='true'] {
+html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'],
+html[data-wb-theme='dark'] body.wb-form-page [data-heritage-form-finalized='true'] {
   color-scheme: dark;
 }
 
@@ -4625,51 +4625,51 @@ html[data-wb-theme='light'] body.wb-form-page #pageForm.wb-modern-form :where(.w
  * forms, extension panels and billing/product forms. It remains presentation
  * only; field names, submit buttons and server routes stay untouched.
  */
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] {
   --wb-form-row-gap: clamp(0.85rem, 1.4cqi, 1.15rem);
   --wb-form-section-gap: clamp(1rem, 2cqi, 1.65rem);
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-form-section {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-form-section {
   min-inline-size: 0;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group:not(.wb-field-group--empty) {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group:not(.wb-field-group--empty) {
   margin-block: 0;
   padding-block: var(--wb-form-row-gap);
   border-bottom: 1px solid color-mix(in srgb, var(--wb-border) 58%, transparent);
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group:last-child {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group:last-child {
   border-bottom-color: transparent;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-label,
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(label, .control-label) {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-label,
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(label, .control-label) {
   align-self: start;
   padding-block-start: 0.72rem;
   letter-spacing: -0.012em;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-body {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-body {
   display: grid;
   align-content: start;
   gap: 0.55rem;
   min-inline-size: 0;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-body--compound,
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-body--select {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-body--compound,
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-body--select {
   gap: 0.45rem;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.wb-owned-enhanced-select) {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.wb-owned-enhanced-select) {
   inline-size: 100% !important;
   max-inline-size: 100%;
   min-inline-size: 0;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.wb-owned-enhanced-select__control) {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.wb-owned-enhanced-select__control) {
   min-block-size: var(--wb-form-field-min, 2.95rem) !important;
   border-radius: 0.95rem !important;
   color: var(--wb-text) !important;
@@ -4678,50 +4678,50 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   box-shadow: none !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.wb-owned-enhanced-select__panel, .wb-owned-enhanced-select__results, .wb-owned-enhanced-select__panel, .wb-owned-enhanced-select__results) {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.wb-owned-enhanced-select__panel, .wb-owned-enhanced-select__results, .wb-owned-enhanced-select__panel, .wb-owned-enhanced-select__results) {
   color: var(--wb-text) !important;
   border-color: color-mix(in srgb, var(--wb-border) 82%, transparent) !important;
   background: var(--wb-surface) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.wb-owned-enhanced-select__option--active, .wb-owned-enhanced-select .wb-owned-enhanced-select__option--active) {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.wb-owned-enhanced-select__option--active, .wb-owned-enhanced-select .wb-owned-enhanced-select__option--active) {
   color: var(--wb-action-contrast) !important;
   background: var(--wb-action) !important;
 }
 
-body.wb-form-page:is(.wb-form-profile--system-config, .wb-form-profile--server-config, .wb-form-profile--limits) #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .tab-content {
+body.wb-form-page:is(.wb-form-profile--system-config, .wb-form-profile--server-config, .wb-form-profile--limits) #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .tab-content {
   display: grid;
   gap: var(--wb-form-section-gap);
 }
 
-body.wb-form-page:is(.wb-form-profile--system-config, .wb-form-profile--server-config, .wb-form-profile--limits) #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .tab-pane.active {
+body.wb-form-page:is(.wb-form-profile--system-config, .wb-form-profile--server-config, .wb-form-profile--limits) #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .tab-pane.active {
   display: grid;
   gap: var(--wb-form-row-gap);
 }
 
-body.wb-form-page:is(.wb-form-profile--system-config, .wb-form-profile--server-config, .wb-form-profile--limits) #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .content-tab-wrapper > .nav-tabs {
+body.wb-form-page:is(.wb-form-profile--system-config, .wb-form-profile--server-config, .wb-form-profile--limits) #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .nav-tabs {
   margin-block-end: 0;
   border-end-start-radius: 0;
   border-end-end-radius: 0;
 }
 
-body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-branding-manager {
+body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-branding-manager {
   border-radius: 1.35rem;
 }
 
-body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-branding-manager__header,
-body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-branding-manager__footer {
+body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-branding-manager__header,
+body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-branding-manager__footer {
   background: color-mix(in srgb, var(--wb-surface-muted) 78%, var(--wb-surface));
 }
 
-body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-branding-manager__grid > label,
-body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-branding-manager__asset,
-body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-branding-manager__color {
+body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-branding-manager__grid > label,
+body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-branding-manager__asset,
+body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-branding-manager__color {
   border-radius: 1.15rem;
   background: color-mix(in srgb, var(--wb-surface) 88%, var(--wb-surface-muted));
 }
 
-body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.wb-branding-manager__logo-preview, .wb-branding-manager__favicon-preview) {
+body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.wb-branding-manager__logo-preview, .wb-branding-manager__favicon-preview) {
   border: 1px solid color-mix(in srgb, var(--wb-border) 72%, transparent);
   background:
     linear-gradient(45deg, color-mix(in srgb, var(--wb-surface-muted) 58%, transparent) 25%, transparent 25% 75%, color-mix(in srgb, var(--wb-surface-muted) 58%, transparent) 75%),
@@ -4729,21 +4729,21 @@ body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbe
   background-size: 1.1rem 1.1rem;
 }
 
-body.wb-form-page.wb-form-profile--billing #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.wb-billing-form, .wb-billing-settings-form) {
+body.wb-form-page.wb-form-profile--billing #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.wb-billing-form, .wb-billing-settings-form) {
   align-items: start;
 }
 
-body.wb-form-page.wb-form-profile--billing #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.wb-billing-panel, .wb-billing-settings-card, .panel, .well) {
+body.wb-form-page.wb-form-profile--billing #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.wb-billing-panel, .wb-billing-settings-card, .panel, .well) {
   border-color: color-mix(in srgb, var(--wb-action) 10%, var(--wb-border));
   background: color-mix(in srgb, var(--wb-surface) 90%, var(--wb-surface-muted));
 }
 
-body.wb-form-page.wb-form-profile--extension #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.panel, .well, .alert, .content-box) {
+body.wb-form-page.wb-form-profile--extension #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.panel, .well, .alert, .content-box) {
   color: var(--wb-text);
   background: color-mix(in srgb, var(--wb-surface) 88%, var(--wb-surface-muted)) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-form-actions {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-form-actions {
   position: sticky;
   inset-block-end: clamp(0.75rem, 2vw, 1.25rem);
   z-index: 8;
@@ -4755,26 +4755,26 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   backdrop-filter: blur(18px);
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-form-actions--has-danger {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-form-actions--has-danger {
   border-color: color-mix(in srgb, var(--wb-danger, #dc2626) 24%, var(--wb-border));
 }
 
-html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.wb-owned-enhanced-select__panel, .wb-owned-enhanced-select__results, .wb-owned-enhanced-select__panel, .wb-owned-enhanced-select__results) {
+html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.wb-owned-enhanced-select__panel, .wb-owned-enhanced-select__results, .wb-owned-enhanced-select__panel, .wb-owned-enhanced-select__results) {
   background: #111c2b !important;
 }
 
-html[data-wb-theme='light'] body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group:not(.wb-field-group--empty) {
+html[data-wb-theme='light'] body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group:not(.wb-field-group--empty) {
   border-bottom-color: color-mix(in srgb, var(--wb-border) 76%, transparent);
 }
 
 @media (max-width: 860px) {
-  body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-form-actions {
+  body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-form-actions {
     position: static;
     inline-size: 100%;
     max-inline-size: none;
   }
 
-  body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-form-actions > * {
+  body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-form-actions > * {
     flex: 1 1 100%;
   }
 }
@@ -4785,7 +4785,7 @@ html[data-wb-theme='light'] body.wb-form-page #pageForm.wb-modern-form[data-work
  * dropdowns, popovers, tooltips, datepickers, jQuery UI widgets and progress
  * strips must use Workbench surfaces in both themes.
  */
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .well,
   .panel,
   .panel-default,
@@ -4806,7 +4806,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   text-shadow: none !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .panel-heading,
   .content-box-header,
   legend,
@@ -4818,7 +4818,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
     linear-gradient(180deg, color-mix(in srgb, var(--wb-surface-muted) 84%, var(--wb-surface)), var(--wb-surface-muted)) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .formtable,
   table.formtable,
   table.table,
@@ -4832,7 +4832,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   background: var(--wb-surface) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .formtable th,
   .formtable td,
   table.table th,
@@ -4847,7 +4847,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   text-shadow: none !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .table-striped > tbody > tr:nth-child(odd) > td,
   .table-striped > tbody > tr:nth-child(odd) > th,
   .formtable tr:nth-child(odd) > td
@@ -4855,7 +4855,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   background: color-mix(in srgb, var(--wb-surface-muted) 58%, transparent) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .dropdown-menu,
   .wb-owned-enhanced-select__panel,
   .wb-owned-enhanced-select__panel,
@@ -4877,7 +4877,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   text-shadow: none !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .dropdown-menu > li > a,
   .dropdown-menu > li > button,
   .wb-owned-enhanced-select__option,
@@ -4895,7 +4895,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   text-shadow: none !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .dropdown-menu > li > a:hover,
   .dropdown-menu > li > a:focus,
   .dropdown-menu > li > button:hover,
@@ -4913,7 +4913,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   background: var(--wb-action) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .wb-owned-enhanced-select__search,
   .wb-owned-enhanced-select__search,
   .ui-widget input,
@@ -4927,7 +4927,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   box-shadow: none !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.progress, .progress-striped) {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.progress, .progress-striped) {
   overflow: hidden;
   min-block-size: 0.75rem;
   border: 1px solid color-mix(in srgb, var(--wb-border) 76%, transparent);
@@ -4936,12 +4936,12 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   box-shadow: none !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.progress-bar, .bar) {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.progress-bar, .bar) {
   background: linear-gradient(90deg, var(--wb-action), color-mix(in srgb, var(--wb-action) 72%, #fff 12%)) !important;
   box-shadow: none !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.badge, .label) {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.badge, .label) {
   color: var(--wb-text) !important;
   border: 1px solid color-mix(in srgb, var(--wb-border) 78%, transparent);
   border-radius: 999px;
@@ -4949,25 +4949,25 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   text-shadow: none !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.label-success, .badge-success) {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.label-success, .badge-success) {
   color: var(--wb-success-ink) !important;
   border-color: color-mix(in srgb, var(--wb-success) 34%, var(--wb-border));
   background: color-mix(in srgb, var(--wb-success) 12%, var(--wb-surface)) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.label-warning, .badge-warning) {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.label-warning, .badge-warning) {
   color: var(--wb-warning-ink) !important;
   border-color: color-mix(in srgb, var(--wb-warning) 38%, var(--wb-border));
   background: color-mix(in srgb, var(--wb-warning) 12%, var(--wb-surface)) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.label-danger, .badge-danger, .label-important, .badge-important) {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.label-danger, .badge-danger, .label-important, .badge-important) {
   color: var(--wb-danger-ink) !important;
   border-color: color-mix(in srgb, var(--wb-danger) 38%, var(--wb-border));
   background: color-mix(in srgb, var(--wb-danger) 12%, var(--wb-surface)) !important;
 }
 
-html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .dropdown-menu,
   .wb-owned-enhanced-select__panel,
   .wb-owned-enhanced-select__panel,
@@ -4982,7 +4982,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form[data-workb
   box-shadow: 0 1.2rem 3rem rgb(0 0 0 / 0.36) !important;
 }
 
-html[data-wb-theme='light'] body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+html[data-wb-theme='light'] body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .dropdown-menu,
   .wb-owned-enhanced-select__panel,
   .wb-owned-enhanced-select__panel,
@@ -5074,7 +5074,7 @@ body.wb-app-navigation-enabled .wb-jail-symbol svg {
  * final visual owner for form cards, tab strips, field rows, native controls,
  * compound controls, embedded legacy panels/tables and the sticky action dock.
  */
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] {
   --wb-form-final-radius: 1.35rem;
   --wb-form-final-control-height: 2.95rem;
   --wb-form-final-label-width: clamp(10.5rem, 20cqi, 15rem);
@@ -5082,7 +5082,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   color: var(--wb-text);
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .content-tab-wrapper {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper {
   overflow: clip;
   border-color: color-mix(in srgb, var(--wb-border) 84%, transparent) !important;
   border-radius: var(--wb-form-final-radius) !important;
@@ -5090,7 +5090,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   box-shadow: 0 1.6rem 4.25rem color-mix(in srgb, #020617 9%, transparent) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .content-tab-wrapper > .nav-tabs {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .nav-tabs {
   min-block-size: 4rem;
   padding: 0.65rem;
   gap: 0.5rem;
@@ -5099,7 +5099,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
     linear-gradient(180deg, color-mix(in srgb, var(--wb-surface-muted) 78%, var(--wb-surface)), var(--wb-surface-muted)) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .content-tab-wrapper > .nav-tabs > li > a {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .nav-tabs > li > a {
   min-block-size: 2.55rem;
   display: inline-flex;
   align-items: center;
@@ -5110,24 +5110,24 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   text-shadow: none !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .content-tab-wrapper > .nav-tabs > li.active > a {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .nav-tabs > li.active > a {
   color: var(--wb-action-quiet-text) !important;
   border-color: color-mix(in srgb, var(--wb-action) 32%, var(--wb-border)) !important;
   background: color-mix(in srgb, var(--wb-action) 9%, var(--wb-surface)) !important;
   box-shadow: inset 0 -0.18rem 0 var(--wb-action) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .content-tab-wrapper > .tab-content {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .tab-content {
   padding: clamp(1rem, 2vw, 1.7rem);
   color: var(--wb-text) !important;
   background: var(--wb-surface) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .content-tab-wrapper > .tab-content > .tab-pane {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .tab-content > .tab-pane {
   max-inline-size: min(100%, var(--wb-form-content-width, 72rem));
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group {
   grid-template-columns: var(--wb-form-final-label-width) minmax(0, 1fr);
   gap: var(--wb-form-final-row-gap);
   min-inline-size: 0;
@@ -5136,23 +5136,23 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   background: transparent !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group:focus-within {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group:focus-within {
   border-radius: 1rem;
   background: color-mix(in srgb, var(--wb-action) 5%, var(--wb-surface)) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group > :where(.control-label, label) {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group > :where(.control-label, label) {
   padding-block-start: 0.75rem;
   color: var(--wb-text) !important;
   text-shadow: none !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-body {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-body {
   min-inline-size: 0;
   max-inline-size: min(100%, var(--wb-form-control-width, 52rem));
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .wb-field-control.form-control,
   input.wb-field-control:not([type='checkbox']):not([type='radio']),
   select.wb-field-control,
@@ -5172,20 +5172,20 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   text-shadow: none !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .wb-field-control.form-control,
   input.wb-field-control:not([type='checkbox']):not([type='radio']),
   select.wb-field-control,
   textarea.wb-field-control,
   .wb-select__control
 ):is(:hover, :focus, :focus-visible),
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-select.is-open .wb-select__control {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-select.is-open .wb-select__control {
   border-color: color-mix(in srgb, var(--wb-action) 42%, var(--wb-border)) !important;
   box-shadow: 0 0 0 0.18rem color-mix(in srgb, var(--wb-action) 14%, transparent) !important;
   outline: none !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .wb-field-control[readonly],
   .wb-field-control:disabled,
   .wb-field-group--readonly .wb-field-control,
@@ -5196,7 +5196,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   opacity: 0.72;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.input-group, .wb-form-control-deck, .wb-color-control-deck) {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.input-group, .wb-form-control-deck, .wb-color-control-deck) {
   min-inline-size: 0;
   max-inline-size: 100%;
   display: flex;
@@ -5205,11 +5205,11 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   align-items: stretch;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.input-group > .wb-field-control, .wb-form-control-deck > .wb-field-control) {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.input-group > .wb-field-control, .wb-form-control-deck > .wb-field-control) {
   flex: 1 1 16rem;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.wb-upload-dropzone, .wb-code-input) {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.wb-upload-dropzone, .wb-code-input) {
   inline-size: 100%;
   max-inline-size: 100%;
   color: var(--wb-text) !important;
@@ -5217,12 +5217,12 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   background: color-mix(in srgb, var(--wb-surface-muted) 62%, var(--wb-surface)) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.wb-upload-dropzone):is(:hover, :focus-within) {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.wb-upload-dropzone):is(:hover, :focus-within) {
   border-color: color-mix(in srgb, var(--wb-action) 38%, var(--wb-border)) !important;
   background: color-mix(in srgb, var(--wb-action) 6%, var(--wb-surface)) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-form-actions {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-form-actions {
   max-inline-size: min(100%, 42rem);
   padding: 0.75rem;
   border: 1px solid color-mix(in srgb, var(--wb-border) 82%, transparent) !important;
@@ -5231,44 +5231,44 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   box-shadow: 0 1.1rem 2.75rem color-mix(in srgb, #020617 13%, transparent) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-form-action-control {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-form-action-control {
   min-block-size: 2.85rem !important;
   border-radius: 0.9rem !important;
   font-weight: 850 !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-form-action-control--primary {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-form-action-control--primary {
   color: var(--wb-action-contrast) !important;
   border-color: transparent !important;
   background: var(--wb-action) !important;
 }
 
-html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .content-tab-wrapper,
-html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .content-tab-wrapper > .tab-content,
-html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.wb-field-control, .wb-select__control, .wb-upload-dropzone, .wb-code-input) {
+html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper,
+html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .tab-content,
+html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.wb-field-control, .wb-select__control, .wb-upload-dropzone, .wb-code-input) {
   color: var(--wb-text) !important;
   background: color-mix(in srgb, var(--wb-surface) 92%, #020617) !important;
 }
 
-html[data-wb-theme='light'] body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .content-tab-wrapper,
-html[data-wb-theme='light'] body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .content-tab-wrapper > .tab-content {
+html[data-wb-theme='light'] body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper,
+html[data-wb-theme='light'] body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .tab-content {
   color: var(--wb-text) !important;
   background: #fff !important;
 }
 
 @container wb-form (max-width: 760px) {
-  body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group,
-  body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group--multi-body {
+  body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group,
+  body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group--multi-body {
     grid-template-columns: minmax(0, 1fr);
     gap: 0.55rem;
   }
 
-  body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group > :where(.control-label, label) {
+  body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group > :where(.control-label, label) {
     padding-block-start: 0;
   }
 
-  body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-body,
-  body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-form-actions {
+  body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-body,
+  body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-form-actions {
     inline-size: 100%;
     max-inline-size: 100%;
   }
@@ -5290,13 +5290,13 @@ body.wb-form-page:is(
   .wb-form-profile--technical-text,
   .wb-form-profile--uploads,
   .wb-form-profile--wide-content
-) #pageForm.wb-modern-form[data-workbench-form-finalized='true'] {
+) #pageForm.wb-modern-form[data-heritage-form-finalized='true'] {
   --wb-form-control-width: 64rem;
   --wb-form-content-width: 86rem;
 }
 
 body.wb-form-page:is(.wb-form-profile--system-config, .wb-form-profile--server-config, .wb-form-profile--deep-tabs)
-  #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .content-tab-wrapper > .nav-tabs {
+  #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .nav-tabs {
   position: sticky;
   top: var(--wb-shell-sticky-offset, 0);
   z-index: 5;
@@ -5305,20 +5305,20 @@ body.wb-form-page:is(.wb-form-profile--system-config, .wb-form-profile--server-c
 }
 
 body.wb-form-page:is(.wb-form-profile--system-config, .wb-form-profile--server-config, .wb-form-profile--limits)
-  #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .tab-pane.active {
+  #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .tab-pane.active {
   display: grid;
   gap: 0.85rem;
 }
 
 body.wb-form-page:is(.wb-form-profile--system-config, .wb-form-profile--server-config, .wb-form-profile--limits)
-  #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group {
+  #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group {
   padding-inline: clamp(0.75rem, 1.5cqi, 1.25rem);
   border: 1px solid color-mix(in srgb, var(--wb-border) 62%, transparent) !important;
   border-radius: 1.05rem;
   background: color-mix(in srgb, var(--wb-surface-muted) 38%, transparent) !important;
 }
 
-body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-branding-manager {
+body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-branding-manager {
   overflow: clip;
   border: 1px solid color-mix(in srgb, var(--wb-border) 76%, transparent);
   border-radius: 1.35rem;
@@ -5326,11 +5326,11 @@ body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbe
   box-shadow: 0 1.5rem 3.5rem color-mix(in srgb, #020617 11%, transparent);
 }
 
-body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-branding-manager__grid {
+body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-branding-manager__grid {
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
 }
 
-body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .wb-branding-manager__logo-preview,
   .wb-branding-manager__favicon-preview,
   .wb-branding-manager__grid > label
@@ -5339,7 +5339,7 @@ body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbe
   background: color-mix(in srgb, var(--wb-surface-muted) 56%, var(--wb-surface)) !important;
 }
 
-body.wb-form-page.wb-form-profile--billing #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page.wb-form-profile--billing #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .wb-billing-form,
   .wb-billing-settings-form,
   .wb-billing-panel,
@@ -5355,7 +5355,7 @@ body.wb-form-page.wb-form-profile--billing #pageForm.wb-modern-form[data-workben
 }
 
 body.wb-form-page:is(.wb-form-profile--technical-text, .wb-form-profile--certificate)
-  #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(textarea.wb-code-input, textarea.wb-field-control) {
+  #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(textarea.wb-code-input, textarea.wb-field-control) {
   min-block-size: clamp(11rem, 26vh, 24rem) !important;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace !important;
   font-size: 0.875rem !important;
@@ -5364,7 +5364,7 @@ body.wb-form-page:is(.wb-form-profile--technical-text, .wb-form-profile--certifi
   tab-size: 2;
 }
 
-body.wb-form-page.wb-form-profile--uploads #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-upload-dropzone {
+body.wb-form-page.wb-form-profile--uploads #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-upload-dropzone {
   display: grid;
   gap: 0.65rem;
   min-block-size: 5.5rem;
@@ -5372,11 +5372,11 @@ body.wb-form-page.wb-form-profile--uploads #pageForm.wb-modern-form[data-workben
   border-style: dashed !important;
 }
 
-body.wb-form-page.wb-form-profile--uploads #pageForm.wb-modern-form[data-workbench-form-finalized='true'] input[type='file'].wb-upload-dropzone__input {
+body.wb-form-page.wb-form-profile--uploads #pageForm.wb-modern-form[data-heritage-form-finalized='true'] input[type='file'].wb-upload-dropzone__input {
   inline-size: 100%;
 }
 
-body.wb-form-page.wb-form-profile--wide-content #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page.wb-form-profile--wide-content #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .wb-field-body,
   .wb-form-control-deck,
   .input-group,
@@ -5386,7 +5386,7 @@ body.wb-form-page.wb-form-profile--wide-content #pageForm.wb-modern-form[data-wo
   max-inline-size: 100%;
 }
 
-body.wb-form-page.wb-form-profile--wide-content #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .content-tab-wrapper > .tab-content {
+body.wb-form-page.wb-form-profile--wide-content #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .tab-content {
   overflow-x: auto;
 }
 
@@ -5396,18 +5396,18 @@ html[data-wb-theme='dark'] body.wb-form-page:is(
   .wb-form-profile--billing,
   .wb-form-profile--extension,
   .wb-form-profile--branding
-) #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.panel, .well, .content-box, .wb-branding-manager, .wb-billing-panel) {
+) #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.panel, .well, .content-box, .wb-branding-manager, .wb-billing-panel) {
   background: color-mix(in srgb, var(--wb-surface) 88%, #020617) !important;
   color: var(--wb-text) !important;
 }
 
 @container wb-form (max-width: 760px) {
   body.wb-form-page:is(.wb-form-profile--system-config, .wb-form-profile--server-config, .wb-form-profile--limits)
-    #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group {
+    #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group {
     padding-inline: 0.85rem;
   }
 
-  body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-branding-manager__grid {
+  body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-branding-manager__grid {
     grid-template-columns: minmax(0, 1fr);
   }
 }
@@ -5419,7 +5419,7 @@ html[data-wb-theme='dark'] body.wb-form-page:is(
  * colour stays restrained; warning, danger and success keep separate semantic
  * colours.
  */
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .help-block,
   .help-inline,
   .form-text,
@@ -5434,16 +5434,16 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   line-height: 1.55;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group--with-help {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group--with-help {
   align-items: start;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group--notice {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group--notice {
   border-radius: 1.05rem;
   background: color-mix(in srgb, var(--wb-info) 6%, var(--wb-surface)) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.alert, .box_error, .box_warning, .box_success) {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.alert, .box_error, .box_warning, .box_success) {
   position: relative;
   overflow: hidden;
   border-width: 1px !important;
@@ -5454,7 +5454,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   box-shadow: none !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.alert, .box_error, .box_warning, .box_success)::before {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.alert, .box_error, .box_warning, .box_success)::before {
   content: '';
   position: absolute;
   inset-block: 0;
@@ -5463,38 +5463,38 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   background: var(--wb-info);
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.alert-danger, .alert-error, .box_error) {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.alert-danger, .alert-error, .box_error) {
   border-color: color-mix(in srgb, var(--wb-danger) 40%, var(--wb-border)) !important;
   background: color-mix(in srgb, var(--wb-danger) 9%, var(--wb-surface)) !important;
   color: var(--wb-danger-ink) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.alert-danger, .alert-error, .box_error)::before {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.alert-danger, .alert-error, .box_error)::before {
   background: var(--wb-danger);
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.alert-warning, .box_warning) {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.alert-warning, .box_warning) {
   border-color: color-mix(in srgb, var(--wb-warning) 42%, var(--wb-border)) !important;
   background: color-mix(in srgb, var(--wb-warning) 11%, var(--wb-surface)) !important;
   color: var(--wb-warning-ink) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.alert-warning, .box_warning)::before {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.alert-warning, .box_warning)::before {
   background: var(--wb-warning);
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.alert-success, .box_success) {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.alert-success, .box_success) {
   border-color: color-mix(in srgb, var(--wb-success) 42%, var(--wb-border)) !important;
   background: color-mix(in srgb, var(--wb-success) 10%, var(--wb-surface)) !important;
   color: var(--wb-success-ink) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.alert-success, .box_success)::before {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.alert-success, .box_success)::before {
   background: var(--wb-success);
 }
 
 body.wb-form-page:is(.wb-form-profile--fieldsets, .wb-form-profile--legacy-panels)
-  #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(fieldset, .fieldset, .fieldset-container, .wb-form-fieldset, .panel, .well) {
+  #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(fieldset, .fieldset, .fieldset-container, .wb-form-fieldset, .panel, .well) {
   border: 1px solid color-mix(in srgb, var(--wb-border) 72%, transparent) !important;
   border-radius: 1.15rem !important;
   background: color-mix(in srgb, var(--wb-surface-muted) 42%, var(--wb-surface)) !important;
@@ -5502,7 +5502,7 @@ body.wb-form-page:is(.wb-form-profile--fieldsets, .wb-form-profile--legacy-panel
 }
 
 body.wb-form-page:is(.wb-form-profile--fieldsets, .wb-form-profile--legacy-panels)
-  #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(legend, .fieldset-legend, .wb-form-section-heading, .panel-heading) {
+  #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(legend, .fieldset-legend, .wb-form-section-heading, .panel-heading) {
   color: var(--wb-text) !important;
   font-size: 0.82rem;
   font-weight: 850;
@@ -5510,7 +5510,7 @@ body.wb-form-page:is(.wb-form-profile--fieldsets, .wb-form-profile--legacy-panel
   text-transform: uppercase;
 }
 
-body.wb-form-page.wb-form-profile--locked-values #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page.wb-form-profile--locked-values #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   [readonly],
   [disabled],
   .readonly,
@@ -5524,12 +5524,12 @@ body.wb-form-page.wb-form-profile--locked-values #pageForm.wb-modern-form[data-w
   color: var(--wb-text-muted) !important;
 }
 
-body.wb-form-page.wb-form-profile--system-mail #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group--mail-credential {
+body.wb-form-page.wb-form-profile--system-mail #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group--mail-credential {
   border-color: color-mix(in srgb, var(--wb-warning) 24%, var(--wb-border)) !important;
   background: linear-gradient(135deg, color-mix(in srgb, var(--wb-warning) 5%, var(--wb-surface)), var(--wb-surface)) !important;
 }
 
-body.wb-form-page.wb-form-profile--system-mail #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group--mail-credential .wb-field-body::after {
+body.wb-form-page.wb-form-profile--system-mail #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group--mail-credential .wb-field-body::after {
   content: 'Zugangsdaten nur in geschuetzten Test-/Admin-Kontexten bearbeiten.';
   display: block;
   max-inline-size: 52ch;
@@ -5539,16 +5539,16 @@ body.wb-form-page.wb-form-profile--system-mail #pageForm.wb-modern-form[data-wor
   line-height: 1.45;
 }
 
-body.wb-form-page.wb-form-profile--certificate #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group--certificate {
+body.wb-form-page.wb-form-profile--certificate #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group--certificate {
   border-color: color-mix(in srgb, var(--wb-info) 30%, var(--wb-border)) !important;
   background: color-mix(in srgb, var(--wb-info) 5%, var(--wb-surface)) !important;
 }
 
-body.wb-form-page.wb-form-profile--certificate #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group--certificate textarea {
+body.wb-form-page.wb-form-profile--certificate #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group--certificate textarea {
   min-block-size: clamp(14rem, 34vh, 28rem) !important;
 }
 
-html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .alert,
   .box_error,
   .box_warning,
@@ -5569,7 +5569,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form[data-workb
  * secret fields and technical textarea editors. It does not change submitted
  * data. It closes visual ownership, readability and responsive behaviour.
  */
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] {
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] {
   --wb-special-form-ring: color-mix(in srgb, var(--wb-text-muted) 13%, var(--wb-border));
   --wb-special-form-ring-focus: color-mix(in srgb, var(--wb-action) 34%, var(--wb-border));
   --wb-special-form-calm-accent: color-mix(in srgb, var(--wb-action) 28%, var(--wb-text-muted));
@@ -5584,7 +5584,7 @@ body.wb-form-page:is(
   .wb-form-profile--uploads,
   .wb-form-profile--technical-text,
   .wb-form-profile--certificate
-) #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+) #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .content-tab-wrapper,
   .tab-content,
   .tab-pane,
@@ -5607,7 +5607,7 @@ body.wb-form-page:is(
   color: var(--wb-text) !important;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   input,
   select,
   textarea,
@@ -5618,7 +5618,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   min-inline-size: 0;
 }
 
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   input,
   select,
   textarea,
@@ -5629,23 +5629,23 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   box-shadow: 0 0 0 0.22rem color-mix(in srgb, var(--wb-action) 12%, transparent) !important;
 }
 
-body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-branding-manager {
+body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-branding-manager {
   overflow: clip;
 }
 
-body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-branding-manager__grid {
+body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-branding-manager__grid {
   align-items: stretch;
 }
 
-body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-branding-manager__grid > label,
-body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(.wb-branding-manager__preview, .wb-branding-manager__upload, .wb-branding-manager__color) {
+body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-branding-manager__grid > label,
+body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(.wb-branding-manager__preview, .wb-branding-manager__upload, .wb-branding-manager__color) {
   border-color: var(--wb-special-form-ring) !important;
   background: color-mix(in srgb, var(--wb-surface-muted) 58%, var(--wb-surface)) !important;
   color: var(--wb-text) !important;
 }
 
-body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-branding-manager__logo-preview,
-body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-branding-manager__favicon-preview {
+body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-branding-manager__logo-preview,
+body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-branding-manager__favicon-preview {
   border-color: color-mix(in srgb, var(--wb-text-muted) 16%, var(--wb-border)) !important;
   background:
     linear-gradient(45deg, color-mix(in srgb, var(--wb-surface-muted) 72%, var(--wb-surface)) 25%, transparent 25%),
@@ -5657,14 +5657,14 @@ body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbe
   background-size: 16px 16px !important;
 }
 
-body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-branding-manager__reset,
-body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbench-form-finalized='true'] [data-workbench-logo-reset] {
+body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-branding-manager__reset,
+body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-heritage-form-finalized='true'] [data-heritage-logo-reset] {
   color: var(--wb-text) !important;
   border-color: color-mix(in srgb, var(--wb-text-muted) 18%, var(--wb-border)) !important;
   background: color-mix(in srgb, var(--wb-surface-muted) 76%, var(--wb-surface)) !important;
 }
 
-body.wb-form-page.wb-form-profile--billing #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page.wb-form-profile--billing #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .wb-billing-form,
   .wb-billing-settings-form
 ) {
@@ -5673,7 +5673,7 @@ body.wb-form-page.wb-form-profile--billing #pageForm.wb-modern-form[data-workben
   gap: 1rem;
 }
 
-body.wb-form-page.wb-form-profile--billing #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page.wb-form-profile--billing #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .wb-billing-settings-card,
   .wb-billing-panel
 ) {
@@ -5681,7 +5681,7 @@ body.wb-form-page.wb-form-profile--billing #pageForm.wb-modern-form[data-workben
   overflow: clip;
 }
 
-body.wb-form-page.wb-form-profile--extension #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+body.wb-form-page.wb-form-profile--extension #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .formbutton-success,
   .formbutton-default,
   .formbutton-danger,
@@ -5694,35 +5694,35 @@ body.wb-form-page.wb-form-profile--extension #pageForm.wb-modern-form[data-workb
 }
 
 body.wb-form-page:is(.wb-form-profile--technical-text, .wb-form-profile--certificate)
-  #pageForm.wb-modern-form[data-workbench-form-finalized='true'] textarea {
+  #pageForm.wb-modern-form[data-heritage-form-finalized='true'] textarea {
   white-space: pre;
   overflow: auto;
   scrollbar-gutter: stable;
 }
 
-body.wb-form-page.wb-form-profile--uploads #pageForm.wb-modern-form[data-workbench-form-finalized='true'] input[type='file'],
-body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbench-form-finalized='true'] input[type='file'] {
+body.wb-form-page.wb-form-profile--uploads #pageForm.wb-modern-form[data-heritage-form-finalized='true'] input[type='file'],
+body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-heritage-form-finalized='true'] input[type='file'] {
   border-style: dashed !important;
   background: color-mix(in srgb, var(--wb-surface-muted) 66%, var(--wb-surface)) !important;
 }
 
-body.wb-form-page.wb-form-profile--secrets #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(input[type='password'], .wb-field-group--secret) {
+body.wb-form-page.wb-form-profile--secrets #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(input[type='password'], .wb-field-group--secret) {
   border-color: color-mix(in srgb, var(--wb-warning) 22%, var(--wb-border)) !important;
   background: color-mix(in srgb, var(--wb-warning) 4%, var(--wb-surface)) !important;
 }
 
-body.wb-form-page.wb-form-profile--deep-tabs #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .content-tab-wrapper > .nav-tabs {
+body.wb-form-page.wb-form-profile--deep-tabs #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .nav-tabs {
   scrollbar-gutter: stable;
 }
 
-body.wb-form-page.wb-form-profile--deep-tabs #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .content-tab-wrapper > .nav-tabs > li > a {
+body.wb-form-page.wb-form-profile--deep-tabs #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .nav-tabs > li > a {
   max-inline-size: 18rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] {
+html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] {
   --wb-special-form-ring: color-mix(in srgb, var(--wb-text-muted) 20%, var(--wb-border));
 }
 
@@ -5735,7 +5735,7 @@ html[data-wb-theme='dark'] body.wb-form-page:is(
   .wb-form-profile--uploads,
   .wb-form-profile--technical-text,
   .wb-form-profile--certificate
-) #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+) #pageForm.wb-modern-form[data-heritage-form-finalized='true'] :where(
   .content-tab-wrapper,
   .tab-content,
   .tab-pane,
@@ -5757,7 +5757,7 @@ html[data-wb-theme='dark'] body.wb-form-page:is(
 
 /* validation guidance follows the control axis instead of wrapping
    inside the narrow label column. */
-body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group.has-error > :where(
+body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group.has-error > :where(
   .help-block,
   .help-inline,
   .error,
@@ -5775,7 +5775,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
 }
 
 @container wb-form (max-width: 680px) {
-  body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group.has-error > :where(
+  body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-field-group.has-error > :where(
     .help-block,
     .help-inline,
     .error,
@@ -5784,16 +5784,16 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
     grid-column: 1 / -1;
   }
 
-  body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-form-actions {
+  body.wb-form-page #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-form-actions {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
   }
 
-  body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-branding-manager__actions {
+  body.wb-form-page.wb-form-profile--branding #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .wb-branding-manager__actions {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  body.wb-form-page.wb-form-profile--deep-tabs #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .content-tab-wrapper > .nav-tabs > li > a {
+  body.wb-form-page.wb-form-profile--deep-tabs #pageForm.wb-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .nav-tabs > li > a {
     max-inline-size: 12rem;
   }
 }

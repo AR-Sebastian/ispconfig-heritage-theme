@@ -55,22 +55,22 @@
   }
 
   function linkContentTarget(link) {
-    return link ? (link.getAttribute('data-workbench-load-content') || link.getAttribute('data-load-content') || link.getAttribute('href') || '') : '';
+    return link ? (link.getAttribute('data-heritage-load-content') || link.getAttribute('data-load-content') || link.getAttribute('href') || '') : '';
   }
 
   function setLinkContentTarget(link, target) {
     if (!link) return;
-    link.setAttribute('data-workbench-load-content', target);
+    link.setAttribute('data-heritage-load-content', target);
     link.removeAttribute('data-load-content');
   }
 
   function linkModule(link) {
-    return link ? (link.getAttribute('data-workbench-module') || link.getAttribute('data-capp') || '') : '';
+    return link ? (link.getAttribute('data-heritage-module') || link.getAttribute('data-capp') || '') : '';
   }
 
   function setLinkModule(link, module) {
     if (!link) return;
-    link.setAttribute('data-workbench-module', module);
+    link.setAttribute('data-heritage-module', module);
     link.removeAttribute('data-capp');
   }
 
@@ -352,7 +352,7 @@
   }
 
   function primaryNavigationSources() {
-    var live = Array.from(document.querySelectorAll('#main-navigation a[data-workbench-module], #main-navigation a[data-capp]')).filter(function (source) {
+    var live = Array.from(document.querySelectorAll('#main-navigation a[data-heritage-module], #main-navigation a[data-capp]')).filter(function (source) {
       return linkModule(source) !== 'vm';
     });
     if (live.length) {
@@ -641,7 +641,7 @@
       userCollapsedModule = '';
     }
 
-    document.querySelectorAll('#main-navigation a[data-workbench-module], #main-navigation a[data-capp]').forEach(function (link) {
+    document.querySelectorAll('#main-navigation a[data-heritage-module], #main-navigation a[data-capp]').forEach(function (link) {
       var active = activeModule && linkModule(link) === activeModule;
       link.classList.toggle('active', Boolean(active));
       if (active) link.setAttribute('aria-current', 'page');
@@ -650,7 +650,7 @@
       if (item) item.classList.toggle('active', Boolean(active));
     });
 
-    panel.querySelectorAll('.wb-mobile-navigation__module[data-workbench-module], .wb-mobile-navigation__module[data-capp]').forEach(function (link) {
+    panel.querySelectorAll('.wb-mobile-navigation__module[data-heritage-module], .wb-mobile-navigation__module[data-capp]').forEach(function (link) {
       var active = activeModule && linkModule(link) === activeModule;
       var submenu = link.closest('li') && link.closest('li').querySelector('.wb-mobile-navigation__secondary');
       link.classList.toggle('active', Boolean(active));
@@ -837,7 +837,7 @@
     panel.dataset.workbenchNavigationReady = 'true';
 
     if (isOpen() && pendingModule) {
-      var pendingLink = Array.from(panel.querySelectorAll('[data-workbench-module], [data-capp]')).find(function (link) {
+      var pendingLink = Array.from(panel.querySelectorAll('[data-heritage-module], [data-capp]')).find(function (link) {
         return linkModule(link) === pendingModule;
       });
       var submenuLink = pendingLink && pendingLink.closest('li').querySelector('.wb-mobile-navigation__secondary a');
@@ -947,7 +947,7 @@
       var api = runtime();
       syncActiveNavigationState(pendingModule + '/');
       render();
-      link = Array.from(panel.querySelectorAll('.wb-mobile-navigation__module[data-workbench-module], .wb-mobile-navigation__module[data-capp]')).find(function (candidate) {
+      link = Array.from(panel.querySelectorAll('.wb-mobile-navigation__module[data-heritage-module], .wb-mobile-navigation__module[data-capp]')).find(function (candidate) {
         return linkModule(candidate) === module;
       }) || link;
       submenu = link.closest('li') && link.closest('li').querySelector('.wb-mobile-navigation__secondary');
@@ -990,7 +990,7 @@
     if (event.key === 'Escape' && isOpen()) close(true);
   });
   document.addEventListener('click', function (event) {
-    var brandLink = event.target.closest('#logo a, .wb-app-navigation__brand-logo a, #main-navigation a[data-workbench-module="dashboard"], #main-navigation a[data-capp="dashboard"]');
+    var brandLink = event.target.closest('#logo a, .wb-app-navigation__brand-logo a, #main-navigation a[data-heritage-module="dashboard"], #main-navigation a[data-capp="dashboard"]');
     if (!brandLink) return;
     event.preventDefault();
     loadDashboardFromNavigation();

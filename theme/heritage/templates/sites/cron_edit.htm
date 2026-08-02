@@ -59,9 +59,9 @@
                 <div class="wb-field-body">
 					<input type="text" name="command" id="command" value="{tmpl_var name='command'}" class="form-control" />
                     <b>{tmpl_var name='variables_txt'}:</b>
-                                       <a href="#" data-workbench-noop="true" data-workbench-tooltip="true" id="php_cli_binary" title="{tmpl_var name='php_cli_binary'}" class="addPlaceholder">{SITE_PHP}</a>,
-                                       <a href="#" data-workbench-noop="true" data-workbench-tooltip="true" id="docroot_client" title="{tmpl_var name='docroot_client'}" class="addPlaceholder">{DOCROOT_CLIENT}</a>,
-                                       <a href="#" data-workbench-noop="true" data-workbench-tooltip="true" id="domain" title="{tmpl_var name='domain'}" class="addPlaceholder">{DOMAIN}</a>
+                                       <a href="#" data-heritage-noop="true" data-heritage-tooltip="true" id="php_cli_binary" title="{tmpl_var name='php_cli_binary'}" class="addPlaceholder">{SITE_PHP}</a>,
+                                       <a href="#" data-heritage-noop="true" data-heritage-tooltip="true" id="docroot_client" title="{tmpl_var name='docroot_client'}" class="addPlaceholder">{DOCROOT_CLIENT}</a>,
+                                       <a href="#" data-heritage-noop="true" data-heritage-tooltip="true" id="domain" title="{tmpl_var name='domain'}" class="addPlaceholder">{DOMAIN}</a>
                                        <br><br><p class="formHint">{tmpl_var name='command_hint_txt'}</p>
 				</div>
             </div>
@@ -81,5 +81,5 @@
 
         <div class="wb-form-actions"><div class="wb-form-actions__primary">
             <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="sites/cron_edit.php">{tmpl_var name='btn_save_txt'}</button>
-            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="sites/cron_list.php" data-load-content="sites/cron_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-heritage-load-content="sites/cron_list.php" data-load-content="sites/cron_list.php">{tmpl_var name='btn_cancel_txt'}</button>
         </div></div>

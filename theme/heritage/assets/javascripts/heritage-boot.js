@@ -14,13 +14,13 @@
     if (!runtime || !document.body) return false;
 
     var body = document.body;
-    runtime.tabChangeDiscard = body.getAttribute('data-workbench-tab-change-discard') || '';
-    runtime.tabChangeWarning = body.getAttribute('data-workbench-tab-change-warning') || '';
-    runtime.tabChangeWarningTxt = body.getAttribute('data-workbench-tab-change-warning-text') || '';
-    runtime.tabChangeDiscardTxt = body.getAttribute('data-workbench-tab-change-discard-text') || '';
+    runtime.tabChangeDiscard = body.getAttribute('data-heritage-tab-change-discard') || '';
+    runtime.tabChangeWarning = body.getAttribute('data-heritage-tab-change-warning') || '';
+    runtime.tabChangeWarningTxt = body.getAttribute('data-heritage-tab-change-warning-text') || '';
+    runtime.tabChangeDiscardTxt = body.getAttribute('data-heritage-tab-change-discard-text') || '';
 
-    if (flag(body.getAttribute('data-workbench-use-load-indicator'))) runtime.setOption('useLoadIndicator', true);
-    if (flag(body.getAttribute('data-workbench-use-combobox'))) runtime.setOption('useComboBox', true);
+    if (flag(body.getAttribute('data-heritage-use-load-indicator'))) runtime.setOption('useLoadIndicator', true);
+    if (flag(body.getAttribute('data-heritage-use-combobox'))) runtime.setOption('useComboBox', true);
 
     return true;
   }

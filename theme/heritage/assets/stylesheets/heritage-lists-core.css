@@ -398,21 +398,21 @@ body.wb-list-page .wb-data-table > thead > tr:first-child > :is(th, td) {
   text-transform: uppercase;
 }
 
-body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] > :is(th, td) {
+body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] > :is(th, td) {
   padding: 10px 7px;
   border-bottom: 1px solid var(--wb-border);
   background: color-mix(in srgb, var(--wb-action) 2.5%, var(--wb-surface));
 }
 
-body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] > :first-child {
+body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] > :first-child {
   padding-left: 14px;
 }
 
-body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] > :last-child {
+body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] > :last-child {
   padding-right: 14px;
 }
 
-body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] :where(.form-control, input, select) {
+body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] :where(.form-control, input, select) {
   width: 100%;
   min-width: 0;
   max-width: 100%;
@@ -424,20 +424,20 @@ body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] :where(
   box-shadow: none;
 }
 
-body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] :where(.wb-select, .wb-select__control) {
+body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] :where(.wb-select, .wb-select__control) {
   width: 100%;
   min-width: 0;
   max-width: 100%;
 }
 
-body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] .wb-select__control {
+body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] .wb-select__control {
   min-height: 36px;
   color: var(--wb-text);
   border-color: var(--wb-border);
   background: var(--wb-surface);
 }
 
-body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] :where(.form-control, input, select):focus {
+body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] :where(.form-control, input, select):focus {
   border-color: var(--wb-action);
   outline: 0;
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--wb-action) 16%, transparent);
@@ -718,7 +718,7 @@ body.wb-list-page .wb-list-filter-status::before {
     white-space: nowrap;
   }
 
-  body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] {
+  body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr);
     gap: 8px;
@@ -729,11 +729,11 @@ body.wb-list-page .wb-list-filter-status::before {
     background: var(--wb-surface-muted);
   }
 
-  body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row][hidden] {
+  body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row][hidden] {
     display: none !important;
   }
 
-  body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] > :is(td, th) {
+  body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] > :is(td, th) {
     display: block !important;
     width: 100%;
     padding: 0;
@@ -934,13 +934,13 @@ body.wb-list-page .wb-data-table {
   min-inline-size: min(100%, max-content);
 }
 
-body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] :where(input, select, .form-control) {
+body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] :where(input, select, .form-control) {
   appearance: auto;
   max-inline-size: 100%;
   color-scheme: light;
 }
 
-html[data-wb-theme='dark'] body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] :where(input, select, .form-control) {
+html[data-wb-theme='dark'] body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] :where(input, select, .form-control) {
   color-scheme: dark;
   color: var(--wb-text);
   background-color: var(--wb-field-bg, var(--wb-surface));
@@ -958,8 +958,8 @@ body.wb-list-page .wb-list-command-bar__actions {
   flex-wrap: wrap;
 }
 
-html[data-wb-theme='dark'] body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] .wb-select__control,
-html[data-wb-theme='dark'] body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] :where(.form-control, input, select) {
+html[data-wb-theme='dark'] body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] .wb-select__control,
+html[data-wb-theme='dark'] body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] :where(.form-control, input, select) {
   color: var(--wb-text);
   border-color: var(--wb-border);
   background-color: var(--wb-field-bg, var(--wb-surface));
@@ -1052,20 +1052,20 @@ body.wb-list-page #pageContent > .table-wrapper:has(> .wb-data-table)::after {
   box-shadow: -16px 0 24px 8px color-mix(in srgb, var(--wb-bg) 70%, transparent);
 }
 
-body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] {
+body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] {
   position: relative;
   z-index: 4;
 }
 
-body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] :is(input, select, .form-control, .wb-select__control) {
+body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] :is(input, select, .form-control, .wb-select__control) {
   min-height: 38px;
   color: var(--wb-text) !important;
   border-color: var(--wb-border) !important;
   background-color: var(--wb-field-bg, var(--wb-surface)) !important;
 }
 
-body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] :is(input, select, .form-control, .wb-select__control):focus,
-body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] :is(input, select, .form-control, .wb-select__control):focus-visible {
+body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] :is(input, select, .form-control, .wb-select__control):focus,
+body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] :is(input, select, .form-control, .wb-select__control):focus-visible {
   border-color: var(--wb-action) !important;
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--wb-action) 16%, transparent) !important;
 }
@@ -1356,29 +1356,29 @@ body.wb-list-page #pageContent > .wb-list-command-bar {
   border-color: color-mix(in srgb, var(--wb-action) 9%, var(--wb-border));
 }
 
-body.wb-list-page #pageContent > .table-wrapper:has(.wb-data-table > thead > tr[data-workbench-filter-row]) {
+body.wb-list-page #pageContent > .table-wrapper:has(.wb-data-table > thead > tr[data-heritage-filter-row]) {
   border-top-left-radius: 18px;
   border-top-right-radius: 18px;
 }
 
-body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] {
+body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] {
   box-shadow: inset 0 1px 0 var(--wb-border), inset 0 -1px 0 var(--wb-border);
 }
 
-body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] > th,
-body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] > td {
+body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] > th,
+body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] > td {
   padding-top: 12px !important;
   padding-bottom: 12px !important;
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--wb-action) 3%, var(--wb-surface-muted)), var(--wb-surface-muted)) !important;
 }
 
-body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] :is(input, select, .form-control, .wb-select__control) {
+body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] :is(input, select, .form-control, .wb-select__control) {
   border-radius: 11px;
   box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 32%, transparent);
 }
 
-html[data-wb-theme='dark'] body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] :is(input, select, .form-control, .wb-select__control) {
+html[data-wb-theme='dark'] body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] :is(input, select, .form-control, .wb-select__control) {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, .04);
 }
 
@@ -1666,12 +1666,12 @@ body.wb-list-page .wb-data-table > thead > tr:first-child > :is(th, td) {
   z-index: 2;
 }
 
-body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] > :is(th, td) {
+body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] > :is(th, td) {
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--wb-action) 4%, var(--wb-surface-muted)), var(--wb-surface-muted)) !important;
 }
 
-body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] :is(input, select, .form-control, .wb-select__control),
+body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] :is(input, select, .form-control, .wb-select__control),
 body.wb-list-page .wb-page-size-select,
 body.wb-list-page .wb-list-page-size .wb-select__control {
   min-height: 40px;
@@ -1849,13 +1849,13 @@ body.wb-list-page .wb-list-footer__summary {
   max-width: 100%;
 }
 
-body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] :is(input, select, .form-control, .wb-select__control) {
+body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] :is(input, select, .form-control, .wb-select__control) {
   width: 100%;
   min-width: 0;
 }
 
-body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] :is(input, select, .form-control):focus,
-body.wb-list-page .wb-data-table > thead > tr[data-workbench-filter-row] .wb-select__control:focus-visible {
+body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] :is(input, select, .form-control):focus,
+body.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] .wb-select__control:focus-visible {
   border-color: color-mix(in srgb, var(--wb-action) 44%, var(--wb-border)) !important;
   box-shadow:
     0 0 0 3px color-mix(in srgb, var(--wb-action) 14%, transparent),
