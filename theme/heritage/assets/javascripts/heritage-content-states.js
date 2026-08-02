@@ -503,7 +503,7 @@
     var meta = document.createElement('div');
     var actions = document.createElement('div');
     var result = document.createElement('span');
-    var resultTemplate = document.body.dataset.workbenchListVisibleResults || localized('{count} Einträge auf dieser Seite', '{count} items on this page');
+    var resultTemplate = document.body.dataset.heritageListVisibleResults || localized('{count} Einträge auf dieser Seite', '{count} items on this page');
     var dataRows = Array.prototype.filter.call(tableWrapper.querySelectorAll('table > tbody > tr'), function(row) {
       return !row.classList.contains('tbl_row_noresults') && !row.hasAttribute('data-heritage-summary-row');
     });
@@ -664,8 +664,8 @@
       var dataRowCount = Array.prototype.filter.call(body.querySelectorAll(':scope > tr'), function(row) {
         return !row.classList.contains('tbl_row_noresults') && !row.hasAttribute('data-heritage-summary-row');
       }).length;
-      var paginationLabel = document.body.dataset.workbenchPagination || localized('Seitennavigation', 'Pagination');
-      var resultTemplate = document.body.dataset.workbenchListVisibleResults || localized('{count} Einträge auf dieser Seite', '{count} items on this page');
+      var paginationLabel = document.body.dataset.heritagePagination || localized('Seitennavigation', 'Pagination');
+      var resultTemplate = document.body.dataset.heritageListVisibleResults || localized('{count} Einträge auf dieser Seite', '{count} items on this page');
       var wrapper = table.closest('.table-wrapper') || table.parentElement;
       var footerBar = wrapper && wrapper.nextElementSibling && wrapper.nextElementSibling.classList.contains('wb-list-footer') ? wrapper.nextElementSibling : null;
       if (wrapper && wrapper.parentNode && !footerBar) {
@@ -679,7 +679,7 @@
       var paginationSlot = null;
       if (footerBar) {
         footerBar.classList.add('wb-table-footer');
-        footerBar.dataset.workbenchListFooter = 'true';
+        footerBar.dataset.heritageListFooter = 'true';
         footerBar.setAttribute('aria-label', paginationLabel);
         footerSummary = footerBar.querySelector(':scope > .wb-list-footer__summary');
         if (!footerSummary) {
@@ -774,7 +774,7 @@
           if (index === 0) cell.classList.add('wb-table-cell--identity');
           if (index === cells.length - 1 || cell.classList.contains('wb-table-align-end') || cell.classList.contains('text-right')) {
             cell.classList.add('wb-table-actions');
-            cell.setAttribute('data-wb-label', document.body.dataset.workbenchTableActions || localized('Aktionen', 'Actions'));
+            cell.setAttribute('data-wb-label', document.body.dataset.heritageTableActions || localized('Aktionen', 'Actions'));
           }
         });
 
@@ -864,8 +864,8 @@
       }
       var paging = table.querySelector('.pagination');
       if (paging) {
-        var pageLabel = document.body.dataset.workbenchPaginationPage || localized('Seite {page}', 'Page {page}');
-        var summaryTemplate = document.body.dataset.workbenchPaginationSummary || localized('Seite {current} von {total}', 'Page {current} of {total}');
+        var pageLabel = document.body.dataset.heritagePaginationPage || localized('Seite {page}', 'Page {page}');
+        var summaryTemplate = document.body.dataset.heritagePaginationSummary || localized('Seite {current} von {total}', 'Page {current} of {total}');
         var paginationNav = paging.closest('nav');
         var numberedLinks = Array.prototype.filter.call(paging.querySelectorAll('li > a, li > span'), function(control) {
           return /^\d+$/.test(control.textContent.trim());
@@ -896,7 +896,7 @@
         var pagingRow = paging.closest('tr');
         if (footerBar) {
           footerBar.classList.add('wb-table-footer');
-          footerBar.dataset.workbenchListFooter = 'true';
+          footerBar.dataset.heritageListFooter = 'true';
           footerBar.setAttribute('aria-label', paginationLabel);
           footerSummary.textContent = summaryTemplate.replace('{current}', currentPage).replace('{total}', totalPages);
           paginationSlot.hidden = false;
@@ -1019,7 +1019,7 @@
     Array.prototype.forEach.call(host.querySelectorAll('input[type="submit"], input[type="button"], button, a.btn, .btn'), function(control) {
       var label = (control.value || control.textContent || control.getAttribute('aria-label') || control.title || '').replace(/\s+/g, ' ').trim();
       if (label && !control.getAttribute('aria-label') && /^(?:\+|>|<|»|«|→|←)$/.test(label)) {
-        control.setAttribute('aria-label', document.body.dataset.workbenchGenericAction || localized('Aktion ausführen', 'Perform action'));
+        control.setAttribute('aria-label', document.body.dataset.heritageGenericAction || localized('Aktion ausführen', 'Perform action'));
       }
       if (/^(?:reset filters|filter zurücksetzen|filter zur\u00fccksetzen)$/i.test(label)) control.classList.add('wb-control--filter-reset');
       if (/^(?:show filters|filter anzeigen|filter einblenden)$/i.test(label)) control.classList.add('wb-control--filter-toggle');
@@ -1028,7 +1028,7 @@
     Array.prototype.forEach.call(host.querySelectorAll('.pagination, .pager'), function(pagination) {
       pagination.classList.add('wb-pagination');
       var nav = pagination.closest('nav');
-      if (nav && !nav.getAttribute('aria-label')) nav.setAttribute('aria-label', document.body.dataset.workbenchPagination || localized('Seitennavigation', 'Pagination'));
+      if (nav && !nav.getAttribute('aria-label')) nav.setAttribute('aria-label', document.body.dataset.heritagePagination || localized('Seitennavigation', 'Pagination'));
     });
   }
 
@@ -1163,7 +1163,7 @@
       if (!summary) {
         summary = document.createElement('div');
         summary.className = 'wb-form-section-summary';
-        summary.setAttribute('aria-label', document.body.dataset.workbenchFormSectionSummary || localized('Zusammenfassung des Formularabschnitts', 'Form section summary'));
+        summary.setAttribute('aria-label', document.body.dataset.heritageFormSectionSummary || localized('Zusammenfassung des Formularabschnitts', 'Form section summary'));
         var heading = section.querySelector(':scope > .wb-form-section-heading, :scope > legend, :scope > .fieldset-legend');
         if (heading && heading.parentNode === section) {
           if (heading.nextSibling) section.insertBefore(summary, heading.nextSibling);
@@ -1304,7 +1304,7 @@
       if (!actions.querySelector('.btn, button, input[type="button"], input[type="submit"]')) return;
       actions.classList.add('wb-form-actions');
       actions.setAttribute('role', 'group');
-      actions.setAttribute('aria-label', document.body.dataset.workbenchFormActions || localized('Formularaktionen', 'Form actions'));
+      actions.setAttribute('aria-label', document.body.dataset.heritageFormActions || localized('Formularaktionen', 'Form actions'));
       var hasDangerAction = false;
       Array.prototype.forEach.call(actions.querySelectorAll('.btn, button, input[type="button"], input[type="submit"], a.formbutton-success, a.formbutton-default, a.formbutton-danger'), function(action) {
         var tone = 'secondary';
@@ -1375,14 +1375,14 @@
       control.setAttribute('data-wb-action-tone', tone);
       control.classList.toggle('wb-action-control--icon', iconOnly);
       if (!control.getAttribute('aria-label') && !visibleText) {
-        control.setAttribute('aria-label', control.getAttribute('title') || document.body.dataset.workbenchTableActions || localized('Aktion', 'Action'));
+        control.setAttribute('aria-label', control.getAttribute('title') || document.body.dataset.heritageTableActions || localized('Aktion', 'Action'));
       }
     });
   }
 
   function finalizeFormControls(scope) {
     if (!scope) return;
-    scope.dataset.workbenchFormFinalized = 'true';
+    scope.dataset.heritageFormFinalized = 'true';
 
     Array.prototype.forEach.call(scope.querySelectorAll('.input-group, .input-append, .input-prepend'), function(deck) {
       deck.classList.add('wb-form-control-deck');
@@ -1559,8 +1559,8 @@
             }
           }
         });
-        if (accordion.dataset.workbenchAccordionState !== 'true') {
-          accordion.dataset.workbenchAccordionState = 'true';
+        if (accordion.dataset.heritageAccordionState !== 'true') {
+          accordion.dataset.heritageAccordionState = 'true';
           var synchronizeAccordionState = function(event) {
             var targetId = event.target && event.target.id;
             if (!targetId) return;

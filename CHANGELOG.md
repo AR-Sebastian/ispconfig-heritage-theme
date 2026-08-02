@@ -9,6 +9,7 @@
 - ZIP and TAR.GZ release artifacts are reproducible and traversal-checked.
 - Theme-owned DOM contracts use the HERITAGE namespace while ISPConfig compatibility attributes remain intact.
 - Theme-owned lifecycle and interaction events use the `heritage:*` namespace.
+- JavaScript-generated DOM state uses `data-heritage-*` consistently, including localized early-boot values.
 
 ## 1.0.33 – 2026-07-31
 

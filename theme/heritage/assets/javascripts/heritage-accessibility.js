@@ -133,8 +133,8 @@
       var title = dialog.querySelector('.modal-title, h1, h2, h3, h4');
       if (title) dialog.setAttribute('aria-labelledby', ensureId(title, 'wb-dialog-title'));
     }
-    if (dialog.dataset.workbenchFocusTrap !== 'true') {
-      dialog.dataset.workbenchFocusTrap = 'true';
+    if (dialog.dataset.heritageFocusTrap !== 'true') {
+      dialog.dataset.heritageFocusTrap = 'true';
       dialog.addEventListener('keydown', function (event) {
         if (event.key === 'Escape' && window.heritageDialog) {
           event.preventDefault();
@@ -160,8 +160,8 @@
         }
       });
     }
-    if (dialog.dataset.workbenchDialogEvents !== 'true') {
-      dialog.dataset.workbenchDialogEvents = 'true';
+    if (dialog.dataset.heritageDialogEvents !== 'true') {
+      dialog.dataset.heritageDialogEvents = 'true';
       dialog.addEventListener('heritage:dialog-open', function () { focusDialog(dialog); });
       dialog.addEventListener('heritage:dialog-close', function () { restoreDialogFocus(dialog); });
     }

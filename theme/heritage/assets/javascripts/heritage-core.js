@@ -726,8 +726,8 @@
         if (!option) return;
         if (option.selected) {
           option.textContent = option.textContent + ' \u2013 Legacy, Migration erforderlich';
-          option.dataset.workbenchMigrationOnly = 'true';
-          select.dataset.workbenchLegacyPhp = value;
+          option.dataset.heritageMigrationOnly = 'true';
+          select.dataset.heritageLegacyPhp = value;
           return;
         }
         option.remove();

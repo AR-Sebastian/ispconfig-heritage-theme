@@ -10,7 +10,7 @@
   }
 
   function enhanceDonation(root) {
-    if (!root || root.dataset.workbenchDisclosure === 'true') return false;
+    if (!root || root.dataset.heritageDisclosure === 'true') return false;
     var legacyTrigger = root.querySelector('h4 button.btn-link.btn-xs');
     var panel = root.querySelector('#description');
     if (!legacyTrigger || !panel) return false;
@@ -29,7 +29,7 @@
     panel.style.removeProperty('display');
     panel.hidden = true;
     root.classList.add('wb-disclosure');
-    root.dataset.workbenchDisclosure = 'true';
+    root.dataset.heritageDisclosure = 'true';
     legacyTrigger.replaceWith(trigger);
 
     trigger.addEventListener('click', function () {

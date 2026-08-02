@@ -53,7 +53,7 @@
         }
       };
       var active = messages[language] || messages.en;
-      Object.keys(active).forEach(function(key) { document.body.dataset['workbench' + key.charAt(0).toUpperCase() + key.slice(1)] = active[key]; });
+      Object.keys(active).forEach(function(key) { document.body.dataset['heritage' + key.charAt(0).toUpperCase() + key.slice(1)] = active[key]; });
       var tabDialog = document.getElementById('workbenchTabChangeDialog');
       if (tabDialog) {
         tabDialog.dataset.warningMessage = active.tabWarning;

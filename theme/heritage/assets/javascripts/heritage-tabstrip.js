@@ -83,7 +83,7 @@
       removeRetiredTabs(list);
       var wrapper = document.createElement('div');
       wrapper.className = 'wb-tabstrip';
-      wrapper.dataset.workbenchTabstrip = 'true';
+      wrapper.dataset.heritageTabstrip = 'true';
       list.id = list.id || 'workbench-tab-list-' + (++sequence);
       list.setAttribute('aria-label', messages.tab_sections || 'Form sections');
       synchronizeAccessibility(list);

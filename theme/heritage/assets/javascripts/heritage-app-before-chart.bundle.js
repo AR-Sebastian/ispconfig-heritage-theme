@@ -97,7 +97,7 @@
   }
 
   function enhance(input) {
-    if (!input || input.dataset.workbenchDateTime === 'true') return input;
+    if (!input || input.dataset.heritageDateTime === 'true') return input;
     var includeTime = input.dataset.inputElement === 'datetime';
     var pattern = input.dataset.dateFormat || (includeTime ? 'yyyy-mm-dd hh:ii' : 'yyyy-mm-dd');
     var includeSeconds = pattern.indexOf('ss') >= 0;
@@ -143,8 +143,8 @@
     });
     input.addEventListener('input', syncNative);
     input.addEventListener('change', syncNative);
-    input.dataset.workbenchDateTime = 'true';
-    input.dataset.workbenchDateTimeFormat = pattern;
+    input.dataset.heritageDateTime = 'true';
+    input.dataset.heritageDateTimeFormat = pattern;
     syncNative();
     return input;
   }
@@ -268,7 +268,7 @@
 
   function tooltipText(element, action) {
     return String(
-      element.dataset.workbenchTooltipText ||
+      element.dataset.heritageTooltipText ||
       element.getAttribute('data-original-title') ||
       element.getAttribute('title') ||
       action && action.title ||
@@ -294,7 +294,7 @@
   }
 
   function showTooltip(control) {
-    if (!control || control.dataset.workbenchNativeTooltip !== 'true') return false;
+    if (!control || control.dataset.heritageNativeTooltip !== 'true') return false;
     var value = tooltipText(control);
     if (!value) return false;
     var tooltip = ensureTooltipNode();
@@ -311,7 +311,7 @@
   function hideTooltip(control) {
     if (control && activeTooltipControl && control !== activeTooltipControl) return false;
     if (activeTooltipControl) {
-      var previous = activeTooltipControl.dataset.workbenchTooltipDescribedBy || '';
+      var previous = activeTooltipControl.dataset.heritageTooltipDescribedBy || '';
       if (previous) activeTooltipControl.setAttribute('aria-describedby', previous);
       else activeTooltipControl.removeAttribute('aria-describedby');
     }
@@ -324,19 +324,19 @@
     if (!element) return false;
     if (action === 'destroy') {
       hideTooltip(element);
-      if (element.dataset.workbenchTooltipText && !element.getAttribute('title')) element.setAttribute('title', element.dataset.workbenchTooltipText);
-      delete element.dataset.workbenchTooltipText;
-      delete element.dataset.workbenchTooltipDescribedBy;
-      delete element.dataset.workbenchNativeTooltip;
+      if (element.dataset.heritageTooltipText && !element.getAttribute('title')) element.setAttribute('title', element.dataset.heritageTooltipText);
+      delete element.dataset.heritageTooltipText;
+      delete element.dataset.heritageTooltipDescribedBy;
+      delete element.dataset.heritageNativeTooltip;
       return true;
     }
     var title = tooltipText(element, action);
     if (!title) return false;
-    if (!element.dataset.workbenchTooltipDescribedBy) element.dataset.workbenchTooltipDescribedBy = element.getAttribute('aria-describedby') || '';
-    element.dataset.workbenchTooltipText = title;
+    if (!element.dataset.heritageTooltipDescribedBy) element.dataset.heritageTooltipDescribedBy = element.getAttribute('aria-describedby') || '';
+    element.dataset.heritageTooltipText = title;
     element.setAttribute('data-original-title', title);
     element.removeAttribute('title');
-    element.dataset.workbenchNativeTooltip = 'true';
+    element.dataset.heritageNativeTooltip = 'true';
     return true;
   }
 
@@ -1375,8 +1375,8 @@
         if (!option) return;
         if (option.selected) {
           option.textContent = option.textContent + ' \u2013 Legacy, Migration erforderlich';
-          option.dataset.workbenchMigrationOnly = 'true';
-          select.dataset.workbenchLegacyPhp = value;
+          option.dataset.heritageMigrationOnly = 'true';
+          select.dataset.heritageLegacyPhp = value;
           return;
         }
         option.remove();
@@ -3757,7 +3757,7 @@
     var meta = document.createElement('div');
     var actions = document.createElement('div');
     var result = document.createElement('span');
-    var resultTemplate = document.body.dataset.workbenchListVisibleResults || localized('{count} Einträge auf dieser Seite', '{count} items on this page');
+    var resultTemplate = document.body.dataset.heritageListVisibleResults || localized('{count} Einträge auf dieser Seite', '{count} items on this page');
     var dataRows = Array.prototype.filter.call(tableWrapper.querySelectorAll('table > tbody > tr'), function(row) {
       return !row.classList.contains('tbl_row_noresults') && !row.hasAttribute('data-heritage-summary-row');
     });
@@ -3918,8 +3918,8 @@
       var dataRowCount = Array.prototype.filter.call(body.querySelectorAll(':scope > tr'), function(row) {
         return !row.classList.contains('tbl_row_noresults') && !row.hasAttribute('data-heritage-summary-row');
       }).length;
-      var paginationLabel = document.body.dataset.workbenchPagination || localized('Seitennavigation', 'Pagination');
-      var resultTemplate = document.body.dataset.workbenchListVisibleResults || localized('{count} Einträge auf dieser Seite', '{count} items on this page');
+      var paginationLabel = document.body.dataset.heritagePagination || localized('Seitennavigation', 'Pagination');
+      var resultTemplate = document.body.dataset.heritageListVisibleResults || localized('{count} Einträge auf dieser Seite', '{count} items on this page');
       var wrapper = table.closest('.table-wrapper') || table.parentElement;
       var footerBar = wrapper && wrapper.nextElementSibling && wrapper.nextElementSibling.classList.contains('wb-list-footer') ? wrapper.nextElementSibling : null;
       if (wrapper && wrapper.parentNode && !footerBar) {
@@ -3933,7 +3933,7 @@
       var paginationSlot = null;
       if (footerBar) {
         footerBar.classList.add('wb-table-footer');
-        footerBar.dataset.workbenchListFooter = 'true';
+        footerBar.dataset.heritageListFooter = 'true';
         footerBar.setAttribute('aria-label', paginationLabel);
         footerSummary = footerBar.querySelector(':scope > .wb-list-footer__summary');
         if (!footerSummary) {
@@ -4028,7 +4028,7 @@
           if (index === 0) cell.classList.add('wb-table-cell--identity');
           if (index === cells.length - 1 || cell.classList.contains('wb-table-align-end') || cell.classList.contains('text-right')) {
             cell.classList.add('wb-table-actions');
-            cell.setAttribute('data-wb-label', document.body.dataset.workbenchTableActions || localized('Aktionen', 'Actions'));
+            cell.setAttribute('data-wb-label', document.body.dataset.heritageTableActions || localized('Aktionen', 'Actions'));
           }
         });
 
@@ -4118,8 +4118,8 @@
       }
       var paging = table.querySelector('.pagination');
       if (paging) {
-        var pageLabel = document.body.dataset.workbenchPaginationPage || localized('Seite {page}', 'Page {page}');
-        var summaryTemplate = document.body.dataset.workbenchPaginationSummary || localized('Seite {current} von {total}', 'Page {current} of {total}');
+        var pageLabel = document.body.dataset.heritagePaginationPage || localized('Seite {page}', 'Page {page}');
+        var summaryTemplate = document.body.dataset.heritagePaginationSummary || localized('Seite {current} von {total}', 'Page {current} of {total}');
         var paginationNav = paging.closest('nav');
         var numberedLinks = Array.prototype.filter.call(paging.querySelectorAll('li > a, li > span'), function(control) {
           return /^\d+$/.test(control.textContent.trim());
@@ -4150,7 +4150,7 @@
         var pagingRow = paging.closest('tr');
         if (footerBar) {
           footerBar.classList.add('wb-table-footer');
-          footerBar.dataset.workbenchListFooter = 'true';
+          footerBar.dataset.heritageListFooter = 'true';
           footerBar.setAttribute('aria-label', paginationLabel);
           footerSummary.textContent = summaryTemplate.replace('{current}', currentPage).replace('{total}', totalPages);
           paginationSlot.hidden = false;
@@ -4273,7 +4273,7 @@
     Array.prototype.forEach.call(host.querySelectorAll('input[type="submit"], input[type="button"], button, a.btn, .btn'), function(control) {
       var label = (control.value || control.textContent || control.getAttribute('aria-label') || control.title || '').replace(/\s+/g, ' ').trim();
       if (label && !control.getAttribute('aria-label') && /^(?:\+|>|<|»|«|→|←)$/.test(label)) {
-        control.setAttribute('aria-label', document.body.dataset.workbenchGenericAction || localized('Aktion ausführen', 'Perform action'));
+        control.setAttribute('aria-label', document.body.dataset.heritageGenericAction || localized('Aktion ausführen', 'Perform action'));
       }
       if (/^(?:reset filters|filter zurücksetzen|filter zur\u00fccksetzen)$/i.test(label)) control.classList.add('wb-control--filter-reset');
       if (/^(?:show filters|filter anzeigen|filter einblenden)$/i.test(label)) control.classList.add('wb-control--filter-toggle');
@@ -4282,7 +4282,7 @@
     Array.prototype.forEach.call(host.querySelectorAll('.pagination, .pager'), function(pagination) {
       pagination.classList.add('wb-pagination');
       var nav = pagination.closest('nav');
-      if (nav && !nav.getAttribute('aria-label')) nav.setAttribute('aria-label', document.body.dataset.workbenchPagination || localized('Seitennavigation', 'Pagination'));
+      if (nav && !nav.getAttribute('aria-label')) nav.setAttribute('aria-label', document.body.dataset.heritagePagination || localized('Seitennavigation', 'Pagination'));
     });
   }
 
@@ -4417,7 +4417,7 @@
       if (!summary) {
         summary = document.createElement('div');
         summary.className = 'wb-form-section-summary';
-        summary.setAttribute('aria-label', document.body.dataset.workbenchFormSectionSummary || localized('Zusammenfassung des Formularabschnitts', 'Form section summary'));
+        summary.setAttribute('aria-label', document.body.dataset.heritageFormSectionSummary || localized('Zusammenfassung des Formularabschnitts', 'Form section summary'));
         var heading = section.querySelector(':scope > .wb-form-section-heading, :scope > legend, :scope > .fieldset-legend');
         if (heading && heading.parentNode === section) {
           if (heading.nextSibling) section.insertBefore(summary, heading.nextSibling);
@@ -4558,7 +4558,7 @@
       if (!actions.querySelector('.btn, button, input[type="button"], input[type="submit"]')) return;
       actions.classList.add('wb-form-actions');
       actions.setAttribute('role', 'group');
-      actions.setAttribute('aria-label', document.body.dataset.workbenchFormActions || localized('Formularaktionen', 'Form actions'));
+      actions.setAttribute('aria-label', document.body.dataset.heritageFormActions || localized('Formularaktionen', 'Form actions'));
       var hasDangerAction = false;
       Array.prototype.forEach.call(actions.querySelectorAll('.btn, button, input[type="button"], input[type="submit"], a.formbutton-success, a.formbutton-default, a.formbutton-danger'), function(action) {
         var tone = 'secondary';
@@ -4629,14 +4629,14 @@
       control.setAttribute('data-wb-action-tone', tone);
       control.classList.toggle('wb-action-control--icon', iconOnly);
       if (!control.getAttribute('aria-label') && !visibleText) {
-        control.setAttribute('aria-label', control.getAttribute('title') || document.body.dataset.workbenchTableActions || localized('Aktion', 'Action'));
+        control.setAttribute('aria-label', control.getAttribute('title') || document.body.dataset.heritageTableActions || localized('Aktion', 'Action'));
       }
     });
   }
 
   function finalizeFormControls(scope) {
     if (!scope) return;
-    scope.dataset.workbenchFormFinalized = 'true';
+    scope.dataset.heritageFormFinalized = 'true';
 
     Array.prototype.forEach.call(scope.querySelectorAll('.input-group, .input-append, .input-prepend'), function(deck) {
       deck.classList.add('wb-form-control-deck');
@@ -4813,8 +4813,8 @@
             }
           }
         });
-        if (accordion.dataset.workbenchAccordionState !== 'true') {
-          accordion.dataset.workbenchAccordionState = 'true';
+        if (accordion.dataset.heritageAccordionState !== 'true') {
+          accordion.dataset.heritageAccordionState = 'true';
           var synchronizeAccordionState = function(event) {
             var targetId = event.target && event.target.id;
             if (!targetId) return;
@@ -5587,11 +5587,11 @@
   }
 
   function enhanceAlert(alert) {
-    if (alert.dataset.workbenchFeedback === 'true') return;
+    if (alert.dataset.heritageFeedback === 'true') return;
     if (alert.closest && alert.closest('.wb-login-form-surface')) return;
     var state = tone(alert);
-    alert.dataset.workbenchFeedback = 'true';
-    alert.dataset.workbenchTone = state;
+    alert.dataset.heritageFeedback = 'true';
+    alert.dataset.heritageTone = state;
     alert.setAttribute('data-heritage-feedback', state);
     alert.classList.add('wb-feedback');
     alert.setAttribute('role', state === 'danger' || state === 'warning' ? 'alert' : 'status');
@@ -6189,7 +6189,7 @@
     link.href = '#';
     setLinkContentTarget(link, pair.create);
     link.textContent = isGermanInterface() ? pair.createDe : 'Create new';
-    link.dataset.workbenchSyntheticCreate = 'true';
+    link.dataset.heritageSyntheticCreate = 'true';
     return link;
   }
 
@@ -6202,9 +6202,9 @@
     var link = document.createElement('a');
     link.href = '#';
     setLinkContentTarget(link, create ? pair.create : pair.list);
-    link.dataset.workbenchSyntheticNavigation = 'true';
+    link.dataset.heritageSyntheticNavigation = 'true';
     link.textContent = create ? (isGermanInterface() ? pair.createDe : 'Create new') : (isGermanInterface() ? pair.de : pair.list);
-    if (!create) link.dataset.workbenchCompactLabel = pair.de;
+    if (!create) link.dataset.heritageCompactLabel = pair.de;
     return link;
   }
 
@@ -6281,9 +6281,9 @@
     var item = document.createElement('li');
     var row = document.createElement('div');
     var secondaryLink = cloneLink(source, 'wb-mobile-navigation__secondary-link');
-    item.dataset.workbenchSearchText = (source.textContent + ' ' + (createSource ? createSource.textContent : '')).trim();
+    item.dataset.heritageSearchText = (source.textContent + ' ' + (createSource ? createSource.textContent : '')).trim();
     if (isCurrentLink(source)) secondaryLink.setAttribute('aria-current', 'page');
-    compactListLabel(secondaryLink, source.dataset.workbenchCompactLabel || '');
+    compactListLabel(secondaryLink, source.dataset.heritageCompactLabel || '');
     if (!createSource) {
       item.appendChild(secondaryLink);
       groupList.appendChild(item);
@@ -6302,7 +6302,7 @@
     quickIcon.setAttribute('aria-hidden', 'true');
     quickIcon.textContent = '+';
     quickAction.appendChild(quickIcon);
-    quickAction.dataset.workbenchQuickAction = 'true';
+    quickAction.dataset.heritageQuickAction = 'true';
     row.appendChild(quickAction);
     item.classList.add('wb-mobile-navigation__paired-item');
     item.appendChild(row);
@@ -6316,7 +6316,7 @@
     var label = document.createElement('label');
     var control = select.cloneNode(true);
     item.className = 'wb-mobile-navigation__secondary-control';
-    item.dataset.workbenchSearchText = select.textContent.trim();
+    item.dataset.heritageSearchText = select.textContent.trim();
     label.className = 'wb-visually-hidden';
     label.textContent = isGermanInterface() ? 'Server ausw\u00e4hlen' : 'Select server';
     control.removeAttribute('id');
@@ -6364,7 +6364,7 @@
     if (brandLink) {
       brandLink.removeAttribute('tabindex');
       setLinkModule(brandLink, 'dashboard');
-      brandLink.dataset.workbenchDirectDashboard = 'true';
+      brandLink.dataset.heritageDirectDashboard = 'true';
       brandLink.setAttribute('aria-label', 'Overview');
     }
     header.insertBefore(brand, header.firstChild);
@@ -6411,10 +6411,10 @@
       sources.forEach(function (source) {
         var pair = explicitPair(source);
         if (pair) {
-          source.dataset.workbenchCompactLabel = pair.de;
+          source.dataset.heritageCompactLabel = pair.de;
           var explicitCreate = createLinkForPair(source, pair, sources);
           pairByList.set(source, explicitCreate);
-          if (!explicitCreate.dataset.workbenchSyntheticCreate) consumed.add(explicitCreate);
+          if (!explicitCreate.dataset.heritageSyntheticCreate) consumed.add(explicitCreate);
           return;
         }
         var resource = navigationResource(source, '_list');
@@ -6542,7 +6542,7 @@
     if (pageTarget) currentPageTarget = pageTarget;
     render();
     syncActiveNavigationState(pageTarget || currentPageTarget || dashboardTarget);
-    panel.dataset.workbenchNavigationFinalized = 'true';
+    panel.dataset.heritageNavigationFinalized = 'true';
   }
 
   function collapseOtherModuleSubmenus(activeLink) {
@@ -6661,7 +6661,7 @@
       var link = cloneLink(source, 'wb-mobile-navigation__module');
       applyCompactPrimaryLabel(link);
       if (linkModule(link) === 'dashboard') {
-        link.dataset.workbenchDirectDashboard = 'true';
+        link.dataset.heritageDirectDashboard = 'true';
         setLinkContentTarget(link, dashboardTarget);
         link.setAttribute('href', '#');
         link.setAttribute('aria-label', isGermanInterface() ? 'Start' : 'Home');
@@ -6691,7 +6691,7 @@
     if (window.heritageIcons) window.heritageIcons.render(panel);
     syncShellLayout();
     syncActiveNavigationState();
-    panel.dataset.workbenchNavigationReady = 'true';
+    panel.dataset.heritageNavigationReady = 'true';
 
     if (isOpen() && pendingModule) {
       var pendingLink = Array.from(panel.querySelectorAll('[data-heritage-module], [data-capp]')).find(function (link) {
@@ -6771,7 +6771,7 @@
     var link = event.target.closest('a');
     if (!link) return;
 
-    if (link.dataset.workbenchDirectDashboard === 'true') {
+    if (link.dataset.heritageDirectDashboard === 'true') {
       event.preventDefault();
       event.stopPropagation();
       userCollapsedModule = '';
@@ -8607,7 +8607,7 @@
   }
 
   function enhanceDonation(root) {
-    if (!root || root.dataset.workbenchDisclosure === 'true') return false;
+    if (!root || root.dataset.heritageDisclosure === 'true') return false;
     var legacyTrigger = root.querySelector('h4 button.btn-link.btn-xs');
     var panel = root.querySelector('#description');
     if (!legacyTrigger || !panel) return false;
@@ -8626,7 +8626,7 @@
     panel.style.removeProperty('display');
     panel.hidden = true;
     root.classList.add('wb-disclosure');
-    root.dataset.workbenchDisclosure = 'true';
+    root.dataset.heritageDisclosure = 'true';
     legacyTrigger.replaceWith(trigger);
 
     trigger.addEventListener('click', function () {
@@ -8972,7 +8972,7 @@
       removeRetiredTabs(list);
       var wrapper = document.createElement('div');
       wrapper.className = 'wb-tabstrip';
-      wrapper.dataset.workbenchTabstrip = 'true';
+      wrapper.dataset.heritageTabstrip = 'true';
       list.id = list.id || 'workbench-tab-list-' + (++sequence);
       list.setAttribute('aria-label', messages.tab_sections || 'Form sections');
       synchronizeAccessibility(list);
@@ -9260,8 +9260,8 @@
       var title = dialog.querySelector('.modal-title, h1, h2, h3, h4');
       if (title) dialog.setAttribute('aria-labelledby', ensureId(title, 'wb-dialog-title'));
     }
-    if (dialog.dataset.workbenchFocusTrap !== 'true') {
-      dialog.dataset.workbenchFocusTrap = 'true';
+    if (dialog.dataset.heritageFocusTrap !== 'true') {
+      dialog.dataset.heritageFocusTrap = 'true';
       dialog.addEventListener('keydown', function (event) {
         if (event.key === 'Escape' && window.heritageDialog) {
           event.preventDefault();
@@ -9287,8 +9287,8 @@
         }
       });
     }
-    if (dialog.dataset.workbenchDialogEvents !== 'true') {
-      dialog.dataset.workbenchDialogEvents = 'true';
+    if (dialog.dataset.heritageDialogEvents !== 'true') {
+      dialog.dataset.heritageDialogEvents = 'true';
       dialog.addEventListener('heritage:dialog-open', function () { focusDialog(dialog); });
       dialog.addEventListener('heritage:dialog-close', function () { restoreDialogFocus(dialog); });
     }
@@ -9415,7 +9415,7 @@
     if (!alert && entries.length) {
       alert = document.createElement('div');
       alert.className = 'wb-validation-summary wb-validation-summary--generated';
-      alert.dataset.workbenchValidationGenerated = 'true';
+      alert.dataset.heritageValidationGenerated = 'true';
       host.prepend(alert);
     }
     return alert;
@@ -9460,7 +9460,7 @@
     if (entries.length) {
       var list = document.createElement('ul');
       list.className = 'wb-validation-summary__list';
-      list.dataset.workbenchValidationList = 'true';
+      list.dataset.heritageValidationList = 'true';
       entries.forEach(function (entry) {
         entry.control.setAttribute('aria-invalid', 'true');
         ensureId(entry.control, 'wb-invalid-field');
@@ -9479,7 +9479,7 @@
       alert.appendChild(list);
     }
 
-    alert.dataset.workbenchValidationSummary = 'true';
+    alert.dataset.heritageValidationSummary = 'true';
     var shouldFocus = options && options.focus === true;
     if (shouldFocus) {
       if (!entries.length || !revealAndFocus(entries[0])) window.setTimeout(function () { alert.focus(); }, 0);

@@ -77,7 +77,7 @@
     if (!alert && entries.length) {
       alert = document.createElement('div');
       alert.className = 'wb-validation-summary wb-validation-summary--generated';
-      alert.dataset.workbenchValidationGenerated = 'true';
+      alert.dataset.heritageValidationGenerated = 'true';
       host.prepend(alert);
     }
     return alert;
@@ -122,7 +122,7 @@
     if (entries.length) {
       var list = document.createElement('ul');
       list.className = 'wb-validation-summary__list';
-      list.dataset.workbenchValidationList = 'true';
+      list.dataset.heritageValidationList = 'true';
       entries.forEach(function (entry) {
         entry.control.setAttribute('aria-invalid', 'true');
         ensureId(entry.control, 'wb-invalid-field');
@@ -141,7 +141,7 @@
       alert.appendChild(list);
     }
 
-    alert.dataset.workbenchValidationSummary = 'true';
+    alert.dataset.heritageValidationSummary = 'true';
     var shouldFocus = options && options.focus === true;
     if (shouldFocus) {
       if (!entries.length || !revealAndFocus(entries[0])) window.setTimeout(function () { alert.focus(); }, 0);

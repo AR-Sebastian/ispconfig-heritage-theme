@@ -332,7 +332,7 @@
     link.href = '#';
     setLinkContentTarget(link, pair.create);
     link.textContent = isGermanInterface() ? pair.createDe : 'Create new';
-    link.dataset.workbenchSyntheticCreate = 'true';
+    link.dataset.heritageSyntheticCreate = 'true';
     return link;
   }
 
@@ -345,9 +345,9 @@
     var link = document.createElement('a');
     link.href = '#';
     setLinkContentTarget(link, create ? pair.create : pair.list);
-    link.dataset.workbenchSyntheticNavigation = 'true';
+    link.dataset.heritageSyntheticNavigation = 'true';
     link.textContent = create ? (isGermanInterface() ? pair.createDe : 'Create new') : (isGermanInterface() ? pair.de : pair.list);
-    if (!create) link.dataset.workbenchCompactLabel = pair.de;
+    if (!create) link.dataset.heritageCompactLabel = pair.de;
     return link;
   }
 
@@ -424,9 +424,9 @@
     var item = document.createElement('li');
     var row = document.createElement('div');
     var secondaryLink = cloneLink(source, 'wb-mobile-navigation__secondary-link');
-    item.dataset.workbenchSearchText = (source.textContent + ' ' + (createSource ? createSource.textContent : '')).trim();
+    item.dataset.heritageSearchText = (source.textContent + ' ' + (createSource ? createSource.textContent : '')).trim();
     if (isCurrentLink(source)) secondaryLink.setAttribute('aria-current', 'page');
-    compactListLabel(secondaryLink, source.dataset.workbenchCompactLabel || '');
+    compactListLabel(secondaryLink, source.dataset.heritageCompactLabel || '');
     if (!createSource) {
       item.appendChild(secondaryLink);
       groupList.appendChild(item);
@@ -445,7 +445,7 @@
     quickIcon.setAttribute('aria-hidden', 'true');
     quickIcon.textContent = '+';
     quickAction.appendChild(quickIcon);
-    quickAction.dataset.workbenchQuickAction = 'true';
+    quickAction.dataset.heritageQuickAction = 'true';
     row.appendChild(quickAction);
     item.classList.add('wb-mobile-navigation__paired-item');
     item.appendChild(row);
@@ -459,7 +459,7 @@
     var label = document.createElement('label');
     var control = select.cloneNode(true);
     item.className = 'wb-mobile-navigation__secondary-control';
-    item.dataset.workbenchSearchText = select.textContent.trim();
+    item.dataset.heritageSearchText = select.textContent.trim();
     label.className = 'wb-visually-hidden';
     label.textContent = isGermanInterface() ? 'Server ausw\u00e4hlen' : 'Select server';
     control.removeAttribute('id');
@@ -507,7 +507,7 @@
     if (brandLink) {
       brandLink.removeAttribute('tabindex');
       setLinkModule(brandLink, 'dashboard');
-      brandLink.dataset.workbenchDirectDashboard = 'true';
+      brandLink.dataset.heritageDirectDashboard = 'true';
       brandLink.setAttribute('aria-label', 'Overview');
     }
     header.insertBefore(brand, header.firstChild);
@@ -554,10 +554,10 @@
       sources.forEach(function (source) {
         var pair = explicitPair(source);
         if (pair) {
-          source.dataset.workbenchCompactLabel = pair.de;
+          source.dataset.heritageCompactLabel = pair.de;
           var explicitCreate = createLinkForPair(source, pair, sources);
           pairByList.set(source, explicitCreate);
-          if (!explicitCreate.dataset.workbenchSyntheticCreate) consumed.add(explicitCreate);
+          if (!explicitCreate.dataset.heritageSyntheticCreate) consumed.add(explicitCreate);
           return;
         }
         var resource = navigationResource(source, '_list');
@@ -685,7 +685,7 @@
     if (pageTarget) currentPageTarget = pageTarget;
     render();
     syncActiveNavigationState(pageTarget || currentPageTarget || dashboardTarget);
-    panel.dataset.workbenchNavigationFinalized = 'true';
+    panel.dataset.heritageNavigationFinalized = 'true';
   }
 
   function collapseOtherModuleSubmenus(activeLink) {
@@ -804,7 +804,7 @@
       var link = cloneLink(source, 'wb-mobile-navigation__module');
       applyCompactPrimaryLabel(link);
       if (linkModule(link) === 'dashboard') {
-        link.dataset.workbenchDirectDashboard = 'true';
+        link.dataset.heritageDirectDashboard = 'true';
         setLinkContentTarget(link, dashboardTarget);
         link.setAttribute('href', '#');
         link.setAttribute('aria-label', isGermanInterface() ? 'Start' : 'Home');
@@ -834,7 +834,7 @@
     if (window.heritageIcons) window.heritageIcons.render(panel);
     syncShellLayout();
     syncActiveNavigationState();
-    panel.dataset.workbenchNavigationReady = 'true';
+    panel.dataset.heritageNavigationReady = 'true';
 
     if (isOpen() && pendingModule) {
       var pendingLink = Array.from(panel.querySelectorAll('[data-heritage-module], [data-capp]')).find(function (link) {
@@ -914,7 +914,7 @@
     var link = event.target.closest('a');
     if (!link) return;
 
-    if (link.dataset.workbenchDirectDashboard === 'true') {
+    if (link.dataset.heritageDirectDashboard === 'true') {
       event.preventDefault();
       event.stopPropagation();
       userCollapsedModule = '';

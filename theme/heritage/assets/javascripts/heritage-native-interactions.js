@@ -102,7 +102,7 @@
 
   function tooltipText(element, action) {
     return String(
-      element.dataset.workbenchTooltipText ||
+      element.dataset.heritageTooltipText ||
       element.getAttribute('data-original-title') ||
       element.getAttribute('title') ||
       action && action.title ||
@@ -128,7 +128,7 @@
   }
 
   function showTooltip(control) {
-    if (!control || control.dataset.workbenchNativeTooltip !== 'true') return false;
+    if (!control || control.dataset.heritageNativeTooltip !== 'true') return false;
     var value = tooltipText(control);
     if (!value) return false;
     var tooltip = ensureTooltipNode();
@@ -145,7 +145,7 @@
   function hideTooltip(control) {
     if (control && activeTooltipControl && control !== activeTooltipControl) return false;
     if (activeTooltipControl) {
-      var previous = activeTooltipControl.dataset.workbenchTooltipDescribedBy || '';
+      var previous = activeTooltipControl.dataset.heritageTooltipDescribedBy || '';
       if (previous) activeTooltipControl.setAttribute('aria-describedby', previous);
       else activeTooltipControl.removeAttribute('aria-describedby');
     }
@@ -158,19 +158,19 @@
     if (!element) return false;
     if (action === 'destroy') {
       hideTooltip(element);
-      if (element.dataset.workbenchTooltipText && !element.getAttribute('title')) element.setAttribute('title', element.dataset.workbenchTooltipText);
-      delete element.dataset.workbenchTooltipText;
-      delete element.dataset.workbenchTooltipDescribedBy;
-      delete element.dataset.workbenchNativeTooltip;
+      if (element.dataset.heritageTooltipText && !element.getAttribute('title')) element.setAttribute('title', element.dataset.heritageTooltipText);
+      delete element.dataset.heritageTooltipText;
+      delete element.dataset.heritageTooltipDescribedBy;
+      delete element.dataset.heritageNativeTooltip;
       return true;
     }
     var title = tooltipText(element, action);
     if (!title) return false;
-    if (!element.dataset.workbenchTooltipDescribedBy) element.dataset.workbenchTooltipDescribedBy = element.getAttribute('aria-describedby') || '';
-    element.dataset.workbenchTooltipText = title;
+    if (!element.dataset.heritageTooltipDescribedBy) element.dataset.heritageTooltipDescribedBy = element.getAttribute('aria-describedby') || '';
+    element.dataset.heritageTooltipText = title;
     element.setAttribute('data-original-title', title);
     element.removeAttribute('title');
-    element.dataset.workbenchNativeTooltip = 'true';
+    element.dataset.heritageNativeTooltip = 'true';
     return true;
   }
 

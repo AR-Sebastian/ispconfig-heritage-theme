@@ -43,11 +43,11 @@
   }
 
   function enhanceAlert(alert) {
-    if (alert.dataset.workbenchFeedback === 'true') return;
+    if (alert.dataset.heritageFeedback === 'true') return;
     if (alert.closest && alert.closest('.wb-login-form-surface')) return;
     var state = tone(alert);
-    alert.dataset.workbenchFeedback = 'true';
-    alert.dataset.workbenchTone = state;
+    alert.dataset.heritageFeedback = 'true';
+    alert.dataset.heritageTone = state;
     alert.setAttribute('data-heritage-feedback', state);
     alert.classList.add('wb-feedback');
     alert.setAttribute('role', state === 'danger' || state === 'warning' ? 'alert' : 'status');

@@ -94,7 +94,7 @@
   }
 
   function enhance(input) {
-    if (!input || input.dataset.workbenchDateTime === 'true') return input;
+    if (!input || input.dataset.heritageDateTime === 'true') return input;
     var includeTime = input.dataset.inputElement === 'datetime';
     var pattern = input.dataset.dateFormat || (includeTime ? 'yyyy-mm-dd hh:ii' : 'yyyy-mm-dd');
     var includeSeconds = pattern.indexOf('ss') >= 0;
@@ -140,8 +140,8 @@
     });
     input.addEventListener('input', syncNative);
     input.addEventListener('change', syncNative);
-    input.dataset.workbenchDateTime = 'true';
-    input.dataset.workbenchDateTimeFormat = pattern;
+    input.dataset.heritageDateTime = 'true';
+    input.dataset.heritageDateTimeFormat = pattern;
     syncNative();
     return input;
   }
