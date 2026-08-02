@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# ZIP stores wall-clock timestamps. Keep them independent of the builder's
+# local timezone; TAR already records the absolute SOURCE_DATE_EPOCH value.
+export TZ=UTC
+
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 version="$(tr -d '[:space:]' < "$root/VERSION")"
 dist="$root/dist"
