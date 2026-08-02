@@ -27,6 +27,8 @@ Target: ISPConfig 3.3.1p1
 - The theme compatibility markers now match ISPConfig 3.3.1p1's stock internal ABI, `ISPC_APP_VERSION=3.3dev`; the manifest continues to identify the public 3.3.1p1 target.
 - Atomic installation normalizes staged directory/file modes to `0755`/`0644`, independent of archive or Windows-transfer metadata.
 - A cache-independent corrected-package rerun delivered HTTP 200 assets and rendered Dashboard, User Settings, System Config, Additional PHP, Domain Alias and Mailbox routes without console errors, overflow or retired component classes.
+- The complete branch-to-`main` pre-merge audit found no ISPConfig core path, unexpected binary, secret signature or file outside the declared theme/release-tooling boundary.
+- Two fully completed candidate builds are bit-identical: ZIP `fcce5674ac92f12c1c937520f8d563a92965d974d1a0da6f1fca143b5f225d26`, TAR.GZ `4e83ea55c707893f17811560efc64b33415f45a37bcf5ed70d40e920c2a7de57`.
 
 The detailed, reproducible evidence and the lab limitation are recorded in
 [`RUNTIME-SMOKE-1.0.34.md`](RUNTIME-SMOKE-1.0.34.md).
@@ -43,7 +45,7 @@ The detailed, reproducible evidence and the lab limitation are recorded in
 - [x] Confirm mailbox quota presentation with an isolated 100 MiB synthetic mailbox fixture on desktop/mobile, then restore the pre-fixture VM state.
 - [ ] Review and merge the release-candidate pull request into `main` with green checks.
 - [ ] Rebuild from the clean merge commit and compare the final archive hashes.
-- [ ] Decide whether the existing `v1.0.20` tag requires a reconstructed GitHub Release entry; no historical publication is changed automatically.
+- [x] Preserve `v1.0.20` as the existing tag-only historical state; do not reconstruct or rewrite a past GitHub Release during the 1.0.34 publication.
 - [ ] Create and push `v1.0.34` only after all previous blockers are closed.
 - [ ] Verify the published release body, ZIP, TAR.GZ and `SHA256SUMS.txt` after the tag workflow completes.
 
