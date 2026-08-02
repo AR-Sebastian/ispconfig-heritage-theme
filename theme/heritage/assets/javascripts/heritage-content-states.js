@@ -4,7 +4,7 @@
   function runtime() { return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null; }
   var legacy = window.ISPConfig;
   var app = runtime();
-  if (!legacy || !app || legacy.workbenchContentStatesInstalled) return;
+  if (!legacy || !app || legacy.heritageContentStatesInstalled) return;
 
   var sequence = 0;
   var retryRequests = {};
@@ -12,7 +12,7 @@
   var contentRequest = null;
   var contentStateTimer = null;
   var contentStateDelay = 140;
-  var historyKey = 'workbenchContent';
+  var historyKey = 'heritageContent';
   var isGerman = (typeof window.heritageLanguage === 'function' ? window.heritageLanguage() : (document.documentElement.lang || '')).toLowerCase().indexOf('de') === 0;
 
   function localized(german, english) {
@@ -135,7 +135,7 @@
     return window.location.pathname + '?wb=' + String(page).replace(/#/g, '%23').replace(/&/g, '%26').replace(/\?/g, '%3F');
   }
   // Expose so the core runtime (navigateTo) uses the same URL form.
-  if (legacy) legacy.workbenchUrlFor = urlFor;
+  if (legacy) legacy.heritageUrlFor = urlFor;
 
   function installNavigationHistory() {
     if (!window.history || !window.history.pushState || document.documentElement.dataset.heritageHistoryReady) return;
@@ -145,14 +145,14 @@
     // or bookmark restores it instead of falling back to the server session
     // module (which made every reload land on the last full-loaded module).
     var initial = pageFromUrl() || (content && content.getAttribute('data-startpage')) || 'dashboard/dashboard.php';
-    if (!window.history.state || !window.history.state[historyKey]) window.history.replaceState({ workbenchContent: initial }, '', urlFor(initial));
+    if (!window.history.state || !window.history.state[historyKey]) window.history.replaceState({ heritageContent: initial }, '', urlFor(initial));
     document.addEventListener('click', function(event) {
       var trigger = event.target.closest('a[data-heritage-module],button[data-heritage-module],a[data-capp],button[data-capp]');
       if (!trigger) return;
       var target = moduleAttribute(trigger);
       if (!target || trigger.getAttribute('data-submit-form') || trigger.getAttribute('data-form-action')) return;
       var current = window.history.state && window.history.state[historyKey];
-      if (current !== target) window.history.pushState({ workbenchContent: target }, '', urlFor(target));
+      if (current !== target) window.history.pushState({ heritageContent: target }, '', urlFor(target));
     });
     window.addEventListener('popstate', function(event) {
       var target = event.state && event.state[historyKey];
@@ -1605,10 +1605,10 @@
         });
       }
       updateConditionalRows();
-      if (form._workbenchConditionalObserver) form._workbenchConditionalObserver.disconnect();
+      if (form._heritageConditionalObserver) form._heritageConditionalObserver.disconnect();
       if (window.MutationObserver) {
-        form._workbenchConditionalObserver = new MutationObserver(updateConditionalRows);
-        form._workbenchConditionalObserver.observe(scope, { subtree: true, attributes: true, attributeFilter: ['style', 'hidden', 'aria-hidden'] });
+        form._heritageConditionalObserver = new MutationObserver(updateConditionalRows);
+        form._heritageConditionalObserver.observe(scope, { subtree: true, attributes: true, attributeFilter: ['style', 'hidden', 'aria-hidden'] });
       }
     });
     if (window.heritageAccessibility) window.heritageAccessibility.enhance(host);
@@ -1626,7 +1626,7 @@
     var moduleName = moduleAttribute(trigger);
     if (!moduleName) return;
     var api = runtime();
-    if (api) api.workbenchActiveModule = moduleName;
+    if (api) api.heritageActiveModule = moduleName;
     document.querySelectorAll('#main-navigation a[aria-current="page"]').forEach(function(link) { link.removeAttribute('aria-current'); });
     document.querySelectorAll('#main-navigation a[data-heritage-module], #main-navigation a[data-capp]').forEach(function(link) {
       if (moduleAttribute(link) === moduleName) link.setAttribute('aria-current', 'page');
@@ -1782,7 +1782,7 @@
         api.replaceServerFragment(host, response);
         var loadedModule = moduleFromPageName(pagename);
         if (loadedModule) {
-          api.workbenchActiveModule = loadedModule;
+          api.heritageActiveModule = loadedModule;
           syncPrimaryModule(document.querySelector('#topnav-container'), loadedModule);
           syncPrimaryModule(document.querySelector('#heritage-mobile-navigation'), loadedModule);
         }
@@ -1887,8 +1887,8 @@
   legacy.loadMenus = function(options) {
     var api = runtime();
     options = options || {};
-    var moduleName = options.module || (api && api.workbenchActiveModule) || '';
-    if (moduleName && api) api.workbenchActiveModule = moduleName;
+    var moduleName = options.module || (api && api.heritageActiveModule) || '';
+    if (moduleName && api) api.heritageActiveModule = moduleName;
     menuSequence += 1;
     var token = menuSequence;
     menuRequests.forEach(function(request) {
@@ -1907,9 +1907,9 @@
     installNavigationHistory();
     var content = document.getElementById('pageContent');
     var startpage = pageFromUrl() || (content && content.getAttribute('data-startpage')) || 'dashboard/dashboard.php';
-    api.workbenchActiveModule = String(startpage).split('/')[0] || 'dashboard';
+    api.heritageActiveModule = String(startpage).split('/')[0] || 'dashboard';
     api.navigateTo(startpage);
-    api.loadMenus({ module: api.workbenchActiveModule });
+    api.loadMenus({ module: api.heritageActiveModule });
     api.keepalive();
     window.setTimeout(function() {
       try {
@@ -1988,7 +1988,7 @@
     retryContentRequest(token);
   });
 
-  legacy.workbenchEnhanceContent = function(rootOrPageName, pageName, context) {
+  legacy.heritageEnhanceContent = function(rootOrPageName, pageName, context) {
     var host = rootOrPageName && rootOrPageName.nodeType ? rootOrPageName : document.getElementById('pageContent');
     var resolvedPage = rootOrPageName && rootOrPageName.nodeType ? pageName : rootOrPageName;
     if (!host) return false;
@@ -1999,17 +1999,17 @@
 
   window.heritageContentStates = window.heritageContentStates || {};
   window.heritageContentStates.enhance = function(root, pageName, context) {
-    return (legacy && typeof legacy.workbenchEnhanceContent === 'function')
-      ? legacy.workbenchEnhanceContent(root || document.getElementById('pageContent'), pageName || '', context || { source: 'external-enhance' })
+    return (legacy && typeof legacy.heritageEnhanceContent === 'function')
+      ? legacy.heritageEnhanceContent(root || document.getElementById('pageContent'), pageName || '', context || { source: 'external-enhance' })
       : false;
   };
 
   legacy.registerHook('onAfterContentLoad', function(name, params) {
     if (params && params.__workbenchEnhanced) return;
-    if (legacy && typeof legacy.workbenchEnhanceContent === 'function') {
-      legacy.workbenchEnhanceContent(params && params.url ? params.url : name || '', '', { source: 'legacy-after-content-hook' });
+    if (legacy && typeof legacy.heritageEnhanceContent === 'function') {
+      legacy.heritageEnhanceContent(params && params.url ? params.url : name || '', '', { source: 'legacy-after-content-hook' });
     }
   });
 
-  legacy.workbenchContentStatesInstalled = true;
+  legacy.heritageContentStatesInstalled = true;
 })(window, document);

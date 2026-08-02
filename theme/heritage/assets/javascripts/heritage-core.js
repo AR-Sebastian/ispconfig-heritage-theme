@@ -60,7 +60,7 @@
     return svg;
   }
 
-  var workbenchEndpoints = {
+  var heritageEndpoints = {
     sitesJson: 'sites/ajax_get_json.php',
     sitesIpOptions: 'sites/ajax_get_ip.php',
     mailJson: 'mail/ajax_get_json.php',
@@ -68,8 +68,8 @@
     globalSearch: '/dashboard/ajax_get_json.php'
   };
 
-  function workbenchEndpoint(name, cacheBust) {
-    var endpoint = workbenchEndpoints[name] || String(name || '');
+  function heritageEndpoint(name, cacheBust) {
+    var endpoint = heritageEndpoints[name] || String(name || '');
     if (!cacheBust) return endpoint;
     return endpoint + (endpoint.indexOf('?') >= 0 ? '&' : '?') + Math.round(new Date().getTime());
   }
@@ -122,10 +122,10 @@
 
   function endpointFromControl(control, fallbackName) {
     var endpointName = control && control.getAttribute('data-endpoint-name');
-    if (endpointName) return workbenchEndpoint(endpointName);
+    if (endpointName) return heritageEndpoint(endpointName);
     var endpoint = control && control.getAttribute('data-endpoint');
     if (endpoint) return endpoint;
-    return fallbackName ? workbenchEndpoint(fallbackName) : '';
+    return fallbackName ? heritageEndpoint(fallbackName) : '';
   }
 
   function endpointWithQueryTemplate(endpoint, template, control) {
@@ -172,7 +172,7 @@
     }
   };
 
-  function workbenchContractValue(element, contract) {
+  function heritageContractValue(element, contract) {
     if (!element || !contract) return null;
     return element.getAttribute(contract.native) || element.getAttribute(contract.legacy);
   }
@@ -587,7 +587,7 @@
   }
 
   function requestSitesJson(queryData) {
-    return requestRuntimeJson(workbenchEndpoint('sitesJson', true), { query: queryData || {}, timeout: 30000 });
+    return requestRuntimeJson(heritageEndpoint('sitesJson', true), { query: queryData || {}, timeout: 30000 });
   }
 
   function applyRedirectServerType(redirectType, serverType, allowApacheProxy) {
@@ -774,8 +774,8 @@
   function reloadVhostWebIp(ctx) {
     var serverId = getVhostServerId(ctx);
     var clientGroupId = ctx.clientGroupField ? ctx.clientGroupField.value : '';
-    callRuntime('loadOptionInto', ['ip_address', workbenchEndpoint('sitesIpOptions') + '?ip_type=IPv4&server_id=' + encodeURIComponent(serverId || '') + '&client_group_id=' + encodeURIComponent(clientGroupId || ''), rerenderWorkbenchSelect]);
-    callRuntime('loadOptionInto', ['ipv6_address', workbenchEndpoint('sitesIpOptions') + '?ip_type=IPv6&server_id=' + encodeURIComponent(serverId || '') + '&client_group_id=' + encodeURIComponent(clientGroupId || ''), rerenderWorkbenchSelect]);
+    callRuntime('loadOptionInto', ['ip_address', heritageEndpoint('sitesIpOptions') + '?ip_type=IPv4&server_id=' + encodeURIComponent(serverId || '') + '&client_group_id=' + encodeURIComponent(clientGroupId || ''), rerenderWorkbenchSelect]);
+    callRuntime('loadOptionInto', ['ipv6_address', heritageEndpoint('sitesIpOptions') + '?ip_type=IPv6&server_id=' + encodeURIComponent(serverId || '') + '&client_group_id=' + encodeURIComponent(clientGroupId || ''), rerenderWorkbenchSelect]);
   }
 
   function reloadVhostDirectiveSnippets(ctx) {
@@ -900,7 +900,7 @@
       var field = document.getElementById(id);
       return field ? field.value : '';
     }
-    var request = requestRuntimeJson(workbenchEndpoint('mailJson', true), {
+    var request = requestRuntimeJson(heritageEndpoint('mailJson', true), {
       query: {
         domain_id: value('domain'),
         dkim_public: value('dkim_public'),
@@ -1017,7 +1017,7 @@
     var german = language === 'de';
     queryAll(root || document, '[data-heritage-field-search]').forEach(function(input) {
       var endpointName = input.getAttribute('data-search-endpoint') || '';
-      var endpoint = endpointName ? workbenchEndpoint(endpointName) : (input.getAttribute('data-search-src') || input.getAttribute('data-src') || '');
+      var endpoint = endpointName ? heritageEndpoint(endpointName) : (input.getAttribute('data-search-src') || input.getAttribute('data-src') || '');
       endpoint = endpointWithQuery(endpoint, 'type', input.getAttribute('data-search-type') || '');
       if (!endpoint) return;
       ISPConfig.enhanceSearch(input, {
@@ -1201,7 +1201,7 @@
 
     endpoint: function(name, options) {
       options = options || {};
-      return workbenchEndpoint(name, options.cacheBust === true);
+      return heritageEndpoint(name, options.cacheBust === true);
     },
 
     normalizeWorkbenchContentContracts: function(root) {
@@ -1221,10 +1221,10 @@
       // (mod_rewrite) vs. ?wb= query-fallback choice stays consistent.
       if (pagename && window.history && window.history.replaceState) {
         try {
-          var wbUrl = (typeof ISPConfig.workbenchUrlFor === 'function')
-            ? ISPConfig.workbenchUrlFor(pagename)
+          var wbUrl = (typeof ISPConfig.heritageUrlFor === 'function')
+            ? ISPConfig.heritageUrlFor(pagename)
             : (window.location.pathname + '?wb=' + String(pagename).replace(/#/g, '%23').replace(/&/g, '%26').replace(/\?/g, '%3F'));
-          window.history.replaceState({ workbenchContent: pagename }, '', wbUrl);
+          window.history.replaceState({ heritageContent: pagename }, '', wbUrl);
         } catch (e) {}
       }
       var request = ISPConfig.requestText(pagename, { query: params || null, timeout: 30000 });
@@ -1597,7 +1597,7 @@
     }
   };
 
-  var workbenchApp = window.heritageApp = window.heritageApp || {};
+  var heritageApp = window.heritageApp = window.heritageApp || {};
 
   [
     'setOption',
@@ -1640,7 +1640,7 @@
     'resetFormChanged',
     'endpoint'
   ].forEach(function(name) {
-    workbenchApp[name] = function() {
+    heritageApp[name] = function() {
       return ISPConfig[name].apply(ISPConfig, arguments);
     };
   });
@@ -1652,12 +1652,12 @@
     'tabChangeWarning',
     'tabChangeDiscard',
     'requestsRunning',
-    'workbenchActiveModule',
+    'heritageActiveModule',
     'dataLogTimer',
     'options',
     'registeredHooks'
   ].forEach(function(name) {
-    Object.defineProperty(workbenchApp, name, {
+    Object.defineProperty(heritageApp, name, {
       configurable: true,
       enumerable: true,
       get: function() { return ISPConfig[name]; },
@@ -1818,10 +1818,10 @@
     var optionQuery = target.getAttribute('data-load-option-query');
     if (optionTarget && (optionTemplate || optionEndpoint)) {
       event.preventDefault();
-      ISPConfig.loadOptionInto(optionTarget, optionTemplate ? controlUrl(optionTemplate, target) : endpointWithQueryTemplate(workbenchEndpoint(optionEndpoint), optionQuery, target));
+      ISPConfig.loadOptionInto(optionTarget, optionTemplate ? controlUrl(optionTemplate, target) : endpointWithQueryTemplate(heritageEndpoint(optionEndpoint), optionQuery, target));
       return;
     }
-    var contentTemplate = workbenchContractValue(target, HERITAGE_CONTENT_CONTRACTS.template);
+    var contentTemplate = heritageContractValue(target, HERITAGE_CONTENT_CONTRACTS.template);
     if (contentTemplate) {
       event.preventDefault();
       ISPConfig.navigateTo(controlUrl(contentTemplate, target));
@@ -1867,7 +1867,7 @@
     var copyControl = closest(event.target, '[data-copy-email-address],[data-copy-composed-value],[data-copy-value]');
     var sslClientDataControl = closest(event.target, '[data-ssl-client-data-action]');
     var tabControl = closest(event.target, '[data-change-tab]');
-    var workbenchActionControl = closest(event.target, '[data-heritage-action]');
+    var heritageActionControl = closest(event.target, '[data-heritage-action]');
     var noopControl = closest(event.target, '[data-heritage-noop]');
     var sortHeader = closest(event.target, 'th[data-column]');
     var placeholder = closest(event.target, '.addPlaceholder');
@@ -1878,10 +1878,10 @@
 
     checkRelatedRadio(event.target);
 
-    if (loadControl || loadIntoControl || moduleControl || submitControl || passwordControl || confirmControl || copyControl || sslClientDataControl || tabControl || workbenchActionControl || noopControl || sortHeader || placeholder || placeholderContent || additionalTemplateRemove) {
+    if (loadControl || loadIntoControl || moduleControl || submitControl || passwordControl || confirmControl || copyControl || sslClientDataControl || tabControl || heritageActionControl || noopControl || sortHeader || placeholder || placeholderContent || additionalTemplateRemove) {
       event.preventDefault();
-      if (ISPConfig.requestsRunning > 0 && !passwordControl && !copyControl && !sslClientDataControl && !workbenchActionControl && !noopControl && !placeholder && !placeholderContent && !additionalTemplateRemove) return;
-      if (!passwordControl && !copyControl && !sslClientDataControl && !workbenchActionControl && !noopControl && !placeholder && !placeholderContent && !additionalTemplateRemove) scrollToTop();
+      if (ISPConfig.requestsRunning > 0 && !passwordControl && !copyControl && !sslClientDataControl && !heritageActionControl && !noopControl && !placeholder && !placeholderContent && !additionalTemplateRemove) return;
+      if (!passwordControl && !copyControl && !sslClientDataControl && !heritageActionControl && !noopControl && !placeholder && !placeholderContent && !additionalTemplateRemove) scrollToTop();
     }
 
     if (noopControl) {
@@ -1941,39 +1941,39 @@
       return;
     }
 
-    if (workbenchActionControl) {
-      var workbenchAction = workbenchActionControl.getAttribute('data-heritage-action');
-      if (workbenchAction === 'add-additional-template') ISPConfig.addAdditionalTemplate();
-      if (workbenchAction === 'reset-autoresponder-dates') window.AR_ResetDates();
-      if (workbenchAction === 'create-dkim') createDkimRecord(workbenchActionControl);
-      if (workbenchAction === 'set-hidden-submit') {
-        var fieldName = workbenchActionControl.getAttribute('data-hidden-field');
-        var fieldValue = workbenchActionControl.getAttribute('data-hidden-value') || '1';
+    if (heritageActionControl) {
+      var heritageAction = heritageActionControl.getAttribute('data-heritage-action');
+      if (heritageAction === 'add-additional-template') ISPConfig.addAdditionalTemplate();
+      if (heritageAction === 'reset-autoresponder-dates') window.AR_ResetDates();
+      if (heritageAction === 'create-dkim') createDkimRecord(heritageActionControl);
+      if (heritageAction === 'set-hidden-submit') {
+        var fieldName = heritageActionControl.getAttribute('data-hidden-field');
+        var fieldValue = heritageActionControl.getAttribute('data-hidden-value') || '1';
         var field = fieldName ? query(document, '[name="' + cssEscape(fieldName) + '"]') : null;
         if (field) {
           field.value = fieldValue;
           trigger(field, 'input');
         }
-        ISPConfig.submitPageForm(workbenchActionControl.getAttribute('data-submit-form') || 'pageForm', workbenchActionControl.getAttribute('data-form-action'));
+        ISPConfig.submitPageForm(heritageActionControl.getAttribute('data-submit-form') || 'pageForm', heritageActionControl.getAttribute('data-form-action'));
       }
       return;
     }
 
     if (loadIntoControl) {
-      var targetId = workbenchContractValue(loadIntoControl, HERITAGE_CONTENT_CONTRACTS.target);
-      var targetContent = workbenchContractValue(loadIntoControl, HERITAGE_CONTENT_CONTRACTS.load);
+      var targetId = heritageContractValue(loadIntoControl, HERITAGE_CONTENT_CONTRACTS.target);
+      var targetContent = heritageContractValue(loadIntoControl, HERITAGE_CONTENT_CONTRACTS.load);
       if (targetId && targetContent) ISPConfig.refreshContentInto(targetId, targetContent);
       return;
     }
 
     if (loadControl) {
-      var content = workbenchContractValue(loadControl, HERITAGE_CONTENT_CONTRACTS.load);
+      var content = heritageContractValue(loadControl, HERITAGE_CONTENT_CONTRACTS.load);
       if (content) ISPConfig.navigateTo(content);
       return;
     }
 
     if (moduleControl) {
-      var module = workbenchContractValue(moduleControl, HERITAGE_CONTENT_CONTRACTS.module);
+      var module = heritageContractValue(moduleControl, HERITAGE_CONTENT_CONTRACTS.module);
       if (module) ISPConfig.capp(module);
       return;
     }

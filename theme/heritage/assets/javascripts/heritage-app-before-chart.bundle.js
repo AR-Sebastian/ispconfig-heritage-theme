@@ -709,7 +709,7 @@
     return svg;
   }
 
-  var workbenchEndpoints = {
+  var heritageEndpoints = {
     sitesJson: 'sites/ajax_get_json.php',
     sitesIpOptions: 'sites/ajax_get_ip.php',
     mailJson: 'mail/ajax_get_json.php',
@@ -717,8 +717,8 @@
     globalSearch: '/dashboard/ajax_get_json.php'
   };
 
-  function workbenchEndpoint(name, cacheBust) {
-    var endpoint = workbenchEndpoints[name] || String(name || '');
+  function heritageEndpoint(name, cacheBust) {
+    var endpoint = heritageEndpoints[name] || String(name || '');
     if (!cacheBust) return endpoint;
     return endpoint + (endpoint.indexOf('?') >= 0 ? '&' : '?') + Math.round(new Date().getTime());
   }
@@ -771,10 +771,10 @@
 
   function endpointFromControl(control, fallbackName) {
     var endpointName = control && control.getAttribute('data-endpoint-name');
-    if (endpointName) return workbenchEndpoint(endpointName);
+    if (endpointName) return heritageEndpoint(endpointName);
     var endpoint = control && control.getAttribute('data-endpoint');
     if (endpoint) return endpoint;
-    return fallbackName ? workbenchEndpoint(fallbackName) : '';
+    return fallbackName ? heritageEndpoint(fallbackName) : '';
   }
 
   function endpointWithQueryTemplate(endpoint, template, control) {
@@ -821,7 +821,7 @@
     }
   };
 
-  function workbenchContractValue(element, contract) {
+  function heritageContractValue(element, contract) {
     if (!element || !contract) return null;
     return element.getAttribute(contract.native) || element.getAttribute(contract.legacy);
   }
@@ -1236,7 +1236,7 @@
   }
 
   function requestSitesJson(queryData) {
-    return requestRuntimeJson(workbenchEndpoint('sitesJson', true), { query: queryData || {}, timeout: 30000 });
+    return requestRuntimeJson(heritageEndpoint('sitesJson', true), { query: queryData || {}, timeout: 30000 });
   }
 
   function applyRedirectServerType(redirectType, serverType, allowApacheProxy) {
@@ -1423,8 +1423,8 @@
   function reloadVhostWebIp(ctx) {
     var serverId = getVhostServerId(ctx);
     var clientGroupId = ctx.clientGroupField ? ctx.clientGroupField.value : '';
-    callRuntime('loadOptionInto', ['ip_address', workbenchEndpoint('sitesIpOptions') + '?ip_type=IPv4&server_id=' + encodeURIComponent(serverId || '') + '&client_group_id=' + encodeURIComponent(clientGroupId || ''), rerenderWorkbenchSelect]);
-    callRuntime('loadOptionInto', ['ipv6_address', workbenchEndpoint('sitesIpOptions') + '?ip_type=IPv6&server_id=' + encodeURIComponent(serverId || '') + '&client_group_id=' + encodeURIComponent(clientGroupId || ''), rerenderWorkbenchSelect]);
+    callRuntime('loadOptionInto', ['ip_address', heritageEndpoint('sitesIpOptions') + '?ip_type=IPv4&server_id=' + encodeURIComponent(serverId || '') + '&client_group_id=' + encodeURIComponent(clientGroupId || ''), rerenderWorkbenchSelect]);
+    callRuntime('loadOptionInto', ['ipv6_address', heritageEndpoint('sitesIpOptions') + '?ip_type=IPv6&server_id=' + encodeURIComponent(serverId || '') + '&client_group_id=' + encodeURIComponent(clientGroupId || ''), rerenderWorkbenchSelect]);
   }
 
   function reloadVhostDirectiveSnippets(ctx) {
@@ -1549,7 +1549,7 @@
       var field = document.getElementById(id);
       return field ? field.value : '';
     }
-    var request = requestRuntimeJson(workbenchEndpoint('mailJson', true), {
+    var request = requestRuntimeJson(heritageEndpoint('mailJson', true), {
       query: {
         domain_id: value('domain'),
         dkim_public: value('dkim_public'),
@@ -1666,7 +1666,7 @@
     var german = language === 'de';
     queryAll(root || document, '[data-heritage-field-search]').forEach(function(input) {
       var endpointName = input.getAttribute('data-search-endpoint') || '';
-      var endpoint = endpointName ? workbenchEndpoint(endpointName) : (input.getAttribute('data-search-src') || input.getAttribute('data-src') || '');
+      var endpoint = endpointName ? heritageEndpoint(endpointName) : (input.getAttribute('data-search-src') || input.getAttribute('data-src') || '');
       endpoint = endpointWithQuery(endpoint, 'type', input.getAttribute('data-search-type') || '');
       if (!endpoint) return;
       ISPConfig.enhanceSearch(input, {
@@ -1850,7 +1850,7 @@
 
     endpoint: function(name, options) {
       options = options || {};
-      return workbenchEndpoint(name, options.cacheBust === true);
+      return heritageEndpoint(name, options.cacheBust === true);
     },
 
     normalizeWorkbenchContentContracts: function(root) {
@@ -1870,10 +1870,10 @@
       // (mod_rewrite) vs. ?wb= query-fallback choice stays consistent.
       if (pagename && window.history && window.history.replaceState) {
         try {
-          var wbUrl = (typeof ISPConfig.workbenchUrlFor === 'function')
-            ? ISPConfig.workbenchUrlFor(pagename)
+          var wbUrl = (typeof ISPConfig.heritageUrlFor === 'function')
+            ? ISPConfig.heritageUrlFor(pagename)
             : (window.location.pathname + '?wb=' + String(pagename).replace(/#/g, '%23').replace(/&/g, '%26').replace(/\?/g, '%3F'));
-          window.history.replaceState({ workbenchContent: pagename }, '', wbUrl);
+          window.history.replaceState({ heritageContent: pagename }, '', wbUrl);
         } catch (e) {}
       }
       var request = ISPConfig.requestText(pagename, { query: params || null, timeout: 30000 });
@@ -2246,7 +2246,7 @@
     }
   };
 
-  var workbenchApp = window.heritageApp = window.heritageApp || {};
+  var heritageApp = window.heritageApp = window.heritageApp || {};
 
   [
     'setOption',
@@ -2289,7 +2289,7 @@
     'resetFormChanged',
     'endpoint'
   ].forEach(function(name) {
-    workbenchApp[name] = function() {
+    heritageApp[name] = function() {
       return ISPConfig[name].apply(ISPConfig, arguments);
     };
   });
@@ -2301,12 +2301,12 @@
     'tabChangeWarning',
     'tabChangeDiscard',
     'requestsRunning',
-    'workbenchActiveModule',
+    'heritageActiveModule',
     'dataLogTimer',
     'options',
     'registeredHooks'
   ].forEach(function(name) {
-    Object.defineProperty(workbenchApp, name, {
+    Object.defineProperty(heritageApp, name, {
       configurable: true,
       enumerable: true,
       get: function() { return ISPConfig[name]; },
@@ -2467,10 +2467,10 @@
     var optionQuery = target.getAttribute('data-load-option-query');
     if (optionTarget && (optionTemplate || optionEndpoint)) {
       event.preventDefault();
-      ISPConfig.loadOptionInto(optionTarget, optionTemplate ? controlUrl(optionTemplate, target) : endpointWithQueryTemplate(workbenchEndpoint(optionEndpoint), optionQuery, target));
+      ISPConfig.loadOptionInto(optionTarget, optionTemplate ? controlUrl(optionTemplate, target) : endpointWithQueryTemplate(heritageEndpoint(optionEndpoint), optionQuery, target));
       return;
     }
-    var contentTemplate = workbenchContractValue(target, HERITAGE_CONTENT_CONTRACTS.template);
+    var contentTemplate = heritageContractValue(target, HERITAGE_CONTENT_CONTRACTS.template);
     if (contentTemplate) {
       event.preventDefault();
       ISPConfig.navigateTo(controlUrl(contentTemplate, target));
@@ -2516,7 +2516,7 @@
     var copyControl = closest(event.target, '[data-copy-email-address],[data-copy-composed-value],[data-copy-value]');
     var sslClientDataControl = closest(event.target, '[data-ssl-client-data-action]');
     var tabControl = closest(event.target, '[data-change-tab]');
-    var workbenchActionControl = closest(event.target, '[data-heritage-action]');
+    var heritageActionControl = closest(event.target, '[data-heritage-action]');
     var noopControl = closest(event.target, '[data-heritage-noop]');
     var sortHeader = closest(event.target, 'th[data-column]');
     var placeholder = closest(event.target, '.addPlaceholder');
@@ -2527,10 +2527,10 @@
 
     checkRelatedRadio(event.target);
 
-    if (loadControl || loadIntoControl || moduleControl || submitControl || passwordControl || confirmControl || copyControl || sslClientDataControl || tabControl || workbenchActionControl || noopControl || sortHeader || placeholder || placeholderContent || additionalTemplateRemove) {
+    if (loadControl || loadIntoControl || moduleControl || submitControl || passwordControl || confirmControl || copyControl || sslClientDataControl || tabControl || heritageActionControl || noopControl || sortHeader || placeholder || placeholderContent || additionalTemplateRemove) {
       event.preventDefault();
-      if (ISPConfig.requestsRunning > 0 && !passwordControl && !copyControl && !sslClientDataControl && !workbenchActionControl && !noopControl && !placeholder && !placeholderContent && !additionalTemplateRemove) return;
-      if (!passwordControl && !copyControl && !sslClientDataControl && !workbenchActionControl && !noopControl && !placeholder && !placeholderContent && !additionalTemplateRemove) scrollToTop();
+      if (ISPConfig.requestsRunning > 0 && !passwordControl && !copyControl && !sslClientDataControl && !heritageActionControl && !noopControl && !placeholder && !placeholderContent && !additionalTemplateRemove) return;
+      if (!passwordControl && !copyControl && !sslClientDataControl && !heritageActionControl && !noopControl && !placeholder && !placeholderContent && !additionalTemplateRemove) scrollToTop();
     }
 
     if (noopControl) {
@@ -2590,39 +2590,39 @@
       return;
     }
 
-    if (workbenchActionControl) {
-      var workbenchAction = workbenchActionControl.getAttribute('data-heritage-action');
-      if (workbenchAction === 'add-additional-template') ISPConfig.addAdditionalTemplate();
-      if (workbenchAction === 'reset-autoresponder-dates') window.AR_ResetDates();
-      if (workbenchAction === 'create-dkim') createDkimRecord(workbenchActionControl);
-      if (workbenchAction === 'set-hidden-submit') {
-        var fieldName = workbenchActionControl.getAttribute('data-hidden-field');
-        var fieldValue = workbenchActionControl.getAttribute('data-hidden-value') || '1';
+    if (heritageActionControl) {
+      var heritageAction = heritageActionControl.getAttribute('data-heritage-action');
+      if (heritageAction === 'add-additional-template') ISPConfig.addAdditionalTemplate();
+      if (heritageAction === 'reset-autoresponder-dates') window.AR_ResetDates();
+      if (heritageAction === 'create-dkim') createDkimRecord(heritageActionControl);
+      if (heritageAction === 'set-hidden-submit') {
+        var fieldName = heritageActionControl.getAttribute('data-hidden-field');
+        var fieldValue = heritageActionControl.getAttribute('data-hidden-value') || '1';
         var field = fieldName ? query(document, '[name="' + cssEscape(fieldName) + '"]') : null;
         if (field) {
           field.value = fieldValue;
           trigger(field, 'input');
         }
-        ISPConfig.submitPageForm(workbenchActionControl.getAttribute('data-submit-form') || 'pageForm', workbenchActionControl.getAttribute('data-form-action'));
+        ISPConfig.submitPageForm(heritageActionControl.getAttribute('data-submit-form') || 'pageForm', heritageActionControl.getAttribute('data-form-action'));
       }
       return;
     }
 
     if (loadIntoControl) {
-      var targetId = workbenchContractValue(loadIntoControl, HERITAGE_CONTENT_CONTRACTS.target);
-      var targetContent = workbenchContractValue(loadIntoControl, HERITAGE_CONTENT_CONTRACTS.load);
+      var targetId = heritageContractValue(loadIntoControl, HERITAGE_CONTENT_CONTRACTS.target);
+      var targetContent = heritageContractValue(loadIntoControl, HERITAGE_CONTENT_CONTRACTS.load);
       if (targetId && targetContent) ISPConfig.refreshContentInto(targetId, targetContent);
       return;
     }
 
     if (loadControl) {
-      var content = workbenchContractValue(loadControl, HERITAGE_CONTENT_CONTRACTS.load);
+      var content = heritageContractValue(loadControl, HERITAGE_CONTENT_CONTRACTS.load);
       if (content) ISPConfig.navigateTo(content);
       return;
     }
 
     if (moduleControl) {
-      var module = workbenchContractValue(moduleControl, HERITAGE_CONTENT_CONTRACTS.module);
+      var module = heritageContractValue(moduleControl, HERITAGE_CONTENT_CONTRACTS.module);
       if (module) ISPConfig.capp(module);
       return;
     }
@@ -3076,7 +3076,7 @@
   function runtime() { return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null; }
   var legacy = window.ISPConfig;
   var app = runtime();
-  if (!legacy || !app || legacy.workbenchLoadingInstalled) return;
+  if (!legacy || !app || legacy.heritageLoadingInstalled) return;
 
   var originalCapp = legacy.capp;
   var content = function() { return document.getElementById('pageContent'); };
@@ -3153,7 +3153,7 @@
   legacy.capp = function(module, redirect) {
     var api = runtime();
     startModuleTransition(module);
-    legacy.workbenchActiveModule = module;
+    legacy.heritageActiveModule = module;
     if (!api || typeof api.requestText !== 'function') return originalCapp.apply(this, arguments);
     if (moduleRequest && moduleRequest.readyState !== 4) moduleRequest.abort();
     try {
@@ -3247,7 +3247,7 @@
     return legacy.endRequest();
   };
 
-  legacy.workbenchLoadingInstalled = true;
+  legacy.heritageLoadingInstalled = true;
 })(window, document);
 
 /* source: heritage-content-states.js */
@@ -3257,7 +3257,7 @@
   function runtime() { return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null; }
   var legacy = window.ISPConfig;
   var app = runtime();
-  if (!legacy || !app || legacy.workbenchContentStatesInstalled) return;
+  if (!legacy || !app || legacy.heritageContentStatesInstalled) return;
 
   var sequence = 0;
   var retryRequests = {};
@@ -3265,7 +3265,7 @@
   var contentRequest = null;
   var contentStateTimer = null;
   var contentStateDelay = 140;
-  var historyKey = 'workbenchContent';
+  var historyKey = 'heritageContent';
   var isGerman = (typeof window.heritageLanguage === 'function' ? window.heritageLanguage() : (document.documentElement.lang || '')).toLowerCase().indexOf('de') === 0;
 
   function localized(german, english) {
@@ -3388,7 +3388,7 @@
     return window.location.pathname + '?wb=' + String(page).replace(/#/g, '%23').replace(/&/g, '%26').replace(/\?/g, '%3F');
   }
   // Expose so the core runtime (navigateTo) uses the same URL form.
-  if (legacy) legacy.workbenchUrlFor = urlFor;
+  if (legacy) legacy.heritageUrlFor = urlFor;
 
   function installNavigationHistory() {
     if (!window.history || !window.history.pushState || document.documentElement.dataset.heritageHistoryReady) return;
@@ -3398,14 +3398,14 @@
     // or bookmark restores it instead of falling back to the server session
     // module (which made every reload land on the last full-loaded module).
     var initial = pageFromUrl() || (content && content.getAttribute('data-startpage')) || 'dashboard/dashboard.php';
-    if (!window.history.state || !window.history.state[historyKey]) window.history.replaceState({ workbenchContent: initial }, '', urlFor(initial));
+    if (!window.history.state || !window.history.state[historyKey]) window.history.replaceState({ heritageContent: initial }, '', urlFor(initial));
     document.addEventListener('click', function(event) {
       var trigger = event.target.closest('a[data-heritage-module],button[data-heritage-module],a[data-capp],button[data-capp]');
       if (!trigger) return;
       var target = moduleAttribute(trigger);
       if (!target || trigger.getAttribute('data-submit-form') || trigger.getAttribute('data-form-action')) return;
       var current = window.history.state && window.history.state[historyKey];
-      if (current !== target) window.history.pushState({ workbenchContent: target }, '', urlFor(target));
+      if (current !== target) window.history.pushState({ heritageContent: target }, '', urlFor(target));
     });
     window.addEventListener('popstate', function(event) {
       var target = event.state && event.state[historyKey];
@@ -4858,10 +4858,10 @@
         });
       }
       updateConditionalRows();
-      if (form._workbenchConditionalObserver) form._workbenchConditionalObserver.disconnect();
+      if (form._heritageConditionalObserver) form._heritageConditionalObserver.disconnect();
       if (window.MutationObserver) {
-        form._workbenchConditionalObserver = new MutationObserver(updateConditionalRows);
-        form._workbenchConditionalObserver.observe(scope, { subtree: true, attributes: true, attributeFilter: ['style', 'hidden', 'aria-hidden'] });
+        form._heritageConditionalObserver = new MutationObserver(updateConditionalRows);
+        form._heritageConditionalObserver.observe(scope, { subtree: true, attributes: true, attributeFilter: ['style', 'hidden', 'aria-hidden'] });
       }
     });
     if (window.heritageAccessibility) window.heritageAccessibility.enhance(host);
@@ -4879,7 +4879,7 @@
     var moduleName = moduleAttribute(trigger);
     if (!moduleName) return;
     var api = runtime();
-    if (api) api.workbenchActiveModule = moduleName;
+    if (api) api.heritageActiveModule = moduleName;
     document.querySelectorAll('#main-navigation a[aria-current="page"]').forEach(function(link) { link.removeAttribute('aria-current'); });
     document.querySelectorAll('#main-navigation a[data-heritage-module], #main-navigation a[data-capp]').forEach(function(link) {
       if (moduleAttribute(link) === moduleName) link.setAttribute('aria-current', 'page');
@@ -5035,7 +5035,7 @@
         api.replaceServerFragment(host, response);
         var loadedModule = moduleFromPageName(pagename);
         if (loadedModule) {
-          api.workbenchActiveModule = loadedModule;
+          api.heritageActiveModule = loadedModule;
           syncPrimaryModule(document.querySelector('#topnav-container'), loadedModule);
           syncPrimaryModule(document.querySelector('#heritage-mobile-navigation'), loadedModule);
         }
@@ -5140,8 +5140,8 @@
   legacy.loadMenus = function(options) {
     var api = runtime();
     options = options || {};
-    var moduleName = options.module || (api && api.workbenchActiveModule) || '';
-    if (moduleName && api) api.workbenchActiveModule = moduleName;
+    var moduleName = options.module || (api && api.heritageActiveModule) || '';
+    if (moduleName && api) api.heritageActiveModule = moduleName;
     menuSequence += 1;
     var token = menuSequence;
     menuRequests.forEach(function(request) {
@@ -5160,9 +5160,9 @@
     installNavigationHistory();
     var content = document.getElementById('pageContent');
     var startpage = pageFromUrl() || (content && content.getAttribute('data-startpage')) || 'dashboard/dashboard.php';
-    api.workbenchActiveModule = String(startpage).split('/')[0] || 'dashboard';
+    api.heritageActiveModule = String(startpage).split('/')[0] || 'dashboard';
     api.navigateTo(startpage);
-    api.loadMenus({ module: api.workbenchActiveModule });
+    api.loadMenus({ module: api.heritageActiveModule });
     api.keepalive();
     window.setTimeout(function() {
       try {
@@ -5241,7 +5241,7 @@
     retryContentRequest(token);
   });
 
-  legacy.workbenchEnhanceContent = function(rootOrPageName, pageName, context) {
+  legacy.heritageEnhanceContent = function(rootOrPageName, pageName, context) {
     var host = rootOrPageName && rootOrPageName.nodeType ? rootOrPageName : document.getElementById('pageContent');
     var resolvedPage = rootOrPageName && rootOrPageName.nodeType ? pageName : rootOrPageName;
     if (!host) return false;
@@ -5252,19 +5252,19 @@
 
   window.heritageContentStates = window.heritageContentStates || {};
   window.heritageContentStates.enhance = function(root, pageName, context) {
-    return (legacy && typeof legacy.workbenchEnhanceContent === 'function')
-      ? legacy.workbenchEnhanceContent(root || document.getElementById('pageContent'), pageName || '', context || { source: 'external-enhance' })
+    return (legacy && typeof legacy.heritageEnhanceContent === 'function')
+      ? legacy.heritageEnhanceContent(root || document.getElementById('pageContent'), pageName || '', context || { source: 'external-enhance' })
       : false;
   };
 
   legacy.registerHook('onAfterContentLoad', function(name, params) {
     if (params && params.__workbenchEnhanced) return;
-    if (legacy && typeof legacy.workbenchEnhanceContent === 'function') {
-      legacy.workbenchEnhanceContent(params && params.url ? params.url : name || '', '', { source: 'legacy-after-content-hook' });
+    if (legacy && typeof legacy.heritageEnhanceContent === 'function') {
+      legacy.heritageEnhanceContent(params && params.url ? params.url : name || '', '', { source: 'legacy-after-content-hook' });
     }
   });
 
-  legacy.workbenchContentStatesInstalled = true;
+  legacy.heritageContentStatesInstalled = true;
 })(window, document);
 
 /* source: heritage-background.js */
@@ -5274,7 +5274,7 @@
   function runtime() { return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null; }
   var legacy = window.ISPConfig;
   var app = runtime();
-  if (!legacy || !app || typeof app.requestText !== 'function' || typeof app.requestJson !== 'function' || legacy.workbenchBackgroundInstalled) return;
+  if (!legacy || !app || typeof app.requestText !== 'function' || typeof app.requestJson !== 'function' || legacy.heritageBackgroundInstalled) return;
 
   var contentRequests = {};
   var keepaliveTimer = null;
@@ -5436,7 +5436,7 @@
     if (datalogRequest && datalogRequest.readyState !== 4) datalogRequest.abort();
   });
 
-  legacy.workbenchBackgroundInstalled = true;
+  legacy.heritageBackgroundInstalled = true;
 })(window, document);
 
 /* source: heritage-icons.js */
@@ -5667,8 +5667,8 @@
 
   function dismissGenerated(alert) {
     if (!alert) return;
-    if (alert.workbenchDismissController && alert.workbenchDismissController.timer) {
-      window.clearTimeout(alert.workbenchDismissController.timer);
+    if (alert.heritageDismissController && alert.heritageDismissController.timer) {
+      window.clearTimeout(alert.heritageDismissController.timer);
     }
     alert.remove();
   }
@@ -5678,7 +5678,7 @@
     var duration = toneName === 'success' ? 7000 : 10000;
     alert.setAttribute('data-heritage-auto-dismiss', 'true');
     alert.style.setProperty('--hg-feedback-duration', duration + 'ms');
-    var controller = alert.workbenchDismissController || {};
+    var controller = alert.heritageDismissController || {};
     if (controller.timer) window.clearTimeout(controller.timer);
     controller.timer = null;
     controller.remaining = duration;
@@ -5708,7 +5708,7 @@
       });
       controller.bound = true;
     }
-    alert.workbenchDismissController = controller;
+    alert.heritageDismissController = controller;
     controller.resume();
   }
 
@@ -5980,7 +5980,7 @@
     if (!runtime()) return '';
     var nextModule = normalizeModule(module);
     if (!nextModule) return '';
-    runtime().workbenchActiveModule = nextModule;
+    runtime().heritageActiveModule = nextModule;
     if (options && options.resetUserCollapsed) {
       userCollapsedModule = '';
       collapsedModules = {};
@@ -6014,7 +6014,7 @@
     var canonical = canonicalNavigationTarget(target || currentPageTarget);
     var moduleFromPage = normalizeModule(normalizePageModule(canonical));
     if (moduleFromPage) return moduleFromPage;
-    var runtimeModule = normalizeModule((runtime() && runtime().workbenchActiveModule) || '');
+    var runtimeModule = normalizeModule((runtime() && runtime().heritageActiveModule) || '');
     if (runtimeModule) return runtimeModule;
     if (fallback) return normalizeModule(fallback);
     if (canonical === '' && currentPageTarget === dashboardTarget) return 'dashboard';
@@ -6394,7 +6394,7 @@
     var sidebar = document.querySelector('#sidebar');
     var container = document.createElement('ul');
     var api = runtime();
-    var activeModule = String(activeModuleOverride || (api && api.workbenchActiveModule) || '');
+    var activeModule = String(activeModuleOverride || (api && api.heritageActiveModule) || '');
     var dashboard = activeModule === 'dashboard' && isDashboardContent();
     if (dashboard) return { node: container, count: 0 };
     var useSidebar = sidebarMatchesModule(sidebar, activeModule);
@@ -6505,7 +6505,7 @@
     var api = runtime();
     var activeModule = resolveActiveModule(canonicalPage);
     if (!activeModule && canonicalPage.indexOf('dashboard/') === 0) activeModule = 'dashboard';
-    if (activeModule && api) api.workbenchActiveModule = activeModule;
+    if (activeModule && api) api.heritageActiveModule = activeModule;
     if (activeModule === 'dashboard') {
       collapsedModules = {};
       userCollapsedModule = '';
@@ -6660,7 +6660,7 @@
   function render() {
     ensureBrand();
     var api = runtime();
-    var activeModule = String(pendingModule || (api && api.workbenchActiveModule) || '');
+    var activeModule = String(pendingModule || (api && api.heritageActiveModule) || '');
     var secondary = buildSecondaryNavigation(activeModule);
     enhanceSecondaryNavigation();
     var primary = primaryNavigationSources();
@@ -9226,11 +9226,11 @@
 
   function restoreDialogFocus(dialog) {
     if (!dialog) return false;
-    var trigger = dialog.workbenchDialogTrigger || document.querySelector('[aria-controls="' + CSS.escape(dialog.id) + '"]');
+    var trigger = dialog.heritageDialogTrigger || document.querySelector('[aria-controls="' + CSS.escape(dialog.id) + '"]');
     if (!trigger) return false;
     trigger.setAttribute('aria-expanded', 'false');
     if (document.contains(trigger)) trigger.focus();
-    dialog.workbenchDialogTrigger = null;
+    dialog.heritageDialogTrigger = null;
     return document.activeElement === trigger;
   }
 
@@ -9668,7 +9668,7 @@
 
   var legacy = window.ISPConfig;
   var api = runtime();
-  if (legacy && api && typeof legacy.submitForm === 'function' && !legacy.workbenchSubmitFeedbackInstalled) {
+  if (legacy && api && typeof legacy.submitForm === 'function' && !legacy.heritageSubmitFeedbackInstalled) {
     var originalSubmitForm = legacy.submitForm;
     legacy.submitForm = function (formname, target, confirmation) {
       var currentApi = runtime();
@@ -9711,7 +9711,7 @@
       }).finally(complete);
       return request;
     };
-    legacy.workbenchSubmitFeedbackInstalled = true;
+    legacy.heritageSubmitFeedbackInstalled = true;
   }
 
   window.heritageSubmitFeedback = {
@@ -9730,7 +9730,7 @@
   function runtime() { return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null; }
   var legacy = window.ISPConfig;
   var app = runtime();
-  if (!legacy || !app || typeof legacy.submitForm !== 'function' || legacy.workbenchListFilterInstalled) return;
+  if (!legacy || !app || typeof legacy.submitForm !== 'function' || legacy.heritageListFilterInstalled) return;
   var previousSubmitForm = legacy.submitForm;
   var active = null;
   var changedSearchControl = null;
@@ -9783,7 +9783,7 @@
     if (control && document.body.classList.contains('wb-list-page')) changedSearchControl = control;
   }, true);
   window.heritageListFilter = { isActive: function() { return Boolean(active); } };
-  legacy.workbenchListFilterInstalled = true;
+  legacy.heritageListFilterInstalled = true;
 })(window, document);
 
 /* source: heritage-statistics.js */
@@ -9795,7 +9795,7 @@
   }
 
   var runtime = app();
-  if (!runtime || runtime.workbenchStatisticsInstalled) return;
+  if (!runtime || runtime.heritageStatisticsInstalled) return;
 
   var reports = [
     { key: 'web', path: 'sites/web_sites_stats.php', labels: { de: 'Web-Traffic', en: 'Web traffic' } },
@@ -9903,7 +9903,7 @@
   }
 
   function enhance(pageName) {
-    var report = currentReport(pageName || (window.history.state && window.history.state.workbenchContent));
+    var report = currentReport(pageName || (window.history.state && window.history.state.heritageContent));
     var host = document.getElementById('pageContent');
     if (!host) return false;
     document.body.classList.toggle('wb-statistics-page', Boolean(report));
@@ -9967,18 +9967,18 @@
     event.preventDefault();
     var path = launcher.getAttribute('data-heritage-load-content') || launcher.getAttribute('data-load-content');
     launcher.setAttribute('aria-busy', 'true');
-    current.workbenchActiveModule = 'sites';
+    current.heritageActiveModule = 'sites';
     var request = current.capp('sites', path);
     Promise.resolve(request && request.promise ? request.promise : request)
       .catch(function () { if (current.reportError) current.reportError('Statistics could not be opened.'); })
       .finally(function () { if (launcher.isConnected) launcher.removeAttribute('aria-busy'); });
   });
   runtime.registerHook('onAfterContentLoad', function (name, params) {
-    enhance(params && params.url ? params.url : (window.history.state && window.history.state.workbenchContent));
+    enhance(params && params.url ? params.url : (window.history.state && window.history.state.heritageContent));
   });
 
   window.heritageStatistics = { enhance: enhance, reports: reports.slice() };
-  runtime.workbenchStatisticsInstalled = true;
+  runtime.heritageStatisticsInstalled = true;
 })(window, document);
 
 /* source: heritage-wizard-preview.js */
@@ -9987,7 +9987,7 @@
   function runtime() { return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null; }
   var legacy = window.ISPConfig;
   var app = runtime();
-  if (!legacy || !app || typeof legacy.submitForm !== 'function' || legacy.workbenchWizardPreviewInstalled) return;
+  if (!legacy || !app || typeof legacy.submitForm !== 'function' || legacy.heritageWizardPreviewInstalled) return;
   var previousSubmitForm = legacy.submitForm;
   var active = null;
   function targetPath(value) { try { return new URL(value || '', document.baseURI).pathname.replace(/^\//, ''); } catch (error) { return ''; } }
@@ -10019,7 +10019,7 @@
     return request;
   };
   window.heritageWizardPreview = { isActive: function() { return Boolean(active); } };
-  legacy.workbenchWizardPreviewInstalled = true;
+  legacy.heritageWizardPreviewInstalled = true;
 })(window, document);
 
 /* source: heritage-advanced-controls.js */
@@ -10189,7 +10189,7 @@
   function runtime() { return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null; }
   var legacy = window.ISPConfig;
   var app = runtime();
-  if (!legacy || !app || typeof legacy.submitUploadForm !== 'function' || legacy.workbenchUploadFeedbackInstalled) return;
+  if (!legacy || !app || typeof legacy.submitUploadForm !== 'function' || legacy.heritageUploadFeedbackInstalled) return;
 
   var originalSubmitUploadForm = legacy.submitUploadForm;
   var active = null;
@@ -10338,7 +10338,7 @@
     isActive: function () { return Boolean(active); },
     abort: function () { if (active && active.request) active.request.abort(); finish('failed', messages.upload_failed || 'The upload response was invalid. Try again.'); }
   };
-  legacy.workbenchUploadFeedbackInstalled = true;
+  legacy.heritageUploadFeedbackInstalled = true;
 })(window, document);
 
 /* source: heritage-global-search.js */

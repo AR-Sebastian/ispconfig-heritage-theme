@@ -4,7 +4,7 @@
   function runtime() { return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null; }
   var legacy = window.ISPConfig;
   var app = runtime();
-  if (!legacy || !app || typeof legacy.submitUploadForm !== 'function' || legacy.workbenchUploadFeedbackInstalled) return;
+  if (!legacy || !app || typeof legacy.submitUploadForm !== 'function' || legacy.heritageUploadFeedbackInstalled) return;
 
   var originalSubmitUploadForm = legacy.submitUploadForm;
   var active = null;
@@ -153,5 +153,5 @@
     isActive: function () { return Boolean(active); },
     abort: function () { if (active && active.request) active.request.abort(); finish('failed', messages.upload_failed || 'The upload response was invalid. Try again.'); }
   };
-  legacy.workbenchUploadFeedbackInstalled = true;
+  legacy.heritageUploadFeedbackInstalled = true;
 })(window, document);

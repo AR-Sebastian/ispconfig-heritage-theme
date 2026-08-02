@@ -3,7 +3,7 @@
   function runtime() { return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null; }
   var legacy = window.ISPConfig;
   var app = runtime();
-  if (!legacy || !app || typeof legacy.submitForm !== 'function' || legacy.workbenchListFilterInstalled) return;
+  if (!legacy || !app || typeof legacy.submitForm !== 'function' || legacy.heritageListFilterInstalled) return;
   var previousSubmitForm = legacy.submitForm;
   var active = null;
   var changedSearchControl = null;
@@ -56,5 +56,5 @@
     if (control && document.body.classList.contains('wb-list-page')) changedSearchControl = control;
   }, true);
   window.heritageListFilter = { isActive: function() { return Boolean(active); } };
-  legacy.workbenchListFilterInstalled = true;
+  legacy.heritageListFilterInstalled = true;
 })(window, document);

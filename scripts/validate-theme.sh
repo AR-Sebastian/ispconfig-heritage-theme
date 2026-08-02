@@ -80,6 +80,10 @@ if grep -RIEq 'workbench-(content-messages|mobile-navigation|mobile-secondary-na
   echo 'Theme contains a retired Workbench-owned DOM identifier.' >&2
   exit 1
 fi
+if grep -RIEq '\b_?workbench[A-Z][A-Za-z0-9_]*' "$theme/assets/javascripts" --exclude='*.bundle.*'; then
+  echo 'Theme contains an internal JavaScript symbol in the retired Workbench namespace.' >&2
+  exit 1
+fi
 while IFS= read -r -d '' file; do node --check "$file"; done < <(find "$theme" -type f -name '*.js' -print0)
 
 node - "$theme" "$version" <<'NODE'

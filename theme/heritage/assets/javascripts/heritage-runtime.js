@@ -212,7 +212,7 @@
   function syncModuleContext() {
     var pageContent = document.getElementById('pageContent');
     if (!pageContent) return;
-    var activeModule = String(window.ISPConfig && window.ISPConfig.workbenchActiveModule || '').toLowerCase();
+    var activeModule = String(window.ISPConfig && window.ISPConfig.heritageActiveModule || '').toLowerCase();
     var isMonitor = !!pageContent.querySelector('.wb-monitor-workspace, .systemmonitor, .stateview, .panel_system, .codeview');
     var family = document.body.classList.contains('wb-dashboard-page') ? 'dashboard' :
       (isMonitor ? 'monitor' :

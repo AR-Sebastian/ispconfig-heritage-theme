@@ -3,7 +3,7 @@
   function runtime() { return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null; }
   var legacy = window.ISPConfig;
   var app = runtime();
-  if (!legacy || !app || typeof legacy.submitForm !== 'function' || legacy.workbenchWizardPreviewInstalled) return;
+  if (!legacy || !app || typeof legacy.submitForm !== 'function' || legacy.heritageWizardPreviewInstalled) return;
   var previousSubmitForm = legacy.submitForm;
   var active = null;
   function targetPath(value) { try { return new URL(value || '', document.baseURI).pathname.replace(/^\//, ''); } catch (error) { return ''; } }
@@ -35,5 +35,5 @@
     return request;
   };
   window.heritageWizardPreview = { isActive: function() { return Boolean(active); } };
-  legacy.workbenchWizardPreviewInstalled = true;
+  legacy.heritageWizardPreviewInstalled = true;
 })(window, document);

@@ -6,7 +6,7 @@
   }
 
   var runtime = app();
-  if (!runtime || runtime.workbenchStatisticsInstalled) return;
+  if (!runtime || runtime.heritageStatisticsInstalled) return;
 
   var reports = [
     { key: 'web', path: 'sites/web_sites_stats.php', labels: { de: 'Web-Traffic', en: 'Web traffic' } },
@@ -114,7 +114,7 @@
   }
 
   function enhance(pageName) {
-    var report = currentReport(pageName || (window.history.state && window.history.state.workbenchContent));
+    var report = currentReport(pageName || (window.history.state && window.history.state.heritageContent));
     var host = document.getElementById('pageContent');
     if (!host) return false;
     document.body.classList.toggle('wb-statistics-page', Boolean(report));
@@ -178,16 +178,16 @@
     event.preventDefault();
     var path = launcher.getAttribute('data-heritage-load-content') || launcher.getAttribute('data-load-content');
     launcher.setAttribute('aria-busy', 'true');
-    current.workbenchActiveModule = 'sites';
+    current.heritageActiveModule = 'sites';
     var request = current.capp('sites', path);
     Promise.resolve(request && request.promise ? request.promise : request)
       .catch(function () { if (current.reportError) current.reportError('Statistics could not be opened.'); })
       .finally(function () { if (launcher.isConnected) launcher.removeAttribute('aria-busy'); });
   });
   runtime.registerHook('onAfterContentLoad', function (name, params) {
-    enhance(params && params.url ? params.url : (window.history.state && window.history.state.workbenchContent));
+    enhance(params && params.url ? params.url : (window.history.state && window.history.state.heritageContent));
   });
 
   window.heritageStatistics = { enhance: enhance, reports: reports.slice() };
-  runtime.workbenchStatisticsInstalled = true;
+  runtime.heritageStatisticsInstalled = true;
 })(window, document);

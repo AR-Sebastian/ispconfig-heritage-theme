@@ -151,7 +151,7 @@
 
   var legacy = window.ISPConfig;
   var api = runtime();
-  if (legacy && api && typeof legacy.submitForm === 'function' && !legacy.workbenchSubmitFeedbackInstalled) {
+  if (legacy && api && typeof legacy.submitForm === 'function' && !legacy.heritageSubmitFeedbackInstalled) {
     var originalSubmitForm = legacy.submitForm;
     legacy.submitForm = function (formname, target, confirmation) {
       var currentApi = runtime();
@@ -194,7 +194,7 @@
       }).finally(complete);
       return request;
     };
-    legacy.workbenchSubmitFeedbackInstalled = true;
+    legacy.heritageSubmitFeedbackInstalled = true;
   }
 
   window.heritageSubmitFeedback = {

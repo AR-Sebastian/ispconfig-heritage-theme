@@ -113,8 +113,8 @@
 
   function dismissGenerated(alert) {
     if (!alert) return;
-    if (alert.workbenchDismissController && alert.workbenchDismissController.timer) {
-      window.clearTimeout(alert.workbenchDismissController.timer);
+    if (alert.heritageDismissController && alert.heritageDismissController.timer) {
+      window.clearTimeout(alert.heritageDismissController.timer);
     }
     alert.remove();
   }
@@ -124,7 +124,7 @@
     var duration = toneName === 'success' ? 7000 : 10000;
     alert.setAttribute('data-heritage-auto-dismiss', 'true');
     alert.style.setProperty('--hg-feedback-duration', duration + 'ms');
-    var controller = alert.workbenchDismissController || {};
+    var controller = alert.heritageDismissController || {};
     if (controller.timer) window.clearTimeout(controller.timer);
     controller.timer = null;
     controller.remaining = duration;
@@ -154,7 +154,7 @@
       });
       controller.bound = true;
     }
-    alert.workbenchDismissController = controller;
+    alert.heritageDismissController = controller;
     controller.resume();
   }
 
@@ -877,7 +877,7 @@
   function syncModuleContext() {
     var pageContent = document.getElementById('pageContent');
     if (!pageContent) return;
-    var activeModule = String(window.ISPConfig && window.ISPConfig.workbenchActiveModule || '').toLowerCase();
+    var activeModule = String(window.ISPConfig && window.ISPConfig.heritageActiveModule || '').toLowerCase();
     var isMonitor = !!pageContent.querySelector('.wb-monitor-workspace, .systemmonitor, .stateview, .panel_system, .codeview');
     var family = document.body.classList.contains('wb-dashboard-page') ? 'dashboard' :
       (isMonitor ? 'monitor' :

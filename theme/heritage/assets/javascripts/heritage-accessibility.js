@@ -86,11 +86,11 @@
 
   function restoreDialogFocus(dialog) {
     if (!dialog) return false;
-    var trigger = dialog.workbenchDialogTrigger || document.querySelector('[aria-controls="' + CSS.escape(dialog.id) + '"]');
+    var trigger = dialog.heritageDialogTrigger || document.querySelector('[aria-controls="' + CSS.escape(dialog.id) + '"]');
     if (!trigger) return false;
     trigger.setAttribute('aria-expanded', 'false');
     if (document.contains(trigger)) trigger.focus();
-    dialog.workbenchDialogTrigger = null;
+    dialog.heritageDialogTrigger = null;
     return document.activeElement === trigger;
   }
 

@@ -110,8 +110,8 @@
 
   function dismissGenerated(alert) {
     if (!alert) return;
-    if (alert.workbenchDismissController && alert.workbenchDismissController.timer) {
-      window.clearTimeout(alert.workbenchDismissController.timer);
+    if (alert.heritageDismissController && alert.heritageDismissController.timer) {
+      window.clearTimeout(alert.heritageDismissController.timer);
     }
     alert.remove();
   }
@@ -121,7 +121,7 @@
     var duration = toneName === 'success' ? 7000 : 10000;
     alert.setAttribute('data-heritage-auto-dismiss', 'true');
     alert.style.setProperty('--hg-feedback-duration', duration + 'ms');
-    var controller = alert.workbenchDismissController || {};
+    var controller = alert.heritageDismissController || {};
     if (controller.timer) window.clearTimeout(controller.timer);
     controller.timer = null;
     controller.remaining = duration;
@@ -151,7 +151,7 @@
       });
       controller.bound = true;
     }
-    alert.workbenchDismissController = controller;
+    alert.heritageDismissController = controller;
     controller.resume();
   }
 

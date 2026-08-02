@@ -110,7 +110,7 @@
     if (!runtime()) return '';
     var nextModule = normalizeModule(module);
     if (!nextModule) return '';
-    runtime().workbenchActiveModule = nextModule;
+    runtime().heritageActiveModule = nextModule;
     if (options && options.resetUserCollapsed) {
       userCollapsedModule = '';
       collapsedModules = {};
@@ -144,7 +144,7 @@
     var canonical = canonicalNavigationTarget(target || currentPageTarget);
     var moduleFromPage = normalizeModule(normalizePageModule(canonical));
     if (moduleFromPage) return moduleFromPage;
-    var runtimeModule = normalizeModule((runtime() && runtime().workbenchActiveModule) || '');
+    var runtimeModule = normalizeModule((runtime() && runtime().heritageActiveModule) || '');
     if (runtimeModule) return runtimeModule;
     if (fallback) return normalizeModule(fallback);
     if (canonical === '' && currentPageTarget === dashboardTarget) return 'dashboard';
@@ -524,7 +524,7 @@
     var sidebar = document.querySelector('#sidebar');
     var container = document.createElement('ul');
     var api = runtime();
-    var activeModule = String(activeModuleOverride || (api && api.workbenchActiveModule) || '');
+    var activeModule = String(activeModuleOverride || (api && api.heritageActiveModule) || '');
     var dashboard = activeModule === 'dashboard' && isDashboardContent();
     if (dashboard) return { node: container, count: 0 };
     var useSidebar = sidebarMatchesModule(sidebar, activeModule);
@@ -635,7 +635,7 @@
     var api = runtime();
     var activeModule = resolveActiveModule(canonicalPage);
     if (!activeModule && canonicalPage.indexOf('dashboard/') === 0) activeModule = 'dashboard';
-    if (activeModule && api) api.workbenchActiveModule = activeModule;
+    if (activeModule && api) api.heritageActiveModule = activeModule;
     if (activeModule === 'dashboard') {
       collapsedModules = {};
       userCollapsedModule = '';
@@ -790,7 +790,7 @@
   function render() {
     ensureBrand();
     var api = runtime();
-    var activeModule = String(pendingModule || (api && api.workbenchActiveModule) || '');
+    var activeModule = String(pendingModule || (api && api.heritageActiveModule) || '');
     var secondary = buildSecondaryNavigation(activeModule);
     enhanceSecondaryNavigation();
     var primary = primaryNavigationSources();

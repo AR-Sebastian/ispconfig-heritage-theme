@@ -4,7 +4,7 @@
   function runtime() { return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null; }
   var legacy = window.ISPConfig;
   var app = runtime();
-  if (!legacy || !app || typeof app.requestText !== 'function' || typeof app.requestJson !== 'function' || legacy.workbenchBackgroundInstalled) return;
+  if (!legacy || !app || typeof app.requestText !== 'function' || typeof app.requestJson !== 'function' || legacy.heritageBackgroundInstalled) return;
 
   var contentRequests = {};
   var keepaliveTimer = null;
@@ -166,5 +166,5 @@
     if (datalogRequest && datalogRequest.readyState !== 4) datalogRequest.abort();
   });
 
-  legacy.workbenchBackgroundInstalled = true;
+  legacy.heritageBackgroundInstalled = true;
 })(window, document);

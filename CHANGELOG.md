@@ -15,6 +15,7 @@
 - Retired branding-editor CSS and its dedicated form profile were removed without changing shared form surfaces.
 - Abbreviated `data-wb-*` contracts and their JavaScript dataset properties were migrated to the explicit HERITAGE namespace.
 - Theme-owned shell, dialog, navigation, search, tooltip and generated DOM identifiers now use the HERITAGE namespace.
+- Internal JavaScript helpers, runtime properties, history state and installation guards now use the HERITAGE namespace.
 
 ## 1.0.33 – 2026-07-31
 
