@@ -40,7 +40,7 @@ The detailed, reproducible evidence and the lab limitation are recorded in
 - [x] Repeat the authenticated visual gates with the corrected `3.3dev` compatibility markers and no temporary lab edits.
 - [x] Confirm Additional PHP list ordering/priority and the alias-domain source contract in the runtime lab.
 - [ ] Confirm HERITAGE login session controls after an explicit global-theme deployment decision.
-- [ ] Confirm mailbox quota presentation with a synthetic mailbox fixture; the current stock lab contains no mailbox rows.
+- [x] Confirm mailbox quota presentation with an isolated 100 MiB synthetic mailbox fixture on desktop/mobile, then restore the pre-fixture VM state.
 - [ ] Review and merge the release-candidate pull request into `main` with green checks.
 - [ ] Rebuild from the clean merge commit and compare the final archive hashes.
 - [ ] Decide whether the existing `v1.0.20` tag requires a reconstructed GitHub Release entry; no historical publication is changed automatically.

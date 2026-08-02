@@ -77,6 +77,20 @@ user-specific `app_theme` exists. Testing or deploying the HERITAGE login page
 therefore requires an explicit global ISPConfig theme configuration decision.
 The package must not silently edit that core configuration.
 
+## Synthetic mailbox quota fixture
+
+A temporary VM snapshot isolated a disabled synthetic mailbox at
+`heritage-quota-fixture@invalid.test`. Its delivery and access states were
+disabled and its quota was exactly 100 MiB. The authenticated mailbox list
+rendered the fixture as one real ISPConfig row. The edit route presented the
+quota as `100` with the localized `Quota (0 for unlimited)` label, visible `MB`
+unit and `aria-describedby="quota-desc"` association.
+
+At 390 x 844 pixels the quota control remained 305.7 pixels wide inside the
+viewport with zero horizontal document overflow. No browser error, warning or
+retired `wb-*` component class was present. The VM was restored to its
+pre-fixture snapshot afterward, so no synthetic mail object remains.
+
 No public gallery image was accepted from this run because the saved browser
 profile has every dashboard widget hidden. That state is useful regression
 evidence but is not representative release imagery.
