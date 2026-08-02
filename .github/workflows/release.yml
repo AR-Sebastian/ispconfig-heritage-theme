@@ -53,3 +53,5 @@ jobs:
             dist/ispconfig-heritage-theme-*.zip
             dist/ispconfig-heritage-theme-*.tar.gz
             dist/SHA256SUMS.txt
+      - name: Verify published assets
+        run: bash scripts/verify-published-release.sh "${GITHUB_REF_NAME#v}"
