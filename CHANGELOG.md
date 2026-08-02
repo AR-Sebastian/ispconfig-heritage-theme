@@ -8,6 +8,7 @@
 - Validation permanently protects branding and the repaired UI contracts.
 - ZIP and TAR.GZ release artifacts are reproducible and traversal-checked.
 - Theme-owned DOM contracts use the HERITAGE namespace while ISPConfig compatibility attributes remain intact.
+- Theme-owned lifecycle and interaction events use the `heritage:*` namespace.
 
 ## 1.0.33 – 2026-07-31
 

@@ -216,5 +216,5 @@
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
   else init();
-  document.addEventListener('workbench:navigation-complete', init);
+  document.addEventListener('heritage:navigation-complete', init);
 })(window, document);

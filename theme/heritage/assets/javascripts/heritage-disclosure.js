@@ -36,7 +36,7 @@
       var expanded = trigger.getAttribute('aria-expanded') === 'true';
       trigger.setAttribute('aria-expanded', expanded ? 'false' : 'true');
       panel.hidden = expanded;
-      root.dispatchEvent(new CustomEvent('workbench:disclosure-change', {
+      root.dispatchEvent(new CustomEvent('heritage:disclosure-change', {
         bubbles: true,
         detail: { expanded: !expanded }
       }));
@@ -68,7 +68,7 @@
     else observe();
   }
 
-  document.addEventListener('workbench:navigation-complete', function () {
+  document.addEventListener('heritage:navigation-complete', function () {
     enhance(document.getElementById('pageContent'));
   });
 

@@ -657,7 +657,7 @@
     try { localStorage.setItem(key, next); } catch (ignore) {}
     apply(next);
   });
-  document.addEventListener('workbench:navigation-complete', scheduleChartTheme);
+  document.addEventListener('heritage:navigation-complete', scheduleChartTheme);
   window.heritageChartTheme = { apply: applyChartTheme };
   window.heritageApplyAccentContrast = applyAccessibleAction;
 }());
@@ -1386,7 +1386,7 @@
 
   }
 
-  document.addEventListener('workbench:navigation-complete', function () {
+  document.addEventListener('heritage:navigation-complete', function () {
     enhancePageComposition();
     markIdentityColumns();
     localizeComponentLabels();

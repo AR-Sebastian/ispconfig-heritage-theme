@@ -49,7 +49,7 @@
     }
     focus(target);
     window.setTimeout(function () { focus(target); }, 0);
-    target.dispatchEvent(new CustomEvent('workbench:dialog-open', { bubbles: true }));
+    target.dispatchEvent(new CustomEvent('heritage:dialog-open', { bubbles: true }));
     return true;
   }
 
@@ -64,7 +64,7 @@
     if (returnFocus && returnFocus.setAttribute && (returnFocus.getAttribute('aria-haspopup') === 'dialog' || returnFocus.getAttribute('aria-controls') === target.id)) {
       returnFocus.setAttribute('aria-expanded', 'false');
     }
-    target.dispatchEvent(new CustomEvent('workbench:dialog-close', { bubbles: true }));
+    target.dispatchEvent(new CustomEvent('heritage:dialog-close', { bubbles: true }));
     openDialog = null;
     if (restoreFocus !== false && returnFocus && document.contains(returnFocus)) returnFocus.focus();
     returnFocus = null;

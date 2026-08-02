@@ -168,7 +168,7 @@
     return true;
   }
 
-  document.addEventListener('workbench:navigation-complete', function (event) {
+  document.addEventListener('heritage:navigation-complete', function (event) {
     enhance(event.detail && event.detail.page);
   });
   document.addEventListener('click', function (event) {

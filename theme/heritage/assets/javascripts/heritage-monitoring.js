@@ -230,7 +230,7 @@
       if (render(document.getElementById(id), payload.labels || [], payload.series[id])) rendered += 1;
     });
     payloadNode.dataset.wbMonitoringReady = 'true';
-    document.dispatchEvent(new CustomEvent('workbench:monitoring-ready', { detail: { rendered: rendered } }));
+    document.dispatchEvent(new CustomEvent('heritage:monitoring-ready', { detail: { rendered: rendered } }));
     return rendered > 0;
   }
 

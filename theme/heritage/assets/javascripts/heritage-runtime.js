@@ -721,7 +721,7 @@
 
   }
 
-  document.addEventListener('workbench:navigation-complete', function () {
+  document.addEventListener('heritage:navigation-complete', function () {
     enhancePageComposition();
     markIdentityColumns();
     localizeComponentLabels();

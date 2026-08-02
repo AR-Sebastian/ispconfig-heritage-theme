@@ -184,7 +184,7 @@
     else observe();
   }
 
-  document.addEventListener('workbench:navigation-complete', enhance);
+  document.addEventListener('heritage:navigation-complete', enhance);
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', enhance, { once: true });
   else enhance();

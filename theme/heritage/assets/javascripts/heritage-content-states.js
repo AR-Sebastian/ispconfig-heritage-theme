@@ -57,13 +57,13 @@
   }
 
   function announceNavigationComplete(pagename, error) {
-    document.dispatchEvent(new CustomEvent('workbench:navigation-complete', {
+    document.dispatchEvent(new CustomEvent('heritage:navigation-complete', {
       detail: { page: pagename, error: error || null }
     }));
   }
 
   function announceContentReady(host, pageName, context) {
-    document.dispatchEvent(new CustomEvent('workbench:content-ready', {
+    document.dispatchEvent(new CustomEvent('heritage:content-ready', {
       detail: { root: host || document, page: pageName || '', context: context || null }
     }));
   }
@@ -1566,11 +1566,11 @@
             if (!targetId) return;
             Array.prototype.forEach.call(accordion.querySelectorAll('.wb-form-panel-trigger'), function(trigger) {
               var target = trigger.getAttribute('href') || trigger.getAttribute('data-target') || '';
-              if (target === '#' + targetId) trigger.setAttribute('aria-expanded', event.type === 'workbench:collapse-open' ? 'true' : 'false');
+              if (target === '#' + targetId) trigger.setAttribute('aria-expanded', event.type === 'heritage:collapse-open' ? 'true' : 'false');
             });
           };
-          accordion.addEventListener('workbench:collapse-open', synchronizeAccordionState);
-          accordion.addEventListener('workbench:collapse-close', synchronizeAccordionState);
+          accordion.addEventListener('heritage:collapse-open', synchronizeAccordionState);
+          accordion.addEventListener('heritage:collapse-close', synchronizeAccordionState);
         }
       });
       summarizeFormSections(scope);

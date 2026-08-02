@@ -151,7 +151,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () { decorate(document); });
-  document.addEventListener('workbench:navigation-complete', function (event) {
+  document.addEventListener('heritage:navigation-complete', function (event) {
     decorate(event.detail && event.detail.root ? event.detail.root : document.getElementById('pageContent'));
   });
   window.WorkbenchAdvancedControls = { decorate: decorate };

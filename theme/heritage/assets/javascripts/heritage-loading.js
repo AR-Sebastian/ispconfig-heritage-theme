@@ -116,7 +116,7 @@
     }
   };
 
-  document.addEventListener('workbench:navigation-complete', function() {
+  document.addEventListener('heritage:navigation-complete', function() {
     if (moduleItems.length) finishModuleTransition();
   });
 

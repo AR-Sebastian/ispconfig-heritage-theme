@@ -118,7 +118,7 @@
       var href = safeUrl(item.url);
       if (href) window.location.assign(href);
     }
-    state.input.dispatchEvent(new CustomEvent('workbench:search-select', {
+    state.input.dispatchEvent(new CustomEvent('heritage:search-select', {
       bubbles: true,
       detail: { item: item }
     }));
@@ -238,7 +238,7 @@
       statusRow(state, state.options.errorText, '', 'error');
       announce(state, state.options.errorText);
       show(state);
-      state.input.dispatchEvent(new CustomEvent('workbench:search-error', { bubbles: true, detail: { error: error } }));
+      state.input.dispatchEvent(new CustomEvent('heritage:search-error', { bubbles: true, detail: { error: error } }));
     }).then(function() {
       if (state.request === current) setBusy(state, false);
     });

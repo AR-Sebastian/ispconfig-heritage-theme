@@ -48,6 +48,10 @@ if grep -RIEq 'data-workbench-' "$theme/templates" "$theme/assets/stylesheets" "
   echo 'Theme contains a DOM contract in the obsolete Workbench namespace.' >&2
   exit 1
 fi
+if grep -RIEq "['\"]workbench:[a-z-]+" "$theme/assets/javascripts"; then
+  echo 'Theme contains a custom event in the obsolete Workbench namespace.' >&2
+  exit 1
+fi
 while IFS= read -r -d '' file; do node --check "$file"; done < <(find "$theme" -type f -name '*.js' -print0)
 
 node - "$theme" "$version" <<'NODE'

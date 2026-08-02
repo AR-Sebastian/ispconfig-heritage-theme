@@ -1003,13 +1003,13 @@
   if (desktopQuery.addEventListener) desktopQuery.addEventListener('change', handleModeChange);
   else desktopQuery.addListener(handleModeChange);
 
-  document.addEventListener('workbench:navigation-complete', function (event) {
+  document.addEventListener('heritage:navigation-complete', function (event) {
     var page = event.detail && event.detail.page;
     if (page) currentPageTarget = page;
     syncShellLayout();
     finalizeNavigationState(page || currentPageTarget);
   });
-  document.addEventListener('workbench:content-ready', function (event) {
+  document.addEventListener('heritage:content-ready', function (event) {
     var page = event.detail && event.detail.page;
     if (page) currentPageTarget = page;
     // Race fix: navigation-complete can fire before the page fragment is in the

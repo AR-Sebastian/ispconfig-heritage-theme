@@ -12,10 +12,10 @@
     var request = window.heritageHttp.getText(url, { accept: 'text/plain', timeout: 10000 });
     request.promise.then(function () {
       alert.dataset.wbAckState = 'complete';
-      alert.dispatchEvent(new CustomEvent('workbench:message-acknowledged', { detail: { url: url } }));
+      alert.dispatchEvent(new CustomEvent('heritage:message-acknowledged', { detail: { url: url } }));
     }).catch(function (error) {
       alert.dataset.wbAckState = 'error';
-      alert.dispatchEvent(new CustomEvent('workbench:message-acknowledgement-error', {
+      alert.dispatchEvent(new CustomEvent('heritage:message-acknowledgement-error', {
         detail: { url: url, error: error }
       }));
     });
@@ -27,7 +27,7 @@
     host.querySelectorAll('[data-wb-ack-url]').forEach(function (alert) {
       if (alert.dataset.wbAckBound === 'true') return;
       alert.dataset.wbAckBound = 'true';
-      alert.addEventListener('workbench:alert-dismiss', function () { acknowledge(alert); }, { once: true });
+      alert.addEventListener('heritage:alert-dismiss', function () { acknowledge(alert); }, { once: true });
     });
   }
 

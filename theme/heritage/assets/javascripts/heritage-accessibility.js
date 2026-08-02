@@ -162,8 +162,8 @@
     }
     if (dialog.dataset.workbenchDialogEvents !== 'true') {
       dialog.dataset.workbenchDialogEvents = 'true';
-      dialog.addEventListener('workbench:dialog-open', function () { focusDialog(dialog); });
-      dialog.addEventListener('workbench:dialog-close', function () { restoreDialogFocus(dialog); });
+      dialog.addEventListener('heritage:dialog-open', function () { focusDialog(dialog); });
+      dialog.addEventListener('heritage:dialog-close', function () { restoreDialogFocus(dialog); });
     }
   }
 
@@ -177,7 +177,7 @@
     host.querySelectorAll('.modal[role="dialog"]').forEach(enhanceDialog);
   }
 
-  document.addEventListener('workbench:navigation-complete', function (event) {
+  document.addEventListener('heritage:navigation-complete', function (event) {
     var root = document.querySelector('#pageContent');
     enhance(root);
     if (event.detail && event.detail.error) {
@@ -186,7 +186,7 @@
     window.setTimeout(function () { enhance(document.querySelector('#pageContent')); }, 100);
   });
 
-  document.addEventListener('workbench:content-ready', function(event) {
+  document.addEventListener('heritage:content-ready', function(event) {
     var detail = event.detail || {};
     var root = detail.root && detail.root.querySelectorAll ? detail.root : document.querySelector('#pageContent');
     window.requestAnimationFrame(function() { focusLoadedPage(root, detail.context || null); });

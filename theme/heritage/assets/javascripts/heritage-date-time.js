@@ -152,7 +152,7 @@
     scope.querySelectorAll('input[data-input-element="date"],input[data-input-element="datetime"]').forEach(enhance);
   }
 
-  document.addEventListener('workbench:navigation-complete', function () { enhanceAll(document.getElementById('pageContent')); });
+  document.addEventListener('heritage:navigation-complete', function () { enhanceAll(document.getElementById('pageContent')); });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { enhanceAll(document); }, { once: true });
   else enhanceAll(document);
 

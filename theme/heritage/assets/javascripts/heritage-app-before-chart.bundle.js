@@ -155,7 +155,7 @@
     scope.querySelectorAll('input[data-input-element="date"],input[data-input-element="datetime"]').forEach(enhance);
   }
 
-  document.addEventListener('workbench:navigation-complete', function () { enhanceAll(document.getElementById('pageContent')); });
+  document.addEventListener('heritage:navigation-complete', function () { enhanceAll(document.getElementById('pageContent')); });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { enhanceAll(document); }, { once: true });
   else enhanceAll(document);
 
@@ -210,12 +210,12 @@
       updateTriggers(target, expanded);
       return true;
     }
-    if (!emitNative(target, expanded ? 'workbench:collapse-before-open' : 'workbench:collapse-before-close', detail, true)) return false;
+    if (!emitNative(target, expanded ? 'heritage:collapse-before-open' : 'heritage:collapse-before-close', detail, true)) return false;
     target.classList.toggle('in', expanded);
     target.hidden = !expanded;
     target.setAttribute('aria-hidden', expanded ? 'false' : 'true');
     updateTriggers(target, expanded);
-    emitNative(target, expanded ? 'workbench:collapse-open' : 'workbench:collapse-close', detail, false);
+    emitNative(target, expanded ? 'heritage:collapse-open' : 'heritage:collapse-close', detail, false);
     return true;
   }
 
@@ -244,9 +244,9 @@
     var alert = control && control.closest('.alert');
     var detail = { relatedTarget: control || null };
     if (!alert) return false;
-    if (!emitNative(alert, 'workbench:alert-before-dismiss', detail, true)) return false;
+    if (!emitNative(alert, 'heritage:alert-before-dismiss', detail, true)) return false;
     alert.remove();
-    emitNative(alert, 'workbench:alert-dismiss', detail, false);
+    emitNative(alert, 'heritage:alert-dismiss', detail, false);
     return true;
   }
 
@@ -395,7 +395,7 @@
     if (control && !control.contains(event.relatedTarget)) hideTooltip(control);
   });
 
-  document.addEventListener('workbench:navigation-complete', function (event) {
+  document.addEventListener('heritage:navigation-complete', function (event) {
     hideTooltip(activeTooltipControl);
     synchronize(event.detail && event.detail.container || document.getElementById('pageContent'));
   });
@@ -2817,7 +2817,7 @@
       var href = safeUrl(item.url);
       if (href) window.location.assign(href);
     }
-    state.input.dispatchEvent(new CustomEvent('workbench:search-select', {
+    state.input.dispatchEvent(new CustomEvent('heritage:search-select', {
       bubbles: true,
       detail: { item: item }
     }));
@@ -2937,7 +2937,7 @@
       statusRow(state, state.options.errorText, '', 'error');
       announce(state, state.options.errorText);
       show(state);
-      state.input.dispatchEvent(new CustomEvent('workbench:search-error', { bubbles: true, detail: { error: error } }));
+      state.input.dispatchEvent(new CustomEvent('heritage:search-error', { bubbles: true, detail: { error: error } }));
     }).then(function() {
       if (state.request === current) setBusy(state, false);
     });
@@ -3046,10 +3046,10 @@
     var request = window.heritageHttp.getText(url, { accept: 'text/plain', timeout: 10000 });
     request.promise.then(function () {
       alert.dataset.wbAckState = 'complete';
-      alert.dispatchEvent(new CustomEvent('workbench:message-acknowledged', { detail: { url: url } }));
+      alert.dispatchEvent(new CustomEvent('heritage:message-acknowledged', { detail: { url: url } }));
     }).catch(function (error) {
       alert.dataset.wbAckState = 'error';
-      alert.dispatchEvent(new CustomEvent('workbench:message-acknowledgement-error', {
+      alert.dispatchEvent(new CustomEvent('heritage:message-acknowledgement-error', {
         detail: { url: url, error: error }
       }));
     });
@@ -3061,7 +3061,7 @@
     host.querySelectorAll('[data-wb-ack-url]').forEach(function (alert) {
       if (alert.dataset.wbAckBound === 'true') return;
       alert.dataset.wbAckBound = 'true';
-      alert.addEventListener('workbench:alert-dismiss', function () { acknowledge(alert); }, { once: true });
+      alert.addEventListener('heritage:alert-dismiss', function () { acknowledge(alert); }, { once: true });
     });
   }
 
@@ -3189,7 +3189,7 @@
     }
   };
 
-  document.addEventListener('workbench:navigation-complete', function() {
+  document.addEventListener('heritage:navigation-complete', function() {
     if (moduleItems.length) finishModuleTransition();
   });
 
@@ -3311,13 +3311,13 @@
   }
 
   function announceNavigationComplete(pagename, error) {
-    document.dispatchEvent(new CustomEvent('workbench:navigation-complete', {
+    document.dispatchEvent(new CustomEvent('heritage:navigation-complete', {
       detail: { page: pagename, error: error || null }
     }));
   }
 
   function announceContentReady(host, pageName, context) {
-    document.dispatchEvent(new CustomEvent('workbench:content-ready', {
+    document.dispatchEvent(new CustomEvent('heritage:content-ready', {
       detail: { root: host || document, page: pageName || '', context: context || null }
     }));
   }
@@ -4820,11 +4820,11 @@
             if (!targetId) return;
             Array.prototype.forEach.call(accordion.querySelectorAll('.wb-form-panel-trigger'), function(trigger) {
               var target = trigger.getAttribute('href') || trigger.getAttribute('data-target') || '';
-              if (target === '#' + targetId) trigger.setAttribute('aria-expanded', event.type === 'workbench:collapse-open' ? 'true' : 'false');
+              if (target === '#' + targetId) trigger.setAttribute('aria-expanded', event.type === 'heritage:collapse-open' ? 'true' : 'false');
             });
           };
-          accordion.addEventListener('workbench:collapse-open', synchronizeAccordionState);
-          accordion.addEventListener('workbench:collapse-close', synchronizeAccordionState);
+          accordion.addEventListener('heritage:collapse-open', synchronizeAccordionState);
+          accordion.addEventListener('heritage:collapse-close', synchronizeAccordionState);
         }
       });
       summarizeFormSections(scope);
@@ -6860,13 +6860,13 @@
   if (desktopQuery.addEventListener) desktopQuery.addEventListener('change', handleModeChange);
   else desktopQuery.addListener(handleModeChange);
 
-  document.addEventListener('workbench:navigation-complete', function (event) {
+  document.addEventListener('heritage:navigation-complete', function (event) {
     var page = event.detail && event.detail.page;
     if (page) currentPageTarget = page;
     syncShellLayout();
     finalizeNavigationState(page || currentPageTarget);
   });
-  document.addEventListener('workbench:content-ready', function (event) {
+  document.addEventListener('heritage:content-ready', function (event) {
     var page = event.detail && event.detail.page;
     if (page) currentPageTarget = page;
     // Race fix: navigation-complete can fire before the page fragment is in the
@@ -7224,7 +7224,7 @@
           }
         });
         payload.removeAttribute('data-wb-dashboard-metrics-ready');
-        document.dispatchEvent(new CustomEvent('workbench:dashboard-metrics-error', {
+        document.dispatchEvent(new CustomEvent('heritage:dashboard-metrics-error', {
           detail: { payload: payload, error: error }
         }));
         return;
@@ -7239,7 +7239,7 @@
       queryAll(root, '[data-wb-metric-card]').forEach(function (card) {
         card.removeAttribute('aria-busy');
       });
-      document.dispatchEvent(new CustomEvent('workbench:dashboard-metrics-ready', {
+      document.dispatchEvent(new CustomEvent('heritage:dashboard-metrics-ready', {
         detail: { payload: payload, rendered: rendered }
       }));
     });
@@ -7256,7 +7256,7 @@
 
   window.heritageDashboardMetrics = { enhance: enhance, parsePayload: parsePayload };
   document.addEventListener('DOMContentLoaded', function () { enhance(document); });
-  document.addEventListener('workbench:content-ready', function (event) { enhance(event.detail && event.detail.root ? event.detail.root : document); });
+  document.addEventListener('heritage:content-ready', function (event) { enhance(event.detail && event.detail.root ? event.detail.root : document); });
   document.addEventListener('click', function (event) {
     var button = event.target && event.target.closest ? event.target.closest('[data-wb-metric-toggle]') : null;
     if (!button) return;
@@ -8519,7 +8519,7 @@
     }
     focus(target);
     window.setTimeout(function () { focus(target); }, 0);
-    target.dispatchEvent(new CustomEvent('workbench:dialog-open', { bubbles: true }));
+    target.dispatchEvent(new CustomEvent('heritage:dialog-open', { bubbles: true }));
     return true;
   }
 
@@ -8534,7 +8534,7 @@
     if (returnFocus && returnFocus.setAttribute && (returnFocus.getAttribute('aria-haspopup') === 'dialog' || returnFocus.getAttribute('aria-controls') === target.id)) {
       returnFocus.setAttribute('aria-expanded', 'false');
     }
-    target.dispatchEvent(new CustomEvent('workbench:dialog-close', { bubbles: true }));
+    target.dispatchEvent(new CustomEvent('heritage:dialog-close', { bubbles: true }));
     openDialog = null;
     if (restoreFocus !== false && returnFocus && document.contains(returnFocus)) returnFocus.focus();
     returnFocus = null;
@@ -8633,7 +8633,7 @@
       var expanded = trigger.getAttribute('aria-expanded') === 'true';
       trigger.setAttribute('aria-expanded', expanded ? 'false' : 'true');
       panel.hidden = expanded;
-      root.dispatchEvent(new CustomEvent('workbench:disclosure-change', {
+      root.dispatchEvent(new CustomEvent('heritage:disclosure-change', {
         bubbles: true,
         detail: { expanded: !expanded }
       }));
@@ -8665,7 +8665,7 @@
     else observe();
   }
 
-  document.addEventListener('workbench:navigation-complete', function () {
+  document.addEventListener('heritage:navigation-complete', function () {
     enhance(document.getElementById('pageContent'));
   });
 
@@ -8866,7 +8866,7 @@
     else observe();
   }
 
-  document.addEventListener('workbench:navigation-complete', enhance);
+  document.addEventListener('heritage:navigation-complete', enhance);
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', enhance, { once: true });
   else enhance();
@@ -9015,7 +9015,7 @@
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', observe, { once: true });
     else observe();
   }
-  document.addEventListener('workbench:navigation-complete', function () { enhance(document.getElementById('pageContent')); });
+  document.addEventListener('heritage:navigation-complete', function () { enhance(document.getElementById('pageContent')); });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { enhance(document); }, { once: true });
   else enhance(document);
 
@@ -9112,7 +9112,7 @@
     else commit(value);
   });
 
-  document.addEventListener('workbench:dialog-close', function (event) {
+  document.addEventListener('heritage:dialog-close', function (event) {
     if (event.target !== dialog() || committing) return;
     pending = null;
   });
@@ -9289,8 +9289,8 @@
     }
     if (dialog.dataset.workbenchDialogEvents !== 'true') {
       dialog.dataset.workbenchDialogEvents = 'true';
-      dialog.addEventListener('workbench:dialog-open', function () { focusDialog(dialog); });
-      dialog.addEventListener('workbench:dialog-close', function () { restoreDialogFocus(dialog); });
+      dialog.addEventListener('heritage:dialog-open', function () { focusDialog(dialog); });
+      dialog.addEventListener('heritage:dialog-close', function () { restoreDialogFocus(dialog); });
     }
   }
 
@@ -9304,7 +9304,7 @@
     host.querySelectorAll('.modal[role="dialog"]').forEach(enhanceDialog);
   }
 
-  document.addEventListener('workbench:navigation-complete', function (event) {
+  document.addEventListener('heritage:navigation-complete', function (event) {
     var root = document.querySelector('#pageContent');
     enhance(root);
     if (event.detail && event.detail.error) {
@@ -9313,7 +9313,7 @@
     window.setTimeout(function () { enhance(document.querySelector('#pageContent')); }, 100);
   });
 
-  document.addEventListener('workbench:content-ready', function(event) {
+  document.addEventListener('heritage:content-ready', function(event) {
     var detail = event.detail || {};
     var root = detail.root && detail.root.querySelectorAll ? detail.root : document.querySelector('#pageContent');
     window.requestAnimationFrame(function() { focusLoadedPage(root, detail.context || null); });
@@ -9487,7 +9487,7 @@
     return { errors: entries.length, focused: shouldFocus };
   }
 
-  document.addEventListener('workbench:navigation-complete', function () {
+  document.addEventListener('heritage:navigation-complete', function () {
     enhance(document.getElementById('pageContent'), { focus: false });
   });
 
@@ -9944,7 +9944,7 @@
     return true;
   }
 
-  document.addEventListener('workbench:navigation-complete', function (event) {
+  document.addEventListener('heritage:navigation-complete', function (event) {
     enhance(event.detail && event.detail.page);
   });
   document.addEventListener('click', function (event) {
@@ -10163,7 +10163,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () { decorate(document); });
-  document.addEventListener('workbench:navigation-complete', function (event) {
+  document.addEventListener('heritage:navigation-complete', function (event) {
     decorate(event.detail && event.detail.root ? event.detail.root : document.getElementById('pageContent'));
   });
   window.WorkbenchAdvancedControls = { decorate: decorate };
@@ -10547,7 +10547,7 @@
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
   else init();
-  document.addEventListener('workbench:navigation-complete', init);
+  document.addEventListener('heritage:navigation-complete', init);
 })(window, document);
 
 /* source: heritage-global-search.js */
@@ -11295,7 +11295,7 @@
     try { localStorage.setItem(key, next); } catch (ignore) {}
     apply(next);
   });
-  document.addEventListener('workbench:navigation-complete', scheduleChartTheme);
+  document.addEventListener('heritage:navigation-complete', scheduleChartTheme);
   window.heritageChartTheme = { apply: applyChartTheme };
   window.heritageApplyAccentContrast = applyAccessibleAction;
 }());

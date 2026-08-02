@@ -325,7 +325,7 @@
           }
         });
         payload.removeAttribute('data-wb-dashboard-metrics-ready');
-        document.dispatchEvent(new CustomEvent('workbench:dashboard-metrics-error', {
+        document.dispatchEvent(new CustomEvent('heritage:dashboard-metrics-error', {
           detail: { payload: payload, error: error }
         }));
         return;
@@ -340,7 +340,7 @@
       queryAll(root, '[data-wb-metric-card]').forEach(function (card) {
         card.removeAttribute('aria-busy');
       });
-      document.dispatchEvent(new CustomEvent('workbench:dashboard-metrics-ready', {
+      document.dispatchEvent(new CustomEvent('heritage:dashboard-metrics-ready', {
         detail: { payload: payload, rendered: rendered }
       }));
     });
@@ -357,7 +357,7 @@
 
   window.heritageDashboardMetrics = { enhance: enhance, parsePayload: parsePayload };
   document.addEventListener('DOMContentLoaded', function () { enhance(document); });
-  document.addEventListener('workbench:content-ready', function (event) { enhance(event.detail && event.detail.root ? event.detail.root : document); });
+  document.addEventListener('heritage:content-ready', function (event) { enhance(event.detail && event.detail.root ? event.detail.root : document); });
   document.addEventListener('click', function (event) {
     var button = event.target && event.target.closest ? event.target.closest('[data-wb-metric-toggle]') : null;
     if (!button) return;

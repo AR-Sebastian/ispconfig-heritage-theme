@@ -126,7 +126,7 @@
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', observe, { once: true });
     else observe();
   }
-  document.addEventListener('workbench:navigation-complete', function () { enhance(document.getElementById('pageContent')); });
+  document.addEventListener('heritage:navigation-complete', function () { enhance(document.getElementById('pageContent')); });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { enhance(document); }, { once: true });
   else enhance(document);
 

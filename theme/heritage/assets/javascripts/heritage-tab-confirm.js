@@ -86,7 +86,7 @@
     else commit(value);
   });
 
-  document.addEventListener('workbench:dialog-close', function (event) {
+  document.addEventListener('heritage:dialog-close', function (event) {
     if (event.target !== dialog() || committing) return;
     pending = null;
   });

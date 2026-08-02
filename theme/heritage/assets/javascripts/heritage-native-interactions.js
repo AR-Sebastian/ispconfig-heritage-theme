@@ -44,12 +44,12 @@
       updateTriggers(target, expanded);
       return true;
     }
-    if (!emitNative(target, expanded ? 'workbench:collapse-before-open' : 'workbench:collapse-before-close', detail, true)) return false;
+    if (!emitNative(target, expanded ? 'heritage:collapse-before-open' : 'heritage:collapse-before-close', detail, true)) return false;
     target.classList.toggle('in', expanded);
     target.hidden = !expanded;
     target.setAttribute('aria-hidden', expanded ? 'false' : 'true');
     updateTriggers(target, expanded);
-    emitNative(target, expanded ? 'workbench:collapse-open' : 'workbench:collapse-close', detail, false);
+    emitNative(target, expanded ? 'heritage:collapse-open' : 'heritage:collapse-close', detail, false);
     return true;
   }
 
@@ -78,9 +78,9 @@
     var alert = control && control.closest('.alert');
     var detail = { relatedTarget: control || null };
     if (!alert) return false;
-    if (!emitNative(alert, 'workbench:alert-before-dismiss', detail, true)) return false;
+    if (!emitNative(alert, 'heritage:alert-before-dismiss', detail, true)) return false;
     alert.remove();
-    emitNative(alert, 'workbench:alert-dismiss', detail, false);
+    emitNative(alert, 'heritage:alert-dismiss', detail, false);
     return true;
   }
 
@@ -229,7 +229,7 @@
     if (control && !control.contains(event.relatedTarget)) hideTooltip(control);
   });
 
-  document.addEventListener('workbench:navigation-complete', function (event) {
+  document.addEventListener('heritage:navigation-complete', function (event) {
     hideTooltip(activeTooltipControl);
     synchronize(event.detail && event.detail.container || document.getElementById('pageContent'));
   });
