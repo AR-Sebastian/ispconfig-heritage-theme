@@ -1,6 +1,7 @@
 (function () {
   'use strict';
-  var key = 'ispconfig-workbench-theme';
+  var key = 'ispconfig-heritage-theme';
+  var legacyKey = 'ispconfig-workbench-theme';
   var root = document.documentElement;
   var eye = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>';
   var eyeOff = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 3 18 18M10.6 6.2A10.5 10.5 0 0 1 12 6c6.1 0 9.5 6 9.5 6a18 18 0 0 1-3.1 3.8M6.1 6.8C3.8 8.2 2.5 12 2.5 12s3.4 6 9.5 6a9.7 9.7 0 0 0 3.1-.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -122,7 +123,15 @@
     });
     scheduleChartTheme();
   }
-  apply(window.localStorage ? localStorage.getItem(key) : 'light');
+  var storedTheme = 'light';
+  try {
+    if (window.localStorage) {
+      storedTheme = localStorage.getItem(key) || localStorage.getItem(legacyKey) || 'light';
+      if (!localStorage.getItem(key) && localStorage.getItem(legacyKey)) localStorage.setItem(key, storedTheme);
+      localStorage.removeItem(legacyKey);
+    }
+  } catch (ignore) {}
+  apply(storedTheme);
   function enhanceLogin() {
     if (!document.body.classList.contains('wb-login-page')) return;
     var surface = document.querySelector('.wb-login-form-surface');

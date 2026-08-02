@@ -70,7 +70,7 @@
   }
 
   try {
-    if (window.localStorage && window.localStorage.getItem('ispconfig-workbench-theme') === 'dark') {
+    if (window.localStorage && (window.localStorage.getItem('ispconfig-heritage-theme') || window.localStorage.getItem('ispconfig-workbench-theme')) === 'dark') {
       document.documentElement.setAttribute('data-heritage-theme', 'dark');
     }
   } catch (error) {

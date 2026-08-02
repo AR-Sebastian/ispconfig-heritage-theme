@@ -1,8 +1,10 @@
 (function () {
   'use strict';
 
-  var storageKey = 'ispconfig-workbench-login-username';
-  var stayStorageKey = 'ispconfig-workbench-login-stay';
+  var storageKey = 'ispconfig-heritage-login-username';
+  var stayStorageKey = 'ispconfig-heritage-login-stay';
+  var legacyStorageKey = 'ispconfig-workbench-login-username';
+  var legacyStayStorageKey = 'ispconfig-workbench-login-stay';
 
   function getStorage() {
     try {
@@ -21,6 +23,15 @@
     } else {
       callback();
     }
+  }
+
+  function migrateStorage(storage) {
+    [[storageKey, legacyStorageKey], [stayStorageKey, legacyStayStorageKey]].forEach(function (keys) {
+      if (storage.getItem(keys[0]) === null && storage.getItem(keys[1]) !== null) {
+        storage.setItem(keys[0], storage.getItem(keys[1]));
+      }
+      storage.removeItem(keys[1]);
+    });
   }
 
   function normalizeFeedback() {
@@ -89,6 +100,8 @@
     if (!form || !username || !storage) {
       return;
     }
+
+    migrateStorage(storage);
 
     var rememberedUsername = storage.getItem(storageKey);
     if (rememberedUsername && !username.value) {
