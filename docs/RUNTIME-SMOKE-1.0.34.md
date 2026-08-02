@@ -91,6 +91,25 @@ viewport with zero horizontal document overflow. No browser error, warning or
 retired `wb-*` component class was present. The VM was restored to its
 pre-fixture snapshot afterward, so no synthetic mail object remains.
 
+## Explicit global-login opt-in
+
+A second isolated VM snapshot temporarily changed only the installed
+ISPConfig `$conf['theme']` value from `default` to `heritage`, followed by an
+Apache reload and a completely renewed anonymous session. ISPConfig then
+loaded exactly `heritage-login.bundle.css?ver=1.0.34` and the HERITAGE login
+JavaScript bundle.
+
+Desktop light/dark and 390 x 844 mobile-dark states passed with zero horizontal
+overflow, console errors, warnings or retired `wb-*` classes. Username and
+password controls exposed the correct autocomplete purposes, the username-only
+remember option rendered, and the password-manager guidance remained visible.
+The form measured 319.1 pixels wide inside the compact viewport.
+
+The lab policy reported `session_timeout=0` and `session_allow_endless=0`, so
+ISPConfig correctly omitted its conditional "stay logged in" option. HERITAGE
+did not override that security decision. The VM was restored to its pre-test
+snapshot, leaving the stock global `default` login configuration intact.
+
 No public gallery image was accepted from this run because the saved browser
 profile has every dashboard widget hidden. That state is useful regression
 evidence but is not representative release imagery.

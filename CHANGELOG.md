@@ -27,6 +27,7 @@
 - Managed installation normalizes directory and file permissions before the atomic swap, preventing transport-specific modes from blocking Apache asset delivery.
 - Stock-runtime evidence now distinguishes authenticated account theming from ISPConfig's operator-controlled global pre-login theme.
 - An isolated real-runtime mailbox fixture verifies the localized 100 MB quota control, accessible unit association and compact mobile containment.
+- Global HERITAGE login is verified as an explicit operator opt-in; the installer preserves ISPConfig's default pre-login configuration and its conditional session-security policy.
 
 ## 1.0.33 – 2026-07-31
 

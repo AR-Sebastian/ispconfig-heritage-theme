@@ -26,3 +26,9 @@ Before authentication, ISPConfig renders the theme configured globally in
 account affects its authenticated session but not the pre-login screen. A
 HERITAGE-branded login therefore requires an explicit operator-owned global
 configuration change outside this presentation-only package.
+
+The supported default deployment is therefore account-scoped HERITAGE with the
+stock pre-login theme unchanged. A global HERITAGE login is an explicit
+operator opt-in and was separately verified in light/dark desktop and mobile
+states. Conditional session controls continue to follow ISPConfig's security
+configuration.

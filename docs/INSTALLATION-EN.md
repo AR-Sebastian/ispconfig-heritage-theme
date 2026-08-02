@@ -17,6 +17,21 @@ sudo ./scripts/manage-theme.sh install
 
 Select HERITAGE for one test account first and sign in again.
 
+## Optional global login theme
+
+Account selection changes the authenticated interface only. ISPConfig renders
+the anonymous login from `$conf['theme']`, whose factory value is `default`.
+Keep that default unless the operator explicitly approves a globally branded
+login. To opt in, back up `/usr/local/ispconfig/interface/lib/config.inc.php`,
+set its existing `$conf['theme']` value to `heritage`, reload the interface web
+service and start a completely new anonymous session. This configuration is
+owned by ISPConfig, may need review after an ISPConfig update and is
+intentionally never changed by the HERITAGE installer.
+
+The "stay logged in" control is rendered only when ISPConfig has both a
+positive session timeout and endless sessions enabled. HERITAGE does not
+weaken those server-side security settings.
+
 ## Verified release archive
 
 On Linux, download the TAR.GZ archive and checksum file directly from the

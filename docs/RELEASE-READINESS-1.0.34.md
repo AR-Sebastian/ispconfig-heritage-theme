@@ -34,12 +34,12 @@ The detailed, reproducible evidence and the lab limitation are recorded in
 ## Open release blockers
 
 - [x] Prove the controller-independent authenticated shell and Admin settings view in an unmodified ISPConfig 3.3.1p1 runtime.
-- [ ] Decide and document whether deployment will explicitly set ISPConfig's global pre-login theme; stock `$conf['theme']='default'` cannot be changed from a presentation-only package.
+- [x] Define account-scoped HERITAGE with stock pre-login `default` as the supported default; document and verify global HERITAGE login as an explicit operator opt-in that the package never applies automatically.
 - [x] Run authenticated 1.0.34 shell smoke tests for light and dark desktop/mobile states in the available Debian 13 lab.
 - [x] Confirm the new HERITAGE logo and refreshed asset cache in an authenticated ISPConfig session.
 - [x] Repeat the authenticated visual gates with the corrected `3.3dev` compatibility markers and no temporary lab edits.
 - [x] Confirm Additional PHP list ordering/priority and the alias-domain source contract in the runtime lab.
-- [ ] Confirm HERITAGE login session controls after an explicit global-theme deployment decision.
+- [x] Confirm HERITAGE login controls in desktop/mobile light/dark states; conditional endless-session control correctly remains absent under the stock disabled lab policy.
 - [x] Confirm mailbox quota presentation with an isolated 100 MiB synthetic mailbox fixture on desktop/mobile, then restore the pre-fixture VM state.
 - [ ] Review and merge the release-candidate pull request into `main` with green checks.
 - [ ] Rebuild from the clean merge commit and compare the final archive hashes.
