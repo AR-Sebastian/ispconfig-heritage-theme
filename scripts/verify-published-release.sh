@@ -10,11 +10,23 @@ tar_name="ispconfig-heritage-theme-$version.tar.gz"
 audit="$(mktemp -d)"
 trap 'rm -rf "$audit"' EXIT
 
+if ! git -C "$root" rev-parse --verify --quiet "$tag^{commit}" >/dev/null; then
+  git -C "$root" fetch --quiet origin "refs/tags/$tag:refs/tags/$tag"
+fi
+tag_commit="$(git -C "$root" rev-parse --verify "$tag^{commit}")"
+
 for asset in "$zip_name" "$tar_name" SHA256SUMS.txt; do
   curl --fail --location --silent --show-error \
+    --retry 5 --retry-all-errors --retry-delay 2 \
     --output "$audit/$asset" "$base_url/$asset"
 done
 
+actual_manifest="$(awk 'NF == 2 { print $2 }' "$audit/SHA256SUMS.txt" | LC_ALL=C sort)"
+expected_manifest="$(printf '%s\n' "$tar_name" "$zip_name" | LC_ALL=C sort)"
+[[ "$actual_manifest" == "$expected_manifest" ]] || {
+  echo 'SHA256SUMS.txt does not contain exactly the two expected archives.' >&2
+  exit 1
+}
 verified="$(cd "$audit" && sha256sum --check SHA256SUMS.txt | tee /dev/stderr | grep -c ': OK$')"
 [[ "$verified" -eq 2 ]] || {
   echo "Expected two verified release archives, got $verified." >&2
@@ -25,21 +37,33 @@ if unzip -Z1 "$audit/$zip_name" | grep -Eq '(^/|(^|/)\.\.(/|$))'; then
   echo 'Published ZIP contains an unsafe path.' >&2
   exit 1
 fi
+if unzip -Z1 "$audit/$zip_name" | grep -Ev '^heritage(/|$)' | grep -q .; then
+  echo 'Published ZIP contains an unexpected top-level path.' >&2
+  exit 1
+fi
 if tar -tzf "$audit/$tar_name" | grep -Eq '(^/|(^|/)\.\.(/|$))'; then
   echo 'Published TAR.GZ contains an unsafe path.' >&2
+  exit 1
+fi
+if tar -tzf "$audit/$tar_name" | grep -Ev '^heritage(/|$)' | grep -q .; then
+  echo 'Published TAR.GZ contains an unexpected top-level path.' >&2
   exit 1
 fi
 
 mkdir -p "$audit/from-zip" "$audit/from-tar" "$audit/from-git"
 unzip -q "$audit/$zip_name" -d "$audit/from-zip"
 tar -xzf "$audit/$tar_name" -C "$audit/from-tar"
-git -C "$root" archive --format=tar HEAD:theme heritage | tar -xf - -C "$audit/from-git"
+[[ -z "$(find "$audit/from-zip" "$audit/from-tar" -type l -print -quit)" ]] || {
+  echo 'Published release contains a symbolic link.' >&2
+  exit 1
+}
+git -C "$root" archive --format=tar "$tag_commit:theme" heritage | tar -xf - -C "$audit/from-git"
 diff -qr "$audit/from-zip/heritage" "$audit/from-tar/heritage"
 diff -qr "$audit/from-git/heritage" "$audit/from-tar/heritage"
 
 mkdir -p "$audit/package/theme" "$audit/package/scripts" "$audit/targets" "$audit/backups"
 cp -a "$audit/from-tar/heritage" "$audit/package/theme/heritage"
-cp "$root/scripts/manage-theme.sh" "$audit/package/scripts/manage-theme.sh"
+git -C "$root" show "$tag_commit:scripts/manage-theme.sh" > "$audit/package/scripts/manage-theme.sh"
 chmod +x "$audit/package/scripts/manage-theme.sh"
 manager="$audit/package/scripts/manage-theme.sh"
 
