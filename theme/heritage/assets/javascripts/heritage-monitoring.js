@@ -91,10 +91,10 @@
   }
 
   function markEmpty(canvas, message) {
-    var card = canvas && canvas.closest('[data-wb-chart-card]');
+    var card = canvas && canvas.closest('[data-heritage-chart-card]');
     if (!card) return;
-    card.dataset.wbChartState = 'empty';
-    var value = card.querySelector('[data-wb-chart-value]');
+    card.dataset.heritageChartState = 'empty';
+    var value = card.querySelector('[data-heritage-chart-value]');
     if (value) {
       value.textContent = '-';
       value.setAttribute('title', message || copy('empty'));
@@ -113,7 +113,7 @@
   }
 
   function setDetails(card, id, stats) {
-    var details = card && card.querySelector('[data-wb-monitor-chart-details="' + id + '"]');
+    var details = card && card.querySelector('[data-heritage-monitor-chart-details="' + id + '"]');
     if (!details || !stats) return;
     details.replaceChildren(
       detailRow(copy('current'), formatNumber(stats.latest)),
@@ -134,8 +134,8 @@
 
     var existing = chartFor(canvas);
     if (existing) existing.destroy();
-    var card = canvas.closest('[data-wb-chart-card]');
-    var value = card && card.querySelector('[data-wb-chart-value]');
+    var card = canvas.closest('[data-heritage-chart-card]');
+    var value = card && card.querySelector('[data-heritage-chart-value]');
     var stats = metricStats(data);
     if (value && stats) {
       value.textContent = formatNumber(stats.latest);
@@ -150,7 +150,7 @@
     canvas.setAttribute('role', 'img');
     canvas.setAttribute('aria-label', (series.label || copy('value')) + ' \u2013 ' + copy('chart'));
     if (card) {
-      card.dataset.wbMonitorMetric = palette.metric;
+      card.dataset.heritageMonitorMetric = palette.metric;
       card.style.setProperty('--wb-monitor-chart-color', palette.color);
     }
     var chart = new window.Chart(canvas.getContext('2d'), {
@@ -199,11 +199,11 @@
         }
       }
     });
-    if (card) card.dataset.wbChartState = 'rendering';
+    if (card) card.dataset.heritageChartState = 'rendering';
     window.requestAnimationFrame(function () {
       window.requestAnimationFrame(function () {
         if (!canvas.isConnected) return;
-        if (card) card.dataset.wbChartState = 'ready';
+        if (card) card.dataset.heritageChartState = 'ready';
       });
     });
     return Boolean(chart);
@@ -211,11 +211,11 @@
 
   function enhance(scope) {
     scope = scope || document;
-    var payloadNode = scope.querySelector('[data-wb-monitor-chart-data]');
-    if (!payloadNode || payloadNode.dataset.wbMonitoringReady === 'true') return false;
-    scope.querySelectorAll('[data-wb-monitor-chart-toggle]').forEach(function (button) {
-      var id = button.getAttribute('data-wb-monitor-chart-toggle');
-      var details = id && scope.querySelector('[data-wb-monitor-chart-details="' + id + '"]');
+    var payloadNode = scope.querySelector('[data-heritage-monitor-chart-data]');
+    if (!payloadNode || payloadNode.dataset.heritageMonitoringReady === 'true') return false;
+    scope.querySelectorAll('[data-heritage-monitor-chart-toggle]').forEach(function (button) {
+      var id = button.getAttribute('data-heritage-monitor-chart-toggle');
+      var details = id && scope.querySelector('[data-heritage-monitor-chart-details="' + id + '"]');
       button.textContent = copy('show');
       if (details) {
         if (!details.id) details.id = id + '-details';
@@ -229,14 +229,14 @@
     Object.keys(payload.series || {}).forEach(function (id) {
       if (render(document.getElementById(id), payload.labels || [], payload.series[id])) rendered += 1;
     });
-    payloadNode.dataset.wbMonitoringReady = 'true';
+    payloadNode.dataset.heritageMonitoringReady = 'true';
     document.dispatchEvent(new CustomEvent('heritage:monitoring-ready', { detail: { rendered: rendered } }));
     return rendered > 0;
   }
 
   function toggleDetails(button) {
-    var id = button && button.getAttribute('data-wb-monitor-chart-toggle');
-    var details = id ? document.querySelector('[data-wb-monitor-chart-details="' + id + '"]') : null;
+    var id = button && button.getAttribute('data-heritage-monitor-chart-toggle');
+    var details = id ? document.querySelector('[data-heritage-monitor-chart-details="' + id + '"]') : null;
     if (!details) return;
     var expanded = button.getAttribute('aria-expanded') === 'true';
     button.setAttribute('aria-expanded', expanded ? 'false' : 'true');
@@ -248,7 +248,7 @@
   window.heritageMonitoringInstalled = true;
   document.addEventListener('DOMContentLoaded', function () { enhance(document); });
   document.addEventListener('click', function (event) {
-    var button = event.target && event.target.closest ? event.target.closest('[data-wb-monitor-chart-toggle]') : null;
+    var button = event.target && event.target.closest ? event.target.closest('[data-heritage-monitor-chart-toggle]') : null;
     if (!button) return;
     event.preventDefault();
     toggleDetails(button);

@@ -195,7 +195,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
   .alert-notification,
   .wb-feedback,
   .wb-content-state
-) :is(.close, [data-dismiss='alert'], [data-wb-dismiss]) {
+) :is(.close, [data-dismiss='alert'], [data-heritage-dismiss]) {
   display: inline-grid;
   width: 32px;
   height: 32px;
@@ -215,7 +215,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
   .alert-notification,
   .wb-feedback,
   .wb-content-state
-) :is(.close, [data-dismiss='alert'], [data-wb-dismiss]):is(:hover, :focus-visible) {
+) :is(.close, [data-dismiss='alert'], [data-heritage-dismiss]):is(:hover, :focus-visible) {
   background: color-mix(in srgb, currentColor 8%, transparent);
   opacity: 1;
 }

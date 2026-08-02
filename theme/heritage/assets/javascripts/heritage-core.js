@@ -1317,14 +1317,14 @@
     beginRequest: function() {
       ISPConfig.requestsRunning += 1;
       document.body.classList.add('wb-request-active');
-      document.body.dataset.wbRequestCount = String(ISPConfig.requestsRunning);
+      document.body.dataset.heritageRequestCount = String(ISPConfig.requestsRunning);
       var host = document.getElementById('pageContent');
       if (host) host.setAttribute('aria-busy', 'true');
     },
 
     endRequest: function() {
       ISPConfig.requestsRunning = Math.max(0, ISPConfig.requestsRunning - 1);
-      document.body.dataset.wbRequestCount = String(ISPConfig.requestsRunning);
+      document.body.dataset.heritageRequestCount = String(ISPConfig.requestsRunning);
       if (ISPConfig.requestsRunning > 0) return;
       document.body.classList.remove('wb-request-active');
       var host = document.getElementById('pageContent');

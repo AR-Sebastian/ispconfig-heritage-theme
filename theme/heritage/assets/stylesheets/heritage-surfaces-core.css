@@ -12,7 +12,7 @@ body.wb-app-navigation-enabled {
   accent-color: var(--wb-action);
 }
 
-html[data-wb-theme='dark'] body.wb-app-navigation-enabled {
+html[data-heritage-theme='dark'] body.wb-app-navigation-enabled {
   color-scheme: dark;
 }
 
@@ -681,7 +681,7 @@ body.wb-app-navigation-enabled .wb-native-tooltip[data-placement='bottom']::afte
 body.wb-app-navigation-enabled .popover { padding: 0; color: var(--wb-text); border: 1px solid var(--wb-border); border-radius: 11px; background: var(--wb-surface); box-shadow: 0 18px 48px rgba(15, 23, 42, .18); }
 body.wb-app-navigation-enabled .popover-title { padding: 10px 12px; color: var(--wb-text); border-color: var(--wb-border); background: var(--wb-surface-muted); font-size: 12px; font-weight: 780; }
 body.wb-app-navigation-enabled .popover-content { padding: 12px; color: var(--wb-text-muted); font-size: 11px; line-height: 1.5; }
-html[data-wb-theme='dark'] body.wb-app-navigation-enabled :is(.popover, .alert, .alert-notification) { box-shadow: none; }
+html[data-heritage-theme='dark'] body.wb-app-navigation-enabled :is(.popover, .alert, .alert-notification) { box-shadow: none; }
 
 body.wb-app-navigation-enabled :where(pre, code, kbd, samp) {
   color: var(--wb-text);
@@ -887,7 +887,7 @@ body.wb-app-navigation-enabled :where(
   background-color: var(--wb-surface-muted);
 }
 
-html[data-wb-theme='dark'] body.wb-app-navigation-enabled :where(
+html[data-heritage-theme='dark'] body.wb-app-navigation-enabled :where(
   .form-control,
   input,
   select,
@@ -1024,7 +1024,7 @@ body.wb-app-navigation-enabled #pageContent :where(
   background-color: color-mix(in srgb, var(--wb-action) 10%, var(--wb-surface));
 }
 
-html[data-wb-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
+html[data-heritage-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
   .panel,
   .well,
   .content-box,
@@ -1040,7 +1040,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
   box-shadow: none;
 }
 
-html[data-wb-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
+html[data-heritage-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
   .table-striped > tbody > tr:nth-of-type(odd),
   .table-hover > tbody > tr:hover,
   .table > tbody > tr.active > td,
@@ -1050,7 +1050,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
   background-color: color-mix(in srgb, var(--wb-action) 7%, var(--wb-surface));
 }
 
-html[data-wb-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
+html[data-heritage-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
   .text-danger,
   .text-warning,
   .text-success,
@@ -1417,7 +1417,7 @@ body.wb-app-navigation-enabled #pageContent :where(
   text-shadow: none !important;
 }
 
-html[data-wb-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
+html[data-heritage-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
   .box,
   .block,
   fieldset,
@@ -1439,7 +1439,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
   background-color: var(--wb-surface) !important;
 }
 
-html[data-wb-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
+html[data-heritage-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
   legend,
   .panel-heading,
   .content-box-header,
@@ -1454,7 +1454,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
   background: color-mix(in srgb, var(--wb-surface-muted) 82%, #fff 2%) !important;
 }
 
-html[data-wb-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
+html[data-heritage-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
   .table-striped > tbody > tr:nth-of-type(odd) > td,
   .table-striped > tbody > tr:nth-of-type(odd) > th,
   .table-hover > tbody > tr:hover > td,
@@ -1679,7 +1679,7 @@ body.wb-app-navigation-enabled #pageContent :where(.wb-residual-inline-scrubbed,
   max-width: 100% !important;
 }
 
-html[data-wb-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
+html[data-heritage-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
   .wb-owned-surface,
   .wb-owned-overlay,
   .wb-residual-bright-surface

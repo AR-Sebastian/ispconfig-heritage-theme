@@ -9,7 +9,7 @@ html {
   color-scheme: light;
 }
 
-html[data-wb-theme='dark'] {
+html[data-heritage-theme='dark'] {
   color-scheme: dark;
 }
 
@@ -87,13 +87,13 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
   color-scheme: inherit;
 }
 
-html[data-wb-theme='dark'] body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-row-action--primary {
+html[data-heritage-theme='dark'] body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-row-action--primary {
   color: color-mix(in srgb, var(--hg-accent) 72%, var(--hg-text)) !important;
   border-color: color-mix(in srgb, var(--hg-accent) 32%, var(--hg-border)) !important;
   background: color-mix(in srgb, var(--hg-accent) 9%, var(--hg-surface)) !important;
 }
 
-html[data-wb-theme='dark'] body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+html[data-heritage-theme='dark'] body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
   .wb-row-action--danger,
   .wb-action-control--danger
 ) {

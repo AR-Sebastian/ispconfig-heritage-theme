@@ -349,11 +349,11 @@ body > .wb-select__panel .wb-select__list {
   width: max(92px, min(100%, 128px));
 }
 
-html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form textarea.wb-code-field,
-html[data-wb-theme='dark'] .wb-select__control,
-html[data-wb-theme='dark'] .wb-select__search,
-html[data-wb-theme='dark'] .wb-select__panel,
-html[data-wb-theme='dark'] body > .wb-select__panel {
+html[data-heritage-theme='dark'] body.wb-form-page #pageForm.wb-modern-form textarea.wb-code-field,
+html[data-heritage-theme='dark'] .wb-select__control,
+html[data-heritage-theme='dark'] .wb-select__search,
+html[data-heritage-theme='dark'] .wb-select__panel,
+html[data-heritage-theme='dark'] body > .wb-select__panel {
   color: var(--wb-text);
   border-color: var(--wb-border);
   background: var(--wb-surface);
@@ -462,7 +462,7 @@ body > .wb-select__panel--page-size .wb-select__option:is(:hover, :focus-visible
   background: var(--wb-action);
 }
 
-html[data-wb-theme='dark'] body > .wb-select__panel--page-size .wb-select__option.is-selected {
+html[data-heritage-theme='dark'] body > .wb-select__panel--page-size .wb-select__option.is-selected {
   color: color-mix(in srgb, var(--wb-action) 54%, #fff);
   background: color-mix(in srgb, var(--wb-action) 18%, var(--wb-surface));
 }
@@ -546,8 +546,8 @@ body > .wb-select__panel .wb-select__option:is(:hover, :focus-visible) {
   background: var(--wb-action) !important;
 }
 
-html[data-wb-theme='dark'] body > .wb-select__panel,
-html[data-wb-theme='dark'] body > .wb-select__panel .wb-select__search {
+html[data-heritage-theme='dark'] body > .wb-select__panel,
+html[data-heritage-theme='dark'] body > .wb-select__panel .wb-select__search {
   color-scheme: dark;
   color: var(--wb-text) !important;
   border-color: color-mix(in srgb, var(--wb-action) 12%, var(--wb-border)) !important;

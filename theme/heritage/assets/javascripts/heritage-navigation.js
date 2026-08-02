@@ -766,7 +766,7 @@
     if (dashboardNews && !newsWidget) {
       newsWidget = document.createElement('article');
       newsWidget.className = 'wb-dashlet wb-dashlet-news';
-      newsWidget.setAttribute('data-wb-dashlet', 'news');
+      newsWidget.setAttribute('data-heritage-dashlet', 'news');
       newsWidget.replaceChildren.apply(newsWidget, Array.prototype.map.call(sidebar.childNodes, function(node) {
         return node.cloneNode(true);
       }));

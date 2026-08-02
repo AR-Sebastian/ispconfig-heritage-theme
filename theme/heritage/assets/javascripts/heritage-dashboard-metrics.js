@@ -133,14 +133,14 @@
     }
 
     function clearPoint(point) {
-      if (document.activeElement === point || host.dataset.wbMetricPinned === point.dataset.wbMetricIndex) return;
+      if (document.activeElement === point || host.dataset.heritageMetricPinned === point.dataset.heritageMetricIndex) return;
       point.classList.remove('is-active');
       guide.hidden = true;
       tooltip.hidden = true;
     }
 
     function releasePinnedPoint() {
-      delete host.dataset.wbMetricPinned;
+      delete host.dataset.heritageMetricPinned;
       queryAll(svg, '.wb-dashboard-sparkline__hit').forEach(function (entry) {
         entry.classList.remove('is-active');
       });
@@ -166,7 +166,7 @@
       point.setAttribute('tabindex', '0');
       point.setAttribute('role', 'img');
       point.setAttribute('aria-label', description);
-      point.setAttribute('data-wb-metric-index', String(index));
+      point.setAttribute('data-heritage-metric-index', String(index));
       var pointTitle = document.createElementNS(namespace, 'title');
       pointTitle.textContent = description;
       point.appendChild(pointTitle);
@@ -176,11 +176,11 @@
       point.addEventListener('blur', function () { clearPoint(point); });
       point.addEventListener('click', function (event) {
         event.preventDefault();
-        if (host.dataset.wbMetricPinned === String(index)) {
+        if (host.dataset.heritageMetricPinned === String(index)) {
           releasePinnedPoint();
           return;
         }
-        host.dataset.wbMetricPinned = String(index);
+        host.dataset.heritageMetricPinned = String(index);
         activatePoint(point, coordinates, description);
       });
       point.addEventListener('keydown', function (event) {
@@ -209,7 +209,7 @@
       svg.appendChild(point);
     });
     host.addEventListener('pointerleave', function () {
-      if (!host.dataset.wbMetricPinned && !host.contains(document.activeElement)) releasePinnedPoint();
+      if (!host.dataset.heritageMetricPinned && !host.contains(document.activeElement)) releasePinnedPoint();
     });
     host.appendChild(svg);
     host.appendChild(tooltip);
@@ -218,13 +218,13 @@
   function renderMetric(root, id, series, labels) {
     var node = root.querySelector('#' + id);
     if (!node) return false;
-    var card = root.querySelector('[data-wb-metric-card="' + id + '"]') || node.closest('.wb-dashboard-metric-card');
+    var card = root.querySelector('[data-heritage-metric-card="' + id + '"]') || node.closest('.wb-dashboard-metric-card');
     var data = numberList(series && series.data);
-    var value = root.querySelector('[data-wb-dashboard-metric-value="' + id + '"]');
-    var trend = root.querySelector('[data-wb-metric-trend="' + id + '"]');
-    var meta = root.querySelector('[data-wb-metric-meta="' + id + '"]');
-    var details = root.querySelector('[data-wb-metric-details="' + id + '"]');
-    var toggle = root.querySelector('[data-wb-metric-toggle="' + id + '"]');
+    var value = root.querySelector('[data-heritage-dashboard-metric-value="' + id + '"]');
+    var trend = root.querySelector('[data-heritage-metric-trend="' + id + '"]');
+    var meta = root.querySelector('[data-heritage-metric-meta="' + id + '"]');
+    var details = root.querySelector('[data-heritage-metric-details="' + id + '"]');
+    var toggle = root.querySelector('[data-heritage-metric-toggle="' + id + '"]');
     var label = node.getAttribute('aria-label') || id;
     var copy = text();
     if (toggle) toggle.textContent = label + ' ' + copy.analysis;
@@ -241,7 +241,7 @@
       if (meta) meta.textContent = copy.noValues;
       if (details) details.hidden = true;
       if (toggle) toggle.hidden = true;
-      if (card) card.dataset.wbMetricState = 'empty';
+      if (card) card.dataset.heritageMetricState = 'empty';
       node.setAttribute('role', 'status');
       return false;
     }
@@ -260,24 +260,24 @@
     if (value) value.textContent = formatNumber(state.latest);
     if (trend) {
       trend.textContent = copy.trend + ' ' + trendText;
-      trend.dataset.wbMetricTrendDirection = state.trend;
+      trend.dataset.heritageMetricTrendDirection = state.trend;
       trend.title = copy.trendHint;
     }
     if (meta) meta.textContent = copy.meanShort + ' ' + formatNumber(state.avg) + ' \u00b7 ' + copy.minShort + ' ' + formatNumber(state.min) + ' \u00b7 ' + copy.maxShort + ' ' + formatNumber(state.max);
     if (card) {
-      card.dataset.wbMetricState = 'ready';
-      card.dataset.wbMetricLatest = String(state.latest);
-      card.dataset.wbMetricMin = String(state.min);
-      card.dataset.wbMetricMax = String(state.max);
-      card.dataset.wbMetricAverage = String(state.avg);
-      card.dataset.wbMetricDelta = String(state.delta);
-      card.dataset.wbMetricTrend = state.trend;
-      card.dataset.wbMetricSamples = String(state.samples);
+      card.dataset.heritageMetricState = 'ready';
+      card.dataset.heritageMetricLatest = String(state.latest);
+      card.dataset.heritageMetricMin = String(state.min);
+      card.dataset.heritageMetricMax = String(state.max);
+      card.dataset.heritageMetricAverage = String(state.avg);
+      card.dataset.heritageMetricDelta = String(state.delta);
+      card.dataset.heritageMetricTrend = state.trend;
+      card.dataset.heritageMetricSamples = String(state.samples);
     }
 
-    node.dataset.wbMetricValues = data.join(',');
-    node.dataset.wbMetricLabel = label;
-    node.dataset.wbMetricLatest = String(state.latest);
+    node.dataset.heritageMetricValues = data.join(',');
+    node.dataset.heritageMetricLabel = label;
+    node.dataset.heritageMetricLatest = String(state.latest);
     node.title = label + ': ' + formatNumber(state.latest) + (lastLabel ? ' - ' + lastLabel : '');
     renderSparkline(node, width, height, label, state, points, area, line, data, labels);
 
@@ -298,18 +298,18 @@
 
   function enhance(root) {
     root = root || document;
-    queryAll(root, '[data-wb-dashboard-metrics-data]').forEach(function (payload) {
-      if (payload.dataset.wbDashboardMetricsReady === 'true') return;
-      payload.dataset.wbDashboardMetricsState = 'loading';
-      queryAll(root, '[data-wb-metric-card]').forEach(function (card) {
-        card.dataset.wbMetricState = 'loading';
+    queryAll(root, '[data-heritage-dashboard-metrics-data]').forEach(function (payload) {
+      if (payload.dataset.heritageDashboardMetricsReady === 'true') return;
+      payload.dataset.heritageDashboardMetricsState = 'loading';
+      queryAll(root, '[data-heritage-metric-card]').forEach(function (card) {
+        card.dataset.heritageMetricState = 'loading';
         card.setAttribute('aria-busy', 'true');
       });
       var data;
       try {
         data = parsePayload(payload.textContent || '{}');
       } catch (error) {
-        payload.dataset.wbDashboardMetricsState = 'error';
+        payload.dataset.heritageDashboardMetricsState = 'error';
         queryAll(root, '.wb-dashboard-sparkline').forEach(function (node) {
           node.replaceChildren();
           node.classList.add('wb-dashboard-sparkline--error');
@@ -318,13 +318,13 @@
           errorState.textContent = text().unavailable;
           node.appendChild(errorState);
           node.setAttribute('role', 'status');
-          var card = node.closest('[data-wb-metric-card]');
+          var card = node.closest('[data-heritage-metric-card]');
           if (card) {
-            card.dataset.wbMetricState = 'error';
+            card.dataset.heritageMetricState = 'error';
             card.removeAttribute('aria-busy');
           }
         });
-        payload.removeAttribute('data-wb-dashboard-metrics-ready');
+        payload.removeAttribute('data-heritage-dashboard-metrics-ready');
         document.dispatchEvent(new CustomEvent('heritage:dashboard-metrics-error', {
           detail: { payload: payload, error: error }
         }));
@@ -334,10 +334,10 @@
       Object.keys(data.series || {}).forEach(function (id) {
         if (renderMetric(root, id, data.series[id], data.labels || [])) rendered += 1;
       });
-      payload.dataset.wbDashboardMetricsState = rendered ? 'rendered' : 'empty';
-      payload.dataset.wbDashboardMetricsRendered = String(rendered);
-      payload.dataset.wbDashboardMetricsReady = 'true';
-      queryAll(root, '[data-wb-metric-card]').forEach(function (card) {
+      payload.dataset.heritageDashboardMetricsState = rendered ? 'rendered' : 'empty';
+      payload.dataset.heritageDashboardMetricsRendered = String(rendered);
+      payload.dataset.heritageDashboardMetricsReady = 'true';
+      queryAll(root, '[data-heritage-metric-card]').forEach(function (card) {
         card.removeAttribute('aria-busy');
       });
       document.dispatchEvent(new CustomEvent('heritage:dashboard-metrics-ready', {
@@ -347,8 +347,8 @@
   }
 
   function toggleDetails(button) {
-    var id = button && button.getAttribute('data-wb-metric-toggle');
-    var details = id ? document.querySelector('[data-wb-metric-details="' + id + '"]') : null;
+    var id = button && button.getAttribute('data-heritage-metric-toggle');
+    var details = id ? document.querySelector('[data-heritage-metric-details="' + id + '"]') : null;
     if (!details) return;
     var expanded = button.getAttribute('aria-expanded') === 'true';
     button.setAttribute('aria-expanded', expanded ? 'false' : 'true');
@@ -359,7 +359,7 @@
   document.addEventListener('DOMContentLoaded', function () { enhance(document); });
   document.addEventListener('heritage:content-ready', function (event) { enhance(event.detail && event.detail.root ? event.detail.root : document); });
   document.addEventListener('click', function (event) {
-    var button = event.target && event.target.closest ? event.target.closest('[data-wb-metric-toggle]') : null;
+    var button = event.target && event.target.closest ? event.target.closest('[data-heritage-metric-toggle]') : null;
     if (!button) return;
     event.preventDefault();
     toggleDetails(button);

@@ -61,7 +61,7 @@
   --wb-radius: var(--hg-radius-md);
 }
 
-html[data-wb-theme='dark'] {
+html[data-heritage-theme='dark'] {
   --hg-accent-hover: color-mix(in srgb, var(--hg-accent) 82%, #fff);
   --hg-accent-soft: color-mix(in srgb, var(--hg-accent) 10%, transparent);
   --hg-accent-line: color-mix(in srgb, var(--hg-accent) 34%, transparent);

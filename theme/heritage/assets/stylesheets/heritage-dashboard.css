@@ -244,7 +244,7 @@ body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-das
   box-shadow: none;
 }
 
-body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet-metric-atomic[data-wb-metric-viewport='compact'] .wb-dashboard-metric-card {
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet-metric-atomic[data-heritage-metric-viewport='compact'] .wb-dashboard-metric-card {
   grid-template-rows: 30px 24px 88px auto auto;
 }
 
@@ -338,7 +338,7 @@ body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout .wb-dashb
   margin-block-start: 8px;
 }
 
-body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-wb-dashboard-cockpit='metric'][data-wb-metric-viewport='compact'] .wb-dashboard-metric-card__meta {
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-heritage-dashboard-cockpit='metric'][data-heritage-metric-viewport='compact'] .wb-dashboard-metric-card__meta {
   display: block !important;
 }
 
@@ -382,7 +382,7 @@ body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout .wb-dashb
   display: grid !important;
 }
 
-body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-wb-dashboard-cockpit='metric'][data-wb-metric-viewport='compact'] .wb-dashboard-metric-card__details:not([hidden]) {
+body.heritage-shell.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-heritage-dashboard-cockpit='metric'][data-heritage-metric-viewport='compact'] .wb-dashboard-metric-card__details:not([hidden]) {
   display: grid !important;
 }
 

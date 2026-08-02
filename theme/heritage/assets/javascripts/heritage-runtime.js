@@ -7,7 +7,7 @@
     var toggle = document.querySelector('.wb-theme-toggle');
     if (!toggle) return;
 
-    var isDark = document.documentElement.getAttribute('data-wb-theme') === 'dark';
+    var isDark = document.documentElement.getAttribute('data-heritage-theme') === 'dark';
     var isGerman = (document.documentElement.lang || '').toLowerCase().indexOf('de') === 0;
     var label = isGerman
       ? (isDark ? 'Zum hellen Design wechseln' : 'Zum dunklen Design wechseln')
@@ -227,7 +227,7 @@
       Array.prototype.slice.call(document.body.classList).forEach(function (className) {
         if (className.indexOf('wb-form-profile--') === 0) document.body.classList.remove(className);
       });
-      delete document.body.dataset.wbFormProfiles;
+      delete document.body.dataset.heritageFormProfiles;
     }
     if (!pageContent.querySelector('table')) pageContent.classList.remove('wb-table-workspace', 'wb-table-workspace--finalized');
     document.body.setAttribute('data-heritage-module-family', family);
@@ -406,7 +406,7 @@
     ];
 
     sections.forEach(function (section) {
-      var first = host.querySelector(section.selector + ':not([data-wb-hidden="true"])');
+      var first = host.querySelector(section.selector + ':not([data-heritage-hidden="true"])');
       var marker = host.querySelector('[data-heritage-dashboard-section="' + section.key + '"]');
       if (!first || first.hidden || first.getClientRects().length === 0) {
         if (marker) marker.hidden = true;
@@ -426,9 +426,9 @@
       if (marker.nextElementSibling !== first) host.insertBefore(marker, first);
     });
 
-    host.querySelectorAll('[data-wb-metric-toggle]').forEach(function (toggle, index) {
-      var metric = toggle.getAttribute('data-wb-metric-toggle') || String(index);
-      var details = host.querySelector('[data-wb-metric-details="' + metric + '"]');
+    host.querySelectorAll('[data-heritage-metric-toggle]').forEach(function (toggle, index) {
+      var metric = toggle.getAttribute('data-heritage-metric-toggle') || String(index);
+      var details = host.querySelector('[data-heritage-metric-details="' + metric + '"]');
       if (!details) return;
       var id = details.id || ('heritage-metric-details-' + metric.replace(/[^a-z0-9_-]/gi, '-'));
       details.id = id;
@@ -685,7 +685,7 @@
 
     new MutationObserver(syncThemeToggleLabel).observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ['data-wb-theme']
+      attributeFilter: ['data-heritage-theme']
     });
 
     var pageContent = document.getElementById('pageContent');

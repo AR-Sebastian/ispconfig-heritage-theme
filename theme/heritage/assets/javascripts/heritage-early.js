@@ -19,13 +19,13 @@
 
   function localize(root) {
     var scope = root || document;
-    var textAttribute = 'data-wb-i18n-' + language;
+    var textAttribute = 'data-heritage-i18n-' + language;
     Array.prototype.forEach.call(scope.querySelectorAll('[' + textAttribute + ']'), function(node) {
       node.textContent = node.getAttribute(textAttribute);
     });
-    Array.prototype.forEach.call(scope.querySelectorAll('[data-wb-i18n-aria-label-de], [data-wb-i18n-title-de]'), function(node) {
-      var aria = node.getAttribute('data-wb-i18n-aria-label-' + language);
-      var title = node.getAttribute('data-wb-i18n-title-' + language);
+    Array.prototype.forEach.call(scope.querySelectorAll('[data-heritage-i18n-aria-label-de], [data-heritage-i18n-title-de]'), function(node) {
+      var aria = node.getAttribute('data-heritage-i18n-aria-label-' + language);
+      var title = node.getAttribute('data-heritage-i18n-title-' + language);
       if (aria !== null) node.setAttribute('aria-label', aria);
       if (title !== null) node.setAttribute('title', title);
     });
@@ -71,7 +71,7 @@
 
   try {
     if (window.localStorage && window.localStorage.getItem('ispconfig-workbench-theme') === 'dark') {
-      document.documentElement.setAttribute('data-wb-theme', 'dark');
+      document.documentElement.setAttribute('data-heritage-theme', 'dark');
     }
   } catch (error) {
     /* Keep first paint independent from storage availability. */

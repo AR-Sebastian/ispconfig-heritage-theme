@@ -45,11 +45,11 @@
   function init() {
     var form = document.getElementById('searchform');
     var input = document.getElementById('globalsearch');
-    if (!form || !input || input.dataset.wbSearchReady === 'true') {
+    if (!form || !input || input.dataset.heritageSearchReady === 'true') {
       return false;
     }
 
-    input.dataset.wbSearchReady = 'true';
+    input.dataset.heritageSearchReady = 'true';
     input.setAttribute('aria-keyshortcuts', '/');
     input.setAttribute('role', 'combobox');
     input.setAttribute('aria-autocomplete', 'list');

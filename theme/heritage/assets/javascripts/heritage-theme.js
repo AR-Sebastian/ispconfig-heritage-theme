@@ -90,7 +90,7 @@
   }
 
   function applyAccessibleAction(color) {
-    var adjusted = accessibleAction(color || cssToken('--wb-accent', '#cc151c'), root.getAttribute('data-wb-theme') === 'dark');
+    var adjusted = accessibleAction(color || cssToken('--wb-accent', '#cc151c'), root.getAttribute('data-heritage-theme') === 'dark');
     root.style.setProperty('--wb-action', adjusted);
     applyActionContrast(adjusted);
     return adjusted;
@@ -111,7 +111,7 @@
 
   function apply(theme) {
     var dark = theme === 'dark';
-    root.setAttribute('data-wb-theme', dark ? 'dark' : 'light');
+    root.setAttribute('data-heritage-theme', dark ? 'dark' : 'light');
     applyAccessibleAction(cssToken('--wb-accent', '#cc151c'));
     Array.prototype.forEach.call(document.querySelectorAll('.wb-theme-toggle'), function (button) {
       var german = typeof window.heritageLanguage === 'function' && window.heritageLanguage() === 'de';
@@ -131,7 +131,7 @@
     form.classList.add('wb-auth-form');
     var action = (form.getAttribute('action') || '').toLowerCase();
     var mode = action.indexOf('otp') !== -1 ? 'otp' : action.indexOf('password_reset') !== -1 ? 'reset' : action.indexOf('force_password') !== -1 ? 'password' : 'login';
-    document.querySelector('.wb-login-card').setAttribute('data-wb-auth-mode', mode);
+    document.querySelector('.wb-login-card').setAttribute('data-heritage-auth-mode', mode);
     var fieldMap = {
       username: { text: 'Benutzername', autocomplete: 'username' },
       password: { text: 'Passwort', autocomplete: 'current-password' },
@@ -148,19 +148,19 @@
       input.setAttribute('aria-label', input.getAttribute('aria-label') || field.text);
       var group = input.closest('.form-group') || input.parentElement;
       if (group) group.classList.add('wb-auth-field');
-      if (group && !group.querySelector('[data-wb-login-label]')) {
+      if (group && !group.querySelector('[data-heritage-login-label]')) {
         var label = document.createElement('label');
         label.textContent = field.text;
         label.setAttribute('for', field.id);
-        label.setAttribute('data-wb-login-label', 'true');
+        label.setAttribute('data-heritage-login-label', 'true');
         group.insertBefore(label, input);
       }
-      if (input.type === 'password' && group && !group.querySelector('[data-wb-password-toggle]')) {
+      if (input.type === 'password' && group && !group.querySelector('[data-heritage-password-toggle]')) {
         group.classList.add('wb-password-field');
         var toggle = document.createElement('button');
         toggle.type = 'button';
         toggle.className = 'wb-password-toggle';
-        toggle.setAttribute('data-wb-password-toggle', 'true');
+        toggle.setAttribute('data-heritage-password-toggle', 'true');
         setIcon(toggle, eye);
         toggle.setAttribute('aria-label', 'Passwort anzeigen');
         toggle.addEventListener('click', function () {
@@ -191,8 +191,8 @@
     if (heading) heading.classList.add('wb-auth-context-title');
     var description = heading && heading.nextElementSibling;
     if (description && description.tagName === 'P') description.classList.add('wb-auth-context-copy');
-    if (form && !form.dataset.wbLoginSubmitBound) {
-      form.dataset.wbLoginSubmitBound = 'true';
+    if (form && !form.dataset.heritageLoginSubmitBound) {
+      form.dataset.heritageLoginSubmitBound = 'true';
       form.addEventListener('submit', function () {
         var submit = form.querySelector('input[type="submit"], button[type="submit"]');
         if (submit) {
@@ -208,7 +208,7 @@
   document.addEventListener('click', function (event) {
     var button = event.target.closest('.wb-theme-toggle');
     if (!button) return;
-    var next = root.getAttribute('data-wb-theme') === 'dark' ? 'light' : 'dark';
+    var next = root.getAttribute('data-heritage-theme') === 'dark' ? 'light' : 'dark';
     try { localStorage.setItem(key, next); } catch (ignore) {}
     apply(next);
   });

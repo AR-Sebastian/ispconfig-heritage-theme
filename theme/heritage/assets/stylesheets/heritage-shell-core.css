@@ -96,7 +96,7 @@ body.wb-app-navigation-enabled #inner-wrapper > .clear:first-child {
   backdrop-filter: blur(16px);
 }
 
-html[data-wb-theme='dark'] body.wb-app-navigation-enabled #inner-wrapper > .clear:first-child {
+html[data-heritage-theme='dark'] body.wb-app-navigation-enabled #inner-wrapper > .clear:first-child {
   box-shadow: 0 7px 22px rgba(0, 0, 0, .18);
 }
 
@@ -124,8 +124,8 @@ body.wb-app-navigation-enabled .wb-app-navigation__brand-logo {
   background-repeat: no-repeat !important;
 }
 
-html[data-wb-theme='dark'] body.wb-app-navigation-enabled #logo,
-html[data-wb-theme='dark'] body.wb-app-navigation-enabled .wb-app-navigation__brand-logo {
+html[data-heritage-theme='dark'] body.wb-app-navigation-enabled #logo,
+html[data-heritage-theme='dark'] body.wb-app-navigation-enabled .wb-app-navigation__brand-logo {
   background-image: var(--wb-dark-logo) !important;
 }
 
@@ -395,17 +395,17 @@ body.wb-app-navigation-enabled .wb-global-search-message { display: grid; min-he
 body.wb-app-navigation-enabled .wb-global-search-message--loading::before { width: 22px; height: 22px; margin-bottom: 8px; border: 2px solid var(--wb-border); border-top-color: var(--wb-action); border-radius: 50%; content: ''; animation: wb-shell-spin .8s linear infinite; }
 body.wb-app-navigation-enabled .wb-global-search-message--error { color: var(--wb-danger-ink); }
 body.wb-app-navigation-enabled #globalsearch[aria-busy='true'] { padding-right: 76px; }
-html[data-wb-theme='dark'] body.wb-app-navigation-enabled .wb-global-search-results { box-shadow: 0 22px 60px rgba(0, 0, 0, .52); }
+html[data-heritage-theme='dark'] body.wb-app-navigation-enabled .wb-global-search-results { box-shadow: 0 22px 60px rgba(0, 0, 0, .52); }
 
-html[data-wb-theme='dark'] body.wb-app-navigation-enabled #searchform .wb-global-search__field,
-html[data-wb-theme='dark'] body.wb-app-navigation-enabled #searchform .wb-global-search-submit,
-html[data-wb-theme='dark'] body.wb-app-navigation-enabled .wb-search-clear,
-html[data-wb-theme='dark'] body.wb-app-navigation-enabled .wb-search-shortcut {
+html[data-heritage-theme='dark'] body.wb-app-navigation-enabled #searchform .wb-global-search__field,
+html[data-heritage-theme='dark'] body.wb-app-navigation-enabled #searchform .wb-global-search-submit,
+html[data-heritage-theme='dark'] body.wb-app-navigation-enabled .wb-search-clear,
+html[data-heritage-theme='dark'] body.wb-app-navigation-enabled .wb-search-shortcut {
   color-scheme: dark;
   background-image: none !important;
 }
 
-html[data-wb-theme='dark'] body.wb-app-navigation-enabled #searchform .wb-global-search-submit {
+html[data-heritage-theme='dark'] body.wb-app-navigation-enabled #searchform .wb-global-search-submit {
   color: var(--wb-text-muted) !important;
   background: color-mix(in srgb, var(--wb-surface-muted) 92%, #000) !important;
 }
@@ -749,7 +749,7 @@ body.wb-app-navigation-enabled :where(.wb-owned-enhanced-select__panel, .dropdow
   max-width: min(560px, calc(100vw - 24px));
 }
 
-html[data-wb-theme='dark'] body.wb-app-navigation-enabled :where(.dropdown-menu, .wb-owned-enhanced-select__panel) {
+html[data-heritage-theme='dark'] body.wb-app-navigation-enabled :where(.dropdown-menu, .wb-owned-enhanced-select__panel) {
   color: var(--wb-text);
   border-color: var(--wb-border);
   background: var(--wb-surface);

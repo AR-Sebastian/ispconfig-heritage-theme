@@ -4,17 +4,17 @@
   if (window.heritageMessageAcknowledgement) return;
 
   function acknowledge(alert) {
-    var url = alert && alert.getAttribute('data-wb-ack-url');
-    if (!url || alert.dataset.wbAckState === 'pending' || alert.dataset.wbAckState === 'complete') return false;
+    var url = alert && alert.getAttribute('data-heritage-ack-url');
+    if (!url || alert.dataset.heritageAckState === 'pending' || alert.dataset.heritageAckState === 'complete') return false;
     if (!window.heritageHttp) return false;
 
-    alert.dataset.wbAckState = 'pending';
+    alert.dataset.heritageAckState = 'pending';
     var request = window.heritageHttp.getText(url, { accept: 'text/plain', timeout: 10000 });
     request.promise.then(function () {
-      alert.dataset.wbAckState = 'complete';
+      alert.dataset.heritageAckState = 'complete';
       alert.dispatchEvent(new CustomEvent('heritage:message-acknowledged', { detail: { url: url } }));
     }).catch(function (error) {
-      alert.dataset.wbAckState = 'error';
+      alert.dataset.heritageAckState = 'error';
       alert.dispatchEvent(new CustomEvent('heritage:message-acknowledgement-error', {
         detail: { url: url, error: error }
       }));
@@ -24,9 +24,9 @@
 
   function enhance(scope) {
     var host = scope && scope.querySelectorAll ? scope : document;
-    host.querySelectorAll('[data-wb-ack-url]').forEach(function (alert) {
-      if (alert.dataset.wbAckBound === 'true') return;
-      alert.dataset.wbAckBound = 'true';
+    host.querySelectorAll('[data-heritage-ack-url]').forEach(function (alert) {
+      if (alert.dataset.heritageAckBound === 'true') return;
+      alert.dataset.heritageAckBound = 'true';
       alert.addEventListener('heritage:alert-dismiss', function () { acknowledge(alert); }, { once: true });
     });
   }

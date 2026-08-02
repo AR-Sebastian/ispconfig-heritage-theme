@@ -428,7 +428,7 @@ body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li 
   body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > :is(th, td)::before {
     align-self: start;
     color: var(--hg-text-muted);
-    content: attr(data-wb-label);
+    content: attr(data-heritage-label);
     font-size: var(--hg-font-xs);
     font-weight: 700;
     letter-spacing: .025em;

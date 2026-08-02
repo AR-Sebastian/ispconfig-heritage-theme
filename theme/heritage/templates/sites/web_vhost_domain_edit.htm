@@ -1,8 +1,8 @@
 <tmpl_if name="config_error_msg">
 <div>
     <p>
-        <div id="errormsg" class="wb-alert wb-alert--danger wb-alert--dismissible" role="alert" data-wb-ack-url="sites/message_ack.php?relation=web_domain:{tmpl_var name='id'}&amp;_csrf_id={tmpl_var name='_csrf_id_msg'}&amp;_csrf_key={tmpl_var name='_csrf_key_msg'}">
-            <button type="button" class="wb-alert__dismiss" data-heritage-dismiss="alert" aria-label="Schließen" data-wb-i18n-aria-label-de="Schließen" data-wb-i18n-aria-label-en="Close"><span aria-hidden="true">&times;</span></button>
+        <div id="errormsg" class="wb-alert wb-alert--danger wb-alert--dismissible" role="alert" data-heritage-ack-url="sites/message_ack.php?relation=web_domain:{tmpl_var name='id'}&amp;_csrf_id={tmpl_var name='_csrf_id_msg'}&amp;_csrf_key={tmpl_var name='_csrf_key_msg'}">
+            <button type="button" class="wb-alert__dismiss" data-heritage-dismiss="alert" aria-label="Schließen" data-heritage-i18n-aria-label-de="Schließen" data-heritage-i18n-aria-label-en="Close"><span aria-hidden="true">&times;</span></button>
             <div class="wb-config-error-time">{tmpl_var name='config_error_tstamp'} :&nbsp;</div>
             <div class="wb-config-error-message">{tmpl_var name='config_error_msg'}</div>
         </div>

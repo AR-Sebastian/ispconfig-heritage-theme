@@ -13,6 +13,7 @@
 - Release readiness now explicitly blocks publication on removal of non-stock `workbench_*` controller dependencies.
 - Shell, login and Admin settings templates no longer require Workbench-only controller values or the custom branding endpoint.
 - Retired branding-editor CSS and its dedicated form profile were removed without changing shared form surfaces.
+- Abbreviated `data-wb-*` contracts and their JavaScript dataset properties were migrated to the explicit HERITAGE namespace.
 
 ## 1.0.33 – 2026-07-31
 

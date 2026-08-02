@@ -1966,14 +1966,14 @@
     beginRequest: function() {
       ISPConfig.requestsRunning += 1;
       document.body.classList.add('wb-request-active');
-      document.body.dataset.wbRequestCount = String(ISPConfig.requestsRunning);
+      document.body.dataset.heritageRequestCount = String(ISPConfig.requestsRunning);
       var host = document.getElementById('pageContent');
       if (host) host.setAttribute('aria-busy', 'true');
     },
 
     endRequest: function() {
       ISPConfig.requestsRunning = Math.max(0, ISPConfig.requestsRunning - 1);
-      document.body.dataset.wbRequestCount = String(ISPConfig.requestsRunning);
+      document.body.dataset.heritageRequestCount = String(ISPConfig.requestsRunning);
       if (ISPConfig.requestsRunning > 0) return;
       document.body.classList.remove('wb-request-active');
       var host = document.getElementById('pageContent');
@@ -3037,17 +3037,17 @@
   if (window.heritageMessageAcknowledgement) return;
 
   function acknowledge(alert) {
-    var url = alert && alert.getAttribute('data-wb-ack-url');
-    if (!url || alert.dataset.wbAckState === 'pending' || alert.dataset.wbAckState === 'complete') return false;
+    var url = alert && alert.getAttribute('data-heritage-ack-url');
+    if (!url || alert.dataset.heritageAckState === 'pending' || alert.dataset.heritageAckState === 'complete') return false;
     if (!window.heritageHttp) return false;
 
-    alert.dataset.wbAckState = 'pending';
+    alert.dataset.heritageAckState = 'pending';
     var request = window.heritageHttp.getText(url, { accept: 'text/plain', timeout: 10000 });
     request.promise.then(function () {
-      alert.dataset.wbAckState = 'complete';
+      alert.dataset.heritageAckState = 'complete';
       alert.dispatchEvent(new CustomEvent('heritage:message-acknowledged', { detail: { url: url } }));
     }).catch(function (error) {
-      alert.dataset.wbAckState = 'error';
+      alert.dataset.heritageAckState = 'error';
       alert.dispatchEvent(new CustomEvent('heritage:message-acknowledgement-error', {
         detail: { url: url, error: error }
       }));
@@ -3057,9 +3057,9 @@
 
   function enhance(scope) {
     var host = scope && scope.querySelectorAll ? scope : document;
-    host.querySelectorAll('[data-wb-ack-url]').forEach(function (alert) {
-      if (alert.dataset.wbAckBound === 'true') return;
-      alert.dataset.wbAckBound = 'true';
+    host.querySelectorAll('[data-heritage-ack-url]').forEach(function (alert) {
+      if (alert.dataset.heritageAckBound === 'true') return;
+      alert.dataset.heritageAckBound = 'true';
       alert.addEventListener('heritage:alert-dismiss', function () { acknowledge(alert); }, { once: true });
     });
   }
@@ -3196,7 +3196,7 @@
     if (legacy.options.useLoadIndicator !== true) return;
     legacy.requestsRunning += 1;
     document.body.classList.add('wb-request-active');
-    document.body.dataset.wbRequestCount = String(legacy.requestsRunning);
+    document.body.dataset.heritageRequestCount = String(legacy.requestsRunning);
     var region = content();
     if (!region) return;
     region.setAttribute('aria-busy', 'true');
@@ -3225,7 +3225,7 @@
 
   legacy.endRequest = function() {
     legacy.requestsRunning = Math.max(0, legacy.requestsRunning - 1);
-    document.body.dataset.wbRequestCount = String(legacy.requestsRunning);
+    document.body.dataset.heritageRequestCount = String(legacy.requestsRunning);
     if (legacy.requestsRunning > 0) return;
     if (requestSlowTimer !== null) {
       window.clearTimeout(requestSlowTimer);
@@ -3391,8 +3391,8 @@
   if (legacy) legacy.workbenchUrlFor = urlFor;
 
   function installNavigationHistory() {
-    if (!window.history || !window.history.pushState || document.documentElement.dataset.wbHistoryReady) return;
-    document.documentElement.dataset.wbHistoryReady = 'true';
+    if (!window.history || !window.history.pushState || document.documentElement.dataset.heritageHistoryReady) return;
+    document.documentElement.dataset.heritageHistoryReady = 'true';
     var content = document.getElementById('pageContent');
     // Robust routing: the current page lives in the address-bar hash, so reload
     // or bookmark restores it instead of falling back to the server session
@@ -3467,7 +3467,7 @@
       if (className.indexOf('wb-form-profile--') === 0) body.classList.remove(className);
     });
     if (!hasForm) {
-      delete body.dataset.wbFormProfiles;
+      delete body.dataset.heritageFormProfiles;
       return;
     }
     if (route.indexOf('billing/') === 0 || host.querySelector('.wb-billing-product, [data-billing-scope]')) addProfile('billing');
@@ -3492,7 +3492,7 @@
     profiles.forEach(function(profile) {
       body.classList.add('wb-form-profile--' + profile);
     });
-    body.dataset.wbFormProfiles = profiles.join(' ');
+    body.dataset.heritageFormProfiles = profiles.join(' ');
   }
 
   function moduleFromPageName(pageName) {
@@ -3594,7 +3594,7 @@
       }
       var title = header.querySelector('h1');
       if (title) {
-        host.setAttribute('data-wb-page-title', title.textContent.replace(/\s+/g, ' ').trim());
+        host.setAttribute('data-heritage-page-title', title.textContent.replace(/\s+/g, ' ').trim());
         title.setAttribute('tabindex', '-1');
       }
     }
@@ -3781,7 +3781,7 @@
     result.className = 'wb-list-result-count';
     result.setAttribute('role', 'status');
     result.textContent = resultTemplate.replace('{count}', dataRows.length);
-    bar.dataset.wbListRows = String(dataRows.length);
+    bar.dataset.heritageListRows = String(dataRows.length);
     bar.classList.toggle('wb-list-command-bar--empty', dataRows.length === 0);
     meta.appendChild(result);
     bar.appendChild(meta);
@@ -3794,7 +3794,7 @@
     var sourceToolbar = tableWrapper.querySelector(':scope > .wb-list-toolbar');
     if (sourceToolbar) {
       Array.prototype.forEach.call(sourceToolbar.querySelectorAll('button, a'), function(action) {
-        if (action.matches('.formbutton-success, .btn-success, .btn-primary, [data-wb-primary-action]')) {
+        if (action.matches('.formbutton-success, .btn-success, .btn-primary, [data-heritage-primary-action]')) {
           action.classList.add('wb-list-command-bar__primary');
         }
         actions.appendChild(action);
@@ -3919,11 +3919,11 @@
         header.classList.toggle('wb-table-header--sortable', sortable);
         header.classList.toggle('wb-table-header--actions', index === headerNodes.length - 1);
         header.classList.toggle('wb-table-header--status', Boolean(statusKinds[index]));
-        if (statusKinds[index]) header.setAttribute('data-wb-status-kind', statusKinds[index]);
-        if (headers[index]) header.setAttribute('data-wb-label', headers[index]);
+        if (statusKinds[index]) header.setAttribute('data-heritage-status-kind', statusKinds[index]);
+        if (headers[index]) header.setAttribute('data-heritage-label', headers[index]);
         if (sortable && !header.getAttribute('aria-sort')) header.setAttribute('aria-sort', 'none');
       });
-      table.setAttribute('data-wb-columns', String(headers.length));
+      table.setAttribute('data-heritage-columns', String(headers.length));
       table.style.setProperty('--wb-table-columns', String(Math.max(headers.length, 1)));
       table.classList.toggle('wb-data-table--wide', headers.length >= 6);
       var body = table.querySelector('tbody');
@@ -3992,7 +3992,7 @@
               }
             }
             if (primaryAction && primaryAction.closest('.wb-list-command-bar')) {
-              emptyState.dataset.wbPrimaryActionDocked = 'true';
+              emptyState.dataset.heritagePrimaryActionDocked = 'true';
             }
             emptyCell.textContent = '';
             emptyCell.appendChild(emptyState);
@@ -4004,7 +4004,7 @@
         row.classList.add('wb-table-data-row');
         row.setAttribute('tabindex', '-1');
         Array.prototype.forEach.call(cells, function(cell, index) {
-          if (headers[index]) cell.setAttribute('data-wb-label', headers[index]);
+          if (headers[index]) cell.setAttribute('data-heritage-label', headers[index]);
           var cellText = (cell.textContent || '').replace(/\s+/g, ' ').trim();
           var hasInteractive = Boolean(cell.querySelector('a, button, input, select, textarea'));
           cell.classList.toggle('wb-table-cell--empty', !cellText && !hasInteractive);
@@ -4035,13 +4035,13 @@
               cell.appendChild(indicator);
             }
             cell.classList.add('wb-table-cell--status', 'wb-table-cell--compact-status');
-            cell.setAttribute('data-wb-status-kind', statusKind);
-            cell.setAttribute('data-wb-status-state', enabled ? 'on' : 'off');
+            cell.setAttribute('data-heritage-status-kind', statusKind);
+            cell.setAttribute('data-heritage-status-state', enabled ? 'on' : 'off');
           }
           if (index === 0) cell.classList.add('wb-table-cell--identity');
           if (index === cells.length - 1 || cell.classList.contains('wb-table-align-end') || cell.classList.contains('text-right')) {
             cell.classList.add('wb-table-actions');
-            cell.setAttribute('data-wb-label', document.body.dataset.heritageTableActions || localized('Aktionen', 'Actions'));
+            cell.setAttribute('data-heritage-label', document.body.dataset.heritageTableActions || localized('Aktionen', 'Actions'));
           }
         });
 
@@ -4052,7 +4052,7 @@
         if (primaryLink) {
           primaryLink.classList.add('wb-record-link');
           primaryLink.closest('td, th').classList.add('wb-table-cell--primary');
-          row.setAttribute('data-wb-record', (primaryLink.textContent || '').replace(/\s+/g, ' ').trim());
+          row.setAttribute('data-heritage-record', (primaryLink.textContent || '').replace(/\s+/g, ' ').trim());
         }
 
         Array.prototype.forEach.call(row.querySelectorAll(':scope > .wb-table-actions'), function(cell) {
@@ -4063,12 +4063,12 @@
             group = document.createElement('div');
             group.className = 'wb-row-actions';
             group.setAttribute('role', 'group');
-            group.setAttribute('aria-label', cell.getAttribute('data-wb-label') || localized('Aktionen', 'Actions'));
+            group.setAttribute('aria-label', cell.getAttribute('data-heritage-label') || localized('Aktionen', 'Actions'));
             cell.insertBefore(group, cell.firstChild);
             while (group.nextSibling) group.appendChild(group.nextSibling);
           }
           controls = group.querySelectorAll('a, button, input[type="button"], input[type="submit"]');
-          cell.setAttribute('data-wb-action-count', String(controls.length));
+          cell.setAttribute('data-heritage-action-count', String(controls.length));
           Array.prototype.forEach.call(controls, function(control, controlIndex) {
             var visibleLabel = control.tagName === 'INPUT' ? control.value : control.textContent;
             var label = control.getAttribute('aria-label') || control.title || (visibleLabel || '').replace(/\s+/g, ' ').trim();
@@ -4092,15 +4092,15 @@
             if (hadGenericLabel || !control.getAttribute('aria-label')) control.setAttribute('aria-label', label);
             if (hadGenericLabel || !control.title) control.title = label;
             if (hadGenericLabel || isGenericActionLabel(control.getAttribute('data-original-title'))) control.setAttribute('data-original-title', label);
-            if (control.getAttribute('style') && /url\(/i.test(control.getAttribute('style'))) control.dataset.wbLegacyInlineIcon = 'true';
+            if (control.getAttribute('style') && /url\(/i.test(control.getAttribute('style'))) control.dataset.heritageLegacyInlineIcon = 'true';
           });
         });
       });
       if (statusKinds.some(Boolean)) {
-        var oldStatusColgroup = table.querySelector(':scope > colgroup[data-wb-status-columns]');
+        var oldStatusColgroup = table.querySelector(':scope > colgroup[data-heritage-status-columns]');
         if (oldStatusColgroup) oldStatusColgroup.remove();
         var statusColgroup = document.createElement('colgroup');
-        statusColgroup.setAttribute('data-wb-status-columns', 'true');
+        statusColgroup.setAttribute('data-heritage-status-columns', 'true');
         headerNodes.forEach(function(header, index) {
           var firstCell = body.querySelector(':scope > tr:not(.tbl_row_noresults) > :is(td, th):nth-child(' + (index + 1) + ')');
           var headerColumn = String(header.getAttribute('data-column') || '').toLowerCase().trim();
@@ -4300,7 +4300,7 @@
   }
 
   function scrubResidualInlineStyle(node, style) {
-    if (!node || !style || node.dataset.wbPreserveInlineStyle === 'true') return false;
+    if (!node || !style || node.dataset.heritagePreserveInlineStyle === 'true') return false;
     if (/^(?:canvas|svg|path|circle|rect|line|polyline|polygon|img|picture|source|video|meter|progress)$/i.test(node.tagName || '')) return false;
     if (node.closest('[data-heritage-preserve-style="true"], .wb-chart-card, .wb-sparkline, .wb-stat-visual, .wb-logo, #logo, .notification_text')) return false;
     if (node.closest('#topnav-container, #workbench-mobile-navigation, .wb-app-navigation, .wb-header-actions')) return false;
@@ -4312,7 +4312,7 @@
     if (legacyGeometry) properties.push('width', 'min-width', 'max-width');
     if (!properties.length) return false;
 
-    node.dataset.wbOriginalInlineStyle = node.dataset.wbOriginalInlineStyle || style;
+    node.dataset.heritageOriginalInlineStyle = node.dataset.heritageOriginalInlineStyle || style;
     properties.forEach(function(property) {
       try { node.style.removeProperty(property); } catch (error) {}
     });
@@ -4367,10 +4367,10 @@
   }
 
   function schedulePostRenderEnhancement(host, pageName) {
-    if (!host || host.dataset.wbPostRenderScheduled === 'true') return;
-    host.dataset.wbPostRenderScheduled = 'true';
+    if (!host || host.dataset.heritagePostRenderScheduled === 'true') return;
+    host.dataset.heritagePostRenderScheduled = 'true';
     var run = function() {
-      host.dataset.wbPostRenderScheduled = 'false';
+      host.dataset.heritagePostRenderScheduled = 'false';
       if (!document.contains(host)) return;
       enhanceLoadedContent(host, pageName);
       announceContentReady(host, pageName || '', { source: 'post-render' });
@@ -4419,10 +4419,10 @@
         return control.disabled || (control.readOnly && control.type !== 'password');
       }).length;
 
-      section.setAttribute('data-wb-section-fields', String(groups.length));
-      section.setAttribute('data-wb-section-required', String(required));
-      section.setAttribute('data-wb-section-invalid', String(invalid));
-      section.setAttribute('data-wb-section-locked', String(disabled));
+      section.setAttribute('data-heritage-section-fields', String(groups.length));
+      section.setAttribute('data-heritage-section-required', String(required));
+      section.setAttribute('data-heritage-section-invalid', String(invalid));
+      section.setAttribute('data-heritage-section-locked', String(disabled));
       section.classList.toggle('wb-form-section--has-errors', invalid > 0);
       section.classList.toggle('wb-form-section--has-required', required > 0);
 
@@ -4448,14 +4448,14 @@
     });
 
     Array.prototype.forEach.call(scope.querySelectorAll('.wb-form-panel'), function(panel) {
-      var count = panel.getAttribute('data-wb-panel-fields') || '0';
+      var count = panel.getAttribute('data-heritage-panel-fields') || '0';
       var invalid = panel.querySelectorAll('.has-error, [aria-invalid="true"], .text-danger, .alert-danger, .error').length;
       var trigger = panel.querySelector('.wb-form-panel-trigger');
       panel.classList.toggle('wb-form-panel--has-errors', invalid > 0);
-      panel.setAttribute('data-wb-panel-invalid', String(invalid));
+      panel.setAttribute('data-heritage-panel-invalid', String(invalid));
       if (trigger) {
-        trigger.setAttribute('data-wb-panel-fields', count);
-        trigger.setAttribute('data-wb-panel-invalid', String(invalid));
+        trigger.setAttribute('data-heritage-panel-fields', count);
+        trigger.setAttribute('data-heritage-panel-invalid', String(invalid));
         trigger.classList.toggle('wb-form-panel-trigger--has-errors', invalid > 0);
       }
     });
@@ -4487,7 +4487,7 @@
       var controlValue = String(control.getAttribute('value') || '').toLowerCase();
       kinds.push(type);
       control.classList.add('wb-field-control');
-      control.setAttribute('data-wb-control-kind', type);
+      control.setAttribute('data-heritage-control-kind', type);
       if (label && control.id && !label.getAttribute('for')) label.setAttribute('for', control.id);
       if (control.disabled) group.classList.add('wb-field-group--disabled');
       if (control.readOnly) group.classList.add('wb-field-group--readonly');
@@ -4510,8 +4510,8 @@
       group.classList.add('wb-field-group--boolean');
       controls[0].setAttribute('role', 'switch');
       controls[0].setAttribute('aria-checked', controls[0].checked ? 'true' : 'false');
-      if (!controls[0].getAttribute('data-wb-boolean-bound')) {
-        controls[0].setAttribute('data-wb-boolean-bound', 'true');
+      if (!controls[0].getAttribute('data-heritage-boolean-bound')) {
+        controls[0].setAttribute('data-heritage-boolean-bound', 'true');
         controls[0].addEventListener('change', function() {
           controls[0].setAttribute('aria-checked', controls[0].checked ? 'true' : 'false');
         });
@@ -4526,7 +4526,7 @@
         if (group.querySelector('.help-block, .help-inline, .description, .hint, small, .form-text')) group.classList.add('wb-field-group--with-help');
         if (group.querySelector('.form-control-static, output, code, pre')) group.classList.add('wb-field-group--static-value');
         if (group.querySelector('table, .table-wrapper, .table-responsive')) group.classList.add('wb-field-group--embedded-table');
-    if (kinds.length) group.setAttribute('data-wb-field-kinds', kinds.join(' '));
+    if (kinds.length) group.setAttribute('data-heritage-field-kinds', kinds.join(' '));
   }
 
   function inferSectionTitle(section, scope) {
@@ -4549,9 +4549,9 @@
       section.classList.toggle('wb-form-section--compact', groups.length > 0 && groups.length <= 3);
       section.classList.toggle('wb-form-section--large', groups.length > 12);
       section.classList.toggle('wb-form-section--notice-heavy', notices > 0);
-      section.setAttribute('data-wb-section-controls', String(controls));
-      section.setAttribute('data-wb-section-notices', String(notices));
-      if (title) section.setAttribute('data-wb-section-title', title);
+      section.setAttribute('data-heritage-section-controls', String(controls));
+      section.setAttribute('data-heritage-section-notices', String(notices));
+      if (title) section.setAttribute('data-heritage-section-title', title);
     });
   }
 
@@ -4580,7 +4580,7 @@
         else if (action.classList.contains('formbutton-success') || action.classList.contains('btn-success') || action.classList.contains('btn-primary') || /save|speichern|create|erstellen|hinzufügen|hinzufuegen|import|upload/.test(actionText)) tone = 'primary';
         if (tone === 'danger') hasDangerAction = true;
         action.classList.add('wb-form-action', 'wb-form-action--' + tone);
-        action.setAttribute('data-wb-form-action-tone', tone);
+        action.setAttribute('data-heritage-form-action-tone', tone);
       });
       actions.classList.toggle('wb-form-actions--has-danger', hasDangerAction);
     });
@@ -4591,7 +4591,7 @@
   }
 
   function inferActionControlTone(control) {
-    var explicitTone = String(control.getAttribute('data-wb-action-tone') || '').toLowerCase();
+    var explicitTone = String(control.getAttribute('data-heritage-action-tone') || '').toLowerCase();
     if (['primary', 'secondary', 'danger', 'warning', 'info'].indexOf(explicitTone) !== -1) return explicitTone;
     if (control.classList.contains('wb-dns-zone-actions__secondary')) return 'secondary';
     var textValue = actionControlText(control);
@@ -4639,7 +4639,7 @@
         control.classList.contains('wb-icon-button') ||
         (!visibleText && Boolean(control.querySelector('span, i, svg, img')));
       control.classList.add('wb-action-control', 'wb-action-control--' + tone);
-      control.setAttribute('data-wb-action-tone', tone);
+      control.setAttribute('data-heritage-action-tone', tone);
       control.classList.toggle('wb-action-control--icon', iconOnly);
       if (!control.getAttribute('aria-label') && !visibleText) {
         control.setAttribute('aria-label', control.getAttribute('title') || document.body.dataset.heritageTableActions || localized('Aktion', 'Action'));
@@ -4663,7 +4663,7 @@
       body.classList.add('wb-upload-dropzone');
       Array.prototype.forEach.call(group.querySelectorAll('input[type="file"]'), function(input) {
         input.classList.add('wb-upload-dropzone__input');
-        input.setAttribute('data-wb-file-ready', 'true');
+        input.setAttribute('data-heritage-file-ready', 'true');
       });
     });
 
@@ -4681,7 +4681,7 @@
     });
 
     Array.prototype.forEach.call(scope.querySelectorAll('.wb-form-actions .btn, .wb-form-actions button, .wb-form-actions input[type="button"], .wb-form-actions input[type="submit"], .wb-form-actions a.formbutton-success, .wb-form-actions a.formbutton-default, .wb-form-actions a.formbutton-danger'), function(action) {
-      var tone = action.getAttribute('data-wb-form-action-tone') || 'secondary';
+      var tone = action.getAttribute('data-heritage-form-action-tone') || 'secondary';
       action.classList.add('wb-form-action-control', 'wb-form-action-control--' + tone);
     });
 
@@ -4711,8 +4711,8 @@
         strengthBar.setAttribute('aria-valuemax', '100');
         if (strengthText) strengthText.setAttribute('aria-live', 'polite');
       };
-      if (!strengthInput.getAttribute('data-wb-strength-visibility-bound')) {
-        strengthInput.setAttribute('data-wb-strength-visibility-bound', 'true');
+      if (!strengthInput.getAttribute('data-heritage-strength-visibility-bound')) {
+        strengthInput.setAttribute('data-heritage-strength-visibility-bound', 'true');
         strengthInput.addEventListener('input', syncStrengthVisibility);
         strengthInput.addEventListener('change', syncStrengthVisibility);
       }
@@ -4731,7 +4731,7 @@
       var scope = form === shellForm ? host : form;
       Array.prototype.forEach.call(scope.querySelectorAll('.tab-pane, fieldset, .pnl_formsarea'), function(section, sectionIndex) {
         section.classList.add('wb-form-section');
-        section.setAttribute('data-wb-section-index', String(sectionIndex + 1));
+        section.setAttribute('data-heritage-section-index', String(sectionIndex + 1));
         if (section.tagName === 'FIELDSET') section.classList.add('wb-form-fieldset');
         var legend = section.querySelector(':scope > legend, :scope > .fieldset-legend');
         if (legend) legend.classList.add('wb-form-section-heading');
@@ -4746,7 +4746,7 @@
         if (label) {
           label.classList.add('wb-field-label');
           var readableLabel = labelText(label);
-          if (readableLabel) group.setAttribute('data-wb-field-label', readableLabel);
+          if (readableLabel) group.setAttribute('data-heritage-field-label', readableLabel);
         }
         if (!label) group.classList.add('wb-field-group--unlabelled');
         if (!controls.length) group.classList.add('wb-field-group--content');
@@ -4776,7 +4776,7 @@
         }
         if (fieldBodies.length > 1) group.classList.add('wb-field-group--multi-body');
         fieldBodies.forEach(function(body, bodyIndex) {
-          body.setAttribute('data-wb-field-body-index', String(bodyIndex + 1));
+          body.setAttribute('data-heritage-field-body-index', String(bodyIndex + 1));
           if (!body.querySelector('input:not([type="hidden"]), select, textarea, button, a') && body.textContent.trim()) {
             body.classList.add('wb-field-affix');
             group.classList.add('wb-field-group--with-affix');
@@ -4799,7 +4799,7 @@
       form.classList.toggle('wb-modern-form--has-secrets', !!scope.querySelector('.wb-field-group--secret'));
       form.classList.toggle('wb-modern-form--has-choices', !!scope.querySelector('.wb-field-group--choice'));
       Array.prototype.forEach.call(scope.querySelectorAll('.wb-form-section'), function(section) {
-        section.setAttribute('data-wb-section-fields', String(section.querySelectorAll('.wb-field-group:not(.wb-field-group--empty)').length));
+        section.setAttribute('data-heritage-section-fields', String(section.querySelectorAll('.wb-field-group:not(.wb-field-group--empty)').length));
       });
       finalizeFormSections(scope);
       Array.prototype.forEach.call(scope.querySelectorAll('.panel-group, .wb-limit-sections, .wb-form-sections'), function(accordion) {
@@ -4810,7 +4810,7 @@
           var heading = panel.querySelector(':scope > .panel-heading, :scope > .wb-limit-section__header, :scope > .wb-form-section__header');
           var trigger = heading && heading.querySelector('a[href^="#"], button[data-target]');
           var count = body ? body.querySelectorAll('.form-group').length : 0;
-          panel.setAttribute('data-wb-panel-fields', String(count));
+          panel.setAttribute('data-heritage-panel-fields', String(count));
           if (heading) heading.classList.add('wb-form-panel-heading');
           if (trigger) {
             trigger.classList.add('wb-form-panel-trigger');
@@ -6636,7 +6636,7 @@
     if (dashboardNews && !newsWidget) {
       newsWidget = document.createElement('article');
       newsWidget.className = 'wb-dashlet wb-dashlet-news';
-      newsWidget.setAttribute('data-wb-dashlet', 'news');
+      newsWidget.setAttribute('data-heritage-dashlet', 'news');
       newsWidget.replaceChildren.apply(newsWidget, Array.prototype.map.call(sidebar.childNodes, function(node) {
         return node.cloneNode(true);
       }));
@@ -7045,14 +7045,14 @@
     }
 
     function clearPoint(point) {
-      if (document.activeElement === point || host.dataset.wbMetricPinned === point.dataset.wbMetricIndex) return;
+      if (document.activeElement === point || host.dataset.heritageMetricPinned === point.dataset.heritageMetricIndex) return;
       point.classList.remove('is-active');
       guide.hidden = true;
       tooltip.hidden = true;
     }
 
     function releasePinnedPoint() {
-      delete host.dataset.wbMetricPinned;
+      delete host.dataset.heritageMetricPinned;
       queryAll(svg, '.wb-dashboard-sparkline__hit').forEach(function (entry) {
         entry.classList.remove('is-active');
       });
@@ -7078,7 +7078,7 @@
       point.setAttribute('tabindex', '0');
       point.setAttribute('role', 'img');
       point.setAttribute('aria-label', description);
-      point.setAttribute('data-wb-metric-index', String(index));
+      point.setAttribute('data-heritage-metric-index', String(index));
       var pointTitle = document.createElementNS(namespace, 'title');
       pointTitle.textContent = description;
       point.appendChild(pointTitle);
@@ -7088,11 +7088,11 @@
       point.addEventListener('blur', function () { clearPoint(point); });
       point.addEventListener('click', function (event) {
         event.preventDefault();
-        if (host.dataset.wbMetricPinned === String(index)) {
+        if (host.dataset.heritageMetricPinned === String(index)) {
           releasePinnedPoint();
           return;
         }
-        host.dataset.wbMetricPinned = String(index);
+        host.dataset.heritageMetricPinned = String(index);
         activatePoint(point, coordinates, description);
       });
       point.addEventListener('keydown', function (event) {
@@ -7121,7 +7121,7 @@
       svg.appendChild(point);
     });
     host.addEventListener('pointerleave', function () {
-      if (!host.dataset.wbMetricPinned && !host.contains(document.activeElement)) releasePinnedPoint();
+      if (!host.dataset.heritageMetricPinned && !host.contains(document.activeElement)) releasePinnedPoint();
     });
     host.appendChild(svg);
     host.appendChild(tooltip);
@@ -7130,13 +7130,13 @@
   function renderMetric(root, id, series, labels) {
     var node = root.querySelector('#' + id);
     if (!node) return false;
-    var card = root.querySelector('[data-wb-metric-card="' + id + '"]') || node.closest('.wb-dashboard-metric-card');
+    var card = root.querySelector('[data-heritage-metric-card="' + id + '"]') || node.closest('.wb-dashboard-metric-card');
     var data = numberList(series && series.data);
-    var value = root.querySelector('[data-wb-dashboard-metric-value="' + id + '"]');
-    var trend = root.querySelector('[data-wb-metric-trend="' + id + '"]');
-    var meta = root.querySelector('[data-wb-metric-meta="' + id + '"]');
-    var details = root.querySelector('[data-wb-metric-details="' + id + '"]');
-    var toggle = root.querySelector('[data-wb-metric-toggle="' + id + '"]');
+    var value = root.querySelector('[data-heritage-dashboard-metric-value="' + id + '"]');
+    var trend = root.querySelector('[data-heritage-metric-trend="' + id + '"]');
+    var meta = root.querySelector('[data-heritage-metric-meta="' + id + '"]');
+    var details = root.querySelector('[data-heritage-metric-details="' + id + '"]');
+    var toggle = root.querySelector('[data-heritage-metric-toggle="' + id + '"]');
     var label = node.getAttribute('aria-label') || id;
     var copy = text();
     if (toggle) toggle.textContent = label + ' ' + copy.analysis;
@@ -7153,7 +7153,7 @@
       if (meta) meta.textContent = copy.noValues;
       if (details) details.hidden = true;
       if (toggle) toggle.hidden = true;
-      if (card) card.dataset.wbMetricState = 'empty';
+      if (card) card.dataset.heritageMetricState = 'empty';
       node.setAttribute('role', 'status');
       return false;
     }
@@ -7172,24 +7172,24 @@
     if (value) value.textContent = formatNumber(state.latest);
     if (trend) {
       trend.textContent = copy.trend + ' ' + trendText;
-      trend.dataset.wbMetricTrendDirection = state.trend;
+      trend.dataset.heritageMetricTrendDirection = state.trend;
       trend.title = copy.trendHint;
     }
     if (meta) meta.textContent = copy.meanShort + ' ' + formatNumber(state.avg) + ' \u00b7 ' + copy.minShort + ' ' + formatNumber(state.min) + ' \u00b7 ' + copy.maxShort + ' ' + formatNumber(state.max);
     if (card) {
-      card.dataset.wbMetricState = 'ready';
-      card.dataset.wbMetricLatest = String(state.latest);
-      card.dataset.wbMetricMin = String(state.min);
-      card.dataset.wbMetricMax = String(state.max);
-      card.dataset.wbMetricAverage = String(state.avg);
-      card.dataset.wbMetricDelta = String(state.delta);
-      card.dataset.wbMetricTrend = state.trend;
-      card.dataset.wbMetricSamples = String(state.samples);
+      card.dataset.heritageMetricState = 'ready';
+      card.dataset.heritageMetricLatest = String(state.latest);
+      card.dataset.heritageMetricMin = String(state.min);
+      card.dataset.heritageMetricMax = String(state.max);
+      card.dataset.heritageMetricAverage = String(state.avg);
+      card.dataset.heritageMetricDelta = String(state.delta);
+      card.dataset.heritageMetricTrend = state.trend;
+      card.dataset.heritageMetricSamples = String(state.samples);
     }
 
-    node.dataset.wbMetricValues = data.join(',');
-    node.dataset.wbMetricLabel = label;
-    node.dataset.wbMetricLatest = String(state.latest);
+    node.dataset.heritageMetricValues = data.join(',');
+    node.dataset.heritageMetricLabel = label;
+    node.dataset.heritageMetricLatest = String(state.latest);
     node.title = label + ': ' + formatNumber(state.latest) + (lastLabel ? ' - ' + lastLabel : '');
     renderSparkline(node, width, height, label, state, points, area, line, data, labels);
 
@@ -7210,18 +7210,18 @@
 
   function enhance(root) {
     root = root || document;
-    queryAll(root, '[data-wb-dashboard-metrics-data]').forEach(function (payload) {
-      if (payload.dataset.wbDashboardMetricsReady === 'true') return;
-      payload.dataset.wbDashboardMetricsState = 'loading';
-      queryAll(root, '[data-wb-metric-card]').forEach(function (card) {
-        card.dataset.wbMetricState = 'loading';
+    queryAll(root, '[data-heritage-dashboard-metrics-data]').forEach(function (payload) {
+      if (payload.dataset.heritageDashboardMetricsReady === 'true') return;
+      payload.dataset.heritageDashboardMetricsState = 'loading';
+      queryAll(root, '[data-heritage-metric-card]').forEach(function (card) {
+        card.dataset.heritageMetricState = 'loading';
         card.setAttribute('aria-busy', 'true');
       });
       var data;
       try {
         data = parsePayload(payload.textContent || '{}');
       } catch (error) {
-        payload.dataset.wbDashboardMetricsState = 'error';
+        payload.dataset.heritageDashboardMetricsState = 'error';
         queryAll(root, '.wb-dashboard-sparkline').forEach(function (node) {
           node.replaceChildren();
           node.classList.add('wb-dashboard-sparkline--error');
@@ -7230,13 +7230,13 @@
           errorState.textContent = text().unavailable;
           node.appendChild(errorState);
           node.setAttribute('role', 'status');
-          var card = node.closest('[data-wb-metric-card]');
+          var card = node.closest('[data-heritage-metric-card]');
           if (card) {
-            card.dataset.wbMetricState = 'error';
+            card.dataset.heritageMetricState = 'error';
             card.removeAttribute('aria-busy');
           }
         });
-        payload.removeAttribute('data-wb-dashboard-metrics-ready');
+        payload.removeAttribute('data-heritage-dashboard-metrics-ready');
         document.dispatchEvent(new CustomEvent('heritage:dashboard-metrics-error', {
           detail: { payload: payload, error: error }
         }));
@@ -7246,10 +7246,10 @@
       Object.keys(data.series || {}).forEach(function (id) {
         if (renderMetric(root, id, data.series[id], data.labels || [])) rendered += 1;
       });
-      payload.dataset.wbDashboardMetricsState = rendered ? 'rendered' : 'empty';
-      payload.dataset.wbDashboardMetricsRendered = String(rendered);
-      payload.dataset.wbDashboardMetricsReady = 'true';
-      queryAll(root, '[data-wb-metric-card]').forEach(function (card) {
+      payload.dataset.heritageDashboardMetricsState = rendered ? 'rendered' : 'empty';
+      payload.dataset.heritageDashboardMetricsRendered = String(rendered);
+      payload.dataset.heritageDashboardMetricsReady = 'true';
+      queryAll(root, '[data-heritage-metric-card]').forEach(function (card) {
         card.removeAttribute('aria-busy');
       });
       document.dispatchEvent(new CustomEvent('heritage:dashboard-metrics-ready', {
@@ -7259,8 +7259,8 @@
   }
 
   function toggleDetails(button) {
-    var id = button && button.getAttribute('data-wb-metric-toggle');
-    var details = id ? document.querySelector('[data-wb-metric-details="' + id + '"]') : null;
+    var id = button && button.getAttribute('data-heritage-metric-toggle');
+    var details = id ? document.querySelector('[data-heritage-metric-details="' + id + '"]') : null;
     if (!details) return;
     var expanded = button.getAttribute('aria-expanded') === 'true';
     button.setAttribute('aria-expanded', expanded ? 'false' : 'true');
@@ -7271,7 +7271,7 @@
   document.addEventListener('DOMContentLoaded', function () { enhance(document); });
   document.addEventListener('heritage:content-ready', function (event) { enhance(event.detail && event.detail.root ? event.detail.root : document); });
   document.addEventListener('click', function (event) {
-    var button = event.target && event.target.closest ? event.target.closest('[data-wb-metric-toggle]') : null;
+    var button = event.target && event.target.closest ? event.target.closest('[data-heritage-metric-toggle]') : null;
     if (!button) return;
     event.preventDefault();
     toggleDetails(button);
@@ -7420,7 +7420,7 @@
   }
 
   function normalizeServerDashlets(host) {
-    var boundary = host.querySelector(':scope > [data-wb-dashboard-server-content]');
+    var boundary = host.querySelector(':scope > [data-heritage-dashboard-server-content]');
     if (!boundary) return;
     var widgets = Array.prototype.slice.call(boundary.children).filter(function (node) {
       return node.classList && node.classList.contains('wb-dashlet');
@@ -7474,37 +7474,37 @@
 
   function setSize(node, size) {
     var safe = sizes.indexOf(size) >= 0 ? size : '1x1';
-    node.dataset.wbSize = safe;
-    node.setAttribute('data-wb-size', safe);
-    node.setAttribute('data-wb-density', safe === '1x1' ? 'compact' : 'expanded');
-    if (node.dataset.wbAtomicSource === 'modules') {
-      node.dataset.wbModuleViewport = safe === '2x2' ? 'detail' : safe === '1x2' ? 'tall' : 'compact';
+    node.dataset.heritageSize = safe;
+    node.setAttribute('data-heritage-size', safe);
+    node.setAttribute('data-heritage-density', safe === '1x1' ? 'compact' : 'expanded');
+    if (node.dataset.heritageAtomicSource === 'modules') {
+      node.dataset.heritageModuleViewport = safe === '2x2' ? 'detail' : safe === '1x2' ? 'tall' : 'compact';
     }
-    if (node.dataset.wbAtomicSource === 'metrics') {
-      node.dataset.wbMetricViewport = safe === '2x2' ? 'detail' : safe === '1x2' ? 'tall' : 'compact';
+    if (node.dataset.heritageAtomicSource === 'metrics') {
+      node.dataset.heritageMetricViewport = safe === '2x2' ? 'detail' : safe === '1x2' ? 'tall' : 'compact';
     }
     node.classList.remove('wb-dashlet-size-1x1', 'wb-dashlet-size-1x2', 'wb-dashlet-size-2x2');
     node.classList.add('wb-dashlet-size-' + safe);
-    Array.prototype.forEach.call(node.querySelectorAll('[data-wb-layout-size]'), function (button) {
-      button.setAttribute('aria-pressed', button.getAttribute('data-wb-layout-size') === safe ? 'true' : 'false');
+    Array.prototype.forEach.call(node.querySelectorAll('[data-heritage-layout-size]'), function (button) {
+      button.setAttribute('aria-pressed', button.getAttribute('data-heritage-layout-size') === safe ? 'true' : 'false');
     });
     syncDensity(node);
     syncMetricAnalysisVisibility(node, safe);
   }
 
   function syncMetricAnalysisVisibility(node, size) {
-    if (node.dataset.wbAtomicSource !== 'metrics') return;
+    if (node.dataset.heritageAtomicSource !== 'metrics') return;
     var expanded = size === '2x2';
-    Array.prototype.forEach.call(node.querySelectorAll('[data-wb-metric-details]'), function (details) {
+    Array.prototype.forEach.call(node.querySelectorAll('[data-heritage-metric-details]'), function (details) {
       details.hidden = !expanded;
     });
-    Array.prototype.forEach.call(node.querySelectorAll('[data-wb-metric-toggle]'), function (toggle) {
+    Array.prototype.forEach.call(node.querySelectorAll('[data-heritage-metric-toggle]'), function (toggle) {
       toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
     });
   }
 
   function densityItems(node) {
-    var name = node.dataset.wbDashlet;
+    var name = node.dataset.heritageDashlet;
     if (name === 'modules') return Array.prototype.slice.call(node.querySelectorAll('.modules > li'));
     if (name === 'news') return Array.prototype.slice.call(node.querySelectorAll('ul > li'));
     if (name === 'metrics') return Array.prototype.slice.call(node.querySelectorAll('.wb-dashboard-metric-card'));
@@ -7516,23 +7516,23 @@
   }
 
   function densityLimit(node) {
-    return node.dataset.wbDashlet === 'modules' ? 4 : node.dataset.wbDashlet === 'news' ? 3 : node.dataset.wbDashlet === 'metrics' ? 2 : node.dataset.wbDashlet === 'statistics' ? 3 : 5;
+    return node.dataset.heritageDashlet === 'modules' ? 4 : node.dataset.heritageDashlet === 'news' ? 3 : node.dataset.heritageDashlet === 'metrics' ? 2 : node.dataset.heritageDashlet === 'statistics' ? 3 : 5;
   }
 
   function syncDensity(node) {
     var items = densityItems(node);
-    var compact = node.dataset.wbSize === '1x1';
+    var compact = node.dataset.heritageSize === '1x1';
     var limit = densityLimit(node);
     var hiddenCount = 0;
     items.forEach(function (item, index) {
       var hide = compact && index >= limit;
       if (hide) {
         item.hidden = true;
-        item.dataset.wbDensityHidden = 'true';
+        item.dataset.heritageDensityHidden = 'true';
         hiddenCount += 1;
-      } else if (item.dataset.wbDensityHidden === 'true') {
+      } else if (item.dataset.heritageDensityHidden === 'true') {
         item.hidden = false;
-        delete item.dataset.wbDensityHidden;
+        delete item.dataset.heritageDensityHidden;
       }
     });
     var existing = node.querySelector(':scope > .wb-dashlet__density-note');
@@ -7550,7 +7550,7 @@
     expand.textContent = t('showMore');
     expand.setAttribute('aria-label', t('expandWidget', { name: node.getAttribute('aria-label') || t('widget') }));
     expand.addEventListener('click', function () {
-      setSize(node, node.dataset.wbDashlet === 'modules' ? '2x2' : '1x2');
+      setSize(node, node.dataset.heritageDashlet === 'modules' ? '2x2' : '1x2');
       var host = node.parentElement;
       if (host) save(host);
     });
@@ -7559,11 +7559,11 @@
   }
 
   function hiddenCount(host) {
-    return dashlets(host).filter(function (node) { return node.dataset.wbHidden === 'true'; }).length;
+    return dashlets(host).filter(function (node) { return node.dataset.heritageHidden === 'true'; }).length;
   }
 
   function decorateModules(node) {
-    if (node.dataset.wbModulesDecorated === 'true') return;
+    if (node.dataset.heritageModulesDecorated === 'true') return;
     Array.prototype.forEach.call(node.querySelectorAll('.modules > li'), function (launcher) {
       var title = launcher.querySelector('.title');
       var action = launcher.querySelector('a.button[data-heritage-module], a.button[data-capp]');
@@ -7579,7 +7579,7 @@
         action.setAttribute('aria-label', (action.textContent || t('openModule')).replace(/\s+/g, ' ').trim());
       }
     });
-    node.dataset.wbModulesDecorated = 'true';
+    node.dataset.heritageModulesDecorated = 'true';
   }
 
   function standardModuleTitle(moduleName) {
@@ -7596,8 +7596,8 @@
   }
 
   function splitModuleDashlet(host) {
-    var source = host.querySelector(':scope > .wb-dashlet[data-wb-dashlet="modules"]');
-    if (!source || source.dataset.wbAtomicSplit === 'true') return;
+    var source = host.querySelector(':scope > .wb-dashlet[data-heritage-dashlet="modules"]');
+    if (!source || source.dataset.heritageAtomicSplit === 'true') return;
     decorateModules(source);
     var items = Array.prototype.slice.call(source.querySelectorAll('.modules > li.wb-module-launcher'));
     if (!items.length) return;
@@ -7625,13 +7625,13 @@
       }
       var article = document.createElement('section');
       article.className = 'wb-dashlet wb-dashlet-module-atomic';
-      article.dataset.wbDashlet = 'module-' + slug(title) + '-' + index;
-      article.dataset.wbAtomicSource = 'modules';
-      article.dataset.wbAtomicLabel = t('individualModule');
-      article.dataset.wbDashboardCockpit = 'module';
-      article.dataset.wbPriority = 'primary';
-      article.dataset.wbDefaultOrder = String(10 + index);
-      article.setAttribute('data-wb-cockpit-card', 'module');
+      article.dataset.heritageDashlet = 'module-' + slug(title) + '-' + index;
+      article.dataset.heritageAtomicSource = 'modules';
+      article.dataset.heritageAtomicLabel = t('individualModule');
+      article.dataset.heritageDashboardCockpit = 'module';
+      article.dataset.heritagePriority = 'primary';
+      article.dataset.heritageDefaultOrder = String(10 + index);
+      article.setAttribute('data-heritage-cockpit-card', 'module');
       var heading = makeEl('h3', '', title);
       var wrapper = makeEl('div', 'dashboard-modules-wrapper wb-dashboard-atomic-module');
       var list = makeEl('ul', 'modules');
@@ -7642,16 +7642,16 @@
       anchor.insertAdjacentElement('afterend', article);
       anchor = article;
     });
-    source.dataset.wbAtomicSplit = 'true';
+    source.dataset.heritageAtomicSplit = 'true';
     source.remove();
   }
 
   function decorateDonate(node) {
-    if (node.dataset.wbDonateDecorated === 'true') return;
+    if (node.dataset.heritageDonateDecorated === 'true') return;
     var button = node.querySelector('.wb-donate-card__toggle');
-    var description = node.querySelector('[data-wb-donate-description], #description');
+    var description = node.querySelector('[data-heritage-donate-description], #description');
     if (!button || !description) {
-      node.dataset.wbDonateDecorated = 'true';
+      node.dataset.heritageDonateDecorated = 'true';
       return;
     }
     if (!description.id) {
@@ -7665,7 +7665,7 @@
       button.setAttribute('aria-expanded', expanded ? 'false' : 'true');
       description.hidden = expanded;
     });
-    node.dataset.wbDonateDecorated = 'true';
+    node.dataset.heritageDonateDecorated = 'true';
   }
 
   function chartInstance(canvas) {
@@ -7695,13 +7695,13 @@
   }
 
   function metricValuesFromSparkline(source) {
-    if (!source || !source.dataset || !source.dataset.wbMetricValues) return [];
-    return source.dataset.wbMetricValues.split(',').map(Number).filter(Number.isFinite);
+    if (!source || !source.dataset || !source.dataset.heritageMetricValues) return [];
+    return source.dataset.heritageMetricValues.split(',').map(Number).filter(Number.isFinite);
   }
 
   function metricLabelFromSource(source) {
     if (!source) return t('currentValue');
-    return source.dataset && source.dataset.wbMetricLabel || source.getAttribute('aria-label') || metricFallback(source);
+    return source.dataset && source.dataset.heritageMetricLabel || source.getAttribute('aria-label') || metricFallback(source);
   }
 
   function syncMetricCards(node) {
@@ -7734,7 +7734,7 @@
   }
 
   function decorateMetrics(node) {
-    if (node.dataset.wbMetricsDecorated === 'true') return;
+    if (node.dataset.heritageMetricsDecorated === 'true') return;
     var content = node.querySelector(':scope > div');
     if (!content) return;
     var title = content.querySelector(':scope > div:first-child > h3');
@@ -7758,14 +7758,14 @@
         container.insertBefore(header, metric);
       }
     });
-    node.dataset.wbMetricsDecorated = 'true';
+    node.dataset.heritageMetricsDecorated = 'true';
     window.requestAnimationFrame(function () { syncMetricCards(node); });
     window.setTimeout(function () { syncMetricCards(node); }, 120);
   }
 
   function splitMetricDashlet(host) {
-    var source = host.querySelector(':scope > .wb-dashlet[data-wb-dashlet="metrics"]');
-    if (!source || source.dataset.wbAtomicSplit === 'true') return;
+    var source = host.querySelector(':scope > .wb-dashlet[data-heritage-dashlet="metrics"]');
+    if (!source || source.dataset.heritageAtomicSplit === 'true') return;
     // Render the declarative metric payload before the source dashlet is split
     // into atomic widgets. Removing the source first also removed its JSON
     // payload, leaving all four charts permanently empty after login.
@@ -7782,16 +7782,16 @@
       var title = label ? label.textContent.replace(/\s+/g, ' ').trim() : metricLabelFromSource(metric || {});
       var article = document.createElement('section');
       article.className = 'wb-dashlet wb-dashlet-metric-atomic';
-      article.dataset.wbDashlet = 'metric-' + slug(metric && metric.id || title) + '-' + index;
-      article.dataset.wbAtomicSource = 'metrics';
-      article.dataset.wbAtomicLabel = t('individualMetric');
-      article.dataset.wbDashboardCockpit = 'metric';
-      article.dataset.wbPriority = 'primary';
+      article.dataset.heritageDashlet = 'metric-' + slug(metric && metric.id || title) + '-' + index;
+      article.dataset.heritageAtomicSource = 'metrics';
+      article.dataset.heritageAtomicLabel = t('individualMetric');
+      article.dataset.heritageDashboardCockpit = 'metric';
+      article.dataset.heritagePriority = 'primary';
       // Keep the four live metrics together as one visual dashboard group.
       // Operational limit cards follow afterwards and must not split the
       // metric sequence or impose their taller row height between charts.
-      article.dataset.wbDefaultOrder = String(20 + index);
-      article.setAttribute('data-wb-cockpit-card', 'metric');
+      article.dataset.heritageDefaultOrder = String(20 + index);
+      article.setAttribute('data-heritage-cockpit-card', 'metric');
       var heading = makeEl('h3', '', title);
       var metricHost = makeEl('div', 'wb-dashboard-single-metric');
       article.appendChild(heading);
@@ -7800,26 +7800,26 @@
       anchor.insertAdjacentElement('afterend', article);
       anchor = article;
     });
-    source.dataset.wbAtomicSplit = 'true';
+    source.dataset.heritageAtomicSplit = 'true';
     source.remove();
     window.requestAnimationFrame(function () {
       dashlets(host).forEach(function (node) {
-        if (node.dataset.wbAtomicSource === 'metrics') syncMetricCards(node);
+        if (node.dataset.heritageAtomicSource === 'metrics') syncMetricCards(node);
       });
     });
   }
 
   function splitAtomicDashlets(host) {
-    var unsplitSource = host.querySelector(':scope > .wb-dashlet[data-wb-dashlet="modules"], :scope > .wb-dashlet[data-wb-dashlet="metrics"]');
-    if (host.dataset.wbAtomicDashboard === 'true' && !unsplitSource) return;
-    if (unsplitSource) delete host.dataset.wbAtomicDashboard;
+    var unsplitSource = host.querySelector(':scope > .wb-dashlet[data-heritage-dashlet="modules"], :scope > .wb-dashlet[data-heritage-dashlet="metrics"]');
+    if (host.dataset.heritageAtomicDashboard === 'true' && !unsplitSource) return;
+    if (unsplitSource) delete host.dataset.heritageAtomicDashboard;
     splitModuleDashlet(host);
     splitMetricDashlet(host);
-    host.dataset.wbAtomicDashboard = 'true';
+    host.dataset.heritageAtomicDashboard = 'true';
   }
 
   function decorateHero(header) {
-    if (!header || header.dataset.wbHeroDecorated === 'true') return;
+    if (!header || header.dataset.heritageHeroDecorated === 'true') return;
     var title = header.querySelector('h1');
     if (!title) return;
     var eyebrow = document.createElement('span');
@@ -7831,7 +7831,7 @@
     summary.textContent = t('workspaceSummary');
     title.insertAdjacentElement('afterend', summary);
     header.classList.add('wb-dashboard-hero');
-    header.dataset.wbHeroDecorated = 'true';
+    header.dataset.heritageHeroDecorated = 'true';
   }
 
   function syncOverview(host) {
@@ -7848,13 +7848,13 @@
     var moduleCount = host.querySelectorAll('.wb-module-launcher').length;
     var warningCount = host.querySelectorAll('.progress-bar-warning').length;
     var criticalCount = host.querySelectorAll('.progress-bar-danger').length;
-    var visibleCount = dashlets(host).filter(function(node) { return node.dataset.wbHidden !== 'true'; }).length;
+    var visibleCount = dashlets(host).filter(function(node) { return node.dataset.heritageHidden !== 'true'; }).length;
     var totalCount = dashlets(host).length;
     var attention = warningCount + criticalCount;
     var modulesCard = overviewStat(t('availableModules'), moduleCount, t('quickDestinations'));
     var attentionCard = overviewStat(t('needsAttention'), attention, t('attentionDetail', { critical: criticalCount, warning: warningCount }), attention ? 'wb-dashboard-overview__stat--attention' : 'wb-dashboard-overview__stat--healthy');
     var layoutCard = overviewStat(t('activeWidgets'), visibleCount, t('personalLayout'), '', totalCount);
-    overview.dataset.wbAttention = attention ? 'true' : 'false';
+    overview.dataset.heritageAttention = attention ? 'true' : 'false';
     while (overview.firstChild) overview.removeChild(overview.firstChild);
     (attention ? [attentionCard, modulesCard, layoutCard] : [modulesCard, attentionCard, layoutCard]).forEach(function (card) {
       overview.appendChild(card);
@@ -7875,7 +7875,7 @@
   function showAllWidgets(host) {
     dashlets(host).forEach(function (node) {
       node.hidden = false;
-      node.dataset.wbHidden = 'false';
+      node.dataset.heritageHidden = 'false';
     });
     save(host);
     syncToolbar(host);
@@ -7883,9 +7883,9 @@
 
   function restoreRecommended(host) {
     dashlets(host).forEach(function (node) {
-      var hiddenByDefault = Boolean(defaultHidden[node.dataset.wbDashlet]);
+      var hiddenByDefault = Boolean(defaultHidden[node.dataset.heritageDashlet]);
       node.hidden = hiddenByDefault;
-      node.dataset.wbHidden = hiddenByDefault ? 'true' : 'false';
+      node.dataset.heritageHidden = hiddenByDefault ? 'true' : 'false';
       setSize(node, defaultSizeFor(node));
     });
     save(host);
@@ -7893,7 +7893,7 @@
   }
 
   function syncEmptyState(host) {
-    var visible = dashlets(host).some(function (node) { return node.dataset.wbHidden !== 'true'; });
+    var visible = dashlets(host).some(function (node) { return node.dataset.heritageHidden !== 'true'; });
     var state = host.querySelector(':scope > .wb-dashboard-empty-state');
     if (visible) {
       if (state) state.remove();
@@ -7923,9 +7923,9 @@
     if (!toolbar) return;
     var editing = host.classList.contains('wb-dashboard-layout-edit');
     var count = hiddenCount(host);
-    var status = toolbar.querySelector('[data-wb-layout-status]');
-    var toggle = toolbar.querySelector('[data-wb-layout-toggle]');
-    var show = toolbar.querySelector('[data-wb-layout-show-hidden]');
+    var status = toolbar.querySelector('[data-heritage-layout-status]');
+    var toggle = toolbar.querySelector('[data-heritage-layout-toggle]');
+    var show = toolbar.querySelector('[data-heritage-layout-show-hidden]');
     toolbar.classList.toggle('wb-dashboard-toolbar--editing', editing);
     status.textContent = editing ? t('layoutEditing') : t('layoutSaved');
     toggle.setAttribute('aria-pressed', editing ? 'true' : 'false');
@@ -7939,8 +7939,8 @@
   function save(host) {
     var layout = {};
     dashlets(host).forEach(function (node, index) {
-      var name = node.dataset.wbDashlet;
-      if (name) layout[name] = { size: node.dataset.wbSize || '1x1', order: index, hidden: node.dataset.wbHidden === 'true' };
+      var name = node.dataset.heritageDashlet;
+      if (name) layout[name] = { size: node.dataset.heritageSize || '1x1', order: index, hidden: node.dataset.heritageHidden === 'true' };
     });
     writeLayout(layout);
   }
@@ -7960,7 +7960,7 @@
       typeIcon.setAttribute('aria-hidden', 'true');
       widgetHeader.insertBefore(typeIcon, widgetHeader.firstChild);
     }
-    var titleText = widgetTitle ? widgetTitle.textContent.replace(/\s+/g, ' ').trim() : (node.dataset.wbDashlet || t('dashboardWidget'));
+    var titleText = widgetTitle ? widgetTitle.textContent.replace(/\s+/g, ' ').trim() : (node.dataset.heritageDashlet || t('dashboardWidget'));
     var dragHandle = document.createElement('span');
     dragHandle.className = 'wb-dashlet__drag-handle';
     dragHandle.setAttribute('role', 'button');
@@ -7984,52 +7984,52 @@
     layoutLabel.className = 'wb-dashlet__layout-label';
     layoutLabel.textContent = t('editHint');
     controls.appendChild(layoutLabel);
-    controls.appendChild(dashboardButton('\u2191', { 'data-wb-layout-move': 'up', 'aria-label': t('moveEarlier') }));
-    controls.appendChild(dashboardButton('\u2193', { 'data-wb-layout-move': 'down', 'aria-label': t('moveLater') }));
-    controls.appendChild(dashboardButton('1\u00d71', { 'data-wb-layout-size': '1x1' }));
-    controls.appendChild(dashboardButton('1\u00d72', { 'data-wb-layout-size': '1x2' }));
-    controls.appendChild(dashboardButton('2\u00d72', { 'data-wb-layout-size': '2x2' }));
-    controls.appendChild(dashboardButton(t('hide'), { 'data-wb-layout-hide': 'true' }));
+    controls.appendChild(dashboardButton('\u2191', { 'data-heritage-layout-move': 'up', 'aria-label': t('moveEarlier') }));
+    controls.appendChild(dashboardButton('\u2193', { 'data-heritage-layout-move': 'down', 'aria-label': t('moveLater') }));
+    controls.appendChild(dashboardButton('1\u00d71', { 'data-heritage-layout-size': '1x1' }));
+    controls.appendChild(dashboardButton('1\u00d72', { 'data-heritage-layout-size': '1x2' }));
+    controls.appendChild(dashboardButton('2\u00d72', { 'data-heritage-layout-size': '2x2' }));
+    controls.appendChild(dashboardButton(t('hide'), { 'data-heritage-layout-hide': 'true' }));
     controls.addEventListener('click', function (event) {
-      var button = event.target.closest('[data-wb-layout-size]');
-      var move = event.target.closest('[data-wb-layout-move]');
-      var hide = event.target.closest('[data-wb-layout-hide]');
+      var button = event.target.closest('[data-heritage-layout-size]');
+      var move = event.target.closest('[data-heritage-layout-move]');
+      var hide = event.target.closest('[data-heritage-layout-hide]');
       if (hide) {
-        node.dataset.wbHidden = 'true';
+        node.dataset.heritageHidden = 'true';
         node.hidden = true;
         save(host);
         syncToolbar(host);
         return;
       }
       if (move) {
-        var sibling = move.getAttribute('data-wb-layout-move') === 'up' ? node.previousElementSibling : node.nextElementSibling;
+        var sibling = move.getAttribute('data-heritage-layout-move') === 'up' ? node.previousElementSibling : node.nextElementSibling;
         if (sibling && sibling.classList.contains('wb-dashlet')) {
-          if (move.getAttribute('data-wb-layout-move') === 'up') node.parentNode.insertBefore(node, sibling);
+          if (move.getAttribute('data-heritage-layout-move') === 'up') node.parentNode.insertBefore(node, sibling);
           else node.parentNode.insertBefore(sibling, node);
           save(host);
         }
         return;
       }
       if (!button) return;
-      setSize(node, button.getAttribute('data-wb-layout-size'));
+      setSize(node, button.getAttribute('data-heritage-layout-size'));
       save(host);
     });
     widgetHeader.appendChild(controls);
-    var moveUp = controls.querySelector('[data-wb-layout-move="up"]');
-    var moveDown = controls.querySelector('[data-wb-layout-move="down"]');
-    var sizeLabels = controls.querySelectorAll('[data-wb-layout-size]');
+    var moveUp = controls.querySelector('[data-heritage-layout-move="up"]');
+    var moveDown = controls.querySelector('[data-heritage-layout-move="down"]');
+    var sizeLabels = controls.querySelectorAll('[data-heritage-layout-size]');
     if (moveUp) moveUp.textContent = '\u2191';
     if (moveDown) moveDown.textContent = '\u2193';
     Array.prototype.forEach.call(sizeLabels, function (button) {
-      var size = button.getAttribute('data-wb-layout-size');
+      var size = button.getAttribute('data-heritage-layout-size');
       button.textContent = size.replace('x', '\u00d7');
-      button.setAttribute('data-wb-size-code', size.replace('x', '\u00d7'));
-      button.setAttribute('data-wb-size-label', sizeLabel(size));
+      button.setAttribute('data-heritage-size-code', size.replace('x', '\u00d7'));
+      button.setAttribute('data-heritage-size-label', sizeLabel(size));
       button.setAttribute('title', sizeHint(size));
       button.setAttribute('aria-label', t('resizeTo', { name: titleText, size: sizeLabel(size) + ' ' + size.replace('x', '\u00d7') }));
-      button.setAttribute('aria-pressed', button.getAttribute('data-wb-layout-size') === node.dataset.wbSize ? 'true' : 'false');
+      button.setAttribute('aria-pressed', button.getAttribute('data-heritage-layout-size') === node.dataset.heritageSize ? 'true' : 'false');
     });
-    var hideButton = controls.querySelector('[data-wb-layout-hide]');
+    var hideButton = controls.querySelector('[data-heritage-layout-hide]');
     if (hideButton) hideButton.setAttribute('aria-label', t('hideWidget', { name: titleText }));
     node.setAttribute('tabindex', '0');
     node.setAttribute('role', 'article');
@@ -8056,7 +8056,7 @@
   }
 
   function decorateDashboardTableLabels(table) {
-    if (!table || table.dataset.wbDashboardLabels === 'true') return;
+    if (!table || table.dataset.heritageDashboardLabels === 'true') return;
     var headings = Array.prototype.map.call(table.querySelectorAll('thead th'), function (cell) {
       return cell.textContent.replace(/\s+/g, ' ').trim();
     });
@@ -8064,16 +8064,16 @@
       var cells = Array.prototype.slice.call(row.cells || []);
       var rowLabel = cells[0] ? cells[0].textContent.replace(/\s+/g, ' ').trim() : '';
       cells.forEach(function (cell, index) {
-        if ((cell.getAttribute('data-wb-label') || '').trim()) return;
+        if ((cell.getAttribute('data-heritage-label') || '').trim()) return;
         var label = headings[index] || (index === 0 ? t('accountLimit') : rowLabel);
-        if (label) cell.setAttribute('data-wb-label', label);
+        if (label) cell.setAttribute('data-heritage-label', label);
       });
     });
-    table.dataset.wbDashboardLabels = 'true';
+    table.dataset.heritageDashboardLabels = 'true';
   }
 
   function decorateLimits(node) {
-    if (node.dataset.wbLimitsDecorated === 'true') return;
+    if (node.dataset.heritageLimitsDecorated === 'true') return;
     var table = node.querySelector('table');
     if (!table) return;
     decorateDashboardTableLabels(table);
@@ -8148,7 +8148,7 @@
       event.currentTarget.setAttribute('aria-expanded', expanded ? 'true' : 'false');
       event.currentTarget.textContent = expanded ? t('hideDetails') : t('showDetails');
     });
-    node.dataset.wbLimitsDecorated = 'true';
+    node.dataset.heritageLimitsDecorated = 'true';
   }
 
   function quotaSummaryItem(className, label, value) {
@@ -8159,7 +8159,7 @@
   }
 
   function decorateQuota(node) {
-    if (node.dataset.wbQuotaDecorated === 'true') return;
+    if (node.dataset.heritageQuotaDecorated === 'true') return;
     var wrapper = node.querySelector('.table-wrapper');
     var table = wrapper && wrapper.querySelector('table');
     if (!table) return;
@@ -8202,7 +8202,7 @@
     if (alertRows.length) wrapper.parentNode.insertBefore(alerts, wrapper);
     wrapper.parentNode.insertBefore(toggle, wrapper);
     node.classList.add('wb-dashlet-quota-collapsed');
-    node.dataset.wbQuotaDecorated = 'true';
+    node.dataset.heritageQuotaDecorated = 'true';
   }
 
   function syncCardState(node) {
@@ -8210,13 +8210,13 @@
       node.querySelector('.progress-bar-warning, .wb-limit-alert--warning') ? 'warning' : 'neutral';
     node.classList.remove('wb-dashlet-state-neutral', 'wb-dashlet-state-warning', 'wb-dashlet-state-critical');
     node.classList.add('wb-dashlet-state-' + state);
-    node.dataset.wbState = state;
+    node.dataset.heritageState = state;
   }
 
   function syncPrimaryContext(node) {
-    var name = node.dataset.wbDashlet;
-    var atomicModule = node.dataset.wbAtomicSource === 'modules';
-    var atomicMetric = node.dataset.wbAtomicSource === 'metrics';
+    var name = node.dataset.heritageDashlet;
+    var atomicModule = node.dataset.heritageAtomicSource === 'modules';
+    var atomicMetric = node.dataset.heritageAtomicSource === 'metrics';
     if (name !== 'modules' && name !== 'metrics' && name !== 'statistics' && !atomicModule && !atomicMetric) return;
     var header = node.querySelector(':scope > .wb-dashlet__header');
     if (!header) return;
@@ -8228,7 +8228,7 @@
     }
     var count = name === 'modules' || atomicModule ? node.querySelectorAll('.wb-module-launcher').length : name === 'statistics' ? node.querySelectorAll('.wb-statistics-launcher').length : node.querySelectorAll('.wb-dashboard-metric-card').length;
     if (atomicModule || atomicMetric) {
-      context.textContent = node.dataset.wbAtomicLabel || t(atomicMetric ? 'individualMetric' : 'individualModule');
+      context.textContent = node.dataset.heritageAtomicLabel || t(atomicMetric ? 'individualMetric' : 'individualModule');
       return;
     }
     var singleKey = name === 'metrics' || atomicMetric ? 'metricSingle' : 'destinationSingle';
@@ -8237,14 +8237,14 @@
   }
 
   function defaultSizeFor(node) {
-    var name = node.dataset.wbDashlet;
-    if (node.dataset.wbAtomicSource === 'modules') return '1x1';
-    if (node.dataset.wbAtomicSource === 'metrics') return '1x1';
+    var name = node.dataset.heritageDashlet;
+    if (node.dataset.heritageAtomicSource === 'modules') return '1x1';
+    if (node.dataset.heritageAtomicSource === 'metrics') return '1x1';
     return defaults[name] || '1x1';
   }
 
   function syncOperationalContext(node) {
-    var name = node.dataset.wbDashlet;
+    var name = node.dataset.heritageDashlet;
     var operational = name === 'limits' || name === 'quota' || name === 'mailquota' || name === 'databasequota';
     if (!operational) return;
     var header = node.querySelector(':scope > .wb-dashlet__header');
@@ -8257,12 +8257,12 @@
     }
     var count = name === 'limits' ? node.querySelectorAll('.wb-limit-group').length : node.querySelectorAll('.wb-quota-summary > article').length;
     var attention = node.querySelectorAll('.wb-limit-alert--warning, .wb-limit-alert--critical, .wb-quota-alert').length;
-    context.dataset.wbState = attention ? 'attention' : 'healthy';
+    context.dataset.heritageState = attention ? 'attention' : 'healthy';
     context.textContent = t(attention ? 'capacityAttention' : 'capacityHealthy', { count: count, attention: attention });
   }
 
   function syncSecondaryContext(node) {
-    var name = node.dataset.wbDashlet;
+    var name = node.dataset.heritageDashlet;
     if (name !== 'news' && name !== 'donate') return;
     var header = node.querySelector(':scope > .wb-dashlet__header');
     if (!header) return;
@@ -8296,20 +8296,20 @@
     var layout = readLayout();
     var nodes = dashlets(host);
     nodes.forEach(function (node, index) {
-      var name = node.dataset.wbDashlet;
-      if (node.dataset.wbDefaultOrder === undefined) node.dataset.wbDefaultOrder = String(defaultOrder[name] || 500 + index);
-      node.dataset.wbPriority = node.dataset.wbPriority || priority[name] || 'standard';
+      var name = node.dataset.heritageDashlet;
+      if (node.dataset.heritageDefaultOrder === undefined) node.dataset.heritageDefaultOrder = String(defaultOrder[name] || 500 + index);
+      node.dataset.heritagePriority = node.dataset.heritagePriority || priority[name] || 'standard';
     });
     nodes.sort(function (a, b) {
-      var ao = layout[a.dataset.wbDashlet] && layout[a.dataset.wbDashlet].order;
-      var bo = layout[b.dataset.wbDashlet] && layout[b.dataset.wbDashlet].order;
-      return (typeof ao === 'number' ? ao : Number(a.dataset.wbDefaultOrder)) - (typeof bo === 'number' ? bo : Number(b.dataset.wbDefaultOrder));
+      var ao = layout[a.dataset.heritageDashlet] && layout[a.dataset.heritageDashlet].order;
+      var bo = layout[b.dataset.heritageDashlet] && layout[b.dataset.heritageDashlet].order;
+      return (typeof ao === 'number' ? ao : Number(a.dataset.heritageDefaultOrder)) - (typeof bo === 'number' ? bo : Number(b.dataset.heritageDefaultOrder));
     }).forEach(function (node) { host.appendChild(node); });
     dashlets(host).forEach(function (node) {
-      var name = node.dataset.wbDashlet;
+      var name = node.dataset.heritageDashlet;
       setSize(node, layout[name] && layout[name].size || defaultSizeFor(node));
-      node.dataset.wbHidden = layout[name] ? (layout[name].hidden ? 'true' : 'false') : (defaultHidden[name] ? 'true' : 'false');
-      node.hidden = node.dataset.wbHidden === 'true';
+      node.dataset.heritageHidden = layout[name] ? (layout[name].hidden ? 'true' : 'false') : (defaultHidden[name] ? 'true' : 'false');
+      node.hidden = node.dataset.heritageHidden === 'true';
       node.draggable = false;
       node.setAttribute('aria-grabbed', 'false');
       if (name === 'limits') decorateLimits(node);
@@ -8323,8 +8323,8 @@
       syncOperationalContext(node);
       syncSecondaryContext(node);
     });
-    if (!host.dataset.wbLayoutDnD) {
-      host.dataset.wbLayoutDnD = 'true';
+    if (!host.dataset.heritageLayoutDnD) {
+      host.dataset.heritageLayoutDnD = 'true';
       var pointerSource = null;
       host.addEventListener('pointerdown', function (event) {
         var node = event.target.closest('.wb-dashlet');
@@ -8352,7 +8352,7 @@
         var node = event.target.closest('.wb-dashlet');
         if (!node || !host.classList.contains('wb-dashboard-layout-edit') || !event.target.closest('.wb-dashlet__drag-handle')) { event.preventDefault(); return; }
         event.dataTransfer.effectAllowed = 'move';
-        event.dataTransfer.setData('text/plain', node.dataset.wbDashlet || '');
+        event.dataTransfer.setData('text/plain', node.dataset.heritageDashlet || '');
         node.setAttribute('aria-grabbed', 'true');
       });
       host.addEventListener('dragend', function (event) {
@@ -8366,7 +8366,7 @@
         if (!host.classList.contains('wb-dashboard-layout-edit')) return;
         var target = event.target.closest('.wb-dashlet');
         var name = event.dataTransfer.getData('text/plain');
-        var source = name && host.querySelector('.wb-dashlet[data-wb-dashlet="' + name + '"]');
+        var source = name && host.querySelector('.wb-dashlet[data-heritage-dashlet="' + name + '"]');
         if (!target || !source || target === source) return;
         event.preventDefault();
         target.parentNode.insertBefore(source, target);
@@ -8381,7 +8381,7 @@
       toolbar.setAttribute('aria-label', t('dashboardLayoutControls'));
       var status = document.createElement('span');
       status.className = 'wb-dashboard-toolbar__status';
-      status.setAttribute('data-wb-layout-status', 'true');
+      status.setAttribute('data-heritage-layout-status', 'true');
       status.setAttribute('role', 'status');
       status.setAttribute('aria-live', 'polite');
       toolbar.appendChild(status);
@@ -8392,12 +8392,12 @@
       toggle.type = 'button';
       toggle.className = 'wb-dashboard-button wb-dashboard-button--primary wb-dashboard-layout-toggle wb-dashboard-toolbar__primary';
       toggle.textContent = t('customizeDashboard');
-      toggle.setAttribute('data-wb-layout-toggle', 'true');
+      toggle.setAttribute('data-heritage-layout-toggle', 'true');
       toggle.setAttribute('aria-pressed', 'false');
       toggle.addEventListener('click', function () {
         host.classList.toggle('wb-dashboard-layout-edit');
         if (reset) {
-          reset.dataset.wbConfirm = 'false';
+          reset.dataset.heritageConfirm = 'false';
           reset.classList.remove('wb-dashboard-layout-reset--armed');
           reset.textContent = t('resetLayout');
         }
@@ -8408,17 +8408,17 @@
       reset.type = 'button';
       reset.className = 'wb-dashboard-button wb-dashboard-layout-reset';
       reset.textContent = t('resetLayout');
-      reset.setAttribute('data-wb-layout-reset', 'true');
+      reset.setAttribute('data-heritage-layout-reset', 'true');
       var resetTimer = null;
       reset.addEventListener('click', function () {
-        if (reset.dataset.wbConfirm !== 'true') {
-          reset.dataset.wbConfirm = 'true';
+        if (reset.dataset.heritageConfirm !== 'true') {
+          reset.dataset.heritageConfirm = 'true';
           reset.classList.add('wb-dashboard-layout-reset--armed');
           reset.textContent = t('confirmReset');
           status.textContent = t('resetWarning');
           if (resetTimer) window.clearTimeout(resetTimer);
           resetTimer = window.setTimeout(function () {
-            reset.dataset.wbConfirm = 'false';
+            reset.dataset.heritageConfirm = 'false';
             reset.classList.remove('wb-dashboard-layout-reset--armed');
             reset.textContent = t('resetLayout');
             syncToolbar(host);
@@ -8426,16 +8426,16 @@
           return;
         }
         if (resetTimer) window.clearTimeout(resetTimer);
-        reset.dataset.wbConfirm = 'false';
+        reset.dataset.heritageConfirm = 'false';
         reset.classList.remove('wb-dashboard-layout-reset--armed');
         reset.textContent = t('resetLayout');
         try { window.localStorage.removeItem(STORAGE_KEY); } catch (error) { /* ignore */ }
         dashlets(host).sort(function (a, b) {
-          return Number(a.dataset.wbDefaultOrder || 0) - Number(b.dataset.wbDefaultOrder || 0);
+          return Number(a.dataset.heritageDefaultOrder || 0) - Number(b.dataset.heritageDefaultOrder || 0);
         }).forEach(function (node) {
-          var hiddenByDefault = Boolean(defaultHidden[node.dataset.wbDashlet]);
+          var hiddenByDefault = Boolean(defaultHidden[node.dataset.heritageDashlet]);
           node.hidden = hiddenByDefault;
-          node.dataset.wbHidden = hiddenByDefault ? 'true' : 'false';
+          node.dataset.heritageHidden = hiddenByDefault ? 'true' : 'false';
           setSize(node, defaultSizeFor(node));
           host.appendChild(node);
         });
@@ -8447,7 +8447,7 @@
       show.type = 'button';
       show.className = 'wb-dashboard-button wb-dashboard-layout-show-hidden';
       show.textContent = t('showHiddenWidgets');
-      show.setAttribute('data-wb-layout-show-hidden', 'true');
+      show.setAttribute('data-heritage-layout-show-hidden', 'true');
       show.addEventListener('click', function () { showAllWidgets(host); });
       actions.appendChild(show);
       (overview || header).insertAdjacentElement('afterend', toolbar);
@@ -9907,12 +9907,12 @@
     var host = document.getElementById('pageContent');
     if (!host) return false;
     document.body.classList.toggle('wb-statistics-page', Boolean(report));
-    if (!report || host.dataset.wbStatisticsReport === report.key) return Boolean(report);
+    if (!report || host.dataset.heritageStatisticsReport === report.key) return Boolean(report);
 
     var table = host.querySelector('.table-wrapper table.table, table.table');
     if (!table) return false;
-    host.dataset.wbStatisticsEnhanced = 'true';
-    host.dataset.wbStatisticsReport = report.key;
+    host.dataset.heritageStatisticsEnhanced = 'true';
+    host.dataset.heritageStatisticsReport = report.key;
     host.classList.add('wb-statistics-workspace');
     var rows = recordRows(table);
     var filters = activeFilters(host);
@@ -10049,15 +10049,15 @@
   function decorateExtensionWorkspace(scope) {
     scope.querySelectorAll('.wb-extension-workspace').forEach(function(workspace) {
       workspace.classList.add('wb-specialty-workspace', 'wb-specialty-workspace--extension');
-      var pageType = workspace.getAttribute('data-wb-extension-page') || 'extension';
-      workspace.setAttribute('data-wb-specialty-page', pageType);
+      var pageType = workspace.getAttribute('data-heritage-extension-page') || 'extension';
+      workspace.setAttribute('data-heritage-specialty-page', pageType);
 
       var table = workspace.querySelector('.wb-data-table');
       var rows = table ? Array.prototype.slice.call(table.querySelectorAll('tbody tr:not(.tbl_row_noresults)')) : [];
       var actions = workspace.querySelectorAll('.wb-row-action, .wb-form-actions button, .wb-form-actions a').length;
       var dangerActions = workspace.querySelectorAll('.wb-row-action--danger, .formbutton-danger').length;
-      workspace.setAttribute('data-wb-extension-records', String(rows.length));
-      workspace.setAttribute('data-wb-extension-actions', String(actions));
+      workspace.setAttribute('data-heritage-extension-records', String(rows.length));
+      workspace.setAttribute('data-heritage-extension-actions', String(actions));
 
       var hero = workspace.querySelector('.wb-extension-hero');
       if (hero && !hero.querySelector('.wb-specialty-badges')) {
@@ -10079,10 +10079,10 @@
   function decorateMonitoringWorkspace(scope) {
     scope.querySelectorAll('.wb-monitor-workspace').forEach(function(workspace) {
       workspace.classList.add('wb-specialty-workspace', 'wb-specialty-workspace--monitoring');
-      var charts = workspace.querySelectorAll('[data-wb-chart-card]').length;
+      var charts = workspace.querySelectorAll('[data-heritage-chart-card]').length;
       var states = workspace.querySelectorAll('.stateview .alert, .systemmonitor .alert, .wb-monitor-state-card').length;
-      workspace.setAttribute('data-wb-monitor-charts', String(charts));
-      workspace.setAttribute('data-wb-monitor-states', String(states));
+      workspace.setAttribute('data-heritage-monitor-charts', String(charts));
+      workspace.setAttribute('data-heritage-monitor-states', String(states));
 
       var hero = workspace.querySelector('.wb-monitor-hero');
       if (hero && !hero.querySelector('.wb-specialty-badges')) {
@@ -10143,7 +10143,7 @@
         var state = card.classList.contains('alert-danger') ? 'danger' :
           card.classList.contains('alert-warning') ? 'warning' :
           card.classList.contains('alert-success') ? 'success' : 'info';
-        card.setAttribute('data-wb-monitor-state', state);
+        card.setAttribute('data-heritage-monitor-state', state);
         var title = card.querySelector('h3');
         if (title) title.classList.add('wb-monitor-state-card__title');
         var summary = card.querySelector('.statusDevice > p');
@@ -10389,11 +10389,11 @@
   function init() {
     var form = document.getElementById('searchform');
     var input = document.getElementById('globalsearch');
-    if (!form || !input || input.dataset.wbSearchReady === 'true') {
+    if (!form || !input || input.dataset.heritageSearchReady === 'true') {
       return false;
     }
 
-    input.dataset.wbSearchReady = 'true';
+    input.dataset.heritageSearchReady = 'true';
     input.setAttribute('aria-keyshortcuts', '/');
     input.setAttribute('role', 'combobox');
     input.setAttribute('aria-autocomplete', 'list');
@@ -10964,7 +10964,7 @@
   }
 
   function applyAccessibleAction(color) {
-    var adjusted = accessibleAction(color || cssToken('--wb-accent', '#cc151c'), root.getAttribute('data-wb-theme') === 'dark');
+    var adjusted = accessibleAction(color || cssToken('--wb-accent', '#cc151c'), root.getAttribute('data-heritage-theme') === 'dark');
     root.style.setProperty('--wb-action', adjusted);
     applyActionContrast(adjusted);
     return adjusted;
@@ -10985,7 +10985,7 @@
 
   function apply(theme) {
     var dark = theme === 'dark';
-    root.setAttribute('data-wb-theme', dark ? 'dark' : 'light');
+    root.setAttribute('data-heritage-theme', dark ? 'dark' : 'light');
     applyAccessibleAction(cssToken('--wb-accent', '#cc151c'));
     Array.prototype.forEach.call(document.querySelectorAll('.wb-theme-toggle'), function (button) {
       var german = typeof window.heritageLanguage === 'function' && window.heritageLanguage() === 'de';
@@ -11005,7 +11005,7 @@
     form.classList.add('wb-auth-form');
     var action = (form.getAttribute('action') || '').toLowerCase();
     var mode = action.indexOf('otp') !== -1 ? 'otp' : action.indexOf('password_reset') !== -1 ? 'reset' : action.indexOf('force_password') !== -1 ? 'password' : 'login';
-    document.querySelector('.wb-login-card').setAttribute('data-wb-auth-mode', mode);
+    document.querySelector('.wb-login-card').setAttribute('data-heritage-auth-mode', mode);
     var fieldMap = {
       username: { text: 'Benutzername', autocomplete: 'username' },
       password: { text: 'Passwort', autocomplete: 'current-password' },
@@ -11022,19 +11022,19 @@
       input.setAttribute('aria-label', input.getAttribute('aria-label') || field.text);
       var group = input.closest('.form-group') || input.parentElement;
       if (group) group.classList.add('wb-auth-field');
-      if (group && !group.querySelector('[data-wb-login-label]')) {
+      if (group && !group.querySelector('[data-heritage-login-label]')) {
         var label = document.createElement('label');
         label.textContent = field.text;
         label.setAttribute('for', field.id);
-        label.setAttribute('data-wb-login-label', 'true');
+        label.setAttribute('data-heritage-login-label', 'true');
         group.insertBefore(label, input);
       }
-      if (input.type === 'password' && group && !group.querySelector('[data-wb-password-toggle]')) {
+      if (input.type === 'password' && group && !group.querySelector('[data-heritage-password-toggle]')) {
         group.classList.add('wb-password-field');
         var toggle = document.createElement('button');
         toggle.type = 'button';
         toggle.className = 'wb-password-toggle';
-        toggle.setAttribute('data-wb-password-toggle', 'true');
+        toggle.setAttribute('data-heritage-password-toggle', 'true');
         setIcon(toggle, eye);
         toggle.setAttribute('aria-label', 'Passwort anzeigen');
         toggle.addEventListener('click', function () {
@@ -11065,8 +11065,8 @@
     if (heading) heading.classList.add('wb-auth-context-title');
     var description = heading && heading.nextElementSibling;
     if (description && description.tagName === 'P') description.classList.add('wb-auth-context-copy');
-    if (form && !form.dataset.wbLoginSubmitBound) {
-      form.dataset.wbLoginSubmitBound = 'true';
+    if (form && !form.dataset.heritageLoginSubmitBound) {
+      form.dataset.heritageLoginSubmitBound = 'true';
       form.addEventListener('submit', function () {
         var submit = form.querySelector('input[type="submit"], button[type="submit"]');
         if (submit) {
@@ -11082,7 +11082,7 @@
   document.addEventListener('click', function (event) {
     var button = event.target.closest('.wb-theme-toggle');
     if (!button) return;
-    var next = root.getAttribute('data-wb-theme') === 'dark' ? 'light' : 'dark';
+    var next = root.getAttribute('data-heritage-theme') === 'dark' ? 'light' : 'dark';
     try { localStorage.setItem(key, next); } catch (ignore) {}
     apply(next);
   });

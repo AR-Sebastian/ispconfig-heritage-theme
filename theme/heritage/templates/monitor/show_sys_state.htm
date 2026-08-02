@@ -19,32 +19,32 @@
     <div class="pnl_formarea wb-monitor-chart-panel">
         <p class="wb-list-section-heading"><tmpl_var name="label_chart_title"></p>
         <div class="wb-monitor-chart-grid">
-            <article class="wb-monitor-chart" data-wb-chart-card>
-                <header><span><tmpl_var name="loadchart_label"></span><strong data-wb-chart-value="loadchart">&ndash;</strong></header>
+            <article class="wb-monitor-chart" data-heritage-chart-card>
+                <header><span><tmpl_var name="loadchart_label"></span><strong data-heritage-chart-value="loadchart">&ndash;</strong></header>
                 <div class="wb-monitor-chart__viewport"><canvas id="loadchart"></canvas></div>
-                <button type="button" class="wb-monitor-chart__toggle" data-wb-monitor-chart-toggle="loadchart" aria-expanded="false">Details</button>
-                <dl class="wb-monitor-chart__details" data-wb-monitor-chart-details="loadchart" hidden></dl>
+                <button type="button" class="wb-monitor-chart__toggle" data-heritage-monitor-chart-toggle="loadchart" aria-expanded="false">Details</button>
+                <dl class="wb-monitor-chart__details" data-heritage-monitor-chart-details="loadchart" hidden></dl>
             </article>
-            <article class="wb-monitor-chart" data-wb-chart-card>
-                <header><span><tmpl_var name="memchart_label"></span><strong data-wb-chart-value="memchart">&ndash;</strong></header>
+            <article class="wb-monitor-chart" data-heritage-chart-card>
+                <header><span><tmpl_var name="memchart_label"></span><strong data-heritage-chart-value="memchart">&ndash;</strong></header>
                 <div class="wb-monitor-chart__viewport"><canvas id="memchart"></canvas></div>
-                <button type="button" class="wb-monitor-chart__toggle" data-wb-monitor-chart-toggle="memchart" aria-expanded="false">Details</button>
-                <dl class="wb-monitor-chart__details" data-wb-monitor-chart-details="memchart" hidden></dl>
+                <button type="button" class="wb-monitor-chart__toggle" data-heritage-monitor-chart-toggle="memchart" aria-expanded="false">Details</button>
+                <dl class="wb-monitor-chart__details" data-heritage-monitor-chart-details="memchart" hidden></dl>
             </article>
-            <article class="wb-monitor-chart" data-wb-chart-card>
-                <header><span><tmpl_var name="rxchart_label"></span><strong data-wb-chart-value="rxchart">&ndash;</strong></header>
+            <article class="wb-monitor-chart" data-heritage-chart-card>
+                <header><span><tmpl_var name="rxchart_label"></span><strong data-heritage-chart-value="rxchart">&ndash;</strong></header>
                 <div class="wb-monitor-chart__viewport"><canvas id="rxchart"></canvas></div>
-                <button type="button" class="wb-monitor-chart__toggle" data-wb-monitor-chart-toggle="rxchart" aria-expanded="false">Details</button>
-                <dl class="wb-monitor-chart__details" data-wb-monitor-chart-details="rxchart" hidden></dl>
+                <button type="button" class="wb-monitor-chart__toggle" data-heritage-monitor-chart-toggle="rxchart" aria-expanded="false">Details</button>
+                <dl class="wb-monitor-chart__details" data-heritage-monitor-chart-details="rxchart" hidden></dl>
             </article>
-            <article class="wb-monitor-chart" data-wb-chart-card>
-                <header><span><tmpl_var name="txchart_label"></span><strong data-wb-chart-value="txchart">&ndash;</strong></header>
+            <article class="wb-monitor-chart" data-heritage-chart-card>
+                <header><span><tmpl_var name="txchart_label"></span><strong data-heritage-chart-value="txchart">&ndash;</strong></header>
                 <div class="wb-monitor-chart__viewport"><canvas id="txchart"></canvas></div>
-                <button type="button" class="wb-monitor-chart__toggle" data-wb-monitor-chart-toggle="txchart" aria-expanded="false">Details</button>
-                <dl class="wb-monitor-chart__details" data-wb-monitor-chart-details="txchart" hidden></dl>
+                <button type="button" class="wb-monitor-chart__toggle" data-heritage-monitor-chart-toggle="txchart" aria-expanded="false">Details</button>
+                <dl class="wb-monitor-chart__details" data-heritage-monitor-chart-details="txchart" hidden></dl>
             </article>
         </div>
     </div>
-    <script type="application/json" data-wb-monitor-chart-data>{tmpl_var name='monitor_chart_json'}</script>
+    <script type="application/json" data-heritage-monitor-chart-data>{tmpl_var name='monitor_chart_json'}</script>
     </tmpl_if>
 </section>

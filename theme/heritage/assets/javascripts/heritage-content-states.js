@@ -138,8 +138,8 @@
   if (legacy) legacy.workbenchUrlFor = urlFor;
 
   function installNavigationHistory() {
-    if (!window.history || !window.history.pushState || document.documentElement.dataset.wbHistoryReady) return;
-    document.documentElement.dataset.wbHistoryReady = 'true';
+    if (!window.history || !window.history.pushState || document.documentElement.dataset.heritageHistoryReady) return;
+    document.documentElement.dataset.heritageHistoryReady = 'true';
     var content = document.getElementById('pageContent');
     // Robust routing: the current page lives in the address-bar hash, so reload
     // or bookmark restores it instead of falling back to the server session
@@ -214,7 +214,7 @@
       if (className.indexOf('wb-form-profile--') === 0) body.classList.remove(className);
     });
     if (!hasForm) {
-      delete body.dataset.wbFormProfiles;
+      delete body.dataset.heritageFormProfiles;
       return;
     }
     if (route.indexOf('billing/') === 0 || host.querySelector('.wb-billing-product, [data-billing-scope]')) addProfile('billing');
@@ -239,7 +239,7 @@
     profiles.forEach(function(profile) {
       body.classList.add('wb-form-profile--' + profile);
     });
-    body.dataset.wbFormProfiles = profiles.join(' ');
+    body.dataset.heritageFormProfiles = profiles.join(' ');
   }
 
   function moduleFromPageName(pageName) {
@@ -341,7 +341,7 @@
       }
       var title = header.querySelector('h1');
       if (title) {
-        host.setAttribute('data-wb-page-title', title.textContent.replace(/\s+/g, ' ').trim());
+        host.setAttribute('data-heritage-page-title', title.textContent.replace(/\s+/g, ' ').trim());
         title.setAttribute('tabindex', '-1');
       }
     }
@@ -528,7 +528,7 @@
     result.className = 'wb-list-result-count';
     result.setAttribute('role', 'status');
     result.textContent = resultTemplate.replace('{count}', dataRows.length);
-    bar.dataset.wbListRows = String(dataRows.length);
+    bar.dataset.heritageListRows = String(dataRows.length);
     bar.classList.toggle('wb-list-command-bar--empty', dataRows.length === 0);
     meta.appendChild(result);
     bar.appendChild(meta);
@@ -541,7 +541,7 @@
     var sourceToolbar = tableWrapper.querySelector(':scope > .wb-list-toolbar');
     if (sourceToolbar) {
       Array.prototype.forEach.call(sourceToolbar.querySelectorAll('button, a'), function(action) {
-        if (action.matches('.formbutton-success, .btn-success, .btn-primary, [data-wb-primary-action]')) {
+        if (action.matches('.formbutton-success, .btn-success, .btn-primary, [data-heritage-primary-action]')) {
           action.classList.add('wb-list-command-bar__primary');
         }
         actions.appendChild(action);
@@ -666,11 +666,11 @@
         header.classList.toggle('wb-table-header--sortable', sortable);
         header.classList.toggle('wb-table-header--actions', index === headerNodes.length - 1);
         header.classList.toggle('wb-table-header--status', Boolean(statusKinds[index]));
-        if (statusKinds[index]) header.setAttribute('data-wb-status-kind', statusKinds[index]);
-        if (headers[index]) header.setAttribute('data-wb-label', headers[index]);
+        if (statusKinds[index]) header.setAttribute('data-heritage-status-kind', statusKinds[index]);
+        if (headers[index]) header.setAttribute('data-heritage-label', headers[index]);
         if (sortable && !header.getAttribute('aria-sort')) header.setAttribute('aria-sort', 'none');
       });
-      table.setAttribute('data-wb-columns', String(headers.length));
+      table.setAttribute('data-heritage-columns', String(headers.length));
       table.style.setProperty('--wb-table-columns', String(Math.max(headers.length, 1)));
       table.classList.toggle('wb-data-table--wide', headers.length >= 6);
       var body = table.querySelector('tbody');
@@ -739,7 +739,7 @@
               }
             }
             if (primaryAction && primaryAction.closest('.wb-list-command-bar')) {
-              emptyState.dataset.wbPrimaryActionDocked = 'true';
+              emptyState.dataset.heritagePrimaryActionDocked = 'true';
             }
             emptyCell.textContent = '';
             emptyCell.appendChild(emptyState);
@@ -751,7 +751,7 @@
         row.classList.add('wb-table-data-row');
         row.setAttribute('tabindex', '-1');
         Array.prototype.forEach.call(cells, function(cell, index) {
-          if (headers[index]) cell.setAttribute('data-wb-label', headers[index]);
+          if (headers[index]) cell.setAttribute('data-heritage-label', headers[index]);
           var cellText = (cell.textContent || '').replace(/\s+/g, ' ').trim();
           var hasInteractive = Boolean(cell.querySelector('a, button, input, select, textarea'));
           cell.classList.toggle('wb-table-cell--empty', !cellText && !hasInteractive);
@@ -782,13 +782,13 @@
               cell.appendChild(indicator);
             }
             cell.classList.add('wb-table-cell--status', 'wb-table-cell--compact-status');
-            cell.setAttribute('data-wb-status-kind', statusKind);
-            cell.setAttribute('data-wb-status-state', enabled ? 'on' : 'off');
+            cell.setAttribute('data-heritage-status-kind', statusKind);
+            cell.setAttribute('data-heritage-status-state', enabled ? 'on' : 'off');
           }
           if (index === 0) cell.classList.add('wb-table-cell--identity');
           if (index === cells.length - 1 || cell.classList.contains('wb-table-align-end') || cell.classList.contains('text-right')) {
             cell.classList.add('wb-table-actions');
-            cell.setAttribute('data-wb-label', document.body.dataset.heritageTableActions || localized('Aktionen', 'Actions'));
+            cell.setAttribute('data-heritage-label', document.body.dataset.heritageTableActions || localized('Aktionen', 'Actions'));
           }
         });
 
@@ -799,7 +799,7 @@
         if (primaryLink) {
           primaryLink.classList.add('wb-record-link');
           primaryLink.closest('td, th').classList.add('wb-table-cell--primary');
-          row.setAttribute('data-wb-record', (primaryLink.textContent || '').replace(/\s+/g, ' ').trim());
+          row.setAttribute('data-heritage-record', (primaryLink.textContent || '').replace(/\s+/g, ' ').trim());
         }
 
         Array.prototype.forEach.call(row.querySelectorAll(':scope > .wb-table-actions'), function(cell) {
@@ -810,12 +810,12 @@
             group = document.createElement('div');
             group.className = 'wb-row-actions';
             group.setAttribute('role', 'group');
-            group.setAttribute('aria-label', cell.getAttribute('data-wb-label') || localized('Aktionen', 'Actions'));
+            group.setAttribute('aria-label', cell.getAttribute('data-heritage-label') || localized('Aktionen', 'Actions'));
             cell.insertBefore(group, cell.firstChild);
             while (group.nextSibling) group.appendChild(group.nextSibling);
           }
           controls = group.querySelectorAll('a, button, input[type="button"], input[type="submit"]');
-          cell.setAttribute('data-wb-action-count', String(controls.length));
+          cell.setAttribute('data-heritage-action-count', String(controls.length));
           Array.prototype.forEach.call(controls, function(control, controlIndex) {
             var visibleLabel = control.tagName === 'INPUT' ? control.value : control.textContent;
             var label = control.getAttribute('aria-label') || control.title || (visibleLabel || '').replace(/\s+/g, ' ').trim();
@@ -839,15 +839,15 @@
             if (hadGenericLabel || !control.getAttribute('aria-label')) control.setAttribute('aria-label', label);
             if (hadGenericLabel || !control.title) control.title = label;
             if (hadGenericLabel || isGenericActionLabel(control.getAttribute('data-original-title'))) control.setAttribute('data-original-title', label);
-            if (control.getAttribute('style') && /url\(/i.test(control.getAttribute('style'))) control.dataset.wbLegacyInlineIcon = 'true';
+            if (control.getAttribute('style') && /url\(/i.test(control.getAttribute('style'))) control.dataset.heritageLegacyInlineIcon = 'true';
           });
         });
       });
       if (statusKinds.some(Boolean)) {
-        var oldStatusColgroup = table.querySelector(':scope > colgroup[data-wb-status-columns]');
+        var oldStatusColgroup = table.querySelector(':scope > colgroup[data-heritage-status-columns]');
         if (oldStatusColgroup) oldStatusColgroup.remove();
         var statusColgroup = document.createElement('colgroup');
-        statusColgroup.setAttribute('data-wb-status-columns', 'true');
+        statusColgroup.setAttribute('data-heritage-status-columns', 'true');
         headerNodes.forEach(function(header, index) {
           var firstCell = body.querySelector(':scope > tr:not(.tbl_row_noresults) > :is(td, th):nth-child(' + (index + 1) + ')');
           var headerColumn = String(header.getAttribute('data-column') || '').toLowerCase().trim();
@@ -1047,7 +1047,7 @@
   }
 
   function scrubResidualInlineStyle(node, style) {
-    if (!node || !style || node.dataset.wbPreserveInlineStyle === 'true') return false;
+    if (!node || !style || node.dataset.heritagePreserveInlineStyle === 'true') return false;
     if (/^(?:canvas|svg|path|circle|rect|line|polyline|polygon|img|picture|source|video|meter|progress)$/i.test(node.tagName || '')) return false;
     if (node.closest('[data-heritage-preserve-style="true"], .wb-chart-card, .wb-sparkline, .wb-stat-visual, .wb-logo, #logo, .notification_text')) return false;
     if (node.closest('#topnav-container, #workbench-mobile-navigation, .wb-app-navigation, .wb-header-actions')) return false;
@@ -1059,7 +1059,7 @@
     if (legacyGeometry) properties.push('width', 'min-width', 'max-width');
     if (!properties.length) return false;
 
-    node.dataset.wbOriginalInlineStyle = node.dataset.wbOriginalInlineStyle || style;
+    node.dataset.heritageOriginalInlineStyle = node.dataset.heritageOriginalInlineStyle || style;
     properties.forEach(function(property) {
       try { node.style.removeProperty(property); } catch (error) {}
     });
@@ -1114,10 +1114,10 @@
   }
 
   function schedulePostRenderEnhancement(host, pageName) {
-    if (!host || host.dataset.wbPostRenderScheduled === 'true') return;
-    host.dataset.wbPostRenderScheduled = 'true';
+    if (!host || host.dataset.heritagePostRenderScheduled === 'true') return;
+    host.dataset.heritagePostRenderScheduled = 'true';
     var run = function() {
-      host.dataset.wbPostRenderScheduled = 'false';
+      host.dataset.heritagePostRenderScheduled = 'false';
       if (!document.contains(host)) return;
       enhanceLoadedContent(host, pageName);
       announceContentReady(host, pageName || '', { source: 'post-render' });
@@ -1166,10 +1166,10 @@
         return control.disabled || (control.readOnly && control.type !== 'password');
       }).length;
 
-      section.setAttribute('data-wb-section-fields', String(groups.length));
-      section.setAttribute('data-wb-section-required', String(required));
-      section.setAttribute('data-wb-section-invalid', String(invalid));
-      section.setAttribute('data-wb-section-locked', String(disabled));
+      section.setAttribute('data-heritage-section-fields', String(groups.length));
+      section.setAttribute('data-heritage-section-required', String(required));
+      section.setAttribute('data-heritage-section-invalid', String(invalid));
+      section.setAttribute('data-heritage-section-locked', String(disabled));
       section.classList.toggle('wb-form-section--has-errors', invalid > 0);
       section.classList.toggle('wb-form-section--has-required', required > 0);
 
@@ -1195,14 +1195,14 @@
     });
 
     Array.prototype.forEach.call(scope.querySelectorAll('.wb-form-panel'), function(panel) {
-      var count = panel.getAttribute('data-wb-panel-fields') || '0';
+      var count = panel.getAttribute('data-heritage-panel-fields') || '0';
       var invalid = panel.querySelectorAll('.has-error, [aria-invalid="true"], .text-danger, .alert-danger, .error').length;
       var trigger = panel.querySelector('.wb-form-panel-trigger');
       panel.classList.toggle('wb-form-panel--has-errors', invalid > 0);
-      panel.setAttribute('data-wb-panel-invalid', String(invalid));
+      panel.setAttribute('data-heritage-panel-invalid', String(invalid));
       if (trigger) {
-        trigger.setAttribute('data-wb-panel-fields', count);
-        trigger.setAttribute('data-wb-panel-invalid', String(invalid));
+        trigger.setAttribute('data-heritage-panel-fields', count);
+        trigger.setAttribute('data-heritage-panel-invalid', String(invalid));
         trigger.classList.toggle('wb-form-panel-trigger--has-errors', invalid > 0);
       }
     });
@@ -1234,7 +1234,7 @@
       var controlValue = String(control.getAttribute('value') || '').toLowerCase();
       kinds.push(type);
       control.classList.add('wb-field-control');
-      control.setAttribute('data-wb-control-kind', type);
+      control.setAttribute('data-heritage-control-kind', type);
       if (label && control.id && !label.getAttribute('for')) label.setAttribute('for', control.id);
       if (control.disabled) group.classList.add('wb-field-group--disabled');
       if (control.readOnly) group.classList.add('wb-field-group--readonly');
@@ -1257,8 +1257,8 @@
       group.classList.add('wb-field-group--boolean');
       controls[0].setAttribute('role', 'switch');
       controls[0].setAttribute('aria-checked', controls[0].checked ? 'true' : 'false');
-      if (!controls[0].getAttribute('data-wb-boolean-bound')) {
-        controls[0].setAttribute('data-wb-boolean-bound', 'true');
+      if (!controls[0].getAttribute('data-heritage-boolean-bound')) {
+        controls[0].setAttribute('data-heritage-boolean-bound', 'true');
         controls[0].addEventListener('change', function() {
           controls[0].setAttribute('aria-checked', controls[0].checked ? 'true' : 'false');
         });
@@ -1273,7 +1273,7 @@
         if (group.querySelector('.help-block, .help-inline, .description, .hint, small, .form-text')) group.classList.add('wb-field-group--with-help');
         if (group.querySelector('.form-control-static, output, code, pre')) group.classList.add('wb-field-group--static-value');
         if (group.querySelector('table, .table-wrapper, .table-responsive')) group.classList.add('wb-field-group--embedded-table');
-    if (kinds.length) group.setAttribute('data-wb-field-kinds', kinds.join(' '));
+    if (kinds.length) group.setAttribute('data-heritage-field-kinds', kinds.join(' '));
   }
 
   function inferSectionTitle(section, scope) {
@@ -1296,9 +1296,9 @@
       section.classList.toggle('wb-form-section--compact', groups.length > 0 && groups.length <= 3);
       section.classList.toggle('wb-form-section--large', groups.length > 12);
       section.classList.toggle('wb-form-section--notice-heavy', notices > 0);
-      section.setAttribute('data-wb-section-controls', String(controls));
-      section.setAttribute('data-wb-section-notices', String(notices));
-      if (title) section.setAttribute('data-wb-section-title', title);
+      section.setAttribute('data-heritage-section-controls', String(controls));
+      section.setAttribute('data-heritage-section-notices', String(notices));
+      if (title) section.setAttribute('data-heritage-section-title', title);
     });
   }
 
@@ -1327,7 +1327,7 @@
         else if (action.classList.contains('formbutton-success') || action.classList.contains('btn-success') || action.classList.contains('btn-primary') || /save|speichern|create|erstellen|hinzufügen|hinzufuegen|import|upload/.test(actionText)) tone = 'primary';
         if (tone === 'danger') hasDangerAction = true;
         action.classList.add('wb-form-action', 'wb-form-action--' + tone);
-        action.setAttribute('data-wb-form-action-tone', tone);
+        action.setAttribute('data-heritage-form-action-tone', tone);
       });
       actions.classList.toggle('wb-form-actions--has-danger', hasDangerAction);
     });
@@ -1338,7 +1338,7 @@
   }
 
   function inferActionControlTone(control) {
-    var explicitTone = String(control.getAttribute('data-wb-action-tone') || '').toLowerCase();
+    var explicitTone = String(control.getAttribute('data-heritage-action-tone') || '').toLowerCase();
     if (['primary', 'secondary', 'danger', 'warning', 'info'].indexOf(explicitTone) !== -1) return explicitTone;
     if (control.classList.contains('wb-dns-zone-actions__secondary')) return 'secondary';
     var textValue = actionControlText(control);
@@ -1386,7 +1386,7 @@
         control.classList.contains('wb-icon-button') ||
         (!visibleText && Boolean(control.querySelector('span, i, svg, img')));
       control.classList.add('wb-action-control', 'wb-action-control--' + tone);
-      control.setAttribute('data-wb-action-tone', tone);
+      control.setAttribute('data-heritage-action-tone', tone);
       control.classList.toggle('wb-action-control--icon', iconOnly);
       if (!control.getAttribute('aria-label') && !visibleText) {
         control.setAttribute('aria-label', control.getAttribute('title') || document.body.dataset.heritageTableActions || localized('Aktion', 'Action'));
@@ -1410,7 +1410,7 @@
       body.classList.add('wb-upload-dropzone');
       Array.prototype.forEach.call(group.querySelectorAll('input[type="file"]'), function(input) {
         input.classList.add('wb-upload-dropzone__input');
-        input.setAttribute('data-wb-file-ready', 'true');
+        input.setAttribute('data-heritage-file-ready', 'true');
       });
     });
 
@@ -1428,7 +1428,7 @@
     });
 
     Array.prototype.forEach.call(scope.querySelectorAll('.wb-form-actions .btn, .wb-form-actions button, .wb-form-actions input[type="button"], .wb-form-actions input[type="submit"], .wb-form-actions a.formbutton-success, .wb-form-actions a.formbutton-default, .wb-form-actions a.formbutton-danger'), function(action) {
-      var tone = action.getAttribute('data-wb-form-action-tone') || 'secondary';
+      var tone = action.getAttribute('data-heritage-form-action-tone') || 'secondary';
       action.classList.add('wb-form-action-control', 'wb-form-action-control--' + tone);
     });
 
@@ -1458,8 +1458,8 @@
         strengthBar.setAttribute('aria-valuemax', '100');
         if (strengthText) strengthText.setAttribute('aria-live', 'polite');
       };
-      if (!strengthInput.getAttribute('data-wb-strength-visibility-bound')) {
-        strengthInput.setAttribute('data-wb-strength-visibility-bound', 'true');
+      if (!strengthInput.getAttribute('data-heritage-strength-visibility-bound')) {
+        strengthInput.setAttribute('data-heritage-strength-visibility-bound', 'true');
         strengthInput.addEventListener('input', syncStrengthVisibility);
         strengthInput.addEventListener('change', syncStrengthVisibility);
       }
@@ -1478,7 +1478,7 @@
       var scope = form === shellForm ? host : form;
       Array.prototype.forEach.call(scope.querySelectorAll('.tab-pane, fieldset, .pnl_formsarea'), function(section, sectionIndex) {
         section.classList.add('wb-form-section');
-        section.setAttribute('data-wb-section-index', String(sectionIndex + 1));
+        section.setAttribute('data-heritage-section-index', String(sectionIndex + 1));
         if (section.tagName === 'FIELDSET') section.classList.add('wb-form-fieldset');
         var legend = section.querySelector(':scope > legend, :scope > .fieldset-legend');
         if (legend) legend.classList.add('wb-form-section-heading');
@@ -1493,7 +1493,7 @@
         if (label) {
           label.classList.add('wb-field-label');
           var readableLabel = labelText(label);
-          if (readableLabel) group.setAttribute('data-wb-field-label', readableLabel);
+          if (readableLabel) group.setAttribute('data-heritage-field-label', readableLabel);
         }
         if (!label) group.classList.add('wb-field-group--unlabelled');
         if (!controls.length) group.classList.add('wb-field-group--content');
@@ -1523,7 +1523,7 @@
         }
         if (fieldBodies.length > 1) group.classList.add('wb-field-group--multi-body');
         fieldBodies.forEach(function(body, bodyIndex) {
-          body.setAttribute('data-wb-field-body-index', String(bodyIndex + 1));
+          body.setAttribute('data-heritage-field-body-index', String(bodyIndex + 1));
           if (!body.querySelector('input:not([type="hidden"]), select, textarea, button, a') && body.textContent.trim()) {
             body.classList.add('wb-field-affix');
             group.classList.add('wb-field-group--with-affix');
@@ -1546,7 +1546,7 @@
       form.classList.toggle('wb-modern-form--has-secrets', !!scope.querySelector('.wb-field-group--secret'));
       form.classList.toggle('wb-modern-form--has-choices', !!scope.querySelector('.wb-field-group--choice'));
       Array.prototype.forEach.call(scope.querySelectorAll('.wb-form-section'), function(section) {
-        section.setAttribute('data-wb-section-fields', String(section.querySelectorAll('.wb-field-group:not(.wb-field-group--empty)').length));
+        section.setAttribute('data-heritage-section-fields', String(section.querySelectorAll('.wb-field-group:not(.wb-field-group--empty)').length));
       });
       finalizeFormSections(scope);
       Array.prototype.forEach.call(scope.querySelectorAll('.panel-group, .wb-limit-sections, .wb-form-sections'), function(accordion) {
@@ -1557,7 +1557,7 @@
           var heading = panel.querySelector(':scope > .panel-heading, :scope > .wb-limit-section__header, :scope > .wb-form-section__header');
           var trigger = heading && heading.querySelector('a[href^="#"], button[data-target]');
           var count = body ? body.querySelectorAll('.form-group').length : 0;
-          panel.setAttribute('data-wb-panel-fields', String(count));
+          panel.setAttribute('data-heritage-panel-fields', String(count));
           if (heading) heading.classList.add('wb-form-panel-heading');
           if (trigger) {
             trigger.classList.add('wb-form-panel-trigger');

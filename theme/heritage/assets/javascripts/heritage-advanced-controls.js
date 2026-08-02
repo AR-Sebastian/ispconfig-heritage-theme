@@ -24,15 +24,15 @@
   function decorateExtensionWorkspace(scope) {
     scope.querySelectorAll('.wb-extension-workspace').forEach(function(workspace) {
       workspace.classList.add('wb-specialty-workspace', 'wb-specialty-workspace--extension');
-      var pageType = workspace.getAttribute('data-wb-extension-page') || 'extension';
-      workspace.setAttribute('data-wb-specialty-page', pageType);
+      var pageType = workspace.getAttribute('data-heritage-extension-page') || 'extension';
+      workspace.setAttribute('data-heritage-specialty-page', pageType);
 
       var table = workspace.querySelector('.wb-data-table');
       var rows = table ? Array.prototype.slice.call(table.querySelectorAll('tbody tr:not(.tbl_row_noresults)')) : [];
       var actions = workspace.querySelectorAll('.wb-row-action, .wb-form-actions button, .wb-form-actions a').length;
       var dangerActions = workspace.querySelectorAll('.wb-row-action--danger, .formbutton-danger').length;
-      workspace.setAttribute('data-wb-extension-records', String(rows.length));
-      workspace.setAttribute('data-wb-extension-actions', String(actions));
+      workspace.setAttribute('data-heritage-extension-records', String(rows.length));
+      workspace.setAttribute('data-heritage-extension-actions', String(actions));
 
       var hero = workspace.querySelector('.wb-extension-hero');
       if (hero && !hero.querySelector('.wb-specialty-badges')) {
@@ -54,10 +54,10 @@
   function decorateMonitoringWorkspace(scope) {
     scope.querySelectorAll('.wb-monitor-workspace').forEach(function(workspace) {
       workspace.classList.add('wb-specialty-workspace', 'wb-specialty-workspace--monitoring');
-      var charts = workspace.querySelectorAll('[data-wb-chart-card]').length;
+      var charts = workspace.querySelectorAll('[data-heritage-chart-card]').length;
       var states = workspace.querySelectorAll('.stateview .alert, .systemmonitor .alert, .wb-monitor-state-card').length;
-      workspace.setAttribute('data-wb-monitor-charts', String(charts));
-      workspace.setAttribute('data-wb-monitor-states', String(states));
+      workspace.setAttribute('data-heritage-monitor-charts', String(charts));
+      workspace.setAttribute('data-heritage-monitor-states', String(states));
 
       var hero = workspace.querySelector('.wb-monitor-hero');
       if (hero && !hero.querySelector('.wb-specialty-badges')) {
@@ -118,7 +118,7 @@
         var state = card.classList.contains('alert-danger') ? 'danger' :
           card.classList.contains('alert-warning') ? 'warning' :
           card.classList.contains('alert-success') ? 'success' : 'info';
-        card.setAttribute('data-wb-monitor-state', state);
+        card.setAttribute('data-heritage-monitor-state', state);
         var title = card.querySelector('h3');
         if (title) title.classList.add('wb-monitor-state-card__title');
         var summary = card.querySelector('.statusDevice > p');

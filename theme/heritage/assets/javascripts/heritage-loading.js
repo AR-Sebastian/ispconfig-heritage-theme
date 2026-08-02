@@ -124,7 +124,7 @@
     if (legacy.options.useLoadIndicator !== true) return;
     legacy.requestsRunning += 1;
     document.body.classList.add('wb-request-active');
-    document.body.dataset.wbRequestCount = String(legacy.requestsRunning);
+    document.body.dataset.heritageRequestCount = String(legacy.requestsRunning);
     var region = content();
     if (!region) return;
     region.setAttribute('aria-busy', 'true');
@@ -153,7 +153,7 @@
 
   legacy.endRequest = function() {
     legacy.requestsRunning = Math.max(0, legacy.requestsRunning - 1);
-    document.body.dataset.wbRequestCount = String(legacy.requestsRunning);
+    document.body.dataset.heritageRequestCount = String(legacy.requestsRunning);
     if (legacy.requestsRunning > 0) return;
     if (requestSlowTimer !== null) {
       window.clearTimeout(requestSlowTimer);

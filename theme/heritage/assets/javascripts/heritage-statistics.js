@@ -118,12 +118,12 @@
     var host = document.getElementById('pageContent');
     if (!host) return false;
     document.body.classList.toggle('wb-statistics-page', Boolean(report));
-    if (!report || host.dataset.wbStatisticsReport === report.key) return Boolean(report);
+    if (!report || host.dataset.heritageStatisticsReport === report.key) return Boolean(report);
 
     var table = host.querySelector('.table-wrapper table.table, table.table');
     if (!table) return false;
-    host.dataset.wbStatisticsEnhanced = 'true';
-    host.dataset.wbStatisticsReport = report.key;
+    host.dataset.heritageStatisticsEnhanced = 'true';
+    host.dataset.heritageStatisticsReport = report.key;
     host.classList.add('wb-statistics-workspace');
     var rows = recordRows(table);
     var filters = activeFilters(host);

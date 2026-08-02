@@ -8,7 +8,7 @@ body.wb-login-page {
   -webkit-tap-highlight-color: color-mix(in srgb, var(--wb-action) 24%, transparent);
 }
 
-html[data-wb-theme='dark'] body.wb-login-page { color-scheme: dark; }
+html[data-heritage-theme='dark'] body.wb-login-page { color-scheme: dark; }
 
 body.wb-login-page,
 body.wb-login-page *,
@@ -114,7 +114,7 @@ body.wb-login-page [hidden] { display: none !important; }
   text-align: left;
 }
 
-html[data-wb-theme='dark'] .wb-login-card { box-shadow: 0 24px 60px rgba(0, 0, 0, .35); }
+html[data-heritage-theme='dark'] .wb-login-card { box-shadow: 0 24px 60px rgba(0, 0, 0, .35); }
 .wb-login-theme-toggle {
   position: absolute;
   top: 16px;
@@ -140,10 +140,10 @@ html[data-wb-theme='dark'] .wb-login-card { box-shadow: 0 24px 60px rgba(0, 0, 0
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--wb-action) 14%, transparent);
 }
 .wb-login-badge { display: inline-flex; margin-bottom: 16px; padding: 5px 10px; border-radius: 999px; color: var(--wb-action); background: color-mix(in srgb, var(--wb-action) 10%, transparent); font-size: 11px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
-html[data-wb-theme='dark'] .wb-login-badge { color: color-mix(in srgb, var(--wb-action) 48%, #fff); }
+html[data-heritage-theme='dark'] .wb-login-badge { color: color-mix(in srgb, var(--wb-action) 48%, #fff); }
 .wb-login-card h2 { margin: 0; color: var(--wb-text); font-size: clamp(26px, 3vw, 32px); letter-spacing: -.035em; }
 .wb-login-subtitle { margin: 10px 0 24px; color: var(--wb-muted); }
-.wb-login-card[data-wb-remembered-user='true'] .wb-login-subtitle::after {
+.wb-login-card[data-heritage-remembered-user='true'] .wb-login-subtitle::after {
   display: inline-flex;
   margin-left: 8px;
   padding: 3px 8px;
@@ -163,7 +163,7 @@ html[data-wb-theme='dark'] .wb-login-badge { color: color-mix(in srgb, var(--wb-
 .wb-login-form-surface .wb-auth-form { margin: 0; }
 .wb-login-form-surface .wb-auth-field { position: relative; margin-bottom: 17px; }
 .wb-login-form-surface label,
-.wb-login-form-surface label[data-wb-login-label] { display: block; margin: 0 0 7px; color: var(--wb-text); font-size: 12px; font-weight: 800; letter-spacing: .015em; }
+.wb-login-form-surface label[data-heritage-login-label] { display: block; margin: 0 0 7px; color: var(--wb-text); font-size: 12px; font-weight: 800; letter-spacing: .015em; }
 
 .wb-login-form-surface .form-control,
 .wb-login-form-surface input[type='text'],
@@ -293,8 +293,8 @@ html[data-wb-theme='dark'] .wb-login-badge { color: color-mix(in srgb, var(--wb-
 .wb-login-security { display: flex; align-items: flex-start; gap: 9px; margin-top: 22px; padding-top: 17px; border-top: 1px solid var(--wb-border); color: var(--wb-muted); font-size: 11px; line-height: 1.45; }
 .wb-login-security svg { width: 17px; height: 17px; flex: 0 0 auto; color: var(--wb-action); }
 .wb-login-disclaimer { margin-top: 18px; color: var(--wb-muted); }
-.wb-login-card[data-wb-auth-mode='otp'] .wb-login-badge::after { content: ' \00b7  2FA'; }
-.wb-login-card[data-wb-auth-mode='reset'] .wb-login-badge::after { content: ' \00b7  Wiederherstellung'; }
+.wb-login-card[data-heritage-auth-mode='otp'] .wb-login-badge::after { content: ' \00b7  2FA'; }
+.wb-login-card[data-heritage-auth-mode='reset'] .wb-login-badge::after { content: ' \00b7  Wiederherstellung'; }
 .wb-login-is-submitting .wb-login-form-surface { opacity: .72; }
 .wb-login-is-submitting::after { position: absolute; inset: 0 0 auto; height: 3px; border-radius: 18px 18px 0 0; background: linear-gradient(90deg, transparent, var(--wb-action), transparent); background-size: 220% 100%; content: ''; animation: wb-auth-progress 1.15s linear infinite; }
 
@@ -721,13 +721,13 @@ body.wb-login-page {
   border-radius: 14px !important;
 }
 
-html[data-wb-theme='dark'] body.wb-login-page {
+html[data-heritage-theme='dark'] body.wb-login-page {
   --wb-login-option-border: color-mix(in srgb, #fff 10%, var(--wb-border));
   --wb-login-option-bg: color-mix(in srgb, var(--wb-surface-muted) 86%, #fff 1%);
   --wb-login-option-active: color-mix(in srgb, var(--wb-success-ink) 10%, var(--wb-surface));
 }
 
-html[data-wb-theme='dark'] .wb-login-badge {
+html[data-heritage-theme='dark'] .wb-login-badge {
   color: color-mix(in srgb, var(--wb-action) 35%, #fff) !important;
 }
 

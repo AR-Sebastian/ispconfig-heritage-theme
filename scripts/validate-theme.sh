@@ -48,6 +48,10 @@ if grep -RIEq 'data-workbench-' "$theme/templates" "$theme/assets/stylesheets" "
   echo 'Theme contains a DOM contract in the obsolete Workbench namespace.' >&2
   exit 1
 fi
+if grep -RIEq 'data-wb-' "$theme/templates" "$theme/assets/stylesheets" "$theme/assets/javascripts"; then
+  echo 'Theme contains a DOM contract in the retired abbreviated namespace.' >&2
+  exit 1
+fi
 if grep -RIEq "tmpl_var[[:space:]]+name=['\"]workbench_" "$theme/templates"; then
   echo 'Theme contains a template value that requires a non-stock Workbench controller.' >&2
   exit 1
@@ -66,6 +70,10 @@ if grep -RIEq "['\"]workbench:[a-z-]+" "$theme/assets/javascripts"; then
 fi
 if grep -RIEq "dataset(\.|\[['\"])workbench" "$theme/assets/javascripts"; then
   echo 'Theme contains a dataset property in the obsolete Workbench namespace.' >&2
+  exit 1
+fi
+if grep -RIEq 'dataset\.wb[A-Z]' "$theme/assets/javascripts"; then
+  echo 'Theme contains a dataset property in the retired abbreviated namespace.' >&2
   exit 1
 fi
 while IFS= read -r -d '' file; do node --check "$file"; done < <(find "$theme" -type f -name '*.js' -print0)

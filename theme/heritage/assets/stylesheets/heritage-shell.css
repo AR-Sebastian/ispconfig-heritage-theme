@@ -14,7 +14,7 @@
   --hg-glass-shadow: 0 12px 34px rgba(24, 39, 75, .075);
 }
 
-html[data-wb-theme='dark'] {
+html[data-heritage-theme='dark'] {
   --hg-canvas: #080d18;
   --hg-glass: rgba(17, 26, 44, .9);
   --hg-glass-line: color-mix(in srgb, var(--wb-border) 88%, transparent);
@@ -69,7 +69,7 @@ body.heritage-shell.wb-app-navigation-enabled #logo a {
   height: 100%;
 }
 
-html[data-wb-theme='dark'] body.heritage-shell.wb-app-navigation-enabled #logo {
+html[data-heritage-theme='dark'] body.heritage-shell.wb-app-navigation-enabled #logo {
   background-image: url('../images/ispconfig-heritage-logo-dark.svg') !important;
 }
 
@@ -258,7 +258,7 @@ body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__quick-actio
   box-shadow: 0 6px 16px color-mix(in srgb, var(--wb-action) 18%, transparent);
 }
 
-html[data-wb-theme='dark'] body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__quick-action {
+html[data-heritage-theme='dark'] body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__quick-action {
   color: color-mix(in srgb, var(--wb-action) 74%, #fff) !important;
   border-color: color-mix(in srgb, var(--wb-action) 28%, rgba(255, 255, 255, .1)) !important;
   background: color-mix(in srgb, var(--wb-action) 7%, #172236) !important;

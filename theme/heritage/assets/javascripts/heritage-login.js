@@ -29,11 +29,11 @@
 
     var nodes = surface.querySelectorAll('.alert, .box_error, .box_warning, .box_success, .box_info');
     Array.prototype.forEach.call(nodes, function (node) {
-      if (node.dataset.wbLoginFeedbackNormalized === 'true') return;
+      if (node.dataset.heritageLoginFeedbackNormalized === 'true') return;
       var text = (node.textContent || '').replace(/\s+/g, ' ').trim();
       if (!text) return;
 
-      node.dataset.wbLoginFeedbackNormalized = 'true';
+      node.dataset.heritageLoginFeedbackNormalized = 'true';
       node.classList.add('wb-login-feedback-normalized');
       if (!node.getAttribute('role')) node.setAttribute('role', 'alert');
       if (!node.getAttribute('aria-live')) node.setAttribute('aria-live', 'polite');
@@ -95,7 +95,7 @@
       username.value = rememberedUsername;
       if (remember) remember.checked = true;
       if (card) {
-        card.setAttribute('data-wb-remembered-user', 'true');
+        card.setAttribute('data-heritage-remembered-user', 'true');
       }
     }
 
@@ -105,7 +105,7 @@
 
     username.addEventListener('input', function () {
       if (card) {
-        card.removeAttribute('data-wb-remembered-user');
+        card.removeAttribute('data-heritage-remembered-user');
       }
     });
 

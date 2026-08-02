@@ -515,8 +515,8 @@ body.wb-app-navigation-enabled .wb-dialog--enhanced .wb-dialog__header::before {
 body.wb-app-navigation-enabled .wb-dialog__activity-list { display: grid; gap: 8px; padding: 0 !important; list-style: none; }
 body.wb-app-navigation-enabled .wb-dialog__activity-item { display: flex; min-height: 44px; align-items: center; justify-content: space-between; gap: 14px; margin: 0 !important; padding: 10px 12px; border: 1px solid var(--wb-border); border-radius: 10px; background: var(--wb-surface-muted); }
 
-html[data-wb-theme='dark'] body.wb-app-navigation-enabled :is(.panel, .content-box, .wb-content-card, .modal-content, .wb-dialog__surface, .wb-content-state) { box-shadow: none; }
-html[data-wb-theme='dark'] body.wb-app-navigation-enabled #pageContent :is(.wb-notice, .wb-feedback) { background: color-mix(in srgb, var(--wb-notice-color) 10%, var(--wb-surface)); }
+html[data-heritage-theme='dark'] body.wb-app-navigation-enabled :is(.panel, .content-box, .wb-content-card, .modal-content, .wb-dialog__surface, .wb-content-state) { box-shadow: none; }
+html[data-heritage-theme='dark'] body.wb-app-navigation-enabled #pageContent :is(.wb-notice, .wb-feedback) { background: color-mix(in srgb, var(--wb-notice-color) 10%, var(--wb-surface)); }
 
 @container wb-page-content (max-width: 760px) {
   body.wb-app-navigation-enabled #pageContent .wb-page-header { grid-template-columns: minmax(0, 1fr); align-items: start; }
@@ -634,7 +634,7 @@ body.wb-list-page #pageContent .wb-dns-zone-actions > button.wb-dns-zone-actions
   display: none;
 }
 
-html[data-wb-theme='dark'] .wb-code-surface {
+html[data-heritage-theme='dark'] .wb-code-surface {
   border-color: var(--wb-border-strong);
   background: var(--wb-surface-elevated);
 }

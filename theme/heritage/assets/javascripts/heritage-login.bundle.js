@@ -345,11 +345,11 @@
 
     var nodes = surface.querySelectorAll('.alert, .box_error, .box_warning, .box_success, .box_info');
     Array.prototype.forEach.call(nodes, function (node) {
-      if (node.dataset.wbLoginFeedbackNormalized === 'true') return;
+      if (node.dataset.heritageLoginFeedbackNormalized === 'true') return;
       var text = (node.textContent || '').replace(/\s+/g, ' ').trim();
       if (!text) return;
 
-      node.dataset.wbLoginFeedbackNormalized = 'true';
+      node.dataset.heritageLoginFeedbackNormalized = 'true';
       node.classList.add('wb-login-feedback-normalized');
       if (!node.getAttribute('role')) node.setAttribute('role', 'alert');
       if (!node.getAttribute('aria-live')) node.setAttribute('aria-live', 'polite');
@@ -411,7 +411,7 @@
       username.value = rememberedUsername;
       if (remember) remember.checked = true;
       if (card) {
-        card.setAttribute('data-wb-remembered-user', 'true');
+        card.setAttribute('data-heritage-remembered-user', 'true');
       }
     }
 
@@ -421,7 +421,7 @@
 
     username.addEventListener('input', function () {
       if (card) {
-        card.removeAttribute('data-wb-remembered-user');
+        card.removeAttribute('data-heritage-remembered-user');
       }
     });
 
@@ -535,7 +535,7 @@
   }
 
   function applyAccessibleAction(color) {
-    var adjusted = accessibleAction(color || cssToken('--wb-accent', '#cc151c'), root.getAttribute('data-wb-theme') === 'dark');
+    var adjusted = accessibleAction(color || cssToken('--wb-accent', '#cc151c'), root.getAttribute('data-heritage-theme') === 'dark');
     root.style.setProperty('--wb-action', adjusted);
     applyActionContrast(adjusted);
     return adjusted;
@@ -556,7 +556,7 @@
 
   function apply(theme) {
     var dark = theme === 'dark';
-    root.setAttribute('data-wb-theme', dark ? 'dark' : 'light');
+    root.setAttribute('data-heritage-theme', dark ? 'dark' : 'light');
     applyAccessibleAction(cssToken('--wb-accent', '#cc151c'));
     Array.prototype.forEach.call(document.querySelectorAll('.wb-theme-toggle'), function (button) {
       var german = typeof window.heritageLanguage === 'function' && window.heritageLanguage() === 'de';
@@ -576,7 +576,7 @@
     form.classList.add('wb-auth-form');
     var action = (form.getAttribute('action') || '').toLowerCase();
     var mode = action.indexOf('otp') !== -1 ? 'otp' : action.indexOf('password_reset') !== -1 ? 'reset' : action.indexOf('force_password') !== -1 ? 'password' : 'login';
-    document.querySelector('.wb-login-card').setAttribute('data-wb-auth-mode', mode);
+    document.querySelector('.wb-login-card').setAttribute('data-heritage-auth-mode', mode);
     var fieldMap = {
       username: { text: 'Benutzername', autocomplete: 'username' },
       password: { text: 'Passwort', autocomplete: 'current-password' },
@@ -593,19 +593,19 @@
       input.setAttribute('aria-label', input.getAttribute('aria-label') || field.text);
       var group = input.closest('.form-group') || input.parentElement;
       if (group) group.classList.add('wb-auth-field');
-      if (group && !group.querySelector('[data-wb-login-label]')) {
+      if (group && !group.querySelector('[data-heritage-login-label]')) {
         var label = document.createElement('label');
         label.textContent = field.text;
         label.setAttribute('for', field.id);
-        label.setAttribute('data-wb-login-label', 'true');
+        label.setAttribute('data-heritage-login-label', 'true');
         group.insertBefore(label, input);
       }
-      if (input.type === 'password' && group && !group.querySelector('[data-wb-password-toggle]')) {
+      if (input.type === 'password' && group && !group.querySelector('[data-heritage-password-toggle]')) {
         group.classList.add('wb-password-field');
         var toggle = document.createElement('button');
         toggle.type = 'button';
         toggle.className = 'wb-password-toggle';
-        toggle.setAttribute('data-wb-password-toggle', 'true');
+        toggle.setAttribute('data-heritage-password-toggle', 'true');
         setIcon(toggle, eye);
         toggle.setAttribute('aria-label', 'Passwort anzeigen');
         toggle.addEventListener('click', function () {
@@ -636,8 +636,8 @@
     if (heading) heading.classList.add('wb-auth-context-title');
     var description = heading && heading.nextElementSibling;
     if (description && description.tagName === 'P') description.classList.add('wb-auth-context-copy');
-    if (form && !form.dataset.wbLoginSubmitBound) {
-      form.dataset.wbLoginSubmitBound = 'true';
+    if (form && !form.dataset.heritageLoginSubmitBound) {
+      form.dataset.heritageLoginSubmitBound = 'true';
       form.addEventListener('submit', function () {
         var submit = form.querySelector('input[type="submit"], button[type="submit"]');
         if (submit) {
@@ -653,7 +653,7 @@
   document.addEventListener('click', function (event) {
     var button = event.target.closest('.wb-theme-toggle');
     if (!button) return;
-    var next = root.getAttribute('data-wb-theme') === 'dark' ? 'light' : 'dark';
+    var next = root.getAttribute('data-heritage-theme') === 'dark' ? 'light' : 'dark';
     try { localStorage.setItem(key, next); } catch (ignore) {}
     apply(next);
   });
@@ -672,7 +672,7 @@
     var toggle = document.querySelector('.wb-theme-toggle');
     if (!toggle) return;
 
-    var isDark = document.documentElement.getAttribute('data-wb-theme') === 'dark';
+    var isDark = document.documentElement.getAttribute('data-heritage-theme') === 'dark';
     var isGerman = (document.documentElement.lang || '').toLowerCase().indexOf('de') === 0;
     var label = isGerman
       ? (isDark ? 'Zum hellen Design wechseln' : 'Zum dunklen Design wechseln')
@@ -892,7 +892,7 @@
       Array.prototype.slice.call(document.body.classList).forEach(function (className) {
         if (className.indexOf('wb-form-profile--') === 0) document.body.classList.remove(className);
       });
-      delete document.body.dataset.wbFormProfiles;
+      delete document.body.dataset.heritageFormProfiles;
     }
     if (!pageContent.querySelector('table')) pageContent.classList.remove('wb-table-workspace', 'wb-table-workspace--finalized');
     document.body.setAttribute('data-heritage-module-family', family);
@@ -1071,7 +1071,7 @@
     ];
 
     sections.forEach(function (section) {
-      var first = host.querySelector(section.selector + ':not([data-wb-hidden="true"])');
+      var first = host.querySelector(section.selector + ':not([data-heritage-hidden="true"])');
       var marker = host.querySelector('[data-heritage-dashboard-section="' + section.key + '"]');
       if (!first || first.hidden || first.getClientRects().length === 0) {
         if (marker) marker.hidden = true;
@@ -1091,9 +1091,9 @@
       if (marker.nextElementSibling !== first) host.insertBefore(marker, first);
     });
 
-    host.querySelectorAll('[data-wb-metric-toggle]').forEach(function (toggle, index) {
-      var metric = toggle.getAttribute('data-wb-metric-toggle') || String(index);
-      var details = host.querySelector('[data-wb-metric-details="' + metric + '"]');
+    host.querySelectorAll('[data-heritage-metric-toggle]').forEach(function (toggle, index) {
+      var metric = toggle.getAttribute('data-heritage-metric-toggle') || String(index);
+      var details = host.querySelector('[data-heritage-metric-details="' + metric + '"]');
       if (!details) return;
       var id = details.id || ('heritage-metric-details-' + metric.replace(/[^a-z0-9_-]/gi, '-'));
       details.id = id;
@@ -1350,7 +1350,7 @@
 
     new MutationObserver(syncThemeToggleLabel).observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ['data-wb-theme']
+      attributeFilter: ['data-heritage-theme']
     });
 
     var pageContent = document.getElementById('pageContent');
