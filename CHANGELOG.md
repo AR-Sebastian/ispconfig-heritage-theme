@@ -19,6 +19,7 @@
 - Browser preferences migrate once from the retired Workbench storage keys to HERITAGE keys without losing theme or login choices.
 - Component classes and CSS custom properties now use the unified `hg-*` / `--hg-*` HERITAGE design namespace.
 - Dashboard layout preferences migrate to the HERITAGE storage key; internal runtime names and generated classes no longer expose Workbench-era terminology.
+- Release notes and readiness evidence now describe the completed namespace architecture and keep unproven runtime gates explicitly open.
 
 ## 1.0.33 – 2026-07-31
 

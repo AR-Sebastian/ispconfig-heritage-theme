@@ -19,10 +19,31 @@ standalone ISPConfig 3.3.1p1 theme.
   actual form controls.
 - Mailbox quota progress bars expose a valid numeric `aria-valuenow` value.
 
+## Theme architecture
+
+- Theme-owned DOM attributes, events, identifiers and generated state use the
+  explicit `heritage` namespace.
+- Component classes and CSS custom properties use the unified `hg-*` and
+  `--hg-*` design-system namespace across every overridden view.
+- JavaScript globals, runtime properties, history state, helpers and lifecycle
+  guards no longer expose transitional Workbench-era names.
+- Shell, login and Admin settings templates depend only on values supplied by
+  stock ISPConfig 3.3.1p1 controllers; the removed branding editor required no
+  ISPConfig core replacement.
+
+## Upgrade continuity
+
+- Theme mode, remembered login name, stay-signed-in preference and personal
+  dashboard layout migrate once from their retired browser-storage keys.
+- The technical theme ID and the narrow ISPConfig integration boundary remain
+  stable for installed-theme and navigation compatibility.
+- Legacy storage reads and the external reload response marker are isolated,
+  documented compatibility literals and cannot spread into new theme code.
+
 ## Release integrity
 
-- Validation protects public branding, cache fingerprints and the repaired UI
-  contracts.
+- Validation protects public branding, cache fingerprints, namespace purity,
+  stock-controller compatibility and the repaired UI contracts.
 - ZIP and TAR.GZ artifacts normalize order, timestamps, modes, ownership and
   compression metadata for reproducible output.
 - The tag workflow rebuilds artifacts twice, compares SHA-256 hashes, verifies
@@ -34,4 +55,3 @@ standalone ISPConfig 3.3.1p1 theme.
 - PHP: 8.1 or newer
 - Validated platforms: Ubuntu 22.04/24.04 and Debian 12/13 with Apache or Nginx
 - Required recovery path: ISPConfig's original `default` theme remains installed
-

@@ -10,6 +10,21 @@ The key uses the complete semantic theme version and is enforced by validation.
 The technical theme identifier remains unchanged to preserve compatibility
 with existing theme-manager installations and update paths.
 
+All theme-owned DOM attributes, events, identifiers, generated state and
+JavaScript runtime interfaces now use the HERITAGE namespace. Component classes
+and CSS custom properties share the `hg-*` / `--hg-*` design-system namespace
+across the complete template set; transitional Workbench-era runtime names and
+styling contracts have been removed.
+
+Existing browser preferences remain intact during the upgrade. Colour mode,
+remembered login name, stay-signed-in choice and personal dashboard layout are
+migrated once to HERITAGE storage keys. Only isolated read compatibility for
+those keys and the external reload response marker remain.
+
+Shell, login and Admin settings rendering no longer depends on template values
+or endpoints supplied only by modified controllers. The package therefore
+retains its theme-only boundary against an unmodified ISPConfig 3.3.1p1 core.
+
 The login template also restores the current ISPConfig session-timeout guard
 around the stay-signed-in option. The control is therefore only presented when
 the configured session lifecycle can actually honor it.

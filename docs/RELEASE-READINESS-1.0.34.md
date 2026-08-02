@@ -12,6 +12,9 @@ Target: ISPConfig 3.3.1p1
 - Application and login assets use the exact `1.0.34` cache fingerprint.
 - All 243 theme template overrides exist in the ISPConfig 3.3.1p1 baseline.
 - No template value or branding endpoint depends on the modified Workbench controllers; shell defaults and assets are theme-owned.
+- Theme-owned DOM attributes, events, identifiers, runtime symbols, component classes and CSS variables use the HERITAGE namespace.
+- Retired browser preferences have explicit one-time migrations; remaining legacy literals are validator-whitelisted compatibility reads only.
+- The complete template set uses the same `hg-*` component contract; no transitional `.wb-*` or `--wb-*` styling layer remains.
 - JavaScript syntax, asset graph, payload budgets and UI contracts pass.
 - Managed installation, update, rollback, uninstall and restore pass.
 - ZIP and TAR.GZ builds are bit-for-bit reproducible and traversal-checked.
