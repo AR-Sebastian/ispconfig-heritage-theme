@@ -1,7 +1,9 @@
 # HERITAGE 1.0.34 runtime smoke evidence
 
-Date: 2026-08-02  
-Environment: local Debian 13 ISPConfig multiserver lab, master node  
+Date: 2026-08-02
+
+Environment: local Debian 13 ISPConfig multiserver lab, master node
+
 Candidate: HERITAGE 1.0.34
 
 ## Result
