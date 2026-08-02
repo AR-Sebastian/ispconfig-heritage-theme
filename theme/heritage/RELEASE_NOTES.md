@@ -22,6 +22,10 @@ Mailbox quota progress bars now expose the numeric controller value through
 `aria-valuenow`; a legacy whitespace typo had previously referenced a missing
 template variable.
 
+Release ZIP and TAR.GZ files are reproducible from the same source revision.
+The builder normalizes path order, timestamps, file modes, ownership metadata
+and compression headers before generating SHA-256 checksums.
+
 ## Previous release
 
 HERITAGE 1.0.33 extends compact states to all five server capabilities and the

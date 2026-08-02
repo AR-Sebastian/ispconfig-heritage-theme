@@ -22,6 +22,26 @@ jobs:
         run: test "${GITHUB_REF_NAME#v}" = "$(tr -d '[:space:]' < VERSION)"
       - name: Build assets
         run: bash scripts/build-release.sh
+      - name: Verify reproducible release assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="$(tr -d '[:space:]' < VERSION)"
+          sha256sum dist/ispconfig-heritage-theme-"$version".zip \
+            dist/ispconfig-heritage-theme-"$version".tar.gz > /tmp/heritage-first-build.sha256
+          bash scripts/build-release.sh
+          sha256sum dist/ispconfig-heritage-theme-"$version".zip \
+            dist/ispconfig-heritage-theme-"$version".tar.gz > /tmp/heritage-second-build.sha256
+          diff -u /tmp/heritage-first-build.sha256 /tmp/heritage-second-build.sha256
+          (cd dist && sha256sum -c SHA256SUMS.txt)
+          if unzip -Z1 dist/ispconfig-heritage-theme-"$version".zip | grep -Eq '(^/|(^|/)\.\.(/|$))'; then
+            echo 'ZIP archive contains an unsafe path.' >&2
+            exit 1
+          fi
+          if tar -tzf dist/ispconfig-heritage-theme-"$version".tar.gz | grep -Eq '(^/|(^|/)\.\.(/|$))'; then
+            echo 'TAR.GZ archive contains an unsafe path.' >&2
+            exit 1
+          fi
       - name: Publish assets
         uses: softprops/action-gh-release@v3
         with:
