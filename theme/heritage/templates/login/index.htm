@@ -20,21 +20,19 @@
 			    	    	<label>
 								<input name="stay" id="stay" type="checkbox" value="1" data-wb-remember-login="1"> <span>{tmpl_var name='stay_logged_in_txt'}</span>
 			    	    	</label>
-							<small>{tmpl_var name='stay_logged_in_hint_txt'}</small>
+							<small data-wb-i18n-de="Hält diese Browsersitzung geöffnet, wenn der Server es erlaubt." data-wb-i18n-en="Keeps this browser session open when the server allows it.">Keeps this browser session open when the server allows it.</small>
 							</div>
 						</tmpl_if>
 						</tmpl_if>
-						<tmpl_if name="workbench_remember_username" value="y">
 						<div class="checkbox wb-login-remember-option">
 							<label>
-								<input name="remember_username" id="remember_username" type="checkbox" value="1" data-wb-remember-username="1"> <span data-wb-i18n-de="Benutzername merken" data-wb-i18n-en="Remember username">{tmpl_var name='remember_username_txt'}</span>
+								<input name="remember_username" id="remember_username" type="checkbox" value="1" data-wb-remember-username="1"> <span data-wb-i18n-de="Benutzername merken" data-wb-i18n-en="Remember username">Remember username</span>
 							</label>
-							<small data-wb-i18n-de="Auf diesem Gerät wird nur der Benutzername gespeichert." data-wb-i18n-en="Store only the username on this device.">{tmpl_var name='remember_username_hint_txt'}</small>
+							<small data-wb-i18n-de="Auf diesem Gerät wird nur der Benutzername gespeichert." data-wb-i18n-en="Store only the username on this device.">Store only the username on this device.</small>
 							</div>
-						</tmpl_if>
 						<div class="wb-login-password-manager-hint" role="note">
 							<span aria-hidden="true">&#10003;</span>
-							<small data-wb-i18n-de="Ein Passwortmanager kann das Kennwort sicher speichern." data-wb-i18n-en="Your password manager can securely store the password.">{tmpl_var name='password_manager_hint_txt'}</small>
+							<small data-wb-i18n-de="Ein Passwortmanager kann das Kennwort sicher speichern." data-wb-i18n-en="Your password manager can securely store the password.">Your password manager can securely store the password.</small>
 						</div>
 						<input type="hidden" name="s_mod" value="login" />
 						<input type="hidden" name="s_pg" value="index" />

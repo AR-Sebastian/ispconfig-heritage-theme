@@ -11,6 +11,7 @@ Target: ISPConfig 3.3.1p1
 - Public branding, PWA metadata and SVG accessibility titles identify ISPConfig HERITAGE.
 - Application and login assets use the exact `1.0.34` cache fingerprint.
 - All 243 theme template overrides exist in the ISPConfig 3.3.1p1 baseline.
+- No template value or branding endpoint depends on the modified Workbench controllers; shell defaults and assets are theme-owned.
 - JavaScript syntax, asset graph, payload budgets and UI contracts pass.
 - Managed installation, update, rollback, uninstall and restore pass.
 - ZIP and TAR.GZ builds are bit-for-bit reproducible and traversal-checked.
@@ -20,7 +21,7 @@ Target: ISPConfig 3.3.1p1
 
 ## Open release blockers
 
-- [ ] Remove or replace the 98 `workbench_*` template-value references that are absent from the stock ISPConfig 3.3.1p1 controllers; prove the resulting shell and Admin settings view against an unmodified 3.3.1p1 checkout.
+- [ ] Prove the controller-independent shell, login and Admin settings view in an authenticated, unmodified ISPConfig 3.3.1p1 runtime.
 - [ ] Run authenticated 1.0.34 visual smoke tests for light and dark desktop/mobile states.
 - [ ] Confirm the new HERITAGE logo and refreshed asset cache in a real ISPConfig session.
 - [ ] Confirm login session controls, additional-PHP sorting, alias-domain source and mailbox quota presentation in the runtime lab.

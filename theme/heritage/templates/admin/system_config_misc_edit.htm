@@ -1,79 +1,7 @@
-<tmpl_if name="workbench_logo_management">
-  <section class="wb-branding-manager" id="workbench-branding-manager" data-wb-branding-editor
-    data-endpoint-name="brandingAction"
-    data-light-max-bytes="46080"
-    data-branding-max-bytes="1048576"
-    data-csrf-id="{tmpl_var name='workbench_logo_csrf_id'}"
-    data-csrf-key="{tmpl_var name='workbench_logo_csrf_key'}"
-    data-saving="{tmpl_var name='workbench_branding_saving_txt'}"
-    data-resetting="{tmpl_var name='workbench_branding_resetting_txt'}"
-    data-saved="{tmpl_var name='workbench_branding_saved_txt'}"
-    data-reset="{tmpl_var name='workbench_branding_reset_complete_txt'}"
-    data-default-state="{tmpl_var name='workbench_logo_default_state_txt'}"
-    data-custom-state="{tmpl_var name='workbench_logo_custom_state_txt'}"
-    data-asset-default="{tmpl_var name='workbench_branding_asset_default_txt'}"
-    data-asset-custom="{tmpl_var name='workbench_branding_asset_custom_txt'}"
-    data-light-type-error="{tmpl_var name='workbench_logo_type_error_txt'}"
-    data-light-size-error="{tmpl_var name='workbench_logo_size_error_txt'}"
-    data-branding-type-error="{tmpl_var name='workbench_branding_type_error_txt'}"
-    data-branding-size-error="{tmpl_var name='workbench_branding_size_error_txt'}"
-    data-request-error="{tmpl_var name='workbench_logo_request_error_txt'}"
-    data-default-light-logo="{tmpl_var name='workbench_logo_default_src'}"
-    data-default-dark-logo="{tmpl_var name='workbench_default_dark_logo_url'}"
-    data-default-favicon="{tmpl_var name='workbench_default_favicon_url'}">
-    <header class="wb-branding-manager__header">
-      <div>
-        <p class="wb-branding-manager__eyebrow">{tmpl_var name='workbench_branding_eyebrow_txt'}</p>
-        <h3>{tmpl_var name='workbench_branding_title_txt'}</h3>
-        <p>{tmpl_var name='workbench_branding_intro_txt'}</p>
-      </div>
-      <span class="wb-branding-manager__state" data-wb-branding-state>{tmpl_var name='workbench_logo_state_txt'}</span>
-    </header>
-    <div class="wb-branding-manager__grid">
-      <label class="wb-branding-manager__asset" for="workbench-light-logo-file">
-        <span>{tmpl_var name='workbench_light_logo_txt'}</span>
-        <strong class="wb-branding-manager__asset-state" data-wb-light-state>{tmpl_var name='workbench_light_logo_asset_state_txt'}</strong>
-        <img class="wb-branding-manager__logo-preview" data-wb-light-preview src="{tmpl_var name='workbench_logo_src'}" alt="{tmpl_var name='workbench_logo_current_alt_txt'}">
-        <input id="workbench-light-logo-file" name="light_logo_file" type="file" class="no-page-form-change" accept="image/png,image/jpeg,image/webp">
-        <small>{tmpl_var name='workbench_logo_hint_txt'}</small>
-      </label>
-      <label class="wb-branding-manager__asset" for="workbench-dark-logo-file">
-        <span>{tmpl_var name='workbench_dark_logo_txt'}</span>
-        <strong class="wb-branding-manager__asset-state" data-wb-dark-state>{tmpl_var name='workbench_dark_logo_asset_state_txt'}</strong>
-        <img class="wb-branding-manager__logo-preview" data-wb-dark-preview src="{tmpl_var name='workbench_dark_logo_url'}" alt="">
-        <input id="workbench-dark-logo-file" name="dark_logo_file" type="file" class="no-page-form-change" accept="image/png,image/jpeg,image/webp">
-        <small>{tmpl_var name='workbench_dark_logo_hint_txt'}</small>
-      </label>
-      <label class="wb-branding-manager__asset" for="workbench-favicon-file">
-        <span>{tmpl_var name='workbench_favicon_txt'}</span>
-        <strong class="wb-branding-manager__asset-state" data-wb-favicon-state>{tmpl_var name='workbench_favicon_asset_state_txt'}</strong>
-        <img class="wb-branding-manager__favicon-preview" data-wb-favicon-preview src="{tmpl_var name='workbench_favicon_url'}" alt="">
-        <input id="workbench-favicon-file" name="favicon_file" type="file" class="no-page-form-change" accept="image/png,image/x-icon,image/vnd.microsoft.icon">
-        <small>{tmpl_var name='workbench_favicon_hint_txt'}</small>
-      </label>
-      <label class="wb-branding-manager__color" for="workbench-accent-color">
-        <span>{tmpl_var name='workbench_accent_color_txt'}</span>
-        <strong class="wb-branding-manager__asset-state" data-wb-accent-state>{tmpl_var name='workbench_accent_asset_state_txt'}</strong>
-        <span class="wb-branding-manager__color-control">
-          <input id="workbench-accent-color" name="accent_color" type="color" value="{tmpl_var name='workbench_accent_color'}">
-          <code data-wb-accent-value>{tmpl_var name='workbench_accent_color'}</code>
-        </span>
-        <small>{tmpl_var name='workbench_accent_color_hint_txt'}</small>
-      </label>
-    </div>
-    <footer class="wb-branding-manager__footer">
-      <p class="wb-branding-manager__status" data-wb-branding-status role="status" aria-live="polite"></p>
-      <div class="wb-branding-manager__actions">
-        <button class="formbutton-success" type="button" data-wb-branding-save>{tmpl_var name='workbench_branding_save_txt'}</button>
-        <button class="formbutton-default" type="button" data-wb-branding-reset>{tmpl_var name='workbench_branding_reset_txt'}</button>
-      </div>
-    </footer>
-  </section>
-</tmpl_if>
 <section class="wb-settings-section">
   <header class="wb-settings-section__header">
-    <h3 data-wb-i18n-de="Identität der Oberfläche" data-wb-i18n-en="Interface identity">{tmpl_var name='workbench_settings_identity_title_txt'}</h3>
-    <p data-wb-i18n-de="Firmenname und öffentliche Anmeldeinformationen konfigurieren." data-wb-i18n-en="Configure the company name and the public login information.">{tmpl_var name='workbench_settings_identity_intro_txt'}</p>
+    <h3 data-wb-i18n-de="Identität der Oberfläche" data-wb-i18n-en="Interface identity">Interface identity</h3>
+    <p data-wb-i18n-de="Firmenname und öffentliche Anmeldeinformationen konfigurieren." data-wb-i18n-en="Configure the company name and the public login information.">Configure the company name and the public login information.</p>
   </header>
 <div class="wb-field-group">
   <label for="page_title" >{tmpl_var name='company_name_txt'}</label>
@@ -90,8 +18,8 @@
 </section>
 <details class="wb-settings-section wb-settings-section--compatibility">
   <summary>
-    <span data-wb-i18n-de="Kompatibilitätseinstellungen" data-wb-i18n-en="Compatibility settings">{tmpl_var name='workbench_settings_legacy_title_txt'}</span>
-    <small data-wb-i18n-de="Ältere Dashboard-Feeds und die Platzierung der Widgets." data-wb-i18n-en="Legacy dashboard feeds and dashlet placement.">{tmpl_var name='workbench_settings_legacy_intro_txt'}</small>
+    <span data-wb-i18n-de="Kompatibilitätseinstellungen" data-wb-i18n-en="Compatibility settings">Compatibility settings</span>
+    <small data-wb-i18n-de="Ältere Dashboard-Feeds und die Platzierung der Widgets." data-wb-i18n-en="Legacy dashboard feeds and dashlet placement.">Legacy dashboard feeds and dashlet placement.</small>
   </summary>
   <div class="wb-settings-section__body">
 <div class="wb-field-group">
@@ -139,8 +67,8 @@
 </details>
 <section class="wb-settings-section">
   <header class="wb-settings-section__header">
-    <h3 data-wb-i18n-de="Verhalten der Oberfläche" data-wb-i18n-en="Interface behavior">{tmpl_var name='workbench_settings_behavior_title_txt'}</h3>
-    <p data-wb-i18n-de="Navigationswarnungen und Erweiterungen der Oberfläche konfigurieren." data-wb-i18n-en="Configure navigation warnings and interface enhancements.">{tmpl_var name='workbench_settings_behavior_intro_txt'}</p>
+    <h3 data-wb-i18n-de="Verhalten der Oberfläche" data-wb-i18n-en="Interface behavior">Interface behavior</h3>
+    <p data-wb-i18n-de="Navigationswarnungen und Erweiterungen der Oberfläche konfigurieren." data-wb-i18n-en="Configure navigation warnings and interface enhancements.">Configure navigation warnings and interface enhancements.</p>
   </header>
 <div class="wb-field-group">
   <label >{tmpl_var name='tab_change_discard_txt'}</label>
@@ -180,7 +108,7 @@
 </div>
 </section>
 <section class="wb-settings-section">
-  <header class="wb-settings-section__header"><h3 data-wb-i18n-de="Kundennummerierung" data-wb-i18n-en="Customer numbering">{tmpl_var name='workbench_settings_customer_title_txt'}</h3></header>
+  <header class="wb-settings-section__header"><h3 data-wb-i18n-de="Kundennummerierung" data-wb-i18n-en="Customer numbering">Customer numbering</h3></header>
 <div class="wb-field-group">
   <label for="customer_no_template" >{tmpl_var name='customer_no_template_txt'}</label>
   <div class="wb-field-body"><input type="text" name="customer_no_template" id="customer_no_template" value="{tmpl_var name='customer_no_template'}" class="form-control" /></div>
@@ -195,7 +123,7 @@
 </div>
 </section>
 <section class="wb-settings-section">
-  <header class="wb-settings-section__header"><h3 data-wb-i18n-de="Sitzung und Sicherheit" data-wb-i18n-en="Session and security">{tmpl_var name='workbench_settings_security_title_txt'}</h3></header>
+  <header class="wb-settings-section__header"><h3 data-wb-i18n-de="Sitzung und Sicherheit" data-wb-i18n-en="Session and security">Session and security</h3></header>
 <div class="wb-field-group">
   <label for="session_timeout" >{tmpl_var name='session_timeout_txt'}</label>
   <div class="wb-field-body"><input type="text" name="session_timeout" id="session_timeout" value="{tmpl_var name='session_timeout'}" class="form-control" /></div>

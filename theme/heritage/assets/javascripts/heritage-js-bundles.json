@@ -10,7 +10,7 @@
       "heritage-tab-confirm.js", "heritage-accessibility.js", "heritage-validation.js",
       "heritage-submit-feedback.js", "heritage-list-filter.js", "heritage-statistics.js",
       "heritage-wizard-preview.js", "heritage-advanced-controls.js", "heritage-upload-feedback.js",
-      "heritage-branding.js", "heritage-global-search.js", "heritage-theme.js", "heritage-select.js"
+      "heritage-global-search.js", "heritage-theme.js", "heritage-select.js"
     ]
   },
   "applicationAfterChart": {

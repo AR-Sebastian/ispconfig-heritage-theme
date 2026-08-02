@@ -65,7 +65,6 @@
     sitesIpOptions: 'sites/ajax_get_ip.php',
     mailJson: 'mail/ajax_get_json.php',
     dnsJson: '/dns/ajax_get_json.php',
-    brandingAction: 'admin/custom_logo_action.php',
     globalSearch: '/dashboard/ajax_get_json.php'
   };
 

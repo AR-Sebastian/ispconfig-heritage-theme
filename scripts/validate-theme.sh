@@ -48,6 +48,14 @@ if grep -RIEq 'data-workbench-' "$theme/templates" "$theme/assets/stylesheets" "
   echo 'Theme contains a DOM contract in the obsolete Workbench namespace.' >&2
   exit 1
 fi
+if grep -RIEq "tmpl_var[[:space:]]+name=['\"]workbench_" "$theme/templates"; then
+  echo 'Theme contains a template value that requires a non-stock Workbench controller.' >&2
+  exit 1
+fi
+if grep -RIEq 'custom_logo_action\.php|heritage-branding\.js|data-wb-branding-editor' "$theme/templates" "$theme/assets/javascripts"; then
+  echo 'Theme contains the retired controller-dependent branding editor.' >&2
+  exit 1
+fi
 if grep -RIEq "['\"]workbench:[a-z-]+" "$theme/assets/javascripts"; then
   echo 'Theme contains a custom event in the obsolete Workbench namespace.' >&2
   exit 1

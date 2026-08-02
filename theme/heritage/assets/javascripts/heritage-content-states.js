@@ -55,6 +55,21 @@
   } catch (error) {
     messages = {};
   }
+  var messageDefaults = {
+    loading: localized('Inhalt wird geladen', 'Loading content'),
+    loading_description: localized('Die angeforderte Ansicht wird vorbereitet.', 'The requested view is being prepared.'),
+    empty: localized('Kein Inhalt verfügbar', 'No content available'),
+    empty_title: localized('Noch keine Einträge', 'No entries yet'),
+    empty_description: localized('Hier gibt es aktuell nichts anzuzeigen.', 'There is currently nothing to display here.'),
+    error: localized('Inhalt konnte nicht geladen werden', 'Content could not be loaded'),
+    error_description: localized('Verbindung prüfen und erneut versuchen.', 'Check the connection and try again.'),
+    retry: localized('Erneut versuchen', 'Try again'),
+    refreshing: localized('Daten werden aktualisiert', 'Refreshing data'),
+    refresh_error: localized('Daten konnten nicht aktualisiert werden', 'Data could not be refreshed')
+  };
+  Object.keys(messageDefaults).forEach(function(name) {
+    if (!messages[name]) messages[name] = messageDefaults[name];
+  });
 
   function announceNavigationComplete(pagename, error) {
     document.dispatchEvent(new CustomEvent('heritage:navigation-complete', {
@@ -203,8 +218,7 @@
       return;
     }
     if (route.indexOf('billing/') === 0 || host.querySelector('.wb-billing-product, [data-billing-scope]')) addProfile('billing');
-    if (route.indexOf('admin/system_config_edit.php') === 0 || host.querySelector('[data-wb-branding-manager], .wb-branding-manager')) addProfile('system-config');
-    if (host.querySelector('[data-wb-branding-manager], .wb-branding-manager, #workbench-accent-color, #workbench-light-logo-file, #workbench-dark-logo-file, #workbench-favicon-file')) addProfile('branding');
+    if (route.indexOf('admin/system_config_edit.php') === 0) addProfile('system-config');
     if (host.querySelector('#smtp_host, #smtp_port, #smtp_user, #smtp_pass, #smtp_crypt, #default_mailserver')) addProfile('system-mail');
     if (route.indexOf('admin/server_config') === 0 || host.querySelector('#maildir_path, #nginx_vhost_conf_dir, #apache_vhost_conf_dir, #jailkit_chroot_home')) addProfile('server-config');
     if (route.indexOf('admin/extension_') === 0 || host.querySelector('[data-load-content*="extension_"], [data-form-action*="extension_"]')) addProfile('extension');

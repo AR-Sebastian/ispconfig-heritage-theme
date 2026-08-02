@@ -11,6 +11,7 @@
 - Theme-owned lifecycle and interaction events use the `heritage:*` namespace.
 - JavaScript-generated DOM state uses `data-heritage-*` consistently, including localized early-boot values.
 - Release readiness now explicitly blocks publication on removal of non-stock `workbench_*` controller dependencies.
+- Shell, login and Admin settings templates no longer require Workbench-only controller values or the custom branding endpoint.
 
 ## 1.0.33 – 2026-07-31
 
