@@ -151,7 +151,10 @@ for (const contract of [
   'body_path: dist/RELEASE_NOTES.md',
   'fail_on_unmatched_files: true',
   'diff -u /tmp/heritage-first-build.sha256 /tmp/heritage-second-build.sha256',
-  'cp "RELEASE_NOTES_$version.md" dist/RELEASE_NOTES.md'
+  'cp "RELEASE_NOTES_$version.md" dist/RELEASE_NOTES.md',
+  'node scripts/generate-sbom.js',
+  'name: Attest release SBOM',
+  '--require-attestation --require-sbom'
 ]) {
   if (!releaseWorkflow.includes(contract)) throw new Error(`Release workflow contract is missing: ${contract}`);
 }
@@ -305,6 +308,7 @@ if (!mailQuota.includes('aria-valuenow="{tmpl_var name="percentage_sort"}"')) {
 console.log(`HERITAGE asset graph passed: ${assets.length} files, ${total} bytes.`);
 NODE
 
-bash -n "$root/scripts/manage-theme.sh" "$root/scripts/test-manager.sh" "$root/scripts/build-release.sh"
+bash -n "$root/scripts/manage-theme.sh" "$root/scripts/test-manager.sh" "$root/scripts/build-release.sh" "$root/scripts/verify-published-release.sh"
+node "$root/scripts/validate-sbom.js"
 "$root/scripts/test-manager.sh"
 echo 'HERITAGE validation passed.'
