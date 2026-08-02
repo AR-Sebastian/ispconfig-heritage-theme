@@ -78,6 +78,6 @@
     enhance(document);
   }
 
-  window.workbenchDisclosure = { enhance: enhance };
-  window.workbenchDisclosureInstalled = true;
+  window.heritageDisclosure = { enhance: enhance };
+  window.heritageDisclosureInstalled = true;
 }());

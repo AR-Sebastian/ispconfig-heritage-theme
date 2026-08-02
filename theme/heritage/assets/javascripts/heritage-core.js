@@ -80,10 +80,10 @@
   }
 
   function runtimeApi() {
-    return window.workbenchApp || legacyApi();
+    return window.heritageApp || legacyApi();
   }
 
-  window.workbenchRuntime = function() {
+  window.heritageRuntime = function() {
     return runtimeApi();
   };
 
@@ -449,7 +449,7 @@
     if (alertUser && window.ISPConfig && typeof window.ISPConfig.notify === 'function') {
       window.ISPConfig.notify(
         region.getAttribute('data-template-lock-message') || (
-          typeof window.workbenchLanguage === 'function' && window.workbenchLanguage() === 'de'
+          typeof window.heritageLanguage === 'function' && window.heritageLanguage() === 'de'
             ? 'Dieses Formular wird durch eine Mastervorlage gesteuert.'
             : 'This form is controlled by a master template.'
         ),
@@ -1012,8 +1012,8 @@
   }
 
   function initDeclarativeFieldSearch(root) {
-    var language = typeof window.workbenchLanguage === 'function'
-      ? window.workbenchLanguage()
+    var language = typeof window.heritageLanguage === 'function'
+      ? window.heritageLanguage()
       : String(document.documentElement.getAttribute('lang') || 'en').toLowerCase().split('-')[0];
     var german = language === 'de';
     queryAll(root || document, '[data-workbench-field-search]').forEach(function(input) {
@@ -1119,15 +1119,15 @@
 
     reportError: function(message) {
       if (window.console && console.warn) console.warn(message);
-      if (window.workbenchFeedback && typeof window.workbenchFeedback.report === 'function') {
-        return window.workbenchFeedback.report(message);
+      if (window.heritageFeedback && typeof window.heritageFeedback.report === 'function') {
+        return window.heritageFeedback.report(message);
       }
       return null;
     },
 
     notify: function(message, state) {
-      if (window.workbenchFeedback && typeof window.workbenchFeedback.show === 'function') {
-        return window.workbenchFeedback.show(message, state || 'info');
+      if (window.heritageFeedback && typeof window.heritageFeedback.show === 'function') {
+        return window.heritageFeedback.show(message, state || 'info');
       }
       if (window.console && console.info) console.info(message);
       return null;
@@ -1148,7 +1148,7 @@
     enhanceTooltip: function(elements, options) {
       toArray(elements && elements.length !== undefined && !elements.nodeType ? elements : [elements]).forEach(function(element) {
         if (!element) return;
-        if (window.workbenchInteractions) window.workbenchInteractions.tooltip(element, options);
+        if (window.heritageInteractions) window.heritageInteractions.tooltip(element, options);
       });
       return elements;
     },
@@ -1156,7 +1156,7 @@
     enhanceSelect: function(elements, options) {
       toArray(elements && elements.length !== undefined && !elements.nodeType ? elements : [elements]).forEach(function(element) {
         if (!element) return;
-        if (window.workbenchSelect) window.workbenchSelect.enhance(element, options || {});
+        if (window.heritageSelect) window.heritageSelect.enhance(element, options || {});
       });
       return elements;
     },
@@ -1164,7 +1164,7 @@
     enhanceSearch: function(elements, options) {
       toArray(elements && elements.length !== undefined && !elements.nodeType ? elements : [elements]).forEach(function(element) {
         if (!element) return;
-        if (window.workbenchFieldSearch) window.workbenchFieldSearch.enhance(element, options || {});
+        if (window.heritageFieldSearch) window.heritageFieldSearch.enhance(element, options || {});
       });
       return elements;
     },
@@ -1172,22 +1172,22 @@
     enhanceDateTime: function(elements, options) {
       toArray(elements && elements.length !== undefined && !elements.nodeType ? elements : [elements]).forEach(function(element) {
         if (!element) return;
-        if (window.workbenchDateTime) window.workbenchDateTime.enhance(element, options || {});
+        if (window.heritageDateTime) window.heritageDateTime.enhance(element, options || {});
       });
       return elements;
     },
 
     closeDialog: function(selector) {
       var element = query(document, selector);
-      if (element && window.workbenchDialog) return window.workbenchDialog.close(element, true);
+      if (element && window.heritageDialog) return window.heritageDialog.close(element, true);
       if (element) element.hidden = true;
       return Boolean(element);
     },
 
     requestRead: function(url, options, responseType) {
       options = options || {};
-      if (window.workbenchHttp) {
-        return responseType === 'json' ? window.workbenchHttp.getJson(url, options) : window.workbenchHttp.getText(url, options);
+      if (window.heritageHttp) {
+        return responseType === 'json' ? window.heritageHttp.getJson(url, options) : window.heritageHttp.getText(url, options);
       }
       return requestFallback(url, options, responseType === 'json' ? 'json' : 'text');
     },
@@ -1299,7 +1299,7 @@
     requestForm: function(form, url, options) {
       options = options || {};
       if (!form || form.nodeName !== 'FORM') throw new TypeError('A form element is required.');
-      if (window.workbenchHttp) return window.workbenchHttp.postForm(form, url, options);
+      if (window.heritageHttp) return window.heritageHttp.postForm(form, url, options);
       return requestFallback(url, {
         method: 'POST',
         timeout: options.timeout || 30000,
@@ -1384,8 +1384,8 @@
 
     submitUploadForm: function(formname, target) {
       var form = document.getElementById(formname);
-      if (!form || !window.workbenchHttp) return false;
-      var request = window.workbenchHttp.postMultipart(form, target, { timeout: 120000 });
+      if (!form || !window.heritageHttp) return false;
+      var request = window.heritageHttp.postMultipart(form, target, { timeout: 120000 });
       request.promise.then(function(markup) {
         var parsed = new DOMParser().parseFromString(markup, 'text/html');
         ['errorMsg', 'OKMsg'].forEach(function(id) {
@@ -1553,7 +1553,7 @@
       var addTplText = parts[1] || '';
       if (!(Number(addTplId) > 0)) {
         ISPConfig.notify(
-          (typeof window.workbenchLanguage === 'function' && window.workbenchLanguage() === 'de')
+          (typeof window.heritageLanguage === 'function' && window.heritageLanguage() === 'de')
             ? 'Keine zusätzliche Vorlage ausgewählt.'
             : 'No additional template selected.',
           'warning'
@@ -1598,7 +1598,7 @@
     }
   };
 
-  var workbenchApp = window.workbenchApp = window.workbenchApp || {};
+  var workbenchApp = window.heritageApp = window.heritageApp || {};
 
   [
     'setOption',

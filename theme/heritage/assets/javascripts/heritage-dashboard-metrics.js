@@ -355,7 +355,7 @@
     details.hidden = expanded;
   }
 
-  window.workbenchDashboardMetrics = { enhance: enhance, parsePayload: parsePayload };
+  window.heritageDashboardMetrics = { enhance: enhance, parsePayload: parsePayload };
   document.addEventListener('DOMContentLoaded', function () { enhance(document); });
   document.addEventListener('workbench:content-ready', function (event) { enhance(event.detail && event.detail.root ? event.detail.root : document); });
   document.addEventListener('click', function (event) {

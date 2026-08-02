@@ -38,6 +38,10 @@ All modular JavaScript sources and the early shell bootstrap now use HERITAGE
 filenames. Bundle order and runtime behavior remain unchanged while obsolete
 Workbench script paths are rejected by release validation.
 
+Theme-owned global runtime interfaces now use the `window.heritage*` namespace.
+The separate `window.ISPConfig` integration boundary remains intact for current
+ISPConfig controller and navigation compatibility.
+
 ## Previous release
 
 HERITAGE 1.0.33 extends compact states to all five server capabilities and the

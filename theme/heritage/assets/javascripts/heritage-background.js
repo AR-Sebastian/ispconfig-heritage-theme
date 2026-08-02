@@ -1,7 +1,7 @@
 (function(window, document) {
   'use strict';
 
-  function runtime() { return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null; }
+  function runtime() { return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null; }
   var legacy = window.ISPConfig;
   var app = runtime();
   if (!legacy || !app || typeof app.requestText !== 'function' || typeof app.requestJson !== 'function' || legacy.workbenchBackgroundInstalled) return;
@@ -33,11 +33,11 @@
       if (contentRequests[elementId] !== request) return;
       if (typeof api.replaceServerFragment !== 'function') throw new TypeError('Workbench fragment renderer is not available.');
       api.replaceServerFragment(host, responseText);
-      if (window.workbenchContentStates && typeof window.workbenchContentStates.enhance === 'function') {
-        window.workbenchContentStates.enhance(host, pageName, { source: 'partial-content' });
+      if (window.heritageContentStates && typeof window.heritageContentStates.enhance === 'function') {
+        window.heritageContentStates.enhance(host, pageName, { source: 'partial-content' });
       } else {
-        if (window.workbenchAccessibility) window.workbenchAccessibility.enhance(host);
-        if (window.workbenchIcons) window.workbenchIcons.render(host);
+        if (window.heritageAccessibility) window.heritageAccessibility.enhance(host);
+        if (window.heritageIcons) window.heritageIcons.render(host);
       }
     }).catch(function(error) {
       if (!request.aborted && (!error || error.name !== 'AbortError')) api.reportError('Partial content request was not successful.');
@@ -110,7 +110,7 @@
       scheduleDatalog(2000);
     } else {
       counter.textContent = '0';
-      if (window.workbenchDialog && dialog && window.workbenchDialog.isOpen(dialog)) {
+      if (window.heritageDialog && dialog && window.heritageDialog.isOpen(dialog)) {
         var empty = document.createElement('li');
         empty.textContent = (document.documentElement.lang || '').toLowerCase().indexOf('de') === 0 ? 'Keine ausstehenden Änderungen.' : 'No pending changes.';
         list.appendChild(empty);

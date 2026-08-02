@@ -1,6 +1,6 @@
 (function(window, document) {
   'use strict';
-  function runtime() { return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null; }
+  function runtime() { return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null; }
   var legacy = window.ISPConfig;
   var app = runtime();
   if (!legacy || !app || typeof legacy.submitForm !== 'function' || legacy.workbenchWizardPreviewInstalled) return;
@@ -34,6 +34,6 @@
     }).catch(function(error) { if (!request.aborted && (!error || error.name !== 'AbortError')) api.reportError('Wizard preview request was not successful.'); }).finally(function() { finish(request); });
     return request;
   };
-  window.workbenchWizardPreview = { isActive: function() { return Boolean(active); } };
+  window.heritageWizardPreview = { isActive: function() { return Boolean(active); } };
   legacy.workbenchWizardPreviewInstalled = true;
 })(window, document);

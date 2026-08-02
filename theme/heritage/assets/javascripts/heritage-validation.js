@@ -86,7 +86,7 @@
   function revealAndFocus(entry) {
     if (!entry || !entry.control) return false;
     var collapsed = entry.group.closest('.collapse:not(.in), .wb-collapse:not(.in)');
-    if (collapsed && window.workbenchInteractions) window.workbenchInteractions.collapse(collapsed, true, entry.control);
+    if (collapsed && window.heritageInteractions) window.heritageInteractions.collapse(collapsed, true, entry.control);
     window.setTimeout(function () {
       if (entry.control.offsetParent !== null) entry.control.focus();
     }, 0);
@@ -96,7 +96,7 @@
   function enhance(root, options) {
     var host = root && root.querySelectorAll ? root : document.getElementById('pageContent');
     if (!host) return { errors: 0, focused: false };
-    if (window.workbenchAccessibility) window.workbenchAccessibility.enhance(host);
+    if (window.heritageAccessibility) window.heritageAccessibility.enhance(host);
 
     localizeKnownValidationText(host);
     var entries = invalidEntries(host);
@@ -159,6 +159,6 @@
     enhance(document.getElementById('pageContent'));
   }
 
-  window.workbenchValidation = { enhance: enhance, revealAndFocus: revealAndFocus };
-  window.workbenchValidationInstalled = true;
+  window.heritageValidation = { enhance: enhance, revealAndFocus: revealAndFocus };
+  window.heritageValidationInstalled = true;
 }());

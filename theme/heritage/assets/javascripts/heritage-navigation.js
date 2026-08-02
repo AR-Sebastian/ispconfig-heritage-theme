@@ -16,7 +16,7 @@
   var legacy = window.ISPConfig;
 
   function runtime() {
-    return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null;
+    return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null;
   }
 
   if (!button || !panel || !overlay || !closeButton || !content || !legacy || !runtime()) return;
@@ -771,7 +771,7 @@
         return node.cloneNode(true);
       }));
       pageContent.appendChild(newsWidget);
-      if (window.workbenchDashboardLayout) window.setTimeout(window.workbenchDashboardLayout.enhance, 0);
+      if (window.heritageDashboardLayout) window.setTimeout(window.heritageDashboardLayout.enhance, 0);
     }
     sidebar.classList.toggle('wb-dashboard-news', dashboardNews);
     sidebar.classList.toggle('wb-secondary-navigation', secondaryNavigation);
@@ -782,7 +782,7 @@
     // dashboard, not only in the sidebar-news branch above. enhance() runs after
     // this tick, by which time body.wb-dashboard-page is set, so its host lookup
     // resolves and the widgets get their native layout/decoration.
-    if (dashboardPage && window.workbenchDashboardLayout) window.setTimeout(window.workbenchDashboardLayout.enhance, 0);
+    if (dashboardPage && window.heritageDashboardLayout) window.setTimeout(window.heritageDashboardLayout.enhance, 0);
     document.body.classList.toggle('wb-content-only-layout', !dashboardNews && !secondaryNavigation);
     return dashboardNews;
   }
@@ -831,7 +831,7 @@
     content.replaceChildren(list);
     panel.classList.add('wb-app-navigation');
     document.body.classList.add('wb-app-navigation-enabled');
-    if (window.workbenchIcons) window.workbenchIcons.render(panel);
+    if (window.heritageIcons) window.heritageIcons.render(panel);
     syncShellLayout();
     syncActiveNavigationState();
     panel.dataset.workbenchNavigationReady = 'true';
@@ -1025,7 +1025,7 @@
   syncMode();
   legacy.loadPushyMenu = render;
   render();
-  window.workbenchNavigation = {
+  window.heritageNavigation = {
     render: render,
     open: open,
     close: close,
@@ -1036,5 +1036,5 @@
     syncShellLayout: syncShellLayout,
     enhanceSecondaryNavigation: enhanceSecondaryNavigation
   };
-  window.workbenchNavigationInstalled = true;
+  window.heritageNavigationInstalled = true;
 }());

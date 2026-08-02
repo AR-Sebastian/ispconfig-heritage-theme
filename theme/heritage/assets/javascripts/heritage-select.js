@@ -409,6 +409,6 @@
     });
   });
 
-  window.workbenchSelect = { enhance: enhance, destroy: destroy, open: open, close: close };
-  window.workbenchSelectInstalled = true;
+  window.heritageSelect = { enhance: enhance, destroy: destroy, open: open, close: close };
+  window.heritageSelectInstalled = true;
 }());

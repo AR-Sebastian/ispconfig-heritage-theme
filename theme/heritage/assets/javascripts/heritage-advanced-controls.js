@@ -4,7 +4,7 @@
   var codeFieldPattern = /(?:config|directive|rules?|template|snippet|php_ini|ssl_(?:key|cert|bundle|request)|ssh_rsa|dkim_(?:private|public)|dns_record|custom_mailfilter)/i;
 
   function localized(german, english) {
-    var language = typeof window.workbenchLanguage === 'function' ? window.workbenchLanguage() : (document.documentElement.lang || '');
+    var language = typeof window.heritageLanguage === 'function' ? window.heritageLanguage() : (document.documentElement.lang || '');
     return String(language).toLowerCase().indexOf('de') === 0 ? german : english;
   }
 

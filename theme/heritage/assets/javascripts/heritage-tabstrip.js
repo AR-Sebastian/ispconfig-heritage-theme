@@ -113,7 +113,7 @@
       if (window.ResizeObserver) new ResizeObserver(function () { revealActive(wrapper); update(wrapper); }).observe(list);
       revealActive(wrapper);
       update(wrapper);
-      if (window.workbenchIcons) window.workbenchIcons.render(wrapper);
+      if (window.heritageIcons) window.heritageIcons.render(wrapper);
     });
   }
 
@@ -130,6 +130,6 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { enhance(document); }, { once: true });
   else enhance(document);
 
-  window.workbenchTabstrip = { enhance: enhance, update: update, revealActive: revealActive };
-  window.workbenchTabstripInstalled = true;
+  window.heritageTabstrip = { enhance: enhance, update: update, revealActive: revealActive };
+  window.heritageTabstripInstalled = true;
 }());

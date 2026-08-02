@@ -247,8 +247,8 @@
     button.textContent = expanded ? copy('show') : copy('hide');
   }
 
-  window.workbenchMonitoring = { enhance: enhance, destroy: destroy };
-  window.workbenchMonitoringInstalled = true;
+  window.heritageMonitoring = { enhance: enhance, destroy: destroy };
+  window.heritageMonitoringInstalled = true;
   document.addEventListener('DOMContentLoaded', function () { enhance(document); });
   document.addEventListener('click', function (event) {
     var button = event.target && event.target.closest ? event.target.closest('[data-wb-monitor-chart-toggle]') : null;
@@ -1031,7 +1031,7 @@
   }
 
   function app() {
-    return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null;
+    return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null;
   }
 
   function applyRuntimeConfig() {

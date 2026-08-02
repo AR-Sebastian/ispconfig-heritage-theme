@@ -2,7 +2,7 @@
   'use strict';
 
   function app() {
-    return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null;
+    return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null;
   }
 
   var runtime = app();
@@ -164,7 +164,7 @@
     var wrapper = table.closest('.table-wrapper');
     if (wrapper) wrapper.classList.add('wb-statistics-table');
     table.classList.add('wb-statistics-data-table');
-    if (window.workbenchIcons) window.workbenchIcons.render(host);
+    if (window.heritageIcons) window.heritageIcons.render(host);
     return true;
   }
 
@@ -188,6 +188,6 @@
     enhance(params && params.url ? params.url : (window.history.state && window.history.state.workbenchContent));
   });
 
-  window.workbenchStatistics = { enhance: enhance, reports: reports.slice() };
+  window.heritageStatistics = { enhance: enhance, reports: reports.slice() };
   runtime.workbenchStatisticsInstalled = true;
 })(window, document);

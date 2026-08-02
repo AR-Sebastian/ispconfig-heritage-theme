@@ -1,11 +1,11 @@
 (function(window, document) {
   'use strict';
 
-  if (window.workbenchFieldSearch) return;
+  if (window.heritageFieldSearch) return;
 
   function language() {
-    return typeof window.workbenchLanguage === 'function'
-      ? window.workbenchLanguage()
+    return typeof window.heritageLanguage === 'function'
+      ? window.heritageLanguage()
       : String(document.documentElement.getAttribute('lang') || 'en').toLowerCase().split('-')[0];
   }
 
@@ -37,7 +37,7 @@
   var states = new WeakMap();
 
   function runtime() {
-    return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null;
+    return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null;
   }
 
   function mergeOptions(options) {
@@ -328,6 +328,6 @@
     return state;
   }
 
-  window.workbenchFieldSearch = { enhance: enhance, destroy: destroy };
-  window.workbenchFieldSearchInstalled = true;
+  window.heritageFieldSearch = { enhance: enhance, destroy: destroy };
+  window.heritageFieldSearchInstalled = true;
 })(window, document);

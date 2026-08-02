@@ -136,10 +136,10 @@
     if (dialog.dataset.workbenchFocusTrap !== 'true') {
       dialog.dataset.workbenchFocusTrap = 'true';
       dialog.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape' && window.workbenchDialog) {
+        if (event.key === 'Escape' && window.heritageDialog) {
           event.preventDefault();
           event.stopPropagation();
-          window.workbenchDialog.close(dialog, true);
+          window.heritageDialog.close(dialog, true);
           return;
         }
         if (event.key !== 'Tab') return;
@@ -198,12 +198,12 @@
     enhance(document);
   }
 
-  window.workbenchAccessibility = {
+  window.heritageAccessibility = {
     enhance: enhance,
     focusDialog: focusDialog,
     restoreDialogFocus: restoreDialogFocus,
     focusLoadedPage: focusLoadedPage,
     focusNavigationError: focusNavigationError
   };
-  window.workbenchAccessibilityInstalled = true;
+  window.heritageAccessibilityInstalled = true;
 }());

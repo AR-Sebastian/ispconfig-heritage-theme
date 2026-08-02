@@ -5,7 +5,7 @@
   var committing = false;
 
   function app() {
-    return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null;
+    return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null;
   }
 
   function dialog() {
@@ -36,16 +36,16 @@
 
   function open(anchor, mode) {
     var target = dialog();
-    if (!target || !window.workbenchDialog || pending) return false;
+    if (!target || !window.heritageDialog || pending) return false;
     pending = { anchor: anchor, mode: mode };
     configure(target, mode);
-    return window.workbenchDialog.open(target, anchor);
+    return window.heritageDialog.open(target, anchor);
   }
 
   function cancel() {
     var target = dialog();
     pending = null;
-    if (target && window.workbenchDialog) window.workbenchDialog.close(target, true);
+    if (target && window.heritageDialog) window.heritageDialog.close(target, true);
   }
 
   function commit(action) {
@@ -54,7 +54,7 @@
     if (!decision || !decision.anchor || !decision.anchor.isConnected || !target) return cancel();
     pending = null;
     committing = true;
-    window.workbenchDialog.close(target, false);
+    window.heritageDialog.close(target, false);
     committing = false;
     var runtime = app();
     if (!runtime || typeof runtime.switchTabDecision !== 'function') return;
@@ -91,9 +91,9 @@
     pending = null;
   });
 
-  window.workbenchTabConfirm = {
+  window.heritageTabConfirm = {
     getPendingMode: function () { return pending ? pending.mode : null; },
     cancel: cancel
   };
-  window.workbenchTabConfirmInstalled = true;
+  window.heritageTabConfirmInstalled = true;
 }());

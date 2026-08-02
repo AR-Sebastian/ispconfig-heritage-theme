@@ -13,7 +13,7 @@
     return 'en';
   }
 
-  window.workbenchLanguage = detectLanguage;
+  window.heritageLanguage = detectLanguage;
   var language = detectLanguage();
   document.documentElement.setAttribute('lang', language);
 
@@ -62,7 +62,7 @@
     }
   }
 
-  window.workbenchLocalize = localize;
+  window.heritageLocalize = localize;
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() { localize(document); }, { once: true });
   } else {

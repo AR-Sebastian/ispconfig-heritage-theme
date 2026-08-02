@@ -1,6 +1,6 @@
 (function(window, document) {
   'use strict';
-  function runtime() { return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null; }
+  function runtime() { return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null; }
   var legacy = window.ISPConfig;
   var app = runtime();
   if (!legacy || !app || typeof legacy.submitForm !== 'function' || legacy.workbenchListFilterInstalled) return;
@@ -55,6 +55,6 @@
     var control = event.target && event.target.closest ? event.target.closest('#pageContent select[name^="search_"]') : null;
     if (control && document.body.classList.contains('wb-list-page')) changedSearchControl = control;
   }, true);
-  window.workbenchListFilter = { isActive: function() { return Boolean(active); } };
+  window.heritageListFilter = { isActive: function() { return Boolean(active); } };
   legacy.workbenchListFilterInstalled = true;
 })(window, document);

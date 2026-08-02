@@ -115,11 +115,11 @@
     focus(openDialog);
   });
 
-  window.workbenchDialog = {
+  window.heritageDialog = {
     open: open,
     close: close,
     focus: focus,
     isOpen: isOpen
   };
-  window.workbenchDialogInstalled = true;
+  window.heritageDialogInstalled = true;
 }());

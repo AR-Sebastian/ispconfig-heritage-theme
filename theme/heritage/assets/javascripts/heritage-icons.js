@@ -1,7 +1,7 @@
 (function(window, document) {
   'use strict';
 
-  if (window.workbenchIconsInstalled) return;
+  if (window.heritageIconsInstalled) return;
 
   var paths = {
     calendar: '<path d="M7 2v3M17 2v3M3 9h18M5 4h14a2 2 0 0 1 2 2v14H3V6a2 2 0 0 1 2-2Z"/>',
@@ -63,8 +63,8 @@
       return child.nodeType === 3 && child.textContent.trim();
     }).map(function(child) { return child.textContent.trim(); }).join(' ');
     if (visibleText) return;
-    var language = typeof window.workbenchLanguage === 'function'
-      ? window.workbenchLanguage()
+    var language = typeof window.heritageLanguage === 'function'
+      ? window.heritageLanguage()
       : String(document.documentElement.getAttribute('lang') || 'en').toLowerCase().split('-')[0];
     var fallback = language === 'de'
       ? {delete:'Löschen',filter:'Filtern',edit:'Bearbeiten',loginas:'Als Benutzer anmelden',dbadmin:'Datenbankverwaltung öffnen',link:'Link öffnen',signal:'Statistiken öffnen',close:'Schließen',calendar:'Kalender öffnen',clone:'Kopieren',key:'Schlüssel',lock:'Gesperrt','arrow-left':'Zurück','arrow-right':'Weiter'}
@@ -101,13 +101,13 @@
   }
 
   render(document);
-  var runtime = typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null;
+  var runtime = typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null;
   if (runtime && runtime.registerHook) {
     runtime.registerHook('onAfterContentLoad', function() {
       render(document.getElementById('pageContent'));
     });
   }
 
-  window.workbenchIcons = { render: render, names: Object.keys(paths) };
-  window.workbenchIconsInstalled = true;
+  window.heritageIcons = { render: render, names: Object.keys(paths) };
+  window.heritageIconsInstalled = true;
 })(window, document);

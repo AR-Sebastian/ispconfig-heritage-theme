@@ -1,7 +1,7 @@
 (function(window, document) {
   'use strict';
 
-  function runtime() { return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null; }
+  function runtime() { return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null; }
   var legacy = window.ISPConfig;
   var app = runtime();
   if (!legacy || !app || legacy.workbenchLoadingInstalled) return;
@@ -15,7 +15,7 @@
   var requestSlowTimer = null;
 
   function localized(german, english) {
-    var language = typeof window.workbenchLanguage === 'function' ? window.workbenchLanguage() : (document.documentElement.lang || '');
+    var language = typeof window.heritageLanguage === 'function' ? window.heritageLanguage() : (document.documentElement.lang || '');
     return String(language).toLowerCase().indexOf('de') === 0 ? german : english;
   }
 

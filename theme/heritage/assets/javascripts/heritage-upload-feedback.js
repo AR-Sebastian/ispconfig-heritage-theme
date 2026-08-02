@@ -1,7 +1,7 @@
 (function (window, document) {
   'use strict';
 
-  function runtime() { return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null; }
+  function runtime() { return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null; }
   var legacy = window.ISPConfig;
   var app = runtime();
   if (!legacy || !app || typeof legacy.submitUploadForm !== 'function' || legacy.workbenchUploadFeedbackInstalled) return;
@@ -21,7 +21,7 @@
   }
 
   function matchingControl(formname, target) {
-    if (formname !== 'pageForm' || !window.workbenchHttp || typeof window.workbenchHttp.postMultipart !== 'function') return null;
+    if (formname !== 'pageForm' || !window.heritageHttp || typeof window.heritageHttp.postMultipart !== 'function') return null;
     var root = document.getElementById('pageContent');
     var control = root && root.querySelector('.formbutton-success[data-submit-form="pageForm"][data-form-upload="true"][data-form-action]');
     return control && requestPath(target) === requestPath(control.getAttribute('data-form-action')) ? control : null;
@@ -130,7 +130,7 @@
     }, 7000);
 
     var request;
-    try { request = window.workbenchHttp.postMultipart(form, target, { timeout: 120000 }); }
+    try { request = window.heritageHttp.postMultipart(form, target, { timeout: 120000 }); }
     catch (error) { finish('failed', messages.upload_failed || 'The upload response was invalid. Try again.'); throw error; }
     active.request = request;
     request.promise.then(function(markup) {
@@ -149,7 +149,7 @@
     return request;
   };
 
-  window.workbenchUploadFeedback = {
+  window.heritageUploadFeedback = {
     isActive: function () { return Boolean(active); },
     abort: function () { if (active && active.request) active.request.abort(); finish('failed', messages.upload_failed || 'The upload response was invalid. Try again.'); }
   };

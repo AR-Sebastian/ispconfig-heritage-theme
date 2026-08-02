@@ -4,7 +4,7 @@
 (function (window, document) {
   'use strict';
 
-  if (window.workbenchFeedbackInstalled) return;
+  if (window.heritageFeedbackInstalled) return;
 
   var icons = {
     success: '<path d="m5 12 4 4L19 6"/>',
@@ -28,7 +28,7 @@
   }
 
   function localized(german, english) {
-    var language = typeof window.workbenchLanguage === 'function' ? window.workbenchLanguage() : (document.documentElement.lang || '');
+    var language = typeof window.heritageLanguage === 'function' ? window.heritageLanguage() : (document.documentElement.lang || '');
     return String(language).toLowerCase().indexOf('de') === 0 ? german : english;
   }
 
@@ -309,8 +309,8 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
   else start();
 
-  window.workbenchFeedback = { enhance: enhance, show: show, report: report, connectivity: connectivityFeedback };
-  window.workbenchFeedbackInstalled = true;
+  window.heritageFeedback = { enhance: enhance, show: show, report: report, connectivity: connectivityFeedback };
+  window.heritageFeedbackInstalled = true;
 }(window, document));
 ;
 
@@ -561,7 +561,7 @@
     root.setAttribute('data-wb-theme', dark ? 'dark' : 'light');
     applyAccessibleAction(cssToken('--wb-accent', '#cc151c'));
     Array.prototype.forEach.call(document.querySelectorAll('.wb-theme-toggle'), function (button) {
-      var german = typeof window.workbenchLanguage === 'function' && window.workbenchLanguage() === 'de';
+      var german = typeof window.heritageLanguage === 'function' && window.heritageLanguage() === 'de';
       button.setAttribute('aria-label', dark
         ? (german ? 'Zum hellen Design wechseln' : 'Switch to light theme')
         : (german ? 'Zum dunklen Design wechseln' : 'Switch to dark theme'));
@@ -660,8 +660,8 @@
     apply(next);
   });
   document.addEventListener('workbench:navigation-complete', scheduleChartTheme);
-  window.workbenchChartTheme = { apply: applyChartTheme };
-  window.workbenchApplyAccentContrast = applyAccessibleAction;
+  window.heritageChartTheme = { apply: applyChartTheme };
+  window.heritageApplyAccentContrast = applyAccessibleAction;
 }());
 ;
 

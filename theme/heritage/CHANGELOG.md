@@ -26,6 +26,8 @@
   in eindeutige `heritage-*-core.css`-Autoritäten überführt.
 - Alle modularen JavaScript-Quellen und der frühe Shell-Bootstrap verwenden
   ausschließlich den HERITAGE-Dateinamensraum.
+- Alle theme-eigenen globalen Runtime-Schnittstellen wurden geschlossen von
+  `window.workbench*` auf `window.heritage*` migriert.
 
 ## 1.0.33 – 2026-07-31
 

@@ -1,7 +1,7 @@
 (function(window, document) {
   'use strict';
 
-  function runtime() { return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null; }
+  function runtime() { return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null; }
   var legacy = window.ISPConfig;
   var app = runtime();
   if (!legacy || !app || legacy.workbenchContentStatesInstalled) return;
@@ -13,7 +13,7 @@
   var contentStateTimer = null;
   var contentStateDelay = 140;
   var historyKey = 'workbenchContent';
-  var isGerman = (typeof window.workbenchLanguage === 'function' ? window.workbenchLanguage() : (document.documentElement.lang || '')).toLowerCase().indexOf('de') === 0;
+  var isGerman = (typeof window.heritageLanguage === 'function' ? window.heritageLanguage() : (document.documentElement.lang || '')).toLowerCase().indexOf('de') === 0;
 
   function localized(german, english) {
     return isGerman ? german : english;
@@ -568,7 +568,7 @@
       var pageSizeCell = pageSize.closest('td, th');
       var pageSizeGroup = document.createElement('div');
       var pageSizeLabel = document.createElement('span');
-      var pageSizeState = window.workbenchSelect ? window.workbenchSelect.enhance(pageSize, { compact: true, search: false }) : null;
+      var pageSizeState = window.heritageSelect ? window.heritageSelect.enhance(pageSize, { compact: true, search: false }) : null;
       var pageSizeShell = pageSize.closest('.wb-select--page-size') || (pageSizeState && pageSizeState.root) || pageSize;
       pageSizeGroup.className = 'wb-list-page-size';
       pageSizeGroup.setAttribute('role', 'group');
@@ -927,9 +927,9 @@
   }
 
   function normalizePageSizeControls(host) {
-    if (!host || !window.workbenchSelect) return;
+    if (!host || !window.heritageSelect) return;
     Array.prototype.forEach.call(host.querySelectorAll('select[name="search_limit"], select.search_limit, select.wb-page-size-select'), function(select) {
-      window.workbenchSelect.enhance(select, { compact: true, search: false });
+      window.heritageSelect.enhance(select, { compact: true, search: false });
     });
   }
 
@@ -1066,7 +1066,7 @@
   function enhanceLoadedContent(host, pageName, params, context) {
     if (!host) return;
     runEnhancementStep('localization', function() {
-      if (typeof window.workbenchLocalize === 'function') window.workbenchLocalize(host);
+      if (typeof window.heritageLocalize === 'function') window.heritageLocalize(host);
     });
     runEnhancementStep('page context', function() { decoratePageContext(host, pageName); });
     runEnhancementStep('page chrome', function() { decoratePageChrome(host, pageName); });
@@ -1080,17 +1080,17 @@
     runEnhancementStep('action controls', function() { decorateActionControls(document); });
     runEnhancementStep('operational states', function() { decorateOperationalStates(host); });
     runEnhancementStep('legacy fragments after controls', function() { normalizeResidualLegacyFragments(host); });
-    runEnhancementStep('icons', function() { if (window.workbenchIcons) window.workbenchIcons.render(host); });
+    runEnhancementStep('icons', function() { if (window.heritageIcons) window.heritageIcons.render(host); });
     runEnhancementStep('navigation shell', function() {
-      if (!window.workbenchNavigation) return;
-      window.workbenchNavigation.syncShellLayout();
-      window.workbenchNavigation.render();
-      if (window.workbenchNavigation.syncActiveNavigationState) window.workbenchNavigation.syncActiveNavigationState(pageName || '');
+      if (!window.heritageNavigation) return;
+      window.heritageNavigation.syncShellLayout();
+      window.heritageNavigation.render();
+      if (window.heritageNavigation.syncActiveNavigationState) window.heritageNavigation.syncActiveNavigationState(pageName || '');
     });
-    runEnhancementStep('dashboard layout', function() { if (window.workbenchDashboardLayout) window.workbenchDashboardLayout.enhance(); });
-    runEnhancementStep('dashboard metrics', function() { if (window.workbenchDashboardMetrics) window.workbenchDashboardMetrics.enhance(host); });
-    runEnhancementStep('statistics', function() { if (window.workbenchStatistics) window.workbenchStatistics.enhance(pageName); });
-    runEnhancementStep('monitoring', function() { if (window.workbenchMonitoring) window.workbenchMonitoring.enhance(host); });
+    runEnhancementStep('dashboard layout', function() { if (window.heritageDashboardLayout) window.heritageDashboardLayout.enhance(); });
+    runEnhancementStep('dashboard metrics', function() { if (window.heritageDashboardMetrics) window.heritageDashboardMetrics.enhance(host); });
+    runEnhancementStep('statistics', function() { if (window.heritageStatistics) window.heritageStatistics.enhance(pageName); });
+    runEnhancementStep('monitoring', function() { if (window.heritageMonitoring) window.heritageMonitoring.enhance(host); });
     if (params !== undefined) {
       runEnhancementStep('after content hooks', function() {
         var api = runtime();
@@ -1597,13 +1597,13 @@
         form._workbenchConditionalObserver.observe(scope, { subtree: true, attributes: true, attributeFilter: ['style', 'hidden', 'aria-hidden'] });
       }
     });
-    if (window.workbenchAccessibility) window.workbenchAccessibility.enhance(host);
-    if (window.workbenchValidation) window.workbenchValidation.enhance(host, {
+    if (window.heritageAccessibility) window.heritageAccessibility.enhance(host);
+    if (window.heritageValidation) window.heritageValidation.enhance(host, {
       focus: Boolean(context && context.focus === true)
     });
-    if (window.workbenchFormState) window.workbenchFormState.enhance();
-    if (window.workbenchFeedback) window.workbenchFeedback.enhance(host);
-    if (window.workbenchMessageAcknowledgement) window.workbenchMessageAcknowledgement.enhance(host);
+    if (window.heritageFormState) window.heritageFormState.enhance();
+    if (window.heritageFeedback) window.heritageFeedback.enhance(host);
+    if (window.heritageMessageAcknowledgement) window.heritageMessageAcknowledgement.enhance(host);
   }
 
   document.addEventListener('click', function(event) {
@@ -1745,7 +1745,7 @@
 
     clearScheduledContentState();
     if (contentRequest && contentRequest.readyState !== 4) contentRequest.abort();
-    if (window.workbenchMonitoring) window.workbenchMonitoring.destroy(host);
+    if (window.heritageMonitoring) window.heritageMonitoring.destroy(host);
     host.setAttribute('aria-busy', 'true');
     scheduleLoadingContentState(host, token);
     var request = requestHtml(pagename, params || null, 30000);
@@ -1855,10 +1855,10 @@
         api.replaceServerFragment(host, response);
         if (cacheKey === 'top') syncPrimaryModule(host, activeModule);
         decorateNavigation(host);
-        if (window.workbenchIcons) window.workbenchIcons.render(host);
+        if (window.heritageIcons) window.heritageIcons.render(host);
         afterLoad();
         if (api && typeof api.loadPushyMenu === 'function') api.loadPushyMenu();
-        if (window.workbenchIcons) window.workbenchIcons.render(document.querySelector('#workbench-mobile-navigation'));
+        if (window.heritageIcons) window.heritageIcons.render(document.querySelector('#workbench-mobile-navigation'));
       }).catch(function(error) {
         if (!request.aborted && (!error || error.name !== 'AbortError') && token === menuSequence) {
           var api = runtime();
@@ -1947,7 +1947,7 @@
     request.promise.then(function(response) {
         if (token !== refreshSequence || request.aborted) return;
         var host = document.getElementById('pageContent');
-        if (window.workbenchMonitoring) window.workbenchMonitoring.destroy(host);
+        if (window.heritageMonitoring) window.heritageMonitoring.destroy(host);
         if (!api || typeof api.replaceServerFragment !== 'function') throw new TypeError('Workbench fragment renderer is not available.');
         api.replaceServerFragment(host, response);
         enhanceLoadedContent(host, pagename, 'refresh=' + interval);
@@ -1983,8 +1983,8 @@
     return true;
   };
 
-  window.workbenchContentStates = window.workbenchContentStates || {};
-  window.workbenchContentStates.enhance = function(root, pageName, context) {
+  window.heritageContentStates = window.heritageContentStates || {};
+  window.heritageContentStates.enhance = function(root, pageName, context) {
     return (legacy && typeof legacy.workbenchEnhanceContent === 'function')
       ? legacy.workbenchEnhanceContent(root || document.getElementById('pageContent'), pageName || '', context || { source: 'external-enhance' })
       : false;

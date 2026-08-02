@@ -156,6 +156,6 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { enhanceAll(document); }, { once: true });
   else enhanceAll(document);
 
-  window.workbenchDateTime = { enhance: enhance, enhanceAll: enhanceAll, parse: parse, format: format, toNative: toNative, fromNative: fromNative };
-  window.workbenchDateTimeInstalled = true;
+  window.heritageDateTime = { enhance: enhance, enhanceAll: enhanceAll, parse: parse, format: format, toNative: toNative, fromNative: fromNative };
+  window.heritageDateTimeInstalled = true;
 }());

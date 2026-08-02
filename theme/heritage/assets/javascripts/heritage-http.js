@@ -1,7 +1,7 @@
 (function(window) {
   'use strict';
 
-  if (window.workbenchHttp) return;
+  if (window.heritageHttp) return;
 
   function HttpError(message, status, url) {
     this.name = 'WorkbenchHttpError';
@@ -194,7 +194,7 @@
     return multipart(new FormData(form), input, options);
   }
 
-  window.workbenchHttp = {
+  window.heritageHttp = {
     getText: function(input, options) { return get(input, options); },
     getJson: function(input, options) {
       options = Object.assign({}, options || {}, { response: 'json', accept: 'application/json' });

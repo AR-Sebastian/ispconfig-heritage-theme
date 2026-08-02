@@ -28,7 +28,7 @@
   }
 
   function runtime() {
-    return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null;
+    return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null;
   }
 
   function saveControl(root) {
@@ -174,12 +174,12 @@
         } else {
           currentApi.replaceServerFragment(root, responseText);
           currentApi.onAfterContentLoad(target, new URLSearchParams(new FormData(form)).toString());
-          if (window.workbenchContentStates && typeof window.workbenchContentStates.enhance === 'function') {
-            window.workbenchContentStates.enhance(root, target, { source: 'submit-feedback', focus: true });
+          if (window.heritageContentStates && typeof window.heritageContentStates.enhance === 'function') {
+            window.heritageContentStates.enhance(root, target, { source: 'submit-feedback', focus: true });
           } else {
-            if (window.workbenchAccessibility) window.workbenchAccessibility.enhance(root);
-            if (window.workbenchValidation) window.workbenchValidation.enhance(root, { focus: true });
-            if (window.workbenchFeedback) window.workbenchFeedback.enhance(root);
+            if (window.heritageAccessibility) window.heritageAccessibility.enhance(root);
+            if (window.heritageValidation) window.heritageValidation.enhance(root, { focus: true });
+            if (window.heritageFeedback) window.heritageFeedback.enhance(root);
           }
           currentApi.pageFormChanged = false;
         }
@@ -197,12 +197,12 @@
     legacy.workbenchSubmitFeedbackInstalled = true;
   }
 
-  window.workbenchSubmitFeedback = {
+  window.heritageSubmitFeedback = {
     begin: begin,
     success: success,
     failure: failure,
     complete: complete,
     isActive: function () { return Boolean(active); }
   };
-  window.workbenchSubmitFeedbackInstalled = true;
+  window.heritageSubmitFeedbackInstalled = true;
 }());

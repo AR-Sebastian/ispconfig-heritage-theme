@@ -40,6 +40,10 @@ if find "$theme/assets/javascripts" -maxdepth 1 -type f -name 'workbench-*.js' -
   echo 'Theme contains a script in the obsolete Workbench filename namespace.' >&2
   exit 1
 fi
+if grep -RIEq 'window\.workbench[A-Za-z0-9_]*' "$theme/assets/javascripts"; then
+  echo 'Theme contains a global runtime symbol in the obsolete Workbench namespace.' >&2
+  exit 1
+fi
 while IFS= read -r -d '' file; do node --check "$file"; done < <(find "$theme" -type f -name '*.js' -print0)
 
 node - "$theme" "$version" <<'NODE'

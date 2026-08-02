@@ -1,7 +1,7 @@
 (function (window, document) {
   'use strict';
 
-  if (window.workbenchFeedbackInstalled) return;
+  if (window.heritageFeedbackInstalled) return;
 
   var icons = {
     success: '<path d="m5 12 4 4L19 6"/>',
@@ -25,7 +25,7 @@
   }
 
   function localized(german, english) {
-    var language = typeof window.workbenchLanguage === 'function' ? window.workbenchLanguage() : (document.documentElement.lang || '');
+    var language = typeof window.heritageLanguage === 'function' ? window.heritageLanguage() : (document.documentElement.lang || '');
     return String(language).toLowerCase().indexOf('de') === 0 ? german : english;
   }
 
@@ -306,6 +306,6 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
   else start();
 
-  window.workbenchFeedback = { enhance: enhance, show: show, report: report, connectivity: connectivityFeedback };
-  window.workbenchFeedbackInstalled = true;
+  window.heritageFeedback = { enhance: enhance, show: show, report: report, connectivity: connectivityFeedback };
+  window.heritageFeedbackInstalled = true;
 }(window, document));

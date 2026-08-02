@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
   'use strict';
 
   var STORAGE_KEY = 'ispconfig-workbench.dashboard.layout.v7';
@@ -106,7 +106,7 @@
   };
 
   function language() {
-    var active = typeof window.workbenchLanguage === 'function' ? window.workbenchLanguage() : String(document.documentElement.lang || 'en');
+    var active = typeof window.heritageLanguage === 'function' ? window.heritageLanguage() : String(document.documentElement.lang || 'en');
     return String(active).toLowerCase().indexOf('de') === 0 ? 'de' : 'en';
   }
 
@@ -488,8 +488,8 @@
     // Render the declarative metric payload before the source dashlet is split
     // into atomic widgets. Removing the source first also removed its JSON
     // payload, leaving all four charts permanently empty after login.
-    if (window.workbenchDashboardMetrics && typeof window.workbenchDashboardMetrics.enhance === 'function') {
-      window.workbenchDashboardMetrics.enhance(source);
+    if (window.heritageDashboardMetrics && typeof window.heritageDashboardMetrics.enhance === 'function') {
+      window.heritageDashboardMetrics.enhance(source);
     }
     decorateMetrics(source);
     var cards = Array.prototype.slice.call(source.querySelectorAll('.wb-dashboard-metric-card'));
@@ -1196,6 +1196,6 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', installDashboardEnhancer);
   else installDashboardEnhancer();
-  window.workbenchDashboardLayout = { enhance: enhance, storageKey: STORAGE_KEY };
+  window.heritageDashboardLayout = { enhance: enhance, storageKey: STORAGE_KEY };
 }());
 

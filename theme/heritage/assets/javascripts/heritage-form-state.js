@@ -2,8 +2,8 @@
   'use strict';
 
   var messages = {};
-  var language = typeof window.workbenchLanguage === 'function'
-    ? window.workbenchLanguage()
+  var language = typeof window.heritageLanguage === 'function'
+    ? window.heritageLanguage()
     : document.documentElement.lang;
   var isGerman = String(language || document.documentElement.lang || '').toLowerCase().indexOf('de') === 0;
 
@@ -22,7 +22,7 @@
   }
 
   function app() {
-    return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null;
+    return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null;
   }
 
   function editableHost() {
@@ -189,7 +189,7 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', enhance, { once: true });
   else enhance();
 
-  window.workbenchFormState = {
+  window.heritageFormState = {
     enhance: enhance,
     setState: setState,
     getState: function () {
@@ -201,5 +201,5 @@
       return status && status.dataset.changedCount !== undefined ? Number(status.dataset.changedCount) : null;
     }
   };
-  window.workbenchFormStateInstalled = true;
+  window.heritageFormStateInstalled = true;
 }());

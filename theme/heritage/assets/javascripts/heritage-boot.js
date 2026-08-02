@@ -6,7 +6,7 @@
   }
 
   function app() {
-    return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null;
+    return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null;
   }
 
   function applyRuntimeConfig() {

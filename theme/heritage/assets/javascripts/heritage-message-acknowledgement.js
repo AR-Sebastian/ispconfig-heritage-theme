@@ -1,15 +1,15 @@
 (function (window, document) {
   'use strict';
 
-  if (window.workbenchMessageAcknowledgement) return;
+  if (window.heritageMessageAcknowledgement) return;
 
   function acknowledge(alert) {
     var url = alert && alert.getAttribute('data-wb-ack-url');
     if (!url || alert.dataset.wbAckState === 'pending' || alert.dataset.wbAckState === 'complete') return false;
-    if (!window.workbenchHttp) return false;
+    if (!window.heritageHttp) return false;
 
     alert.dataset.wbAckState = 'pending';
-    var request = window.workbenchHttp.getText(url, { accept: 'text/plain', timeout: 10000 });
+    var request = window.heritageHttp.getText(url, { accept: 'text/plain', timeout: 10000 });
     request.promise.then(function () {
       alert.dataset.wbAckState = 'complete';
       alert.dispatchEvent(new CustomEvent('workbench:message-acknowledged', { detail: { url: url } }));
@@ -31,7 +31,7 @@
     });
   }
 
-  window.workbenchMessageAcknowledgement = { enhance: enhance, acknowledge: acknowledge };
-  window.workbenchMessageAcknowledgementInstalled = true;
+  window.heritageMessageAcknowledgement = { enhance: enhance, acknowledge: acknowledge };
+  window.heritageMessageAcknowledgementInstalled = true;
   document.addEventListener('DOMContentLoaded', function () { enhance(document); });
 })(window, document);

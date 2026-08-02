@@ -1,7 +1,7 @@
 (function (window, document) {
   'use strict';
 
-  if (window.workbenchGlobalSearchInstalled) {
+  if (window.heritageGlobalSearchInstalled) {
     return;
   }
 
@@ -11,8 +11,8 @@
   var activeIndex = -1;
 
   function app() {
-    return typeof window.workbenchRuntime === 'function'
-      ? window.workbenchRuntime()
+    return typeof window.heritageRuntime === 'function'
+      ? window.heritageRuntime()
       : null;
   }
 
@@ -523,6 +523,6 @@
     init();
   }
 
-  window.workbenchGlobalSearch = { init: init };
-  window.workbenchGlobalSearchInstalled = true;
+  window.heritageGlobalSearch = { init: init };
+  window.heritageGlobalSearchInstalled = true;
 }(window, document));

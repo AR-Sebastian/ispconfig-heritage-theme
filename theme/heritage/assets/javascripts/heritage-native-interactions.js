@@ -85,8 +85,8 @@
   }
 
   function setModal(element, visible, relatedTarget) {
-    if (!element || element.getAttribute('role') !== 'dialog' || !window.workbenchDialog) return false;
-    return visible ? window.workbenchDialog.open(element, relatedTarget) : window.workbenchDialog.close(element, true);
+    if (!element || element.getAttribute('role') !== 'dialog' || !window.heritageDialog) return false;
+    return visible ? window.heritageDialog.open(element, relatedTarget) : window.heritageDialog.close(element, true);
   }
 
   function ensureTooltipNode() {
@@ -257,7 +257,7 @@
     synchronize(document);
   }
 
-  window.workbenchInteractions = {
+  window.heritageInteractions = {
     collapse: setCollapse,
     toggleCollapse: toggleCollapse,
     dismissAlert: dismissAlert,
@@ -265,5 +265,5 @@
     tooltip: initializeTooltip,
     synchronize: synchronize
   };
-  window.workbenchInteractionsInstalled = true;
+  window.heritageInteractionsInstalled = true;
 }());

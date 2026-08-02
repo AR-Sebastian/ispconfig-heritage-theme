@@ -159,8 +159,8 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { enhanceAll(document); }, { once: true });
   else enhanceAll(document);
 
-  window.workbenchDateTime = { enhance: enhance, enhanceAll: enhanceAll, parse: parse, format: format, toNative: toNative, fromNative: fromNative };
-  window.workbenchDateTimeInstalled = true;
+  window.heritageDateTime = { enhance: enhance, enhanceAll: enhanceAll, parse: parse, format: format, toNative: toNative, fromNative: fromNative };
+  window.heritageDateTimeInstalled = true;
 }());
 ;
 
@@ -252,8 +252,8 @@
   }
 
   function setModal(element, visible, relatedTarget) {
-    if (!element || element.getAttribute('role') !== 'dialog' || !window.workbenchDialog) return false;
-    return visible ? window.workbenchDialog.open(element, relatedTarget) : window.workbenchDialog.close(element, true);
+    if (!element || element.getAttribute('role') !== 'dialog' || !window.heritageDialog) return false;
+    return visible ? window.heritageDialog.open(element, relatedTarget) : window.heritageDialog.close(element, true);
   }
 
   function ensureTooltipNode() {
@@ -424,7 +424,7 @@
     synchronize(document);
   }
 
-  window.workbenchInteractions = {
+  window.heritageInteractions = {
     collapse: setCollapse,
     toggleCollapse: toggleCollapse,
     dismissAlert: dismissAlert,
@@ -432,7 +432,7 @@
     tooltip: initializeTooltip,
     synchronize: synchronize
   };
-  window.workbenchInteractionsInstalled = true;
+  window.heritageInteractionsInstalled = true;
 }());
 ;
 
@@ -440,7 +440,7 @@
 (function(window) {
   'use strict';
 
-  if (window.workbenchHttp) return;
+  if (window.heritageHttp) return;
 
   function HttpError(message, status, url) {
     this.name = 'WorkbenchHttpError';
@@ -633,7 +633,7 @@
     return multipart(new FormData(form), input, options);
   }
 
-  window.workbenchHttp = {
+  window.heritageHttp = {
     getText: function(input, options) { return get(input, options); },
     getJson: function(input, options) {
       options = Object.assign({}, options || {}, { response: 'json', accept: 'application/json' });
@@ -732,10 +732,10 @@
   }
 
   function runtimeApi() {
-    return window.workbenchApp || legacyApi();
+    return window.heritageApp || legacyApi();
   }
 
-  window.workbenchRuntime = function() {
+  window.heritageRuntime = function() {
     return runtimeApi();
   };
 
@@ -1101,7 +1101,7 @@
     if (alertUser && window.ISPConfig && typeof window.ISPConfig.notify === 'function') {
       window.ISPConfig.notify(
         region.getAttribute('data-template-lock-message') || (
-          typeof window.workbenchLanguage === 'function' && window.workbenchLanguage() === 'de'
+          typeof window.heritageLanguage === 'function' && window.heritageLanguage() === 'de'
             ? 'Dieses Formular wird durch eine Mastervorlage gesteuert.'
             : 'This form is controlled by a master template.'
         ),
@@ -1664,8 +1664,8 @@
   }
 
   function initDeclarativeFieldSearch(root) {
-    var language = typeof window.workbenchLanguage === 'function'
-      ? window.workbenchLanguage()
+    var language = typeof window.heritageLanguage === 'function'
+      ? window.heritageLanguage()
       : String(document.documentElement.getAttribute('lang') || 'en').toLowerCase().split('-')[0];
     var german = language === 'de';
     queryAll(root || document, '[data-workbench-field-search]').forEach(function(input) {
@@ -1771,15 +1771,15 @@
 
     reportError: function(message) {
       if (window.console && console.warn) console.warn(message);
-      if (window.workbenchFeedback && typeof window.workbenchFeedback.report === 'function') {
-        return window.workbenchFeedback.report(message);
+      if (window.heritageFeedback && typeof window.heritageFeedback.report === 'function') {
+        return window.heritageFeedback.report(message);
       }
       return null;
     },
 
     notify: function(message, state) {
-      if (window.workbenchFeedback && typeof window.workbenchFeedback.show === 'function') {
-        return window.workbenchFeedback.show(message, state || 'info');
+      if (window.heritageFeedback && typeof window.heritageFeedback.show === 'function') {
+        return window.heritageFeedback.show(message, state || 'info');
       }
       if (window.console && console.info) console.info(message);
       return null;
@@ -1800,7 +1800,7 @@
     enhanceTooltip: function(elements, options) {
       toArray(elements && elements.length !== undefined && !elements.nodeType ? elements : [elements]).forEach(function(element) {
         if (!element) return;
-        if (window.workbenchInteractions) window.workbenchInteractions.tooltip(element, options);
+        if (window.heritageInteractions) window.heritageInteractions.tooltip(element, options);
       });
       return elements;
     },
@@ -1808,7 +1808,7 @@
     enhanceSelect: function(elements, options) {
       toArray(elements && elements.length !== undefined && !elements.nodeType ? elements : [elements]).forEach(function(element) {
         if (!element) return;
-        if (window.workbenchSelect) window.workbenchSelect.enhance(element, options || {});
+        if (window.heritageSelect) window.heritageSelect.enhance(element, options || {});
       });
       return elements;
     },
@@ -1816,7 +1816,7 @@
     enhanceSearch: function(elements, options) {
       toArray(elements && elements.length !== undefined && !elements.nodeType ? elements : [elements]).forEach(function(element) {
         if (!element) return;
-        if (window.workbenchFieldSearch) window.workbenchFieldSearch.enhance(element, options || {});
+        if (window.heritageFieldSearch) window.heritageFieldSearch.enhance(element, options || {});
       });
       return elements;
     },
@@ -1824,22 +1824,22 @@
     enhanceDateTime: function(elements, options) {
       toArray(elements && elements.length !== undefined && !elements.nodeType ? elements : [elements]).forEach(function(element) {
         if (!element) return;
-        if (window.workbenchDateTime) window.workbenchDateTime.enhance(element, options || {});
+        if (window.heritageDateTime) window.heritageDateTime.enhance(element, options || {});
       });
       return elements;
     },
 
     closeDialog: function(selector) {
       var element = query(document, selector);
-      if (element && window.workbenchDialog) return window.workbenchDialog.close(element, true);
+      if (element && window.heritageDialog) return window.heritageDialog.close(element, true);
       if (element) element.hidden = true;
       return Boolean(element);
     },
 
     requestRead: function(url, options, responseType) {
       options = options || {};
-      if (window.workbenchHttp) {
-        return responseType === 'json' ? window.workbenchHttp.getJson(url, options) : window.workbenchHttp.getText(url, options);
+      if (window.heritageHttp) {
+        return responseType === 'json' ? window.heritageHttp.getJson(url, options) : window.heritageHttp.getText(url, options);
       }
       return requestFallback(url, options, responseType === 'json' ? 'json' : 'text');
     },
@@ -1951,7 +1951,7 @@
     requestForm: function(form, url, options) {
       options = options || {};
       if (!form || form.nodeName !== 'FORM') throw new TypeError('A form element is required.');
-      if (window.workbenchHttp) return window.workbenchHttp.postForm(form, url, options);
+      if (window.heritageHttp) return window.heritageHttp.postForm(form, url, options);
       return requestFallback(url, {
         method: 'POST',
         timeout: options.timeout || 30000,
@@ -2036,8 +2036,8 @@
 
     submitUploadForm: function(formname, target) {
       var form = document.getElementById(formname);
-      if (!form || !window.workbenchHttp) return false;
-      var request = window.workbenchHttp.postMultipart(form, target, { timeout: 120000 });
+      if (!form || !window.heritageHttp) return false;
+      var request = window.heritageHttp.postMultipart(form, target, { timeout: 120000 });
       request.promise.then(function(markup) {
         var parsed = new DOMParser().parseFromString(markup, 'text/html');
         ['errorMsg', 'OKMsg'].forEach(function(id) {
@@ -2205,7 +2205,7 @@
       var addTplText = parts[1] || '';
       if (!(Number(addTplId) > 0)) {
         ISPConfig.notify(
-          (typeof window.workbenchLanguage === 'function' && window.workbenchLanguage() === 'de')
+          (typeof window.heritageLanguage === 'function' && window.heritageLanguage() === 'de')
             ? 'Keine zusätzliche Vorlage ausgewählt.'
             : 'No additional template selected.',
           'warning'
@@ -2250,7 +2250,7 @@
     }
   };
 
-  var workbenchApp = window.workbenchApp = window.workbenchApp || {};
+  var workbenchApp = window.heritageApp = window.heritageApp || {};
 
   [
     'setOption',
@@ -2704,11 +2704,11 @@
 (function(window, document) {
   'use strict';
 
-  if (window.workbenchFieldSearch) return;
+  if (window.heritageFieldSearch) return;
 
   function language() {
-    return typeof window.workbenchLanguage === 'function'
-      ? window.workbenchLanguage()
+    return typeof window.heritageLanguage === 'function'
+      ? window.heritageLanguage()
       : String(document.documentElement.getAttribute('lang') || 'en').toLowerCase().split('-')[0];
   }
 
@@ -2740,7 +2740,7 @@
   var states = new WeakMap();
 
   function runtime() {
-    return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null;
+    return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null;
   }
 
   function mergeOptions(options) {
@@ -3031,8 +3031,8 @@
     return state;
   }
 
-  window.workbenchFieldSearch = { enhance: enhance, destroy: destroy };
-  window.workbenchFieldSearchInstalled = true;
+  window.heritageFieldSearch = { enhance: enhance, destroy: destroy };
+  window.heritageFieldSearchInstalled = true;
 })(window, document);
 ;
 
@@ -3040,15 +3040,15 @@
 (function (window, document) {
   'use strict';
 
-  if (window.workbenchMessageAcknowledgement) return;
+  if (window.heritageMessageAcknowledgement) return;
 
   function acknowledge(alert) {
     var url = alert && alert.getAttribute('data-wb-ack-url');
     if (!url || alert.dataset.wbAckState === 'pending' || alert.dataset.wbAckState === 'complete') return false;
-    if (!window.workbenchHttp) return false;
+    if (!window.heritageHttp) return false;
 
     alert.dataset.wbAckState = 'pending';
-    var request = window.workbenchHttp.getText(url, { accept: 'text/plain', timeout: 10000 });
+    var request = window.heritageHttp.getText(url, { accept: 'text/plain', timeout: 10000 });
     request.promise.then(function () {
       alert.dataset.wbAckState = 'complete';
       alert.dispatchEvent(new CustomEvent('workbench:message-acknowledged', { detail: { url: url } }));
@@ -3070,8 +3070,8 @@
     });
   }
 
-  window.workbenchMessageAcknowledgement = { enhance: enhance, acknowledge: acknowledge };
-  window.workbenchMessageAcknowledgementInstalled = true;
+  window.heritageMessageAcknowledgement = { enhance: enhance, acknowledge: acknowledge };
+  window.heritageMessageAcknowledgementInstalled = true;
   document.addEventListener('DOMContentLoaded', function () { enhance(document); });
 })(window, document);
 ;
@@ -3080,7 +3080,7 @@
 (function(window, document) {
   'use strict';
 
-  function runtime() { return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null; }
+  function runtime() { return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null; }
   var legacy = window.ISPConfig;
   var app = runtime();
   if (!legacy || !app || legacy.workbenchLoadingInstalled) return;
@@ -3094,7 +3094,7 @@
   var requestSlowTimer = null;
 
   function localized(german, english) {
-    var language = typeof window.workbenchLanguage === 'function' ? window.workbenchLanguage() : (document.documentElement.lang || '');
+    var language = typeof window.heritageLanguage === 'function' ? window.heritageLanguage() : (document.documentElement.lang || '');
     return String(language).toLowerCase().indexOf('de') === 0 ? german : english;
   }
 
@@ -3262,7 +3262,7 @@
 (function(window, document) {
   'use strict';
 
-  function runtime() { return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null; }
+  function runtime() { return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null; }
   var legacy = window.ISPConfig;
   var app = runtime();
   if (!legacy || !app || legacy.workbenchContentStatesInstalled) return;
@@ -3274,7 +3274,7 @@
   var contentStateTimer = null;
   var contentStateDelay = 140;
   var historyKey = 'workbenchContent';
-  var isGerman = (typeof window.workbenchLanguage === 'function' ? window.workbenchLanguage() : (document.documentElement.lang || '')).toLowerCase().indexOf('de') === 0;
+  var isGerman = (typeof window.heritageLanguage === 'function' ? window.heritageLanguage() : (document.documentElement.lang || '')).toLowerCase().indexOf('de') === 0;
 
   function localized(german, english) {
     return isGerman ? german : english;
@@ -3829,7 +3829,7 @@
       var pageSizeCell = pageSize.closest('td, th');
       var pageSizeGroup = document.createElement('div');
       var pageSizeLabel = document.createElement('span');
-      var pageSizeState = window.workbenchSelect ? window.workbenchSelect.enhance(pageSize, { compact: true, search: false }) : null;
+      var pageSizeState = window.heritageSelect ? window.heritageSelect.enhance(pageSize, { compact: true, search: false }) : null;
       var pageSizeShell = pageSize.closest('.wb-select--page-size') || (pageSizeState && pageSizeState.root) || pageSize;
       pageSizeGroup.className = 'wb-list-page-size';
       pageSizeGroup.setAttribute('role', 'group');
@@ -4188,9 +4188,9 @@
   }
 
   function normalizePageSizeControls(host) {
-    if (!host || !window.workbenchSelect) return;
+    if (!host || !window.heritageSelect) return;
     Array.prototype.forEach.call(host.querySelectorAll('select[name="search_limit"], select.search_limit, select.wb-page-size-select'), function(select) {
-      window.workbenchSelect.enhance(select, { compact: true, search: false });
+      window.heritageSelect.enhance(select, { compact: true, search: false });
     });
   }
 
@@ -4327,7 +4327,7 @@
   function enhanceLoadedContent(host, pageName, params, context) {
     if (!host) return;
     runEnhancementStep('localization', function() {
-      if (typeof window.workbenchLocalize === 'function') window.workbenchLocalize(host);
+      if (typeof window.heritageLocalize === 'function') window.heritageLocalize(host);
     });
     runEnhancementStep('page context', function() { decoratePageContext(host, pageName); });
     runEnhancementStep('page chrome', function() { decoratePageChrome(host, pageName); });
@@ -4341,17 +4341,17 @@
     runEnhancementStep('action controls', function() { decorateActionControls(document); });
     runEnhancementStep('operational states', function() { decorateOperationalStates(host); });
     runEnhancementStep('legacy fragments after controls', function() { normalizeResidualLegacyFragments(host); });
-    runEnhancementStep('icons', function() { if (window.workbenchIcons) window.workbenchIcons.render(host); });
+    runEnhancementStep('icons', function() { if (window.heritageIcons) window.heritageIcons.render(host); });
     runEnhancementStep('navigation shell', function() {
-      if (!window.workbenchNavigation) return;
-      window.workbenchNavigation.syncShellLayout();
-      window.workbenchNavigation.render();
-      if (window.workbenchNavigation.syncActiveNavigationState) window.workbenchNavigation.syncActiveNavigationState(pageName || '');
+      if (!window.heritageNavigation) return;
+      window.heritageNavigation.syncShellLayout();
+      window.heritageNavigation.render();
+      if (window.heritageNavigation.syncActiveNavigationState) window.heritageNavigation.syncActiveNavigationState(pageName || '');
     });
-    runEnhancementStep('dashboard layout', function() { if (window.workbenchDashboardLayout) window.workbenchDashboardLayout.enhance(); });
-    runEnhancementStep('dashboard metrics', function() { if (window.workbenchDashboardMetrics) window.workbenchDashboardMetrics.enhance(host); });
-    runEnhancementStep('statistics', function() { if (window.workbenchStatistics) window.workbenchStatistics.enhance(pageName); });
-    runEnhancementStep('monitoring', function() { if (window.workbenchMonitoring) window.workbenchMonitoring.enhance(host); });
+    runEnhancementStep('dashboard layout', function() { if (window.heritageDashboardLayout) window.heritageDashboardLayout.enhance(); });
+    runEnhancementStep('dashboard metrics', function() { if (window.heritageDashboardMetrics) window.heritageDashboardMetrics.enhance(host); });
+    runEnhancementStep('statistics', function() { if (window.heritageStatistics) window.heritageStatistics.enhance(pageName); });
+    runEnhancementStep('monitoring', function() { if (window.heritageMonitoring) window.heritageMonitoring.enhance(host); });
     if (params !== undefined) {
       runEnhancementStep('after content hooks', function() {
         var api = runtime();
@@ -4858,13 +4858,13 @@
         form._workbenchConditionalObserver.observe(scope, { subtree: true, attributes: true, attributeFilter: ['style', 'hidden', 'aria-hidden'] });
       }
     });
-    if (window.workbenchAccessibility) window.workbenchAccessibility.enhance(host);
-    if (window.workbenchValidation) window.workbenchValidation.enhance(host, {
+    if (window.heritageAccessibility) window.heritageAccessibility.enhance(host);
+    if (window.heritageValidation) window.heritageValidation.enhance(host, {
       focus: Boolean(context && context.focus === true)
     });
-    if (window.workbenchFormState) window.workbenchFormState.enhance();
-    if (window.workbenchFeedback) window.workbenchFeedback.enhance(host);
-    if (window.workbenchMessageAcknowledgement) window.workbenchMessageAcknowledgement.enhance(host);
+    if (window.heritageFormState) window.heritageFormState.enhance();
+    if (window.heritageFeedback) window.heritageFeedback.enhance(host);
+    if (window.heritageMessageAcknowledgement) window.heritageMessageAcknowledgement.enhance(host);
   }
 
   document.addEventListener('click', function(event) {
@@ -5006,7 +5006,7 @@
 
     clearScheduledContentState();
     if (contentRequest && contentRequest.readyState !== 4) contentRequest.abort();
-    if (window.workbenchMonitoring) window.workbenchMonitoring.destroy(host);
+    if (window.heritageMonitoring) window.heritageMonitoring.destroy(host);
     host.setAttribute('aria-busy', 'true');
     scheduleLoadingContentState(host, token);
     var request = requestHtml(pagename, params || null, 30000);
@@ -5116,10 +5116,10 @@
         api.replaceServerFragment(host, response);
         if (cacheKey === 'top') syncPrimaryModule(host, activeModule);
         decorateNavigation(host);
-        if (window.workbenchIcons) window.workbenchIcons.render(host);
+        if (window.heritageIcons) window.heritageIcons.render(host);
         afterLoad();
         if (api && typeof api.loadPushyMenu === 'function') api.loadPushyMenu();
-        if (window.workbenchIcons) window.workbenchIcons.render(document.querySelector('#workbench-mobile-navigation'));
+        if (window.heritageIcons) window.heritageIcons.render(document.querySelector('#workbench-mobile-navigation'));
       }).catch(function(error) {
         if (!request.aborted && (!error || error.name !== 'AbortError') && token === menuSequence) {
           var api = runtime();
@@ -5208,7 +5208,7 @@
     request.promise.then(function(response) {
         if (token !== refreshSequence || request.aborted) return;
         var host = document.getElementById('pageContent');
-        if (window.workbenchMonitoring) window.workbenchMonitoring.destroy(host);
+        if (window.heritageMonitoring) window.heritageMonitoring.destroy(host);
         if (!api || typeof api.replaceServerFragment !== 'function') throw new TypeError('Workbench fragment renderer is not available.');
         api.replaceServerFragment(host, response);
         enhanceLoadedContent(host, pagename, 'refresh=' + interval);
@@ -5244,8 +5244,8 @@
     return true;
   };
 
-  window.workbenchContentStates = window.workbenchContentStates || {};
-  window.workbenchContentStates.enhance = function(root, pageName, context) {
+  window.heritageContentStates = window.heritageContentStates || {};
+  window.heritageContentStates.enhance = function(root, pageName, context) {
     return (legacy && typeof legacy.workbenchEnhanceContent === 'function')
       ? legacy.workbenchEnhanceContent(root || document.getElementById('pageContent'), pageName || '', context || { source: 'external-enhance' })
       : false;
@@ -5266,7 +5266,7 @@
 (function(window, document) {
   'use strict';
 
-  function runtime() { return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null; }
+  function runtime() { return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null; }
   var legacy = window.ISPConfig;
   var app = runtime();
   if (!legacy || !app || typeof app.requestText !== 'function' || typeof app.requestJson !== 'function' || legacy.workbenchBackgroundInstalled) return;
@@ -5298,11 +5298,11 @@
       if (contentRequests[elementId] !== request) return;
       if (typeof api.replaceServerFragment !== 'function') throw new TypeError('Workbench fragment renderer is not available.');
       api.replaceServerFragment(host, responseText);
-      if (window.workbenchContentStates && typeof window.workbenchContentStates.enhance === 'function') {
-        window.workbenchContentStates.enhance(host, pageName, { source: 'partial-content' });
+      if (window.heritageContentStates && typeof window.heritageContentStates.enhance === 'function') {
+        window.heritageContentStates.enhance(host, pageName, { source: 'partial-content' });
       } else {
-        if (window.workbenchAccessibility) window.workbenchAccessibility.enhance(host);
-        if (window.workbenchIcons) window.workbenchIcons.render(host);
+        if (window.heritageAccessibility) window.heritageAccessibility.enhance(host);
+        if (window.heritageIcons) window.heritageIcons.render(host);
       }
     }).catch(function(error) {
       if (!request.aborted && (!error || error.name !== 'AbortError')) api.reportError('Partial content request was not successful.');
@@ -5375,7 +5375,7 @@
       scheduleDatalog(2000);
     } else {
       counter.textContent = '0';
-      if (window.workbenchDialog && dialog && window.workbenchDialog.isOpen(dialog)) {
+      if (window.heritageDialog && dialog && window.heritageDialog.isOpen(dialog)) {
         var empty = document.createElement('li');
         empty.textContent = (document.documentElement.lang || '').toLowerCase().indexOf('de') === 0 ? 'Keine ausstehenden Änderungen.' : 'No pending changes.';
         list.appendChild(empty);
@@ -5439,7 +5439,7 @@
 (function(window, document) {
   'use strict';
 
-  if (window.workbenchIconsInstalled) return;
+  if (window.heritageIconsInstalled) return;
 
   var paths = {
     calendar: '<path d="M7 2v3M17 2v3M3 9h18M5 4h14a2 2 0 0 1 2 2v14H3V6a2 2 0 0 1 2-2Z"/>',
@@ -5501,8 +5501,8 @@
       return child.nodeType === 3 && child.textContent.trim();
     }).map(function(child) { return child.textContent.trim(); }).join(' ');
     if (visibleText) return;
-    var language = typeof window.workbenchLanguage === 'function'
-      ? window.workbenchLanguage()
+    var language = typeof window.heritageLanguage === 'function'
+      ? window.heritageLanguage()
       : String(document.documentElement.getAttribute('lang') || 'en').toLowerCase().split('-')[0];
     var fallback = language === 'de'
       ? {delete:'Löschen',filter:'Filtern',edit:'Bearbeiten',loginas:'Als Benutzer anmelden',dbadmin:'Datenbankverwaltung öffnen',link:'Link öffnen',signal:'Statistiken öffnen',close:'Schließen',calendar:'Kalender öffnen',clone:'Kopieren',key:'Schlüssel',lock:'Gesperrt','arrow-left':'Zurück','arrow-right':'Weiter'}
@@ -5539,15 +5539,15 @@
   }
 
   render(document);
-  var runtime = typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null;
+  var runtime = typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null;
   if (runtime && runtime.registerHook) {
     runtime.registerHook('onAfterContentLoad', function() {
       render(document.getElementById('pageContent'));
     });
   }
 
-  window.workbenchIcons = { render: render, names: Object.keys(paths) };
-  window.workbenchIconsInstalled = true;
+  window.heritageIcons = { render: render, names: Object.keys(paths) };
+  window.heritageIconsInstalled = true;
 })(window, document);
 ;
 
@@ -5555,7 +5555,7 @@
 (function (window, document) {
   'use strict';
 
-  if (window.workbenchFeedbackInstalled) return;
+  if (window.heritageFeedbackInstalled) return;
 
   var icons = {
     success: '<path d="m5 12 4 4L19 6"/>',
@@ -5579,7 +5579,7 @@
   }
 
   function localized(german, english) {
-    var language = typeof window.workbenchLanguage === 'function' ? window.workbenchLanguage() : (document.documentElement.lang || '');
+    var language = typeof window.heritageLanguage === 'function' ? window.heritageLanguage() : (document.documentElement.lang || '');
     return String(language).toLowerCase().indexOf('de') === 0 ? german : english;
   }
 
@@ -5860,8 +5860,8 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
   else start();
 
-  window.workbenchFeedback = { enhance: enhance, show: show, report: report, connectivity: connectivityFeedback };
-  window.workbenchFeedbackInstalled = true;
+  window.heritageFeedback = { enhance: enhance, show: show, report: report, connectivity: connectivityFeedback };
+  window.heritageFeedbackInstalled = true;
 }(window, document));
 ;
 
@@ -5884,7 +5884,7 @@
   var legacy = window.ISPConfig;
 
   function runtime() {
-    return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null;
+    return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null;
   }
 
   if (!button || !panel || !overlay || !closeButton || !content || !legacy || !runtime()) return;
@@ -6639,7 +6639,7 @@
         return node.cloneNode(true);
       }));
       pageContent.appendChild(newsWidget);
-      if (window.workbenchDashboardLayout) window.setTimeout(window.workbenchDashboardLayout.enhance, 0);
+      if (window.heritageDashboardLayout) window.setTimeout(window.heritageDashboardLayout.enhance, 0);
     }
     sidebar.classList.toggle('wb-dashboard-news', dashboardNews);
     sidebar.classList.toggle('wb-secondary-navigation', secondaryNavigation);
@@ -6650,7 +6650,7 @@
     // dashboard, not only in the sidebar-news branch above. enhance() runs after
     // this tick, by which time body.wb-dashboard-page is set, so its host lookup
     // resolves and the widgets get their native layout/decoration.
-    if (dashboardPage && window.workbenchDashboardLayout) window.setTimeout(window.workbenchDashboardLayout.enhance, 0);
+    if (dashboardPage && window.heritageDashboardLayout) window.setTimeout(window.heritageDashboardLayout.enhance, 0);
     document.body.classList.toggle('wb-content-only-layout', !dashboardNews && !secondaryNavigation);
     return dashboardNews;
   }
@@ -6699,7 +6699,7 @@
     content.replaceChildren(list);
     panel.classList.add('wb-app-navigation');
     document.body.classList.add('wb-app-navigation-enabled');
-    if (window.workbenchIcons) window.workbenchIcons.render(panel);
+    if (window.heritageIcons) window.heritageIcons.render(panel);
     syncShellLayout();
     syncActiveNavigationState();
     panel.dataset.workbenchNavigationReady = 'true';
@@ -6893,7 +6893,7 @@
   syncMode();
   legacy.loadPushyMenu = render;
   render();
-  window.workbenchNavigation = {
+  window.heritageNavigation = {
     render: render,
     open: open,
     close: close,
@@ -6904,7 +6904,7 @@
     syncShellLayout: syncShellLayout,
     enhanceSecondaryNavigation: enhanceSecondaryNavigation
   };
-  window.workbenchNavigationInstalled = true;
+  window.heritageNavigationInstalled = true;
 }());
 ;
 
@@ -7266,7 +7266,7 @@
     details.hidden = expanded;
   }
 
-  window.workbenchDashboardMetrics = { enhance: enhance, parsePayload: parsePayload };
+  window.heritageDashboardMetrics = { enhance: enhance, parsePayload: parsePayload };
   document.addEventListener('DOMContentLoaded', function () { enhance(document); });
   document.addEventListener('workbench:content-ready', function (event) { enhance(event.detail && event.detail.root ? event.detail.root : document); });
   document.addEventListener('click', function (event) {
@@ -7387,7 +7387,7 @@
   };
 
   function language() {
-    var active = typeof window.workbenchLanguage === 'function' ? window.workbenchLanguage() : String(document.documentElement.lang || 'en');
+    var active = typeof window.heritageLanguage === 'function' ? window.heritageLanguage() : String(document.documentElement.lang || 'en');
     return String(active).toLowerCase().indexOf('de') === 0 ? 'de' : 'en';
   }
 
@@ -7769,8 +7769,8 @@
     // Render the declarative metric payload before the source dashlet is split
     // into atomic widgets. Removing the source first also removed its JSON
     // payload, leaving all four charts permanently empty after login.
-    if (window.workbenchDashboardMetrics && typeof window.workbenchDashboardMetrics.enhance === 'function') {
-      window.workbenchDashboardMetrics.enhance(source);
+    if (window.heritageDashboardMetrics && typeof window.heritageDashboardMetrics.enhance === 'function') {
+      window.heritageDashboardMetrics.enhance(source);
     }
     decorateMetrics(source);
     var cards = Array.prototype.slice.call(source.querySelectorAll('.wb-dashboard-metric-card'));
@@ -8477,7 +8477,7 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', installDashboardEnhancer);
   else installDashboardEnhancer();
-  window.workbenchDashboardLayout = { enhance: enhance, storageKey: STORAGE_KEY };
+  window.heritageDashboardLayout = { enhance: enhance, storageKey: STORAGE_KEY };
 }());
 ;
 
@@ -8599,13 +8599,13 @@
     focus(openDialog);
   });
 
-  window.workbenchDialog = {
+  window.heritageDialog = {
     open: open,
     close: close,
     focus: focus,
     isOpen: isOpen
   };
-  window.workbenchDialogInstalled = true;
+  window.heritageDialogInstalled = true;
 }());
 ;
 
@@ -8690,8 +8690,8 @@
     enhance(document);
   }
 
-  window.workbenchDisclosure = { enhance: enhance };
-  window.workbenchDisclosureInstalled = true;
+  window.heritageDisclosure = { enhance: enhance };
+  window.heritageDisclosureInstalled = true;
 }());
 ;
 
@@ -8700,8 +8700,8 @@
   'use strict';
 
   var messages = {};
-  var language = typeof window.workbenchLanguage === 'function'
-    ? window.workbenchLanguage()
+  var language = typeof window.heritageLanguage === 'function'
+    ? window.heritageLanguage()
     : document.documentElement.lang;
   var isGerman = String(language || document.documentElement.lang || '').toLowerCase().indexOf('de') === 0;
 
@@ -8720,7 +8720,7 @@
   }
 
   function app() {
-    return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null;
+    return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null;
   }
 
   function editableHost() {
@@ -8887,7 +8887,7 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', enhance, { once: true });
   else enhance();
 
-  window.workbenchFormState = {
+  window.heritageFormState = {
     enhance: enhance,
     setState: setState,
     getState: function () {
@@ -8899,7 +8899,7 @@
       return status && status.dataset.changedCount !== undefined ? Number(status.dataset.changedCount) : null;
     }
   };
-  window.workbenchFormStateInstalled = true;
+  window.heritageFormStateInstalled = true;
 }());
 ;
 
@@ -9019,7 +9019,7 @@
       if (window.ResizeObserver) new ResizeObserver(function () { revealActive(wrapper); update(wrapper); }).observe(list);
       revealActive(wrapper);
       update(wrapper);
-      if (window.workbenchIcons) window.workbenchIcons.render(wrapper);
+      if (window.heritageIcons) window.heritageIcons.render(wrapper);
     });
   }
 
@@ -9036,8 +9036,8 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { enhance(document); }, { once: true });
   else enhance(document);
 
-  window.workbenchTabstrip = { enhance: enhance, update: update, revealActive: revealActive };
-  window.workbenchTabstripInstalled = true;
+  window.heritageTabstrip = { enhance: enhance, update: update, revealActive: revealActive };
+  window.heritageTabstripInstalled = true;
 }());
 ;
 
@@ -9049,7 +9049,7 @@
   var committing = false;
 
   function app() {
-    return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null;
+    return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null;
   }
 
   function dialog() {
@@ -9080,16 +9080,16 @@
 
   function open(anchor, mode) {
     var target = dialog();
-    if (!target || !window.workbenchDialog || pending) return false;
+    if (!target || !window.heritageDialog || pending) return false;
     pending = { anchor: anchor, mode: mode };
     configure(target, mode);
-    return window.workbenchDialog.open(target, anchor);
+    return window.heritageDialog.open(target, anchor);
   }
 
   function cancel() {
     var target = dialog();
     pending = null;
-    if (target && window.workbenchDialog) window.workbenchDialog.close(target, true);
+    if (target && window.heritageDialog) window.heritageDialog.close(target, true);
   }
 
   function commit(action) {
@@ -9098,7 +9098,7 @@
     if (!decision || !decision.anchor || !decision.anchor.isConnected || !target) return cancel();
     pending = null;
     committing = true;
-    window.workbenchDialog.close(target, false);
+    window.heritageDialog.close(target, false);
     committing = false;
     var runtime = app();
     if (!runtime || typeof runtime.switchTabDecision !== 'function') return;
@@ -9135,11 +9135,11 @@
     pending = null;
   });
 
-  window.workbenchTabConfirm = {
+  window.heritageTabConfirm = {
     getPendingMode: function () { return pending ? pending.mode : null; },
     cancel: cancel
   };
-  window.workbenchTabConfirmInstalled = true;
+  window.heritageTabConfirmInstalled = true;
 }());
 ;
 
@@ -9282,10 +9282,10 @@
     if (dialog.dataset.workbenchFocusTrap !== 'true') {
       dialog.dataset.workbenchFocusTrap = 'true';
       dialog.addEventListener('keydown', function (event) {
-        if (event.key === 'Escape' && window.workbenchDialog) {
+        if (event.key === 'Escape' && window.heritageDialog) {
           event.preventDefault();
           event.stopPropagation();
-          window.workbenchDialog.close(dialog, true);
+          window.heritageDialog.close(dialog, true);
           return;
         }
         if (event.key !== 'Tab') return;
@@ -9344,14 +9344,14 @@
     enhance(document);
   }
 
-  window.workbenchAccessibility = {
+  window.heritageAccessibility = {
     enhance: enhance,
     focusDialog: focusDialog,
     restoreDialogFocus: restoreDialogFocus,
     focusLoadedPage: focusLoadedPage,
     focusNavigationError: focusNavigationError
   };
-  window.workbenchAccessibilityInstalled = true;
+  window.heritageAccessibilityInstalled = true;
 }());
 ;
 
@@ -9444,7 +9444,7 @@
   function revealAndFocus(entry) {
     if (!entry || !entry.control) return false;
     var collapsed = entry.group.closest('.collapse:not(.in), .wb-collapse:not(.in)');
-    if (collapsed && window.workbenchInteractions) window.workbenchInteractions.collapse(collapsed, true, entry.control);
+    if (collapsed && window.heritageInteractions) window.heritageInteractions.collapse(collapsed, true, entry.control);
     window.setTimeout(function () {
       if (entry.control.offsetParent !== null) entry.control.focus();
     }, 0);
@@ -9454,7 +9454,7 @@
   function enhance(root, options) {
     var host = root && root.querySelectorAll ? root : document.getElementById('pageContent');
     if (!host) return { errors: 0, focused: false };
-    if (window.workbenchAccessibility) window.workbenchAccessibility.enhance(host);
+    if (window.heritageAccessibility) window.heritageAccessibility.enhance(host);
 
     localizeKnownValidationText(host);
     var entries = invalidEntries(host);
@@ -9517,8 +9517,8 @@
     enhance(document.getElementById('pageContent'));
   }
 
-  window.workbenchValidation = { enhance: enhance, revealAndFocus: revealAndFocus };
-  window.workbenchValidationInstalled = true;
+  window.heritageValidation = { enhance: enhance, revealAndFocus: revealAndFocus };
+  window.heritageValidationInstalled = true;
 }());
 ;
 
@@ -9553,7 +9553,7 @@
   }
 
   function runtime() {
-    return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null;
+    return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null;
   }
 
   function saveControl(root) {
@@ -9699,12 +9699,12 @@
         } else {
           currentApi.replaceServerFragment(root, responseText);
           currentApi.onAfterContentLoad(target, new URLSearchParams(new FormData(form)).toString());
-          if (window.workbenchContentStates && typeof window.workbenchContentStates.enhance === 'function') {
-            window.workbenchContentStates.enhance(root, target, { source: 'submit-feedback', focus: true });
+          if (window.heritageContentStates && typeof window.heritageContentStates.enhance === 'function') {
+            window.heritageContentStates.enhance(root, target, { source: 'submit-feedback', focus: true });
           } else {
-            if (window.workbenchAccessibility) window.workbenchAccessibility.enhance(root);
-            if (window.workbenchValidation) window.workbenchValidation.enhance(root, { focus: true });
-            if (window.workbenchFeedback) window.workbenchFeedback.enhance(root);
+            if (window.heritageAccessibility) window.heritageAccessibility.enhance(root);
+            if (window.heritageValidation) window.heritageValidation.enhance(root, { focus: true });
+            if (window.heritageFeedback) window.heritageFeedback.enhance(root);
           }
           currentApi.pageFormChanged = false;
         }
@@ -9722,21 +9722,21 @@
     legacy.workbenchSubmitFeedbackInstalled = true;
   }
 
-  window.workbenchSubmitFeedback = {
+  window.heritageSubmitFeedback = {
     begin: begin,
     success: success,
     failure: failure,
     complete: complete,
     isActive: function () { return Boolean(active); }
   };
-  window.workbenchSubmitFeedbackInstalled = true;
+  window.heritageSubmitFeedbackInstalled = true;
 }());
 ;
 
 /* source: heritage-list-filter.js */
 (function(window, document) {
   'use strict';
-  function runtime() { return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null; }
+  function runtime() { return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null; }
   var legacy = window.ISPConfig;
   var app = runtime();
   if (!legacy || !app || typeof legacy.submitForm !== 'function' || legacy.workbenchListFilterInstalled) return;
@@ -9791,7 +9791,7 @@
     var control = event.target && event.target.closest ? event.target.closest('#pageContent select[name^="search_"]') : null;
     if (control && document.body.classList.contains('wb-list-page')) changedSearchControl = control;
   }, true);
-  window.workbenchListFilter = { isActive: function() { return Boolean(active); } };
+  window.heritageListFilter = { isActive: function() { return Boolean(active); } };
   legacy.workbenchListFilterInstalled = true;
 })(window, document);
 ;
@@ -9801,7 +9801,7 @@
   'use strict';
 
   function app() {
-    return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null;
+    return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null;
   }
 
   var runtime = app();
@@ -9963,7 +9963,7 @@
     var wrapper = table.closest('.table-wrapper');
     if (wrapper) wrapper.classList.add('wb-statistics-table');
     table.classList.add('wb-statistics-data-table');
-    if (window.workbenchIcons) window.workbenchIcons.render(host);
+    if (window.heritageIcons) window.heritageIcons.render(host);
     return true;
   }
 
@@ -9987,7 +9987,7 @@
     enhance(params && params.url ? params.url : (window.history.state && window.history.state.workbenchContent));
   });
 
-  window.workbenchStatistics = { enhance: enhance, reports: reports.slice() };
+  window.heritageStatistics = { enhance: enhance, reports: reports.slice() };
   runtime.workbenchStatisticsInstalled = true;
 })(window, document);
 ;
@@ -9995,7 +9995,7 @@
 /* source: heritage-wizard-preview.js */
 (function(window, document) {
   'use strict';
-  function runtime() { return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null; }
+  function runtime() { return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null; }
   var legacy = window.ISPConfig;
   var app = runtime();
   if (!legacy || !app || typeof legacy.submitForm !== 'function' || legacy.workbenchWizardPreviewInstalled) return;
@@ -10029,7 +10029,7 @@
     }).catch(function(error) { if (!request.aborted && (!error || error.name !== 'AbortError')) api.reportError('Wizard preview request was not successful.'); }).finally(function() { finish(request); });
     return request;
   };
-  window.workbenchWizardPreview = { isActive: function() { return Boolean(active); } };
+  window.heritageWizardPreview = { isActive: function() { return Boolean(active); } };
   legacy.workbenchWizardPreviewInstalled = true;
 })(window, document);
 ;
@@ -10041,7 +10041,7 @@
   var codeFieldPattern = /(?:config|directive|rules?|template|snippet|php_ini|ssl_(?:key|cert|bundle|request)|ssh_rsa|dkim_(?:private|public)|dns_record|custom_mailfilter)/i;
 
   function localized(german, english) {
-    var language = typeof window.workbenchLanguage === 'function' ? window.workbenchLanguage() : (document.documentElement.lang || '');
+    var language = typeof window.heritageLanguage === 'function' ? window.heritageLanguage() : (document.documentElement.lang || '');
     return String(language).toLowerCase().indexOf('de') === 0 ? german : english;
   }
 
@@ -10199,7 +10199,7 @@
 (function (window, document) {
   'use strict';
 
-  function runtime() { return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null; }
+  function runtime() { return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null; }
   var legacy = window.ISPConfig;
   var app = runtime();
   if (!legacy || !app || typeof legacy.submitUploadForm !== 'function' || legacy.workbenchUploadFeedbackInstalled) return;
@@ -10219,7 +10219,7 @@
   }
 
   function matchingControl(formname, target) {
-    if (formname !== 'pageForm' || !window.workbenchHttp || typeof window.workbenchHttp.postMultipart !== 'function') return null;
+    if (formname !== 'pageForm' || !window.heritageHttp || typeof window.heritageHttp.postMultipart !== 'function') return null;
     var root = document.getElementById('pageContent');
     var control = root && root.querySelector('.formbutton-success[data-submit-form="pageForm"][data-form-upload="true"][data-form-action]');
     return control && requestPath(target) === requestPath(control.getAttribute('data-form-action')) ? control : null;
@@ -10328,7 +10328,7 @@
     }, 7000);
 
     var request;
-    try { request = window.workbenchHttp.postMultipart(form, target, { timeout: 120000 }); }
+    try { request = window.heritageHttp.postMultipart(form, target, { timeout: 120000 }); }
     catch (error) { finish('failed', messages.upload_failed || 'The upload response was invalid. Try again.'); throw error; }
     active.request = request;
     request.promise.then(function(markup) {
@@ -10347,7 +10347,7 @@
     return request;
   };
 
-  window.workbenchUploadFeedback = {
+  window.heritageUploadFeedback = {
     isActive: function () { return Boolean(active); },
     abort: function () { if (active && active.request) active.request.abort(); finish('failed', messages.upload_failed || 'The upload response was invalid. Try again.'); }
   };
@@ -10362,12 +10362,12 @@
   var activeRequest = null;
 
   function app() {
-    return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null;
+    return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null;
   }
 
   function init() {
     var root = document.querySelector('[data-wb-branding-editor]');
-    if (!root || root.dataset.ready === 'true' || !window.workbenchHttp) return;
+    if (!root || root.dataset.ready === 'true' || !window.heritageHttp) return;
     root.dataset.ready = 'true';
 
     var color = root.querySelector('#workbench-accent-color');
@@ -10416,7 +10416,7 @@
       colorValue.textContent = next;
       document.documentElement.style.setProperty('--wb-accent', next);
       document.documentElement.style.setProperty('--wb-action', next);
-      if (window.workbenchApplyAccentContrast) window.workbenchApplyAccentContrast(next);
+      if (window.heritageApplyAccentContrast) window.heritageApplyAccentContrast(next);
     }
 
     function preview(file, target) {
@@ -10529,7 +10529,7 @@
       }
 
       try {
-        activeRequest.handle = window.workbenchHttp.postMultipartJson(body, endpoint(), { timeout: 120000 });
+        activeRequest.handle = window.heritageHttp.postMultipartJson(body, endpoint(), { timeout: 120000 });
         var result = await activeRequest.handle.promise;
         var payload = result.payload || {};
         var rotated = updateCsrf(payload);
@@ -10582,7 +10582,7 @@
 (function (window, document) {
   'use strict';
 
-  if (window.workbenchGlobalSearchInstalled) {
+  if (window.heritageGlobalSearchInstalled) {
     return;
   }
 
@@ -10592,8 +10592,8 @@
   var activeIndex = -1;
 
   function app() {
-    return typeof window.workbenchRuntime === 'function'
-      ? window.workbenchRuntime()
+    return typeof window.heritageRuntime === 'function'
+      ? window.heritageRuntime()
       : null;
   }
 
@@ -11104,8 +11104,8 @@
     init();
   }
 
-  window.workbenchGlobalSearch = { init: init };
-  window.workbenchGlobalSearchInstalled = true;
+  window.heritageGlobalSearch = { init: init };
+  window.heritageGlobalSearchInstalled = true;
 }(window, document));
 ;
 
@@ -11226,7 +11226,7 @@
     root.setAttribute('data-wb-theme', dark ? 'dark' : 'light');
     applyAccessibleAction(cssToken('--wb-accent', '#cc151c'));
     Array.prototype.forEach.call(document.querySelectorAll('.wb-theme-toggle'), function (button) {
-      var german = typeof window.workbenchLanguage === 'function' && window.workbenchLanguage() === 'de';
+      var german = typeof window.heritageLanguage === 'function' && window.heritageLanguage() === 'de';
       button.setAttribute('aria-label', dark
         ? (german ? 'Zum hellen Design wechseln' : 'Switch to light theme')
         : (german ? 'Zum dunklen Design wechseln' : 'Switch to dark theme'));
@@ -11325,8 +11325,8 @@
     apply(next);
   });
   document.addEventListener('workbench:navigation-complete', scheduleChartTheme);
-  window.workbenchChartTheme = { apply: applyChartTheme };
-  window.workbenchApplyAccentContrast = applyAccessibleAction;
+  window.heritageChartTheme = { apply: applyChartTheme };
+  window.heritageApplyAccentContrast = applyAccessibleAction;
 }());
 ;
 
@@ -11742,7 +11742,7 @@
     });
   });
 
-  window.workbenchSelect = { enhance: enhance, destroy: destroy, open: open, close: close };
-  window.workbenchSelectInstalled = true;
+  window.heritageSelect = { enhance: enhance, destroy: destroy, open: open, close: close };
+  window.heritageSelectInstalled = true;
 }());
 ;

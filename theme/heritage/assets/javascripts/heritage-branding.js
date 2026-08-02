@@ -4,12 +4,12 @@
   var activeRequest = null;
 
   function app() {
-    return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null;
+    return typeof window.heritageRuntime === 'function' ? window.heritageRuntime() : null;
   }
 
   function init() {
     var root = document.querySelector('[data-wb-branding-editor]');
-    if (!root || root.dataset.ready === 'true' || !window.workbenchHttp) return;
+    if (!root || root.dataset.ready === 'true' || !window.heritageHttp) return;
     root.dataset.ready = 'true';
 
     var color = root.querySelector('#workbench-accent-color');
@@ -58,7 +58,7 @@
       colorValue.textContent = next;
       document.documentElement.style.setProperty('--wb-accent', next);
       document.documentElement.style.setProperty('--wb-action', next);
-      if (window.workbenchApplyAccentContrast) window.workbenchApplyAccentContrast(next);
+      if (window.heritageApplyAccentContrast) window.heritageApplyAccentContrast(next);
     }
 
     function preview(file, target) {
@@ -171,7 +171,7 @@
       }
 
       try {
-        activeRequest.handle = window.workbenchHttp.postMultipartJson(body, endpoint(), { timeout: 120000 });
+        activeRequest.handle = window.heritageHttp.postMultipartJson(body, endpoint(), { timeout: 120000 });
         var result = await activeRequest.handle.promise;
         var payload = result.payload || {};
         var rotated = updateCsrf(payload);
