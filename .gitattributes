@@ -1,3 +1,5 @@
+* text=auto eol=lf
+
 *.sh text eol=lf
 *.yml text eol=lf
 *.yaml text eol=lf
@@ -6,3 +8,10 @@
 *.css text eol=lf
 *.js text eol=lf
 *.htm text eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.woff binary
+*.woff2 binary
