@@ -4,26 +4,26 @@
 <p><tmpl_var name="list_desc_txt"></p>
 
 
-        <p class="wb-list-section-heading">{tmpl_var name="toolsarea_head_txt"}</p>
+        <p class="hg-list-section-heading">{tmpl_var name="toolsarea_head_txt"}</p>
 
                 <button class="formbutton-success" type="button" data-heritage-load-content="dns/dns_template_edit.php" data-load-content="dns/dns_template_edit.php">{tmpl_var name="add_new_record_txt"}</button>
 
 
 
 
-        <p class="wb-list-section-heading"><tmpl_var name="list_head_txt"></p>
-            <div class="wb-table-workspace">
-<table class="table wb-data-table">
+        <p class="hg-list-section-heading"><tmpl_var name="list_head_txt"></p>
+            <div class="hg-table-workspace">
+<table class="table hg-data-table">
                 <thead >
                     <tr>
                         <th data-column="visible"><tmpl_var name="visible_txt"></th>
                         <th data-column="name"><tmpl_var name="name_txt"></th>
-                        <th class="wb-table-actions-column wb-table-align-end">{tmpl_var name='search_limit'}</th>
+                        <th class="hg-table-actions-column hg-table-align-end">{tmpl_var name='search_limit'}</th>
                     </tr>
                     <tr>
                         <td><select class="form-control" name="search_visible">{tmpl_var name='search_visible'}</select></td>
                         <td><input class="form-control" type="text" name="search_name" value="{tmpl_var name='search_name'}" /></td>
-                        <td class="wb-table-align-end">
+                        <td class="hg-table-align-end">
                             <button type="button" class="formbutton-default formbutton-narrow" name="Filter" id="Filter" value="{tmpl_var name="filter_txt"}" data-submit-form="pageForm" data-form-action="dns/dns_template_list.php"><span class="icon icon-filter"></span></button>
                         </td>
                     </tr>
@@ -33,7 +33,7 @@
                     <tr>
                         <td><a href="#" data-heritage-load-content="dns/dns_template_edit.php?id={tmpl_var name='id'}" data-load-content="dns/dns_template_edit.php?id={tmpl_var name='id'}">{tmpl_var name="visible"}</a></td>
                         <td><a href="#" data-heritage-load-content="dns/dns_template_edit.php?id={tmpl_var name='id'}" data-load-content="dns/dns_template_edit.php?id={tmpl_var name='id'}">{tmpl_var name="name"}</a></td>
-                        <td class="wb-table-align-end">
+                        <td class="hg-table-align-end">
                             <a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="dns/dns_template_del.php?id={tmpl_var name='id'}&_csrf_id={tmpl_var name='csrf_id'}&_csrf_key={tmpl_var name='csrf_key'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete"></span></a>
                         </td>
                     </tr>

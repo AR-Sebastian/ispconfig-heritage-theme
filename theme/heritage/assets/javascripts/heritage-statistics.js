@@ -76,15 +76,15 @@
 
   function metric(label, value, state, detail) {
     var card = document.createElement('article');
-    card.className = 'wb-statistics-metric wb-statistics-metric--' + (state || 'neutral');
+    card.className = 'hg-statistics-metric hg-statistics-metric--' + (state || 'neutral');
     var labelNode = document.createElement('span');
-    labelNode.className = 'wb-statistics-metric__label';
+    labelNode.className = 'hg-statistics-metric__label';
     labelNode.textContent = label;
     var valueNode = document.createElement('strong');
-    valueNode.className = 'wb-statistics-metric__value';
+    valueNode.className = 'hg-statistics-metric__value';
     valueNode.textContent = value;
     var detailNode = document.createElement('small');
-    detailNode.className = 'wb-statistics-metric__detail';
+    detailNode.className = 'hg-statistics-metric__detail';
     detailNode.textContent = detail || '';
     card.appendChild(labelNode);
     card.appendChild(valueNode);
@@ -94,13 +94,13 @@
 
   function navigation(active) {
     var nav = document.createElement('nav');
-    nav.className = 'wb-statistics-navigation';
+    nav.className = 'hg-statistics-navigation';
     nav.setAttribute('aria-label', t('reports'));
     reports.forEach(function (report) {
       var label = report.labels[language()] || report.labels.en;
       var link = document.createElement('a');
       link.href = '#';
-      link.className = 'wb-statistics-navigation__item';
+      link.className = 'hg-statistics-navigation__item';
       link.textContent = label;
       link.setAttribute('data-heritage-load-content', report.path);
       link.setAttribute('aria-label', t('open', { name: label }));
@@ -117,14 +117,14 @@
     var report = currentReport(pageName || (window.history.state && window.history.state.heritageContent));
     var host = document.getElementById('pageContent');
     if (!host) return false;
-    document.body.classList.toggle('wb-statistics-page', Boolean(report));
+    document.body.classList.toggle('hg-statistics-page', Boolean(report));
     if (!report || host.dataset.heritageStatisticsReport === report.key) return Boolean(report);
 
     var table = host.querySelector('.table-wrapper table.table, table.table');
     if (!table) return false;
     host.dataset.heritageStatisticsEnhanced = 'true';
     host.dataset.heritageStatisticsReport = report.key;
-    host.classList.add('wb-statistics-workspace');
+    host.classList.add('hg-statistics-workspace');
     var rows = recordRows(table);
     var filters = activeFilters(host);
     var notices = quotaNotices(host);
@@ -136,9 +136,9 @@
     if (duplicateLegend) duplicateLegend.hidden = true;
 
     var hero = document.createElement('header');
-    hero.className = 'wb-statistics-hero';
+    hero.className = 'hg-statistics-hero';
     var eyebrow = document.createElement('span');
-    eyebrow.className = 'wb-statistics-hero__eyebrow';
+    eyebrow.className = 'hg-statistics-hero__eyebrow';
     eyebrow.textContent = t('eyebrow');
     var copy = document.createElement('div');
     var title = document.createElement('h1');
@@ -153,17 +153,17 @@
     hero.insertAdjacentElement('afterend', navigation(report));
 
     var metrics = document.createElement('section');
-    metrics.className = 'wb-statistics-metrics';
+    metrics.className = 'hg-statistics-metrics';
     metrics.setAttribute('aria-label', t('title'));
     metrics.appendChild(metric(t('visible'), String(rows.length), 'neutral', reportLabel));
     metrics.appendChild(metric(t('filters'), filters ? String(filters) : t('none'), filters ? 'active' : 'neutral', filters ? t('report') : ''));
     metrics.appendChild(metric(t('notices'), String(notices), notices ? 'warning' : 'healthy', notices ? t('warning', { count: notices }) : t('healthy')));
     metrics.appendChild(metric(t('report'), reportLabel, 'accent', t('reports')));
-    host.querySelector('.wb-statistics-navigation').insertAdjacentElement('afterend', metrics);
+    host.querySelector('.hg-statistics-navigation').insertAdjacentElement('afterend', metrics);
 
     var wrapper = table.closest('.table-wrapper');
-    if (wrapper) wrapper.classList.add('wb-statistics-table');
-    table.classList.add('wb-statistics-data-table');
+    if (wrapper) wrapper.classList.add('hg-statistics-table');
+    table.classList.add('hg-statistics-data-table');
     if (window.heritageIcons) window.heritageIcons.render(host);
     return true;
   }
@@ -172,7 +172,7 @@
     enhance(event.detail && event.detail.page);
   });
   document.addEventListener('click', function (event) {
-    var launcher = event.target && event.target.closest ? event.target.closest('.wb-statistics-launcher[data-heritage-load-content], .wb-statistics-launcher[data-load-content]') : null;
+    var launcher = event.target && event.target.closest ? event.target.closest('.hg-statistics-launcher[data-heritage-load-content], .hg-statistics-launcher[data-load-content]') : null;
     var current = app();
     if (!launcher || !current || typeof current.capp !== 'function') return;
     event.preventDefault();

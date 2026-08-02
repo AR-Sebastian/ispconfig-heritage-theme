@@ -22,7 +22,7 @@
       var heading = table.closest('#pageContent, .dashlet')?.querySelector('.page-header h1, .fieldset-legend, h1, h2');
       if (heading && heading.textContent.trim()) {
         var caption = document.createElement('caption');
-        caption.className = 'wb-visually-hidden';
+        caption.className = 'hg-visually-hidden';
         caption.textContent = heading.textContent.trim();
         table.prepend(caption);
       }
@@ -50,9 +50,9 @@
     var label = group.querySelector(':scope > label.control-label');
     var controls = Array.from(group.querySelectorAll('input:not([type="hidden"]), select, textarea'));
     if (label && controls.length === 1 && !hasAccessibleName(controls[0])) {
-      label.htmlFor = ensureId(controls[0], 'wb-field');
+      label.htmlFor = ensureId(controls[0], 'hg-field');
     } else if (label && controls.length > 1) {
-      var labelId = ensureId(label, 'wb-group-label');
+      var labelId = ensureId(label, 'hg-group-label');
       controls.forEach(function (control) {
         if (!hasAccessibleName(control)) control.setAttribute('aria-labelledby', labelId);
       });
@@ -63,7 +63,7 @@
       controls.forEach(function (control) {
         control.setAttribute('aria-invalid', 'true');
         if (error) {
-          var errorId = ensureId(error, 'wb-field-error');
+          var errorId = ensureId(error, 'hg-field-error');
           var describedBy = (control.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean);
           if (!describedBy.includes(errorId)) describedBy.push(errorId);
           control.setAttribute('aria-describedby', describedBy.join(' '));
@@ -95,7 +95,7 @@
   }
 
   function dialogIsOpen() {
-    return Boolean(document.querySelector('.wb-dialog:not([hidden]):not([aria-hidden="true"]), .modal.in[role="dialog"], .modal.show[role="dialog"]'));
+    return Boolean(document.querySelector('.hg-dialog:not([hidden]):not([aria-hidden="true"]), .modal.in[role="dialog"], .modal.show[role="dialog"]'));
   }
 
   function focusPageTarget(target) {
@@ -117,13 +117,13 @@
 
   function focusLoadedPage(root, context) {
     if (!root || !context || context.source !== 'navigation') return false;
-    var heading = root.querySelector(':scope > .wb-page-header h1, :scope > .page-header h1, :scope > h1');
+    var heading = root.querySelector(':scope > .hg-page-header h1, :scope > .page-header h1, :scope > h1');
     return focusPageTarget(heading || root);
   }
 
   function focusNavigationError(root) {
     if (!root) return false;
-    return focusPageTarget(root.querySelector('.wb-content-state--error .wb-content-state__retry, .wb-content-state--error'));
+    return focusPageTarget(root.querySelector('.hg-content-state--error .hg-content-state__retry, .hg-content-state--error'));
   }
 
   function enhanceDialog(dialog) {
@@ -131,7 +131,7 @@
     if (!dialog.hasAttribute('aria-modal')) dialog.setAttribute('aria-modal', 'true');
     if (!dialog.getAttribute('aria-label') && !dialog.getAttribute('aria-labelledby')) {
       var title = dialog.querySelector('.modal-title, h1, h2, h3, h4');
-      if (title) dialog.setAttribute('aria-labelledby', ensureId(title, 'wb-dialog-title'));
+      if (title) dialog.setAttribute('aria-labelledby', ensureId(title, 'hg-dialog-title'));
     }
     if (dialog.dataset.heritageFocusTrap !== 'true') {
       dialog.dataset.heritageFocusTrap = 'true';

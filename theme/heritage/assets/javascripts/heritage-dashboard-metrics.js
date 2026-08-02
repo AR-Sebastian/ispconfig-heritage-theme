@@ -89,7 +89,7 @@
   function renderSparkline(host, width, height, label, state, points, area, line, data, labels) {
     var namespace = 'http://www.w3.org/2000/svg';
     host.replaceChildren();
-    host.classList.remove('wb-dashboard-sparkline--empty', 'wb-dashboard-sparkline--error');
+    host.classList.remove('hg-dashboard-sparkline--empty', 'hg-dashboard-sparkline--error');
     var svg = document.createElementNS(namespace, 'svg');
     svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
     svg.setAttribute('role', 'img');
@@ -99,36 +99,36 @@
     title.textContent = label + ': ' + copy.current + ' ' + formatNumber(state.latest) + ', ' + copy.minimum + ' ' + formatNumber(state.min) + ', ' + copy.maximum + ' ' + formatNumber(state.max);
     var polygon = document.createElementNS(namespace, 'polygon');
     polygon.setAttribute('points', area);
-    polygon.setAttribute('class', 'wb-dashboard-sparkline__area');
+    polygon.setAttribute('class', 'hg-dashboard-sparkline__area');
     var polyline = document.createElementNS(namespace, 'polyline');
     polyline.setAttribute('points', line);
-    polyline.setAttribute('class', 'wb-dashboard-sparkline__line');
+    polyline.setAttribute('class', 'hg-dashboard-sparkline__line');
     svg.appendChild(title);
     svg.appendChild(polygon);
     svg.appendChild(polyline);
     var guide = document.createElementNS(namespace, 'line');
     guide.setAttribute('y1', String(7));
     guide.setAttribute('y2', String(height - 7));
-    guide.setAttribute('class', 'wb-dashboard-sparkline__guide');
+    guide.setAttribute('class', 'hg-dashboard-sparkline__guide');
     guide.hidden = true;
     svg.appendChild(guide);
     var tooltip = document.createElement('output');
-    tooltip.className = 'wb-dashboard-sparkline__tooltip';
-    tooltip.id = 'wb-metric-tooltip-' + String(host.id || label).replace(/[^a-z0-9_-]+/gi, '-').toLowerCase();
+    tooltip.className = 'hg-dashboard-sparkline__tooltip';
+    tooltip.id = 'hg-metric-tooltip-' + String(host.id || label).replace(/[^a-z0-9_-]+/gi, '-').toLowerCase();
     tooltip.setAttribute('role', 'status');
     tooltip.setAttribute('aria-live', 'polite');
     tooltip.hidden = true;
     svg.setAttribute('aria-describedby', tooltip.id);
 
     function activatePoint(point, coordinates, description) {
-      queryAll(svg, '.wb-dashboard-sparkline__hit').forEach(function (entry) {
+      queryAll(svg, '.hg-dashboard-sparkline__hit').forEach(function (entry) {
         entry.classList.toggle('is-active', entry === point);
       });
       guide.setAttribute('x1', coordinates[0].toFixed(1));
       guide.setAttribute('x2', coordinates[0].toFixed(1));
       guide.hidden = false;
       tooltip.textContent = description;
-      tooltip.style.setProperty('--wb-metric-point-x', ((coordinates[0] / width) * 100).toFixed(2) + '%');
+      tooltip.style.setProperty('--hg-metric-point-x', ((coordinates[0] / width) * 100).toFixed(2) + '%');
       tooltip.hidden = false;
     }
 
@@ -141,7 +141,7 @@
 
     function releasePinnedPoint() {
       delete host.dataset.heritageMetricPinned;
-      queryAll(svg, '.wb-dashboard-sparkline__hit').forEach(function (entry) {
+      queryAll(svg, '.hg-dashboard-sparkline__hit').forEach(function (entry) {
         entry.classList.remove('is-active');
       });
       guide.hidden = true;
@@ -149,7 +149,7 @@
     }
 
     function movePoint(point, offset) {
-      var pointNodes = queryAll(svg, '.wb-dashboard-sparkline__hit');
+      var pointNodes = queryAll(svg, '.hg-dashboard-sparkline__hit');
       var current = pointNodes.indexOf(point);
       if (current < 0) return;
       pointNodes[(current + offset + pointNodes.length) % pointNodes.length].focus();
@@ -162,7 +162,7 @@
       point.setAttribute('cx', coordinates[0].toFixed(1));
       point.setAttribute('cy', coordinates[1].toFixed(1));
       point.setAttribute('r', index === points.length - 1 ? '3.5' : '2.5');
-      point.setAttribute('class', 'wb-dashboard-sparkline__point wb-dashboard-sparkline__hit');
+      point.setAttribute('class', 'hg-dashboard-sparkline__point hg-dashboard-sparkline__hit');
       point.setAttribute('tabindex', '0');
       point.setAttribute('role', 'img');
       point.setAttribute('aria-label', description);
@@ -192,10 +192,10 @@
           movePoint(point, -1);
         } else if (event.key === 'Home') {
           event.preventDefault();
-          queryAll(svg, '.wb-dashboard-sparkline__hit')[0].focus();
+          queryAll(svg, '.hg-dashboard-sparkline__hit')[0].focus();
         } else if (event.key === 'End') {
           event.preventDefault();
-          var pointNodes = queryAll(svg, '.wb-dashboard-sparkline__hit');
+          var pointNodes = queryAll(svg, '.hg-dashboard-sparkline__hit');
           pointNodes[pointNodes.length - 1].focus();
         } else if (event.key === 'Escape') {
           event.preventDefault();
@@ -218,7 +218,7 @@
   function renderMetric(root, id, series, labels) {
     var node = root.querySelector('#' + id);
     if (!node) return false;
-    var card = root.querySelector('[data-heritage-metric-card="' + id + '"]') || node.closest('.wb-dashboard-metric-card');
+    var card = root.querySelector('[data-heritage-metric-card="' + id + '"]') || node.closest('.hg-dashboard-metric-card');
     var data = numberList(series && series.data);
     var value = root.querySelector('[data-heritage-dashboard-metric-value="' + id + '"]');
     var trend = root.querySelector('[data-heritage-metric-trend="' + id + '"]');
@@ -231,9 +231,9 @@
 
     if (!data.length) {
       node.replaceChildren();
-      node.classList.add('wb-dashboard-sparkline--empty');
+      node.classList.add('hg-dashboard-sparkline--empty');
       var emptyState = document.createElement('span');
-      emptyState.className = 'wb-dashboard-sparkline__state';
+      emptyState.className = 'hg-dashboard-sparkline__state';
       emptyState.textContent = copy.noValues;
       node.appendChild(emptyState);
       if (value) value.textContent = '-';
@@ -310,11 +310,11 @@
         data = parsePayload(payload.textContent || '{}');
       } catch (error) {
         payload.dataset.heritageDashboardMetricsState = 'error';
-        queryAll(root, '.wb-dashboard-sparkline').forEach(function (node) {
+        queryAll(root, '.hg-dashboard-sparkline').forEach(function (node) {
           node.replaceChildren();
-          node.classList.add('wb-dashboard-sparkline--error');
+          node.classList.add('hg-dashboard-sparkline--error');
           var errorState = document.createElement('span');
-          errorState.className = 'wb-dashboard-sparkline__state';
+          errorState.className = 'hg-dashboard-sparkline__state';
           errorState.textContent = text().unavailable;
           node.appendChild(errorState);
           node.setAttribute('role', 'status');

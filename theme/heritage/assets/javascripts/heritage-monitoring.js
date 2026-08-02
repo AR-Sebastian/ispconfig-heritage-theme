@@ -8,7 +8,7 @@
 
   function destroy(scope) {
     if (!scope || !window.Chart) return;
-    scope.querySelectorAll('.wb-monitor-chart canvas').forEach(function (canvas) {
+    scope.querySelectorAll('.hg-monitor-chart canvas').forEach(function (canvas) {
       var chart = chartFor(canvas);
       if (chart) chart.destroy();
     });
@@ -58,12 +58,12 @@
 
   function chartPalette(canvas, theme) {
     var palettes = {
-      loadchart: ['--wb-info', '#1769aa', 'load'],
-      memchart: ['--wb-chart-violet', '#6d5bd0', 'memory'],
-      rxchart: ['--wb-chart-teal', '#087f8c', 'network-in'],
-      txchart: ['--wb-chart-amber', '#996515', 'network-out']
+      loadchart: ['--hg-info', '#1769aa', 'load'],
+      memchart: ['--hg-chart-violet', '#6d5bd0', 'memory'],
+      rxchart: ['--hg-chart-teal', '#087f8c', 'network-in'],
+      txchart: ['--hg-chart-amber', '#996515', 'network-out']
     };
-    var selected = palettes[canvas.id] || ['--wb-info', '#1769aa', 'neutral'];
+    var selected = palettes[canvas.id] || ['--hg-info', '#1769aa', 'neutral'];
     var color = theme.getPropertyValue(selected[0]).trim() || selected[1];
     return { color: color, fallback: selected[1], metric: selected[2] };
   }
@@ -145,13 +145,13 @@
 
     var theme = getComputedStyle(document.documentElement);
     var palette = chartPalette(canvas, theme);
-    var text = theme.getPropertyValue('--wb-text-muted').trim() || '#687389';
-    var grid = theme.getPropertyValue('--wb-border').trim() || '#e1e5ed';
+    var text = theme.getPropertyValue('--hg-text-muted').trim() || '#687389';
+    var grid = theme.getPropertyValue('--hg-border').trim() || '#e1e5ed';
     canvas.setAttribute('role', 'img');
     canvas.setAttribute('aria-label', (series.label || copy('value')) + ' \u2013 ' + copy('chart'));
     if (card) {
       card.dataset.heritageMonitorMetric = palette.metric;
-      card.style.setProperty('--wb-monitor-chart-color', palette.color);
+      card.style.setProperty('--hg-monitor-chart-color', palette.color);
     }
     var chart = new window.Chart(canvas.getContext('2d'), {
       type: 'line',

@@ -35,7 +35,7 @@
   }
 
   function normalizeFeedback() {
-    var surface = document.querySelector('.wb-login-form-surface');
+    var surface = document.querySelector('.hg-login-form-surface');
     if (!surface) return;
 
     var nodes = surface.querySelectorAll('.alert, .box_error, .box_warning, .box_success, .box_info');
@@ -45,7 +45,7 @@
       if (!text) return;
 
       node.dataset.heritageLoginFeedbackNormalized = 'true';
-      node.classList.add('wb-login-feedback-normalized');
+      node.classList.add('hg-login-feedback-normalized');
       if (!node.getAttribute('role')) node.setAttribute('role', 'alert');
       if (!node.getAttribute('aria-live')) node.setAttribute('aria-live', 'polite');
 
@@ -54,14 +54,14 @@
       }
 
       var message = document.createElement('span');
-      message.className = 'wb-login-feedback-text';
+      message.className = 'hg-login-feedback-text';
       message.textContent = text;
       node.appendChild(message);
     });
   }
 
   function observeFeedback() {
-    var surface = document.querySelector('.wb-login-form-surface');
+    var surface = document.querySelector('.hg-login-form-surface');
     if (!surface || !('MutationObserver' in window)) return;
 
     var pending = false;
@@ -79,11 +79,11 @@
 
   ready(function () {
     var storage = getStorage();
-    var form = document.querySelector('.wb-login-form-surface form');
+    var form = document.querySelector('.hg-login-form-surface form');
     var username = document.getElementById('username');
     var remember = document.getElementById('remember_username');
     var stay = document.getElementById('stay');
-    var card = document.querySelector('.wb-login-card');
+    var card = document.querySelector('.hg-login-card');
 
     normalizeFeedback();
     observeFeedback();

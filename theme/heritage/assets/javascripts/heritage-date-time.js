@@ -99,20 +99,20 @@
     var pattern = input.dataset.dateFormat || (includeTime ? 'yyyy-mm-dd hh:ii' : 'yyyy-mm-dd');
     var includeSeconds = pattern.indexOf('ss') >= 0;
     var wrapper = document.createElement('span');
-    wrapper.className = 'wb-date-time-control';
+    wrapper.className = 'hg-date-time-control';
     input.parentNode.insertBefore(wrapper, input);
     wrapper.appendChild(input);
 
     var nativeInput = document.createElement('input');
     nativeInput.type = includeTime ? 'datetime-local' : 'date';
-    nativeInput.className = 'wb-date-time-control__native';
+    nativeInput.className = 'hg-date-time-control__native';
     nativeInput.tabIndex = -1;
     nativeInput.setAttribute('aria-hidden', 'true');
     if (includeSeconds) nativeInput.step = '1';
 
     var button = document.createElement('button');
     button.type = 'button';
-    button.className = 'wb-date-time-control__trigger';
+    button.className = 'hg-date-time-control__trigger';
     button.setAttribute('aria-label', labelFor(input, includeTime));
     button.appendChild(svgNode());
     wrapper.appendChild(nativeInput);
@@ -121,7 +121,7 @@
     function syncNative() {
       var parsed = parse(input.value, pattern);
       nativeInput.value = parsed ? toNative(parsed, includeTime, includeSeconds) : '';
-      input.classList.toggle('wb-date-time-control__text--invalid', Boolean(input.value.trim() && !parsed));
+      input.classList.toggle('hg-date-time-control__text--invalid', Boolean(input.value.trim() && !parsed));
     }
 
     button.addEventListener('click', function () {
@@ -133,7 +133,7 @@
       var parsed = fromNative(nativeInput.value);
       if (!parsed) return;
       input.value = format(parsed, pattern);
-      input.classList.remove('wb-date-time-control__text--invalid');
+      input.classList.remove('hg-date-time-control__text--invalid');
       input.dispatchEvent(new Event('input', { bubbles: true }));
       input.dispatchEvent(new Event('change', { bubbles: true }));
       input.focus();

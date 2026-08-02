@@ -2,16 +2,16 @@
 	<h1><tmpl_var name="list_head_txt"></h1>
 </div>
 <p><tmpl_var name="list_desc_txt"></p>
-        <p class="wb-list-section-heading wb-visually-hidden" hidden>{tmpl_var name="toolsarea_head_txt"}</p>
-        <div class="wb-dns-zone-actions" role="group" aria-label="DNS-Zonenaktionen" data-heritage-i18n-aria-label-de="DNS-Zonenaktionen" data-heritage-i18n-aria-label-en="DNS zone actions">
-                <button class="formbutton-success wb-dns-zone-actions__primary" type="button" data-heritage-load-content="dns/dns_wizard.php" data-load-content="dns/dns_wizard.php">{tmpl_var name="add_new_record_wizard_txt"}</button>
-                <button class="formbutton-default wb-dns-zone-actions__secondary" type="button" data-heritage-load-content="dns/dns_soa_edit.php" data-load-content="dns/dns_soa_edit.php">{tmpl_var name="add_new_record_txt"}</button>
-                <button class="formbutton-default wb-dns-zone-actions__secondary" type="button" data-heritage-load-content="dns/dns_import.php" data-load-content="dns/dns_import.php">{tmpl_var name="import_zone_file_txt"}</button>
+        <p class="hg-list-section-heading hg-visually-hidden" hidden>{tmpl_var name="toolsarea_head_txt"}</p>
+        <div class="hg-dns-zone-actions" role="group" aria-label="DNS-Zonenaktionen" data-heritage-i18n-aria-label-de="DNS-Zonenaktionen" data-heritage-i18n-aria-label-en="DNS zone actions">
+                <button class="formbutton-success hg-dns-zone-actions__primary" type="button" data-heritage-load-content="dns/dns_wizard.php" data-load-content="dns/dns_wizard.php">{tmpl_var name="add_new_record_wizard_txt"}</button>
+                <button class="formbutton-default hg-dns-zone-actions__secondary" type="button" data-heritage-load-content="dns/dns_soa_edit.php" data-load-content="dns/dns_soa_edit.php">{tmpl_var name="add_new_record_txt"}</button>
+                <button class="formbutton-default hg-dns-zone-actions__secondary" type="button" data-heritage-load-content="dns/dns_import.php" data-load-content="dns/dns_import.php">{tmpl_var name="import_zone_file_txt"}</button>
         </div>
 
-        <p class="wb-list-section-heading wb-visually-hidden" hidden><tmpl_var name="list_head_txt"></p>
-            <div class="wb-table-workspace">
-<table class="table wb-data-table">
+        <p class="hg-list-section-heading hg-visually-hidden" hidden><tmpl_var name="list_head_txt"></p>
+            <div class="hg-table-workspace">
+<table class="table hg-data-table">
             <thead >
                 <tr>
                     <th class="tiny-col" data-column="active"><tmpl_var name="active_txt"></th>
@@ -20,7 +20,7 @@
                     <th data-column="origin"><tmpl_var name="origin_txt"></th>
                     <th data-column="ns"><tmpl_var name="ns_txt"></th>
                     <th data-column="mbox"><tmpl_var name="mbox_txt"></th>
-                    <th class="wb-table-actions-column wb-table-align-end">{tmpl_var name='search_limit'}</th>
+                    <th class="hg-table-actions-column hg-table-align-end">{tmpl_var name='search_limit'}</th>
                 </tr>
                 <tr>
                     <td><select class="form-control" name="search_active">{tmpl_var name='search_active'}</select></td>
@@ -29,7 +29,7 @@
                     <td><input class="form-control" type="text" name="search_origin" value="{tmpl_var name='search_origin'}" /></td>
                     <td><input class="form-control" type="text" name="search_ns" value="{tmpl_var name='search_ns'}" /></td>
                     <td><input class="form-control" type="text" name="search_mbox" value="{tmpl_var name='search_mbox'}" /></td>
-                    <td class="wb-table-align-end">
+                    <td class="hg-table-align-end">
                         <button type="button" class="formbutton-default formbutton-narrow" name="Filter" id="Filter" value="{tmpl_var name="filter_txt"}" data-submit-form="pageForm" data-form-action="dns/dns_soa_list.php"><span class="icon icon-filter"></span></button>
                     </td>
                 </tr>
@@ -43,7 +43,7 @@
                         <td><a href="#" data-heritage-load-content="dns/dns_soa_edit.php?id={tmpl_var name='id'}&next_tab=dns_records" data-load-content="dns/dns_soa_edit.php?id={tmpl_var name='id'}&next_tab=dns_records" data-heritage-tooltip="true" data-heritage-tooltip-placement="bottom" title="{tmpl_var name='origin'}">{tmpl_var name="origin"}</a></td>
                         <td><a href="#" data-heritage-load-content="dns/dns_soa_edit.php?id={tmpl_var name='id'}&next_tab=dns_records" data-load-content="dns/dns_soa_edit.php?id={tmpl_var name='id'}&next_tab=dns_records" data-heritage-tooltip="true" data-heritage-tooltip-placement="bottom" title="{tmpl_var name='ns'}">{tmpl_var name="ns"}</a></td>
                         <td><a href="#" data-heritage-load-content="dns/dns_soa_edit.php?id={tmpl_var name='id'}&next_tab=dns_records" data-load-content="dns/dns_soa_edit.php?id={tmpl_var name='id'}&next_tab=dns_records" data-heritage-tooltip="true" data-heritage-tooltip-placement="bottom" title="{tmpl_var name='mbox'}">{tmpl_var name="mbox"}</a></td>
-                        <td class="wb-table-align-end">
+                        <td class="hg-table-align-end">
                             <a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="dns/dns_soa_del.php?id={tmpl_var name='id'}&_csrf_id={tmpl_var name='csrf_id'}&_csrf_key={tmpl_var name='csrf_key'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete"></span></a>
                         </td>
                     </tr>

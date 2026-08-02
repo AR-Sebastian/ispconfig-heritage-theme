@@ -102,20 +102,20 @@
     var pattern = input.dataset.dateFormat || (includeTime ? 'yyyy-mm-dd hh:ii' : 'yyyy-mm-dd');
     var includeSeconds = pattern.indexOf('ss') >= 0;
     var wrapper = document.createElement('span');
-    wrapper.className = 'wb-date-time-control';
+    wrapper.className = 'hg-date-time-control';
     input.parentNode.insertBefore(wrapper, input);
     wrapper.appendChild(input);
 
     var nativeInput = document.createElement('input');
     nativeInput.type = includeTime ? 'datetime-local' : 'date';
-    nativeInput.className = 'wb-date-time-control__native';
+    nativeInput.className = 'hg-date-time-control__native';
     nativeInput.tabIndex = -1;
     nativeInput.setAttribute('aria-hidden', 'true');
     if (includeSeconds) nativeInput.step = '1';
 
     var button = document.createElement('button');
     button.type = 'button';
-    button.className = 'wb-date-time-control__trigger';
+    button.className = 'hg-date-time-control__trigger';
     button.setAttribute('aria-label', labelFor(input, includeTime));
     button.appendChild(svgNode());
     wrapper.appendChild(nativeInput);
@@ -124,7 +124,7 @@
     function syncNative() {
       var parsed = parse(input.value, pattern);
       nativeInput.value = parsed ? toNative(parsed, includeTime, includeSeconds) : '';
-      input.classList.toggle('wb-date-time-control__text--invalid', Boolean(input.value.trim() && !parsed));
+      input.classList.toggle('hg-date-time-control__text--invalid', Boolean(input.value.trim() && !parsed));
     }
 
     button.addEventListener('click', function () {
@@ -136,7 +136,7 @@
       var parsed = fromNative(nativeInput.value);
       if (!parsed) return;
       input.value = format(parsed, pattern);
-      input.classList.remove('wb-date-time-control__text--invalid');
+      input.classList.remove('hg-date-time-control__text--invalid');
       input.dispatchEvent(new Event('input', { bubbles: true }));
       input.dispatchEvent(new Event('change', { bubbles: true }));
       input.focus();
@@ -225,7 +225,7 @@
     var parent;
     try { parent = document.querySelector(parentSelector); } catch (error) { parent = null; }
     if (!parent) return;
-    parent.querySelectorAll('.collapse.in, .wb-collapse.in').forEach(function (peer) {
+    parent.querySelectorAll('.collapse.in, .hg-collapse.in').forEach(function (peer) {
       if (peer !== target) setCollapse(peer, false, trigger);
     });
   }
@@ -259,7 +259,7 @@
     if (tooltipNode && tooltipNode.isConnected) return tooltipNode;
     tooltipNode = document.createElement('div');
     tooltipNode.id = tooltipId;
-    tooltipNode.className = 'wb-native-tooltip';
+    tooltipNode.className = 'hg-native-tooltip';
     tooltipNode.setAttribute('role', 'tooltip');
     tooltipNode.hidden = true;
     document.body.appendChild(tooltipNode);
@@ -347,13 +347,13 @@
       trigger.removeAttribute('data-dismiss');
       trigger.removeAttribute('data-bs-dismiss');
     });
-    host.querySelectorAll('.wb-row-action[title]').forEach(function(element) {
+    host.querySelectorAll('.hg-row-action[title]').forEach(function(element) {
       element.setAttribute('data-heritage-tooltip', 'true');
     });
     host.querySelectorAll('[data-heritage-tooltip]').forEach(function (element) {
       initializeTooltip(element);
     });
-    host.querySelectorAll('.collapse, .wb-collapse').forEach(function (target) {
+    host.querySelectorAll('.collapse, .hg-collapse').forEach(function (target) {
       var expanded = target.classList.contains('in');
       target.hidden = !expanded;
       target.setAttribute('aria-hidden', expanded ? 'false' : 'true');
@@ -1603,17 +1603,17 @@
         updateTooltipText('php_cli_binary', data.php_cli_binary);
         updateTooltipText('docroot_client', data.docroot_client);
         updateTooltipText('domain', data.domain || control.getAttribute('data-domain-not-selected') || '');
-        var existing = query(document, '.wb-jail-symbol, .jail-symbol');
+        var existing = query(document, '.hg-jail-symbol, .jail-symbol');
         if (data.cron_type === 'chrooted') {
           if (!existing) {
             var marker = document.createElement('span');
-            marker.className = 'wb-jail-symbol';
+            marker.className = 'hg-jail-symbol';
             marker.title = control.getAttribute('data-jailed-title') || '';
             marker.appendChild(svgLockIcon());
             control.insertAdjacentElement('afterend', marker);
           }
         } else {
-          queryAll(document, '.wb-jail-symbol, .jail-symbol').forEach(function(element) { element.remove(); });
+          queryAll(document, '.hg-jail-symbol, .jail-symbol').forEach(function(element) { element.remove(); });
         }
       } else if (mode === 'database-users') {
         String(control.getAttribute('data-json-option-targets') || '').split(',').forEach(function(id) {
@@ -1965,7 +1965,7 @@
 
     beginRequest: function() {
       ISPConfig.requestsRunning += 1;
-      document.body.classList.add('wb-request-active');
+      document.body.classList.add('hg-request-active');
       document.body.dataset.heritageRequestCount = String(ISPConfig.requestsRunning);
       var host = document.getElementById('pageContent');
       if (host) host.setAttribute('aria-busy', 'true');
@@ -1975,7 +1975,7 @@
       ISPConfig.requestsRunning = Math.max(0, ISPConfig.requestsRunning - 1);
       document.body.dataset.heritageRequestCount = String(ISPConfig.requestsRunning);
       if (ISPConfig.requestsRunning > 0) return;
-      document.body.classList.remove('wb-request-active');
+      document.body.classList.remove('hg-request-active');
       var host = document.getElementById('pageContent');
       if (host) host.setAttribute('aria-busy', 'false');
     },
@@ -2167,7 +2167,7 @@
         var notification = query(document, '.notification');
         var textNode = query(document, '.notification_text');
         var dialog = document.getElementById('datalogModal');
-        var modalBody = dialog && query(dialog, '.modal-body, .wb-dialog__body ul');
+        var modalBody = dialog && query(dialog, '.modal-body, .hg-dialog__body ul');
         if (modalBody) {
           modalBody.replaceChildren();
           Object.keys(entries).forEach(function(key) {
@@ -2218,7 +2218,7 @@
       item.appendChild(document.createTextNode(addTplText + ' '));
       var remove = document.createElement('a');
       remove.href = '#';
-      remove.className = 'wb-template-remove';
+      remove.className = 'hg-template-remove';
       remove.setAttribute('data-heritage-template-remove', 'true');
       remove.setAttribute('aria-label', 'Remove template');
       var glyph = document.createElement('span');
@@ -2760,7 +2760,7 @@
 
   function setBusy(state, busy) {
     state.input.classList.toggle(state.options.cssPrefix + 'loading', busy);
-    state.input.classList.toggle('wb-field-search__input--loading', busy);
+    state.input.classList.toggle('hg-field-search__input--loading', busy);
     state.input.setAttribute('aria-busy', busy ? 'true' : 'false');
   }
 
@@ -2779,7 +2779,7 @@
 
   function statusRow(state, message, limit, kind) {
     var item = document.createElement('li');
-    item.className = state.options.cssPrefix + 'cheader wb-field-search__status wb-field-search__status--' + kind;
+    item.className = state.options.cssPrefix + 'cheader hg-field-search__status hg-field-search__status--' + kind;
     item.setAttribute('role', 'presentation');
     item.setAttribute('aria-hidden', 'true');
     var title = document.createElement('p');
@@ -2827,7 +2827,7 @@
     var row = document.createElement('li');
     var optionId = state.list.id + '-option-' + state.optionsList.length;
     row.id = optionId;
-    row.className = state.options.cssPrefix + 'cdata wb-field-search__option';
+    row.className = state.options.cssPrefix + 'cdata hg-field-search__option';
     row.setAttribute('role', 'option');
     row.setAttribute('aria-selected', 'false');
     row.tabIndex = -1;
@@ -2841,7 +2841,7 @@
     }
     if (item.description !== undefined) {
       var description = document.createElement('span');
-      description.className = 'wb-field-search__description';
+      description.className = 'hg-field-search__description';
       description.textContent = String(item.description);
       content.appendChild(description);
     }
@@ -2955,7 +2955,7 @@
     state.listeners.forEach(function(listener) { input.removeEventListener(listener.type, listener.handler); });
     state.container.parentNode.insertBefore(input, state.container);
     state.container.remove();
-    input.classList.remove('wb-field-search__input', 'wb-field-search__input--loading');
+    input.classList.remove('hg-field-search__input', 'hg-field-search__input--loading');
     ['role', 'aria-autocomplete', 'aria-controls', 'aria-expanded', 'aria-activedescendant', 'aria-busy'].forEach(function(name) {
       input.removeAttribute(name);
     });
@@ -2972,14 +2972,14 @@
     var container = document.createElement('div');
     var list = document.createElement('ul');
     var live = document.createElement('div');
-    var id = 'wb-field-search-' + (++sequence);
-    container.className = settings.cssPrefix + 'container wb-field-search';
+    var id = 'hg-field-search-' + (++sequence);
+    container.className = settings.cssPrefix + 'container hg-field-search';
     list.id = id + '-listbox';
-    list.className = settings.cssPrefix + 'resultbox wb-field-search__results';
+    list.className = settings.cssPrefix + 'resultbox hg-field-search__results';
     list.setAttribute('role', 'listbox');
     list.hidden = true;
     live.id = id + '-status';
-    live.className = 'sr-only wb-field-search__live';
+    live.className = 'sr-only hg-field-search__live';
     live.setAttribute('role', 'status');
     live.setAttribute('aria-live', 'polite');
     live.setAttribute('aria-atomic', 'true');
@@ -2989,7 +2989,7 @@
     container.appendChild(list);
     container.appendChild(live);
     input.autocomplete = 'off';
-    input.classList.add('wb-field-search__input');
+    input.classList.add('hg-field-search__input');
     input.setAttribute('role', 'combobox');
     input.setAttribute('aria-autocomplete', 'list');
     input.setAttribute('aria-controls', list.id);
@@ -3107,12 +3107,12 @@
       window.clearTimeout(moduleSlowTimer);
       moduleSlowTimer = null;
     }
-    document.body.classList.remove('wb-module-transition-active');
+    document.body.classList.remove('hg-module-transition-active');
     moduleItems.forEach(function(item) {
       item.removeAttribute('aria-busy');
       item.removeAttribute('data-heritage-delayed');
-      item.classList.remove('wb-module-transition-source');
-      var state = item.querySelector('.wb-module-transition');
+      item.classList.remove('hg-module-transition-source');
+      var state = item.querySelector('.hg-module-transition');
       if (state) state.remove();
     });
     moduleItems = [];
@@ -3120,15 +3120,15 @@
 
   function startModuleTransition(module) {
     finishModuleTransition();
-    document.body.classList.add('wb-module-transition-active');
+    document.body.classList.add('hg-module-transition-active');
     moduleItems = Array.prototype.filter.call(document.querySelectorAll('[data-capp]'), function(item) {
       return item.getAttribute('data-capp') === String(module);
     });
     moduleItems.forEach(function(item) {
       item.setAttribute('aria-busy', 'true');
-      item.classList.add('wb-module-transition-source');
+      item.classList.add('hg-module-transition-source');
       var state = document.createElement('span');
-      state.className = 'wb-module-transition';
+      state.className = 'hg-module-transition';
       state.setAttribute('role', 'status');
       var sr = document.createElement('span');
       sr.className = 'sr-only';
@@ -3142,7 +3142,7 @@
     moduleSlowTimer = window.setTimeout(function() {
       moduleItems.forEach(function(item) {
         item.setAttribute('data-heritage-delayed', 'true');
-        var label = item.querySelector('.wb-module-transition .sr-only');
+        var label = item.querySelector('.hg-module-transition .sr-only');
         if (label) label.textContent = localized('Modul wird weiterhin geladen', 'Module is still loading');
       });
     }, 7000);
@@ -3195,15 +3195,15 @@
   legacy.beginRequest = function() {
     if (legacy.options.useLoadIndicator !== true) return;
     legacy.requestsRunning += 1;
-    document.body.classList.add('wb-request-active');
+    document.body.classList.add('hg-request-active');
     document.body.dataset.heritageRequestCount = String(legacy.requestsRunning);
     var region = content();
     if (!region) return;
     region.setAttribute('aria-busy', 'true');
-    var status = region.querySelector(':scope > .wb-request-status');
+    var status = region.querySelector(':scope > .hg-request-status');
     if (!status) {
       status = document.createElement('div');
-      status.className = 'wb-request-status';
+      status.className = 'hg-request-status';
       status.setAttribute('role', 'status');
       status.setAttribute('aria-live', 'polite');
       status.setAttribute('aria-atomic', 'true');
@@ -3215,7 +3215,7 @@
       requestSlowTimer = window.setTimeout(function() {
         requestSlowTimer = null;
         var current = content();
-        var currentStatus = current && current.querySelector(':scope > .wb-request-status');
+        var currentStatus = current && current.querySelector(':scope > .hg-request-status');
         if (!currentStatus || legacy.requestsRunning < 1) return;
         currentStatus.setAttribute('data-heritage-delayed', 'true');
         currentStatus.textContent = localized('Die Anfrage dauert etwas länger. Sie wird weiterhin verarbeitet.', 'This request is taking a little longer. It is still being processed.');
@@ -3231,11 +3231,11 @@
       window.clearTimeout(requestSlowTimer);
       requestSlowTimer = null;
     }
-    document.body.classList.remove('wb-request-active');
+    document.body.classList.remove('hg-request-active');
     var region = content();
     if (!region) return;
     region.setAttribute('aria-busy', 'false');
-    var status = region.querySelector(':scope > .wb-request-status');
+    var status = region.querySelector(':scope > .hg-request-status');
     if (status) status.remove();
   };
 
@@ -3361,11 +3361,11 @@
   }
 
   function emptyStateNode(modifier, title, description) {
-    var state = element('div', 'wb-empty-state wb-empty-state--' + modifier);
-    var content = element('div', 'wb-empty-state__content');
-    content.appendChild(element('strong', 'wb-empty-state__title', title));
-    content.appendChild(element('span', 'wb-empty-state__description', description || ''));
-    state.appendChild(iconElement('wb-empty-state__icon'));
+    var state = element('div', 'hg-empty-state hg-empty-state--' + modifier);
+    var content = element('div', 'hg-empty-state__content');
+    content.appendChild(element('strong', 'hg-empty-state__title', title));
+    content.appendChild(element('span', 'hg-empty-state__description', description || ''));
+    state.appendChild(iconElement('hg-empty-state__icon'));
     state.appendChild(content);
     return state;
   }
@@ -3441,15 +3441,15 @@
   function decoratePageContext(host, pageName) {
     if (!host) return;
     var dashboardPage = /(?:^|\/)dashboard\/dashboard\.php(?:$|\?)/.test(normalizePageName(pageName)) ||
-      Boolean(host.querySelector(':scope > .wb-dashlet, :scope > .dashboard-modules-wrapper, :scope > ul.modules'));
+      Boolean(host.querySelector(':scope > .hg-dashlet, :scope > .dashboard-modules-wrapper, :scope > ul.modules'));
     var hasTable = !dashboardPage && Boolean(host.querySelector(':scope > .table-wrapper > table.table, :scope > table.table, .table-wrapper > table.table, table.table'));
     var shellForm = host.closest('form#pageForm, form.form-horizontal');
     var hasForm = !dashboardPage && (Boolean(host.querySelector('form#pageForm, .form-horizontal .form-group')) ||
       Boolean(shellForm && host.querySelector('.form-group, .pnl_formsarea, .tab-content')) ||
       /(?:_edit|_add|user_settings)\.php(?:$|\?)/.test(pageName || ''));
     var body = document.body;
-    body.classList.toggle('wb-list-page', hasTable);
-    body.classList.toggle('wb-form-page', hasForm);
+    body.classList.toggle('hg-list-page', hasTable);
+    body.classList.toggle('hg-form-page', hasForm);
     applyFormProfiles(body, host, pageName, hasForm);
   }
 
@@ -3464,13 +3464,13 @@
       if (profiles.indexOf(profile) === -1) profiles.push(profile);
     };
     Array.prototype.forEach.call(body.classList, function(className) {
-      if (className.indexOf('wb-form-profile--') === 0) body.classList.remove(className);
+      if (className.indexOf('hg-form-profile--') === 0) body.classList.remove(className);
     });
     if (!hasForm) {
       delete body.dataset.heritageFormProfiles;
       return;
     }
-    if (route.indexOf('billing/') === 0 || host.querySelector('.wb-billing-product, [data-billing-scope]')) addProfile('billing');
+    if (route.indexOf('billing/') === 0 || host.querySelector('.hg-billing-product, [data-billing-scope]')) addProfile('billing');
     if (route.indexOf('admin/system_config_edit.php') === 0) addProfile('system-config');
     if (host.querySelector('#smtp_host, #smtp_port, #smtp_user, #smtp_pass, #smtp_crypt, #default_mailserver')) addProfile('system-mail');
     if (route.indexOf('admin/server_config') === 0 || host.querySelector('#maildir_path, #nginx_vhost_conf_dir, #apache_vhost_conf_dir, #jailkit_chroot_home')) addProfile('server-config');
@@ -3478,7 +3478,7 @@
     if (route.indexOf('client/client_edit.php') === 0 || route.indexOf('client/reseller_edit.php') === 0 || host.querySelector('.panel_client, [id^="limit_"], [name^="limit_"]')) addProfile('limits');
     if (host.querySelector('input[type="file"]')) addProfile('uploads');
     if (host.querySelector('input[type="password"], input[name*="pass"], input[id*="pass"]')) addProfile('secrets');
-    if (host.querySelector('.content-tab-wrapper > .wb-form-tabs > li:nth-child(8), .tab-content > .tab-pane:nth-child(8)')) addProfile('deep-tabs');
+    if (host.querySelector('.content-tab-wrapper > .hg-form-tabs > li:nth-child(8), .tab-content > .tab-pane:nth-child(8)')) addProfile('deep-tabs');
     if (host.querySelector('.panel-group, .panel-collapse, .panel-heading, .well')) addProfile('legacy-panels');
     if (host.querySelector('.select2-container, .chosen-container, select[multiple], select[size]')) addProfile('legacy-selects');
     if (host.querySelector('.input-group, .input-append, .input-prepend, .btn-group')) addProfile('compound-controls');
@@ -3490,7 +3490,7 @@
     if (host.querySelector('.help-block, .help-inline, .description, .hint, small, .form-text')) addProfile('help-rich');
     if (host.scrollWidth > host.clientWidth + 24 || host.querySelector('textarea[cols], table[width], input[size]')) addProfile('wide-content');
     profiles.forEach(function(profile) {
-      body.classList.add('wb-form-profile--' + profile);
+      body.classList.add('hg-form-profile--' + profile);
     });
     body.dataset.heritageFormProfiles = profiles.join(' ');
   }
@@ -3527,67 +3527,67 @@
     if (!host) return;
     var header = host.querySelector(':scope > .page-header');
     if (header) {
-      header.classList.add('wb-page-header');
-      if (!document.body.classList.contains('wb-dashboard-page')) {
+      header.classList.add('hg-page-header');
+      if (!document.body.classList.contains('hg-dashboard-page')) {
         var title = header.querySelector(':scope > h1');
         var moduleLabel = moduleLabelFromPageName(pageName);
-        if (title && moduleLabel && moduleLabel.toLowerCase() !== title.textContent.trim().toLowerCase() && !header.querySelector(':scope > .wb-page-header__eyebrow')) {
+        if (title && moduleLabel && moduleLabel.toLowerCase() !== title.textContent.trim().toLowerCase() && !header.querySelector(':scope > .hg-page-header__eyebrow')) {
           var eyebrow = document.createElement('span');
-          eyebrow.className = 'wb-page-header__eyebrow';
+          eyebrow.className = 'hg-page-header__eyebrow';
           eyebrow.textContent = moduleLabel;
           header.insertBefore(eyebrow, title);
         }
-        var meta = host.querySelector(':scope > .wb-page-meta');
+        var meta = host.querySelector(':scope > .hg-page-meta');
         if (!meta) {
           meta = document.createElement('div');
-          meta.className = 'wb-page-meta';
+          meta.className = 'hg-page-meta';
           header.insertAdjacentElement('afterend', meta);
         }
-        var notices = host.querySelector(':scope > .wb-page-notices');
+        var notices = host.querySelector(':scope > .hg-page-notices');
         if (!notices) {
           notices = document.createElement('section');
-          notices.className = 'wb-page-notices';
+          notices.className = 'hg-page-notices';
           notices.setAttribute('aria-live', 'polite');
           meta.insertAdjacentElement('afterend', notices);
         }
       }
       Array.prototype.forEach.call(header.querySelectorAll(':scope > .btn, :scope > button, :scope > a.btn'), function(action) {
-        action.classList.add('wb-page-header__action');
+        action.classList.add('hg-page-header__action');
       });
       var description = header.nextElementSibling;
-      if (description && description.classList.contains('wb-page-meta')) description = description.nextElementSibling;
+      if (description && description.classList.contains('hg-page-meta')) description = description.nextElementSibling;
       if (description && description.tagName === 'P' && !description.classList.contains('fieldset-legend')) {
-        description.classList.add('wb-page-description');
-        var metaTarget = host.querySelector(':scope > .wb-page-meta');
+        description.classList.add('hg-page-description');
+        var metaTarget = host.querySelector(':scope > .hg-page-meta');
         if (metaTarget) metaTarget.appendChild(description);
       }
-      var metaTarget = host.querySelector(':scope > .wb-page-meta');
-      Array.prototype.forEach.call(host.querySelectorAll(':scope > .wb-form-state, :scope > .wb-submit-feedback'), function(status) {
+      var metaTarget = host.querySelector(':scope > .hg-page-meta');
+      Array.prototype.forEach.call(host.querySelectorAll(':scope > .hg-form-state, :scope > .hg-submit-feedback'), function(status) {
         if (metaTarget) metaTarget.appendChild(status);
       });
-      var noticeTarget = host.querySelector(':scope > .wb-page-notices');
+      var noticeTarget = host.querySelector(':scope > .hg-page-notices');
       Array.prototype.forEach.call(host.querySelectorAll(':scope > #errormsg, :scope > #warningmsg, :scope > #infomsg, :scope > .alert'), function(notice) {
         if (noticeTarget) noticeTarget.appendChild(notice);
       });
     }
     Array.prototype.forEach.call(host.querySelectorAll(':scope > .fieldset-legend'), function(legend) {
-      legend.classList.add('wb-section-heading');
+      legend.classList.add('hg-section-heading');
     });
   }
 
   function decorateInformationArchitecture(host) {
     if (!host) return;
-    var header = host.querySelector(':scope > .wb-page-header, :scope > .page-header');
+    var header = host.querySelector(':scope > .hg-page-header, :scope > .page-header');
     if (header) {
-      var directActions = Array.prototype.slice.call(header.querySelectorAll(':scope > .wb-page-header__action, :scope > .btn, :scope > button, :scope > a.btn'));
-      var actionGroup = header.querySelector(':scope > .wb-page-header__actions');
+      var directActions = Array.prototype.slice.call(header.querySelectorAll(':scope > .hg-page-header__action, :scope > .btn, :scope > button, :scope > a.btn'));
+      var actionGroup = header.querySelector(':scope > .hg-page-header__actions');
       if (directActions.length && !actionGroup) {
         actionGroup = document.createElement('div');
-        actionGroup.className = 'wb-page-header__actions';
+        actionGroup.className = 'hg-page-header__actions';
         actionGroup.setAttribute('role', 'group');
         actionGroup.setAttribute('aria-label', (header.querySelector('h1')?.textContent || localized('Seite', 'Page')) + ' ' + localized('Aktionen', 'actions'));
         directActions.forEach(function(action) {
-          action.classList.add('wb-page-header__action');
+          action.classList.add('hg-page-header__action');
           actionGroup.appendChild(action);
         });
         header.appendChild(actionGroup);
@@ -3600,37 +3600,37 @@
     }
 
     Array.prototype.forEach.call(host.querySelectorAll('#errormsg, #warningmsg, #infomsg, #OKMsg, .alert'), function(notice) {
-      notice.classList.add('wb-notice');
+      notice.classList.add('hg-notice');
       var kind = notice.matches('#errormsg, .alert-danger, .alert-error') ? 'danger' :
         notice.matches('#warningmsg, .alert-warning') ? 'warning' :
         notice.matches('#OKMsg, .alert-success') ? 'success' : 'info';
-      notice.classList.add('wb-notice--' + kind);
+      notice.classList.add('hg-notice--' + kind);
       notice.setAttribute('role', kind === 'danger' ? 'alert' : 'status');
-      if (!notice.querySelector(':scope > .wb-notice__icon')) {
+      if (!notice.querySelector(':scope > .hg-notice__icon')) {
         var icon = document.createElement('span');
-        icon.className = 'wb-notice__icon';
+        icon.className = 'hg-notice__icon';
         icon.setAttribute('aria-hidden', 'true');
         notice.insertBefore(icon, notice.firstChild);
       }
     });
 
     Array.prototype.forEach.call(host.querySelectorAll('dl'), function(list) {
-      list.classList.add('wb-definition-list');
-      Array.prototype.forEach.call(list.querySelectorAll(':scope > dt'), function(term) { term.classList.add('wb-definition-list__term'); });
-      Array.prototype.forEach.call(list.querySelectorAll(':scope > dd'), function(value) { value.classList.add('wb-definition-list__value'); });
+      list.classList.add('hg-definition-list');
+      Array.prototype.forEach.call(list.querySelectorAll(':scope > dt'), function(term) { term.classList.add('hg-definition-list__term'); });
+      Array.prototype.forEach.call(list.querySelectorAll(':scope > dd'), function(value) { value.classList.add('hg-definition-list__value'); });
     });
     Array.prototype.forEach.call(host.querySelectorAll(':scope > .panel, :scope > .well'), function(card) {
-      card.classList.add('wb-content-card');
+      card.classList.add('hg-content-card');
     });
-    Array.prototype.forEach.call(host.querySelectorAll('pre:not(.wb-code-output), .codeview:not(.wb-code-output)'), function(output) {
-      output.classList.add('wb-code-output');
+    Array.prototype.forEach.call(host.querySelectorAll('pre:not(.hg-code-output), .codeview:not(.hg-code-output)'), function(output) {
+      output.classList.add('hg-code-output');
     });
     Array.prototype.forEach.call(host.querySelectorAll('.label, .badge'), function(status) {
       if (status.closest('#main-navigation, #sidebar, #heritage-mobile-navigation')) return;
-      status.classList.add('wb-status-chip');
+      status.classList.add('hg-status-chip');
       if (!status.getAttribute('role')) status.setAttribute('role', 'status');
     });
-    Array.prototype.forEach.call(host.querySelectorAll('.wb-section-heading'), function(heading) {
+    Array.prototype.forEach.call(host.querySelectorAll('.hg-section-heading'), function(heading) {
       if (!heading.getAttribute('role')) heading.setAttribute('role', 'heading');
       if (!heading.getAttribute('aria-level')) heading.setAttribute('aria-level', '2');
     });
@@ -3666,28 +3666,28 @@
       var toolbar = null;
       var toggle = null;
       var summary = null;
-      if (wrapper && wrapper.parentNode && !wrapper.parentNode.querySelector(':scope > .wb-filter-toolbar')) {
+      if (wrapper && wrapper.parentNode && !wrapper.parentNode.querySelector(':scope > .hg-filter-toolbar')) {
         var toolbar = document.createElement('div');
-        toolbar.className = 'wb-filter-toolbar';
+        toolbar.className = 'hg-filter-toolbar';
         toolbar.setAttribute('role', 'search');
         var toolbarTitle = document.createElement('strong');
-        toolbarTitle.className = 'wb-filter-toolbar__title';
+        toolbarTitle.className = 'hg-filter-toolbar__title';
         toolbarTitle.textContent = document.body.getAttribute('data-heritage-filter-toggle') || localized('Filter', 'Filters');
         var toggle = document.createElement('button');
-        toggle.type = 'button'; toggle.className = 'wb-filter-toggle';
+        toggle.type = 'button'; toggle.className = 'hg-filter-toggle';
         var showLabel = document.body.getAttribute('data-heritage-filter-show') || localized('Filter anzeigen', 'Show filters');
         var hideLabel = document.body.getAttribute('data-heritage-filter-hide') || localized('Filter ausblenden', 'Hide filters');
-        toggle.appendChild(iconElement('wb-filter-toggle__icon'));
-        toggle.appendChild(element('span', 'wb-filter-toggle__label'));
-        toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-controls', 'wb-filter-row-' + Math.random().toString(36).slice(2));
+        toggle.appendChild(iconElement('hg-filter-toggle__icon'));
+        toggle.appendChild(element('span', 'hg-filter-toggle__label'));
+        toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-controls', 'hg-filter-row-' + Math.random().toString(36).slice(2));
         row.id = toggle.getAttribute('aria-controls'); row.hidden = true;
         function syncToggle() {
           var label = row.hidden ? showLabel : hideLabel;
           toggle.setAttribute('aria-expanded', row.hidden ? 'false' : 'true');
           toggle.setAttribute('aria-label', label);
           toggle.title = label;
-          toggle.querySelector('.wb-filter-toggle__label').textContent = label;
-          wrapper.classList.toggle('wb-filter-panel-open', !row.hidden);
+          toggle.querySelector('.hg-filter-toggle__label').textContent = label;
+          wrapper.classList.toggle('hg-filter-panel-open', !row.hidden);
         }
         toggle.addEventListener('click', function() {
           row.hidden = !row.hidden;
@@ -3698,7 +3698,7 @@
           }
         });
         var summary = document.createElement('span');
-        summary.className = 'wb-filter-summary';
+        summary.className = 'hg-filter-summary';
         summary.setAttribute('role', 'status');
         summary.setAttribute('aria-live', 'polite');
         toolbar.appendChild(toolbarTitle);
@@ -3707,12 +3707,12 @@
         wrapper.parentNode.insertBefore(toolbar, wrapper);
         syncToggle();
       } else if (wrapper && wrapper.parentNode) {
-        toolbar = wrapper.parentNode.querySelector(':scope > .wb-filter-toolbar');
-        toggle = toolbar ? toolbar.querySelector('.wb-filter-toggle') : null;
-        summary = toolbar ? toolbar.querySelector('.wb-filter-summary') : null;
+        toolbar = wrapper.parentNode.querySelector(':scope > .hg-filter-toolbar');
+        toggle = toolbar ? toolbar.querySelector('.hg-filter-toggle') : null;
+        summary = toolbar ? toolbar.querySelector('.hg-filter-summary') : null;
       }
       var reset = document.createElement('button');
-      reset.type = 'button'; reset.className = 'wb-filter-reset';
+      reset.type = 'button'; reset.className = 'hg-filter-reset';
       var resetLabel = document.body.getAttribute('data-heritage-filter-reset') || localized('Filter zurücksetzen', 'Reset filters');
       var resetActiveLabel = document.body.getAttribute('data-heritage-filter-reset-active') || localized('Filter zurücksetzen (%s)', 'Reset filters (%s)');
       reset.textContent = resetLabel; reset.setAttribute('aria-label', resetLabel);
@@ -3724,8 +3724,8 @@
         reset.disabled = count === 0;
         if (summary) summary.textContent = count ? label : '';
         if (toolbar) {
-          toolbar.classList.toggle('wb-filter-toolbar--active', count > 0);
-          toolbar.classList.toggle('wb-filter-toolbar--idle', count === 0);
+          toolbar.classList.toggle('hg-filter-toolbar--active', count > 0);
+          toolbar.classList.toggle('hg-filter-toolbar--idle', count === 0);
         }
         if (count && row.hidden) {
           row.hidden = false;
@@ -3733,9 +3733,9 @@
             toggle.setAttribute('aria-expanded', 'true');
             toggle.setAttribute('aria-label', hideLabel);
             toggle.title = hideLabel;
-            toggle.querySelector('.wb-filter-toggle__label').textContent = hideLabel;
+            toggle.querySelector('.hg-filter-toggle__label').textContent = hideLabel;
           }
-          if (wrapper) wrapper.classList.add('wb-filter-panel-open');
+          if (wrapper) wrapper.classList.add('hg-filter-panel-open');
         }
       }
       Array.prototype.forEach.call(row.querySelectorAll('input, select'), function(control) { control.addEventListener('input', syncFilterCount); control.addEventListener('change', syncFilterCount); });
@@ -3750,22 +3750,22 @@
       row.addEventListener('keydown', function(event) {
         if (event.key !== 'Escape' || !toggle) return;
         row.hidden = true;
-        wrapper.classList.remove('wb-filter-panel-open');
+        wrapper.classList.remove('hg-filter-panel-open');
         toggle.setAttribute('aria-expanded', 'false');
         toggle.setAttribute('aria-label', showLabel);
         toggle.title = showLabel;
-        toggle.querySelector('.wb-filter-toggle__label').textContent = showLabel;
+        toggle.querySelector('.hg-filter-toggle__label').textContent = showLabel;
         toggle.focus();
       });
     });
   }
 
   function decorateListCommandBar(host) {
-    if (!host || !document.body.classList.contains('wb-list-page') || host.querySelector(':scope > .wb-list-command-bar')) return;
-    var tableWrapper = host.querySelector(':scope > .table-wrapper, :scope > .wb-table-workspace');
+    if (!host || !document.body.classList.contains('hg-list-page') || host.querySelector(':scope > .hg-list-command-bar')) return;
+    var tableWrapper = host.querySelector(':scope > .table-wrapper, :scope > .hg-table-workspace');
     if (!tableWrapper) return;
-    host.classList.add('wb-table-workspace');
-    tableWrapper.classList.add('wb-table-viewport');
+    host.classList.add('hg-table-workspace');
+    tableWrapper.classList.add('hg-table-viewport');
     var bar = document.createElement('section');
     var meta = document.createElement('div');
     var actions = document.createElement('div');
@@ -3774,15 +3774,15 @@
     var dataRows = Array.prototype.filter.call(tableWrapper.querySelectorAll('table > tbody > tr'), function(row) {
       return !row.classList.contains('tbl_row_noresults') && !row.hasAttribute('data-heritage-summary-row');
     });
-    bar.className = 'wb-list-command-bar';
+    bar.className = 'hg-list-command-bar';
     bar.setAttribute('aria-label', host.querySelector(':scope > .page-header h1')?.textContent.trim() || localized('Listenaktionen', 'List actions'));
-    meta.className = 'wb-list-command-bar__meta';
-    actions.className = 'wb-list-command-bar__actions';
-    result.className = 'wb-list-result-count';
+    meta.className = 'hg-list-command-bar__meta';
+    actions.className = 'hg-list-command-bar__actions';
+    result.className = 'hg-list-result-count';
     result.setAttribute('role', 'status');
     result.textContent = resultTemplate.replace('{count}', dataRows.length);
     bar.dataset.heritageListRows = String(dataRows.length);
-    bar.classList.toggle('wb-list-command-bar--empty', dataRows.length === 0);
+    bar.classList.toggle('hg-list-command-bar--empty', dataRows.length === 0);
     meta.appendChild(result);
     bar.appendChild(meta);
     bar.appendChild(actions);
@@ -3791,11 +3791,11 @@
      * table so the controller contract stays untouched. Consolidate that
      * source toolbar into the generated command bar instead of rendering two
      * competing headers above one dataset. */
-    var sourceToolbar = tableWrapper.querySelector(':scope > .wb-list-toolbar');
+    var sourceToolbar = tableWrapper.querySelector(':scope > .hg-list-toolbar');
     if (sourceToolbar) {
       Array.prototype.forEach.call(sourceToolbar.querySelectorAll('button, a'), function(action) {
         if (action.matches('.formbutton-success, .btn-success, .btn-primary, [data-heritage-primary-action]')) {
-          action.classList.add('wb-list-command-bar__primary');
+          action.classList.add('hg-list-command-bar__primary');
         }
         actions.appendChild(action);
       });
@@ -3805,21 +3805,21 @@
     Array.prototype.forEach.call(host.querySelectorAll(':scope > button.formbutton-success, :scope > a.formbutton-success, :scope > .buttons > .formbutton-success'), function(action) {
       var originalParent = action.parentElement;
       var actionLegend = originalParent === host ? action.previousElementSibling : originalParent.previousElementSibling;
-      if (actionLegend && (actionLegend.classList.contains('fieldset-legend') || actionLegend.classList.contains('wb-list-section-heading'))) actionLegend.hidden = true;
-      action.classList.add('wb-list-command-bar__primary');
+      if (actionLegend && (actionLegend.classList.contains('fieldset-legend') || actionLegend.classList.contains('hg-list-section-heading'))) actionLegend.hidden = true;
+      action.classList.add('hg-list-command-bar__primary');
       actions.appendChild(action);
       if (originalParent !== host && !originalParent.children.length) originalParent.remove();
     });
-    Array.prototype.forEach.call(host.querySelectorAll(':scope > .wb-dns-zone-actions, :scope > .wb-list-actions'), function(actionGroup) {
+    Array.prototype.forEach.call(host.querySelectorAll(':scope > .hg-dns-zone-actions, :scope > .hg-list-actions'), function(actionGroup) {
       var actionLegend = actionGroup.previousElementSibling;
-      if (actionLegend && (actionLegend.classList.contains('fieldset-legend') || actionLegend.classList.contains('wb-list-section-heading'))) actionLegend.hidden = true;
-      actionGroup.classList.add('wb-list-command-bar__action-group');
+      if (actionLegend && (actionLegend.classList.contains('fieldset-legend') || actionLegend.classList.contains('hg-list-section-heading'))) actionLegend.hidden = true;
+      actionGroup.classList.add('hg-list-command-bar__action-group');
       actions.appendChild(actionGroup);
     });
-    var filterToolbar = host.querySelector(':scope > .wb-filter-toolbar');
+    var filterToolbar = host.querySelector(':scope > .hg-filter-toolbar');
     if (filterToolbar) actions.appendChild(filterToolbar);
     var pageSize = Array.prototype.find.call(tableWrapper.querySelectorAll('select'), function(select) {
-      if (select.name === 'search_limit' || select.classList.contains('search_limit') || select.classList.contains('wb-page-size-select')) return true;
+      if (select.name === 'search_limit' || select.classList.contains('search_limit') || select.classList.contains('hg-page-size-select')) return true;
       var name = String(select.name || select.id || '').toLowerCase();
       if (/(^|[_-])(limit|pagesize|page_size|perpage|per_page|items_per_page)([_-]|$)/.test(name)) return true;
       if (select.multiple || (select.size && Number(select.size) > 1)) return false;
@@ -3831,22 +3831,22 @@
         values.every(function(value) { return /^\d{1,3}$/.test(value) && pageSizes.indexOf(value) !== -1; }) &&
         values.some(function(value) { return value === '15' || value === '25' || value === '50'; });
     });
-    if (pageSize && !host.querySelector(':scope > .wb-list-page-size')) {
+    if (pageSize && !host.querySelector(':scope > .hg-list-page-size')) {
       var pageSizeCell = pageSize.closest('td, th');
       var pageSizeGroup = document.createElement('div');
       var pageSizeLabel = document.createElement('span');
       var pageSizeState = window.heritageSelect ? window.heritageSelect.enhance(pageSize, { compact: true, search: false }) : null;
-      var pageSizeShell = pageSize.closest('.wb-select--page-size') || (pageSizeState && pageSizeState.root) || pageSize;
-      pageSizeGroup.className = 'wb-list-page-size';
+      var pageSizeShell = pageSize.closest('.hg-select--page-size') || (pageSizeState && pageSizeState.root) || pageSize;
+      pageSizeGroup.className = 'hg-list-page-size';
       pageSizeGroup.setAttribute('role', 'group');
       pageSizeGroup.setAttribute('aria-label', pageSize.getAttribute('aria-label') || localized('Einträge pro Seite', 'Items per page'));
-      pageSizeLabel.className = 'wb-list-page-size__label';
+      pageSizeLabel.className = 'hg-list-page-size__label';
       pageSizeLabel.textContent = pageSize.getAttribute('aria-label') || (((document.documentElement.lang || '').toLowerCase().indexOf('de') === 0) ? 'Pro Seite' : 'Per page');
       pageSizeGroup.appendChild(pageSizeLabel);
       pageSizeGroup.appendChild(pageSizeShell);
       pageSize.setAttribute('data-heritage-toolbar-control', 'true');
       if (pageSizeCell) {
-        pageSizeCell.classList.add('wb-page-size-source-cell');
+        pageSizeCell.classList.add('hg-page-size-source-cell');
         pageSizeCell.setAttribute('aria-hidden', 'true');
         if (!pageSizeCell.textContent.replace(/\s+/g, '').trim()) pageSizeCell.hidden = true;
       }
@@ -3854,9 +3854,9 @@
     }
 
     var pageTitle = host.querySelector(':scope > .page-header h1');
-    Array.prototype.forEach.call(host.querySelectorAll(':scope > .fieldset-legend, :scope > .wb-list-section-heading'), function(legend) {
+    Array.prototype.forEach.call(host.querySelectorAll(':scope > .fieldset-legend, :scope > .hg-list-section-heading'), function(legend) {
       var duplicatesTitle = pageTitle && legend.textContent.trim() === pageTitle.textContent.trim();
-      if (duplicatesTitle || legend.classList.contains('wb-list-section-heading')) {
+      if (duplicatesTitle || legend.classList.contains('hg-list-section-heading')) {
         legend.hidden = true;
         legend.setAttribute('aria-hidden', 'true');
       }
@@ -3866,15 +3866,15 @@
 
   function decorateDataTables(host) {
     if (!host) return;
-    Array.prototype.forEach.call(host.querySelectorAll('.table-wrapper > table.table, .wb-table-workspace > table.table'), function(table) {
+    Array.prototype.forEach.call(host.querySelectorAll('.table-wrapper > table.table, .hg-table-workspace > table.table'), function(table) {
       if (table.getAttribute('data-heritage-table') === 'true') return;
       table.setAttribute('data-heritage-table', 'true');
-      table.classList.add('wb-data-table');
+      table.classList.add('hg-data-table');
       var tableViewport = table.closest('.table-wrapper');
       if (tableViewport) {
-        tableViewport.classList.add('wb-table-viewport');
+        tableViewport.classList.add('hg-table-viewport');
         tableViewport.setAttribute('data-heritage-table-viewport', 'true');
-        if (tableViewport.parentElement && document.body.classList.contains('wb-list-page')) tableViewport.parentElement.classList.add('wb-table-workspace');
+        if (tableViewport.parentElement && document.body.classList.contains('hg-list-page')) tableViewport.parentElement.classList.add('hg-table-workspace');
       }
       var headerNodes = Array.prototype.slice.call(table.querySelectorAll('thead > tr:first-child > th, thead > tr:first-child > td'));
       var headers = headerNodes.map(function(header) {
@@ -3902,30 +3902,30 @@
         if (visibleLabel) {
           visibleLabel.textContent = '';
           var icon = document.createElement('span');
-          icon.className = 'wb-status-header-icon wb-status-header-icon--' + kind;
+          icon.className = 'hg-status-header-icon hg-status-header-icon--' + kind;
           icon.setAttribute('aria-hidden', 'true');
           visibleLabel.appendChild(icon);
         }
         headerNodes[index].setAttribute('aria-label', fullLabel);
         headerNodes[index].setAttribute('title', fullLabel);
       });
-      table.classList.toggle('wb-data-table--compact-status-columns', statusKinds.some(Boolean));
+      table.classList.toggle('hg-data-table--compact-status-columns', statusKinds.some(Boolean));
       headerNodes.forEach(function(header, index) {
         var html = header.innerHTML || '';
         var sortable = Boolean(header.querySelector('a[href], a[data-load-content], [data-sort], [data-order]')) ||
           /(?:order|orderby|order_by|sort|sortierung)/i.test(html) ||
           /[\u2191\u2193\u2195]/.test(header.textContent || '');
-        header.classList.add('wb-table-header');
-        header.classList.toggle('wb-table-header--sortable', sortable);
-        header.classList.toggle('wb-table-header--actions', index === headerNodes.length - 1);
-        header.classList.toggle('wb-table-header--status', Boolean(statusKinds[index]));
+        header.classList.add('hg-table-header');
+        header.classList.toggle('hg-table-header--sortable', sortable);
+        header.classList.toggle('hg-table-header--actions', index === headerNodes.length - 1);
+        header.classList.toggle('hg-table-header--status', Boolean(statusKinds[index]));
         if (statusKinds[index]) header.setAttribute('data-heritage-status-kind', statusKinds[index]);
         if (headers[index]) header.setAttribute('data-heritage-label', headers[index]);
         if (sortable && !header.getAttribute('aria-sort')) header.setAttribute('aria-sort', 'none');
       });
       table.setAttribute('data-heritage-columns', String(headers.length));
-      table.style.setProperty('--wb-table-columns', String(Math.max(headers.length, 1)));
-      table.classList.toggle('wb-data-table--wide', headers.length >= 6);
+      table.style.setProperty('--hg-table-columns', String(Math.max(headers.length, 1)));
+      table.classList.toggle('hg-data-table--wide', headers.length >= 6);
       var body = table.querySelector('tbody');
       if (!body) return;
       var dataRowCount = Array.prototype.filter.call(body.querySelectorAll(':scope > tr'), function(row) {
@@ -3934,64 +3934,64 @@
       var paginationLabel = document.body.dataset.heritagePagination || localized('Seitennavigation', 'Pagination');
       var resultTemplate = document.body.dataset.heritageListVisibleResults || localized('{count} Einträge auf dieser Seite', '{count} items on this page');
       var wrapper = table.closest('.table-wrapper') || table.parentElement;
-      var footerBar = wrapper && wrapper.nextElementSibling && wrapper.nextElementSibling.classList.contains('wb-list-footer') ? wrapper.nextElementSibling : null;
+      var footerBar = wrapper && wrapper.nextElementSibling && wrapper.nextElementSibling.classList.contains('hg-list-footer') ? wrapper.nextElementSibling : null;
       if (wrapper && wrapper.parentNode && !footerBar) {
         footerBar = document.createElement('section');
-        footerBar.className = 'wb-list-footer';
+        footerBar.className = 'hg-list-footer';
         wrapper.insertAdjacentElement('afterend', footerBar);
       }
-      if (wrapper) wrapper.classList.add('wb-table-viewport--finalized');
-      if (wrapper && wrapper.parentElement) wrapper.parentElement.classList.add('wb-table-workspace--finalized');
+      if (wrapper) wrapper.classList.add('hg-table-viewport--finalized');
+      if (wrapper && wrapper.parentElement) wrapper.parentElement.classList.add('hg-table-workspace--finalized');
       var footerSummary = null;
       var paginationSlot = null;
       if (footerBar) {
-        footerBar.classList.add('wb-table-footer');
+        footerBar.classList.add('hg-table-footer');
         footerBar.dataset.heritageListFooter = 'true';
         footerBar.setAttribute('aria-label', paginationLabel);
-        footerSummary = footerBar.querySelector(':scope > .wb-list-footer__summary');
+        footerSummary = footerBar.querySelector(':scope > .hg-list-footer__summary');
         if (!footerSummary) {
           footerSummary = document.createElement('span');
-          footerSummary.className = 'wb-list-footer__summary';
+          footerSummary.className = 'hg-list-footer__summary';
           footerBar.appendChild(footerSummary);
         }
         footerSummary.textContent = resultTemplate.replace('{count}', dataRowCount);
-        paginationSlot = footerBar.querySelector(':scope > .wb-list-footer__pagination');
+        paginationSlot = footerBar.querySelector(':scope > .hg-list-footer__pagination');
         if (!paginationSlot) {
           paginationSlot = document.createElement('div');
-          paginationSlot.className = 'wb-list-footer__pagination';
+          paginationSlot.className = 'hg-list-footer__pagination';
           footerBar.appendChild(paginationSlot);
         }
         paginationSlot.hidden = true;
       }
-      table.classList.toggle('wb-data-table--empty', dataRowCount === 0);
-      table.classList.toggle('wb-data-table--compact', headers.length <= 4);
-      table.classList.toggle('wb-data-table--dense', dataRowCount > 20);
-      if (tableViewport) tableViewport.classList.toggle('wb-table-viewport--empty', dataRowCount === 0);
+      table.classList.toggle('hg-data-table--empty', dataRowCount === 0);
+      table.classList.toggle('hg-data-table--compact', headers.length <= 4);
+      table.classList.toggle('hg-data-table--dense', dataRowCount > 20);
+      if (tableViewport) tableViewport.classList.toggle('hg-table-viewport--empty', dataRowCount === 0);
       var emptyStateSurface = null;
       var emptyStateRow = null;
       Array.prototype.forEach.call(body.querySelectorAll(':scope > tr'), function(row) {
         var cells = row.querySelectorAll(':scope > td, :scope > th');
         if (row.classList.contains('tbl_row_noresults')) {
-          row.classList.add('wb-table-empty-row');
+          row.classList.add('hg-table-empty-row');
           row.setAttribute('role', 'status');
           var emptyCell = cells[0];
-          if (emptyCell && !emptyCell.querySelector('.wb-empty-state')) {
+          if (emptyCell && !emptyCell.querySelector('.hg-empty-state')) {
             emptyCell.colSpan = Math.max(headers.length, 1);
             var serverMessage = (emptyCell.textContent || '').replace(/\s+/g, ' ').trim();
             var emptyState = emptyStateNode('table', serverMessage || messages.empty_title || messages.empty, messages.empty_description || '');
-            var primaryAction = host.querySelector('.wb-list-command-bar__primary');
-            if (primaryAction && !primaryAction.closest('.wb-list-command-bar')) {
+            var primaryAction = host.querySelector('.hg-list-command-bar__primary');
+            if (primaryAction && !primaryAction.closest('.hg-list-command-bar')) {
               var actionLabel = (primaryAction.value || primaryAction.textContent || primaryAction.getAttribute('aria-label') || '').replace(/\s+/g, ' ').trim();
               if (actionLabel) {
                 var emptyAction = document.createElement('button');
                 emptyAction.type = 'button';
-                emptyAction.className = 'wb-empty-state__action wb-empty-state__action--primary';
+                emptyAction.className = 'hg-empty-state__action hg-empty-state__action--primary';
                 emptyAction.textContent = actionLabel;
                 emptyAction.addEventListener('click', function() { primaryAction.click(); });
                 emptyState.appendChild(emptyAction);
               }
             }
-            if (primaryAction && primaryAction.closest('.wb-list-command-bar')) {
+            if (primaryAction && primaryAction.closest('.hg-list-command-bar')) {
               emptyState.dataset.heritagePrimaryActionDocked = 'true';
             }
             emptyCell.textContent = '';
@@ -4001,15 +4001,15 @@
           }
           return;
         }
-        row.classList.add('wb-table-data-row');
+        row.classList.add('hg-table-data-row');
         row.setAttribute('tabindex', '-1');
         Array.prototype.forEach.call(cells, function(cell, index) {
           if (headers[index]) cell.setAttribute('data-heritage-label', headers[index]);
           var cellText = (cell.textContent || '').replace(/\s+/g, ' ').trim();
           var hasInteractive = Boolean(cell.querySelector('a, button, input, select, textarea'));
-          cell.classList.toggle('wb-table-cell--empty', !cellText && !hasInteractive);
-          cell.classList.toggle('wb-table-cell--numeric', /^[-+]?\d+(?:[.,]\d+)?(?:\s*[%a-z]+)?$/i.test(cellText));
-          cell.classList.toggle('wb-table-cell--status', /^(yes|no|ja|nein|active|inactive|enabled|disabled|aktiv|inaktiv)$/i.test(cellText));
+          cell.classList.toggle('hg-table-cell--empty', !cellText && !hasInteractive);
+          cell.classList.toggle('hg-table-cell--numeric', /^[-+]?\d+(?:[.,]\d+)?(?:\s*[%a-z]+)?$/i.test(cellText));
+          cell.classList.toggle('hg-table-cell--status', /^(yes|no|ja|nein|active|inactive|enabled|disabled|aktiv|inaktiv)$/i.test(cellText));
           var statusKind = statusKinds[index];
           if (statusKind && /^(?:0|1|yes|no|ja|nein|active|inactive|enabled|disabled|aktiv|inaktiv)$/i.test(cellText)) {
             var enabled = /^(?:1|yes|ja|active|enabled|aktiv)$/i.test(cellText);
@@ -4021,7 +4021,7 @@
                 : fullStatusLabel + ': ' + (enabled ? localized('Ja', 'Yes') : localized('Nein', 'No'));
             var statusTarget = cell.querySelector('a, button') || cell;
             var indicator = document.createElement('span');
-            indicator.className = 'wb-status-indicator';
+            indicator.className = 'hg-status-indicator';
             indicator.setAttribute('aria-hidden', 'true');
             if (statusTarget !== cell) {
               statusTarget.textContent = '';
@@ -4034,34 +4034,34 @@
               cell.setAttribute('title', stateLabel);
               cell.appendChild(indicator);
             }
-            cell.classList.add('wb-table-cell--status', 'wb-table-cell--compact-status');
+            cell.classList.add('hg-table-cell--status', 'hg-table-cell--compact-status');
             cell.setAttribute('data-heritage-status-kind', statusKind);
             cell.setAttribute('data-heritage-status-state', enabled ? 'on' : 'off');
           }
-          if (index === 0) cell.classList.add('wb-table-cell--identity');
-          if (index === cells.length - 1 || cell.classList.contains('wb-table-align-end') || cell.classList.contains('text-right')) {
-            cell.classList.add('wb-table-actions');
+          if (index === 0) cell.classList.add('hg-table-cell--identity');
+          if (index === cells.length - 1 || cell.classList.contains('hg-table-align-end') || cell.classList.contains('text-right')) {
+            cell.classList.add('hg-table-actions');
             cell.setAttribute('data-heritage-label', document.body.dataset.heritageTableActions || localized('Aktionen', 'Actions'));
           }
         });
 
         var primaryLink = Array.prototype.find.call(cells, function(cell) {
-          return !cell.classList.contains('wb-table-actions') && cell.querySelector('a[data-capp], a[href]');
+          return !cell.classList.contains('hg-table-actions') && cell.querySelector('a[data-capp], a[href]');
         });
         primaryLink = primaryLink && primaryLink.querySelector('a[data-capp], a[href]');
         if (primaryLink) {
-          primaryLink.classList.add('wb-record-link');
-          primaryLink.closest('td, th').classList.add('wb-table-cell--primary');
+          primaryLink.classList.add('hg-record-link');
+          primaryLink.closest('td, th').classList.add('hg-table-cell--primary');
           row.setAttribute('data-heritage-record', (primaryLink.textContent || '').replace(/\s+/g, ' ').trim());
         }
 
-        Array.prototype.forEach.call(row.querySelectorAll(':scope > .wb-table-actions'), function(cell) {
+        Array.prototype.forEach.call(row.querySelectorAll(':scope > .hg-table-actions'), function(cell) {
           var controls = cell.querySelectorAll('a, button, input[type="button"], input[type="submit"]');
           if (!controls.length) return;
-          var group = cell.querySelector(':scope > .wb-row-actions');
+          var group = cell.querySelector(':scope > .hg-row-actions');
           if (!group) {
             group = document.createElement('div');
-            group.className = 'wb-row-actions';
+            group.className = 'hg-row-actions';
             group.setAttribute('role', 'group');
             group.setAttribute('aria-label', cell.getAttribute('data-heritage-label') || localized('Aktionen', 'Actions'));
             cell.insertBefore(group, cell.firstChild);
@@ -4077,11 +4077,11 @@
             var isDanger = control.classList.contains('formbutton-danger') || control.classList.contains('btn-danger');
             var isLogin = /loginas|login_as|cid=|Anmelden als|Login as/i.test(control.className + ' ' + control.getAttribute('href') + ' ' + label);
             var isEdit = /edit|bearbeiten/i.test(control.className + ' ' + control.getAttribute('href') + ' ' + label);
-            control.classList.add('wb-row-action');
-            control.classList.toggle('wb-row-action--danger', isDanger);
-            control.classList.toggle('wb-row-action--login', isLogin);
-            control.classList.toggle('wb-row-action--edit', isEdit);
-            if (!isDanger && controlIndex === 0) control.classList.add('wb-row-action--primary');
+            control.classList.add('hg-row-action');
+            control.classList.toggle('hg-row-action--danger', isDanger);
+            control.classList.toggle('hg-row-action--login', isLogin);
+            control.classList.toggle('hg-row-action--edit', isEdit);
+            if (!isDanger && controlIndex === 0) control.classList.add('hg-row-action--primary');
             if (!label) {
               label = inferRowActionLabel(control, {
                 isDanger: isDanger,
@@ -4113,10 +4113,10 @@
           if (hidden) return;
           var column = document.createElement('col');
           if (statusKinds[index]) {
-            column.className = 'wb-table-col--status';
+            column.className = 'hg-table-col--status';
             column.style.width = '68px';
           } else if (index === headerNodes.length - 1) {
-            column.className = 'wb-table-col--actions';
+            column.className = 'hg-table-col--actions';
             column.style.width = '120px';
           }
           statusColgroup.appendChild(column);
@@ -4124,7 +4124,7 @@
         table.insertBefore(statusColgroup, table.querySelector('thead, tbody, tfoot'));
       }
       if (dataRowCount === 0 && wrapper && emptyStateSurface && emptyStateRow) {
-        emptyStateSurface.classList.add('wb-empty-state--detached');
+        emptyStateSurface.classList.add('hg-empty-state--detached');
         wrapper.appendChild(emptyStateSurface);
         emptyStateRow.hidden = true;
         emptyStateRow.removeAttribute('role');
@@ -4154,15 +4154,15 @@
             control.setAttribute('tabindex', '-1');
           }
           if (number) {
-            item.classList.add('wb-pagination-page');
+            item.classList.add('hg-pagination-page');
             control.setAttribute('aria-label', pageLabel.replace('{page}', number));
-            if (number !== 1 && number !== totalPages && Math.abs(number - currentPage) > 1) item.classList.add('wb-pagination-page--peripheral');
+            if (number !== 1 && number !== totalPages && Math.abs(number - currentPage) > 1) item.classList.add('hg-pagination-page--peripheral');
           }
         });
         var pagingCell = paging.closest('td');
         var pagingRow = paging.closest('tr');
         if (footerBar) {
-          footerBar.classList.add('wb-table-footer');
+          footerBar.classList.add('hg-table-footer');
           footerBar.dataset.heritageListFooter = 'true';
           footerBar.setAttribute('aria-label', paginationLabel);
           footerSummary.textContent = summaryTemplate.replace('{current}', currentPage).replace('{total}', totalPages);
@@ -4170,9 +4170,9 @@
           paginationSlot.appendChild(paginationNav || paging);
           if (pagingRow && pagingRow.parentNode) pagingRow.parentNode.removeChild(pagingRow);
           if (pagingCell) {
-            pagingCell.classList.remove('wb-table-pagination');
+            pagingCell.classList.remove('hg-table-pagination');
             pagingCell.removeAttribute('colspan');
-            Array.prototype.forEach.call(pagingCell.querySelectorAll('.wb-table-pagination__summary'), function(oldSummary) {
+            Array.prototype.forEach.call(pagingCell.querySelectorAll('.hg-table-pagination__summary'), function(oldSummary) {
               oldSummary.parentNode.removeChild(oldSummary);
             });
           }
@@ -4183,10 +4183,10 @@
 
   function decorateOperationalStates(host) {
     if (!host) return;
-    Array.prototype.forEach.call(host.querySelectorAll('.panel-body, .tab-pane.active, .wb-content-card'), function(region) {
-      if (region.querySelector('form, table, input, select, textarea, button, a, img, canvas, svg, .wb-empty-state')) return;
+    Array.prototype.forEach.call(host.querySelectorAll('.panel-body, .tab-pane.active, .hg-content-card'), function(region) {
+      if (region.querySelector('form, table, input, select, textarea, button, a, img, canvas, svg, .hg-empty-state')) return;
       if ((region.textContent || '').replace(/\s+/g, ' ').trim()) return;
-      region.classList.add('wb-empty-region');
+      region.classList.add('hg-empty-region');
       var state = emptyStateNode('region', messages.empty_title || messages.empty, messages.empty_description || '');
       state.setAttribute('role', 'status');
       region.appendChild(state);
@@ -4195,7 +4195,7 @@
 
   function normalizePageSizeControls(host) {
     if (!host || !window.heritageSelect) return;
-    Array.prototype.forEach.call(host.querySelectorAll('select[name="search_limit"], select.search_limit, select.wb-page-size-select'), function(select) {
+    Array.prototype.forEach.call(host.querySelectorAll('select[name="search_limit"], select.search_limit, select.hg-page-size-select'), function(select) {
       window.heritageSelect.enhance(select, { compact: true, search: false });
     });
   }
@@ -4205,80 +4205,80 @@
 
     Array.prototype.forEach.call(host.querySelectorAll('.panel, .well, .content-box, .box, .pnl_formsarea, .tab-content, .tab-pane'), function(surface) {
       if (surface.closest('#topnav-container, #sidebar, #heritage-mobile-navigation')) return;
-      surface.classList.add('wb-owned-surface');
-      if (surface.matches('.tab-content, .tab-pane')) surface.classList.add('wb-owned-surface--tabs');
-      if (surface.matches('.panel, .well, .content-box, .box, .pnl_formsarea')) surface.classList.add('wb-owned-surface--card');
+      surface.classList.add('hg-owned-surface');
+      if (surface.matches('.tab-content, .tab-pane')) surface.classList.add('hg-owned-surface--tabs');
+      if (surface.matches('.panel, .well, .content-box, .box, .pnl_formsarea')) surface.classList.add('hg-owned-surface--card');
     });
 
     Array.prototype.forEach.call(host.querySelectorAll('.dropdown-menu, .popover, .modal-content, .ui-datepicker, .ui-dialog, .select2-drop, .chosen-drop'), function(overlay) {
       if (overlay.closest('#topnav-container, #sidebar, #heritage-mobile-navigation')) return;
-      overlay.classList.add('wb-owned-overlay');
-      if (overlay.matches('.select2-drop, .chosen-drop')) overlay.classList.add('wb-owned-enhanced-select__panel');
+      overlay.classList.add('hg-owned-overlay');
+      if (overlay.matches('.select2-drop, .chosen-drop')) overlay.classList.add('hg-owned-enhanced-select__panel');
     });
 
     Array.prototype.forEach.call(host.querySelectorAll('.input-group, .input-append, .input-prepend, .btn-group, .btn-toolbar'), function(cluster) {
-      if (cluster.closest('#topnav-container, #sidebar, #heritage-mobile-navigation, .wb-header-actions')) return;
-      cluster.classList.add('wb-owned-control-cluster');
+      if (cluster.closest('#topnav-container, #sidebar, #heritage-mobile-navigation, .hg-header-actions')) return;
+      cluster.classList.add('hg-owned-control-cluster');
     });
 
     Array.prototype.forEach.call(host.querySelectorAll('.table-responsive, .table-wrapper'), function(region) {
-      region.classList.add('wb-owned-scroll-region');
+      region.classList.add('hg-owned-scroll-region');
     });
 
     Array.prototype.forEach.call(host.querySelectorAll('.select2-container, .select2-container-multi, .chosen-container, .chosen-container-single, .chosen-container-multi'), function(container) {
       if (container.closest('#topnav-container, #sidebar, #heritage-mobile-navigation')) return;
-      container.classList.add('wb-owned-enhanced-select');
+      container.classList.add('hg-owned-enhanced-select');
       Array.prototype.forEach.call(container.querySelectorAll('.select2-choice, .select2-choices, .chosen-single, .chosen-choices'), function(control) {
-        control.classList.add('wb-owned-enhanced-select__control');
+        control.classList.add('hg-owned-enhanced-select__control');
       });
       Array.prototype.forEach.call(container.querySelectorAll('.select2-chosen, .select2-search-choice, .chosen-single span, .chosen-choices li.search-choice'), function(value) {
-        value.classList.add('wb-owned-enhanced-select__value');
+        value.classList.add('hg-owned-enhanced-select__value');
       });
       Array.prototype.forEach.call(container.querySelectorAll('.select2-arrow, .chosen-single div'), function(arrow) {
-        arrow.classList.add('wb-owned-enhanced-select__arrow');
+        arrow.classList.add('hg-owned-enhanced-select__arrow');
       });
       Array.prototype.forEach.call(container.querySelectorAll('.select2-search input, .chosen-search input, .chosen-choices li.search-field input'), function(input) {
-        input.classList.add('wb-owned-enhanced-select__search');
+        input.classList.add('hg-owned-enhanced-select__search');
       });
     });
 
     Array.prototype.forEach.call(host.querySelectorAll('.select2-results, .chosen-results'), function(list) {
-      list.classList.add('wb-owned-enhanced-select__results');
+      list.classList.add('hg-owned-enhanced-select__results');
     });
 
     Array.prototype.forEach.call(host.querySelectorAll('.select2-result-label, .select2-results li, .chosen-results li'), function(option) {
-      option.classList.add('wb-owned-enhanced-select__option');
+      option.classList.add('hg-owned-enhanced-select__option');
     });
 
     Array.prototype.forEach.call(host.querySelectorAll('.select2-highlighted, .chosen-results li.highlighted'), function(option) {
-      option.classList.add('wb-owned-enhanced-select__option--active');
+      option.classList.add('hg-owned-enhanced-select__option--active');
     });
 
     Array.prototype.forEach.call(host.querySelectorAll('.help-block, .help-inline, .description, .hint, .text-muted, small, label, legend, .control-label'), function(textNode) {
       if (textNode.closest('#topnav-container, #sidebar, #heritage-mobile-navigation')) return;
-      textNode.classList.add('wb-owned-readable-text');
+      textNode.classList.add('hg-owned-readable-text');
     });
 
     Array.prototype.forEach.call(host.querySelectorAll('[style]'), function(node) {
       var style = node.getAttribute('style') || '';
       var scrubbed = scrubResidualInlineStyle(node, style);
       if (/(?:^|;)\s*(?:width|min-width|max-width)\s*:\s*(?:\d{3,}|1000|auto)/i.test(style)) {
-        node.classList.add('wb-residual-inline-geometry');
+        node.classList.add('hg-residual-inline-geometry');
       }
       if (/(?:^|;)\s*(?:color|background(?:-color)?)\s*:/i.test(style)) {
-        node.classList.add('wb-residual-inline-colour');
+        node.classList.add('hg-residual-inline-colour');
       }
       if (/(?:^|;)\s*background(?:-color)?\s*:\s*(?:#fff|#ffffff|white|rgb\(\s*255\s*,\s*255\s*,\s*255\s*\))/i.test(style)) {
-        node.classList.add('wb-residual-bright-surface');
+        node.classList.add('hg-residual-bright-surface');
       }
-      if (scrubbed) node.classList.add('wb-residual-inline-scrubbed');
+      if (scrubbed) node.classList.add('hg-residual-inline-scrubbed');
     });
 
     Array.prototype.forEach.call(host.querySelectorAll('table.table, table.formtable'), function(table) {
-      var wrapper = table.closest('.table-wrapper, .table-responsive, .wb-field-group--embedded-table');
+      var wrapper = table.closest('.table-wrapper, .table-responsive, .hg-field-group--embedded-table');
       if (wrapper) return;
       var shell = document.createElement('div');
-      shell.className = 'table-wrapper wb-table-wrapper--runtime';
+      shell.className = 'table-wrapper hg-table-wrapper--runtime';
       table.parentNode.insertBefore(shell, table);
       shell.appendChild(table);
     });
@@ -4288,12 +4288,12 @@
       if (label && !control.getAttribute('aria-label') && /^(?:\+|>|<|»|«|→|←)$/.test(label)) {
         control.setAttribute('aria-label', document.body.dataset.heritageGenericAction || localized('Aktion ausführen', 'Perform action'));
       }
-      if (/^(?:reset filters|filter zurücksetzen|filter zur\u00fccksetzen)$/i.test(label)) control.classList.add('wb-control--filter-reset');
-      if (/^(?:show filters|filter anzeigen|filter einblenden)$/i.test(label)) control.classList.add('wb-control--filter-toggle');
+      if (/^(?:reset filters|filter zurücksetzen|filter zur\u00fccksetzen)$/i.test(label)) control.classList.add('hg-control--filter-reset');
+      if (/^(?:show filters|filter anzeigen|filter einblenden)$/i.test(label)) control.classList.add('hg-control--filter-toggle');
     });
 
     Array.prototype.forEach.call(host.querySelectorAll('.pagination, .pager'), function(pagination) {
-      pagination.classList.add('wb-pagination');
+      pagination.classList.add('hg-pagination');
       var nav = pagination.closest('nav');
       if (nav && !nav.getAttribute('aria-label')) nav.setAttribute('aria-label', document.body.dataset.heritagePagination || localized('Seitennavigation', 'Pagination'));
     });
@@ -4302,8 +4302,8 @@
   function scrubResidualInlineStyle(node, style) {
     if (!node || !style || node.dataset.heritagePreserveInlineStyle === 'true') return false;
     if (/^(?:canvas|svg|path|circle|rect|line|polyline|polygon|img|picture|source|video|meter|progress)$/i.test(node.tagName || '')) return false;
-    if (node.closest('[data-heritage-preserve-style="true"], .wb-chart-card, .wb-sparkline, .wb-stat-visual, .wb-logo, #logo, .notification_text')) return false;
-    if (node.closest('#topnav-container, #heritage-mobile-navigation, .wb-app-navigation, .wb-header-actions')) return false;
+    if (node.closest('[data-heritage-preserve-style="true"], .hg-chart-card, .hg-sparkline, .hg-stat-visual, .hg-logo, #logo, .notification_text')) return false;
+    if (node.closest('#topnav-container, #heritage-mobile-navigation, .hg-app-navigation, .hg-header-actions')) return false;
 
     var properties = [];
     var legacyPaint = /(?:^|;)\s*(?:color|background(?:-color)?|font(?:-family|-size)?|line-height)\s*:/i.test(style);
@@ -4385,7 +4385,7 @@
 
   function makeFormSummaryItem(label, value, modifier) {
     var item = document.createElement('span');
-    item.className = 'wb-form-section-summary__item' + (modifier ? ' wb-form-section-summary__item--' + modifier : '');
+    item.className = 'hg-form-section-summary__item' + (modifier ? ' hg-form-section-summary__item--' + modifier : '');
     item.setAttribute('aria-label', label + ': ' + value);
 
     var count = document.createElement('strong');
@@ -4401,13 +4401,13 @@
 
   function summarizeFormSections(scope) {
     if (!scope) return;
-    Array.prototype.forEach.call(scope.querySelectorAll('.wb-form-section'), function(section) {
-      var groups = Array.prototype.slice.call(section.querySelectorAll('.wb-field-group:not(.wb-field-group--empty)'));
+    Array.prototype.forEach.call(scope.querySelectorAll('.hg-form-section'), function(section) {
+      var groups = Array.prototype.slice.call(section.querySelectorAll('.hg-field-group:not(.hg-field-group--empty)'));
       if (!groups.length) return;
 
       var controls = Array.prototype.slice.call(section.querySelectorAll('input:not([type="hidden"]), select, textarea'));
       var required = groups.filter(function(group) {
-        return group.classList.contains('wb-field-group--required') ||
+        return group.classList.contains('hg-field-group--required') ||
           !!group.querySelector('[required], [aria-required="true"], .required, .req, label.required');
       }).length;
       var invalid = groups.filter(function(group) {
@@ -4423,15 +4423,15 @@
       section.setAttribute('data-heritage-section-required', String(required));
       section.setAttribute('data-heritage-section-invalid', String(invalid));
       section.setAttribute('data-heritage-section-locked', String(disabled));
-      section.classList.toggle('wb-form-section--has-errors', invalid > 0);
-      section.classList.toggle('wb-form-section--has-required', required > 0);
+      section.classList.toggle('hg-form-section--has-errors', invalid > 0);
+      section.classList.toggle('hg-form-section--has-required', required > 0);
 
-      var summary = section.querySelector(':scope > .wb-form-section-summary');
+      var summary = section.querySelector(':scope > .hg-form-section-summary');
       if (!summary) {
         summary = document.createElement('div');
-        summary.className = 'wb-form-section-summary';
+        summary.className = 'hg-form-section-summary';
         summary.setAttribute('aria-label', document.body.dataset.heritageFormSectionSummary || localized('Zusammenfassung des Formularabschnitts', 'Form section summary'));
-        var heading = section.querySelector(':scope > .wb-form-section-heading, :scope > legend, :scope > .fieldset-legend');
+        var heading = section.querySelector(':scope > .hg-form-section-heading, :scope > legend, :scope > .fieldset-legend');
         if (heading && heading.parentNode === section) {
           if (heading.nextSibling) section.insertBefore(summary, heading.nextSibling);
           else section.appendChild(summary);
@@ -4447,16 +4447,16 @@
       summary.hidden = !summary.childElementCount;
     });
 
-    Array.prototype.forEach.call(scope.querySelectorAll('.wb-form-panel'), function(panel) {
+    Array.prototype.forEach.call(scope.querySelectorAll('.hg-form-panel'), function(panel) {
       var count = panel.getAttribute('data-heritage-panel-fields') || '0';
       var invalid = panel.querySelectorAll('.has-error, [aria-invalid="true"], .text-danger, .alert-danger, .error').length;
-      var trigger = panel.querySelector('.wb-form-panel-trigger');
-      panel.classList.toggle('wb-form-panel--has-errors', invalid > 0);
+      var trigger = panel.querySelector('.hg-form-panel-trigger');
+      panel.classList.toggle('hg-form-panel--has-errors', invalid > 0);
       panel.setAttribute('data-heritage-panel-invalid', String(invalid));
       if (trigger) {
         trigger.setAttribute('data-heritage-panel-fields', count);
         trigger.setAttribute('data-heritage-panel-invalid', String(invalid));
-        trigger.classList.toggle('wb-form-panel-trigger--has-errors', invalid > 0);
+        trigger.classList.toggle('hg-form-panel-trigger--has-errors', invalid > 0);
       }
     });
   }
@@ -4486,28 +4486,28 @@
       var controlId = String(control.id || '').toLowerCase();
       var controlValue = String(control.getAttribute('value') || '').toLowerCase();
       kinds.push(type);
-      control.classList.add('wb-field-control');
+      control.classList.add('hg-field-control');
       control.setAttribute('data-heritage-control-kind', type);
       if (label && control.id && !label.getAttribute('for')) label.setAttribute('for', control.id);
-      if (control.disabled) group.classList.add('wb-field-group--disabled');
-      if (control.readOnly) group.classList.add('wb-field-group--readonly');
-      if (type === 'checkbox' || type === 'radio') group.classList.add('wb-field-group--choice');
-      if (type === 'password') group.classList.add('wb-field-group--secret');
-      if (type === 'file') group.classList.add('wb-field-group--file');
-      if (type === 'color') group.classList.add('wb-field-group--color');
-      if (type === 'number') group.classList.add('wb-field-group--number');
-      if (tag === 'select') group.classList.add('wb-field-group--select');
-      if (tag === 'textarea') group.classList.add('wb-field-group--textarea');
-      if (/^smtp_(user|pass)$/.test(controlName) || /^smtp_(user|pass)$/.test(controlId)) group.classList.add('wb-field-group--mail-credential');
-      if (/^limit_/.test(controlName) || /^limit_/.test(controlId)) group.classList.add('wb-field-group--limit-value');
-      if (/(_path|_dir|config_dir|conf_dir|root_dir|log_dir|vhost_conf_dir)$/.test(controlName) || /(_path|_dir|config_dir|conf_dir|root_dir|log_dir|vhost_conf_dir)$/.test(controlId) || (type === 'text' && controlValue.indexOf('/') !== -1)) group.classList.add('wb-field-group--path-value');
-      if (/(ssl|cert|csr|key|ca_bundle|private_key)/.test(controlName) || /(ssl|cert|csr|key|ca_bundle|private_key)/.test(controlId)) group.classList.add('wb-field-group--certificate');
-      if (tag === 'textarea' && /(config|directive|snippet|conf|custom|template)/.test(controlName + ' ' + controlId)) group.classList.add('wb-field-group--technical-text');
+      if (control.disabled) group.classList.add('hg-field-group--disabled');
+      if (control.readOnly) group.classList.add('hg-field-group--readonly');
+      if (type === 'checkbox' || type === 'radio') group.classList.add('hg-field-group--choice');
+      if (type === 'password') group.classList.add('hg-field-group--secret');
+      if (type === 'file') group.classList.add('hg-field-group--file');
+      if (type === 'color') group.classList.add('hg-field-group--color');
+      if (type === 'number') group.classList.add('hg-field-group--number');
+      if (tag === 'select') group.classList.add('hg-field-group--select');
+      if (tag === 'textarea') group.classList.add('hg-field-group--textarea');
+      if (/^smtp_(user|pass)$/.test(controlName) || /^smtp_(user|pass)$/.test(controlId)) group.classList.add('hg-field-group--mail-credential');
+      if (/^limit_/.test(controlName) || /^limit_/.test(controlId)) group.classList.add('hg-field-group--limit-value');
+      if (/(_path|_dir|config_dir|conf_dir|root_dir|log_dir|vhost_conf_dir)$/.test(controlName) || /(_path|_dir|config_dir|conf_dir|root_dir|log_dir|vhost_conf_dir)$/.test(controlId) || (type === 'text' && controlValue.indexOf('/') !== -1)) group.classList.add('hg-field-group--path-value');
+      if (/(ssl|cert|csr|key|ca_bundle|private_key)/.test(controlName) || /(ssl|cert|csr|key|ca_bundle|private_key)/.test(controlId)) group.classList.add('hg-field-group--certificate');
+      if (tag === 'textarea' && /(config|directive|snippet|conf|custom|template)/.test(controlName + ' ' + controlId)) group.classList.add('hg-field-group--technical-text');
       if (control.matches('[readonly], [disabled]')) control.setAttribute('aria-disabled', control.disabled ? 'true' : 'false');
     });
-    if (group.querySelector('.select2-container, .select2-container-multi')) group.classList.add('wb-field-group--enhanced-select');
+    if (group.querySelector('.select2-container, .select2-container-multi')) group.classList.add('hg-field-group--enhanced-select');
     if (controls.length === 1 && kinds[0] === 'checkbox') {
-      group.classList.add('wb-field-group--boolean');
+      group.classList.add('hg-field-group--boolean');
       controls[0].setAttribute('role', 'switch');
       controls[0].setAttribute('aria-checked', controls[0].checked ? 'true' : 'false');
       if (!controls[0].getAttribute('data-heritage-boolean-bound')) {
@@ -4517,15 +4517,15 @@
         });
       }
     }
-    if (group.querySelector('.input-group, .input-append, .input-prepend')) group.classList.add('wb-field-group--compound');
-    if (group.querySelector('button, .btn, input[type="button"], input[type="submit"]')) group.classList.add('wb-field-group--with-action');
-        if (group.classList.contains('has-error') || group.querySelector('[aria-invalid="true"], .text-danger, .invalid-feedback, .confirmpassworderror')) group.classList.add('wb-field-group--invalid');
-        if (group.classList.contains('has-warning') || group.querySelector('.text-warning, .alert-warning')) group.classList.add('wb-field-group--warning');
-        if (group.classList.contains('has-success') || group.querySelector('.text-success, .confirmpasswordok')) group.classList.add('wb-field-group--success');
-        if (group.querySelector('.alert, .alert-info, .alert-warning, .alert-danger, .alert-success, .box_error, .box_warning, .box_success')) group.classList.add('wb-field-group--notice');
-        if (group.querySelector('.help-block, .help-inline, .description, .hint, small, .form-text')) group.classList.add('wb-field-group--with-help');
-        if (group.querySelector('.form-control-static, output, code, pre')) group.classList.add('wb-field-group--static-value');
-        if (group.querySelector('table, .table-wrapper, .table-responsive')) group.classList.add('wb-field-group--embedded-table');
+    if (group.querySelector('.input-group, .input-append, .input-prepend')) group.classList.add('hg-field-group--compound');
+    if (group.querySelector('button, .btn, input[type="button"], input[type="submit"]')) group.classList.add('hg-field-group--with-action');
+        if (group.classList.contains('has-error') || group.querySelector('[aria-invalid="true"], .text-danger, .invalid-feedback, .confirmpassworderror')) group.classList.add('hg-field-group--invalid');
+        if (group.classList.contains('has-warning') || group.querySelector('.text-warning, .alert-warning')) group.classList.add('hg-field-group--warning');
+        if (group.classList.contains('has-success') || group.querySelector('.text-success, .confirmpasswordok')) group.classList.add('hg-field-group--success');
+        if (group.querySelector('.alert, .alert-info, .alert-warning, .alert-danger, .alert-success, .box_error, .box_warning, .box_success')) group.classList.add('hg-field-group--notice');
+        if (group.querySelector('.help-block, .help-inline, .description, .hint, small, .form-text')) group.classList.add('hg-field-group--with-help');
+        if (group.querySelector('.form-control-static, output, code, pre')) group.classList.add('hg-field-group--static-value');
+        if (group.querySelector('table, .table-wrapper, .table-responsive')) group.classList.add('hg-field-group--embedded-table');
     if (kinds.length) group.setAttribute('data-heritage-field-kinds', kinds.join(' '));
   }
 
@@ -4533,22 +4533,22 @@
     var heading = section.querySelector(':scope > legend, :scope > .fieldset-legend, :scope > .panel-heading, :scope > h2, :scope > h3, :scope > h4');
     if (heading && heading.textContent.trim()) return heading.textContent.replace(/\s+/g, ' ').trim();
     if (section.id && scope) {
-      var tab = scope.querySelector('.content-tab-wrapper > .wb-form-tabs a[href="#' + section.id.replace(/"/g, '\\"') + '"]');
+      var tab = scope.querySelector('.content-tab-wrapper > .hg-form-tabs a[href="#' + section.id.replace(/"/g, '\\"') + '"]');
       if (tab && tab.textContent.trim()) return tab.textContent.replace(/\s+/g, ' ').trim();
     }
     return '';
   }
 
   function finalizeFormSections(scope) {
-    Array.prototype.forEach.call(scope.querySelectorAll('.wb-form-section'), function(section) {
-      var groups = Array.prototype.slice.call(section.querySelectorAll('.wb-field-group:not(.wb-field-group--empty)'));
+    Array.prototype.forEach.call(scope.querySelectorAll('.hg-form-section'), function(section) {
+      var groups = Array.prototype.slice.call(section.querySelectorAll('.hg-field-group:not(.hg-field-group--empty)'));
       var controls = section.querySelectorAll('input:not([type="hidden"]), select, textarea').length;
-      var notices = section.querySelectorAll('.alert, .box_error, .box_warning, .box_success, .wb-field-group--notice').length;
+      var notices = section.querySelectorAll('.alert, .box_error, .box_warning, .box_success, .hg-field-group--notice').length;
       var title = inferSectionTitle(section, scope);
-      section.classList.toggle('wb-form-section--empty', groups.length === 0 && controls === 0);
-      section.classList.toggle('wb-form-section--compact', groups.length > 0 && groups.length <= 3);
-      section.classList.toggle('wb-form-section--large', groups.length > 12);
-      section.classList.toggle('wb-form-section--notice-heavy', notices > 0);
+      section.classList.toggle('hg-form-section--empty', groups.length === 0 && controls === 0);
+      section.classList.toggle('hg-form-section--compact', groups.length > 0 && groups.length <= 3);
+      section.classList.toggle('hg-form-section--large', groups.length > 12);
+      section.classList.toggle('hg-form-section--notice-heavy', notices > 0);
       section.setAttribute('data-heritage-section-controls', String(controls));
       section.setAttribute('data-heritage-section-notices', String(notices));
       if (title) section.setAttribute('data-heritage-section-title', title);
@@ -4558,8 +4558,8 @@
   function wireFormHelp(group, controls, formIndex, groupIndex) {
     var helps = Array.prototype.slice.call(group.querySelectorAll('.help-block, .form-text, .formHint, .hint, .description, small'));
     helps.forEach(function(help, helpIndex) {
-      help.classList.add('wb-field-help');
-      if (!help.id) help.id = stableFormId('wb-field-help-' + formIndex + '-' + groupIndex, helpIndex + 1);
+      help.classList.add('hg-field-help');
+      if (!help.id) help.id = stableFormId('hg-field-help-' + formIndex + '-' + groupIndex, helpIndex + 1);
     });
     if (!helps.length || controls.length !== 1) return;
     var ids = helps.map(function(help) { return help.id; }).filter(Boolean).join(' ');
@@ -4569,7 +4569,7 @@
   function decorateFormActions(scope) {
     Array.prototype.forEach.call(scope.querySelectorAll('.right, .form-actions, .buttonHolder'), function(actions) {
       if (!actions.querySelector('.btn, button, input[type="button"], input[type="submit"]')) return;
-      actions.classList.add('wb-form-actions');
+      actions.classList.add('hg-form-actions');
       actions.setAttribute('role', 'group');
       actions.setAttribute('aria-label', document.body.dataset.heritageFormActions || localized('Formularaktionen', 'Form actions'));
       var hasDangerAction = false;
@@ -4579,10 +4579,10 @@
         if (action.classList.contains('formbutton-danger') || action.classList.contains('btn-danger') || /delete|remove|löschen|loeschen|storno|cancel invoice/.test(actionText)) tone = 'danger';
         else if (action.classList.contains('formbutton-success') || action.classList.contains('btn-success') || action.classList.contains('btn-primary') || /save|speichern|create|erstellen|hinzufügen|hinzufuegen|import|upload/.test(actionText)) tone = 'primary';
         if (tone === 'danger') hasDangerAction = true;
-        action.classList.add('wb-form-action', 'wb-form-action--' + tone);
+        action.classList.add('hg-form-action', 'hg-form-action--' + tone);
         action.setAttribute('data-heritage-form-action-tone', tone);
       });
-      actions.classList.toggle('wb-form-actions--has-danger', hasDangerAction);
+      actions.classList.toggle('hg-form-actions--has-danger', hasDangerAction);
     });
   }
 
@@ -4593,14 +4593,14 @@
   function inferActionControlTone(control) {
     var explicitTone = String(control.getAttribute('data-heritage-action-tone') || '').toLowerCase();
     if (['primary', 'secondary', 'danger', 'warning', 'info'].indexOf(explicitTone) !== -1) return explicitTone;
-    if (control.classList.contains('wb-dns-zone-actions__secondary')) return 'secondary';
+    if (control.classList.contains('hg-dns-zone-actions__secondary')) return 'secondary';
     var textValue = actionControlText(control);
     var href = String(control.getAttribute('href') || control.getAttribute('data-capp') || control.getAttribute('data-form-action') || '').toLowerCase();
     var className = String(control.className || '').toLowerCase();
     var signal = [textValue, href, className].join(' ');
     if (
-      control.classList.contains('wb-row-action--danger') ||
-      control.classList.contains('wb-form-action--danger') ||
+      control.classList.contains('hg-row-action--danger') ||
+      control.classList.contains('hg-form-action--danger') ||
       control.classList.contains('formbutton-danger') ||
       control.classList.contains('btn-danger') ||
       control.hasAttribute('data-confirm-action') ||
@@ -4615,8 +4615,8 @@
       /info|details|anzeigen|show|preview|vorschau|prüfen|pruefen|testen/.test(signal)
     ) return 'info';
     if (
-      control.classList.contains('wb-row-action--primary') ||
-      control.classList.contains('wb-form-action--primary') ||
+      control.classList.contains('hg-row-action--primary') ||
+      control.classList.contains('hg-form-action--primary') ||
       control.classList.contains('formbutton-success') ||
       control.classList.contains('btn-success') ||
       control.classList.contains('btn-primary') ||
@@ -4629,18 +4629,18 @@
 
   function decorateActionControls(host) {
     if (!host) return;
-    var controls = host.querySelectorAll('#pageContent .btn, #pageContent button:not(.close):not(.wb-dialog__backdrop), #pageContent input[type="button"], #pageContent input[type="submit"], #pageContent a.formbutton-success, #pageContent a.formbutton-default, #pageContent a.formbutton-danger');
+    var controls = host.querySelectorAll('#pageContent .btn, #pageContent button:not(.close):not(.hg-dialog__backdrop), #pageContent input[type="button"], #pageContent input[type="submit"], #pageContent a.formbutton-success, #pageContent a.formbutton-default, #pageContent a.formbutton-danger');
     Array.prototype.forEach.call(controls, function(control) {
       if (control.closest('.select2-container, .chosen-container, .mce-container, .mce-tinymce')) return;
       var tone = inferActionControlTone(control);
       var visibleText = actionControlText(control);
       var iconOnly = control.classList.contains('formbutton-narrow') ||
         control.classList.contains('btn-icon') ||
-        control.classList.contains('wb-icon-button') ||
+        control.classList.contains('hg-icon-button') ||
         (!visibleText && Boolean(control.querySelector('span, i, svg, img')));
-      control.classList.add('wb-action-control', 'wb-action-control--' + tone);
+      control.classList.add('hg-action-control', 'hg-action-control--' + tone);
       control.setAttribute('data-heritage-action-tone', tone);
-      control.classList.toggle('wb-action-control--icon', iconOnly);
+      control.classList.toggle('hg-action-control--icon', iconOnly);
       if (!control.getAttribute('aria-label') && !visibleText) {
         control.setAttribute('aria-label', control.getAttribute('title') || document.body.dataset.heritageTableActions || localized('Aktion', 'Action'));
       }
@@ -4652,59 +4652,59 @@
     scope.dataset.heritageFormFinalized = 'true';
 
     Array.prototype.forEach.call(scope.querySelectorAll('.input-group, .input-append, .input-prepend'), function(deck) {
-      deck.classList.add('wb-form-control-deck');
+      deck.classList.add('hg-form-control-deck');
       Array.prototype.forEach.call(deck.querySelectorAll('.input-group-addon, .add-on, .input-group-btn, .btn, button, input[type="button"], input[type="submit"]'), function(part) {
-        part.classList.add('wb-form-control-deck__item');
+        part.classList.add('hg-form-control-deck__item');
       });
     });
 
-    Array.prototype.forEach.call(scope.querySelectorAll('.wb-field-group--file'), function(group) {
-      var body = group.querySelector('.wb-field-body') || group;
-      body.classList.add('wb-upload-dropzone');
+    Array.prototype.forEach.call(scope.querySelectorAll('.hg-field-group--file'), function(group) {
+      var body = group.querySelector('.hg-field-body') || group;
+      body.classList.add('hg-upload-dropzone');
       Array.prototype.forEach.call(group.querySelectorAll('input[type="file"]'), function(input) {
-        input.classList.add('wb-upload-dropzone__input');
+        input.classList.add('hg-upload-dropzone__input');
         input.setAttribute('data-heritage-file-ready', 'true');
       });
     });
 
-    Array.prototype.forEach.call(scope.querySelectorAll('.wb-field-group--color'), function(group) {
-      var body = group.querySelector('.wb-field-body') || group;
-      body.classList.add('wb-color-control-deck');
+    Array.prototype.forEach.call(scope.querySelectorAll('.hg-field-group--color'), function(group) {
+      var body = group.querySelector('.hg-field-body') || group;
+      body.classList.add('hg-color-control-deck');
       Array.prototype.forEach.call(group.querySelectorAll('input[type="color"]'), function(input) {
-        input.classList.add('wb-color-control-deck__swatch');
+        input.classList.add('hg-color-control-deck__swatch');
       });
     });
 
-    Array.prototype.forEach.call(scope.querySelectorAll('.wb-field-group--technical-text textarea, textarea[name*="config"], textarea[id*="config"], textarea[name*="directive"], textarea[id*="directive"], textarea[name*="snippet"], textarea[id*="snippet"], textarea[name*="template"], textarea[id*="template"]'), function(textarea) {
-      textarea.classList.add('wb-code-input');
+    Array.prototype.forEach.call(scope.querySelectorAll('.hg-field-group--technical-text textarea, textarea[name*="config"], textarea[id*="config"], textarea[name*="directive"], textarea[id*="directive"], textarea[name*="snippet"], textarea[id*="snippet"], textarea[name*="template"], textarea[id*="template"]'), function(textarea) {
+      textarea.classList.add('hg-code-input');
       textarea.setAttribute('spellcheck', 'false');
     });
 
-    Array.prototype.forEach.call(scope.querySelectorAll('.wb-form-actions .btn, .wb-form-actions button, .wb-form-actions input[type="button"], .wb-form-actions input[type="submit"], .wb-form-actions a.formbutton-success, .wb-form-actions a.formbutton-default, .wb-form-actions a.formbutton-danger'), function(action) {
+    Array.prototype.forEach.call(scope.querySelectorAll('.hg-form-actions .btn, .hg-form-actions button, .hg-form-actions input[type="button"], .hg-form-actions input[type="submit"], .hg-form-actions a.formbutton-success, .hg-form-actions a.formbutton-default, .hg-form-actions a.formbutton-danger'), function(action) {
       var tone = action.getAttribute('data-heritage-form-action-tone') || 'secondary';
-      action.classList.add('wb-form-action-control', 'wb-form-action-control--' + tone);
+      action.classList.add('hg-form-action-control', 'hg-form-action-control--' + tone);
     });
 
-    Array.prototype.forEach.call(scope.querySelectorAll('.wb-field-group'), function(group) {
-      var body = group.querySelector('.wb-field-body');
+    Array.prototype.forEach.call(scope.querySelectorAll('.hg-field-group'), function(group) {
+      var body = group.querySelector('.hg-field-body');
       if (!body) return;
-      if (group.classList.contains('wb-field-group--compound')) body.classList.add('wb-field-body--compound');
-      if (group.classList.contains('wb-field-group--select')) body.classList.add('wb-field-body--select');
-      if (group.classList.contains('wb-field-group--textarea')) body.classList.add('wb-field-body--textarea');
-      if (group.classList.contains('wb-field-group--secret')) body.classList.add('wb-field-body--secret');
-      if (group.classList.contains('wb-field-group--readonly') || group.classList.contains('wb-field-group--disabled')) body.classList.add('wb-field-body--locked');
+      if (group.classList.contains('hg-field-group--compound')) body.classList.add('hg-field-body--compound');
+      if (group.classList.contains('hg-field-group--select')) body.classList.add('hg-field-body--select');
+      if (group.classList.contains('hg-field-group--textarea')) body.classList.add('hg-field-body--textarea');
+      if (group.classList.contains('hg-field-group--secret')) body.classList.add('hg-field-body--secret');
+      if (group.classList.contains('hg-field-group--readonly') || group.classList.contains('hg-field-group--disabled')) body.classList.add('hg-field-body--locked');
     });
 
     var strengthBar = scope.querySelector('#passBar');
     var strengthInput = scope.querySelector('[data-heritage-password-strength="true"]');
     if (strengthBar && strengthInput) {
-      var strengthGroup = strengthBar.closest('.wb-field-group');
+      var strengthGroup = strengthBar.closest('.hg-field-group');
       var strengthText = scope.querySelector('#passText');
       var syncStrengthVisibility = function() {
         var hasPassword = String(strengthInput.value || '').length > 0;
         if (strengthGroup) {
           strengthGroup.hidden = !hasPassword;
-          strengthGroup.classList.add('wb-field-group--password-strength');
+          strengthGroup.classList.add('hg-field-group--password-strength');
         }
         strengthBar.setAttribute('role', 'progressbar');
         strengthBar.setAttribute('aria-valuemin', '0');
@@ -4726,42 +4726,42 @@
     var shellForm = host.closest('form#pageForm, form.form-horizontal');
     if (shellForm && forms.indexOf(shellForm) === -1) forms.push(shellForm);
     forms.forEach(function(form) {
-      form.classList.add('wb-modern-form');
+      form.classList.add('hg-modern-form');
       var fieldCount = 0;
       var scope = form === shellForm ? host : form;
       Array.prototype.forEach.call(scope.querySelectorAll('.tab-pane, fieldset, .pnl_formsarea'), function(section, sectionIndex) {
-        section.classList.add('wb-form-section');
+        section.classList.add('hg-form-section');
         section.setAttribute('data-heritage-section-index', String(sectionIndex + 1));
-        if (section.tagName === 'FIELDSET') section.classList.add('wb-form-fieldset');
+        if (section.tagName === 'FIELDSET') section.classList.add('hg-form-fieldset');
         var legend = section.querySelector(':scope > legend, :scope > .fieldset-legend');
-        if (legend) legend.classList.add('wb-form-section-heading');
+        if (legend) legend.classList.add('hg-form-section-heading');
       });
-      // also decorate native .wb-field-group templates (Bootstrap-free forms),
+      // also decorate native .hg-field-group templates (Bootstrap-free forms),
       // not only legacy Bootstrap .form-group. Static NodeList + idempotent add =>
       // no double processing; legacy .form-group templates behave exactly as before.
-      Array.prototype.forEach.call(scope.querySelectorAll('.form-group, .wb-field-group'), function(group, groupIndex) {
-        group.classList.add('wb-field-group');
+      Array.prototype.forEach.call(scope.querySelectorAll('.form-group, .hg-field-group'), function(group, groupIndex) {
+        group.classList.add('hg-field-group');
         var label = group.querySelector(':scope > label, :scope > .control-label');
         var controls = Array.prototype.slice.call(group.querySelectorAll('input:not([type="hidden"]), select, textarea'));
         if (label) {
-          label.classList.add('wb-field-label');
+          label.classList.add('hg-field-label');
           var readableLabel = labelText(label);
           if (readableLabel) group.setAttribute('data-heritage-field-label', readableLabel);
         }
-        if (!label) group.classList.add('wb-field-group--unlabelled');
-        if (!controls.length) group.classList.add('wb-field-group--content');
+        if (!label) group.classList.add('hg-field-group--unlabelled');
+        if (!controls.length) group.classList.add('hg-field-group--content');
         if (!controls.length && !group.textContent.trim() && !group.querySelector('button, a, [role], [id]:not(input)')) {
-          group.classList.add('wb-field-group--empty');
+          group.classList.add('hg-field-group--empty');
           group.setAttribute('aria-hidden', 'true');
         }
-        if (controls.length === 1) group.classList.add('wb-field-group--single');
-        if (hasRequiredCue(group, label, controls)) group.classList.add('wb-field-group--required');
+        if (controls.length === 1) group.classList.add('hg-field-group--single');
+        if (hasRequiredCue(group, label, controls)) group.classList.add('hg-field-group--required');
         classifyFieldGroup(group, label, controls);
         var fieldBodies = [];
         Array.prototype.forEach.call(group.children, function(child) {
           if (child === label) return;
           if (child.matches('[class*="col-"], .controls, .input-group, .input-append, .input-prepend, .checkbox, .radio, .select2-container, .select2-container-multi')) {
-            child.classList.add('wb-field-body');
+            child.classList.add('hg-field-body');
             fieldBodies.push(child);
           }
         });
@@ -4769,57 +4769,57 @@
           controls.forEach(function(control) {
             var parent = control.parentElement;
             if (parent && parent !== group && parent.parentElement === group) {
-              parent.classList.add('wb-field-body');
+              parent.classList.add('hg-field-body');
               if (fieldBodies.indexOf(parent) === -1) fieldBodies.push(parent);
             }
           });
         }
-        if (fieldBodies.length > 1) group.classList.add('wb-field-group--multi-body');
+        if (fieldBodies.length > 1) group.classList.add('hg-field-group--multi-body');
         fieldBodies.forEach(function(body, bodyIndex) {
           body.setAttribute('data-heritage-field-body-index', String(bodyIndex + 1));
           if (!body.querySelector('input:not([type="hidden"]), select, textarea, button, a') && body.textContent.trim()) {
-            body.classList.add('wb-field-affix');
-            group.classList.add('wb-field-group--with-affix');
+            body.classList.add('hg-field-affix');
+            group.classList.add('hg-field-group--with-affix');
           }
         });
         Array.prototype.forEach.call(controls, function(control) {
           fieldCount += 1;
-          if (group.classList.contains('wb-field-group--required')) control.setAttribute('aria-required', 'true');
+          if (group.classList.contains('hg-field-group--required')) control.setAttribute('aria-required', 'true');
         });
         wireFormHelp(group, controls, forms.indexOf(form) + 1, groupIndex + 1);
       });
       form.setAttribute('data-heritage-field-count', String(fieldCount));
-      form.classList.toggle('wb-modern-form--dense', fieldCount > 12);
-      form.classList.toggle('wb-modern-form--long', fieldCount > 20);
-      form.classList.toggle('wb-modern-form--huge', fieldCount > 38);
-      var tabCount = scope.querySelectorAll('.content-tab-wrapper > .wb-form-tabs > li').length;
-      form.classList.toggle('wb-modern-form--tabbed', tabCount > 1);
+      form.classList.toggle('hg-modern-form--dense', fieldCount > 12);
+      form.classList.toggle('hg-modern-form--long', fieldCount > 20);
+      form.classList.toggle('hg-modern-form--huge', fieldCount > 38);
+      var tabCount = scope.querySelectorAll('.content-tab-wrapper > .hg-form-tabs > li').length;
+      form.classList.toggle('hg-modern-form--tabbed', tabCount > 1);
       form.setAttribute('data-heritage-tab-count', String(tabCount));
-      form.classList.toggle('wb-modern-form--has-upload', !!scope.querySelector('.wb-field-group--file'));
-      form.classList.toggle('wb-modern-form--has-secrets', !!scope.querySelector('.wb-field-group--secret'));
-      form.classList.toggle('wb-modern-form--has-choices', !!scope.querySelector('.wb-field-group--choice'));
-      Array.prototype.forEach.call(scope.querySelectorAll('.wb-form-section'), function(section) {
-        section.setAttribute('data-heritage-section-fields', String(section.querySelectorAll('.wb-field-group:not(.wb-field-group--empty)').length));
+      form.classList.toggle('hg-modern-form--has-upload', !!scope.querySelector('.hg-field-group--file'));
+      form.classList.toggle('hg-modern-form--has-secrets', !!scope.querySelector('.hg-field-group--secret'));
+      form.classList.toggle('hg-modern-form--has-choices', !!scope.querySelector('.hg-field-group--choice'));
+      Array.prototype.forEach.call(scope.querySelectorAll('.hg-form-section'), function(section) {
+        section.setAttribute('data-heritage-section-fields', String(section.querySelectorAll('.hg-field-group:not(.hg-field-group--empty)').length));
       });
       finalizeFormSections(scope);
-      Array.prototype.forEach.call(scope.querySelectorAll('.panel-group, .wb-limit-sections, .wb-form-sections'), function(accordion) {
-        accordion.classList.add('wb-form-accordion');
-        Array.prototype.forEach.call(accordion.querySelectorAll(':scope > .panel, :scope > .wb-limit-section, :scope > .wb-form-section'), function(panel) {
-          panel.classList.add('wb-form-panel');
-          var body = panel.querySelector('.panel-body, .panel-collapse, .wb-limit-section__content, .wb-limit-section__body, .wb-form-section__content, .wb-form-section__body');
-          var heading = panel.querySelector(':scope > .panel-heading, :scope > .wb-limit-section__header, :scope > .wb-form-section__header');
+      Array.prototype.forEach.call(scope.querySelectorAll('.panel-group, .hg-limit-sections, .hg-form-sections'), function(accordion) {
+        accordion.classList.add('hg-form-accordion');
+        Array.prototype.forEach.call(accordion.querySelectorAll(':scope > .panel, :scope > .hg-limit-section, :scope > .hg-form-section'), function(panel) {
+          panel.classList.add('hg-form-panel');
+          var body = panel.querySelector('.panel-body, .panel-collapse, .hg-limit-section__content, .hg-limit-section__body, .hg-form-section__content, .hg-form-section__body');
+          var heading = panel.querySelector(':scope > .panel-heading, :scope > .hg-limit-section__header, :scope > .hg-form-section__header');
           var trigger = heading && heading.querySelector('a[href^="#"], button[data-target]');
           var count = body ? body.querySelectorAll('.form-group').length : 0;
           panel.setAttribute('data-heritage-panel-fields', String(count));
-          if (heading) heading.classList.add('wb-form-panel-heading');
+          if (heading) heading.classList.add('hg-form-panel-heading');
           if (trigger) {
-            trigger.classList.add('wb-form-panel-trigger');
+            trigger.classList.add('hg-form-panel-trigger');
             var target = trigger.getAttribute('href') || trigger.getAttribute('data-target') || '';
             if (target.charAt(0) === '#') trigger.setAttribute('aria-controls', target.slice(1));
             trigger.setAttribute('aria-expanded', trigger.classList.contains('collapsed') ? 'false' : 'true');
-            if (!trigger.querySelector('.wb-form-panel-count')) {
+            if (!trigger.querySelector('.hg-form-panel-count')) {
               var counter = document.createElement('span');
-              counter.className = 'wb-form-panel-count';
+              counter.className = 'hg-form-panel-count';
               counter.textContent = String(count);
               counter.setAttribute('aria-hidden', 'true');
               trigger.appendChild(counter);
@@ -4831,7 +4831,7 @@
           var synchronizeAccordionState = function(event) {
             var targetId = event.target && event.target.id;
             if (!targetId) return;
-            Array.prototype.forEach.call(accordion.querySelectorAll('.wb-form-panel-trigger'), function(trigger) {
+            Array.prototype.forEach.call(accordion.querySelectorAll('.hg-form-panel-trigger'), function(trigger) {
               var target = trigger.getAttribute('href') || trigger.getAttribute('data-target') || '';
               if (target === '#' + targetId) trigger.setAttribute('aria-expanded', event.type === 'heritage:collapse-open' ? 'true' : 'false');
             });
@@ -4845,7 +4845,7 @@
       finalizeFormControls(scope);
 
       function updateConditionalRows() {
-        Array.prototype.forEach.call(scope.querySelectorAll('.wb-field-group--unlabelled.wb-field-group--content'), function(group) {
+        Array.prototype.forEach.call(scope.querySelectorAll('.hg-field-group--unlabelled.hg-field-group--content'), function(group) {
           var conditionalNodes = Array.prototype.slice.call(group.querySelectorAll('[style*="display"], [hidden]'));
           if (!conditionalNodes.length) return;
           var visible = conditionalNodes.some(function(node) {
@@ -4853,7 +4853,7 @@
             var style = window.getComputedStyle ? window.getComputedStyle(node) : node.style;
             return style.display !== 'none' && style.visibility !== 'hidden';
           });
-          group.classList.toggle('wb-field-group--dormant', !visible);
+          group.classList.toggle('hg-field-group--dormant', !visible);
           group.setAttribute('aria-hidden', visible ? 'false' : 'true');
         });
       }
@@ -4899,12 +4899,12 @@
   function contentStateNode(kind, token, diagnostic, retryArgs) {
     var state;
     if (kind === 'loading') {
-      state = element('div', 'wb-content-state wb-content-state--loading');
+      state = element('div', 'hg-content-state hg-content-state--loading');
       state.setAttribute('role', 'status');
-      state.appendChild(iconElement('wb-content-state__spinner'));
-      state.appendChild(element('strong', 'wb-content-state__title', messages.loading));
-      state.appendChild(element('span', 'wb-content-state__description', messages.loading_description || ''));
-      var skeleton = iconElement('wb-content-state__skeleton');
+      state.appendChild(iconElement('hg-content-state__spinner'));
+      state.appendChild(element('strong', 'hg-content-state__title', messages.loading));
+      state.appendChild(element('span', 'hg-content-state__description', messages.loading_description || ''));
+      var skeleton = iconElement('hg-content-state__skeleton');
       skeleton.appendChild(document.createElement('i'));
       skeleton.appendChild(document.createElement('i'));
       skeleton.appendChild(document.createElement('i'));
@@ -4912,23 +4912,23 @@
       return state;
     }
     if (kind === 'empty') {
-      state = element('div', 'wb-content-state wb-content-state--empty');
+      state = element('div', 'hg-content-state hg-content-state--empty');
       state.setAttribute('role', 'status');
-      state.appendChild(iconElement('wb-content-state__icon'));
-      state.appendChild(element('strong', 'wb-content-state__title', messages.empty_title || messages.empty));
-      state.appendChild(element('span', 'wb-content-state__description', messages.empty_description || ''));
+      state.appendChild(iconElement('hg-content-state__icon'));
+      state.appendChild(element('strong', 'hg-content-state__title', messages.empty_title || messages.empty));
+      state.appendChild(element('span', 'hg-content-state__description', messages.empty_description || ''));
       return state;
     }
-    state = element('div', 'wb-content-state wb-content-state--error');
+    state = element('div', 'hg-content-state hg-content-state--error');
     state.setAttribute('role', 'alert');
-    state.appendChild(iconElement('wb-content-state__icon', '!'));
-    state.appendChild(element('strong', 'wb-content-state__title', messages.error));
-    state.appendChild(element('span', 'wb-content-state__description', messages.error_description || ''));
-    var detail = element('span', 'wb-visually-hidden', diagnostic || '');
+    state.appendChild(iconElement('hg-content-state__icon', '!'));
+    state.appendChild(element('strong', 'hg-content-state__title', messages.error));
+    state.appendChild(element('span', 'hg-content-state__description', messages.error_description || ''));
+    var detail = element('span', 'hg-visually-hidden', diagnostic || '');
     detail.setAttribute('data-heritage-error-detail', 'true');
     state.appendChild(detail);
     if (token) {
-      var retry = element('button', 'wb-content-state__retry', messages.retry);
+      var retry = element('button', 'hg-content-state__retry', messages.retry);
       retry.type = 'button';
       retry.setAttribute('data-heritage-retry', token);
       retry.setAttribute('data-heritage-retry-owner', '94');
@@ -5072,10 +5072,10 @@
     var api = runtime();
     if (!api) return false;
     if (!window.confirm(confirmation)) return false;
-    document.body.classList.add('wb-confirmed-action-active');
+    document.body.classList.add('hg-confirmed-action-active');
     var request = legacy.loadContent(link);
     if (request && request.promise) request.promise.finally(function() {
-      document.body.classList.remove('wb-confirmed-action-active');
+      document.body.classList.remove('hg-confirmed-action-active');
     });
     return request;
   };
@@ -5177,14 +5177,14 @@
   var refreshTimer = null;
 
   function refreshState(kind) {
-    document.querySelectorAll('.wb-refresh-state').forEach(function(state) { state.remove(); });
+    document.querySelectorAll('.hg-refresh-state').forEach(function(state) { state.remove(); });
     var role = kind === 'error' ? 'alert' : 'status';
     var label = kind === 'error' ? messages.refresh_error : messages.refreshing;
     var host = document.getElementById('pageContent');
     if (!host) return;
-    var state = element('div', 'wb-refresh-state wb-refresh-state--' + kind);
+    var state = element('div', 'hg-refresh-state hg-refresh-state--' + kind);
     state.setAttribute('role', role);
-    state.appendChild(kind === 'error' ? iconElement('wb-refresh-state__icon', '!') : iconElement('wb-refresh-state__spinner'));
+    state.appendChild(kind === 'error' ? iconElement('hg-refresh-state__icon', '!') : iconElement('hg-refresh-state__spinner'));
     state.appendChild(element('span', '', label));
     host.insertBefore(state, host.firstChild);
   }
@@ -5204,7 +5204,7 @@
     refreshRequest = null;
 
     if (interval <= 0) {
-      document.querySelectorAll('.wb-refresh-state').forEach(function(state) { state.remove(); });
+      document.querySelectorAll('.hg-refresh-state').forEach(function(state) { state.remove(); });
       return;
     }
 
@@ -5234,7 +5234,7 @@
   };
 
   document.addEventListener('click', function(event) {
-    var trigger = event.target.closest('.wb-content-state__retry');
+    var trigger = event.target.closest('.hg-content-state__retry');
     if (!trigger) return;
     event.preventDefault();
     var token = trigger.getAttribute('data-heritage-retry');
@@ -5362,7 +5362,7 @@
     var trigger = document.querySelector('.notification');
     var counter = trigger && trigger.querySelector('.notification_text');
     var dialog = document.getElementById('datalogModal');
-    var list = dialog && dialog.querySelector('.wb-dialog__body ul');
+    var list = dialog && dialog.querySelector('.hg-dialog__body ul');
     var count = Number(payload && payload.count || 0);
     if (!trigger || !counter || !list) return;
     list.replaceChildren();
@@ -5516,7 +5516,7 @@
   }
 
   function render(root) {
-    var nodes = (root || document).querySelectorAll('.icon:not(.wb-svg-icon),.glyphicon:not(.wb-svg-icon),.fa:not(.wb-svg-icon)');
+    var nodes = (root || document).querySelectorAll('.icon:not(.hg-svg-icon),.glyphicon:not(.hg-svg-icon),.fa:not(.hg-svg-icon)');
     Array.prototype.forEach.call(nodes, function(node) {
       var name = '';
       Array.prototype.some.call(node.classList, function(className) {
@@ -5535,7 +5535,7 @@
         return false;
       });
       if (!name) return;
-      node.classList.add('wb-svg-icon');
+      node.classList.add('hg-svg-icon');
       node.setAttribute('data-heritage-icon', name);
       node.replaceChildren(svgIcon(name));
       accessibleName(node, name);
@@ -5587,12 +5587,12 @@
   }
 
   function structureContent(alert) {
-    var content = alert.querySelector(':scope > .wb-feedback__content');
+    var content = alert.querySelector(':scope > .hg-feedback__content');
     if (content) return content;
     content = document.createElement('div');
-    content.className = 'wb-feedback__content';
+    content.className = 'hg-feedback__content';
     Array.prototype.slice.call(alert.childNodes).forEach(function(node) {
-      if (node.nodeType === 1 && node.matches('.close, [data-heritage-dismiss], .wb-feedback__icon, .wb-feedback__action')) return;
+      if (node.nodeType === 1 && node.matches('.close, [data-heritage-dismiss], .hg-feedback__icon, .hg-feedback__action')) return;
       content.appendChild(node);
     });
     alert.appendChild(content);
@@ -5601,18 +5601,18 @@
 
   function enhanceAlert(alert) {
     if (alert.dataset.heritageFeedback === 'true') return;
-    if (alert.closest && alert.closest('.wb-login-form-surface')) return;
+    if (alert.closest && alert.closest('.hg-login-form-surface')) return;
     var state = tone(alert);
     alert.dataset.heritageFeedback = 'true';
     alert.dataset.heritageTone = state;
     alert.setAttribute('data-heritage-feedback', state);
-    alert.classList.add('wb-feedback');
+    alert.classList.add('hg-feedback');
     alert.setAttribute('role', state === 'danger' || state === 'warning' ? 'alert' : 'status');
     alert.setAttribute('aria-live', state === 'danger' || state === 'warning' ? 'assertive' : 'polite');
     alert.setAttribute('aria-atomic', 'true');
     structureContent(alert);
     var icon = document.createElement('span');
-    icon.className = 'wb-feedback__icon';
+    icon.className = 'hg-feedback__icon';
     icon.setAttribute('aria-hidden', 'true');
     icon.appendChild(svgFromMarkup(icons[state]));
     alert.prepend(icon);
@@ -5627,33 +5627,33 @@
   }
 
   function enhanceDialog(dialog) {
-    dialog.classList.add('wb-dialog--enhanced');
+    dialog.classList.add('hg-dialog--enhanced');
     dialog.setAttribute('data-heritage-dialog', 'true');
-    var dangerAction = dialog.querySelector('.wb-dialog__action--danger, .btn-danger, [data-heritage-tab-confirm-action="discard"]');
-    var primaryAction = dialog.querySelector('.wb-dialog__action--primary, .btn-primary, [data-heritage-tab-confirm-action="save"]');
+    var dangerAction = dialog.querySelector('.hg-dialog__action--danger, .btn-danger, [data-heritage-tab-confirm-action="discard"]');
+    var primaryAction = dialog.querySelector('.hg-dialog__action--primary, .btn-primary, [data-heritage-tab-confirm-action="save"]');
     dialog.setAttribute('data-heritage-dialog-tone', dangerAction ? 'warning' : (primaryAction ? 'action' : 'neutral'));
-    var body = dialog.querySelector('.wb-dialog__body');
+    var body = dialog.querySelector('.hg-dialog__body');
     if (body && !dialog.getAttribute('aria-describedby')) {
-      var description = body.querySelector('p, .wb-dialog__supporting-text');
+      var description = body.querySelector('p, .hg-dialog__supporting-text');
       if (description) {
         if (!description.id) description.id = (dialog.id || 'heritage-dialog') + '-description';
         dialog.setAttribute('aria-describedby', description.id);
       }
     }
-    var footer = dialog.querySelector('.wb-dialog__footer');
+    var footer = dialog.querySelector('.hg-dialog__footer');
     if (footer) {
       footer.setAttribute('role', 'group');
       footer.setAttribute('aria-label', localized('Dialogaktionen', 'Dialog actions'));
       Array.prototype.forEach.call(footer.querySelectorAll('button, a'), function (action) {
-        var kind = action.matches('.wb-dialog__action--primary, .btn-primary') ? 'primary' :
-          (action.matches('.wb-dialog__action--danger, .btn-danger') ? 'danger' : 'secondary');
+        var kind = action.matches('.hg-dialog__action--primary, .btn-primary') ? 'primary' :
+          (action.matches('.hg-dialog__action--danger, .btn-danger') ? 'danger' : 'secondary');
         action.setAttribute('data-heritage-dialog-action', kind);
       });
     }
-    var list = dialog.querySelector('.wb-dialog__body > ul');
+    var list = dialog.querySelector('.hg-dialog__body > ul');
     if (list) {
-      list.classList.add('wb-dialog__activity-list');
-      Array.prototype.forEach.call(list.children, function (item) { item.classList.add('wb-dialog__activity-item'); });
+      list.classList.add('hg-dialog__activity-list');
+      Array.prototype.forEach.call(list.children, function (item) { item.classList.add('hg-dialog__activity-item'); });
     }
   }
 
@@ -5661,8 +5661,8 @@
     var host = root && root.querySelectorAll ? root : document;
     if (host.matches && host.matches('.alert')) enhanceAlert(host);
     Array.prototype.forEach.call(host.querySelectorAll('.alert'), enhanceAlert);
-    if (host.matches && host.matches('.wb-dialog')) enhanceDialog(host);
-    Array.prototype.forEach.call(host.querySelectorAll('.wb-dialog'), enhanceDialog);
+    if (host.matches && host.matches('.hg-dialog')) enhanceDialog(host);
+    Array.prototype.forEach.call(host.querySelectorAll('.hg-dialog'), enhanceDialog);
   }
 
   function dismissGenerated(alert) {
@@ -5715,7 +5715,7 @@
   function actionControl(options) {
     if (!options || !options.actionLabel || (!options.actionHref && typeof options.onAction !== 'function')) return null;
     var control = document.createElement(options.actionHref ? 'a' : 'button');
-    control.className = 'wb-feedback__action';
+    control.className = 'hg-feedback__action';
     control.textContent = String(options.actionLabel);
     if (options.actionHref) control.href = new URL(options.actionHref, document.baseURI).href;
     else {
@@ -5733,10 +5733,10 @@
     if (!text) return null;
     var host = document.getElementById('pageContent');
     if (!host) return null;
-    var stack = host.querySelector(':scope > .wb-feedback-stack');
+    var stack = host.querySelector(':scope > .hg-feedback-stack');
     if (!stack) {
       stack = document.createElement('div');
-      stack.className = 'wb-feedback-stack';
+      stack.className = 'hg-feedback-stack';
       stack.setAttribute('aria-label', localized('Meldungen', 'Notifications'));
       stack.setAttribute('data-heritage-feedback-stack', 'true');
       stack.setAttribute('role', 'region');
@@ -5749,7 +5749,7 @@
         item.getAttribute('data-heritage-feedback-tone') === toneName;
     });
     if (duplicate) {
-      if (!duplicate.querySelector(':scope > .wb-feedback__action')) {
+      if (!duplicate.querySelector(':scope > .hg-feedback__action')) {
         var duplicateAction = actionControl(options);
         var duplicateDismiss = duplicate.querySelector(':scope > [data-heritage-dismiss]');
         if (duplicateAction) duplicate.insertBefore(duplicateAction, duplicateDismiss || null);
@@ -5824,8 +5824,8 @@
 
   function hasAuthoritativeError(host) {
     return Boolean(host && host.querySelector(
-      '.wb-content-state--error, ' +
-      '.wb-submit-feedback[data-state="failed"], ' +
+      '.hg-content-state--error, ' +
+      '.hg-submit-feedback[data-state="failed"], ' +
       '.alert-danger:not([data-heritage-generated-feedback])'
     ));
   }
@@ -5873,9 +5873,9 @@
 
   var button = document.querySelector('.menu-btn');
   var panel = document.querySelector('#heritage-mobile-navigation');
-  var overlay = document.querySelector('.wb-navigation-overlay');
-  var closeButton = panel && panel.querySelector('.wb-mobile-navigation__close');
-  var content = panel && panel.querySelector('.wb-mobile-navigation__content');
+  var overlay = document.querySelector('.hg-navigation-overlay');
+  var closeButton = panel && panel.querySelector('.hg-mobile-navigation__close');
+  var content = panel && panel.querySelector('.hg-mobile-navigation__content');
   var pendingModule = null;
   var currentPageTarget = '';
   var userCollapsedModule = '';
@@ -6237,18 +6237,18 @@
   function isDashboardContent() {
     var pageContent = document.querySelector('#pageContent');
     if (!pageContent) return false;
-    // Regression fix: detect the raw dashboard by its shipped .wb-dashlet
-    // widgets too. The other markers (.wb-dashboard-layout, ul.modules, ...) are
-    // only added by enhance(), which itself requires body.wb-dashboard-page — so
-    // without .wb-dashlet here the detection deadlocked and the dashboard stayed
+    // Regression fix: detect the raw dashboard by its shipped .hg-dashlet
+    // widgets too. The other markers (.hg-dashboard-layout, ul.modules, ...) are
+    // only added by enhance(), which itself requires body.hg-dashboard-page — so
+    // without .hg-dashlet here the detection deadlocked and the dashboard stayed
     // unstyled.
-    return Boolean(pageContent.querySelector(':scope > .wb-dashlet, ul.modules, .wb-dashboard-layout, .wb-dashboard-hero, .wb-dashboard-overview'));
+    return Boolean(pageContent.querySelector(':scope > .hg-dashlet, ul.modules, .hg-dashboard-layout, .hg-dashboard-hero, .hg-dashboard-overview'));
   }
 
   function isGermanInterface() {
     var declared = (document.documentElement.lang || '').toLowerCase();
     var primary = document.querySelector('#main-navigation');
-    var footer = document.querySelector('.wb-app-navigation__footer');
+    var footer = document.querySelector('.hg-app-navigation__footer');
     return declared.indexOf('de') === 0 || /\u00fcbersicht|kunden|webseiten|\u00fcberwachung|einstellungen/i.test(primary ? primary.textContent : '') || /ispconfig workbench/i.test(footer ? footer.textContent : '');
   }
 
@@ -6293,7 +6293,7 @@
   function appendNavigationItem(groupList, source, createSource) {
     var item = document.createElement('li');
     var row = document.createElement('div');
-    var secondaryLink = cloneLink(source, 'wb-mobile-navigation__secondary-link');
+    var secondaryLink = cloneLink(source, 'hg-mobile-navigation__secondary-link');
     item.dataset.heritageSearchText = (source.textContent + ' ' + (createSource ? createSource.textContent : '')).trim();
     if (isCurrentLink(source)) secondaryLink.setAttribute('aria-current', 'page');
     compactListLabel(secondaryLink, source.dataset.heritageCompactLabel || '');
@@ -6303,9 +6303,9 @@
       return;
     }
 
-    row.className = 'wb-mobile-navigation__secondary-row';
+    row.className = 'hg-mobile-navigation__secondary-row';
     row.appendChild(secondaryLink);
-    var quickAction = cloneLink(createSource, 'wb-mobile-navigation__quick-action');
+    var quickAction = cloneLink(createSource, 'hg-mobile-navigation__quick-action');
     var createLabel = createSource.textContent.trim() || 'Create new';
     quickAction.replaceChildren();
     quickAction.setAttribute('aria-label', createLabel);
@@ -6317,7 +6317,7 @@
     quickAction.appendChild(quickIcon);
     quickAction.dataset.heritageQuickAction = 'true';
     row.appendChild(quickAction);
-    item.classList.add('wb-mobile-navigation__paired-item');
+    item.classList.add('hg-mobile-navigation__paired-item');
     item.appendChild(row);
     groupList.appendChild(item);
   }
@@ -6328,13 +6328,13 @@
     var item = document.createElement('li');
     var label = document.createElement('label');
     var control = select.cloneNode(true);
-    item.className = 'wb-mobile-navigation__secondary-control';
+    item.className = 'hg-mobile-navigation__secondary-control';
     item.dataset.heritageSearchText = select.textContent.trim();
-    label.className = 'wb-visually-hidden';
+    label.className = 'hg-visually-hidden';
     label.textContent = isGermanInterface() ? 'Server ausw\u00e4hlen' : 'Select server';
     control.removeAttribute('id');
     control.removeAttribute('onchange');
-    control.classList.add('wb-mobile-navigation__server-select');
+    control.classList.add('hg-mobile-navigation__server-select');
     control.setAttribute('aria-label', label.textContent);
     control.addEventListener('change', function () {
       var api = runtime();
@@ -6354,7 +6354,7 @@
     var labelText = header.textContent.trim();
     var listId = 'heritage-mobile-secondary-group-' + (index + 1);
     groupList.id = listId;
-    label.className = 'wb-mobile-navigation__secondary-label';
+    label.className = 'hg-mobile-navigation__secondary-label';
     label.setAttribute('role', 'presentation');
     var labelTextNode = document.createElement('span');
     labelTextNode.textContent = labelText;
@@ -6366,12 +6366,12 @@
   }
 
   function ensureBrand() {
-    var header = panel.querySelector('.wb-mobile-navigation__header');
+    var header = panel.querySelector('.hg-mobile-navigation__header');
     var source = document.querySelector('#logo');
-    if (!header || !source || header.querySelector('.wb-app-navigation__brand-logo')) return;
+    if (!header || !source || header.querySelector('.hg-app-navigation__brand-logo')) return;
     var brand = source.cloneNode(true);
     brand.removeAttribute('id');
-    brand.className = 'wb-app-navigation__brand-logo';
+    brand.className = 'hg-app-navigation__brand-logo';
     brand.removeAttribute('aria-hidden');
     var brandLink = brand.querySelector('a');
     if (brandLink) {
@@ -6385,7 +6385,7 @@
 
   function sidebarMatchesModule(sidebar, activeModule) {
     if (!sidebar || !activeModule) return false;
-    return Array.from(sidebar.querySelectorAll('#sub-navigation a, .wb-secondary-navigation__group a')).some(function (link) {
+    return Array.from(sidebar.querySelectorAll('#sub-navigation a, .hg-secondary-navigation__group a')).some(function (link) {
       return moduleFromTarget(navigationTarget(link)) === activeModule;
     });
   }
@@ -6398,18 +6398,18 @@
     var dashboard = activeModule === 'dashboard' && isDashboardContent();
     if (dashboard) return { node: container, count: 0 };
     var useSidebar = sidebarMatchesModule(sidebar, activeModule);
-    var links = useSidebar ? Array.from(sidebar.querySelectorAll('#sub-navigation a, .wb-secondary-navigation__group a')) : [];
-    container.className = 'wb-mobile-navigation__secondary';
+    var links = useSidebar ? Array.from(sidebar.querySelectorAll('#sub-navigation a, .hg-secondary-navigation__group a')) : [];
+    container.className = 'hg-mobile-navigation__secondary';
     container.id = 'heritage-mobile-secondary-navigation';
     if (!sidebar) return { node: container, count: 0 };
 
     var groups = useSidebar ? Array.from(sidebar.querySelectorAll(':scope > header')) : [];
     if (!groups.length) groups = [null];
     groups.forEach(function (header, groupIndex) {
-      var sourceList = useSidebar ? (header ? header.nextElementSibling : sidebar.querySelector('#sub-navigation, .wb-secondary-navigation__group')) : null;
+      var sourceList = useSidebar ? (header ? header.nextElementSibling : sidebar.querySelector('#sub-navigation, .hg-secondary-navigation__group')) : null;
       if (!sourceList || sourceList.tagName !== 'UL') return;
       var group = document.createElement('li');
-      group.className = 'wb-mobile-navigation__secondary-group';
+      group.className = 'hg-mobile-navigation__secondary-group';
       var groupList = document.createElement('ul');
       appendSecondaryGroupLabel(group, groupList, header, groupIndex, sourceList);
       var sources = Array.from(sourceList.querySelectorAll(':scope > li > a')).filter(function (source) {
@@ -6450,12 +6450,12 @@
       group.appendChild(groupList);
       container.appendChild(group);
     });
-    if (!container.querySelector('.wb-mobile-navigation__secondary-link, .wb-mobile-navigation__secondary-control')) {
+    if (!container.querySelector('.hg-mobile-navigation__secondary-link, .hg-mobile-navigation__secondary-control')) {
       (fallbackNavigationGroups[activeModule] || []).forEach(function (fallbackGroup, groupIndex) {
         var group = document.createElement('li');
         var groupList = document.createElement('ul');
         var header = document.createElement('header');
-        group.className = 'wb-mobile-navigation__secondary-group wb-mobile-navigation__secondary-group--fallback';
+        group.className = 'hg-mobile-navigation__secondary-group hg-mobile-navigation__secondary-group--fallback';
         header.textContent = isGermanInterface() ? fallbackGroup.titleDe : fallbackGroup.titleDe;
         appendSecondaryGroupLabel(group, groupList, header, groupIndex, groupList);
         fallbackGroup.pairs.forEach(function (pairTarget) {
@@ -6469,7 +6469,7 @@
         }
       });
     }
-    return { node: container, count: Math.max(links.length, container.querySelectorAll('.wb-mobile-navigation__secondary-link, .wb-mobile-navigation__secondary-control').length) };
+    return { node: container, count: Math.max(links.length, container.querySelectorAll('.hg-mobile-navigation__secondary-link, .hg-mobile-navigation__secondary-control').length) };
   }
 
   function isCurrentLink(link) {
@@ -6490,9 +6490,9 @@
       var list = header.nextElementSibling;
       if (!list || list.tagName !== 'UL') return;
       list.hidden = false;
-      header.classList.toggle('wb-secondary-navigation__header--active', groupContainsTarget(list, canonicalPage));
+      header.classList.toggle('hg-secondary-navigation__header--active', groupContainsTarget(list, canonicalPage));
     });
-    panel.querySelectorAll('.wb-mobile-navigation__secondary-group').forEach(function (group) {
+    panel.querySelectorAll('.hg-mobile-navigation__secondary-group').forEach(function (group) {
       var list = group.querySelector(':scope > ul');
       if (!list) return;
       if (groupContainsTarget(list, canonicalPage)) list.hidden = false;
@@ -6520,14 +6520,14 @@
       if (item) item.classList.toggle('active', Boolean(active));
     });
 
-    panel.querySelectorAll('.wb-mobile-navigation__module[data-heritage-module], .wb-mobile-navigation__module[data-capp]').forEach(function (link) {
+    panel.querySelectorAll('.hg-mobile-navigation__module[data-heritage-module], .hg-mobile-navigation__module[data-capp]').forEach(function (link) {
       var active = activeModule && linkModule(link) === activeModule;
-      var submenu = link.closest('li') && link.closest('li').querySelector('.wb-mobile-navigation__secondary');
+      var submenu = link.closest('li') && link.closest('li').querySelector('.hg-mobile-navigation__secondary');
       link.classList.toggle('active', Boolean(active));
       if (active) link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');
       if (!submenu) {
-        link.classList.remove('wb-has-submenu');
+        link.classList.remove('hg-has-submenu');
         link.removeAttribute('aria-controls');
         link.removeAttribute('aria-expanded');
       } else if (!active) {
@@ -6542,7 +6542,7 @@
     });
 
     if (!canonicalPage) return;
-    document.querySelectorAll('#sidebar a, #heritage-mobile-navigation a:not(.wb-mobile-navigation__module)').forEach(function (link) {
+    document.querySelectorAll('#sidebar a, #heritage-mobile-navigation a:not(.hg-mobile-navigation__module)').forEach(function (link) {
       var active = navigationTargetMatches(navigationTarget(link), canonicalPage);
       link.classList.toggle('active', active);
       if (active) link.setAttribute('aria-current', 'page');
@@ -6559,24 +6559,24 @@
   }
 
   function collapseOtherModuleSubmenus(activeLink) {
-    panel.querySelectorAll('.wb-mobile-navigation__module.wb-has-submenu[aria-expanded="true"]').forEach(function (module) {
+    panel.querySelectorAll('.hg-mobile-navigation__module.hg-has-submenu[aria-expanded="true"]').forEach(function (module) {
       if (module === activeLink) return;
       module.setAttribute('aria-expanded', 'false');
-      var moduleSubmenu = module.closest('li') && module.closest('li').querySelector('.wb-mobile-navigation__secondary');
+      var moduleSubmenu = module.closest('li') && module.closest('li').querySelector('.hg-mobile-navigation__secondary');
       if (moduleSubmenu) moduleSubmenu.hidden = true;
     });
   }
 
   function setModuleSubmenuExpanded(link, expanded) {
     if (!link) return false;
-    var submenu = link.closest('li') && link.closest('li').querySelector('.wb-mobile-navigation__secondary');
+    var submenu = link.closest('li') && link.closest('li').querySelector('.hg-mobile-navigation__secondary');
     if (!submenu) {
-      link.classList.remove('wb-has-submenu');
+      link.classList.remove('hg-has-submenu');
       link.removeAttribute('aria-controls');
       link.removeAttribute('aria-expanded');
       return false;
     }
-    link.classList.add('wb-has-submenu');
+    link.classList.add('hg-has-submenu');
     submenu.hidden = expanded === false;
     var module = linkModule(link);
     if (!expanded) {
@@ -6612,16 +6612,16 @@
       if (!list || list.tagName !== 'UL') return;
       var groupId = 'heritage-secondary-group-' + (index + 1);
       list.id = groupId;
-      list.classList.add('wb-secondary-navigation__group');
-      header.classList.add('wb-secondary-navigation__header');
+      list.classList.add('hg-secondary-navigation__group');
+      header.classList.add('hg-secondary-navigation__header');
       var canonicalPage = canonicalNavigationTarget(currentPageTarget);
       var active = Boolean(list.querySelector('a.active, a[aria-current="page"]')) || groupContainsTarget(list, canonicalPage);
-      var button = header.querySelector(':scope > .wb-secondary-navigation__toggle');
+      var button = header.querySelector(':scope > .hg-secondary-navigation__toggle');
       if (button) button.remove();
       list.hidden = false;
-      header.classList.toggle('wb-secondary-navigation__header--active', active);
+      header.classList.toggle('hg-secondary-navigation__header--active', active);
     });
-    sidebar.classList.toggle('wb-secondary-navigation--grouped', headers.length > 0);
+    sidebar.classList.toggle('hg-secondary-navigation--grouped', headers.length > 0);
     return headers.length;
   }
 
@@ -6632,10 +6632,10 @@
     var secondaryNavigation = Boolean(sidebar.querySelector('#sub-navigation'));
     var dashboardPage = isDashboardContent();
     var dashboardNews = Boolean(dashboardPage && !secondaryNavigation && sidebar.textContent.trim());
-    var newsWidget = pageContent.querySelector(':scope > .wb-dashlet-news');
+    var newsWidget = pageContent.querySelector(':scope > .hg-dashlet-news');
     if (dashboardNews && !newsWidget) {
       newsWidget = document.createElement('article');
-      newsWidget.className = 'wb-dashlet wb-dashlet-news';
+      newsWidget.className = 'hg-dashlet hg-dashlet-news';
       newsWidget.setAttribute('data-heritage-dashlet', 'news');
       newsWidget.replaceChildren.apply(newsWidget, Array.prototype.map.call(sidebar.childNodes, function(node) {
         return node.cloneNode(true);
@@ -6643,17 +6643,17 @@
       pageContent.appendChild(newsWidget);
       if (window.heritageDashboardLayout) window.setTimeout(window.heritageDashboardLayout.enhance, 0);
     }
-    sidebar.classList.toggle('wb-dashboard-news', dashboardNews);
-    sidebar.classList.toggle('wb-secondary-navigation', secondaryNavigation);
+    sidebar.classList.toggle('hg-dashboard-news', dashboardNews);
+    sidebar.classList.toggle('hg-secondary-navigation', secondaryNavigation);
     sidebar.hidden = !secondaryNavigation;
-    document.body.classList.toggle('wb-dashboard-news-layout', dashboardNews);
-    document.body.classList.toggle('wb-dashboard-page', dashboardPage);
+    document.body.classList.toggle('hg-dashboard-news-layout', dashboardNews);
+    document.body.classList.toggle('hg-dashboard-page', dashboardPage);
     // Regression fix: schedule dashboard enhancement whenever the page is a
     // dashboard, not only in the sidebar-news branch above. enhance() runs after
-    // this tick, by which time body.wb-dashboard-page is set, so its host lookup
+    // this tick, by which time body.hg-dashboard-page is set, so its host lookup
     // resolves and the widgets get their native layout/decoration.
     if (dashboardPage && window.heritageDashboardLayout) window.setTimeout(window.heritageDashboardLayout.enhance, 0);
-    document.body.classList.toggle('wb-content-only-layout', !dashboardNews && !secondaryNavigation);
+    document.body.classList.toggle('hg-content-only-layout', !dashboardNews && !secondaryNavigation);
     return dashboardNews;
   }
 
@@ -6668,10 +6668,10 @@
     var activeItem = null;
     var activeLink = null;
 
-    list.className = 'wb-mobile-navigation__modules';
+    list.className = 'hg-mobile-navigation__modules';
     primary.forEach(function (source) {
       var item = document.createElement('li');
-      var link = cloneLink(source, 'wb-mobile-navigation__module');
+      var link = cloneLink(source, 'hg-mobile-navigation__module');
       applyCompactPrimaryLabel(link);
       if (linkModule(link) === 'dashboard') {
         link.dataset.heritageDirectDashboard = 'true';
@@ -6691,7 +6691,7 @@
       (activeItem || list).appendChild(secondary.node);
       if (activeLink) {
         var activeCollapsed = userCollapsedModule && userCollapsedModule === linkModule(activeLink);
-        activeLink.classList.add('wb-has-submenu');
+        activeLink.classList.add('hg-has-submenu');
         activeLink.setAttribute('aria-controls', secondary.node.id);
         activeLink.setAttribute('aria-expanded', activeCollapsed ? 'false' : 'true');
         secondary.node.hidden = Boolean(activeCollapsed);
@@ -6699,8 +6699,8 @@
     }
 
     content.replaceChildren(list);
-    panel.classList.add('wb-app-navigation');
-    document.body.classList.add('wb-app-navigation-enabled');
+    panel.classList.add('hg-app-navigation');
+    document.body.classList.add('hg-app-navigation-enabled');
     if (window.heritageIcons) window.heritageIcons.render(panel);
     syncShellLayout();
     syncActiveNavigationState();
@@ -6710,7 +6710,7 @@
       var pendingLink = Array.from(panel.querySelectorAll('[data-heritage-module], [data-capp]')).find(function (link) {
         return linkModule(link) === pendingModule;
       });
-      var submenuLink = pendingLink && pendingLink.closest('li').querySelector('.wb-mobile-navigation__secondary a');
+      var submenuLink = pendingLink && pendingLink.closest('li').querySelector('.hg-mobile-navigation__secondary a');
       window.setTimeout(function () {
         if (submenuLink) {
           submenuLink.focus();
@@ -6724,7 +6724,7 @@
   }
 
   function isOpen() {
-    return desktopQuery.matches || document.body.classList.contains('wb-navigation-open');
+    return desktopQuery.matches || document.body.classList.contains('hg-navigation-open');
   }
 
   function syncMode() {
@@ -6732,13 +6732,13 @@
     panel.inert = false;
     panel.setAttribute('role', desktop ? 'navigation' : 'dialog');
     panel.setAttribute('aria-modal', desktop ? 'false' : 'true');
-    panel.setAttribute('aria-hidden', desktop ? 'false' : (document.body.classList.contains('wb-navigation-open') ? 'false' : 'true'));
+    panel.setAttribute('aria-hidden', desktop ? 'false' : (document.body.classList.contains('hg-navigation-open') ? 'false' : 'true'));
     overlay.setAttribute('aria-hidden', desktop ? 'true' : overlay.getAttribute('aria-hidden'));
-    document.body.classList.toggle('wb-app-navigation-desktop', desktop);
+    document.body.classList.toggle('hg-app-navigation-desktop', desktop);
     if (desktop) {
-      document.body.classList.remove('wb-navigation-open');
+      document.body.classList.remove('hg-navigation-open');
       button.setAttribute('aria-expanded', 'false');
-    } else if (!document.body.classList.contains('wb-navigation-open')) {
+    } else if (!document.body.classList.contains('hg-navigation-open')) {
       panel.inert = true;
     }
   }
@@ -6756,7 +6756,7 @@
     panel.setAttribute('aria-hidden', 'false');
     overlay.setAttribute('aria-hidden', 'false');
     button.setAttribute('aria-expanded', 'true');
-    document.body.classList.add('wb-navigation-open');
+    document.body.classList.add('hg-navigation-open');
     focusNavigation();
     window.setTimeout(focusNavigation, 0);
     window.setTimeout(function () {
@@ -6766,7 +6766,7 @@
 
   function close(restoreFocus) {
     if (desktopQuery.matches) return;
-    document.body.classList.remove('wb-navigation-open');
+    document.body.classList.remove('hg-navigation-open');
     panel.setAttribute('aria-hidden', 'true');
     panel.inert = true;
     overlay.setAttribute('aria-hidden', 'true');
@@ -6793,8 +6793,8 @@
       return;
     }
 
-    if (link.classList.contains('wb-mobile-navigation__module') && linkModule(link)) {
-      var submenu = link.closest('li').querySelector('.wb-mobile-navigation__secondary');
+    if (link.classList.contains('hg-mobile-navigation__module') && linkModule(link)) {
+      var submenu = link.closest('li').querySelector('.hg-mobile-navigation__secondary');
       var module = linkModule(link);
       if (link.classList.contains('active') && submenu) {
         event.preventDefault();
@@ -6817,15 +6817,15 @@
       var api = runtime();
       syncActiveNavigationState(pendingModule + '/');
       render();
-      link = Array.from(panel.querySelectorAll('.wb-mobile-navigation__module[data-heritage-module], .wb-mobile-navigation__module[data-capp]')).find(function (candidate) {
+      link = Array.from(panel.querySelectorAll('.hg-mobile-navigation__module[data-heritage-module], .hg-mobile-navigation__module[data-capp]')).find(function (candidate) {
         return linkModule(candidate) === module;
       }) || link;
-      submenu = link.closest('li') && link.closest('li').querySelector('.wb-mobile-navigation__secondary');
+      submenu = link.closest('li') && link.closest('li').querySelector('.hg-mobile-navigation__secondary');
       if (submenu) setModuleSubmenuExpanded(link, true);
       else setModuleSubmenuExpanded(link, false);
       event.preventDefault();
       event.stopPropagation();
-      link.classList.add('wb-module-transition-source');
+      link.classList.add('hg-module-transition-source');
       if (api && typeof api.capp === 'function') api.capp(pendingModule);
       return;
     }
@@ -6860,7 +6860,7 @@
     if (event.key === 'Escape' && isOpen()) close(true);
   });
   document.addEventListener('click', function (event) {
-    var brandLink = event.target.closest('#logo a, .wb-app-navigation__brand-logo a, #main-navigation a[data-heritage-module="dashboard"], #main-navigation a[data-capp="dashboard"]');
+    var brandLink = event.target.closest('#logo a, .hg-app-navigation__brand-logo a, #main-navigation a[data-heritage-module="dashboard"], #main-navigation a[data-capp="dashboard"]');
     if (!brandLink) return;
     event.preventDefault();
     loadDashboardFromNavigation();
@@ -7001,7 +7001,7 @@
   function renderSparkline(host, width, height, label, state, points, area, line, data, labels) {
     var namespace = 'http://www.w3.org/2000/svg';
     host.replaceChildren();
-    host.classList.remove('wb-dashboard-sparkline--empty', 'wb-dashboard-sparkline--error');
+    host.classList.remove('hg-dashboard-sparkline--empty', 'hg-dashboard-sparkline--error');
     var svg = document.createElementNS(namespace, 'svg');
     svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
     svg.setAttribute('role', 'img');
@@ -7011,36 +7011,36 @@
     title.textContent = label + ': ' + copy.current + ' ' + formatNumber(state.latest) + ', ' + copy.minimum + ' ' + formatNumber(state.min) + ', ' + copy.maximum + ' ' + formatNumber(state.max);
     var polygon = document.createElementNS(namespace, 'polygon');
     polygon.setAttribute('points', area);
-    polygon.setAttribute('class', 'wb-dashboard-sparkline__area');
+    polygon.setAttribute('class', 'hg-dashboard-sparkline__area');
     var polyline = document.createElementNS(namespace, 'polyline');
     polyline.setAttribute('points', line);
-    polyline.setAttribute('class', 'wb-dashboard-sparkline__line');
+    polyline.setAttribute('class', 'hg-dashboard-sparkline__line');
     svg.appendChild(title);
     svg.appendChild(polygon);
     svg.appendChild(polyline);
     var guide = document.createElementNS(namespace, 'line');
     guide.setAttribute('y1', String(7));
     guide.setAttribute('y2', String(height - 7));
-    guide.setAttribute('class', 'wb-dashboard-sparkline__guide');
+    guide.setAttribute('class', 'hg-dashboard-sparkline__guide');
     guide.hidden = true;
     svg.appendChild(guide);
     var tooltip = document.createElement('output');
-    tooltip.className = 'wb-dashboard-sparkline__tooltip';
-    tooltip.id = 'wb-metric-tooltip-' + String(host.id || label).replace(/[^a-z0-9_-]+/gi, '-').toLowerCase();
+    tooltip.className = 'hg-dashboard-sparkline__tooltip';
+    tooltip.id = 'hg-metric-tooltip-' + String(host.id || label).replace(/[^a-z0-9_-]+/gi, '-').toLowerCase();
     tooltip.setAttribute('role', 'status');
     tooltip.setAttribute('aria-live', 'polite');
     tooltip.hidden = true;
     svg.setAttribute('aria-describedby', tooltip.id);
 
     function activatePoint(point, coordinates, description) {
-      queryAll(svg, '.wb-dashboard-sparkline__hit').forEach(function (entry) {
+      queryAll(svg, '.hg-dashboard-sparkline__hit').forEach(function (entry) {
         entry.classList.toggle('is-active', entry === point);
       });
       guide.setAttribute('x1', coordinates[0].toFixed(1));
       guide.setAttribute('x2', coordinates[0].toFixed(1));
       guide.hidden = false;
       tooltip.textContent = description;
-      tooltip.style.setProperty('--wb-metric-point-x', ((coordinates[0] / width) * 100).toFixed(2) + '%');
+      tooltip.style.setProperty('--hg-metric-point-x', ((coordinates[0] / width) * 100).toFixed(2) + '%');
       tooltip.hidden = false;
     }
 
@@ -7053,7 +7053,7 @@
 
     function releasePinnedPoint() {
       delete host.dataset.heritageMetricPinned;
-      queryAll(svg, '.wb-dashboard-sparkline__hit').forEach(function (entry) {
+      queryAll(svg, '.hg-dashboard-sparkline__hit').forEach(function (entry) {
         entry.classList.remove('is-active');
       });
       guide.hidden = true;
@@ -7061,7 +7061,7 @@
     }
 
     function movePoint(point, offset) {
-      var pointNodes = queryAll(svg, '.wb-dashboard-sparkline__hit');
+      var pointNodes = queryAll(svg, '.hg-dashboard-sparkline__hit');
       var current = pointNodes.indexOf(point);
       if (current < 0) return;
       pointNodes[(current + offset + pointNodes.length) % pointNodes.length].focus();
@@ -7074,7 +7074,7 @@
       point.setAttribute('cx', coordinates[0].toFixed(1));
       point.setAttribute('cy', coordinates[1].toFixed(1));
       point.setAttribute('r', index === points.length - 1 ? '3.5' : '2.5');
-      point.setAttribute('class', 'wb-dashboard-sparkline__point wb-dashboard-sparkline__hit');
+      point.setAttribute('class', 'hg-dashboard-sparkline__point hg-dashboard-sparkline__hit');
       point.setAttribute('tabindex', '0');
       point.setAttribute('role', 'img');
       point.setAttribute('aria-label', description);
@@ -7104,10 +7104,10 @@
           movePoint(point, -1);
         } else if (event.key === 'Home') {
           event.preventDefault();
-          queryAll(svg, '.wb-dashboard-sparkline__hit')[0].focus();
+          queryAll(svg, '.hg-dashboard-sparkline__hit')[0].focus();
         } else if (event.key === 'End') {
           event.preventDefault();
-          var pointNodes = queryAll(svg, '.wb-dashboard-sparkline__hit');
+          var pointNodes = queryAll(svg, '.hg-dashboard-sparkline__hit');
           pointNodes[pointNodes.length - 1].focus();
         } else if (event.key === 'Escape') {
           event.preventDefault();
@@ -7130,7 +7130,7 @@
   function renderMetric(root, id, series, labels) {
     var node = root.querySelector('#' + id);
     if (!node) return false;
-    var card = root.querySelector('[data-heritage-metric-card="' + id + '"]') || node.closest('.wb-dashboard-metric-card');
+    var card = root.querySelector('[data-heritage-metric-card="' + id + '"]') || node.closest('.hg-dashboard-metric-card');
     var data = numberList(series && series.data);
     var value = root.querySelector('[data-heritage-dashboard-metric-value="' + id + '"]');
     var trend = root.querySelector('[data-heritage-metric-trend="' + id + '"]');
@@ -7143,9 +7143,9 @@
 
     if (!data.length) {
       node.replaceChildren();
-      node.classList.add('wb-dashboard-sparkline--empty');
+      node.classList.add('hg-dashboard-sparkline--empty');
       var emptyState = document.createElement('span');
-      emptyState.className = 'wb-dashboard-sparkline__state';
+      emptyState.className = 'hg-dashboard-sparkline__state';
       emptyState.textContent = copy.noValues;
       node.appendChild(emptyState);
       if (value) value.textContent = '-';
@@ -7222,11 +7222,11 @@
         data = parsePayload(payload.textContent || '{}');
       } catch (error) {
         payload.dataset.heritageDashboardMetricsState = 'error';
-        queryAll(root, '.wb-dashboard-sparkline').forEach(function (node) {
+        queryAll(root, '.hg-dashboard-sparkline').forEach(function (node) {
           node.replaceChildren();
-          node.classList.add('wb-dashboard-sparkline--error');
+          node.classList.add('hg-dashboard-sparkline--error');
           var errorState = document.createElement('span');
-          errorState.className = 'wb-dashboard-sparkline__state';
+          errorState.className = 'hg-dashboard-sparkline__state';
           errorState.textContent = text().unavailable;
           node.appendChild(errorState);
           node.setAttribute('role', 'status');
@@ -7416,14 +7416,14 @@
   }
 
   function dashlets(host) {
-    return Array.prototype.slice.call(host.querySelectorAll(':scope > .wb-dashlet'));
+    return Array.prototype.slice.call(host.querySelectorAll(':scope > .hg-dashlet'));
   }
 
   function normalizeServerDashlets(host) {
     var boundary = host.querySelector(':scope > [data-heritage-dashboard-server-content]');
     if (!boundary) return;
     var widgets = Array.prototype.slice.call(boundary.children).filter(function (node) {
-      return node.classList && node.classList.contains('wb-dashlet');
+      return node.classList && node.classList.contains('hg-dashlet');
     });
     widgets.forEach(function (node) {
       boundary.insertAdjacentElement('beforebegin', node);
@@ -7483,8 +7483,8 @@
     if (node.dataset.heritageAtomicSource === 'metrics') {
       node.dataset.heritageMetricViewport = safe === '2x2' ? 'detail' : safe === '1x2' ? 'tall' : 'compact';
     }
-    node.classList.remove('wb-dashlet-size-1x1', 'wb-dashlet-size-1x2', 'wb-dashlet-size-2x2');
-    node.classList.add('wb-dashlet-size-' + safe);
+    node.classList.remove('hg-dashlet-size-1x1', 'hg-dashlet-size-1x2', 'hg-dashlet-size-2x2');
+    node.classList.add('hg-dashlet-size-' + safe);
     Array.prototype.forEach.call(node.querySelectorAll('[data-heritage-layout-size]'), function (button) {
       button.setAttribute('aria-pressed', button.getAttribute('data-heritage-layout-size') === safe ? 'true' : 'false');
     });
@@ -7507,8 +7507,8 @@
     var name = node.dataset.heritageDashlet;
     if (name === 'modules') return Array.prototype.slice.call(node.querySelectorAll('.modules > li'));
     if (name === 'news') return Array.prototype.slice.call(node.querySelectorAll('ul > li'));
-    if (name === 'metrics') return Array.prototype.slice.call(node.querySelectorAll('.wb-dashboard-metric-card'));
-    if (name === 'statistics') return Array.prototype.slice.call(node.querySelectorAll('.wb-statistics-launcher'));
+    if (name === 'metrics') return Array.prototype.slice.call(node.querySelectorAll('.hg-dashboard-metric-card'));
+    if (name === 'statistics') return Array.prototype.slice.call(node.querySelectorAll('.hg-statistics-launcher'));
     if (name === 'quota' || name === 'mailquota' || name === 'databasequota') {
       return Array.prototype.slice.call(node.querySelectorAll('.table-wrapper table > tbody > tr'));
     }
@@ -7535,18 +7535,18 @@
         delete item.dataset.heritageDensityHidden;
       }
     });
-    var existing = node.querySelector(':scope > .wb-dashlet__density-note');
+    var existing = node.querySelector(':scope > .hg-dashlet__density-note');
     if (existing) existing.remove();
     if (!hiddenCount) return;
     var note = document.createElement('div');
-    note.className = 'wb-dashlet__density-note';
+    note.className = 'hg-dashlet__density-note';
     note.setAttribute('role', 'status');
     var text = document.createElement('span');
     text.textContent = t('moreItems', { count: hiddenCount });
     note.appendChild(text);
     var expand = document.createElement('button');
     expand.type = 'button';
-    expand.className = 'wb-dashlet__density-expand';
+    expand.className = 'hg-dashlet__density-expand';
     expand.textContent = t('showMore');
     expand.setAttribute('aria-label', t('expandWidget', { name: node.getAttribute('aria-label') || t('widget') }));
     expand.addEventListener('click', function () {
@@ -7567,15 +7567,15 @@
     Array.prototype.forEach.call(node.querySelectorAll('.modules > li'), function (launcher) {
       var title = launcher.querySelector('.title');
       var action = launcher.querySelector('a.button[data-heritage-module], a.button[data-capp]');
-      launcher.classList.add('wb-module-launcher');
-      if (title && !launcher.querySelector('.wb-module-launcher__meta')) {
+      launcher.classList.add('hg-module-launcher');
+      if (title && !launcher.querySelector('.hg-module-launcher__meta')) {
         var meta = document.createElement('span');
-        meta.className = 'wb-module-launcher__meta';
+        meta.className = 'hg-module-launcher__meta';
         meta.textContent = t('openModule');
         title.insertAdjacentElement('afterend', meta);
       }
       if (action) {
-        action.classList.add('wb-module-launcher__action');
+        action.classList.add('hg-module-launcher__action');
         action.setAttribute('aria-label', (action.textContent || t('openModule')).replace(/\s+/g, ' ').trim());
       }
     });
@@ -7596,10 +7596,10 @@
   }
 
   function splitModuleDashlet(host) {
-    var source = host.querySelector(':scope > .wb-dashlet[data-heritage-dashlet="modules"]');
+    var source = host.querySelector(':scope > .hg-dashlet[data-heritage-dashlet="modules"]');
     if (!source || source.dataset.heritageAtomicSplit === 'true') return;
     decorateModules(source);
-    var items = Array.prototype.slice.call(source.querySelectorAll('.modules > li.wb-module-launcher'));
+    var items = Array.prototype.slice.call(source.querySelectorAll('.modules > li.hg-module-launcher'));
     if (!items.length) return;
     var anchor = source;
     items.forEach(function (item, index) {
@@ -7624,7 +7624,7 @@
         }
       }
       var article = document.createElement('section');
-      article.className = 'wb-dashlet wb-dashlet-module-atomic';
+      article.className = 'hg-dashlet hg-dashlet-module-atomic';
       article.dataset.heritageDashlet = 'module-' + slug(title) + '-' + index;
       article.dataset.heritageAtomicSource = 'modules';
       article.dataset.heritageAtomicLabel = t('individualModule');
@@ -7633,7 +7633,7 @@
       article.dataset.heritageDefaultOrder = String(10 + index);
       article.setAttribute('data-heritage-cockpit-card', 'module');
       var heading = makeEl('h3', '', title);
-      var wrapper = makeEl('div', 'dashboard-modules-wrapper wb-dashboard-atomic-module');
+      var wrapper = makeEl('div', 'dashboard-modules-wrapper hg-dashboard-atomic-module');
       var list = makeEl('ul', 'modules');
       wrapper.appendChild(list);
       article.appendChild(heading);
@@ -7648,14 +7648,14 @@
 
   function decorateDonate(node) {
     if (node.dataset.heritageDonateDecorated === 'true') return;
-    var button = node.querySelector('.wb-donate-card__toggle');
+    var button = node.querySelector('.hg-donate-card__toggle');
     var description = node.querySelector('[data-heritage-donate-description], #description');
     if (!button || !description) {
       node.dataset.heritageDonateDecorated = 'true';
       return;
     }
     if (!description.id) {
-      description.id = 'wb-donate-description-' + Math.random().toString(36).slice(2, 8);
+      description.id = 'hg-donate-description-' + Math.random().toString(36).slice(2, 8);
     }
     button.setAttribute('aria-controls', description.id);
     description.hidden = true;
@@ -7691,7 +7691,7 @@
   }
 
   function metricSource(card) {
-    return card.querySelector('canvas, .wb-dashboard-sparkline');
+    return card.querySelector('canvas, .hg-dashboard-sparkline');
   }
 
   function metricValuesFromSparkline(source) {
@@ -7705,15 +7705,15 @@
   }
 
   function syncMetricCards(node) {
-    Array.prototype.forEach.call(node.querySelectorAll('.wb-dashboard-metric-card'), function (card) {
+    Array.prototype.forEach.call(node.querySelectorAll('.hg-dashboard-metric-card'), function (card) {
       var canvas = card.querySelector('canvas');
       var source = metricSource(card);
       var chart = canvas && chartInstance(canvas);
       var dataset = chart && chart.data && chart.data.datasets && chart.data.datasets[0];
       var values = dataset && dataset.data || metricValuesFromSparkline(source);
       var latest = values.length ? values[values.length - 1] : null;
-      var label = card.querySelector('.wb-dashboard-metric-card__label');
-      var value = card.querySelector('.wb-dashboard-metric-card__value');
+      var label = card.querySelector('.hg-dashboard-metric-card__label');
+      var value = card.querySelector('.hg-dashboard-metric-card__value');
       if (label) label.textContent = dataset && dataset.label || metricLabelFromSource(source || canvas || {});
       if (value) value.textContent = metricValue(latest);
       if (!chart) return;
@@ -7741,17 +7741,17 @@
     var titleHolder = title && title.parentElement;
     if (title) node.insertBefore(title, content);
     if (titleHolder && !titleHolder.textContent.trim() && !titleHolder.children.length) titleHolder.remove();
-    content.classList.add('wb-dashboard-metrics-grid');
+    content.classList.add('hg-dashboard-metrics-grid');
     Array.prototype.forEach.call(content.children, function (container) {
-      var metric = container.querySelector && container.querySelector(':scope > canvas, :scope > .wb-dashboard-sparkline');
+      var metric = container.querySelector && container.querySelector(':scope > canvas, :scope > .hg-dashboard-sparkline');
       if (!metric) return;
-      container.classList.add('wb-dashboard-metric-card');
+      container.classList.add('hg-dashboard-metric-card');
       container.style.removeProperty('padding-bottom');
-      if (!container.querySelector('.wb-dashboard-metric-card__header')) {
+      if (!container.querySelector('.hg-dashboard-metric-card__header')) {
         var header = document.createElement('header');
-        header.className = 'wb-dashboard-metric-card__header';
-        var label = makeEl('span', 'wb-dashboard-metric-card__label', metricLabelFromSource(metric));
-        var value = makeEl('strong', 'wb-dashboard-metric-card__value', '-');
+        header.className = 'hg-dashboard-metric-card__header';
+        var label = makeEl('span', 'hg-dashboard-metric-card__label', metricLabelFromSource(metric));
+        var value = makeEl('strong', 'hg-dashboard-metric-card__value', '-');
         value.setAttribute('aria-label', t('currentValue'));
         header.appendChild(label);
         header.appendChild(value);
@@ -7764,7 +7764,7 @@
   }
 
   function splitMetricDashlet(host) {
-    var source = host.querySelector(':scope > .wb-dashlet[data-heritage-dashlet="metrics"]');
+    var source = host.querySelector(':scope > .hg-dashlet[data-heritage-dashlet="metrics"]');
     if (!source || source.dataset.heritageAtomicSplit === 'true') return;
     // Render the declarative metric payload before the source dashlet is split
     // into atomic widgets. Removing the source first also removed its JSON
@@ -7773,15 +7773,15 @@
       window.heritageDashboardMetrics.enhance(source);
     }
     decorateMetrics(source);
-    var cards = Array.prototype.slice.call(source.querySelectorAll('.wb-dashboard-metric-card'));
+    var cards = Array.prototype.slice.call(source.querySelectorAll('.hg-dashboard-metric-card'));
     if (!cards.length) return;
     var anchor = source;
     cards.forEach(function (card, index) {
       var metric = metricSource(card);
-      var label = card.querySelector('.wb-dashboard-metric-card__label');
+      var label = card.querySelector('.hg-dashboard-metric-card__label');
       var title = label ? label.textContent.replace(/\s+/g, ' ').trim() : metricLabelFromSource(metric || {});
       var article = document.createElement('section');
-      article.className = 'wb-dashlet wb-dashlet-metric-atomic';
+      article.className = 'hg-dashlet hg-dashlet-metric-atomic';
       article.dataset.heritageDashlet = 'metric-' + slug(metric && metric.id || title) + '-' + index;
       article.dataset.heritageAtomicSource = 'metrics';
       article.dataset.heritageAtomicLabel = t('individualMetric');
@@ -7793,7 +7793,7 @@
       article.dataset.heritageDefaultOrder = String(20 + index);
       article.setAttribute('data-heritage-cockpit-card', 'metric');
       var heading = makeEl('h3', '', title);
-      var metricHost = makeEl('div', 'wb-dashboard-single-metric');
+      var metricHost = makeEl('div', 'hg-dashboard-single-metric');
       article.appendChild(heading);
       article.appendChild(metricHost);
       metricHost.appendChild(card);
@@ -7810,7 +7810,7 @@
   }
 
   function splitAtomicDashlets(host) {
-    var unsplitSource = host.querySelector(':scope > .wb-dashlet[data-heritage-dashlet="modules"], :scope > .wb-dashlet[data-heritage-dashlet="metrics"]');
+    var unsplitSource = host.querySelector(':scope > .hg-dashlet[data-heritage-dashlet="modules"], :scope > .hg-dashlet[data-heritage-dashlet="metrics"]');
     if (host.dataset.heritageAtomicDashboard === 'true' && !unsplitSource) return;
     if (unsplitSource) delete host.dataset.heritageAtomicDashboard;
     splitModuleDashlet(host);
@@ -7823,14 +7823,14 @@
     var title = header.querySelector('h1');
     if (!title) return;
     var eyebrow = document.createElement('span');
-    eyebrow.className = 'wb-dashboard-hero__eyebrow';
+    eyebrow.className = 'hg-dashboard-hero__eyebrow';
     eyebrow.textContent = t('workspace');
     title.insertAdjacentElement('beforebegin', eyebrow);
     var summary = document.createElement('p');
-    summary.className = 'wb-dashboard-hero__summary';
+    summary.className = 'hg-dashboard-hero__summary';
     summary.textContent = t('workspaceSummary');
     title.insertAdjacentElement('afterend', summary);
-    header.classList.add('wb-dashboard-hero');
+    header.classList.add('hg-dashboard-hero');
     header.dataset.heritageHeroDecorated = 'true';
   }
 
@@ -7838,21 +7838,21 @@
     var header = host.querySelector(':scope > .page-header');
     if (!header) return null;
     decorateHero(header);
-    var overview = host.querySelector(':scope > .wb-dashboard-overview');
+    var overview = host.querySelector(':scope > .hg-dashboard-overview');
     if (!overview) {
       overview = document.createElement('section');
-      overview.className = 'wb-dashboard-overview';
+      overview.className = 'hg-dashboard-overview';
       overview.setAttribute('aria-label', t('overview'));
       header.insertAdjacentElement('afterend', overview);
     }
-    var moduleCount = host.querySelectorAll('.wb-module-launcher').length;
+    var moduleCount = host.querySelectorAll('.hg-module-launcher').length;
     var warningCount = host.querySelectorAll('.progress-bar-warning').length;
     var criticalCount = host.querySelectorAll('.progress-bar-danger').length;
     var visibleCount = dashlets(host).filter(function(node) { return node.dataset.heritageHidden !== 'true'; }).length;
     var totalCount = dashlets(host).length;
     var attention = warningCount + criticalCount;
     var modulesCard = overviewStat(t('availableModules'), moduleCount, t('quickDestinations'));
-    var attentionCard = overviewStat(t('needsAttention'), attention, t('attentionDetail', { critical: criticalCount, warning: warningCount }), attention ? 'wb-dashboard-overview__stat--attention' : 'wb-dashboard-overview__stat--healthy');
+    var attentionCard = overviewStat(t('needsAttention'), attention, t('attentionDetail', { critical: criticalCount, warning: warningCount }), attention ? 'hg-dashboard-overview__stat--attention' : 'hg-dashboard-overview__stat--healthy');
     var layoutCard = overviewStat(t('activeWidgets'), visibleCount, t('personalLayout'), '', totalCount);
     overview.dataset.heritageAttention = attention ? 'true' : 'false';
     while (overview.firstChild) overview.removeChild(overview.firstChild);
@@ -7863,7 +7863,7 @@
   }
 
   function overviewStat(label, value, detail, modifier, total) {
-    var card = makeEl('article', 'wb-dashboard-overview__stat' + (modifier ? ' ' + modifier : ''));
+    var card = makeEl('article', 'hg-dashboard-overview__stat' + (modifier ? ' ' + modifier : ''));
     var strong = makeEl('strong', '', value);
     if (total !== undefined && total !== null) strong.appendChild(makeEl('em', '', '/' + total));
     card.appendChild(makeEl('span', '', label));
@@ -7894,39 +7894,39 @@
 
   function syncEmptyState(host) {
     var visible = dashlets(host).some(function (node) { return node.dataset.heritageHidden !== 'true'; });
-    var state = host.querySelector(':scope > .wb-dashboard-empty-state');
+    var state = host.querySelector(':scope > .hg-dashboard-empty-state');
     if (visible) {
       if (state) state.remove();
       return;
     }
     if (state) return;
     state = document.createElement('section');
-    state.className = 'wb-dashboard-empty-state';
+    state.className = 'hg-dashboard-empty-state';
     state.setAttribute('role', 'status');
     var content = makeEl('div');
     content.appendChild(makeEl('h2', '', t('emptyTitle')));
     content.appendChild(makeEl('p', '', t('emptyText')));
-    state.appendChild(hiddenIcon('wb-dashboard-empty-state__icon'));
+    state.appendChild(hiddenIcon('hg-dashboard-empty-state__icon'));
     state.appendChild(content);
     var restore = document.createElement('button');
     restore.type = 'button';
-    restore.className = 'wb-dashboard-button wb-dashboard-button--primary';
+    restore.className = 'hg-dashboard-button hg-dashboard-button--primary';
     restore.textContent = t('restoreWidgets');
     restore.addEventListener('click', function () { restoreRecommended(host); });
     state.appendChild(restore);
-    var toolbar = host.querySelector(':scope > .wb-dashboard-toolbar');
-    (toolbar || host.querySelector(':scope > .wb-dashboard-overview') || host.querySelector(':scope > .page-header')).insertAdjacentElement('afterend', state);
+    var toolbar = host.querySelector(':scope > .hg-dashboard-toolbar');
+    (toolbar || host.querySelector(':scope > .hg-dashboard-overview') || host.querySelector(':scope > .page-header')).insertAdjacentElement('afterend', state);
   }
 
   function syncToolbar(host) {
-    var toolbar = host.querySelector(':scope > .wb-dashboard-toolbar');
+    var toolbar = host.querySelector(':scope > .hg-dashboard-toolbar');
     if (!toolbar) return;
-    var editing = host.classList.contains('wb-dashboard-layout-edit');
+    var editing = host.classList.contains('hg-dashboard-layout-edit');
     var count = hiddenCount(host);
     var status = toolbar.querySelector('[data-heritage-layout-status]');
     var toggle = toolbar.querySelector('[data-heritage-layout-toggle]');
     var show = toolbar.querySelector('[data-heritage-layout-show-hidden]');
-    toolbar.classList.toggle('wb-dashboard-toolbar--editing', editing);
+    toolbar.classList.toggle('hg-dashboard-toolbar--editing', editing);
     status.textContent = editing ? t('layoutEditing') : t('layoutSaved');
     toggle.setAttribute('aria-pressed', editing ? 'true' : 'false');
     toggle.textContent = editing ? t('finishEditing') : t('customizeDashboard');
@@ -7947,22 +7947,22 @@
 
   function makeControls(node, host) {
     var widgetTitle = node.querySelector(':scope > h2, :scope > h3, :scope > header');
-    var widgetHeader = node.querySelector(':scope > .wb-dashlet__header');
+    var widgetHeader = node.querySelector(':scope > .hg-dashlet__header');
     if (!widgetHeader) {
       widgetHeader = document.createElement('div');
-      widgetHeader.className = 'wb-dashlet__header';
+      widgetHeader.className = 'hg-dashlet__header';
       node.insertBefore(widgetHeader, node.firstChild);
       if (widgetTitle) widgetHeader.appendChild(widgetTitle);
     }
-    if (!widgetHeader.querySelector('.wb-dashlet__type-icon')) {
+    if (!widgetHeader.querySelector('.hg-dashlet__type-icon')) {
       var typeIcon = document.createElement('span');
-      typeIcon.className = 'wb-dashlet__type-icon';
+      typeIcon.className = 'hg-dashlet__type-icon';
       typeIcon.setAttribute('aria-hidden', 'true');
       widgetHeader.insertBefore(typeIcon, widgetHeader.firstChild);
     }
     var titleText = widgetTitle ? widgetTitle.textContent.replace(/\s+/g, ' ').trim() : (node.dataset.heritageDashlet || t('dashboardWidget'));
     var dragHandle = document.createElement('span');
-    dragHandle.className = 'wb-dashlet__drag-handle';
+    dragHandle.className = 'hg-dashlet__drag-handle';
     dragHandle.setAttribute('role', 'button');
     dragHandle.setAttribute('tabindex', '0');
     dragHandle.setAttribute('aria-label', t('dragWidget', { name: titleText }));
@@ -7970,18 +7970,18 @@
     for (var dot = 0; dot < 6; dot += 1) dragHandle.appendChild(document.createElement('i'));
     widgetHeader.insertBefore(dragHandle, widgetHeader.firstChild);
     var editHint = document.createElement('span');
-    editHint.className = 'wb-dashlet__edit-hint';
+    editHint.className = 'hg-dashlet__edit-hint';
     editHint.textContent = t('editHint');
     widgetHeader.appendChild(editHint);
     var controls = document.createElement('div');
-    controls.className = 'wb-dashlet__layout-controls';
+    controls.className = 'hg-dashlet__layout-controls';
     controls.setAttribute('role', 'group');
     controls.setAttribute('aria-label', t('layoutControls', { name: titleText }));
     // Regression fix: inside makeControls the `node` parameter (the dashlet
     // element) shadows the module-level makeEl() element helper, so calling
     // makeEl('span', ...) threw "node is not a function". Build the label inline.
     var layoutLabel = document.createElement('span');
-    layoutLabel.className = 'wb-dashlet__layout-label';
+    layoutLabel.className = 'hg-dashlet__layout-label';
     layoutLabel.textContent = t('editHint');
     controls.appendChild(layoutLabel);
     controls.appendChild(dashboardButton('\u2191', { 'data-heritage-layout-move': 'up', 'aria-label': t('moveEarlier') }));
@@ -8003,7 +8003,7 @@
       }
       if (move) {
         var sibling = move.getAttribute('data-heritage-layout-move') === 'up' ? node.previousElementSibling : node.nextElementSibling;
-        if (sibling && sibling.classList.contains('wb-dashlet')) {
+        if (sibling && sibling.classList.contains('hg-dashlet')) {
           if (move.getAttribute('data-heritage-layout-move') === 'up') node.parentNode.insertBefore(node, sibling);
           else node.parentNode.insertBefore(sibling, node);
           save(host);
@@ -8036,11 +8036,11 @@
     if (titleText) node.setAttribute('aria-label', titleText);
     syncDensity(node);
     node.addEventListener('keydown', function (event) {
-      if (!host.classList.contains('wb-dashboard-layout-edit') || event.target.closest('button, a, input, select, textarea')) return;
+      if (!host.classList.contains('hg-dashboard-layout-edit') || event.target.closest('button, a, input, select, textarea')) return;
       if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
       event.preventDefault();
       var sibling = event.key === 'ArrowUp' ? node.previousElementSibling : node.nextElementSibling;
-      if (!sibling || !sibling.classList.contains('wb-dashlet')) return;
+      if (!sibling || !sibling.classList.contains('hg-dashlet')) return;
       if (event.key === 'ArrowUp') node.parentNode.insertBefore(node, sibling);
       else node.parentNode.insertBefore(sibling, node);
       save(host);
@@ -8081,12 +8081,12 @@
     var warning = table.querySelectorAll('.progress-bar-warning').length;
     var critical = table.querySelectorAll('.progress-bar-danger').length;
     var summary = document.createElement('div');
-    summary.className = 'wb-limit-summary';
+    summary.className = 'hg-limit-summary';
     summary.setAttribute('aria-label', t('accountLimitSummary'));
     summary.appendChild(limitSummaryItem('', rows.length, t('limitsTracked')));
-    summary.appendChild(limitSummaryItem('wb-limit-summary__warning', warning, t('warnings')));
-    summary.appendChild(limitSummaryItem('wb-limit-summary__critical', critical, t('critical')));
-    var detailsToggle = dashboardButton(t('showDetails'), { 'class': 'wb-limit-summary__toggle', 'aria-expanded': 'false' });
+    summary.appendChild(limitSummaryItem('hg-limit-summary__warning', warning, t('warnings')));
+    summary.appendChild(limitSummaryItem('hg-limit-summary__critical', critical, t('critical')));
+    var detailsToggle = dashboardButton(t('showDetails'), { 'class': 'hg-limit-summary__toggle', 'aria-expanded': 'false' });
     summary.appendChild(detailsToggle);
     var wrapper = table.closest('.table-wrapper');
     (wrapper && wrapper.parentNode || node).insertBefore(summary, wrapper || table);
@@ -8094,21 +8094,21 @@
       return row.querySelector('.progress-bar-warning, .progress-bar-danger');
     });
     var alerts = document.createElement('div');
-    alerts.className = 'wb-limit-alerts';
+    alerts.className = 'hg-limit-alerts';
     alerts.setAttribute('aria-label', t('accountLimitWarnings'));
     if (!alertRows.length) {
-      alerts.appendChild(makeEl('span', 'wb-limit-alerts__empty', t('limitsHealthy')));
+      alerts.appendChild(makeEl('span', 'hg-limit-alerts__empty', t('limitsHealthy')));
     } else {
       alertRows.slice(0, 4).forEach(function (row) {
         var bar = row.querySelector('.progress-bar-warning, .progress-bar-danger');
         var label = row.cells && row.cells[0] ? row.cells[0].textContent.trim() : t('accountLimit');
         var severity = bar.classList.contains('progress-bar-danger') ? 'critical' : 'warning';
-        var alert = makeEl('span', 'wb-limit-alert wb-limit-alert--' + severity);
+        var alert = makeEl('span', 'hg-limit-alert hg-limit-alert--' + severity);
         alert.appendChild(makeEl('strong', '', label));
         alert.appendChild(makeEl('em', '', t(severity)));
         alerts.appendChild(alert);
       });
-      if (alertRows.length > 4) alerts.appendChild(makeEl('span', 'wb-limit-alerts__more', t('moreInDetails', { count: alertRows.length - 4 })));
+      if (alertRows.length > 4) alerts.appendChild(makeEl('span', 'hg-limit-alerts__more', t('moreInDetails', { count: alertRows.length - 4 })));
     }
     summary.parentNode.insertBefore(alerts, summary.nextSibling);
     var groups = { mail: { total: 0, attention: 0 }, web: { total: 0, attention: 0 }, dns: { total: 0, attention: 0 }, database: { total: 0, attention: 0 }, clients: { total: 0, attention: 0 }, other: { total: 0, attention: 0 } };
@@ -8124,13 +8124,13 @@
     });
     var groupLabels = { mail: 'limitMail', web: 'limitWeb', dns: 'limitDns', database: 'limitDatabase', clients: 'limitClients', other: 'limitOther' };
     var groupOverview = document.createElement('div');
-    groupOverview.className = 'wb-limit-groups';
+    groupOverview.className = 'hg-limit-groups';
     groupOverview.setAttribute('aria-label', t('accountLimitSummary'));
     Object.keys(groups).forEach(function (name) {
       var group = groups[name];
       if (!group.total) return;
       var card = document.createElement('article');
-      card.className = 'wb-limit-group' + (group.attention ? ' wb-limit-group--attention' : '');
+      card.className = 'hg-limit-group' + (group.attention ? ' hg-limit-group--attention' : '');
       var label = document.createElement('span');
       label.textContent = t(groupLabels[name]);
       var value = document.createElement('strong');
@@ -8143,8 +8143,8 @@
       groupOverview.appendChild(card);
     });
     summary.parentNode.insertBefore(groupOverview, alerts);
-    summary.querySelector('.wb-limit-summary__toggle').addEventListener('click', function (event) {
-      var expanded = node.classList.toggle('wb-dashlet-limits--expanded');
+    summary.querySelector('.hg-limit-summary__toggle').addEventListener('click', function (event) {
+      var expanded = node.classList.toggle('hg-dashlet-limits--expanded');
       event.currentTarget.setAttribute('aria-expanded', expanded ? 'true' : 'false');
       event.currentTarget.textContent = expanded ? t('hideDetails') : t('showDetails');
     });
@@ -8169,17 +8169,17 @@
     var footerValues = Array.prototype.map.call(table.querySelectorAll('tfoot th'), function (cell) { return cell.textContent.replace(/\s+/g, ' ').trim(); }).filter(Boolean);
     var totalUsage = footerValues.length > 1 ? footerValues[footerValues.length - 1] : '-';
     var summary = document.createElement('div');
-    summary.className = 'wb-quota-summary';
+    summary.className = 'hg-quota-summary';
     summary.appendChild(quotaSummaryItem('', t('quotaEntries'), rows.length));
     summary.appendChild(quotaSummaryItem('', t('totalUsage'), totalUsage));
-    summary.appendChild(quotaSummaryItem(alertRows.length ? 'wb-quota-summary__attention' : 'wb-quota-summary__healthy', alertRows.length ? t('quotaAttention', { count: alertRows.length }) : t('quotaHealthy'), alertRows.length));
+    summary.appendChild(quotaSummaryItem(alertRows.length ? 'hg-quota-summary__attention' : 'hg-quota-summary__healthy', alertRows.length ? t('quotaAttention', { count: alertRows.length }) : t('quotaHealthy'), alertRows.length));
     var alerts = document.createElement('div');
-    alerts.className = 'wb-quota-alerts';
+    alerts.className = 'hg-quota-alerts';
     alertRows.slice(0, 3).forEach(function (row) {
       var label = row.cells && row.cells[0] ? row.cells[0].textContent.replace(/\s+/g, ' ').trim() : t('quotaEntries');
       var progress = row.querySelector('[role="progressbar"]');
       var item = document.createElement('span');
-      item.className = 'wb-quota-alert';
+      item.className = 'hg-quota-alert';
       var name = document.createElement('strong');
       name.textContent = label;
       var value = document.createElement('em');
@@ -8190,26 +8190,26 @@
     });
     var toggle = document.createElement('button');
     toggle.type = 'button';
-    toggle.className = 'wb-quota-details-toggle';
+    toggle.className = 'hg-quota-details-toggle';
     toggle.setAttribute('aria-expanded', 'false');
     toggle.textContent = t('showDetails');
     toggle.addEventListener('click', function () {
-      var expanded = node.classList.toggle('wb-dashlet-quota-expanded');
+      var expanded = node.classList.toggle('hg-dashlet-quota-expanded');
       toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
       toggle.textContent = expanded ? t('hideDetails') : t('showDetails');
     });
     wrapper.parentNode.insertBefore(summary, wrapper);
     if (alertRows.length) wrapper.parentNode.insertBefore(alerts, wrapper);
     wrapper.parentNode.insertBefore(toggle, wrapper);
-    node.classList.add('wb-dashlet-quota-collapsed');
+    node.classList.add('hg-dashlet-quota-collapsed');
     node.dataset.heritageQuotaDecorated = 'true';
   }
 
   function syncCardState(node) {
-    var state = node.querySelector('.progress-bar-danger, .wb-limit-alert--critical') ? 'critical' :
-      node.querySelector('.progress-bar-warning, .wb-limit-alert--warning') ? 'warning' : 'neutral';
-    node.classList.remove('wb-dashlet-state-neutral', 'wb-dashlet-state-warning', 'wb-dashlet-state-critical');
-    node.classList.add('wb-dashlet-state-' + state);
+    var state = node.querySelector('.progress-bar-danger, .hg-limit-alert--critical') ? 'critical' :
+      node.querySelector('.progress-bar-warning, .hg-limit-alert--warning') ? 'warning' : 'neutral';
+    node.classList.remove('hg-dashlet-state-neutral', 'hg-dashlet-state-warning', 'hg-dashlet-state-critical');
+    node.classList.add('hg-dashlet-state-' + state);
     node.dataset.heritageState = state;
   }
 
@@ -8218,15 +8218,15 @@
     var atomicModule = node.dataset.heritageAtomicSource === 'modules';
     var atomicMetric = node.dataset.heritageAtomicSource === 'metrics';
     if (name !== 'modules' && name !== 'metrics' && name !== 'statistics' && !atomicModule && !atomicMetric) return;
-    var header = node.querySelector(':scope > .wb-dashlet__header');
+    var header = node.querySelector(':scope > .hg-dashlet__header');
     if (!header) return;
-    var context = header.querySelector(':scope > .wb-dashlet__context');
+    var context = header.querySelector(':scope > .hg-dashlet__context');
     if (!context) {
       context = document.createElement('span');
-      context.className = 'wb-dashlet__context';
-      header.insertBefore(context, header.querySelector('.wb-dashlet__edit-hint, .wb-dashlet__layout-controls'));
+      context.className = 'hg-dashlet__context';
+      header.insertBefore(context, header.querySelector('.hg-dashlet__edit-hint, .hg-dashlet__layout-controls'));
     }
-    var count = name === 'modules' || atomicModule ? node.querySelectorAll('.wb-module-launcher').length : name === 'statistics' ? node.querySelectorAll('.wb-statistics-launcher').length : node.querySelectorAll('.wb-dashboard-metric-card').length;
+    var count = name === 'modules' || atomicModule ? node.querySelectorAll('.hg-module-launcher').length : name === 'statistics' ? node.querySelectorAll('.hg-statistics-launcher').length : node.querySelectorAll('.hg-dashboard-metric-card').length;
     if (atomicModule || atomicMetric) {
       context.textContent = node.dataset.heritageAtomicLabel || t(atomicMetric ? 'individualMetric' : 'individualModule');
       return;
@@ -8247,16 +8247,16 @@
     var name = node.dataset.heritageDashlet;
     var operational = name === 'limits' || name === 'quota' || name === 'mailquota' || name === 'databasequota';
     if (!operational) return;
-    var header = node.querySelector(':scope > .wb-dashlet__header');
+    var header = node.querySelector(':scope > .hg-dashlet__header');
     if (!header) return;
-    var context = header.querySelector(':scope > .wb-dashlet__context');
+    var context = header.querySelector(':scope > .hg-dashlet__context');
     if (!context) {
       context = document.createElement('span');
-      context.className = 'wb-dashlet__context wb-dashlet__context--capacity';
-      header.insertBefore(context, header.querySelector('.wb-dashlet__edit-hint, .wb-dashlet__layout-controls'));
+      context.className = 'hg-dashlet__context hg-dashlet__context--capacity';
+      header.insertBefore(context, header.querySelector('.hg-dashlet__edit-hint, .hg-dashlet__layout-controls'));
     }
-    var count = name === 'limits' ? node.querySelectorAll('.wb-limit-group').length : node.querySelectorAll('.wb-quota-summary > article').length;
-    var attention = node.querySelectorAll('.wb-limit-alert--warning, .wb-limit-alert--critical, .wb-quota-alert').length;
+    var count = name === 'limits' ? node.querySelectorAll('.hg-limit-group').length : node.querySelectorAll('.hg-quota-summary > article').length;
+    var attention = node.querySelectorAll('.hg-limit-alert--warning, .hg-limit-alert--critical, .hg-quota-alert').length;
     context.dataset.heritageState = attention ? 'attention' : 'healthy';
     context.textContent = t(attention ? 'capacityAttention' : 'capacityHealthy', { count: count, attention: attention });
   }
@@ -8264,13 +8264,13 @@
   function syncSecondaryContext(node) {
     var name = node.dataset.heritageDashlet;
     if (name !== 'news' && name !== 'donate') return;
-    var header = node.querySelector(':scope > .wb-dashlet__header');
+    var header = node.querySelector(':scope > .hg-dashlet__header');
     if (!header) return;
-    var context = header.querySelector(':scope > .wb-dashlet__context');
+    var context = header.querySelector(':scope > .hg-dashlet__context');
     if (!context) {
       context = document.createElement('span');
-      context.className = 'wb-dashlet__context wb-dashlet__context--secondary';
-      header.insertBefore(context, header.querySelector('.wb-dashlet__edit-hint, .wb-dashlet__layout-controls'));
+      context.className = 'hg-dashlet__context hg-dashlet__context--secondary';
+      header.insertBefore(context, header.querySelector('.hg-dashlet__edit-hint, .hg-dashlet__layout-controls'));
     }
     context.textContent = name === 'news' ? t('newsCount', { count: node.querySelectorAll('ul > li').length }) : t('optionalContent');
   }
@@ -8278,20 +8278,20 @@
   function enhance() {
     // Self-sufficient + idempotent: enhance is the single authority on the
     // dashboard state. It detects the dashboard by its raw, direct-child
-    // .wb-dashlet widgets, sets the gating classes itself, and clears them on
+    // .hg-dashlet widgets, sets the gating classes itself, and clears them on
     // non-dashboard pages. This removes the earlier fragile dependency on some
-    // other code having set body.wb-dashboard-page first, which caused the
+    // other code having set body.hg-dashboard-page first, which caused the
     // SPA-return race where the dashboard rendered undecorated.
     var host = document.getElementById('pageContent');
     if (!host) return false;
     normalizeServerDashlets(host);
-    if (!host.querySelector(':scope > .wb-dashlet')) {
-      document.body.classList.remove('wb-dashboard-page');
-      host.classList.remove('wb-dashboard-layout');
+    if (!host.querySelector(':scope > .hg-dashlet')) {
+      document.body.classList.remove('hg-dashboard-page');
+      host.classList.remove('hg-dashboard-layout');
       return false;
     }
-    document.body.classList.add('wb-dashboard-page');
-    host.classList.add('wb-dashboard-layout');
+    document.body.classList.add('hg-dashboard-page');
+    host.classList.add('hg-dashboard-layout');
     splitAtomicDashlets(host);
     var layout = readLayout();
     var nodes = dashlets(host);
@@ -8317,7 +8317,7 @@
       if (name === 'donate') decorateDonate(node);
       if (name === 'metrics') decorateMetrics(node);
       if (name === 'quota' || name === 'mailquota' || name === 'databasequota') decorateQuota(node);
-      if (!node.querySelector('.wb-dashlet__layout-controls')) makeControls(node, host);
+      if (!node.querySelector('.hg-dashlet__layout-controls')) makeControls(node, host);
       syncCardState(node);
       syncPrimaryContext(node);
       syncOperationalContext(node);
@@ -8327,46 +8327,46 @@
       host.dataset.heritageLayoutDnD = 'true';
       var pointerSource = null;
       host.addEventListener('pointerdown', function (event) {
-        var node = event.target.closest('.wb-dashlet');
-        if (!node || !host.classList.contains('wb-dashboard-layout-edit') || !event.target.closest('.wb-dashlet__drag-handle')) return;
+        var node = event.target.closest('.hg-dashlet');
+        if (!node || !host.classList.contains('hg-dashboard-layout-edit') || !event.target.closest('.hg-dashlet__drag-handle')) return;
         pointerSource = node;
-        node.classList.add('wb-dashlet--dragging');
+        node.classList.add('hg-dashlet--dragging');
         node.setPointerCapture(event.pointerId);
       });
       host.addEventListener('pointerup', function (event) {
         if (!pointerSource) return;
         var target = document.elementFromPoint(event.clientX, event.clientY);
-        var destination = target && target.closest('.wb-dashlet');
+        var destination = target && target.closest('.hg-dashlet');
         if (destination && destination !== pointerSource && host.contains(destination)) {
           destination.parentNode.insertBefore(pointerSource, destination);
           save(host);
         }
-        pointerSource.classList.remove('wb-dashlet--dragging');
+        pointerSource.classList.remove('hg-dashlet--dragging');
         pointerSource = null;
       });
       host.addEventListener('pointercancel', function () {
-        if (pointerSource) pointerSource.classList.remove('wb-dashlet--dragging');
+        if (pointerSource) pointerSource.classList.remove('hg-dashlet--dragging');
         pointerSource = null;
       });
       host.addEventListener('dragstart', function (event) {
-        var node = event.target.closest('.wb-dashlet');
-        if (!node || !host.classList.contains('wb-dashboard-layout-edit') || !event.target.closest('.wb-dashlet__drag-handle')) { event.preventDefault(); return; }
+        var node = event.target.closest('.hg-dashlet');
+        if (!node || !host.classList.contains('hg-dashboard-layout-edit') || !event.target.closest('.hg-dashlet__drag-handle')) { event.preventDefault(); return; }
         event.dataTransfer.effectAllowed = 'move';
         event.dataTransfer.setData('text/plain', node.dataset.heritageDashlet || '');
         node.setAttribute('aria-grabbed', 'true');
       });
       host.addEventListener('dragend', function (event) {
-        var node = event.target.closest('.wb-dashlet');
+        var node = event.target.closest('.hg-dashlet');
         if (node) node.setAttribute('aria-grabbed', 'false');
       });
       host.addEventListener('dragover', function (event) {
-        if (host.classList.contains('wb-dashboard-layout-edit') && event.target.closest('.wb-dashlet')) event.preventDefault();
+        if (host.classList.contains('hg-dashboard-layout-edit') && event.target.closest('.hg-dashlet')) event.preventDefault();
       });
       host.addEventListener('drop', function (event) {
-        if (!host.classList.contains('wb-dashboard-layout-edit')) return;
-        var target = event.target.closest('.wb-dashlet');
+        if (!host.classList.contains('hg-dashboard-layout-edit')) return;
+        var target = event.target.closest('.hg-dashlet');
         var name = event.dataTransfer.getData('text/plain');
-        var source = name && host.querySelector('.wb-dashlet[data-heritage-dashlet="' + name + '"]');
+        var source = name && host.querySelector('.hg-dashlet[data-heritage-dashlet="' + name + '"]');
         if (!target || !source || target === source) return;
         event.preventDefault();
         target.parentNode.insertBefore(source, target);
@@ -8375,30 +8375,30 @@
     }
     var header = host.querySelector(':scope > .page-header');
     var overview = syncOverview(host);
-    if (header && !host.querySelector(':scope > .wb-dashboard-toolbar')) {
+    if (header && !host.querySelector(':scope > .hg-dashboard-toolbar')) {
       var toolbar = document.createElement('div');
-      toolbar.className = 'wb-dashboard-toolbar';
+      toolbar.className = 'hg-dashboard-toolbar';
       toolbar.setAttribute('aria-label', t('dashboardLayoutControls'));
       var status = document.createElement('span');
-      status.className = 'wb-dashboard-toolbar__status';
+      status.className = 'hg-dashboard-toolbar__status';
       status.setAttribute('data-heritage-layout-status', 'true');
       status.setAttribute('role', 'status');
       status.setAttribute('aria-live', 'polite');
       toolbar.appendChild(status);
       var actions = document.createElement('div');
-      actions.className = 'wb-dashboard-toolbar__actions';
+      actions.className = 'hg-dashboard-toolbar__actions';
       toolbar.appendChild(actions);
       var toggle = document.createElement('button');
       toggle.type = 'button';
-      toggle.className = 'wb-dashboard-button wb-dashboard-button--primary wb-dashboard-layout-toggle wb-dashboard-toolbar__primary';
+      toggle.className = 'hg-dashboard-button hg-dashboard-button--primary hg-dashboard-layout-toggle hg-dashboard-toolbar__primary';
       toggle.textContent = t('customizeDashboard');
       toggle.setAttribute('data-heritage-layout-toggle', 'true');
       toggle.setAttribute('aria-pressed', 'false');
       toggle.addEventListener('click', function () {
-        host.classList.toggle('wb-dashboard-layout-edit');
+        host.classList.toggle('hg-dashboard-layout-edit');
         if (reset) {
           reset.dataset.heritageConfirm = 'false';
-          reset.classList.remove('wb-dashboard-layout-reset--armed');
+          reset.classList.remove('hg-dashboard-layout-reset--armed');
           reset.textContent = t('resetLayout');
         }
         syncToolbar(host);
@@ -8406,20 +8406,20 @@
       actions.appendChild(toggle);
       var reset = document.createElement('button');
       reset.type = 'button';
-      reset.className = 'wb-dashboard-button wb-dashboard-layout-reset';
+      reset.className = 'hg-dashboard-button hg-dashboard-layout-reset';
       reset.textContent = t('resetLayout');
       reset.setAttribute('data-heritage-layout-reset', 'true');
       var resetTimer = null;
       reset.addEventListener('click', function () {
         if (reset.dataset.heritageConfirm !== 'true') {
           reset.dataset.heritageConfirm = 'true';
-          reset.classList.add('wb-dashboard-layout-reset--armed');
+          reset.classList.add('hg-dashboard-layout-reset--armed');
           reset.textContent = t('confirmReset');
           status.textContent = t('resetWarning');
           if (resetTimer) window.clearTimeout(resetTimer);
           resetTimer = window.setTimeout(function () {
             reset.dataset.heritageConfirm = 'false';
-            reset.classList.remove('wb-dashboard-layout-reset--armed');
+            reset.classList.remove('hg-dashboard-layout-reset--armed');
             reset.textContent = t('resetLayout');
             syncToolbar(host);
           }, 6000);
@@ -8427,7 +8427,7 @@
         }
         if (resetTimer) window.clearTimeout(resetTimer);
         reset.dataset.heritageConfirm = 'false';
-        reset.classList.remove('wb-dashboard-layout-reset--armed');
+        reset.classList.remove('hg-dashboard-layout-reset--armed');
         reset.textContent = t('resetLayout');
         try { window.localStorage.removeItem(STORAGE_KEY); } catch (error) { /* ignore */ }
         dashlets(host).sort(function (a, b) {
@@ -8445,7 +8445,7 @@
       actions.appendChild(reset);
       var show = document.createElement('button');
       show.type = 'button';
-      show.className = 'wb-dashboard-button wb-dashboard-layout-show-hidden';
+      show.className = 'hg-dashboard-button hg-dashboard-layout-show-hidden';
       show.textContent = t('showHiddenWidgets');
       show.setAttribute('data-heritage-layout-show-hidden', 'true');
       show.addEventListener('click', function () { showAllWidgets(host); });
@@ -8525,7 +8525,7 @@
     target.hidden = false;
     target.setAttribute('aria-hidden', 'false');
     target.setAttribute('data-heritage-dialog-state', 'open');
-    document.body.classList.add('wb-dialog-open');
+    document.body.classList.add('hg-dialog-open');
     document.body.setAttribute('data-heritage-dialog-active', target.id || 'dialog');
     if (returnFocus && returnFocus.setAttribute && (returnFocus.getAttribute('aria-haspopup') === 'dialog' || returnFocus.getAttribute('aria-controls') === target.id)) {
       returnFocus.setAttribute('aria-expanded', 'true');
@@ -8542,7 +8542,7 @@
     target.setAttribute('aria-hidden', 'true');
     target.hidden = true;
     target.setAttribute('data-heritage-dialog-state', 'closed');
-    document.body.classList.remove('wb-dialog-open');
+    document.body.classList.remove('hg-dialog-open');
     document.body.removeAttribute('data-heritage-dialog-active');
     if (returnFocus && returnFocus.setAttribute && (returnFocus.getAttribute('aria-haspopup') === 'dialog' || returnFocus.getAttribute('aria-controls') === target.id)) {
       returnFocus.setAttribute('aria-expanded', 'false');
@@ -8562,9 +8562,9 @@
       return;
     }
     var closeControl = event.target.closest('[data-heritage-dialog-close]');
-    if (closeControl && closeControl.closest('.wb-dialog')) {
+    if (closeControl && closeControl.closest('.hg-dialog')) {
       event.preventDefault();
-      close(closeControl.closest('.wb-dialog'), true);
+      close(closeControl.closest('.hg-dialog'), true);
     }
   });
 
@@ -8629,16 +8629,16 @@
     var panelId = 'heritage-donation-details-' + generatedId;
     var trigger = document.createElement('button');
     trigger.type = 'button';
-    trigger.className = 'wb-disclosure__trigger';
+    trigger.className = 'hg-disclosure__trigger';
     trigger.textContent = legacyTrigger.textContent.trim();
     trigger.setAttribute('aria-controls', panelId);
     trigger.setAttribute('aria-expanded', 'false');
 
     panel.id = panelId;
-    panel.classList.add('wb-disclosure__panel');
+    panel.classList.add('hg-disclosure__panel');
     panel.style.removeProperty('display');
     panel.hidden = true;
-    root.classList.add('wb-disclosure');
+    root.classList.add('hg-disclosure');
     root.dataset.heritageDisclosure = 'true';
     legacyTrigger.replaceWith(trigger);
 
@@ -8781,21 +8781,21 @@
   }
 
   function ensureStatus(host) {
-    var status = host.querySelector(':scope > .wb-page-meta > .wb-form-state, :scope > .wb-form-state');
+    var status = host.querySelector(':scope > .hg-page-meta > .hg-form-state, :scope > .hg-form-state');
     if (status) return status;
     status = document.createElement('div');
-    status.className = 'wb-form-state';
+    status.className = 'hg-form-state';
     status.setAttribute('role', 'status');
     status.setAttribute('aria-live', 'polite');
     status.setAttribute('aria-atomic', 'true');
     var indicator = document.createElement('span');
-    indicator.className = 'wb-form-state__indicator';
+    indicator.className = 'hg-form-state__indicator';
     indicator.setAttribute('aria-hidden', 'true');
     var label = document.createElement('span');
-    label.className = 'wb-form-state__label';
+    label.className = 'hg-form-state__label';
     status.appendChild(indicator);
     status.appendChild(label);
-    var meta = host.querySelector(':scope > .wb-page-meta');
+    var meta = host.querySelector(':scope > .hg-page-meta');
     var heading = host.querySelector(':scope > .page-header');
     if (meta) meta.appendChild(status);
     else if (heading) heading.insertAdjacentElement('afterend', status);
@@ -8819,7 +8819,7 @@
         ? (messages.form_field || localized('geändertes Feld', 'changed field'))
         : (messages.form_fields || localized('geänderte Felder', 'changed fields')));
     }
-    var labelNode = status.querySelector('.wb-form-state__label');
+    var labelNode = status.querySelector('.hg-form-state__label');
     if (labelNode.textContent !== label) labelNode.textContent = label;
     return true;
   }
@@ -8870,7 +8870,7 @@
       if (!host) return;
       new MutationObserver(function (mutations) {
         var contentChanged = mutations.some(function (mutation) {
-          return !mutation.target.closest || !mutation.target.closest('.wb-form-state');
+          return !mutation.target.closest || !mutation.target.closest('.hg-form-state');
         });
         if (contentChanged) enhance();
       }).observe(host, { childList: true, subtree: true });
@@ -8888,11 +8888,11 @@
     enhance: enhance,
     setState: setState,
     getState: function () {
-      var status = document.querySelector('#pageContent > .wb-page-meta > .wb-form-state, #pageContent > .wb-form-state');
+      var status = document.querySelector('#pageContent > .hg-page-meta > .hg-form-state, #pageContent > .hg-form-state');
       return status ? status.dataset.state : null;
     },
     getChangedCount: function () {
-      var status = document.querySelector('#pageContent > .wb-page-meta > .wb-form-state, #pageContent > .wb-form-state');
+      var status = document.querySelector('#pageContent > .hg-page-meta > .hg-form-state, #pageContent > .hg-form-state');
       return status && status.dataset.changedCount !== undefined ? Number(status.dataset.changedCount) : null;
     }
   };
@@ -8920,17 +8920,17 @@
   }
 
   function update(wrapper) {
-    var list = wrapper.querySelector('.wb-form-tabs');
+    var list = wrapper.querySelector('.hg-form-tabs');
     if (!list) return;
     var maximum = Math.max(0, list.scrollWidth - list.clientWidth);
     var overflow = maximum > 2;
     wrapper.dataset.overflow = String(overflow);
-    wrapper.querySelector('.wb-tabstrip__previous').disabled = !overflow || list.scrollLeft <= 1;
-    wrapper.querySelector('.wb-tabstrip__next').disabled = !overflow || list.scrollLeft >= maximum - 1;
+    wrapper.querySelector('.hg-tabstrip__previous').disabled = !overflow || list.scrollLeft <= 1;
+    wrapper.querySelector('.hg-tabstrip__next').disabled = !overflow || list.scrollLeft >= maximum - 1;
   }
 
   function revealActive(wrapper) {
-    var list = wrapper.querySelector('.wb-form-tabs');
+    var list = wrapper.querySelector('.hg-form-tabs');
     var active = list && list.querySelector('li.active');
     if (!active) return;
     var left = active.offsetLeft;
@@ -8940,7 +8940,7 @@
   }
 
   function scroll(wrapper, direction) {
-    var list = wrapper.querySelector('.wb-form-tabs');
+    var list = wrapper.querySelector('.hg-form-tabs');
     if (!list) return;
     var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     list.scrollBy({ left: direction * Math.max(120, Math.round(list.clientWidth * 0.72)), behavior: reduced ? 'auto' : 'smooth' });
@@ -8980,11 +8980,11 @@
 
   function enhance(root) {
     var scope = root && root.querySelectorAll ? root : document;
-    Array.from(scope.querySelectorAll('.content-tab-wrapper > .wb-form-tabs')).forEach(function (list) {
-      if (list.parentElement && list.parentElement.classList.contains('wb-tabstrip')) return;
+    Array.from(scope.querySelectorAll('.content-tab-wrapper > .hg-form-tabs')).forEach(function (list) {
+      if (list.parentElement && list.parentElement.classList.contains('hg-tabstrip')) return;
       removeRetiredTabs(list);
       var wrapper = document.createElement('div');
-      wrapper.className = 'wb-tabstrip';
+      wrapper.className = 'hg-tabstrip';
       wrapper.dataset.heritageTabstrip = 'true';
       list.id = list.id || 'heritage-tab-list-' + (++sequence);
       list.setAttribute('aria-label', messages.tab_sections || 'Form sections');
@@ -8994,14 +8994,14 @@
 
       var previous = document.createElement('button');
       previous.type = 'button';
-      previous.className = 'wb-tabstrip__control wb-tabstrip__previous';
+      previous.className = 'hg-tabstrip__control hg-tabstrip__previous';
       previous.setAttribute('aria-label', messages.tab_previous || 'Scroll tabs left');
       previous.setAttribute('aria-controls', list.id);
       previous.appendChild(icon('arrow-left'));
 
       var next = document.createElement('button');
       next.type = 'button';
-      next.className = 'wb-tabstrip__control wb-tabstrip__next';
+      next.className = 'hg-tabstrip__control hg-tabstrip__next';
       next.setAttribute('aria-label', messages.tab_next || 'Scroll tabs right');
       next.setAttribute('aria-controls', list.id);
       next.appendChild(icon('arrow-right'));
@@ -9106,7 +9106,7 @@
   }
 
   document.addEventListener('click', function (event) {
-    var anchor = event.target.closest('.content-tab-wrapper .wb-form-tabs a[data-change-tab]');
+    var anchor = event.target.closest('.content-tab-wrapper .hg-form-tabs a[data-change-tab]');
     if (!anchor) return;
     var mode = confirmationMode();
     if (!mode) return;
@@ -9162,7 +9162,7 @@
       var heading = table.closest('#pageContent, .dashlet')?.querySelector('.page-header h1, .fieldset-legend, h1, h2');
       if (heading && heading.textContent.trim()) {
         var caption = document.createElement('caption');
-        caption.className = 'wb-visually-hidden';
+        caption.className = 'hg-visually-hidden';
         caption.textContent = heading.textContent.trim();
         table.prepend(caption);
       }
@@ -9190,9 +9190,9 @@
     var label = group.querySelector(':scope > label.control-label');
     var controls = Array.from(group.querySelectorAll('input:not([type="hidden"]), select, textarea'));
     if (label && controls.length === 1 && !hasAccessibleName(controls[0])) {
-      label.htmlFor = ensureId(controls[0], 'wb-field');
+      label.htmlFor = ensureId(controls[0], 'hg-field');
     } else if (label && controls.length > 1) {
-      var labelId = ensureId(label, 'wb-group-label');
+      var labelId = ensureId(label, 'hg-group-label');
       controls.forEach(function (control) {
         if (!hasAccessibleName(control)) control.setAttribute('aria-labelledby', labelId);
       });
@@ -9203,7 +9203,7 @@
       controls.forEach(function (control) {
         control.setAttribute('aria-invalid', 'true');
         if (error) {
-          var errorId = ensureId(error, 'wb-field-error');
+          var errorId = ensureId(error, 'hg-field-error');
           var describedBy = (control.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean);
           if (!describedBy.includes(errorId)) describedBy.push(errorId);
           control.setAttribute('aria-describedby', describedBy.join(' '));
@@ -9235,7 +9235,7 @@
   }
 
   function dialogIsOpen() {
-    return Boolean(document.querySelector('.wb-dialog:not([hidden]):not([aria-hidden="true"]), .modal.in[role="dialog"], .modal.show[role="dialog"]'));
+    return Boolean(document.querySelector('.hg-dialog:not([hidden]):not([aria-hidden="true"]), .modal.in[role="dialog"], .modal.show[role="dialog"]'));
   }
 
   function focusPageTarget(target) {
@@ -9257,13 +9257,13 @@
 
   function focusLoadedPage(root, context) {
     if (!root || !context || context.source !== 'navigation') return false;
-    var heading = root.querySelector(':scope > .wb-page-header h1, :scope > .page-header h1, :scope > h1');
+    var heading = root.querySelector(':scope > .hg-page-header h1, :scope > .page-header h1, :scope > h1');
     return focusPageTarget(heading || root);
   }
 
   function focusNavigationError(root) {
     if (!root) return false;
-    return focusPageTarget(root.querySelector('.wb-content-state--error .wb-content-state__retry, .wb-content-state--error'));
+    return focusPageTarget(root.querySelector('.hg-content-state--error .hg-content-state__retry, .hg-content-state--error'));
   }
 
   function enhanceDialog(dialog) {
@@ -9271,7 +9271,7 @@
     if (!dialog.hasAttribute('aria-modal')) dialog.setAttribute('aria-modal', 'true');
     if (!dialog.getAttribute('aria-label') && !dialog.getAttribute('aria-labelledby')) {
       var title = dialog.querySelector('.modal-title, h1, h2, h3, h4');
-      if (title) dialog.setAttribute('aria-labelledby', ensureId(title, 'wb-dialog-title'));
+      if (title) dialog.setAttribute('aria-labelledby', ensureId(title, 'hg-dialog-title'));
     }
     if (dialog.dataset.heritageFocusTrap !== 'true') {
       dialog.dataset.heritageFocusTrap = 'true';
@@ -9407,7 +9407,7 @@
 
   function alignFieldError(group) {
     var error = group && group.querySelector(':scope > .help-block, :scope > .help-inline, :scope > .error, :scope > [role="alert"]');
-    var body = group && group.querySelector(':scope > .wb-field-body');
+    var body = group && group.querySelector(':scope > .hg-field-body');
     if (error && body && !body.contains(error)) {
       body.appendChild(error);
       error.setAttribute('data-heritage-field-error-aligned', 'true');
@@ -9416,7 +9416,7 @@
   }
 
   function invalidEntries(host) {
-    return Array.from(host.querySelectorAll('.form-group.has-error, .wb-field-group.has-error')).map(function (group, index) {
+    return Array.from(host.querySelectorAll('.form-group.has-error, .hg-field-group.has-error')).map(function (group, index) {
       var control = fieldControl(group);
       if (!control) return null;
       return { group: group, control: control, label: fieldLabel(group, control, index), error: fieldError(group) };
@@ -9424,10 +9424,10 @@
   }
 
   function summaryAlert(host, entries) {
-    var alert = host.querySelector('.wb-validation-summary, .alert.alert-danger, #errorMsg');
+    var alert = host.querySelector('.hg-validation-summary, .alert.alert-danger, #errorMsg');
     if (!alert && entries.length) {
       alert = document.createElement('div');
-      alert.className = 'wb-validation-summary wb-validation-summary--generated';
+      alert.className = 'hg-validation-summary hg-validation-summary--generated';
       alert.dataset.heritageValidationGenerated = 'true';
       host.prepend(alert);
     }
@@ -9436,7 +9436,7 @@
 
   function revealAndFocus(entry) {
     if (!entry || !entry.control) return false;
-    var collapsed = entry.group.closest('.collapse:not(.in), .wb-collapse:not(.in)');
+    var collapsed = entry.group.closest('.collapse:not(.in), .hg-collapse:not(.in)');
     if (collapsed && window.heritageInteractions) window.heritageInteractions.collapse(collapsed, true, entry.control);
     window.setTimeout(function () {
       if (entry.control.offsetParent !== null) entry.control.focus();
@@ -9454,7 +9454,7 @@
     var alert = summaryAlert(host, entries);
     if (!alert || !alert.textContent.trim() && !entries.length) return { errors: 0, focused: false };
 
-    alert.classList.add('wb-validation-summary');
+    alert.classList.add('hg-validation-summary');
     alert.setAttribute('role', 'alert');
     alert.setAttribute('tabindex', '-1');
     alert.setAttribute('aria-live', 'assertive');
@@ -9463,20 +9463,20 @@
     var title = alert.querySelector('.alert-label strong, .alert-label, h1, h2, h3, h4');
     if (!title) {
       var label = document.createElement('strong');
-      label.className = 'wb-validation-summary__title';
+      label.className = 'hg-validation-summary__title';
       label.textContent = messages.validation_summary || (isGerman() ? 'Bitte pr\u00fcfen Sie die markierten Felder.' : 'Please check the highlighted fields.');
       alert.prepend(label);
       title = label;
     }
-    alert.setAttribute('aria-labelledby', ensureId(title, 'wb-validation-title'));
+    alert.setAttribute('aria-labelledby', ensureId(title, 'hg-validation-title'));
 
     if (entries.length) {
       var list = document.createElement('ul');
-      list.className = 'wb-validation-summary__list';
+      list.className = 'hg-validation-summary__list';
       list.dataset.heritageValidationList = 'true';
       entries.forEach(function (entry) {
         entry.control.setAttribute('aria-invalid', 'true');
-        ensureId(entry.control, 'wb-invalid-field');
+        ensureId(entry.control, 'hg-invalid-field');
         alignFieldError(entry.group);
         var item = document.createElement('li');
         var link = document.createElement('a');
@@ -9566,22 +9566,22 @@
   }
 
   function ensureFeedback(root) {
-    var feedback = root.querySelector(':scope > .wb-page-meta > .wb-submit-feedback, :scope > .wb-submit-feedback');
+    var feedback = root.querySelector(':scope > .hg-page-meta > .hg-submit-feedback, :scope > .hg-submit-feedback');
     if (feedback) return feedback;
     feedback = document.createElement('div');
-    feedback.className = 'wb-submit-feedback';
+    feedback.className = 'hg-submit-feedback';
     feedback.setAttribute('role', 'status');
     feedback.setAttribute('aria-live', 'polite');
     feedback.setAttribute('aria-atomic', 'true');
     var indicator = document.createElement('span');
-    indicator.className = 'wb-submit-feedback__indicator';
+    indicator.className = 'hg-submit-feedback__indicator';
     indicator.setAttribute('aria-hidden', 'true');
     var label = document.createElement('span');
-    label.className = 'wb-submit-feedback__label';
+    label.className = 'hg-submit-feedback__label';
     feedback.appendChild(indicator);
     feedback.appendChild(label);
-    var meta = root.querySelector(':scope > .wb-page-meta');
-    var formState = root.querySelector(':scope > .wb-page-meta > .wb-form-state, :scope > .wb-form-state');
+    var meta = root.querySelector(':scope > .hg-page-meta');
+    var formState = root.querySelector(':scope > .hg-page-meta > .hg-form-state, :scope > .hg-form-state');
     var heading = root.querySelector(':scope > .page-header');
     if (formState) formState.insertAdjacentElement('afterend', feedback);
     else if (meta) meta.appendChild(feedback);
@@ -9597,7 +9597,7 @@
     feedback.removeAttribute('data-heritage-delayed');
     feedback.dataset.state = state;
     feedback.setAttribute('role', state === 'failed' ? 'alert' : 'status');
-    feedback.querySelector('.wb-submit-feedback__label').textContent = label;
+    feedback.querySelector('.hg-submit-feedback__label').textContent = label;
     return feedback;
   }
 
@@ -9613,7 +9613,7 @@
     };
     control.disabled = true;
     control.setAttribute('aria-busy', 'true');
-    control.classList.add('wb-submit-source');
+    control.classList.add('hg-submit-source');
     root.setAttribute('aria-busy', 'true');
     setFeedback(root, 'saving', localizedMessage('form_saving', '\u00c4nderungen werden gespeichert', 'Saving changes'));
     active.slowTimer = window.setTimeout(function() {
@@ -9658,7 +9658,7 @@
       control.disabled = active.disabled;
       if (active.ariaBusy === null) control.removeAttribute('aria-busy');
       else control.setAttribute('aria-busy', active.ariaBusy);
-      control.classList.remove('wb-submit-source');
+      control.classList.remove('hg-submit-source');
     }
     var root = host();
     if (root) root.setAttribute('aria-busy', 'false');
@@ -9737,7 +9737,7 @@
   function path(value) { try { return new URL(value || '', document.baseURI).pathname.replace(/^\//, ''); } catch (error) { return ''; } }
   function controlFor(formname, target) {
     var api = runtime();
-    if (formname !== 'pageForm' || !document.body.classList.contains('wb-list-page') || !api || typeof api.requestForm !== 'function') return null;
+    if (formname !== 'pageForm' || !document.body.classList.contains('hg-list-page') || !api || typeof api.requestForm !== 'function') return null;
     var root = document.getElementById('pageContent');
     var controls = root ? root.querySelectorAll('[name="Filter"][data-submit-form="pageForm"][data-form-action]') : [];
     var button = Array.prototype.find.call(controls, function(control) { return path(control.getAttribute('data-form-action')) === path(target); }) || null;
@@ -9751,17 +9751,17 @@
     var current = active; active = null;
     if (current.control && current.control.isConnected) { current.control.disabled = current.disabled; current.control.removeAttribute('aria-busy'); }
     if (current.root && current.root.isConnected) {
-      current.root.classList.remove('wb-list-filter-active'); current.root.setAttribute('aria-busy', 'false');
-      var status = current.root.querySelector('.wb-list-filter-status'); if (status) status.remove();
+      current.root.classList.remove('hg-list-filter-active'); current.root.setAttribute('aria-busy', 'false');
+      var status = current.root.querySelector('.hg-list-filter-status'); if (status) status.remove();
     }
   }
   function start(root, control, request) {
     var status = document.createElement('span');
-    status.className = 'wb-list-filter-status'; status.setAttribute('role', 'status'); status.setAttribute('aria-live', 'polite');
+    status.className = 'hg-list-filter-status'; status.setAttribute('role', 'status'); status.setAttribute('aria-live', 'polite');
     status.textContent = control.getAttribute('value') || control.textContent.trim() || 'Filter';
     control.insertAdjacentElement('afterend', status);
     active = { root: root, control: control, disabled: control.disabled, request: request };
-    control.disabled = true; control.setAttribute('aria-busy', 'true'); root.classList.add('wb-list-filter-active'); root.setAttribute('aria-busy', 'true');
+    control.disabled = true; control.setAttribute('aria-busy', 'true'); root.classList.add('hg-list-filter-active'); root.setAttribute('aria-busy', 'true');
   }
   legacy.submitForm = function(formname, target, confirmation) {
     var api = runtime();
@@ -9780,7 +9780,7 @@
   };
   document.addEventListener('change', function(event) {
     var control = event.target && event.target.closest ? event.target.closest('#pageContent select[name^="search_"]') : null;
-    if (control && document.body.classList.contains('wb-list-page')) changedSearchControl = control;
+    if (control && document.body.classList.contains('hg-list-page')) changedSearchControl = control;
   }, true);
   window.heritageListFilter = { isActive: function() { return Boolean(active); } };
   legacy.heritageListFilterInstalled = true;
@@ -9865,15 +9865,15 @@
 
   function metric(label, value, state, detail) {
     var card = document.createElement('article');
-    card.className = 'wb-statistics-metric wb-statistics-metric--' + (state || 'neutral');
+    card.className = 'hg-statistics-metric hg-statistics-metric--' + (state || 'neutral');
     var labelNode = document.createElement('span');
-    labelNode.className = 'wb-statistics-metric__label';
+    labelNode.className = 'hg-statistics-metric__label';
     labelNode.textContent = label;
     var valueNode = document.createElement('strong');
-    valueNode.className = 'wb-statistics-metric__value';
+    valueNode.className = 'hg-statistics-metric__value';
     valueNode.textContent = value;
     var detailNode = document.createElement('small');
-    detailNode.className = 'wb-statistics-metric__detail';
+    detailNode.className = 'hg-statistics-metric__detail';
     detailNode.textContent = detail || '';
     card.appendChild(labelNode);
     card.appendChild(valueNode);
@@ -9883,13 +9883,13 @@
 
   function navigation(active) {
     var nav = document.createElement('nav');
-    nav.className = 'wb-statistics-navigation';
+    nav.className = 'hg-statistics-navigation';
     nav.setAttribute('aria-label', t('reports'));
     reports.forEach(function (report) {
       var label = report.labels[language()] || report.labels.en;
       var link = document.createElement('a');
       link.href = '#';
-      link.className = 'wb-statistics-navigation__item';
+      link.className = 'hg-statistics-navigation__item';
       link.textContent = label;
       link.setAttribute('data-heritage-load-content', report.path);
       link.setAttribute('aria-label', t('open', { name: label }));
@@ -9906,14 +9906,14 @@
     var report = currentReport(pageName || (window.history.state && window.history.state.heritageContent));
     var host = document.getElementById('pageContent');
     if (!host) return false;
-    document.body.classList.toggle('wb-statistics-page', Boolean(report));
+    document.body.classList.toggle('hg-statistics-page', Boolean(report));
     if (!report || host.dataset.heritageStatisticsReport === report.key) return Boolean(report);
 
     var table = host.querySelector('.table-wrapper table.table, table.table');
     if (!table) return false;
     host.dataset.heritageStatisticsEnhanced = 'true';
     host.dataset.heritageStatisticsReport = report.key;
-    host.classList.add('wb-statistics-workspace');
+    host.classList.add('hg-statistics-workspace');
     var rows = recordRows(table);
     var filters = activeFilters(host);
     var notices = quotaNotices(host);
@@ -9925,9 +9925,9 @@
     if (duplicateLegend) duplicateLegend.hidden = true;
 
     var hero = document.createElement('header');
-    hero.className = 'wb-statistics-hero';
+    hero.className = 'hg-statistics-hero';
     var eyebrow = document.createElement('span');
-    eyebrow.className = 'wb-statistics-hero__eyebrow';
+    eyebrow.className = 'hg-statistics-hero__eyebrow';
     eyebrow.textContent = t('eyebrow');
     var copy = document.createElement('div');
     var title = document.createElement('h1');
@@ -9942,17 +9942,17 @@
     hero.insertAdjacentElement('afterend', navigation(report));
 
     var metrics = document.createElement('section');
-    metrics.className = 'wb-statistics-metrics';
+    metrics.className = 'hg-statistics-metrics';
     metrics.setAttribute('aria-label', t('title'));
     metrics.appendChild(metric(t('visible'), String(rows.length), 'neutral', reportLabel));
     metrics.appendChild(metric(t('filters'), filters ? String(filters) : t('none'), filters ? 'active' : 'neutral', filters ? t('report') : ''));
     metrics.appendChild(metric(t('notices'), String(notices), notices ? 'warning' : 'healthy', notices ? t('warning', { count: notices }) : t('healthy')));
     metrics.appendChild(metric(t('report'), reportLabel, 'accent', t('reports')));
-    host.querySelector('.wb-statistics-navigation').insertAdjacentElement('afterend', metrics);
+    host.querySelector('.hg-statistics-navigation').insertAdjacentElement('afterend', metrics);
 
     var wrapper = table.closest('.table-wrapper');
-    if (wrapper) wrapper.classList.add('wb-statistics-table');
-    table.classList.add('wb-statistics-data-table');
+    if (wrapper) wrapper.classList.add('hg-statistics-table');
+    table.classList.add('hg-statistics-data-table');
     if (window.heritageIcons) window.heritageIcons.render(host);
     return true;
   }
@@ -9961,7 +9961,7 @@
     enhance(event.detail && event.detail.page);
   });
   document.addEventListener('click', function (event) {
-    var launcher = event.target && event.target.closest ? event.target.closest('.wb-statistics-launcher[data-heritage-load-content], .wb-statistics-launcher[data-load-content]') : null;
+    var launcher = event.target && event.target.closest ? event.target.closest('.hg-statistics-launcher[data-heritage-load-content], .hg-statistics-launcher[data-load-content]') : null;
     var current = app();
     if (!launcher || !current || typeof current.capp !== 'function') return;
     event.preventDefault();
@@ -10001,15 +10001,15 @@
     if (!active || active !== request) return;
     active = null;
     var root = document.getElementById('pageContent');
-    if (root) { root.classList.remove('wb-wizard-preview-active'); root.setAttribute('aria-busy', 'false'); var state = root.querySelector('.wb-wizard-preview-status'); if (state) state.remove(); }
+    if (root) { root.classList.remove('hg-wizard-preview-active'); root.setAttribute('aria-busy', 'false'); var state = root.querySelector('.hg-wizard-preview-status'); if (state) state.remove(); }
   }
   legacy.submitForm = function(formname, target) {
     var api = runtime();
     if (!api || !isPreview(formname, target)) return previousSubmitForm.apply(this, arguments);
     if (active && active.readyState !== 4) active.abort();
     var form = document.getElementById(formname); var root = document.getElementById('pageContent');
-    var status = document.createElement('div'); status.className = 'wb-wizard-preview-status'; status.setAttribute('role', 'status'); status.setAttribute('aria-live', 'polite'); status.textContent = 'Updating form';
-    root.prepend(status); root.classList.add('wb-wizard-preview-active'); root.setAttribute('aria-busy', 'true');
+    var status = document.createElement('div'); status.className = 'hg-wizard-preview-status'; status.setAttribute('role', 'status'); status.setAttribute('aria-live', 'polite'); status.textContent = 'Updating form';
+    root.prepend(status); root.classList.add('hg-wizard-preview-active'); root.setAttribute('aria-busy', 'true');
     var request = api.requestForm(form, target, { timeout: 30000 }); active = request;
     request.promise.then(function(responseText) {
       if (responseText.indexOf('HEADER_REDIRECT:') > -1) api.navigateTo(responseText.split(':')[1]);
@@ -10035,7 +10035,7 @@
 
   function createBadge(label, value, modifier) {
     var badge = document.createElement('span');
-    badge.className = 'wb-specialty-badge' + (modifier ? ' wb-specialty-badge--' + modifier : '');
+    badge.className = 'hg-specialty-badge' + (modifier ? ' hg-specialty-badge--' + modifier : '');
     badge.setAttribute('aria-label', label + ': ' + value);
     var count = document.createElement('strong');
     count.textContent = String(value);
@@ -10047,58 +10047,58 @@
   }
 
   function decorateExtensionWorkspace(scope) {
-    scope.querySelectorAll('.wb-extension-workspace').forEach(function(workspace) {
-      workspace.classList.add('wb-specialty-workspace', 'wb-specialty-workspace--extension');
+    scope.querySelectorAll('.hg-extension-workspace').forEach(function(workspace) {
+      workspace.classList.add('hg-specialty-workspace', 'hg-specialty-workspace--extension');
       var pageType = workspace.getAttribute('data-heritage-extension-page') || 'extension';
       workspace.setAttribute('data-heritage-specialty-page', pageType);
 
-      var table = workspace.querySelector('.wb-data-table');
+      var table = workspace.querySelector('.hg-data-table');
       var rows = table ? Array.prototype.slice.call(table.querySelectorAll('tbody tr:not(.tbl_row_noresults)')) : [];
-      var actions = workspace.querySelectorAll('.wb-row-action, .wb-form-actions button, .wb-form-actions a').length;
-      var dangerActions = workspace.querySelectorAll('.wb-row-action--danger, .formbutton-danger').length;
+      var actions = workspace.querySelectorAll('.hg-row-action, .hg-form-actions button, .hg-form-actions a').length;
+      var dangerActions = workspace.querySelectorAll('.hg-row-action--danger, .formbutton-danger').length;
       workspace.setAttribute('data-heritage-extension-records', String(rows.length));
       workspace.setAttribute('data-heritage-extension-actions', String(actions));
 
-      var hero = workspace.querySelector('.wb-extension-hero');
-      if (hero && !hero.querySelector('.wb-specialty-badges')) {
+      var hero = workspace.querySelector('.hg-extension-hero');
+      if (hero && !hero.querySelector('.hg-specialty-badges')) {
         var badges = document.createElement('div');
-        badges.className = 'wb-specialty-badges';
+        badges.className = 'hg-specialty-badges';
         badges.appendChild(createBadge(localized('Einträge', 'Entries'), rows.length, 'records'));
         if (actions > 0) badges.appendChild(createBadge(localized('Aktionen', 'Actions'), actions, 'actions'));
         if (dangerActions > 0) badges.appendChild(createBadge(localized('Kritisch', 'Critical'), dangerActions, 'danger'));
         hero.appendChild(badges);
       }
 
-      workspace.querySelectorAll('.wb-data-table tbody tr').forEach(function(row) {
-        row.classList.add('wb-specialty-row');
-        if (row.querySelector('.wb-row-action--danger, .formbutton-danger')) row.classList.add('wb-specialty-row--destructive');
+      workspace.querySelectorAll('.hg-data-table tbody tr').forEach(function(row) {
+        row.classList.add('hg-specialty-row');
+        if (row.querySelector('.hg-row-action--danger, .formbutton-danger')) row.classList.add('hg-specialty-row--destructive');
       });
     });
   }
 
   function decorateMonitoringWorkspace(scope) {
-    scope.querySelectorAll('.wb-monitor-workspace').forEach(function(workspace) {
-      workspace.classList.add('wb-specialty-workspace', 'wb-specialty-workspace--monitoring');
+    scope.querySelectorAll('.hg-monitor-workspace').forEach(function(workspace) {
+      workspace.classList.add('hg-specialty-workspace', 'hg-specialty-workspace--monitoring');
       var charts = workspace.querySelectorAll('[data-heritage-chart-card]').length;
-      var states = workspace.querySelectorAll('.stateview .alert, .systemmonitor .alert, .wb-monitor-state-card').length;
+      var states = workspace.querySelectorAll('.stateview .alert, .systemmonitor .alert, .hg-monitor-state-card').length;
       workspace.setAttribute('data-heritage-monitor-charts', String(charts));
       workspace.setAttribute('data-heritage-monitor-states', String(states));
 
-      var hero = workspace.querySelector('.wb-monitor-hero');
-      if (hero && !hero.querySelector('.wb-specialty-badges')) {
+      var hero = workspace.querySelector('.hg-monitor-hero');
+      if (hero && !hero.querySelector('.hg-specialty-badges')) {
         var badges = document.createElement('div');
-        badges.className = 'wb-specialty-badges';
+        badges.className = 'hg-specialty-badges';
         if (states > 0) badges.appendChild(createBadge(localized('Status', 'Status'), states, 'records'));
         if (charts > 0) badges.appendChild(createBadge(localized('Diagramme', 'Charts'), charts, 'actions'));
         hero.appendChild(badges);
       }
 
-      workspace.querySelectorAll('.wb-monitor-refresh-panel, .wb-monitor-refresh').forEach(function(panel) {
-        panel.classList.add('wb-specialty-control-strip');
+      workspace.querySelectorAll('.hg-monitor-refresh-panel, .hg-monitor-refresh').forEach(function(panel) {
+        panel.classList.add('hg-specialty-control-strip');
         var select = panel.querySelector('select');
-        if (select && !panel.querySelector('.wb-specialty-control-hint')) {
+        if (select && !panel.querySelector('.hg-specialty-control-hint')) {
           var hint = document.createElement('span');
-          hint.className = 'wb-specialty-control-hint';
+          hint.className = 'hg-specialty-control-hint';
           hint.textContent = select.value
             ? localized('Automatische Aktualisierung aktiv', 'Automatic refresh active')
             : localized('Manuelle Aktualisierung', 'Manual refresh');
@@ -10112,18 +10112,18 @@
     var scope = root && root.querySelectorAll ? root : document;
     scope.querySelectorAll('textarea.form-control').forEach(function (field) {
       var identity = [field.name || '', field.id || ''].join(' ');
-      field.classList.add('wb-textarea-field');
+      field.classList.add('hg-textarea-field');
       if (codeFieldPattern.test(identity)) {
-        field.classList.add('wb-code-field');
+        field.classList.add('hg-code-field');
         field.setAttribute('spellcheck', 'false');
       }
-      if (field.readOnly || field.disabled) field.classList.add('wb-readonly-field');
+      if (field.readOnly || field.disabled) field.classList.add('hg-readonly-field');
     });
 
     scope.querySelectorAll('[role="progressbar"]').forEach(function (bar) {
       var value = Number(bar.getAttribute('aria-valuenow'));
       var label = bar.querySelector('span');
-      bar.closest('.progress')?.classList.add('wb-progress');
+      bar.closest('.progress')?.classList.add('hg-progress');
       if (!bar.getAttribute('aria-label') && Number.isFinite(value)) {
         bar.setAttribute('aria-label', (label && label.textContent.trim()) || (value + '% used'));
       }
@@ -10131,32 +10131,32 @@
 
     var monitorSurface = scope.querySelector('.systemmonitor, .stateview, .codeview, .panel_system');
     if (monitorSurface) {
-      document.body.classList.add('wb-monitor-page');
+      document.body.classList.add('hg-monitor-page');
       var page = document.getElementById('pageContent');
-      if (page) page.classList.add('wb-monitor-surface');
+      if (page) page.classList.add('hg-monitor-surface');
       scope.querySelectorAll('#refreshinterval').forEach(function (field) {
         var group = field.closest('.form-group');
-        if (group) group.classList.add('wb-monitor-refresh');
+        if (group) group.classList.add('hg-monitor-refresh');
       });
       scope.querySelectorAll('.stateview .alert, .systemmonitor .alert').forEach(function (card) {
-        card.classList.add('wb-monitor-state-card');
+        card.classList.add('hg-monitor-state-card');
         var state = card.classList.contains('alert-danger') ? 'danger' :
           card.classList.contains('alert-warning') ? 'warning' :
           card.classList.contains('alert-success') ? 'success' : 'info';
         card.setAttribute('data-heritage-monitor-state', state);
         var title = card.querySelector('h3');
-        if (title) title.classList.add('wb-monitor-state-card__title');
+        if (title) title.classList.add('hg-monitor-state-card__title');
         var summary = card.querySelector('.statusDevice > p');
-        if (summary && !summary.querySelector('.wb-monitor-state-metrics')) {
-          summary.classList.add('wb-monitor-state-card__summary');
+        if (summary && !summary.querySelector('.hg-monitor-state-metrics')) {
+          summary.classList.add('hg-monitor-state-card__summary');
           var match = summary.textContent.replace(/\s+/g, ' ').trim().match(/^(.*?)\s*\(([^)]+)\)\s*$/);
           if (match) {
             summary.textContent = match[1];
             var metrics = document.createElement('span');
-            metrics.className = 'wb-monitor-state-metrics';
+            metrics.className = 'hg-monitor-state-metrics';
             match[2].split(',').forEach(function(metric) {
               var chip = document.createElement('span');
-              chip.className = 'wb-monitor-state-metric';
+              chip.className = 'hg-monitor-state-metric';
               chip.textContent = metric.trim();
               metrics.appendChild(chip);
             });
@@ -10164,11 +10164,11 @@
           }
         }
         var status = card.querySelector('.statusDevice');
-        if (status) status.classList.add('wb-monitor-state-card__body');
-        card.querySelectorAll('a').forEach(function(link) { link.classList.add('wb-monitor-state-card__action'); });
+        if (status) status.classList.add('hg-monitor-state-card__body');
+        card.querySelectorAll('a').forEach(function(link) { link.classList.add('hg-monitor-state-card__action'); });
       });
     } else if (scope === document || scope.id === 'pageContent') {
-      document.body.classList.remove('wb-monitor-page');
+      document.body.classList.remove('hg-monitor-page');
     }
 
     decorateExtensionWorkspace(scope);
@@ -10213,18 +10213,18 @@
   }
 
   function ensureFeedback(root) {
-    var feedback = root.querySelector(':scope > .wb-upload-feedback');
+    var feedback = root.querySelector(':scope > .hg-upload-feedback');
     if (feedback) return feedback;
     feedback = document.createElement('div');
-    feedback.className = 'wb-submit-feedback wb-upload-feedback';
+    feedback.className = 'hg-submit-feedback hg-upload-feedback';
     feedback.setAttribute('role', 'status');
     feedback.setAttribute('aria-live', 'polite');
     feedback.setAttribute('aria-atomic', 'true');
     var indicator = document.createElement('span');
-    indicator.className = 'wb-submit-feedback__indicator';
+    indicator.className = 'hg-submit-feedback__indicator';
     indicator.setAttribute('aria-hidden', 'true');
     var label = document.createElement('span');
-    label.className = 'wb-submit-feedback__label';
+    label.className = 'hg-submit-feedback__label';
     feedback.appendChild(indicator);
     feedback.appendChild(label);
     var heading = root.querySelector(':scope > .page-header');
@@ -10240,7 +10240,7 @@
     feedback.removeAttribute('data-heritage-delayed');
     feedback.dataset.state = state;
     feedback.setAttribute('role', state === 'failed' ? 'alert' : 'status');
-    feedback.querySelector('.wb-submit-feedback__label').textContent = label;
+    feedback.querySelector('.hg-submit-feedback__label').textContent = label;
   }
 
   function csrfFrom(root) {
@@ -10284,7 +10284,7 @@
       current.control.disabled = current.disabled;
       if (current.ariaBusy === null) current.control.removeAttribute('aria-busy');
       else current.control.setAttribute('aria-busy', current.ariaBusy);
-      current.control.classList.remove('wb-upload-source');
+      current.control.classList.remove('hg-upload-source');
     }
     var root = document.getElementById('pageContent');
     if (root) root.setAttribute('aria-busy', 'false');
@@ -10300,7 +10300,7 @@
     active = { form: form, control: control, disabled: control.disabled, ariaBusy: control.getAttribute('aria-busy') };
     control.disabled = true;
     control.setAttribute('aria-busy', 'true');
-    control.classList.add('wb-upload-source');
+    control.classList.add('hg-upload-source');
     var root = document.getElementById('pageContent');
     if (root) root.setAttribute('aria-busy', 'true');
     setFeedback('uploading', messages.upload_sending || 'Upload in progress');
@@ -10310,7 +10310,7 @@
       setFeedback('uploading', german
         ? 'Der Upload dauert etwas l\u00e4nger. Die Datei wird weiterhin verarbeitet.'
         : 'The upload is taking a little longer. The file is still being processed.');
-      var feedback = document.querySelector('#pageContent > .wb-upload-feedback');
+      var feedback = document.querySelector('#pageContent > .hg-upload-feedback');
       if (feedback) feedback.setAttribute('data-heritage-delayed', 'true');
     }, 7000);
 
@@ -10401,7 +10401,7 @@
 
     var resultBox = document.createElement('div');
     resultBox.id = 'heritage-global-search-results';
-    resultBox.className = 'wb-global-search-results';
+    resultBox.className = 'hg-global-search-results';
     resultBox.setAttribute('role', 'listbox');
     resultBox.setAttribute('aria-label', input.getAttribute('aria-label') || tr('Suchergebnisse', 'Search results'));
     resultBox.hidden = true;
@@ -10409,24 +10409,24 @@
     input.setAttribute('aria-controls', resultBox.id);
 
     var status = document.createElement('span');
-    status.className = 'wb-visually-hidden';
+    status.className = 'hg-visually-hidden';
     status.setAttribute('role', 'status');
     status.setAttribute('aria-live', 'polite');
     status.setAttribute('aria-atomic', 'true');
     form.appendChild(status);
 
-    var clear = form.querySelector('.wb-search-clear');
+    var clear = form.querySelector('.hg-search-clear');
     if (!clear) {
       clear = document.createElement('button');
       clear.type = 'button';
-      clear.className = 'wb-search-clear';
+      clear.className = 'hg-search-clear';
       clear.setAttribute('aria-label', document.body.getAttribute('data-heritage-search-clear') || tr('Suche leeren', 'Clear search'));
       clear.textContent = '\u00d7';
       input.parentNode.appendChild(clear);
     }
     clear.hidden = true;
 
-    var shortcut = form.querySelector('.wb-search-shortcut');
+    var shortcut = form.querySelector('.hg-search-shortcut');
 
     function announce(message) {
       status.textContent = '';
@@ -10448,7 +10448,7 @@
       activeIndex = (index + items.length) % items.length;
       items.forEach(function (item, itemIndex) {
         var active = itemIndex === activeIndex;
-        item.classList.toggle('wb-global-search-result--active', active);
+        item.classList.toggle('hg-global-search-result--active', active);
         item.setAttribute('aria-selected', active ? 'true' : 'false');
       });
 
@@ -10458,14 +10458,14 @@
 
     function closeResults() {
       resultBox.hidden = true;
-      form.classList.remove('wb-global-search-open');
+      form.classList.remove('hg-global-search-open');
       input.setAttribute('aria-expanded', 'false');
       input.removeAttribute('aria-activedescendant');
       activeIndex = -1;
     }
 
     function openResults() {
-      form.classList.add('wb-global-search-open');
+      form.classList.add('hg-global-search-open');
       resultBox.hidden = false;
       input.setAttribute('aria-expanded', 'true');
     }
@@ -10522,7 +10522,7 @@
 
     function appendHeader(query, count) {
       var header = document.createElement('div');
-      header.className = 'wb-global-search-palette__header';
+      header.className = 'hg-global-search-palette__header';
 
       var eyebrow = document.createElement('span');
       eyebrow.textContent = tr('Globale Suche', 'Global search');
@@ -10541,7 +10541,7 @@
 
     function appendFooter() {
       var footer = document.createElement('div');
-      footer.className = 'wb-global-search-palette__footer';
+      footer.className = 'hg-global-search-palette__footer';
       footer.textContent = tr('Mit Pfeil hoch/runter navigieren, Enter öffnet, Esc schließt.', 'Use up/down, Enter opens, Esc closes.');
       resultBox.appendChild(footer);
     }
@@ -10551,7 +10551,7 @@
       appendHeader(query || input.value.trim(), null);
 
       var row = document.createElement('div');
-      row.className = 'wb-global-search-message wb-global-search-message--' + state;
+      row.className = 'hg-global-search-message hg-global-search-message--' + state;
       row.setAttribute('role', state === 'error' ? 'alert' : 'status');
       row.textContent = message;
       resultBox.appendChild(row);
@@ -10566,7 +10566,7 @@
       appendHeader('', null);
 
       var row = document.createElement('div');
-      row.className = 'wb-global-search-message wb-global-search-message--hint';
+      row.className = 'hg-global-search-message hg-global-search-message--hint';
       row.setAttribute('role', 'status');
       row.textContent = tr(
         'Bitte 2 Zeichen eingeben. Suche nach Kunden, Domains, E-Mails, Servern oder Tickets.',
@@ -10592,11 +10592,11 @@
         }
 
         var group = document.createElement('section');
-        group.className = 'wb-global-search-group';
+        group.className = 'hg-global-search-group';
         group.setAttribute('role', 'group');
 
         var header = document.createElement('div');
-        header.className = 'wb-global-search-group__header';
+        header.className = 'hg-global-search-group__header';
 
         var title = document.createElement('strong');
         title.textContent = (category.cheader && category.cheader.title) || tr('Ergebnisse', 'Results');
@@ -10624,17 +10624,17 @@
           var option = document.createElement('button');
           option.type = 'button';
           option.id = 'heritage-global-search-option-' + count;
-          option.className = 'wb-global-search-result';
+          option.className = 'hg-global-search-result';
           option.setAttribute('role', 'option');
           option.setAttribute('aria-selected', 'false');
 
           var icon = document.createElement('span');
-          icon.className = 'wb-global-search-result__icon';
+          icon.className = 'hg-global-search-result__icon';
           icon.setAttribute('aria-hidden', 'true');
           icon.textContent = String((title.textContent || '?').trim().charAt(0) || '?').toLocaleUpperCase();
 
           var content = document.createElement('span');
-          content.className = 'wb-global-search-result__content';
+          content.className = 'hg-global-search-result__content';
 
           var label = document.createElement('strong');
           appendText(label, item.title || '', query);
@@ -10652,7 +10652,7 @@
           content.appendChild(meta);
 
           var arrow = document.createElement('span');
-          arrow.className = 'wb-global-search-result__arrow';
+          arrow.className = 'hg-global-search-result__arrow';
           arrow.setAttribute('aria-hidden', 'true');
           arrow.textContent = '→';
 
@@ -10678,7 +10678,7 @@
         item.setAttribute('aria-posinset', String(itemIndex + 1));
       });
 
-      var resultSummary = resultBox.querySelector('.wb-global-search-palette__header strong');
+      var resultSummary = resultBox.querySelector('.hg-global-search-palette__header strong');
       if (resultSummary) {
         resultSummary.textContent = formatResultSummary(count, query);
       }
@@ -10758,7 +10758,7 @@
     function syncClear(scheduleSearch) {
       var hasValue = Boolean(input.value);
       clear.hidden = !hasValue;
-      form.classList.toggle('wb-global-search-has-value', hasValue);
+      form.classList.toggle('hg-global-search-has-value', hasValue);
       if (shortcut) {
         shortcut.hidden = hasValue;
       }
@@ -10952,21 +10952,21 @@
   }
 
   function applyActionContrast(color) {
-    color = String(color || cssToken('--wb-action', '#cc151c')).trim();
+    color = String(color || cssToken('--hg-action', '#cc151c')).trim();
     var channels = colorChannels(color);
     if (!channels) {
-      root.style.setProperty('--wb-action-contrast', '#ffffff');
+      root.style.setProperty('--hg-action-contrast', '#ffffff');
       return '#ffffff';
     }
     var luminance = relativeLuminance(channels);
     var contrast = ((luminance + .05) / .05) >= (1.05 / (luminance + .05)) ? '#111827' : '#ffffff';
-    root.style.setProperty('--wb-action-contrast', contrast);
+    root.style.setProperty('--hg-action-contrast', contrast);
     return contrast;
   }
 
   function applyAccessibleAction(color) {
-    var adjusted = accessibleAction(color || cssToken('--wb-accent', '#cc151c'), root.getAttribute('data-heritage-theme') === 'dark');
-    root.style.setProperty('--wb-action', adjusted);
+    var adjusted = accessibleAction(color || cssToken('--hg-accent', '#cc151c'), root.getAttribute('data-heritage-theme') === 'dark');
+    root.style.setProperty('--hg-action', adjusted);
     applyActionContrast(adjusted);
     return adjusted;
   }
@@ -10974,7 +10974,7 @@
   function applyChartTheme() {
     if (!document.getElementById('pageContent')) return;
     Array.prototype.forEach.call(document.querySelectorAll('#pageContent canvas'), function (canvas) {
-      canvas.classList.add('wb-themed-chart');
+      canvas.classList.add('hg-themed-chart');
       canvas.style.removeProperty('background-color');
     });
   }
@@ -10987,8 +10987,8 @@
   function apply(theme) {
     var dark = theme === 'dark';
     root.setAttribute('data-heritage-theme', dark ? 'dark' : 'light');
-    applyAccessibleAction(cssToken('--wb-accent', '#cc151c'));
-    Array.prototype.forEach.call(document.querySelectorAll('.wb-theme-toggle'), function (button) {
+    applyAccessibleAction(cssToken('--hg-accent', '#cc151c'));
+    Array.prototype.forEach.call(document.querySelectorAll('.hg-theme-toggle'), function (button) {
       var german = typeof window.heritageLanguage === 'function' && window.heritageLanguage() === 'de';
       button.setAttribute('aria-label', dark
         ? (german ? 'Zum hellen Design wechseln' : 'Switch to light theme')
@@ -11007,14 +11007,14 @@
   } catch (ignore) {}
   apply(storedTheme);
   function enhanceLogin() {
-    if (!document.body.classList.contains('wb-login-page')) return;
-    var surface = document.querySelector('.wb-login-form-surface');
+    if (!document.body.classList.contains('hg-login-page')) return;
+    var surface = document.querySelector('.hg-login-form-surface');
     var form = surface && surface.querySelector('form');
     if (!surface || !form) return;
-    form.classList.add('wb-auth-form');
+    form.classList.add('hg-auth-form');
     var action = (form.getAttribute('action') || '').toLowerCase();
     var mode = action.indexOf('otp') !== -1 ? 'otp' : action.indexOf('password_reset') !== -1 ? 'reset' : action.indexOf('force_password') !== -1 ? 'password' : 'login';
-    document.querySelector('.wb-login-card').setAttribute('data-heritage-auth-mode', mode);
+    document.querySelector('.hg-login-card').setAttribute('data-heritage-auth-mode', mode);
     var fieldMap = {
       username: { text: 'Benutzername', autocomplete: 'username' },
       password: { text: 'Passwort', autocomplete: 'current-password' },
@@ -11030,7 +11030,7 @@
       if (field.type && input.type === 'text') input.type = field.type;
       input.setAttribute('aria-label', input.getAttribute('aria-label') || field.text);
       var group = input.closest('.form-group') || input.parentElement;
-      if (group) group.classList.add('wb-auth-field');
+      if (group) group.classList.add('hg-auth-field');
       if (group && !group.querySelector('[data-heritage-login-label]')) {
         var label = document.createElement('label');
         label.textContent = field.text;
@@ -11039,10 +11039,10 @@
         group.insertBefore(label, input);
       }
       if (input.type === 'password' && group && !group.querySelector('[data-heritage-password-toggle]')) {
-        group.classList.add('wb-password-field');
+        group.classList.add('hg-password-field');
         var toggle = document.createElement('button');
         toggle.type = 'button';
-        toggle.className = 'wb-password-toggle';
+        toggle.className = 'hg-password-toggle';
         toggle.setAttribute('data-heritage-password-toggle', 'true');
         setIcon(toggle, eye);
         toggle.setAttribute('aria-label', 'Passwort anzeigen');
@@ -11055,25 +11055,25 @@
         group.appendChild(toggle);
       }
       if ((input.id || input.name) === 'code') {
-        input.classList.add('wb-auth-code');
-        group.classList.add('wb-auth-field--code');
+        input.classList.add('hg-auth-code');
+        group.classList.add('hg-auth-field--code');
       }
     });
     Array.prototype.forEach.call(surface.querySelectorAll('.alert'), function (alert) {
-      alert.classList.add('wb-auth-feedback');
+      alert.classList.add('hg-auth-feedback');
       alert.setAttribute('aria-live', 'polite');
     });
     Array.prototype.forEach.call(form.querySelectorAll('input[type="submit"]'), function (button, index) {
-      button.classList.add(index === 0 ? 'wb-auth-primary' : 'wb-auth-secondary');
+      button.classList.add(index === 0 ? 'hg-auth-primary' : 'hg-auth-secondary');
     });
     Array.prototype.forEach.call(form.querySelectorAll('button'), function (button) {
-      if (button.type === 'submit' && button.value !== 'resend') button.classList.add('wb-auth-primary');
-      else button.classList.add('wb-auth-secondary');
+      if (button.type === 'submit' && button.value !== 'resend') button.classList.add('hg-auth-primary');
+      else button.classList.add('hg-auth-secondary');
     });
     var heading = surface.querySelector('h2');
-    if (heading) heading.classList.add('wb-auth-context-title');
+    if (heading) heading.classList.add('hg-auth-context-title');
     var description = heading && heading.nextElementSibling;
-    if (description && description.tagName === 'P') description.classList.add('wb-auth-context-copy');
+    if (description && description.tagName === 'P') description.classList.add('hg-auth-context-copy');
     if (form && !form.dataset.heritageLoginSubmitBound) {
       form.dataset.heritageLoginSubmitBound = 'true';
       form.addEventListener('submit', function () {
@@ -11082,14 +11082,14 @@
           submit.disabled = true;
           submit.setAttribute('aria-busy', 'true');
         }
-        var card = document.querySelector('.wb-login-card');
-        if (card) card.classList.add('wb-login-is-submitting');
+        var card = document.querySelector('.hg-login-card');
+        if (card) card.classList.add('hg-login-is-submitting');
       });
     }
   }
   enhanceLogin();
   document.addEventListener('click', function (event) {
-    var button = event.target.closest('.wb-theme-toggle');
+    var button = event.target.closest('.hg-theme-toggle');
     if (!button) return;
     var next = root.getAttribute('data-heritage-theme') === 'dark' ? 'light' : 'dark';
     try { localStorage.setItem(key, next); } catch (ignore) {}
@@ -11185,15 +11185,15 @@
     if (!selected.length) {
       var placeholder = state.select.options[state.select.selectedIndex];
       state.value.textContent = placeholder ? presentationLabel(state.select, placeholder) : state.options.placeholder || '';
-      state.value.className = 'wb-select__value wb-select__value--placeholder';
+      state.value.className = 'hg-select__value hg-select__value--placeholder';
     } else if (!state.select.multiple) {
       state.value.textContent = presentationLabel(state.select, selected[0]);
-      state.value.className = 'wb-select__value';
+      state.value.className = 'hg-select__value';
     } else {
-      state.value.className = 'wb-select__value wb-select__value--multiple';
+      state.value.className = 'hg-select__value hg-select__value--multiple';
       selected.forEach(function (option) {
         var chip = document.createElement('span');
-        chip.className = 'wb-select__chip';
+        chip.className = 'hg-select__chip';
         chip.textContent = presentationLabel(state.select, option);
         state.value.appendChild(chip);
       });
@@ -11205,7 +11205,7 @@
   function optionButton(state, option, index) {
     var button = document.createElement('button');
     button.type = 'button';
-    button.className = 'wb-select__option';
+    button.className = 'hg-select__option';
     button.id = state.id + '-option-' + index;
     button.dataset.value = option.value;
     button.setAttribute('role', 'option');
@@ -11224,9 +11224,9 @@
     Array.prototype.forEach.call(state.select.children, function (child) {
       if (child.tagName === 'OPTGROUP') {
         var group = document.createElement('div');
-        group.className = 'wb-select__group';
+        group.className = 'hg-select__group';
         var heading = document.createElement('div');
-        heading.className = 'wb-select__group-label';
+        heading.className = 'hg-select__group-label';
         heading.textContent = child.label;
         group.appendChild(heading);
         Array.prototype.forEach.call(child.children, function (option) {
@@ -11241,7 +11241,7 @@
     });
     if (!visible) {
       var empty = document.createElement('div');
-      empty.className = 'wb-select__empty';
+      empty.className = 'hg-select__empty';
       empty.textContent = text('empty');
       state.list.appendChild(empty);
     }
@@ -11262,22 +11262,22 @@
     state.panel.style.removeProperty('max-height');
     state.panel.style.removeProperty('transform');
     state.panel.style.removeProperty('transform-origin');
-    state.panel.style.removeProperty('--wb-select-overlay-max-height');
+    state.panel.style.removeProperty('--hg-select-overlay-max-height');
   }
 
   function syncVariantClasses(state) {
     var pageSize = isPageSizeSelect(state.select);
-    state.root.classList.toggle('wb-select--compact', Boolean(state.options.compact));
-    state.panel.classList.toggle('wb-select__panel--compact', Boolean(state.options.compact));
-    state.root.classList.toggle('wb-select--page-size', pageSize);
-    state.panel.classList.toggle('wb-select__panel--page-size', pageSize);
-    state.select.classList.toggle('wb-page-size-select', pageSize);
+    state.root.classList.toggle('hg-select--compact', Boolean(state.options.compact));
+    state.panel.classList.toggle('hg-select__panel--compact', Boolean(state.options.compact));
+    state.root.classList.toggle('hg-select--page-size', pageSize);
+    state.panel.classList.toggle('hg-select__panel--page-size', pageSize);
+    state.select.classList.toggle('hg-page-size-select', pageSize);
   }
 
   function isPageSizeSelect(select) {
     if (!select || select.tagName !== 'SELECT') return false;
     if (select.multiple || (select.size && Number(select.size) > 1)) return false;
-    if (select.name === 'search_limit' || select.classList.contains('search_limit') || select.classList.contains('wb-page-size-select')) return true;
+    if (select.name === 'search_limit' || select.classList.contains('search_limit') || select.classList.contains('hg-page-size-select')) return true;
     var name = String(select.name || select.id || '').toLowerCase();
     if (/(^|[_-])(limit|pagesize|page_size|perpage|per_page|items_per_page)([_-]|$)/.test(name)) return true;
     var values = Array.prototype.map.call(select.options || [], function (option) {
@@ -11297,7 +11297,7 @@
     var margin = 12;
     var pageSize = isPageSizeSelect(state.select);
     var availableWidth = Math.max(220, window.innerWidth - margin * 2);
-    var compact = state.root.classList.contains('wb-select--compact');
+    var compact = state.root.classList.contains('hg-select--compact');
     var targetWidth = pageSize ? Math.max(rect.width, 108) : (compact ? Math.max(rect.width, 92) : Math.max(rect.width, Math.min(300, availableWidth)));
     var width = Math.min(targetWidth, availableWidth);
     var left = viewportClamp(rect.left, margin, window.innerWidth - width - margin);
@@ -11316,7 +11316,7 @@
     state.panel.style.width = Math.round(width) + 'px';
     state.panel.style.maxWidth = 'calc(100vw - 24px)';
     state.panel.style.maxHeight = Math.round(maxHeight) + 'px';
-    state.panel.style.setProperty('--wb-select-overlay-max-height', Math.round(maxHeight) + 'px');
+    state.panel.style.setProperty('--hg-select-overlay-max-height', Math.round(maxHeight) + 'px');
     state.panel.style.top = Math.round(openAbove ? rect.top - gap : rect.bottom + gap) + 'px';
     state.panel.style.transform = openAbove ? 'translateY(-100%)' : 'none';
     state.panel.style.transformOrigin = openAbove ? 'bottom center' : 'top center';
@@ -11338,7 +11338,7 @@
 
   function open(state) {
     if (state.select.disabled) return;
-    document.querySelectorAll('.wb-select.is-open').forEach(function (root) {
+    document.querySelectorAll('.hg-select.is-open').forEach(function (root) {
       if (root !== state.root) {
         var other = states.get(root.querySelector('select'));
         if (other) close(other, false);
@@ -11359,8 +11359,8 @@
       positionPanel(state);
       if (state.search) state.search.focus();
       else {
-        var selected = state.list.querySelector('.wb-select__option.is-selected');
-        var first = state.list.querySelector('.wb-select__option:not(:disabled)');
+        var selected = state.list.querySelector('.hg-select__option.is-selected');
+        var first = state.list.querySelector('.hg-select__option:not(:disabled)');
         (selected || first || state.control).focus();
       }
     }, 0);
@@ -11406,16 +11406,16 @@
       return existing;
     }
     var root = document.createElement('span');
-    root.className = 'wb-select';
-    var id = 'wb-select-' + (++sequence);
+    root.className = 'hg-select';
+    var id = 'hg-select-' + (++sequence);
     root.id = id;
     select.parentNode.insertBefore(root, select);
     root.appendChild(select);
-    select.classList.add('wb-select__native');
+    select.classList.add('hg-select__native');
 
     var control = document.createElement('button');
     control.type = 'button';
-    control.className = 'wb-select__control';
+    control.className = 'hg-select__control';
     control.setAttribute('role', 'combobox');
     control.setAttribute('aria-haspopup', 'listbox');
     control.setAttribute('aria-expanded', 'false');
@@ -11423,7 +11423,7 @@
     control.setAttribute('aria-label', label(select));
     var value = document.createElement('span');
     var arrow = document.createElement('span');
-    arrow.className = 'wb-select__arrow';
+    arrow.className = 'hg-select__arrow';
     arrow.setAttribute('aria-hidden', 'true');
     var namespace = 'http://www.w3.org/2000/svg';
     var arrowSvg = document.createElementNS(namespace, 'svg');
@@ -11442,19 +11442,19 @@
     control.appendChild(arrow);
 
     var panel = document.createElement('span');
-    panel.className = 'wb-select__panel';
+    panel.className = 'hg-select__panel';
     panel.hidden = true;
     var search = null;
     if (options.search !== false) {
       search = document.createElement('input');
       search.type = 'search';
-      search.className = 'wb-select__search';
+      search.className = 'hg-select__search';
       search.placeholder = text('search');
       search.setAttribute('aria-label', text('search'));
       panel.appendChild(search);
     }
     var list = document.createElement('span');
-    list.className = 'wb-select__list';
+    list.className = 'hg-select__list';
     list.id = id + '-list';
     list.setAttribute('role', 'listbox');
     if (select.multiple) list.setAttribute('aria-multiselectable', 'true');
@@ -11473,7 +11473,7 @@
     if (search) {
       search.addEventListener('input', function () { renderOptions(state); });
       search.addEventListener('keydown', function (event) {
-        var enabled = Array.prototype.filter.call(list.querySelectorAll('.wb-select__option'), function (item) { return !item.disabled; });
+        var enabled = Array.prototype.filter.call(list.querySelectorAll('.hg-select__option'), function (item) { return !item.disabled; });
         var current = enabled.indexOf(document.activeElement);
         if (event.key === 'Escape') { event.preventDefault(); close(state, true); }
         else if (event.key === 'ArrowDown') { event.preventDefault(); (enabled[Math.min(current + 1, enabled.length - 1)] || enabled[0])?.focus(); }
@@ -11481,7 +11481,7 @@
       });
     }
     list.addEventListener('keydown', function (event) {
-      var enabled = Array.prototype.filter.call(list.querySelectorAll('.wb-select__option'), function (item) { return !item.disabled; });
+      var enabled = Array.prototype.filter.call(list.querySelectorAll('.hg-select__option'), function (item) { return !item.disabled; });
       var current = enabled.indexOf(document.activeElement);
       if (event.key === 'Escape') { event.preventDefault(); close(state, true); }
       else if (event.key === 'ArrowDown') { event.preventDefault(); (enabled[current + 1] || enabled[0])?.focus(); }
@@ -11498,13 +11498,13 @@
     var state = states.get(select);
     if (!state) return;
     state.root.parentNode.insertBefore(select, state.root);
-    select.classList.remove('wb-select__native');
+    select.classList.remove('hg-select__native');
     state.root.remove();
     states.delete(select);
   }
 
   document.addEventListener('pointerdown', function (event) {
-    document.querySelectorAll('.wb-select.is-open').forEach(function (root) {
+    document.querySelectorAll('.hg-select.is-open').forEach(function (root) {
       var state = states.get(root.querySelector('select'));
       if (state && !root.contains(event.target) && !state.panel.contains(event.target)) {
         close(state, false);

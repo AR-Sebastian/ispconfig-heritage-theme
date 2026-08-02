@@ -92,7 +92,7 @@
     var trigger = document.querySelector('.notification');
     var counter = trigger && trigger.querySelector('.notification_text');
     var dialog = document.getElementById('datalogModal');
-    var list = dialog && dialog.querySelector('.wb-dialog__body ul');
+    var list = dialog && dialog.querySelector('.hg-dialog__body ul');
     var count = Number(payload && payload.count || 0);
     if (!trigger || !counter || !list) return;
     list.replaceChildren();

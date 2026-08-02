@@ -5,15 +5,15 @@
 
 
 
-            <div class="wb-field-group">
+            <div class="hg-field-group">
                 <label for="config" >{tmpl_var name='config_txt'}</label>
-                <div class="wb-field-body"><textarea class="form-control" name="config" id="config" rows='20' cols='40'>{tmpl_var name='config'}</textarea></div>
+                <div class="hg-field-body"><textarea class="form-control" name="config" id="config" rows='20' cols='40'>{tmpl_var name='config'}</textarea></div>
             </div>
 
 
         <input type="hidden" name="id" value="{tmpl_var name='id'}">
 
-        <div class="wb-form-actions"><div class="wb-form-actions__primary">
+        <div class="hg-form-actions"><div class="hg-form-actions__primary">
             <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="admin/server_edit.php">{tmpl_var name='btn_save_txt'}</button>
             <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-heritage-load-content="admin/server_list.php" data-load-content="admin/server_list.php">{tmpl_var name='btn_cancel_txt'}</button>
         </div></div>

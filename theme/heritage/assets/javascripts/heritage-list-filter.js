@@ -10,7 +10,7 @@
   function path(value) { try { return new URL(value || '', document.baseURI).pathname.replace(/^\//, ''); } catch (error) { return ''; } }
   function controlFor(formname, target) {
     var api = runtime();
-    if (formname !== 'pageForm' || !document.body.classList.contains('wb-list-page') || !api || typeof api.requestForm !== 'function') return null;
+    if (formname !== 'pageForm' || !document.body.classList.contains('hg-list-page') || !api || typeof api.requestForm !== 'function') return null;
     var root = document.getElementById('pageContent');
     var controls = root ? root.querySelectorAll('[name="Filter"][data-submit-form="pageForm"][data-form-action]') : [];
     var button = Array.prototype.find.call(controls, function(control) { return path(control.getAttribute('data-form-action')) === path(target); }) || null;
@@ -24,17 +24,17 @@
     var current = active; active = null;
     if (current.control && current.control.isConnected) { current.control.disabled = current.disabled; current.control.removeAttribute('aria-busy'); }
     if (current.root && current.root.isConnected) {
-      current.root.classList.remove('wb-list-filter-active'); current.root.setAttribute('aria-busy', 'false');
-      var status = current.root.querySelector('.wb-list-filter-status'); if (status) status.remove();
+      current.root.classList.remove('hg-list-filter-active'); current.root.setAttribute('aria-busy', 'false');
+      var status = current.root.querySelector('.hg-list-filter-status'); if (status) status.remove();
     }
   }
   function start(root, control, request) {
     var status = document.createElement('span');
-    status.className = 'wb-list-filter-status'; status.setAttribute('role', 'status'); status.setAttribute('aria-live', 'polite');
+    status.className = 'hg-list-filter-status'; status.setAttribute('role', 'status'); status.setAttribute('aria-live', 'polite');
     status.textContent = control.getAttribute('value') || control.textContent.trim() || 'Filter';
     control.insertAdjacentElement('afterend', status);
     active = { root: root, control: control, disabled: control.disabled, request: request };
-    control.disabled = true; control.setAttribute('aria-busy', 'true'); root.classList.add('wb-list-filter-active'); root.setAttribute('aria-busy', 'true');
+    control.disabled = true; control.setAttribute('aria-busy', 'true'); root.classList.add('hg-list-filter-active'); root.setAttribute('aria-busy', 'true');
   }
   legacy.submitForm = function(formname, target, confirmation) {
     var api = runtime();
@@ -53,7 +53,7 @@
   };
   document.addEventListener('change', function(event) {
     var control = event.target && event.target.closest ? event.target.closest('#pageContent select[name^="search_"]') : null;
-    if (control && document.body.classList.contains('wb-list-page')) changedSearchControl = control;
+    if (control && document.body.classList.contains('hg-list-page')) changedSearchControl = control;
   }, true);
   window.heritageListFilter = { isActive: function() { return Boolean(active); } };
   legacy.heritageListFilterInstalled = true;

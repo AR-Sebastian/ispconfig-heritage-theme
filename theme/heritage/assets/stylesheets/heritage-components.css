@@ -1,20 +1,20 @@
 /* ISPConfig HERITAGE component system */
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent {
+body.heritage-shell.hg-app-navigation-enabled #pageContent {
   color: var(--hg-text);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(h1, .page-header h1, .panel-title) {
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(h1, .page-header h1, .panel-title) {
   color: var(--hg-text);
   letter-spacing: -.025em;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   .panel,
   .content-box,
   .table-wrapper,
   .table-responsive,
-  .wb-dashlet,
+  .hg-dashlet,
   fieldset
 ) {
   border: 1px solid var(--hg-border);
@@ -23,7 +23,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
   box-shadow: var(--hg-shadow-xs);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   .panel-heading,
   .panel-header,
   .content-box-header,
@@ -34,7 +34,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
   background: transparent;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   .form-control,
   input[type='text'],
   input[type='email'],
@@ -54,7 +54,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
   transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   .form-control,
   input,
   select,
@@ -63,7 +63,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
   border-color: var(--hg-border-strong);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   .form-control,
   input,
   select,
@@ -73,13 +73,13 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
   box-shadow: var(--hg-focus-ring);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(input, select, textarea):disabled {
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(input, select, textarea):disabled {
   color: color-mix(in srgb, var(--hg-text-muted) 72%, transparent);
   background: var(--hg-surface-subtle);
   cursor: not-allowed;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   label,
   .control-label,
   .form-group > label
@@ -89,7 +89,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
   font-weight: 620;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   .help-block,
   .form-text,
   .text-muted,
@@ -98,7 +98,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
   color: var(--hg-text-muted);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   .btn,
   button,
   input[type='submit'],
@@ -110,7 +110,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
   transition: color .15s ease, border-color .15s ease, background .15s ease, box-shadow .15s ease, transform .15s ease;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   .btn-primary,
   .btn-success,
   input[type='submit']
@@ -121,7 +121,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
   box-shadow: 0 7px 18px color-mix(in srgb, var(--hg-accent) 18%, transparent);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   .btn-primary,
   .btn-success,
   input[type='submit']
@@ -132,31 +132,31 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
   transform: translateY(-1px);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(.btn-default, .btn-secondary) {
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(.btn-default, .btn-secondary) {
   color: var(--hg-text);
   border-color: var(--hg-border);
   background: var(--hg-surface);
   box-shadow: var(--hg-shadow-xs);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(.btn-default, .btn-secondary):hover {
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(.btn-default, .btn-secondary):hover {
   border-color: var(--hg-border-strong);
   background: var(--hg-surface-subtle);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(.btn-danger, .btn-delete) {
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(.btn-danger, .btn-delete) {
   color: var(--hg-danger);
   border-color: color-mix(in srgb, var(--hg-danger) 28%, var(--hg-border));
   background: var(--hg-danger-soft);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .nav-tabs {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .nav-tabs {
   gap: 4px;
   padding-inline: 4px;
   border-bottom: 1px solid var(--hg-border);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .nav-tabs > li > a {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .nav-tabs > li > a {
   min-height: 46px;
   padding: 12px 15px;
   border: 0;
@@ -166,26 +166,26 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent .nav-tabs > li > a {
   background: transparent;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .nav-tabs > li > a:hover {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .nav-tabs > li > a:hover {
   color: var(--hg-text);
   background: var(--hg-accent-soft);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .nav-tabs > li.active > a {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .nav-tabs > li.active > a {
   color: var(--hg-accent);
   border-bottom-color: var(--hg-accent);
   background: transparent;
   font-weight: 750;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(.table, table) {
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(.table, table) {
   color: var(--hg-text);
   border-collapse: separate;
   border-spacing: 0;
   background: var(--hg-surface);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(.table, table) > thead > tr > th {
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(.table, table) > thead > tr > th {
   min-height: 48px;
   padding: 13px 15px;
   color: color-mix(in srgb, var(--hg-text-muted) 88%, var(--hg-text));
@@ -197,21 +197,21 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(.table, table) > 
   text-transform: uppercase;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(.table, table) > tbody > tr > td {
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(.table, table) > tbody > tr > td {
   padding: 13px 15px;
   border-color: var(--hg-border);
   background: var(--hg-surface);
   vertical-align: middle;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(.table, table) > tbody > tr:hover > td {
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(.table, table) > tbody > tr:hover > td {
   background: color-mix(in srgb, var(--hg-accent) 2.5%, var(--hg-surface));
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   .alert,
   .alert-notification,
-  .wb-content-state
+  .hg-content-state
 ) {
   border: 1px solid var(--hg-border);
   border-inline-start-width: 4px;
@@ -219,28 +219,28 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
   box-shadow: none;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .alert-success {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .alert-success {
   color: var(--hg-success);
   border-color: color-mix(in srgb, var(--hg-success) 28%, var(--hg-border));
   border-inline-start-color: var(--hg-success);
   background: var(--hg-success-soft);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .alert-warning {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .alert-warning {
   color: var(--hg-warning);
   border-color: color-mix(in srgb, var(--hg-warning) 28%, var(--hg-border));
   border-inline-start-color: var(--hg-warning);
   background: var(--hg-warning-soft);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .alert-danger {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .alert-danger {
   color: var(--hg-danger);
   border-color: color-mix(in srgb, var(--hg-danger) 28%, var(--hg-border));
   border-inline-start-color: var(--hg-danger);
   background: var(--hg-danger-soft);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .alert-info {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .alert-info {
   color: var(--hg-info);
   border-color: color-mix(in srgb, var(--hg-info) 28%, var(--hg-border));
   border-inline-start-color: var(--hg-info);
@@ -248,25 +248,25 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent .alert-info {
 }
 
 @media (max-width: 670px) {
-  body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
     .panel,
     .content-box,
     .table-wrapper,
     .table-responsive,
-    .wb-dashlet,
+    .hg-dashlet,
     fieldset
   ) {
     border-radius: var(--hg-radius-md);
   }
 
-  body.heritage-shell.wb-app-navigation-enabled #pageContent .nav-tabs > li > a {
+  body.heritage-shell.hg-app-navigation-enabled #pageContent .nav-tabs > li > a {
     min-height: 43px;
     padding-inline: 12px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
     .btn,
     button,
     input,

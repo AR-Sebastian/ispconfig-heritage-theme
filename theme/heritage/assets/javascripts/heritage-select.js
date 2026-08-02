@@ -82,15 +82,15 @@
     if (!selected.length) {
       var placeholder = state.select.options[state.select.selectedIndex];
       state.value.textContent = placeholder ? presentationLabel(state.select, placeholder) : state.options.placeholder || '';
-      state.value.className = 'wb-select__value wb-select__value--placeholder';
+      state.value.className = 'hg-select__value hg-select__value--placeholder';
     } else if (!state.select.multiple) {
       state.value.textContent = presentationLabel(state.select, selected[0]);
-      state.value.className = 'wb-select__value';
+      state.value.className = 'hg-select__value';
     } else {
-      state.value.className = 'wb-select__value wb-select__value--multiple';
+      state.value.className = 'hg-select__value hg-select__value--multiple';
       selected.forEach(function (option) {
         var chip = document.createElement('span');
-        chip.className = 'wb-select__chip';
+        chip.className = 'hg-select__chip';
         chip.textContent = presentationLabel(state.select, option);
         state.value.appendChild(chip);
       });
@@ -102,7 +102,7 @@
   function optionButton(state, option, index) {
     var button = document.createElement('button');
     button.type = 'button';
-    button.className = 'wb-select__option';
+    button.className = 'hg-select__option';
     button.id = state.id + '-option-' + index;
     button.dataset.value = option.value;
     button.setAttribute('role', 'option');
@@ -121,9 +121,9 @@
     Array.prototype.forEach.call(state.select.children, function (child) {
       if (child.tagName === 'OPTGROUP') {
         var group = document.createElement('div');
-        group.className = 'wb-select__group';
+        group.className = 'hg-select__group';
         var heading = document.createElement('div');
-        heading.className = 'wb-select__group-label';
+        heading.className = 'hg-select__group-label';
         heading.textContent = child.label;
         group.appendChild(heading);
         Array.prototype.forEach.call(child.children, function (option) {
@@ -138,7 +138,7 @@
     });
     if (!visible) {
       var empty = document.createElement('div');
-      empty.className = 'wb-select__empty';
+      empty.className = 'hg-select__empty';
       empty.textContent = text('empty');
       state.list.appendChild(empty);
     }
@@ -159,22 +159,22 @@
     state.panel.style.removeProperty('max-height');
     state.panel.style.removeProperty('transform');
     state.panel.style.removeProperty('transform-origin');
-    state.panel.style.removeProperty('--wb-select-overlay-max-height');
+    state.panel.style.removeProperty('--hg-select-overlay-max-height');
   }
 
   function syncVariantClasses(state) {
     var pageSize = isPageSizeSelect(state.select);
-    state.root.classList.toggle('wb-select--compact', Boolean(state.options.compact));
-    state.panel.classList.toggle('wb-select__panel--compact', Boolean(state.options.compact));
-    state.root.classList.toggle('wb-select--page-size', pageSize);
-    state.panel.classList.toggle('wb-select__panel--page-size', pageSize);
-    state.select.classList.toggle('wb-page-size-select', pageSize);
+    state.root.classList.toggle('hg-select--compact', Boolean(state.options.compact));
+    state.panel.classList.toggle('hg-select__panel--compact', Boolean(state.options.compact));
+    state.root.classList.toggle('hg-select--page-size', pageSize);
+    state.panel.classList.toggle('hg-select__panel--page-size', pageSize);
+    state.select.classList.toggle('hg-page-size-select', pageSize);
   }
 
   function isPageSizeSelect(select) {
     if (!select || select.tagName !== 'SELECT') return false;
     if (select.multiple || (select.size && Number(select.size) > 1)) return false;
-    if (select.name === 'search_limit' || select.classList.contains('search_limit') || select.classList.contains('wb-page-size-select')) return true;
+    if (select.name === 'search_limit' || select.classList.contains('search_limit') || select.classList.contains('hg-page-size-select')) return true;
     var name = String(select.name || select.id || '').toLowerCase();
     if (/(^|[_-])(limit|pagesize|page_size|perpage|per_page|items_per_page)([_-]|$)/.test(name)) return true;
     var values = Array.prototype.map.call(select.options || [], function (option) {
@@ -194,7 +194,7 @@
     var margin = 12;
     var pageSize = isPageSizeSelect(state.select);
     var availableWidth = Math.max(220, window.innerWidth - margin * 2);
-    var compact = state.root.classList.contains('wb-select--compact');
+    var compact = state.root.classList.contains('hg-select--compact');
     var targetWidth = pageSize ? Math.max(rect.width, 108) : (compact ? Math.max(rect.width, 92) : Math.max(rect.width, Math.min(300, availableWidth)));
     var width = Math.min(targetWidth, availableWidth);
     var left = viewportClamp(rect.left, margin, window.innerWidth - width - margin);
@@ -213,7 +213,7 @@
     state.panel.style.width = Math.round(width) + 'px';
     state.panel.style.maxWidth = 'calc(100vw - 24px)';
     state.panel.style.maxHeight = Math.round(maxHeight) + 'px';
-    state.panel.style.setProperty('--wb-select-overlay-max-height', Math.round(maxHeight) + 'px');
+    state.panel.style.setProperty('--hg-select-overlay-max-height', Math.round(maxHeight) + 'px');
     state.panel.style.top = Math.round(openAbove ? rect.top - gap : rect.bottom + gap) + 'px';
     state.panel.style.transform = openAbove ? 'translateY(-100%)' : 'none';
     state.panel.style.transformOrigin = openAbove ? 'bottom center' : 'top center';
@@ -235,7 +235,7 @@
 
   function open(state) {
     if (state.select.disabled) return;
-    document.querySelectorAll('.wb-select.is-open').forEach(function (root) {
+    document.querySelectorAll('.hg-select.is-open').forEach(function (root) {
       if (root !== state.root) {
         var other = states.get(root.querySelector('select'));
         if (other) close(other, false);
@@ -256,8 +256,8 @@
       positionPanel(state);
       if (state.search) state.search.focus();
       else {
-        var selected = state.list.querySelector('.wb-select__option.is-selected');
-        var first = state.list.querySelector('.wb-select__option:not(:disabled)');
+        var selected = state.list.querySelector('.hg-select__option.is-selected');
+        var first = state.list.querySelector('.hg-select__option:not(:disabled)');
         (selected || first || state.control).focus();
       }
     }, 0);
@@ -303,16 +303,16 @@
       return existing;
     }
     var root = document.createElement('span');
-    root.className = 'wb-select';
-    var id = 'wb-select-' + (++sequence);
+    root.className = 'hg-select';
+    var id = 'hg-select-' + (++sequence);
     root.id = id;
     select.parentNode.insertBefore(root, select);
     root.appendChild(select);
-    select.classList.add('wb-select__native');
+    select.classList.add('hg-select__native');
 
     var control = document.createElement('button');
     control.type = 'button';
-    control.className = 'wb-select__control';
+    control.className = 'hg-select__control';
     control.setAttribute('role', 'combobox');
     control.setAttribute('aria-haspopup', 'listbox');
     control.setAttribute('aria-expanded', 'false');
@@ -320,7 +320,7 @@
     control.setAttribute('aria-label', label(select));
     var value = document.createElement('span');
     var arrow = document.createElement('span');
-    arrow.className = 'wb-select__arrow';
+    arrow.className = 'hg-select__arrow';
     arrow.setAttribute('aria-hidden', 'true');
     var namespace = 'http://www.w3.org/2000/svg';
     var arrowSvg = document.createElementNS(namespace, 'svg');
@@ -339,19 +339,19 @@
     control.appendChild(arrow);
 
     var panel = document.createElement('span');
-    panel.className = 'wb-select__panel';
+    panel.className = 'hg-select__panel';
     panel.hidden = true;
     var search = null;
     if (options.search !== false) {
       search = document.createElement('input');
       search.type = 'search';
-      search.className = 'wb-select__search';
+      search.className = 'hg-select__search';
       search.placeholder = text('search');
       search.setAttribute('aria-label', text('search'));
       panel.appendChild(search);
     }
     var list = document.createElement('span');
-    list.className = 'wb-select__list';
+    list.className = 'hg-select__list';
     list.id = id + '-list';
     list.setAttribute('role', 'listbox');
     if (select.multiple) list.setAttribute('aria-multiselectable', 'true');
@@ -370,7 +370,7 @@
     if (search) {
       search.addEventListener('input', function () { renderOptions(state); });
       search.addEventListener('keydown', function (event) {
-        var enabled = Array.prototype.filter.call(list.querySelectorAll('.wb-select__option'), function (item) { return !item.disabled; });
+        var enabled = Array.prototype.filter.call(list.querySelectorAll('.hg-select__option'), function (item) { return !item.disabled; });
         var current = enabled.indexOf(document.activeElement);
         if (event.key === 'Escape') { event.preventDefault(); close(state, true); }
         else if (event.key === 'ArrowDown') { event.preventDefault(); (enabled[Math.min(current + 1, enabled.length - 1)] || enabled[0])?.focus(); }
@@ -378,7 +378,7 @@
       });
     }
     list.addEventListener('keydown', function (event) {
-      var enabled = Array.prototype.filter.call(list.querySelectorAll('.wb-select__option'), function (item) { return !item.disabled; });
+      var enabled = Array.prototype.filter.call(list.querySelectorAll('.hg-select__option'), function (item) { return !item.disabled; });
       var current = enabled.indexOf(document.activeElement);
       if (event.key === 'Escape') { event.preventDefault(); close(state, true); }
       else if (event.key === 'ArrowDown') { event.preventDefault(); (enabled[current + 1] || enabled[0])?.focus(); }
@@ -395,13 +395,13 @@
     var state = states.get(select);
     if (!state) return;
     state.root.parentNode.insertBefore(select, state.root);
-    select.classList.remove('wb-select__native');
+    select.classList.remove('hg-select__native');
     state.root.remove();
     states.delete(select);
   }
 
   document.addEventListener('pointerdown', function (event) {
-    document.querySelectorAll('.wb-select.is-open').forEach(function (root) {
+    document.querySelectorAll('.hg-select.is-open').forEach(function (root) {
       var state = states.get(root.querySelector('select'));
       if (state && !root.contains(event.target) && !state.panel.contains(event.target)) {
         close(state, false);

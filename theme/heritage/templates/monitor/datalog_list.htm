@@ -4,23 +4,23 @@
 <p><tmpl_var name="list_desc_txt"></p>
 
 
-        <p class="wb-list-section-heading"><tmpl_var name="list_head_txt"></p>
-            <div class="wb-table-workspace">
-<table class="table wb-data-table">
+        <p class="hg-list-section-heading"><tmpl_var name="list_head_txt"></p>
+            <div class="hg-table-workspace">
+<table class="table hg-data-table">
                 <thead >
                     <tr>
                         <th data-column="tstamp"><tmpl_var name="tstamp_txt"></th>
                         <th data-column="server_id"><tmpl_var name="server_id_txt"></th>
                         <th data-column="action"><tmpl_var name="action_txt"></th>
                         <th data-column="dbtable"><tmpl_var name="dbtable_txt"></th>
-                        <th class="wb-table-actions-column wb-table-align-end">{tmpl_var name='search_limit'}</th>
+                        <th class="hg-table-actions-column hg-table-align-end">{tmpl_var name='search_limit'}</th>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
                         <td><select class="form-control" name="search_server_id">{tmpl_var name='search_server_id'}</select></td>
                         <td><select class="form-control" name="search_action">{tmpl_var name='search_action'}</select></td>
                         <td><input class="form-control" type="text" name="search_dbtable" value="{tmpl_var name='search_dbtable'}" /></td>
-                        <td class="wb-table-align-end">
+                        <td class="hg-table-align-end">
                             <button type="button" class="formbutton-default formbutton-narrow" name="Filter" id="Filter" value="{tmpl_var name="filter_txt"}" data-submit-form="pageForm" data-form-action="monitor/datalog_list.php"><span class="icon icon-filter"></span></button>
                         </td>
                     </tr>
@@ -32,7 +32,7 @@
                             <td>{tmpl_var name="server_id"}</td>
                             <td>{tmpl_var name="action"}</td>
                             <td>{tmpl_var name="dbtable"}</td>
-                            <td class="wb-table-align-end">
+                            <td class="hg-table-align-end">
                                 <!--<a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="monitor/datalog_del.php?id={tmpl_var name='id'}&_csrf_id={tmpl_var name='csrf_id'}&_csrf_key={tmpl_var name='csrf_key'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete"></span></a> -->
                             </td>
                         </tr>

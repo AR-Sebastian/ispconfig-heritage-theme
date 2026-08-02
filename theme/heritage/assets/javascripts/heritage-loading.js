@@ -35,12 +35,12 @@
       window.clearTimeout(moduleSlowTimer);
       moduleSlowTimer = null;
     }
-    document.body.classList.remove('wb-module-transition-active');
+    document.body.classList.remove('hg-module-transition-active');
     moduleItems.forEach(function(item) {
       item.removeAttribute('aria-busy');
       item.removeAttribute('data-heritage-delayed');
-      item.classList.remove('wb-module-transition-source');
-      var state = item.querySelector('.wb-module-transition');
+      item.classList.remove('hg-module-transition-source');
+      var state = item.querySelector('.hg-module-transition');
       if (state) state.remove();
     });
     moduleItems = [];
@@ -48,15 +48,15 @@
 
   function startModuleTransition(module) {
     finishModuleTransition();
-    document.body.classList.add('wb-module-transition-active');
+    document.body.classList.add('hg-module-transition-active');
     moduleItems = Array.prototype.filter.call(document.querySelectorAll('[data-capp]'), function(item) {
       return item.getAttribute('data-capp') === String(module);
     });
     moduleItems.forEach(function(item) {
       item.setAttribute('aria-busy', 'true');
-      item.classList.add('wb-module-transition-source');
+      item.classList.add('hg-module-transition-source');
       var state = document.createElement('span');
-      state.className = 'wb-module-transition';
+      state.className = 'hg-module-transition';
       state.setAttribute('role', 'status');
       var sr = document.createElement('span');
       sr.className = 'sr-only';
@@ -70,7 +70,7 @@
     moduleSlowTimer = window.setTimeout(function() {
       moduleItems.forEach(function(item) {
         item.setAttribute('data-heritage-delayed', 'true');
-        var label = item.querySelector('.wb-module-transition .sr-only');
+        var label = item.querySelector('.hg-module-transition .sr-only');
         if (label) label.textContent = localized('Modul wird weiterhin geladen', 'Module is still loading');
       });
     }, 7000);
@@ -123,15 +123,15 @@
   legacy.beginRequest = function() {
     if (legacy.options.useLoadIndicator !== true) return;
     legacy.requestsRunning += 1;
-    document.body.classList.add('wb-request-active');
+    document.body.classList.add('hg-request-active');
     document.body.dataset.heritageRequestCount = String(legacy.requestsRunning);
     var region = content();
     if (!region) return;
     region.setAttribute('aria-busy', 'true');
-    var status = region.querySelector(':scope > .wb-request-status');
+    var status = region.querySelector(':scope > .hg-request-status');
     if (!status) {
       status = document.createElement('div');
-      status.className = 'wb-request-status';
+      status.className = 'hg-request-status';
       status.setAttribute('role', 'status');
       status.setAttribute('aria-live', 'polite');
       status.setAttribute('aria-atomic', 'true');
@@ -143,7 +143,7 @@
       requestSlowTimer = window.setTimeout(function() {
         requestSlowTimer = null;
         var current = content();
-        var currentStatus = current && current.querySelector(':scope > .wb-request-status');
+        var currentStatus = current && current.querySelector(':scope > .hg-request-status');
         if (!currentStatus || legacy.requestsRunning < 1) return;
         currentStatus.setAttribute('data-heritage-delayed', 'true');
         currentStatus.textContent = localized('Die Anfrage dauert etwas länger. Sie wird weiterhin verarbeitet.', 'This request is taking a little longer. It is still being processed.');
@@ -159,11 +159,11 @@
       window.clearTimeout(requestSlowTimer);
       requestSlowTimer = null;
     }
-    document.body.classList.remove('wb-request-active');
+    document.body.classList.remove('hg-request-active');
     var region = content();
     if (!region) return;
     region.setAttribute('aria-busy', 'false');
-    var status = region.querySelector(':scope > .wb-request-status');
+    var status = region.querySelector(':scope > .hg-request-status');
     if (status) status.remove();
   };
 

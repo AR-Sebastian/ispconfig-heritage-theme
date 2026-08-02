@@ -84,6 +84,10 @@ if grep -RIEq '\b_?workbench[A-Z][A-Za-z0-9_]*' "$theme/assets/javascripts" --ex
   echo 'Theme contains an internal JavaScript symbol in the retired Workbench namespace.' >&2
   exit 1
 fi
+if grep -RIEq '(^|[^A-Za-z0-9_])wb-' "$theme/templates" "$theme/assets/stylesheets" "$theme/assets/javascripts" --exclude='*.bundle.*'; then
+  echo 'Theme contains a component class or design token in the retired WB namespace.' >&2
+  exit 1
+fi
 while IFS= read -r -d '' file; do node --check "$file"; done < <(find "$theme" -type f -name '*.js' -print0)
 
 node - "$theme" "$version" <<'NODE'
@@ -191,7 +195,7 @@ if (total > 3600000) throw new Error(`Asset payload exceeds 3.6 MB source and bu
 if (largest.size > 225000) throw new Error(`Authored asset exceeds 225 KB: ${path.basename(largest.file)} (${largest.size})`);
 const styles = path.join(theme, 'assets', 'stylesheets');
 const tableAuthority = fs.readFileSync(path.join(styles, 'heritage-tables.css'), 'utf8');
-for (const contract of ['inline-size: 100%', ':has(.wb-row-actions > :nth-child(3))', 'justify-content: flex-end', '.hg-record-identity']) {
+for (const contract of ['inline-size: 100%', ':has(.hg-row-actions > :nth-child(3))', 'justify-content: flex-end', '.hg-record-identity']) {
   if (!tableAuthority.includes(contract)) throw new Error(`Table geometry contract is missing: ${contract}`);
 }
 const accessibilityAuthority = fs.readFileSync(path.join(styles, 'heritage-accessibility.css'), 'utf8');

@@ -135,14 +135,14 @@
   }
 
   function dashlets(host) {
-    return Array.prototype.slice.call(host.querySelectorAll(':scope > .wb-dashlet'));
+    return Array.prototype.slice.call(host.querySelectorAll(':scope > .hg-dashlet'));
   }
 
   function normalizeServerDashlets(host) {
     var boundary = host.querySelector(':scope > [data-heritage-dashboard-server-content]');
     if (!boundary) return;
     var widgets = Array.prototype.slice.call(boundary.children).filter(function (node) {
-      return node.classList && node.classList.contains('wb-dashlet');
+      return node.classList && node.classList.contains('hg-dashlet');
     });
     widgets.forEach(function (node) {
       boundary.insertAdjacentElement('beforebegin', node);
@@ -202,8 +202,8 @@
     if (node.dataset.heritageAtomicSource === 'metrics') {
       node.dataset.heritageMetricViewport = safe === '2x2' ? 'detail' : safe === '1x2' ? 'tall' : 'compact';
     }
-    node.classList.remove('wb-dashlet-size-1x1', 'wb-dashlet-size-1x2', 'wb-dashlet-size-2x2');
-    node.classList.add('wb-dashlet-size-' + safe);
+    node.classList.remove('hg-dashlet-size-1x1', 'hg-dashlet-size-1x2', 'hg-dashlet-size-2x2');
+    node.classList.add('hg-dashlet-size-' + safe);
     Array.prototype.forEach.call(node.querySelectorAll('[data-heritage-layout-size]'), function (button) {
       button.setAttribute('aria-pressed', button.getAttribute('data-heritage-layout-size') === safe ? 'true' : 'false');
     });
@@ -226,8 +226,8 @@
     var name = node.dataset.heritageDashlet;
     if (name === 'modules') return Array.prototype.slice.call(node.querySelectorAll('.modules > li'));
     if (name === 'news') return Array.prototype.slice.call(node.querySelectorAll('ul > li'));
-    if (name === 'metrics') return Array.prototype.slice.call(node.querySelectorAll('.wb-dashboard-metric-card'));
-    if (name === 'statistics') return Array.prototype.slice.call(node.querySelectorAll('.wb-statistics-launcher'));
+    if (name === 'metrics') return Array.prototype.slice.call(node.querySelectorAll('.hg-dashboard-metric-card'));
+    if (name === 'statistics') return Array.prototype.slice.call(node.querySelectorAll('.hg-statistics-launcher'));
     if (name === 'quota' || name === 'mailquota' || name === 'databasequota') {
       return Array.prototype.slice.call(node.querySelectorAll('.table-wrapper table > tbody > tr'));
     }
@@ -254,18 +254,18 @@
         delete item.dataset.heritageDensityHidden;
       }
     });
-    var existing = node.querySelector(':scope > .wb-dashlet__density-note');
+    var existing = node.querySelector(':scope > .hg-dashlet__density-note');
     if (existing) existing.remove();
     if (!hiddenCount) return;
     var note = document.createElement('div');
-    note.className = 'wb-dashlet__density-note';
+    note.className = 'hg-dashlet__density-note';
     note.setAttribute('role', 'status');
     var text = document.createElement('span');
     text.textContent = t('moreItems', { count: hiddenCount });
     note.appendChild(text);
     var expand = document.createElement('button');
     expand.type = 'button';
-    expand.className = 'wb-dashlet__density-expand';
+    expand.className = 'hg-dashlet__density-expand';
     expand.textContent = t('showMore');
     expand.setAttribute('aria-label', t('expandWidget', { name: node.getAttribute('aria-label') || t('widget') }));
     expand.addEventListener('click', function () {
@@ -286,15 +286,15 @@
     Array.prototype.forEach.call(node.querySelectorAll('.modules > li'), function (launcher) {
       var title = launcher.querySelector('.title');
       var action = launcher.querySelector('a.button[data-heritage-module], a.button[data-capp]');
-      launcher.classList.add('wb-module-launcher');
-      if (title && !launcher.querySelector('.wb-module-launcher__meta')) {
+      launcher.classList.add('hg-module-launcher');
+      if (title && !launcher.querySelector('.hg-module-launcher__meta')) {
         var meta = document.createElement('span');
-        meta.className = 'wb-module-launcher__meta';
+        meta.className = 'hg-module-launcher__meta';
         meta.textContent = t('openModule');
         title.insertAdjacentElement('afterend', meta);
       }
       if (action) {
-        action.classList.add('wb-module-launcher__action');
+        action.classList.add('hg-module-launcher__action');
         action.setAttribute('aria-label', (action.textContent || t('openModule')).replace(/\s+/g, ' ').trim());
       }
     });
@@ -315,10 +315,10 @@
   }
 
   function splitModuleDashlet(host) {
-    var source = host.querySelector(':scope > .wb-dashlet[data-heritage-dashlet="modules"]');
+    var source = host.querySelector(':scope > .hg-dashlet[data-heritage-dashlet="modules"]');
     if (!source || source.dataset.heritageAtomicSplit === 'true') return;
     decorateModules(source);
-    var items = Array.prototype.slice.call(source.querySelectorAll('.modules > li.wb-module-launcher'));
+    var items = Array.prototype.slice.call(source.querySelectorAll('.modules > li.hg-module-launcher'));
     if (!items.length) return;
     var anchor = source;
     items.forEach(function (item, index) {
@@ -343,7 +343,7 @@
         }
       }
       var article = document.createElement('section');
-      article.className = 'wb-dashlet wb-dashlet-module-atomic';
+      article.className = 'hg-dashlet hg-dashlet-module-atomic';
       article.dataset.heritageDashlet = 'module-' + slug(title) + '-' + index;
       article.dataset.heritageAtomicSource = 'modules';
       article.dataset.heritageAtomicLabel = t('individualModule');
@@ -352,7 +352,7 @@
       article.dataset.heritageDefaultOrder = String(10 + index);
       article.setAttribute('data-heritage-cockpit-card', 'module');
       var heading = makeEl('h3', '', title);
-      var wrapper = makeEl('div', 'dashboard-modules-wrapper wb-dashboard-atomic-module');
+      var wrapper = makeEl('div', 'dashboard-modules-wrapper hg-dashboard-atomic-module');
       var list = makeEl('ul', 'modules');
       wrapper.appendChild(list);
       article.appendChild(heading);
@@ -367,14 +367,14 @@
 
   function decorateDonate(node) {
     if (node.dataset.heritageDonateDecorated === 'true') return;
-    var button = node.querySelector('.wb-donate-card__toggle');
+    var button = node.querySelector('.hg-donate-card__toggle');
     var description = node.querySelector('[data-heritage-donate-description], #description');
     if (!button || !description) {
       node.dataset.heritageDonateDecorated = 'true';
       return;
     }
     if (!description.id) {
-      description.id = 'wb-donate-description-' + Math.random().toString(36).slice(2, 8);
+      description.id = 'hg-donate-description-' + Math.random().toString(36).slice(2, 8);
     }
     button.setAttribute('aria-controls', description.id);
     description.hidden = true;
@@ -410,7 +410,7 @@
   }
 
   function metricSource(card) {
-    return card.querySelector('canvas, .wb-dashboard-sparkline');
+    return card.querySelector('canvas, .hg-dashboard-sparkline');
   }
 
   function metricValuesFromSparkline(source) {
@@ -424,15 +424,15 @@
   }
 
   function syncMetricCards(node) {
-    Array.prototype.forEach.call(node.querySelectorAll('.wb-dashboard-metric-card'), function (card) {
+    Array.prototype.forEach.call(node.querySelectorAll('.hg-dashboard-metric-card'), function (card) {
       var canvas = card.querySelector('canvas');
       var source = metricSource(card);
       var chart = canvas && chartInstance(canvas);
       var dataset = chart && chart.data && chart.data.datasets && chart.data.datasets[0];
       var values = dataset && dataset.data || metricValuesFromSparkline(source);
       var latest = values.length ? values[values.length - 1] : null;
-      var label = card.querySelector('.wb-dashboard-metric-card__label');
-      var value = card.querySelector('.wb-dashboard-metric-card__value');
+      var label = card.querySelector('.hg-dashboard-metric-card__label');
+      var value = card.querySelector('.hg-dashboard-metric-card__value');
       if (label) label.textContent = dataset && dataset.label || metricLabelFromSource(source || canvas || {});
       if (value) value.textContent = metricValue(latest);
       if (!chart) return;
@@ -460,17 +460,17 @@
     var titleHolder = title && title.parentElement;
     if (title) node.insertBefore(title, content);
     if (titleHolder && !titleHolder.textContent.trim() && !titleHolder.children.length) titleHolder.remove();
-    content.classList.add('wb-dashboard-metrics-grid');
+    content.classList.add('hg-dashboard-metrics-grid');
     Array.prototype.forEach.call(content.children, function (container) {
-      var metric = container.querySelector && container.querySelector(':scope > canvas, :scope > .wb-dashboard-sparkline');
+      var metric = container.querySelector && container.querySelector(':scope > canvas, :scope > .hg-dashboard-sparkline');
       if (!metric) return;
-      container.classList.add('wb-dashboard-metric-card');
+      container.classList.add('hg-dashboard-metric-card');
       container.style.removeProperty('padding-bottom');
-      if (!container.querySelector('.wb-dashboard-metric-card__header')) {
+      if (!container.querySelector('.hg-dashboard-metric-card__header')) {
         var header = document.createElement('header');
-        header.className = 'wb-dashboard-metric-card__header';
-        var label = makeEl('span', 'wb-dashboard-metric-card__label', metricLabelFromSource(metric));
-        var value = makeEl('strong', 'wb-dashboard-metric-card__value', '-');
+        header.className = 'hg-dashboard-metric-card__header';
+        var label = makeEl('span', 'hg-dashboard-metric-card__label', metricLabelFromSource(metric));
+        var value = makeEl('strong', 'hg-dashboard-metric-card__value', '-');
         value.setAttribute('aria-label', t('currentValue'));
         header.appendChild(label);
         header.appendChild(value);
@@ -483,7 +483,7 @@
   }
 
   function splitMetricDashlet(host) {
-    var source = host.querySelector(':scope > .wb-dashlet[data-heritage-dashlet="metrics"]');
+    var source = host.querySelector(':scope > .hg-dashlet[data-heritage-dashlet="metrics"]');
     if (!source || source.dataset.heritageAtomicSplit === 'true') return;
     // Render the declarative metric payload before the source dashlet is split
     // into atomic widgets. Removing the source first also removed its JSON
@@ -492,15 +492,15 @@
       window.heritageDashboardMetrics.enhance(source);
     }
     decorateMetrics(source);
-    var cards = Array.prototype.slice.call(source.querySelectorAll('.wb-dashboard-metric-card'));
+    var cards = Array.prototype.slice.call(source.querySelectorAll('.hg-dashboard-metric-card'));
     if (!cards.length) return;
     var anchor = source;
     cards.forEach(function (card, index) {
       var metric = metricSource(card);
-      var label = card.querySelector('.wb-dashboard-metric-card__label');
+      var label = card.querySelector('.hg-dashboard-metric-card__label');
       var title = label ? label.textContent.replace(/\s+/g, ' ').trim() : metricLabelFromSource(metric || {});
       var article = document.createElement('section');
-      article.className = 'wb-dashlet wb-dashlet-metric-atomic';
+      article.className = 'hg-dashlet hg-dashlet-metric-atomic';
       article.dataset.heritageDashlet = 'metric-' + slug(metric && metric.id || title) + '-' + index;
       article.dataset.heritageAtomicSource = 'metrics';
       article.dataset.heritageAtomicLabel = t('individualMetric');
@@ -512,7 +512,7 @@
       article.dataset.heritageDefaultOrder = String(20 + index);
       article.setAttribute('data-heritage-cockpit-card', 'metric');
       var heading = makeEl('h3', '', title);
-      var metricHost = makeEl('div', 'wb-dashboard-single-metric');
+      var metricHost = makeEl('div', 'hg-dashboard-single-metric');
       article.appendChild(heading);
       article.appendChild(metricHost);
       metricHost.appendChild(card);
@@ -529,7 +529,7 @@
   }
 
   function splitAtomicDashlets(host) {
-    var unsplitSource = host.querySelector(':scope > .wb-dashlet[data-heritage-dashlet="modules"], :scope > .wb-dashlet[data-heritage-dashlet="metrics"]');
+    var unsplitSource = host.querySelector(':scope > .hg-dashlet[data-heritage-dashlet="modules"], :scope > .hg-dashlet[data-heritage-dashlet="metrics"]');
     if (host.dataset.heritageAtomicDashboard === 'true' && !unsplitSource) return;
     if (unsplitSource) delete host.dataset.heritageAtomicDashboard;
     splitModuleDashlet(host);
@@ -542,14 +542,14 @@
     var title = header.querySelector('h1');
     if (!title) return;
     var eyebrow = document.createElement('span');
-    eyebrow.className = 'wb-dashboard-hero__eyebrow';
+    eyebrow.className = 'hg-dashboard-hero__eyebrow';
     eyebrow.textContent = t('workspace');
     title.insertAdjacentElement('beforebegin', eyebrow);
     var summary = document.createElement('p');
-    summary.className = 'wb-dashboard-hero__summary';
+    summary.className = 'hg-dashboard-hero__summary';
     summary.textContent = t('workspaceSummary');
     title.insertAdjacentElement('afterend', summary);
-    header.classList.add('wb-dashboard-hero');
+    header.classList.add('hg-dashboard-hero');
     header.dataset.heritageHeroDecorated = 'true';
   }
 
@@ -557,21 +557,21 @@
     var header = host.querySelector(':scope > .page-header');
     if (!header) return null;
     decorateHero(header);
-    var overview = host.querySelector(':scope > .wb-dashboard-overview');
+    var overview = host.querySelector(':scope > .hg-dashboard-overview');
     if (!overview) {
       overview = document.createElement('section');
-      overview.className = 'wb-dashboard-overview';
+      overview.className = 'hg-dashboard-overview';
       overview.setAttribute('aria-label', t('overview'));
       header.insertAdjacentElement('afterend', overview);
     }
-    var moduleCount = host.querySelectorAll('.wb-module-launcher').length;
+    var moduleCount = host.querySelectorAll('.hg-module-launcher').length;
     var warningCount = host.querySelectorAll('.progress-bar-warning').length;
     var criticalCount = host.querySelectorAll('.progress-bar-danger').length;
     var visibleCount = dashlets(host).filter(function(node) { return node.dataset.heritageHidden !== 'true'; }).length;
     var totalCount = dashlets(host).length;
     var attention = warningCount + criticalCount;
     var modulesCard = overviewStat(t('availableModules'), moduleCount, t('quickDestinations'));
-    var attentionCard = overviewStat(t('needsAttention'), attention, t('attentionDetail', { critical: criticalCount, warning: warningCount }), attention ? 'wb-dashboard-overview__stat--attention' : 'wb-dashboard-overview__stat--healthy');
+    var attentionCard = overviewStat(t('needsAttention'), attention, t('attentionDetail', { critical: criticalCount, warning: warningCount }), attention ? 'hg-dashboard-overview__stat--attention' : 'hg-dashboard-overview__stat--healthy');
     var layoutCard = overviewStat(t('activeWidgets'), visibleCount, t('personalLayout'), '', totalCount);
     overview.dataset.heritageAttention = attention ? 'true' : 'false';
     while (overview.firstChild) overview.removeChild(overview.firstChild);
@@ -582,7 +582,7 @@
   }
 
   function overviewStat(label, value, detail, modifier, total) {
-    var card = makeEl('article', 'wb-dashboard-overview__stat' + (modifier ? ' ' + modifier : ''));
+    var card = makeEl('article', 'hg-dashboard-overview__stat' + (modifier ? ' ' + modifier : ''));
     var strong = makeEl('strong', '', value);
     if (total !== undefined && total !== null) strong.appendChild(makeEl('em', '', '/' + total));
     card.appendChild(makeEl('span', '', label));
@@ -613,39 +613,39 @@
 
   function syncEmptyState(host) {
     var visible = dashlets(host).some(function (node) { return node.dataset.heritageHidden !== 'true'; });
-    var state = host.querySelector(':scope > .wb-dashboard-empty-state');
+    var state = host.querySelector(':scope > .hg-dashboard-empty-state');
     if (visible) {
       if (state) state.remove();
       return;
     }
     if (state) return;
     state = document.createElement('section');
-    state.className = 'wb-dashboard-empty-state';
+    state.className = 'hg-dashboard-empty-state';
     state.setAttribute('role', 'status');
     var content = makeEl('div');
     content.appendChild(makeEl('h2', '', t('emptyTitle')));
     content.appendChild(makeEl('p', '', t('emptyText')));
-    state.appendChild(hiddenIcon('wb-dashboard-empty-state__icon'));
+    state.appendChild(hiddenIcon('hg-dashboard-empty-state__icon'));
     state.appendChild(content);
     var restore = document.createElement('button');
     restore.type = 'button';
-    restore.className = 'wb-dashboard-button wb-dashboard-button--primary';
+    restore.className = 'hg-dashboard-button hg-dashboard-button--primary';
     restore.textContent = t('restoreWidgets');
     restore.addEventListener('click', function () { restoreRecommended(host); });
     state.appendChild(restore);
-    var toolbar = host.querySelector(':scope > .wb-dashboard-toolbar');
-    (toolbar || host.querySelector(':scope > .wb-dashboard-overview') || host.querySelector(':scope > .page-header')).insertAdjacentElement('afterend', state);
+    var toolbar = host.querySelector(':scope > .hg-dashboard-toolbar');
+    (toolbar || host.querySelector(':scope > .hg-dashboard-overview') || host.querySelector(':scope > .page-header')).insertAdjacentElement('afterend', state);
   }
 
   function syncToolbar(host) {
-    var toolbar = host.querySelector(':scope > .wb-dashboard-toolbar');
+    var toolbar = host.querySelector(':scope > .hg-dashboard-toolbar');
     if (!toolbar) return;
-    var editing = host.classList.contains('wb-dashboard-layout-edit');
+    var editing = host.classList.contains('hg-dashboard-layout-edit');
     var count = hiddenCount(host);
     var status = toolbar.querySelector('[data-heritage-layout-status]');
     var toggle = toolbar.querySelector('[data-heritage-layout-toggle]');
     var show = toolbar.querySelector('[data-heritage-layout-show-hidden]');
-    toolbar.classList.toggle('wb-dashboard-toolbar--editing', editing);
+    toolbar.classList.toggle('hg-dashboard-toolbar--editing', editing);
     status.textContent = editing ? t('layoutEditing') : t('layoutSaved');
     toggle.setAttribute('aria-pressed', editing ? 'true' : 'false');
     toggle.textContent = editing ? t('finishEditing') : t('customizeDashboard');
@@ -666,22 +666,22 @@
 
   function makeControls(node, host) {
     var widgetTitle = node.querySelector(':scope > h2, :scope > h3, :scope > header');
-    var widgetHeader = node.querySelector(':scope > .wb-dashlet__header');
+    var widgetHeader = node.querySelector(':scope > .hg-dashlet__header');
     if (!widgetHeader) {
       widgetHeader = document.createElement('div');
-      widgetHeader.className = 'wb-dashlet__header';
+      widgetHeader.className = 'hg-dashlet__header';
       node.insertBefore(widgetHeader, node.firstChild);
       if (widgetTitle) widgetHeader.appendChild(widgetTitle);
     }
-    if (!widgetHeader.querySelector('.wb-dashlet__type-icon')) {
+    if (!widgetHeader.querySelector('.hg-dashlet__type-icon')) {
       var typeIcon = document.createElement('span');
-      typeIcon.className = 'wb-dashlet__type-icon';
+      typeIcon.className = 'hg-dashlet__type-icon';
       typeIcon.setAttribute('aria-hidden', 'true');
       widgetHeader.insertBefore(typeIcon, widgetHeader.firstChild);
     }
     var titleText = widgetTitle ? widgetTitle.textContent.replace(/\s+/g, ' ').trim() : (node.dataset.heritageDashlet || t('dashboardWidget'));
     var dragHandle = document.createElement('span');
-    dragHandle.className = 'wb-dashlet__drag-handle';
+    dragHandle.className = 'hg-dashlet__drag-handle';
     dragHandle.setAttribute('role', 'button');
     dragHandle.setAttribute('tabindex', '0');
     dragHandle.setAttribute('aria-label', t('dragWidget', { name: titleText }));
@@ -689,18 +689,18 @@
     for (var dot = 0; dot < 6; dot += 1) dragHandle.appendChild(document.createElement('i'));
     widgetHeader.insertBefore(dragHandle, widgetHeader.firstChild);
     var editHint = document.createElement('span');
-    editHint.className = 'wb-dashlet__edit-hint';
+    editHint.className = 'hg-dashlet__edit-hint';
     editHint.textContent = t('editHint');
     widgetHeader.appendChild(editHint);
     var controls = document.createElement('div');
-    controls.className = 'wb-dashlet__layout-controls';
+    controls.className = 'hg-dashlet__layout-controls';
     controls.setAttribute('role', 'group');
     controls.setAttribute('aria-label', t('layoutControls', { name: titleText }));
     // Regression fix: inside makeControls the `node` parameter (the dashlet
     // element) shadows the module-level makeEl() element helper, so calling
     // makeEl('span', ...) threw "node is not a function". Build the label inline.
     var layoutLabel = document.createElement('span');
-    layoutLabel.className = 'wb-dashlet__layout-label';
+    layoutLabel.className = 'hg-dashlet__layout-label';
     layoutLabel.textContent = t('editHint');
     controls.appendChild(layoutLabel);
     controls.appendChild(dashboardButton('\u2191', { 'data-heritage-layout-move': 'up', 'aria-label': t('moveEarlier') }));
@@ -722,7 +722,7 @@
       }
       if (move) {
         var sibling = move.getAttribute('data-heritage-layout-move') === 'up' ? node.previousElementSibling : node.nextElementSibling;
-        if (sibling && sibling.classList.contains('wb-dashlet')) {
+        if (sibling && sibling.classList.contains('hg-dashlet')) {
           if (move.getAttribute('data-heritage-layout-move') === 'up') node.parentNode.insertBefore(node, sibling);
           else node.parentNode.insertBefore(sibling, node);
           save(host);
@@ -755,11 +755,11 @@
     if (titleText) node.setAttribute('aria-label', titleText);
     syncDensity(node);
     node.addEventListener('keydown', function (event) {
-      if (!host.classList.contains('wb-dashboard-layout-edit') || event.target.closest('button, a, input, select, textarea')) return;
+      if (!host.classList.contains('hg-dashboard-layout-edit') || event.target.closest('button, a, input, select, textarea')) return;
       if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') return;
       event.preventDefault();
       var sibling = event.key === 'ArrowUp' ? node.previousElementSibling : node.nextElementSibling;
-      if (!sibling || !sibling.classList.contains('wb-dashlet')) return;
+      if (!sibling || !sibling.classList.contains('hg-dashlet')) return;
       if (event.key === 'ArrowUp') node.parentNode.insertBefore(node, sibling);
       else node.parentNode.insertBefore(sibling, node);
       save(host);
@@ -800,12 +800,12 @@
     var warning = table.querySelectorAll('.progress-bar-warning').length;
     var critical = table.querySelectorAll('.progress-bar-danger').length;
     var summary = document.createElement('div');
-    summary.className = 'wb-limit-summary';
+    summary.className = 'hg-limit-summary';
     summary.setAttribute('aria-label', t('accountLimitSummary'));
     summary.appendChild(limitSummaryItem('', rows.length, t('limitsTracked')));
-    summary.appendChild(limitSummaryItem('wb-limit-summary__warning', warning, t('warnings')));
-    summary.appendChild(limitSummaryItem('wb-limit-summary__critical', critical, t('critical')));
-    var detailsToggle = dashboardButton(t('showDetails'), { 'class': 'wb-limit-summary__toggle', 'aria-expanded': 'false' });
+    summary.appendChild(limitSummaryItem('hg-limit-summary__warning', warning, t('warnings')));
+    summary.appendChild(limitSummaryItem('hg-limit-summary__critical', critical, t('critical')));
+    var detailsToggle = dashboardButton(t('showDetails'), { 'class': 'hg-limit-summary__toggle', 'aria-expanded': 'false' });
     summary.appendChild(detailsToggle);
     var wrapper = table.closest('.table-wrapper');
     (wrapper && wrapper.parentNode || node).insertBefore(summary, wrapper || table);
@@ -813,21 +813,21 @@
       return row.querySelector('.progress-bar-warning, .progress-bar-danger');
     });
     var alerts = document.createElement('div');
-    alerts.className = 'wb-limit-alerts';
+    alerts.className = 'hg-limit-alerts';
     alerts.setAttribute('aria-label', t('accountLimitWarnings'));
     if (!alertRows.length) {
-      alerts.appendChild(makeEl('span', 'wb-limit-alerts__empty', t('limitsHealthy')));
+      alerts.appendChild(makeEl('span', 'hg-limit-alerts__empty', t('limitsHealthy')));
     } else {
       alertRows.slice(0, 4).forEach(function (row) {
         var bar = row.querySelector('.progress-bar-warning, .progress-bar-danger');
         var label = row.cells && row.cells[0] ? row.cells[0].textContent.trim() : t('accountLimit');
         var severity = bar.classList.contains('progress-bar-danger') ? 'critical' : 'warning';
-        var alert = makeEl('span', 'wb-limit-alert wb-limit-alert--' + severity);
+        var alert = makeEl('span', 'hg-limit-alert hg-limit-alert--' + severity);
         alert.appendChild(makeEl('strong', '', label));
         alert.appendChild(makeEl('em', '', t(severity)));
         alerts.appendChild(alert);
       });
-      if (alertRows.length > 4) alerts.appendChild(makeEl('span', 'wb-limit-alerts__more', t('moreInDetails', { count: alertRows.length - 4 })));
+      if (alertRows.length > 4) alerts.appendChild(makeEl('span', 'hg-limit-alerts__more', t('moreInDetails', { count: alertRows.length - 4 })));
     }
     summary.parentNode.insertBefore(alerts, summary.nextSibling);
     var groups = { mail: { total: 0, attention: 0 }, web: { total: 0, attention: 0 }, dns: { total: 0, attention: 0 }, database: { total: 0, attention: 0 }, clients: { total: 0, attention: 0 }, other: { total: 0, attention: 0 } };
@@ -843,13 +843,13 @@
     });
     var groupLabels = { mail: 'limitMail', web: 'limitWeb', dns: 'limitDns', database: 'limitDatabase', clients: 'limitClients', other: 'limitOther' };
     var groupOverview = document.createElement('div');
-    groupOverview.className = 'wb-limit-groups';
+    groupOverview.className = 'hg-limit-groups';
     groupOverview.setAttribute('aria-label', t('accountLimitSummary'));
     Object.keys(groups).forEach(function (name) {
       var group = groups[name];
       if (!group.total) return;
       var card = document.createElement('article');
-      card.className = 'wb-limit-group' + (group.attention ? ' wb-limit-group--attention' : '');
+      card.className = 'hg-limit-group' + (group.attention ? ' hg-limit-group--attention' : '');
       var label = document.createElement('span');
       label.textContent = t(groupLabels[name]);
       var value = document.createElement('strong');
@@ -862,8 +862,8 @@
       groupOverview.appendChild(card);
     });
     summary.parentNode.insertBefore(groupOverview, alerts);
-    summary.querySelector('.wb-limit-summary__toggle').addEventListener('click', function (event) {
-      var expanded = node.classList.toggle('wb-dashlet-limits--expanded');
+    summary.querySelector('.hg-limit-summary__toggle').addEventListener('click', function (event) {
+      var expanded = node.classList.toggle('hg-dashlet-limits--expanded');
       event.currentTarget.setAttribute('aria-expanded', expanded ? 'true' : 'false');
       event.currentTarget.textContent = expanded ? t('hideDetails') : t('showDetails');
     });
@@ -888,17 +888,17 @@
     var footerValues = Array.prototype.map.call(table.querySelectorAll('tfoot th'), function (cell) { return cell.textContent.replace(/\s+/g, ' ').trim(); }).filter(Boolean);
     var totalUsage = footerValues.length > 1 ? footerValues[footerValues.length - 1] : '-';
     var summary = document.createElement('div');
-    summary.className = 'wb-quota-summary';
+    summary.className = 'hg-quota-summary';
     summary.appendChild(quotaSummaryItem('', t('quotaEntries'), rows.length));
     summary.appendChild(quotaSummaryItem('', t('totalUsage'), totalUsage));
-    summary.appendChild(quotaSummaryItem(alertRows.length ? 'wb-quota-summary__attention' : 'wb-quota-summary__healthy', alertRows.length ? t('quotaAttention', { count: alertRows.length }) : t('quotaHealthy'), alertRows.length));
+    summary.appendChild(quotaSummaryItem(alertRows.length ? 'hg-quota-summary__attention' : 'hg-quota-summary__healthy', alertRows.length ? t('quotaAttention', { count: alertRows.length }) : t('quotaHealthy'), alertRows.length));
     var alerts = document.createElement('div');
-    alerts.className = 'wb-quota-alerts';
+    alerts.className = 'hg-quota-alerts';
     alertRows.slice(0, 3).forEach(function (row) {
       var label = row.cells && row.cells[0] ? row.cells[0].textContent.replace(/\s+/g, ' ').trim() : t('quotaEntries');
       var progress = row.querySelector('[role="progressbar"]');
       var item = document.createElement('span');
-      item.className = 'wb-quota-alert';
+      item.className = 'hg-quota-alert';
       var name = document.createElement('strong');
       name.textContent = label;
       var value = document.createElement('em');
@@ -909,26 +909,26 @@
     });
     var toggle = document.createElement('button');
     toggle.type = 'button';
-    toggle.className = 'wb-quota-details-toggle';
+    toggle.className = 'hg-quota-details-toggle';
     toggle.setAttribute('aria-expanded', 'false');
     toggle.textContent = t('showDetails');
     toggle.addEventListener('click', function () {
-      var expanded = node.classList.toggle('wb-dashlet-quota-expanded');
+      var expanded = node.classList.toggle('hg-dashlet-quota-expanded');
       toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
       toggle.textContent = expanded ? t('hideDetails') : t('showDetails');
     });
     wrapper.parentNode.insertBefore(summary, wrapper);
     if (alertRows.length) wrapper.parentNode.insertBefore(alerts, wrapper);
     wrapper.parentNode.insertBefore(toggle, wrapper);
-    node.classList.add('wb-dashlet-quota-collapsed');
+    node.classList.add('hg-dashlet-quota-collapsed');
     node.dataset.heritageQuotaDecorated = 'true';
   }
 
   function syncCardState(node) {
-    var state = node.querySelector('.progress-bar-danger, .wb-limit-alert--critical') ? 'critical' :
-      node.querySelector('.progress-bar-warning, .wb-limit-alert--warning') ? 'warning' : 'neutral';
-    node.classList.remove('wb-dashlet-state-neutral', 'wb-dashlet-state-warning', 'wb-dashlet-state-critical');
-    node.classList.add('wb-dashlet-state-' + state);
+    var state = node.querySelector('.progress-bar-danger, .hg-limit-alert--critical') ? 'critical' :
+      node.querySelector('.progress-bar-warning, .hg-limit-alert--warning') ? 'warning' : 'neutral';
+    node.classList.remove('hg-dashlet-state-neutral', 'hg-dashlet-state-warning', 'hg-dashlet-state-critical');
+    node.classList.add('hg-dashlet-state-' + state);
     node.dataset.heritageState = state;
   }
 
@@ -937,15 +937,15 @@
     var atomicModule = node.dataset.heritageAtomicSource === 'modules';
     var atomicMetric = node.dataset.heritageAtomicSource === 'metrics';
     if (name !== 'modules' && name !== 'metrics' && name !== 'statistics' && !atomicModule && !atomicMetric) return;
-    var header = node.querySelector(':scope > .wb-dashlet__header');
+    var header = node.querySelector(':scope > .hg-dashlet__header');
     if (!header) return;
-    var context = header.querySelector(':scope > .wb-dashlet__context');
+    var context = header.querySelector(':scope > .hg-dashlet__context');
     if (!context) {
       context = document.createElement('span');
-      context.className = 'wb-dashlet__context';
-      header.insertBefore(context, header.querySelector('.wb-dashlet__edit-hint, .wb-dashlet__layout-controls'));
+      context.className = 'hg-dashlet__context';
+      header.insertBefore(context, header.querySelector('.hg-dashlet__edit-hint, .hg-dashlet__layout-controls'));
     }
-    var count = name === 'modules' || atomicModule ? node.querySelectorAll('.wb-module-launcher').length : name === 'statistics' ? node.querySelectorAll('.wb-statistics-launcher').length : node.querySelectorAll('.wb-dashboard-metric-card').length;
+    var count = name === 'modules' || atomicModule ? node.querySelectorAll('.hg-module-launcher').length : name === 'statistics' ? node.querySelectorAll('.hg-statistics-launcher').length : node.querySelectorAll('.hg-dashboard-metric-card').length;
     if (atomicModule || atomicMetric) {
       context.textContent = node.dataset.heritageAtomicLabel || t(atomicMetric ? 'individualMetric' : 'individualModule');
       return;
@@ -966,16 +966,16 @@
     var name = node.dataset.heritageDashlet;
     var operational = name === 'limits' || name === 'quota' || name === 'mailquota' || name === 'databasequota';
     if (!operational) return;
-    var header = node.querySelector(':scope > .wb-dashlet__header');
+    var header = node.querySelector(':scope > .hg-dashlet__header');
     if (!header) return;
-    var context = header.querySelector(':scope > .wb-dashlet__context');
+    var context = header.querySelector(':scope > .hg-dashlet__context');
     if (!context) {
       context = document.createElement('span');
-      context.className = 'wb-dashlet__context wb-dashlet__context--capacity';
-      header.insertBefore(context, header.querySelector('.wb-dashlet__edit-hint, .wb-dashlet__layout-controls'));
+      context.className = 'hg-dashlet__context hg-dashlet__context--capacity';
+      header.insertBefore(context, header.querySelector('.hg-dashlet__edit-hint, .hg-dashlet__layout-controls'));
     }
-    var count = name === 'limits' ? node.querySelectorAll('.wb-limit-group').length : node.querySelectorAll('.wb-quota-summary > article').length;
-    var attention = node.querySelectorAll('.wb-limit-alert--warning, .wb-limit-alert--critical, .wb-quota-alert').length;
+    var count = name === 'limits' ? node.querySelectorAll('.hg-limit-group').length : node.querySelectorAll('.hg-quota-summary > article').length;
+    var attention = node.querySelectorAll('.hg-limit-alert--warning, .hg-limit-alert--critical, .hg-quota-alert').length;
     context.dataset.heritageState = attention ? 'attention' : 'healthy';
     context.textContent = t(attention ? 'capacityAttention' : 'capacityHealthy', { count: count, attention: attention });
   }
@@ -983,13 +983,13 @@
   function syncSecondaryContext(node) {
     var name = node.dataset.heritageDashlet;
     if (name !== 'news' && name !== 'donate') return;
-    var header = node.querySelector(':scope > .wb-dashlet__header');
+    var header = node.querySelector(':scope > .hg-dashlet__header');
     if (!header) return;
-    var context = header.querySelector(':scope > .wb-dashlet__context');
+    var context = header.querySelector(':scope > .hg-dashlet__context');
     if (!context) {
       context = document.createElement('span');
-      context.className = 'wb-dashlet__context wb-dashlet__context--secondary';
-      header.insertBefore(context, header.querySelector('.wb-dashlet__edit-hint, .wb-dashlet__layout-controls'));
+      context.className = 'hg-dashlet__context hg-dashlet__context--secondary';
+      header.insertBefore(context, header.querySelector('.hg-dashlet__edit-hint, .hg-dashlet__layout-controls'));
     }
     context.textContent = name === 'news' ? t('newsCount', { count: node.querySelectorAll('ul > li').length }) : t('optionalContent');
   }
@@ -997,20 +997,20 @@
   function enhance() {
     // Self-sufficient + idempotent: enhance is the single authority on the
     // dashboard state. It detects the dashboard by its raw, direct-child
-    // .wb-dashlet widgets, sets the gating classes itself, and clears them on
+    // .hg-dashlet widgets, sets the gating classes itself, and clears them on
     // non-dashboard pages. This removes the earlier fragile dependency on some
-    // other code having set body.wb-dashboard-page first, which caused the
+    // other code having set body.hg-dashboard-page first, which caused the
     // SPA-return race where the dashboard rendered undecorated.
     var host = document.getElementById('pageContent');
     if (!host) return false;
     normalizeServerDashlets(host);
-    if (!host.querySelector(':scope > .wb-dashlet')) {
-      document.body.classList.remove('wb-dashboard-page');
-      host.classList.remove('wb-dashboard-layout');
+    if (!host.querySelector(':scope > .hg-dashlet')) {
+      document.body.classList.remove('hg-dashboard-page');
+      host.classList.remove('hg-dashboard-layout');
       return false;
     }
-    document.body.classList.add('wb-dashboard-page');
-    host.classList.add('wb-dashboard-layout');
+    document.body.classList.add('hg-dashboard-page');
+    host.classList.add('hg-dashboard-layout');
     splitAtomicDashlets(host);
     var layout = readLayout();
     var nodes = dashlets(host);
@@ -1036,7 +1036,7 @@
       if (name === 'donate') decorateDonate(node);
       if (name === 'metrics') decorateMetrics(node);
       if (name === 'quota' || name === 'mailquota' || name === 'databasequota') decorateQuota(node);
-      if (!node.querySelector('.wb-dashlet__layout-controls')) makeControls(node, host);
+      if (!node.querySelector('.hg-dashlet__layout-controls')) makeControls(node, host);
       syncCardState(node);
       syncPrimaryContext(node);
       syncOperationalContext(node);
@@ -1046,46 +1046,46 @@
       host.dataset.heritageLayoutDnD = 'true';
       var pointerSource = null;
       host.addEventListener('pointerdown', function (event) {
-        var node = event.target.closest('.wb-dashlet');
-        if (!node || !host.classList.contains('wb-dashboard-layout-edit') || !event.target.closest('.wb-dashlet__drag-handle')) return;
+        var node = event.target.closest('.hg-dashlet');
+        if (!node || !host.classList.contains('hg-dashboard-layout-edit') || !event.target.closest('.hg-dashlet__drag-handle')) return;
         pointerSource = node;
-        node.classList.add('wb-dashlet--dragging');
+        node.classList.add('hg-dashlet--dragging');
         node.setPointerCapture(event.pointerId);
       });
       host.addEventListener('pointerup', function (event) {
         if (!pointerSource) return;
         var target = document.elementFromPoint(event.clientX, event.clientY);
-        var destination = target && target.closest('.wb-dashlet');
+        var destination = target && target.closest('.hg-dashlet');
         if (destination && destination !== pointerSource && host.contains(destination)) {
           destination.parentNode.insertBefore(pointerSource, destination);
           save(host);
         }
-        pointerSource.classList.remove('wb-dashlet--dragging');
+        pointerSource.classList.remove('hg-dashlet--dragging');
         pointerSource = null;
       });
       host.addEventListener('pointercancel', function () {
-        if (pointerSource) pointerSource.classList.remove('wb-dashlet--dragging');
+        if (pointerSource) pointerSource.classList.remove('hg-dashlet--dragging');
         pointerSource = null;
       });
       host.addEventListener('dragstart', function (event) {
-        var node = event.target.closest('.wb-dashlet');
-        if (!node || !host.classList.contains('wb-dashboard-layout-edit') || !event.target.closest('.wb-dashlet__drag-handle')) { event.preventDefault(); return; }
+        var node = event.target.closest('.hg-dashlet');
+        if (!node || !host.classList.contains('hg-dashboard-layout-edit') || !event.target.closest('.hg-dashlet__drag-handle')) { event.preventDefault(); return; }
         event.dataTransfer.effectAllowed = 'move';
         event.dataTransfer.setData('text/plain', node.dataset.heritageDashlet || '');
         node.setAttribute('aria-grabbed', 'true');
       });
       host.addEventListener('dragend', function (event) {
-        var node = event.target.closest('.wb-dashlet');
+        var node = event.target.closest('.hg-dashlet');
         if (node) node.setAttribute('aria-grabbed', 'false');
       });
       host.addEventListener('dragover', function (event) {
-        if (host.classList.contains('wb-dashboard-layout-edit') && event.target.closest('.wb-dashlet')) event.preventDefault();
+        if (host.classList.contains('hg-dashboard-layout-edit') && event.target.closest('.hg-dashlet')) event.preventDefault();
       });
       host.addEventListener('drop', function (event) {
-        if (!host.classList.contains('wb-dashboard-layout-edit')) return;
-        var target = event.target.closest('.wb-dashlet');
+        if (!host.classList.contains('hg-dashboard-layout-edit')) return;
+        var target = event.target.closest('.hg-dashlet');
         var name = event.dataTransfer.getData('text/plain');
-        var source = name && host.querySelector('.wb-dashlet[data-heritage-dashlet="' + name + '"]');
+        var source = name && host.querySelector('.hg-dashlet[data-heritage-dashlet="' + name + '"]');
         if (!target || !source || target === source) return;
         event.preventDefault();
         target.parentNode.insertBefore(source, target);
@@ -1094,30 +1094,30 @@
     }
     var header = host.querySelector(':scope > .page-header');
     var overview = syncOverview(host);
-    if (header && !host.querySelector(':scope > .wb-dashboard-toolbar')) {
+    if (header && !host.querySelector(':scope > .hg-dashboard-toolbar')) {
       var toolbar = document.createElement('div');
-      toolbar.className = 'wb-dashboard-toolbar';
+      toolbar.className = 'hg-dashboard-toolbar';
       toolbar.setAttribute('aria-label', t('dashboardLayoutControls'));
       var status = document.createElement('span');
-      status.className = 'wb-dashboard-toolbar__status';
+      status.className = 'hg-dashboard-toolbar__status';
       status.setAttribute('data-heritage-layout-status', 'true');
       status.setAttribute('role', 'status');
       status.setAttribute('aria-live', 'polite');
       toolbar.appendChild(status);
       var actions = document.createElement('div');
-      actions.className = 'wb-dashboard-toolbar__actions';
+      actions.className = 'hg-dashboard-toolbar__actions';
       toolbar.appendChild(actions);
       var toggle = document.createElement('button');
       toggle.type = 'button';
-      toggle.className = 'wb-dashboard-button wb-dashboard-button--primary wb-dashboard-layout-toggle wb-dashboard-toolbar__primary';
+      toggle.className = 'hg-dashboard-button hg-dashboard-button--primary hg-dashboard-layout-toggle hg-dashboard-toolbar__primary';
       toggle.textContent = t('customizeDashboard');
       toggle.setAttribute('data-heritage-layout-toggle', 'true');
       toggle.setAttribute('aria-pressed', 'false');
       toggle.addEventListener('click', function () {
-        host.classList.toggle('wb-dashboard-layout-edit');
+        host.classList.toggle('hg-dashboard-layout-edit');
         if (reset) {
           reset.dataset.heritageConfirm = 'false';
-          reset.classList.remove('wb-dashboard-layout-reset--armed');
+          reset.classList.remove('hg-dashboard-layout-reset--armed');
           reset.textContent = t('resetLayout');
         }
         syncToolbar(host);
@@ -1125,20 +1125,20 @@
       actions.appendChild(toggle);
       var reset = document.createElement('button');
       reset.type = 'button';
-      reset.className = 'wb-dashboard-button wb-dashboard-layout-reset';
+      reset.className = 'hg-dashboard-button hg-dashboard-layout-reset';
       reset.textContent = t('resetLayout');
       reset.setAttribute('data-heritage-layout-reset', 'true');
       var resetTimer = null;
       reset.addEventListener('click', function () {
         if (reset.dataset.heritageConfirm !== 'true') {
           reset.dataset.heritageConfirm = 'true';
-          reset.classList.add('wb-dashboard-layout-reset--armed');
+          reset.classList.add('hg-dashboard-layout-reset--armed');
           reset.textContent = t('confirmReset');
           status.textContent = t('resetWarning');
           if (resetTimer) window.clearTimeout(resetTimer);
           resetTimer = window.setTimeout(function () {
             reset.dataset.heritageConfirm = 'false';
-            reset.classList.remove('wb-dashboard-layout-reset--armed');
+            reset.classList.remove('hg-dashboard-layout-reset--armed');
             reset.textContent = t('resetLayout');
             syncToolbar(host);
           }, 6000);
@@ -1146,7 +1146,7 @@
         }
         if (resetTimer) window.clearTimeout(resetTimer);
         reset.dataset.heritageConfirm = 'false';
-        reset.classList.remove('wb-dashboard-layout-reset--armed');
+        reset.classList.remove('hg-dashboard-layout-reset--armed');
         reset.textContent = t('resetLayout');
         try { window.localStorage.removeItem(STORAGE_KEY); } catch (error) { /* ignore */ }
         dashlets(host).sort(function (a, b) {
@@ -1164,7 +1164,7 @@
       actions.appendChild(reset);
       var show = document.createElement('button');
       show.type = 'button';
-      show.className = 'wb-dashboard-button wb-dashboard-layout-show-hidden';
+      show.className = 'hg-dashboard-button hg-dashboard-layout-show-hidden';
       show.textContent = t('showHiddenWidgets');
       show.setAttribute('data-heritage-layout-show-hidden', 'true');
       show.addEventListener('click', function () { showAllWidgets(host); });

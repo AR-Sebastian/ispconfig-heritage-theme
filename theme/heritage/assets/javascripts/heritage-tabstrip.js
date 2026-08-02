@@ -18,17 +18,17 @@
   }
 
   function update(wrapper) {
-    var list = wrapper.querySelector('.wb-form-tabs');
+    var list = wrapper.querySelector('.hg-form-tabs');
     if (!list) return;
     var maximum = Math.max(0, list.scrollWidth - list.clientWidth);
     var overflow = maximum > 2;
     wrapper.dataset.overflow = String(overflow);
-    wrapper.querySelector('.wb-tabstrip__previous').disabled = !overflow || list.scrollLeft <= 1;
-    wrapper.querySelector('.wb-tabstrip__next').disabled = !overflow || list.scrollLeft >= maximum - 1;
+    wrapper.querySelector('.hg-tabstrip__previous').disabled = !overflow || list.scrollLeft <= 1;
+    wrapper.querySelector('.hg-tabstrip__next').disabled = !overflow || list.scrollLeft >= maximum - 1;
   }
 
   function revealActive(wrapper) {
-    var list = wrapper.querySelector('.wb-form-tabs');
+    var list = wrapper.querySelector('.hg-form-tabs');
     var active = list && list.querySelector('li.active');
     if (!active) return;
     var left = active.offsetLeft;
@@ -38,7 +38,7 @@
   }
 
   function scroll(wrapper, direction) {
-    var list = wrapper.querySelector('.wb-form-tabs');
+    var list = wrapper.querySelector('.hg-form-tabs');
     if (!list) return;
     var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     list.scrollBy({ left: direction * Math.max(120, Math.round(list.clientWidth * 0.72)), behavior: reduced ? 'auto' : 'smooth' });
@@ -78,11 +78,11 @@
 
   function enhance(root) {
     var scope = root && root.querySelectorAll ? root : document;
-    Array.from(scope.querySelectorAll('.content-tab-wrapper > .wb-form-tabs')).forEach(function (list) {
-      if (list.parentElement && list.parentElement.classList.contains('wb-tabstrip')) return;
+    Array.from(scope.querySelectorAll('.content-tab-wrapper > .hg-form-tabs')).forEach(function (list) {
+      if (list.parentElement && list.parentElement.classList.contains('hg-tabstrip')) return;
       removeRetiredTabs(list);
       var wrapper = document.createElement('div');
-      wrapper.className = 'wb-tabstrip';
+      wrapper.className = 'hg-tabstrip';
       wrapper.dataset.heritageTabstrip = 'true';
       list.id = list.id || 'heritage-tab-list-' + (++sequence);
       list.setAttribute('aria-label', messages.tab_sections || 'Form sections');
@@ -92,14 +92,14 @@
 
       var previous = document.createElement('button');
       previous.type = 'button';
-      previous.className = 'wb-tabstrip__control wb-tabstrip__previous';
+      previous.className = 'hg-tabstrip__control hg-tabstrip__previous';
       previous.setAttribute('aria-label', messages.tab_previous || 'Scroll tabs left');
       previous.setAttribute('aria-controls', list.id);
       previous.appendChild(icon('arrow-left'));
 
       var next = document.createElement('button');
       next.type = 'button';
-      next.className = 'wb-tabstrip__control wb-tabstrip__next';
+      next.className = 'hg-tabstrip__control hg-tabstrip__next';
       next.setAttribute('aria-label', messages.tab_next || 'Scroll tabs right');
       next.setAttribute('aria-controls', list.id);
       next.appendChild(icon('arrow-right'));

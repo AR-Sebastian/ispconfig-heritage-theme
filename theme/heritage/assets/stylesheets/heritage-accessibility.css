@@ -5,7 +5,7 @@
  * targets. This layer does not alter controller behaviour.
  */
 
-body.heritage-shell.wb-app-navigation-enabled :is(
+body.heritage-shell.hg-app-navigation-enabled :is(
   a,
   button,
   input,
@@ -20,7 +20,7 @@ body.heritage-shell.wb-app-navigation-enabled :is(
   box-shadow: 0 0 0 5px color-mix(in srgb, var(--hg-accent) 14%, transparent);
 }
 
-body.heritage-shell.wb-app-navigation-enabled :is(
+body.heritage-shell.hg-app-navigation-enabled :is(
   [aria-disabled='true'],
   :disabled
 ) {
@@ -28,7 +28,7 @@ body.heritage-shell.wb-app-navigation-enabled :is(
   opacity: .58;
 }
 
-body.heritage-shell.wb-app-navigation-enabled .wb-visually-hidden {
+body.heritage-shell.hg-app-navigation-enabled .hg-visually-hidden {
   position: absolute !important;
   width: 1px !important;
   height: 1px !important;
@@ -40,22 +40,22 @@ body.heritage-shell.wb-app-navigation-enabled .wb-visually-hidden {
   white-space: nowrap !important;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   .table-responsive,
-  .wb-table-scroll,
-  .wb-table-viewport,
-  .wb-owned-scroll-region
+  .hg-table-scroll,
+  .hg-table-viewport,
+  .hg-owned-scroll-region
 )[role='region']:focus-visible {
   border-radius: var(--hg-radius-md);
   outline-offset: 4px;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent [aria-invalid='true'] {
+body.heritage-shell.hg-app-navigation-enabled #pageContent [aria-invalid='true'] {
   border-color: var(--hg-danger);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--hg-danger) 14%, transparent);
 }
 
-body.wb-login-page.heritage-shell :is(a, button, input, select, textarea, [role='button'], [tabindex]):focus-visible {
+body.hg-login-page.heritage-shell :is(a, button, input, select, textarea, [role='button'], [tabindex]):focus-visible {
   outline: 3px solid color-mix(in srgb, var(--hg-accent) 72%, white);
   outline-offset: 3px;
   box-shadow: 0 0 0 5px color-mix(in srgb, var(--hg-accent) 14%, transparent);
@@ -64,26 +64,26 @@ body.wb-login-page.heritage-shell :is(a, button, input, select, textarea, [role=
 /* Page changes move focus to the new heading so assistive technology announces
  * it. The heading is not interactive, therefore it must not inherit the
  * prominent control ring used by links, fields and buttons. */
-body.heritage-shell.wb-app-navigation-enabled #pageContent:is([data-heritage-page-focus='true'], h1[data-heritage-page-focus='true']):focus-visible,
-body.heritage-shell.wb-app-navigation-enabled #pageContent h1[data-heritage-page-focus='true']:focus-visible {
+body.heritage-shell.hg-app-navigation-enabled #pageContent:is([data-heritage-page-focus='true'], h1[data-heritage-page-focus='true']):focus-visible,
+body.heritage-shell.hg-app-navigation-enabled #pageContent h1[data-heritage-page-focus='true']:focus-visible {
   outline: 0;
   box-shadow: none !important;
 }
 
 @media (pointer: coarse) {
-  body.heritage-shell:is(.wb-app-navigation-enabled, .wb-login-page) :is(
+  body.heritage-shell:is(.hg-app-navigation-enabled, .hg-login-page) :is(
     button,
     .btn,
     [role='button'],
     [role='tab'],
-    .wb-action-control
+    .hg-action-control
   ) {
     min-height: 44px;
   }
 }
 
 @media (forced-colors: active) {
-  body.heritage-shell.wb-app-navigation-enabled :is(
+  body.heritage-shell.hg-app-navigation-enabled :is(
     a,
     button,
     input,
@@ -97,24 +97,24 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent h1[data-heritage-page
     forced-color-adjust: auto;
   }
 
-  body.heritage-shell.wb-app-navigation-enabled :is(
-    .wb-status-pill,
+  body.heritage-shell.hg-app-navigation-enabled :is(
+    .hg-status-pill,
     .badge,
     .label,
     .alert,
-    .wb-feedback
+    .hg-feedback
   ) {
     border: 1px solid CanvasText;
     forced-color-adjust: auto;
   }
 
-  body.heritage-shell.wb-app-navigation-enabled :is(
-    .wb-app-navigation__module.active,
-    .wb-app-navigation__module[aria-current='page'],
-    .wb-mobile-navigation__module.active,
-    .wb-mobile-navigation__module[aria-current='page'],
-    .wb-secondary-navigation a.active,
-    .wb-secondary-navigation a[aria-current='page']
+  body.heritage-shell.hg-app-navigation-enabled :is(
+    .hg-app-navigation__module.active,
+    .hg-app-navigation__module[aria-current='page'],
+    .hg-mobile-navigation__module.active,
+    .hg-mobile-navigation__module[aria-current='page'],
+    .hg-secondary-navigation a.active,
+    .hg-secondary-navigation a[aria-current='page']
   ) {
     border: 2px solid Highlight;
     color: HighlightText;
@@ -122,7 +122,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent h1[data-heritage-page
     forced-color-adjust: none;
   }
 
-  body.wb-login-page.heritage-shell :is(.wb-login-shell, .wb-login-hero, .wb-login-form-surface, input, button) {
+  body.hg-login-page.heritage-shell :is(.hg-login-shell, .hg-login-hero, .hg-login-form-surface, input, button) {
     border-color: CanvasText;
     box-shadow: none;
     forced-color-adjust: auto;
@@ -136,7 +136,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent h1[data-heritage-page
     --hg-text-muted: color-mix(in srgb, currentColor 82%, transparent);
   }
 
-  body.heritage-shell :is(.wb-app-navigation__module, .wb-mobile-navigation__module, .wb-secondary-navigation a, .wb-surface, .wb-panel, .wb-card, .form-control, input, select, textarea, button, .btn) {
+  body.heritage-shell :is(.hg-app-navigation__module, .hg-mobile-navigation__module, .hg-secondary-navigation a, .hg-surface, .hg-panel, .hg-card, .form-control, input, select, textarea, button, .btn) {
     border-width: 2px;
   }
 
@@ -145,13 +145,13 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent h1[data-heritage-page
     box-shadow: none;
   }
 
-  body.heritage-shell :is(.text-muted, .help-block, .wb-field-help, .wb-meta) {
+  body.heritage-shell :is(.text-muted, .help-block, .hg-field-help, .hg-meta) {
     color: var(--hg-text) !important;
   }
 }
 
 @media (prefers-reduced-transparency: reduce) {
-  body.heritage-shell :is(.wb-app-header, .wb-app-navigation, .wb-mobile-navigation, .wb-secondary-navigation, .wb-login-shell, .wb-login-hero, .wb-login-form-surface, .wb-dialog) {
+  body.heritage-shell :is(.hg-app-header, .hg-app-navigation, .hg-mobile-navigation, .hg-secondary-navigation, .hg-login-shell, .hg-login-hero, .hg-login-form-surface, .hg-dialog) {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }

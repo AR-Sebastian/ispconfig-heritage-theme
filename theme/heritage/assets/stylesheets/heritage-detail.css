@@ -4,7 +4,7 @@
  * existing semantic markup and progressive Workbench classes only.
  */
 
-body.heritage-shell.wb-form-page #pageContent .breadcrumb {
+body.heritage-shell.hg-form-page #pageContent .breadcrumb {
   display: flex;
   min-height: 30px;
   align-items: center;
@@ -21,20 +21,20 @@ body.heritage-shell.wb-form-page #pageContent .breadcrumb {
   font-size: 11px;
 }
 
-body.heritage-shell.wb-form-page #pageContent .breadcrumb > li {
+body.heritage-shell.hg-form-page #pageContent .breadcrumb > li {
   display: inline-flex;
   min-width: 0;
   align-items: center;
   gap: 5px;
 }
 
-body.heritage-shell.wb-form-page #pageContent .breadcrumb > li + li::before {
+body.heritage-shell.hg-form-page #pageContent .breadcrumb > li + li::before {
   padding: 0 2px;
   color: color-mix(in srgb, var(--hg-text-muted) 62%, transparent);
   content: '\203A';
 }
 
-body.heritage-shell.wb-form-page #pageContent .breadcrumb :is(a, .active) {
+body.heritage-shell.hg-form-page #pageContent .breadcrumb :is(a, .active) {
   overflow: hidden;
   max-width: 32ch;
   color: inherit;
@@ -42,18 +42,18 @@ body.heritage-shell.wb-form-page #pageContent .breadcrumb :is(a, .active) {
   white-space: nowrap;
 }
 
-body.heritage-shell.wb-form-page #pageContent .breadcrumb a:is(:hover, :focus-visible) {
+body.heritage-shell.hg-form-page #pageContent .breadcrumb a:is(:hover, :focus-visible) {
   color: var(--hg-accent);
 }
 
 /* Section cards */
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form,
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form,
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .hg-form-tabs-shell {
   overflow: visible;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell > :is(.nav-tabs, .wb-tabstrip) {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .hg-form-tabs-shell > :is(.nav-tabs, .hg-tabstrip) {
   position: sticky;
   z-index: 18;
   top: calc(var(--hg-header-height, 70px) + var(--hg-module-height, 68px) - 1px);
@@ -66,11 +66,11 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell > 
   backdrop-filter: blur(18px) saturate(140%);
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell :is(.nav-tabs, .wb-form-tabs) > li > a {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .hg-form-tabs-shell :is(.nav-tabs, .hg-form-tabs) > li > a {
   position: relative;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell :is(.nav-tabs, .wb-form-tabs) > li.active > a::after {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .hg-form-tabs-shell :is(.nav-tabs, .hg-form-tabs) > li.active > a::after {
   position: absolute;
   right: 15px;
   bottom: 5px;
@@ -81,7 +81,7 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell :i
   content: '';
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .hg-tab-error-count {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .hg-tab-error-count {
   display: inline-grid;
   min-width: 18px;
   height: 18px;
@@ -97,7 +97,7 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form .hg-tab-error-count {
   line-height: 1;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .hg-form-validation-summary {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .hg-form-validation-summary {
   display: flex;
   width: 100%;
   min-height: 42px;
@@ -116,7 +116,7 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form .hg-form-validation-su
   cursor: pointer;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .hg-form-validation-summary::before {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .hg-form-validation-summary::before {
   display: inline-grid;
   width: 22px;
   height: 22px;
@@ -130,13 +130,13 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form .hg-form-validation-su
   font-weight: 850;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .hg-form-validation-summary:is(:hover, :focus-visible) {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .hg-form-validation-summary:is(:hover, :focus-visible) {
   border-color: color-mix(in srgb, var(--hg-danger) 46%, var(--hg-border));
   box-shadow: var(--hg-focus-ring);
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
-  .wb-content-panel,
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form :is(
+  .hg-content-panel,
   .panel,
   fieldset,
   .well
@@ -150,8 +150,8 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
   box-shadow: var(--hg-shadow-xs);
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
-  .wb-content-panel,
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form :is(
+  .hg-content-panel,
   .panel,
   fieldset
 )::before {
@@ -169,21 +169,21 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
   pointer-events: none;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-content-panel__header {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .hg-content-panel__header {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: 6px 16px;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-content-panel__header > :is(h1, h2, h3) {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .hg-content-panel__header > :is(h1, h2, h3) {
   color: var(--hg-text);
   font-size: 15px;
   font-weight: 790;
   letter-spacing: -.015em;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-content-panel__header > p {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .hg-content-panel__header > p {
   grid-column: 1 / -1;
   max-width: 72ch;
   color: var(--hg-text-muted);
@@ -193,30 +193,30 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-content-panel__hea
 
 /* Fields and compound controls */
 
-body.heritage-shell.wb-form-page #pageForm[data-heritage-form-system='true'] {
+body.heritage-shell.hg-form-page #pageForm[data-heritage-form-system='true'] {
   --hg-form-label-width: clamp(132px, 22%, 210px);
 }
 
-body.heritage-shell.wb-form-page #pageForm[data-heritage-form-system='true'] [data-heritage-form-section='true'] {
+body.heritage-shell.hg-form-page #pageForm[data-heritage-form-system='true'] [data-heritage-form-section='true'] {
   isolation: isolate;
   scroll-margin-top: calc(var(--hg-header-height, 70px) + var(--hg-module-height, 68px) + 76px);
 }
 
-body.heritage-shell.wb-form-page #pageForm[data-heritage-form-system='true'] [data-heritage-form-section='true'] > :is(
-  .wb-form-section-heading,
+body.heritage-shell.hg-form-page #pageForm[data-heritage-form-system='true'] [data-heritage-form-section='true'] > :is(
+  .hg-form-section-heading,
   legend,
   .panel-heading,
-  .wb-content-panel__header
+  .hg-content-panel__header
 ) {
   color: var(--hg-text);
   letter-spacing: -.012em;
 }
 
-body.heritage-shell.wb-form-page #pageForm[data-heritage-form-system='true'] [data-heritage-field='true'] {
+body.heritage-shell.hg-form-page #pageForm[data-heritage-form-system='true'] [data-heritage-field='true'] {
   padding: 5px 7px;
 }
 
-body.heritage-shell.wb-form-page #pageForm[data-heritage-form-system='true'] [data-heritage-required] > :is(label, .control-label)::after {
+body.heritage-shell.hg-form-page #pageForm[data-heritage-form-system='true'] [data-heritage-required] > :is(label, .control-label)::after {
   margin-inline-start: 4px;
   color: var(--hg-accent);
   content: '\2022';
@@ -224,15 +224,15 @@ body.heritage-shell.wb-form-page #pageForm[data-heritage-form-system='true'] [da
   font-weight: 900;
 }
 
-body.heritage-shell.wb-form-page #pageForm[data-heritage-form-system='true'] [data-heritage-invalid] {
+body.heritage-shell.hg-form-page #pageForm[data-heritage-form-system='true'] [data-heritage-invalid] {
   background: linear-gradient(90deg, var(--hg-danger-soft), transparent 70%);
   box-shadow: inset 3px 0 0 color-mix(in srgb, var(--hg-danger) 74%, transparent);
 }
 
-body.heritage-shell.wb-form-page #pageForm[data-heritage-form-system='true'] :is(
+body.heritage-shell.hg-form-page #pageForm[data-heritage-form-system='true'] :is(
   .help-block-error,
   .field-error,
-  .wb-field-error
+  .hg-field-error
 ) {
   margin-block-start: 6px;
   color: var(--hg-danger);
@@ -241,11 +241,11 @@ body.heritage-shell.wb-form-page #pageForm[data-heritage-form-system='true'] :is
   line-height: 1.45;
 }
 
-body.heritage-shell.wb-form-page #pageForm[data-heritage-form-density='compact'] .tab-pane.active.wb-form-section {
+body.heritage-shell.hg-form-page #pageForm[data-heritage-form-density='compact'] .tab-pane.active.hg-form-section {
   max-width: 920px;
 }
 
-body.heritage-shell.wb-form-page #pageForm[data-heritage-form-density='long'] .wb-form-section-summary {
+body.heritage-shell.hg-form-page #pageForm[data-heritage-form-density='long'] .hg-form-section-summary {
   position: sticky;
   z-index: 9;
   top: calc(var(--hg-header-height, 70px) + var(--hg-module-height, 68px) + 58px);
@@ -254,10 +254,10 @@ body.heritage-shell.wb-form-page #pageForm[data-heritage-form-density='long'] .w
   backdrop-filter: blur(16px) saturate(125%);
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form :is(
   .form-group,
   .ctrlHolder,
-  .wb-field-group
+  .hg-field-group
 ) {
   position: relative;
   min-width: 0;
@@ -265,30 +265,30 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
   transition: background .16s ease, box-shadow .16s ease;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form :is(
   .form-group,
   .ctrlHolder,
-  .wb-field-group
+  .hg-field-group
 ):focus-within {
   background: color-mix(in srgb, var(--hg-accent) 2.5%, transparent);
   box-shadow: 0 0 0 1px color-mix(in srgb, var(--hg-accent) 8%, transparent);
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-field-group {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .hg-field-group {
   scroll-margin-top: calc(var(--hg-header-height, 70px) + var(--hg-module-height, 68px) + 72px);
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-field-group.hg-field-group--disabled {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .hg-field-group.hg-field-group--disabled {
   opacity: .72;
   background: var(--hg-surface-subtle);
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(input, select, textarea)::placeholder {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form :is(input, select, textarea)::placeholder {
   color: color-mix(in srgb, var(--hg-text-muted) 76%, transparent);
   opacity: 1;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(input, select, textarea):user-invalid {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form :is(input, select, textarea):user-invalid {
   border-color: color-mix(in srgb, var(--hg-danger) 58%, var(--hg-border));
   box-shadow: 0 0 0 3px var(--hg-danger-soft);
 }
@@ -297,47 +297,47 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(input, select, tex
  * operational forms scannable without changing field order or submission
  * semantics. Rich editors, summaries and action rows retain the full width. */
 @media (min-width: 1100px) {
-  body.heritage-shell.wb-form-page #pageForm.wb-modern-form
-  .tab-pane.active.wb-form-section {
+  body.heritage-shell.hg-form-page #pageForm.hg-modern-form
+  .tab-pane.active.hg-form-section {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: start;
     gap: 10px 18px;
   }
 
-  body.heritage-shell.wb-form-page #pageForm.wb-modern-form
-  .tab-pane.active.wb-form-section > :not(.wb-field-group),
-  body.heritage-shell.wb-form-page #pageForm.wb-modern-form
-  .tab-pane.active.wb-form-section > :is(
-    .wb-form-section-summary,
-    .wb-form-actions,
+  body.heritage-shell.hg-form-page #pageForm.hg-modern-form
+  .tab-pane.active.hg-form-section > :not(.hg-field-group),
+  body.heritage-shell.hg-form-page #pageForm.hg-modern-form
+  .tab-pane.active.hg-form-section > :is(
+    .hg-form-section-summary,
+    .hg-form-actions,
     .clear,
     fieldset,
     hr,
     .alert,
     .panel,
-    .wb-content-panel,
-    .wb-field-group--textarea,
-    .wb-field-group--code,
-    .wb-field-group--editor
+    .hg-content-panel,
+    .hg-field-group--textarea,
+    .hg-field-group--code,
+    .hg-field-group--editor
   ) {
     grid-column: 1 / -1;
   }
 
-  body.heritage-shell.wb-form-page #pageForm.wb-modern-form
-  .tab-pane.active.wb-form-section > .wb-field-group {
+  body.heritage-shell.hg-form-page #pageForm.hg-modern-form
+  .tab-pane.active.hg-form-section > .hg-field-group {
     min-height: 60px;
     margin: 0 !important;
     grid-template-columns: minmax(118px, 32%) minmax(0, 1fr);
   }
 
-  body.heritage-shell.wb-form-page #pageForm.wb-modern-form
-  .tab-pane.active.wb-form-section > .wb-field-group--boolean {
+  body.heritage-shell.hg-form-page #pageForm.hg-modern-form
+  .tab-pane.active.hg-form-section > .hg-field-group--boolean {
     min-height: 52px;
   }
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form :is(
   .input-group,
   .input-group-btn,
   .input-group-addon
@@ -345,12 +345,12 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
   min-height: var(--hg-control-height);
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .input-group {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .input-group {
   display: flex;
   align-items: stretch;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-actions {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .hg-form-actions {
   position: sticky;
   z-index: 14;
   bottom: 12px;
@@ -361,32 +361,32 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-actions {
   backdrop-filter: blur(18px) saturate(140%);
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form [data-heritage-form-actions='true'] {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form [data-heritage-form-actions='true'] {
   justify-content: flex-start;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form [data-heritage-form-actions='true'] [data-heritage-action='primary'] {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form [data-heritage-form-actions='true'] [data-heritage-action='primary'] {
   order: 3;
   margin-inline-start: auto;
   box-shadow: 0 8px 20px color-mix(in srgb, var(--hg-accent) 18%, transparent);
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form [data-heritage-form-actions='true'] [data-heritage-action='danger'] {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form [data-heritage-form-actions='true'] [data-heritage-action='danger'] {
   order: 2;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form [data-heritage-form-actions='true'] [data-heritage-action='secondary'] {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form [data-heritage-form-actions='true'] [data-heritage-action='secondary'] {
   order: 1;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-actions :is(
-  .wb-form-action--primary,
-  .wb-action-control--primary
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .hg-form-actions :is(
+  .hg-form-action--primary,
+  .hg-action-control--primary
 ) {
   min-width: 108px;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .input-group > :is(
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .input-group > :is(
   .form-control,
   input,
   select
@@ -397,7 +397,7 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form .input-group > :is(
   border-end-end-radius: 0;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .input-group :is(
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .input-group :is(
   .input-group-addon,
   .input-group-btn > .btn,
   .input-group-btn > button
@@ -414,17 +414,17 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form .input-group :is(
   background: var(--hg-surface-subtle);
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form textarea {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form textarea {
   min-height: 112px;
   resize: vertical;
   line-height: 1.55;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form :is(
   .help-block,
   .form-text,
   .field-help,
-  .wb-field-help
+  .hg-field-help
 ) {
   display: block;
   margin-block-start: 6px;
@@ -433,24 +433,24 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
   line-height: 1.5;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form :is(
   .has-error,
-  .wb-field-error
+  .hg-field-error
 ) :is(input, select, textarea, .form-control) {
   border-color: color-mix(in srgb, var(--hg-danger) 54%, var(--hg-border));
   box-shadow: 0 0 0 3px var(--hg-danger-soft);
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form :is(
   .has-success,
-  .wb-field-valid
+  .hg-field-valid
 ) :is(input, select, textarea, .form-control) {
   border-color: color-mix(in srgb, var(--hg-success) 40%, var(--hg-border));
 }
 
 /* Boolean controls */
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form input[type='checkbox'][role='switch'] {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form input[type='checkbox'][role='switch'] {
   position: relative;
   width: 42px;
   min-width: 42px;
@@ -467,7 +467,7 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form input[type='checkbox']
   transition: border-color .16s ease, background .16s ease, box-shadow .16s ease;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form input[type='checkbox'][role='switch']::before {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form input[type='checkbox'][role='switch']::before {
   position: absolute;
   top: 3px;
   left: 3px;
@@ -480,24 +480,24 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form input[type='checkbox']
   transition: transform .16s ease;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form input[type='checkbox'][role='switch']:checked {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form input[type='checkbox'][role='switch']:checked {
   border-color: var(--hg-accent);
   background: var(--hg-accent);
   box-shadow: 0 5px 14px color-mix(in srgb, var(--hg-accent) 20%, transparent);
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form input[type='checkbox'][role='switch']:checked::before {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form input[type='checkbox'][role='switch']:checked::before {
   transform: translateX(18px);
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form input[type='checkbox'][role='switch']:focus-visible {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form input[type='checkbox'][role='switch']:focus-visible {
   outline: none;
   box-shadow: var(--hg-focus-ring);
 }
 
 /* Status, quota and progress */
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-status-chip {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-status-chip {
   display: inline-flex;
   min-height: 25px;
   align-items: center;
@@ -511,7 +511,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-status-chip {
   font-weight: 760;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-status-chip::before {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-status-chip::before {
   width: 6px;
   height: 6px;
   flex: 0 0 6px;
@@ -521,37 +521,37 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-status-chip::befo
   opacity: .75;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   .label-success,
   .badge-success,
-  .wb-status-chip--success
+  .hg-status-chip--success
 ) {
   color: var(--hg-success);
   border-color: color-mix(in srgb, var(--hg-success) 24%, var(--hg-border));
   background: var(--hg-success-soft);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   .label-warning,
   .badge-warning,
-  .wb-status-chip--warning
+  .hg-status-chip--warning
 ) {
   color: var(--hg-warning);
   border-color: color-mix(in srgb, var(--hg-warning) 24%, var(--hg-border));
   background: var(--hg-warning-soft);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   .label-danger,
   .badge-danger,
-  .wb-status-chip--danger
+  .hg-status-chip--danger
 ) {
   color: var(--hg-danger);
   border-color: color-mix(in srgb, var(--hg-danger) 24%, var(--hg-border));
   background: var(--hg-danger-soft);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(.progress, .wb-progress) {
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(.progress, .hg-progress) {
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -562,7 +562,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(.progress, .wb-pr
   box-shadow: inset 0 1px 2px rgba(24, 39, 75, .08);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   .progress-bar,
   .progress > .bar
 ) {
@@ -574,24 +574,24 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
   transition: width .3s ease;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .progress-bar-success {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .progress-bar-success {
   background: var(--hg-success);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .progress-bar-warning {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .progress-bar-warning {
   background: var(--hg-warning);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .progress-bar-danger {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .progress-bar-danger {
   background: var(--hg-danger);
 }
 
 /* Context and quick-action surfaces already emitted by modules/add-ons. */
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   .list-group,
-  .wb-quick-actions,
-  .wb-context-panel
+  .hg-quick-actions,
+  .hg-context-panel
 ) {
   overflow: clip;
   margin: 0 0 var(--hg-page-gap, 18px);
@@ -602,9 +602,9 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
   box-shadow: var(--hg-shadow-xs);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   .list-group-item,
-  .wb-quick-action
+  .hg-quick-action
 ) {
   display: flex;
   min-height: 42px;
@@ -619,24 +619,24 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
   background: transparent;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   .list-group-item,
-  .wb-quick-action
+  .hg-quick-action
 ):last-child {
   border-bottom: 0;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   .list-group-item,
-  .wb-quick-action
+  .hg-quick-action
 ):is(:hover, :focus-visible) {
   color: var(--hg-accent);
   background: var(--hg-accent-soft);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   .list-group-item,
-  .wb-quick-action
+  .hg-quick-action
 )::after {
   margin-inline-start: auto;
   color: var(--hg-text-muted);
@@ -645,9 +645,9 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
   line-height: 1;
 }
 
-@container wb-page-content (min-width: 1120px) {
-  body.heritage-shell.wb-form-page #pageForm.wb-modern-form .tab-content > .active:has(
-    > .wb-context-panel
+@container hg-page-content (min-width: 1120px) {
+  body.heritage-shell.hg-form-page #pageForm.hg-modern-form .tab-content > .active:has(
+    > .hg-context-panel
   ) {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
@@ -655,69 +655,69 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
     align-items: start;
   }
 
-  body.heritage-shell.wb-form-page #pageForm.wb-modern-form .tab-content > .active > .wb-context-panel {
+  body.heritage-shell.hg-form-page #pageForm.hg-modern-form .tab-content > .active > .hg-context-panel {
     position: sticky;
     top: calc(var(--hg-header-height, 72px) + var(--hg-module-height, 68px) + 18px);
   }
 }
 
-@container wb-page-content (max-width: 620px) {
-  body.heritage-shell.wb-form-page #pageContent .breadcrumb {
+@container hg-page-content (max-width: 620px) {
+  body.heritage-shell.hg-form-page #pageContent .breadcrumb {
     width: 100%;
     flex-wrap: nowrap;
     overflow-x: auto;
     scrollbar-width: none;
   }
 
-  body.heritage-shell.wb-form-page #pageContent .breadcrumb::-webkit-scrollbar {
+  body.heritage-shell.hg-form-page #pageContent .breadcrumb::-webkit-scrollbar {
     display: none;
   }
 
-  body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell > .tab-content {
+  body.heritage-shell.hg-form-page #pageForm.hg-modern-form .hg-form-tabs-shell > .tab-content {
     padding: 14px;
   }
 
-  body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell > :is(.nav-tabs, .wb-tabstrip) {
+  body.heritage-shell.hg-form-page #pageForm.hg-modern-form .hg-form-tabs-shell > :is(.nav-tabs, .hg-tabstrip) {
     top: var(--hg-header-height, 64px);
     overflow-x: auto;
     flex-wrap: nowrap;
     scrollbar-width: none;
   }
 
-  body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell > :is(.nav-tabs, .wb-tabstrip)::-webkit-scrollbar {
+  body.heritage-shell.hg-form-page #pageForm.hg-modern-form .hg-form-tabs-shell > :is(.nav-tabs, .hg-tabstrip)::-webkit-scrollbar {
     display: none;
   }
 
-  body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-actions {
+  body.heritage-shell.hg-form-page #pageForm.hg-modern-form .hg-form-actions {
     bottom: 8px;
     display: grid;
     grid-template-columns: 1fr;
     padding: 10px;
   }
 
-  body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-actions > * {
+  body.heritage-shell.hg-form-page #pageForm.hg-modern-form .hg-form-actions > * {
     width: 100%;
   }
 
-  body.heritage-shell.wb-form-page #pageForm[data-heritage-form-system='true'] [data-heritage-field='true'] {
+  body.heritage-shell.hg-form-page #pageForm[data-heritage-form-system='true'] [data-heritage-field='true'] {
     padding: 5px 2px 10px;
   }
 
-  body.heritage-shell.wb-form-page #pageForm.wb-modern-form [data-heritage-form-actions='true'] [data-heritage-action='primary'] {
+  body.heritage-shell.hg-form-page #pageForm.hg-modern-form [data-heritage-form-actions='true'] [data-heritage-action='primary'] {
     order: 1;
     margin-inline-start: 0;
   }
 
-  body.heritage-shell.wb-form-page #pageForm.wb-modern-form [data-heritage-form-actions='true'] [data-heritage-action='secondary'] {
+  body.heritage-shell.hg-form-page #pageForm.hg-modern-form [data-heritage-form-actions='true'] [data-heritage-action='secondary'] {
     order: 2;
   }
 
-  body.heritage-shell.wb-form-page #pageForm.wb-modern-form [data-heritage-form-actions='true'] [data-heritage-action='danger'] {
+  body.heritage-shell.hg-form-page #pageForm.hg-modern-form [data-heritage-form-actions='true'] [data-heritage-action='danger'] {
     order: 3;
   }
 
-  body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
-    .wb-content-panel,
+  body.heritage-shell.hg-form-page #pageForm.hg-modern-form :is(
+    .hg-content-panel,
     .panel,
     fieldset,
     .well
@@ -727,14 +727,14 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+  body.heritage-shell.hg-form-page #pageForm.hg-modern-form :is(
     .form-group,
     .ctrlHolder,
-    .wb-field-group,
+    .hg-field-group,
     input[type='checkbox'][role='switch'],
     input[type='checkbox'][role='switch']::before
   ),
-  body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+  body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
     .progress-bar,
     .progress > .bar
   ) {

@@ -74,7 +74,7 @@
   }
 
   function render(root) {
-    var nodes = (root || document).querySelectorAll('.icon:not(.wb-svg-icon),.glyphicon:not(.wb-svg-icon),.fa:not(.wb-svg-icon)');
+    var nodes = (root || document).querySelectorAll('.icon:not(.hg-svg-icon),.glyphicon:not(.hg-svg-icon),.fa:not(.hg-svg-icon)');
     Array.prototype.forEach.call(nodes, function(node) {
       var name = '';
       Array.prototype.some.call(node.classList, function(className) {
@@ -93,7 +93,7 @@
         return false;
       });
       if (!name) return;
-      node.classList.add('wb-svg-icon');
+      node.classList.add('hg-svg-icon');
       node.setAttribute('data-heritage-icon', name);
       node.replaceChildren(svgIcon(name));
       accessibleName(node, name);

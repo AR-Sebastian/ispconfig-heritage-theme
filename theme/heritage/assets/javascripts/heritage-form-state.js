@@ -86,21 +86,21 @@
   }
 
   function ensureStatus(host) {
-    var status = host.querySelector(':scope > .wb-page-meta > .wb-form-state, :scope > .wb-form-state');
+    var status = host.querySelector(':scope > .hg-page-meta > .hg-form-state, :scope > .hg-form-state');
     if (status) return status;
     status = document.createElement('div');
-    status.className = 'wb-form-state';
+    status.className = 'hg-form-state';
     status.setAttribute('role', 'status');
     status.setAttribute('aria-live', 'polite');
     status.setAttribute('aria-atomic', 'true');
     var indicator = document.createElement('span');
-    indicator.className = 'wb-form-state__indicator';
+    indicator.className = 'hg-form-state__indicator';
     indicator.setAttribute('aria-hidden', 'true');
     var label = document.createElement('span');
-    label.className = 'wb-form-state__label';
+    label.className = 'hg-form-state__label';
     status.appendChild(indicator);
     status.appendChild(label);
-    var meta = host.querySelector(':scope > .wb-page-meta');
+    var meta = host.querySelector(':scope > .hg-page-meta');
     var heading = host.querySelector(':scope > .page-header');
     if (meta) meta.appendChild(status);
     else if (heading) heading.insertAdjacentElement('afterend', status);
@@ -124,7 +124,7 @@
         ? (messages.form_field || localized('geändertes Feld', 'changed field'))
         : (messages.form_fields || localized('geänderte Felder', 'changed fields')));
     }
-    var labelNode = status.querySelector('.wb-form-state__label');
+    var labelNode = status.querySelector('.hg-form-state__label');
     if (labelNode.textContent !== label) labelNode.textContent = label;
     return true;
   }
@@ -175,7 +175,7 @@
       if (!host) return;
       new MutationObserver(function (mutations) {
         var contentChanged = mutations.some(function (mutation) {
-          return !mutation.target.closest || !mutation.target.closest('.wb-form-state');
+          return !mutation.target.closest || !mutation.target.closest('.hg-form-state');
         });
         if (contentChanged) enhance();
       }).observe(host, { childList: true, subtree: true });
@@ -193,11 +193,11 @@
     enhance: enhance,
     setState: setState,
     getState: function () {
-      var status = document.querySelector('#pageContent > .wb-page-meta > .wb-form-state, #pageContent > .wb-form-state');
+      var status = document.querySelector('#pageContent > .hg-page-meta > .hg-form-state, #pageContent > .hg-form-state');
       return status ? status.dataset.state : null;
     },
     getChangedCount: function () {
-      var status = document.querySelector('#pageContent > .wb-page-meta > .wb-form-state, #pageContent > .wb-form-state');
+      var status = document.querySelector('#pageContent > .hg-page-meta > .hg-form-state, #pageContent > .hg-form-state');
       return status && status.dataset.changedCount !== undefined ? Number(status.dataset.changedCount) : null;
     }
   };

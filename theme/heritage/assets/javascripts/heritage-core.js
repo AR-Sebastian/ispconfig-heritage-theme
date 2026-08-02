@@ -954,17 +954,17 @@
         updateTooltipText('php_cli_binary', data.php_cli_binary);
         updateTooltipText('docroot_client', data.docroot_client);
         updateTooltipText('domain', data.domain || control.getAttribute('data-domain-not-selected') || '');
-        var existing = query(document, '.wb-jail-symbol, .jail-symbol');
+        var existing = query(document, '.hg-jail-symbol, .jail-symbol');
         if (data.cron_type === 'chrooted') {
           if (!existing) {
             var marker = document.createElement('span');
-            marker.className = 'wb-jail-symbol';
+            marker.className = 'hg-jail-symbol';
             marker.title = control.getAttribute('data-jailed-title') || '';
             marker.appendChild(svgLockIcon());
             control.insertAdjacentElement('afterend', marker);
           }
         } else {
-          queryAll(document, '.wb-jail-symbol, .jail-symbol').forEach(function(element) { element.remove(); });
+          queryAll(document, '.hg-jail-symbol, .jail-symbol').forEach(function(element) { element.remove(); });
         }
       } else if (mode === 'database-users') {
         String(control.getAttribute('data-json-option-targets') || '').split(',').forEach(function(id) {
@@ -1316,7 +1316,7 @@
 
     beginRequest: function() {
       ISPConfig.requestsRunning += 1;
-      document.body.classList.add('wb-request-active');
+      document.body.classList.add('hg-request-active');
       document.body.dataset.heritageRequestCount = String(ISPConfig.requestsRunning);
       var host = document.getElementById('pageContent');
       if (host) host.setAttribute('aria-busy', 'true');
@@ -1326,7 +1326,7 @@
       ISPConfig.requestsRunning = Math.max(0, ISPConfig.requestsRunning - 1);
       document.body.dataset.heritageRequestCount = String(ISPConfig.requestsRunning);
       if (ISPConfig.requestsRunning > 0) return;
-      document.body.classList.remove('wb-request-active');
+      document.body.classList.remove('hg-request-active');
       var host = document.getElementById('pageContent');
       if (host) host.setAttribute('aria-busy', 'false');
     },
@@ -1518,7 +1518,7 @@
         var notification = query(document, '.notification');
         var textNode = query(document, '.notification_text');
         var dialog = document.getElementById('datalogModal');
-        var modalBody = dialog && query(dialog, '.modal-body, .wb-dialog__body ul');
+        var modalBody = dialog && query(dialog, '.modal-body, .hg-dialog__body ul');
         if (modalBody) {
           modalBody.replaceChildren();
           Object.keys(entries).forEach(function(key) {
@@ -1569,7 +1569,7 @@
       item.appendChild(document.createTextNode(addTplText + ' '));
       var remove = document.createElement('a');
       remove.href = '#';
-      remove.className = 'wb-template-remove';
+      remove.className = 'hg-template-remove';
       remove.setAttribute('data-heritage-template-remove', 'true');
       remove.setAttribute('aria-label', 'Remove template');
       var glyph = document.createElement('span');

@@ -56,7 +56,7 @@
 
   function alignFieldError(group) {
     var error = group && group.querySelector(':scope > .help-block, :scope > .help-inline, :scope > .error, :scope > [role="alert"]');
-    var body = group && group.querySelector(':scope > .wb-field-body');
+    var body = group && group.querySelector(':scope > .hg-field-body');
     if (error && body && !body.contains(error)) {
       body.appendChild(error);
       error.setAttribute('data-heritage-field-error-aligned', 'true');
@@ -65,7 +65,7 @@
   }
 
   function invalidEntries(host) {
-    return Array.from(host.querySelectorAll('.form-group.has-error, .wb-field-group.has-error')).map(function (group, index) {
+    return Array.from(host.querySelectorAll('.form-group.has-error, .hg-field-group.has-error')).map(function (group, index) {
       var control = fieldControl(group);
       if (!control) return null;
       return { group: group, control: control, label: fieldLabel(group, control, index), error: fieldError(group) };
@@ -73,10 +73,10 @@
   }
 
   function summaryAlert(host, entries) {
-    var alert = host.querySelector('.wb-validation-summary, .alert.alert-danger, #errorMsg');
+    var alert = host.querySelector('.hg-validation-summary, .alert.alert-danger, #errorMsg');
     if (!alert && entries.length) {
       alert = document.createElement('div');
-      alert.className = 'wb-validation-summary wb-validation-summary--generated';
+      alert.className = 'hg-validation-summary hg-validation-summary--generated';
       alert.dataset.heritageValidationGenerated = 'true';
       host.prepend(alert);
     }
@@ -85,7 +85,7 @@
 
   function revealAndFocus(entry) {
     if (!entry || !entry.control) return false;
-    var collapsed = entry.group.closest('.collapse:not(.in), .wb-collapse:not(.in)');
+    var collapsed = entry.group.closest('.collapse:not(.in), .hg-collapse:not(.in)');
     if (collapsed && window.heritageInteractions) window.heritageInteractions.collapse(collapsed, true, entry.control);
     window.setTimeout(function () {
       if (entry.control.offsetParent !== null) entry.control.focus();
@@ -103,7 +103,7 @@
     var alert = summaryAlert(host, entries);
     if (!alert || !alert.textContent.trim() && !entries.length) return { errors: 0, focused: false };
 
-    alert.classList.add('wb-validation-summary');
+    alert.classList.add('hg-validation-summary');
     alert.setAttribute('role', 'alert');
     alert.setAttribute('tabindex', '-1');
     alert.setAttribute('aria-live', 'assertive');
@@ -112,20 +112,20 @@
     var title = alert.querySelector('.alert-label strong, .alert-label, h1, h2, h3, h4');
     if (!title) {
       var label = document.createElement('strong');
-      label.className = 'wb-validation-summary__title';
+      label.className = 'hg-validation-summary__title';
       label.textContent = messages.validation_summary || (isGerman() ? 'Bitte pr\u00fcfen Sie die markierten Felder.' : 'Please check the highlighted fields.');
       alert.prepend(label);
       title = label;
     }
-    alert.setAttribute('aria-labelledby', ensureId(title, 'wb-validation-title'));
+    alert.setAttribute('aria-labelledby', ensureId(title, 'hg-validation-title'));
 
     if (entries.length) {
       var list = document.createElement('ul');
-      list.className = 'wb-validation-summary__list';
+      list.className = 'hg-validation-summary__list';
       list.dataset.heritageValidationList = 'true';
       entries.forEach(function (entry) {
         entry.control.setAttribute('aria-invalid', 'true');
-        ensureId(entry.control, 'wb-invalid-field');
+        ensureId(entry.control, 'hg-invalid-field');
         alignFieldError(entry.group);
         var item = document.createElement('li');
         var link = document.createElement('a');

@@ -2,31 +2,31 @@
 	<h1><tmpl_var name="list_head_txt"></h1>
 </div>
 <p><tmpl_var name="list_desc_txt"></p>
-<section class="wb-table-workspace">
-    <div class="wb-list-toolbar">
-        <div class="wb-list-toolbar__context">
-            <span class="wb-list-toolbar__eyebrow">{tmpl_var name="toolsarea_head_txt"}</span>
+<section class="hg-table-workspace">
+    <div class="hg-list-toolbar">
+        <div class="hg-list-toolbar__context">
+            <span class="hg-list-toolbar__eyebrow">{tmpl_var name="toolsarea_head_txt"}</span>
             <strong><tmpl_var name="list_head_txt"></strong>
         </div>
         <button class="formbutton-success" type="button" data-heritage-load-content="admin/users_edit.php" data-load-content="admin/users_edit.php">{tmpl_var name="add_new_record_txt"}</button>
     </div>
-    <div class="wb-alert wb-alert--warning"><p><tmpl_var name="warning_txt"></p></div>
+    <div class="hg-alert hg-alert--warning"><p><tmpl_var name="warning_txt"></p></div>
 
-<table class="table wb-data-table">
+<table class="table hg-data-table">
                 <thead >
                     <tr>
-                        <th class="wb-table-compact-column" data-column="client_id"><tmpl_var name="client_id_txt"></th>
+                        <th class="hg-table-compact-column" data-column="client_id"><tmpl_var name="client_id_txt"></th>
                         <th class="tiny-col" data-column="active"><tmpl_var name="active_txt"></th>
                         <th data-column="username"><tmpl_var name="username_txt"></th>
                         <th data-column="groups"><tmpl_var name="groups_txt"></th>
-                        <th class="wb-table-actions-column wb-table-align-end">{tmpl_var name='search_limit'}</th>
+                        <th class="hg-table-actions-column hg-table-align-end">{tmpl_var name='search_limit'}</th>
                     </tr>
                     <tr>
                         <td><input class="form-control" type="text" name="search_client_id" value="{tmpl_var name='search_client_id'}" /></td>
                         <td><select class="form-control" name="search_active">{tmpl_var name='search_active'}</select></td>
                         <td><input class="form-control" type="text" name="search_username" value="{tmpl_var name='search_username'}" /></td>
                         <td><select class="form-control" name="search_groups">{tmpl_var name='search_groups'}</select></td>
-                        <td class="wb-table-align-end">
+                        <td class="hg-table-align-end">
                             <button type="button" class="formbutton-default formbutton-narrow" name="Filter" id="Filter" value="{tmpl_var name="filter_txt"}" data-submit-form="pageForm" data-form-action="admin/users_list.php"><span class="icon icon-filter"></span></button>
                         </td>
                     </tr>
@@ -38,7 +38,7 @@
                             <td><a href="#" data-heritage-load-content="admin/users_edit.php?id={tmpl_var name='id'}" data-load-content="admin/users_edit.php?id={tmpl_var name='id'}">{tmpl_var name="active"}</a></td>
                             <td><div class="icons16 group-{tmpl_var name="typ"}" title="{tmpl_var name="typ"}"><span>{tmpl_var name="typ"}</span></div> <div class="group-icon"><a href="#" data-heritage-load-content="admin/users_edit.php?id={tmpl_var name='id'}" data-load-content="admin/users_edit.php?id={tmpl_var name='id'}">{tmpl_var name="username"}</a></div></td>
                             <td>{tmpl_var name="groups"}</td>
-                            <td class="wb-table-align-end">
+                            <td class="hg-table-align-end">
                                 <tmpl_if name="client_id" op="!=" value="0">
                                     <a class="formbutton-success formbutton-narrow" data-heritage-load-content="login/login_as.php?cid={tmpl_var name='client_id'}" data-load-content="login/login_as.php?cid={tmpl_var name='client_id'}"><span class="icon icon-loginas"></span></a>
                                     <a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="admin/users_del.php?id={tmpl_var name='id'}&_csrf_id={tmpl_var name='csrf_id'}&_csrf_key={tmpl_var name='csrf_key'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete"></span></a>

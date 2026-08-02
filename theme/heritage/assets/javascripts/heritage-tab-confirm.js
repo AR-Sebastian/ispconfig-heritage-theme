@@ -67,7 +67,7 @@
   }
 
   document.addEventListener('click', function (event) {
-    var anchor = event.target.closest('.content-tab-wrapper .wb-form-tabs a[data-change-tab]');
+    var anchor = event.target.closest('.content-tab-wrapper .hg-form-tabs a[data-change-tab]');
     if (!anchor) return;
     var mode = confirmationMode();
     if (!mode) return;

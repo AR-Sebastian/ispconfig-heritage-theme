@@ -3,20 +3,20 @@
     <p><tmpl_var name="list_desc_txt"></p>
 </div>
 
-<section class="wb-content-panel wb-content-panel--branding">
-    <div class="wb-field-group">
-        <div class="wb-field-span wb-field-span--full">
-            <span class="wb-field-label"><tmpl_var name="branding_txt">Branding</span>
-            <label class="wb-choice-row" for="allow_themechange">
+<section class="hg-content-panel hg-content-panel--branding">
+    <div class="hg-field-group">
+        <div class="hg-field-span hg-field-span--full">
+            <span class="hg-field-label"><tmpl_var name="branding_txt">Branding</span>
+            <label class="hg-choice-row" for="allow_themechange">
                 <span>{tmpl_var name='allow_themechange_txt'}Allow users to change theme</span>
-                <span class="wb-choice-row__control">{tmpl_var name='allow_themechange'}</span>
+                <span class="hg-choice-row__control">{tmpl_var name='allow_themechange'}</span>
             </label>
         </div>
     </div>
 
     <input type="hidden" name="id" value="{tmpl_var name='id'}">
-    <div class="wb-form-actions">
-        <div class="wb-form-actions__primary">
+    <div class="hg-form-actions">
+        <div class="hg-form-actions__primary">
             <button
                 class="formbutton-success"
                 type="button"

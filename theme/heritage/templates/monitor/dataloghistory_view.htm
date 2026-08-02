@@ -3,8 +3,8 @@
         <h1><tmpl_var name="list_head_txt"></h1>
 </div>
 </tmpl_if>
-<div class="wb-table-workspace">
-	<table class="table wb-data-table">
+<div class="hg-table-workspace">
+	<table class="table hg-data-table">
 		<thead >
 			<tr>
 				<th width="25%"><tmpl_var name="id_txt"></th>
@@ -46,8 +46,8 @@
 	<h2><tmpl_var name="fields_deleted_txt"></h2>
 </tmpl_if>
 
-<div class="wb-table-workspace">
-	<table class="table wb-data-table">
+<div class="hg-table-workspace">
+	<table class="table hg-data-table">
 		<tmpl_if name='action_char' value='i'>
 			<thead >
 				<tr>
@@ -83,7 +83,7 @@
 						<tr>
 							<td><tmpl_var name="key"></td>
 							<td colspan="2">
-								<div class="wb-alert wb-alert--warning"><tmpl_var name="is_diff_txt"> (<span class="finediff"><ins><tmpl_var name="is_diff_inserts_txt"></ins></span> / <span class="finediff"><del><tmpl_var name="is_diff_deletes_txt"></del></span>)</div>
+								<div class="hg-alert hg-alert--warning"><tmpl_var name="is_diff_txt"> (<span class="finediff"><ins><tmpl_var name="is_diff_inserts_txt"></ins></span> / <span class="finediff"><del><tmpl_var name="is_diff_deletes_txt"></del></span>)</div>
 								<div class="finediff"><tmpl_var name="diff"></div>
 							</td>
 						</tr>
@@ -118,8 +118,8 @@
     </table>
 </div>
 
-<div class="wb-form-actions">
-	<div class="wb-form-actions__primary">
+<div class="hg-form-actions">
+	<div class="hg-form-actions__primary">
 		<tmpl_if name='can_undo'>
 			<a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="monitor/dataloghistory_undo.php?id={tmpl_var name='id'}" data-confirm-message="{tmpl_var name='undo_confirmation_txt'}"> {tmpl_var name='undo_txt'}</a>
 		</tmpl_if>

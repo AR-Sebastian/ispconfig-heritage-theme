@@ -1,20 +1,20 @@
-<section class="wb-extension-workspace" data-heritage-extension-page="installed">
-    <header class="wb-extension-hero">
-        <span class="wb-module-eyebrow">ISPConfig</span>
+<section class="hg-extension-workspace" data-heritage-extension-page="installed">
+    <header class="hg-extension-hero">
+        <span class="hg-module-eyebrow">ISPConfig</span>
         <h1><tmpl_var name="install_list_head_txt"></h1>
     </header>
 
     <tmpl_if name="has_pending_installs">
-        <div class="wb-alert wb-alert--warning" role="status"><tmpl_var name="pending_installs_txt"></div>
+        <div class="hg-alert hg-alert--warning" role="status"><tmpl_var name="pending_installs_txt"></div>
     </tmpl_if>
 
-    <section class="wb-table-workspace" aria-labelledby="wb-extension-installed-title">
-        <div class="wb-list-toolbar">
-            <div class="wb-list-toolbar__context">
-                <strong id="wb-extension-installed-title"><tmpl_var name="install_list_head_txt"></strong>
+    <section class="hg-table-workspace" aria-labelledby="hg-extension-installed-title">
+        <div class="hg-list-toolbar">
+            <div class="hg-list-toolbar__context">
+                <strong id="hg-extension-installed-title"><tmpl_var name="install_list_head_txt"></strong>
             </div>
         </div>
-        <table class="table wb-data-table">
+        <table class="table hg-data-table">
             <thead>
                 <tr>
                     <th data-column="active"><tmpl_var name="active_txt"></th>
@@ -22,7 +22,7 @@
                     <th data-column="name"><tmpl_var name="name_txt"></th>
                     <th data-column="version"><tmpl_var name="installed_version_txt"></th>
                     <th data-column="title"><tmpl_var name="title_txt"></th>
-                    <th class="wb-table-actions-column wb-table-align-end"><span class="wb-visually-hidden"><tmpl_var name="delete_txt"></span></th>
+                    <th class="hg-table-actions-column hg-table-align-end"><span class="hg-visually-hidden"><tmpl_var name="delete_txt"></span></th>
                 </tr>
             </thead>
             <tbody>
@@ -34,8 +34,8 @@
                             <td data-heritage-label="{tmpl_var name='name_txt'}"><a href="#" data-heritage-load-content="admin/extension_edit.php?name={tmpl_var name='name'}&action=edit&server_id={tmpl_var name='server_id'}" data-load-content="admin/extension_edit.php?name={tmpl_var name='name'}&action=edit&server_id={tmpl_var name='server_id'}">{tmpl_var name="name"}</a></td>
                             <td data-heritage-label="{tmpl_var name='installed_version_txt'}"><a href="#" data-heritage-load-content="admin/extension_edit.php?name={tmpl_var name='name'}&action=edit&server_id={tmpl_var name='server_id'}" data-load-content="admin/extension_edit.php?name={tmpl_var name='name'}&action=edit&server_id={tmpl_var name='server_id'}">{tmpl_var name="version"}</a></td>
                             <td data-heritage-label="{tmpl_var name='title_txt'}"><a href="#" data-heritage-load-content="admin/extension_edit.php?name={tmpl_var name='name'}&action=edit&server_id={tmpl_var name='server_id'}" data-load-content="admin/extension_edit.php?name={tmpl_var name='name'}&action=edit&server_id={tmpl_var name='server_id'}">{tmpl_var name="title"}</a></td>
-                            <td class="wb-table-align-end" data-heritage-label="{tmpl_var name='delete_txt'}">
-                                <button class="wb-row-action wb-row-action--danger" type="button" title="{tmpl_var name='delete_txt'}" aria-label="{tmpl_var name='delete_txt'}" data-confirm-action="admin/extension_edit.php?name={tmpl_var name='name'}&server_id={tmpl_var name='server_id'}&action=delete&_csrf_id={tmpl_var name='csrf_id'}&_csrf_key={tmpl_var name='csrf_key'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete" aria-hidden="true"></span></button>
+                            <td class="hg-table-align-end" data-heritage-label="{tmpl_var name='delete_txt'}">
+                                <button class="hg-row-action hg-row-action--danger" type="button" title="{tmpl_var name='delete_txt'}" aria-label="{tmpl_var name='delete_txt'}" data-confirm-action="admin/extension_edit.php?name={tmpl_var name='name'}&server_id={tmpl_var name='server_id'}&action=delete&_csrf_id={tmpl_var name='csrf_id'}&_csrf_key={tmpl_var name='csrf_key'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete" aria-hidden="true"></span></button>
                             </td>
                         </tr>
                     </tmpl_loop>

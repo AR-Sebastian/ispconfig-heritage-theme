@@ -2,22 +2,22 @@
 	<h1><tmpl_var name="list_head_txt"></h1>
 </div>
 <p><tmpl_var name="list_desc_txt"></p>
-<section class="wb-table-workspace">
-    <div class="wb-list-toolbar">
-        <div class="wb-list-toolbar__context">
+<section class="hg-table-workspace">
+    <div class="hg-list-toolbar">
+        <div class="hg-list-toolbar__context">
             <strong><tmpl_var name="list_head_txt"></strong>
         </div>
     </div>
 
-<table class="table wb-data-table">
+<table class="table hg-data-table">
                 <thead >
                     <tr>
                         <th data-column="server_name"><tmpl_var name="server_name_txt"></th>
-                        <th class="wb-table-actions-column wb-table-align-end">{tmpl_var name='search_limit'}</th>
+                        <th class="hg-table-actions-column hg-table-align-end">{tmpl_var name='search_limit'}</th>
                     </tr>
                     <tr>
                         <td><input class="form-control" type="text" name="search_server_name" value="{tmpl_var name='search_server_name'}" /></td>
-                        <td class="wb-table-align-end">
+                        <td class="hg-table-align-end">
                             <button type="button" class="formbutton-default formbutton-narrow" name="Filter" id="Filter" value="{tmpl_var name="filter_txt"}" data-submit-form="pageForm" data-form-action="admin/server_config_list.php"><span class="icon icon-filter"></span></button>
                         </td>
                     </tr>
@@ -26,7 +26,7 @@
                     <tmpl_loop name="records">
                         <tr>
                             <td><a href="#" data-heritage-load-content="admin/server_config_edit.php?id={tmpl_var name='id'}" data-load-content="admin/server_config_edit.php?id={tmpl_var name='id'}">{tmpl_var name="server_name"}</a></td>
-                            <td class="wb-table-align-end">
+                            <td class="hg-table-align-end">
                                 <a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="admin/server_config_del.php?id={tmpl_var name='id'}&_csrf_id={tmpl_var name='csrf_id'}&_csrf_key={tmpl_var name='csrf_key'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete"></span></a>
                             </td>
                         </tr>

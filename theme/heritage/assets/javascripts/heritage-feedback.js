@@ -30,12 +30,12 @@
   }
 
   function structureContent(alert) {
-    var content = alert.querySelector(':scope > .wb-feedback__content');
+    var content = alert.querySelector(':scope > .hg-feedback__content');
     if (content) return content;
     content = document.createElement('div');
-    content.className = 'wb-feedback__content';
+    content.className = 'hg-feedback__content';
     Array.prototype.slice.call(alert.childNodes).forEach(function(node) {
-      if (node.nodeType === 1 && node.matches('.close, [data-heritage-dismiss], .wb-feedback__icon, .wb-feedback__action')) return;
+      if (node.nodeType === 1 && node.matches('.close, [data-heritage-dismiss], .hg-feedback__icon, .hg-feedback__action')) return;
       content.appendChild(node);
     });
     alert.appendChild(content);
@@ -44,18 +44,18 @@
 
   function enhanceAlert(alert) {
     if (alert.dataset.heritageFeedback === 'true') return;
-    if (alert.closest && alert.closest('.wb-login-form-surface')) return;
+    if (alert.closest && alert.closest('.hg-login-form-surface')) return;
     var state = tone(alert);
     alert.dataset.heritageFeedback = 'true';
     alert.dataset.heritageTone = state;
     alert.setAttribute('data-heritage-feedback', state);
-    alert.classList.add('wb-feedback');
+    alert.classList.add('hg-feedback');
     alert.setAttribute('role', state === 'danger' || state === 'warning' ? 'alert' : 'status');
     alert.setAttribute('aria-live', state === 'danger' || state === 'warning' ? 'assertive' : 'polite');
     alert.setAttribute('aria-atomic', 'true');
     structureContent(alert);
     var icon = document.createElement('span');
-    icon.className = 'wb-feedback__icon';
+    icon.className = 'hg-feedback__icon';
     icon.setAttribute('aria-hidden', 'true');
     icon.appendChild(svgFromMarkup(icons[state]));
     alert.prepend(icon);
@@ -70,33 +70,33 @@
   }
 
   function enhanceDialog(dialog) {
-    dialog.classList.add('wb-dialog--enhanced');
+    dialog.classList.add('hg-dialog--enhanced');
     dialog.setAttribute('data-heritage-dialog', 'true');
-    var dangerAction = dialog.querySelector('.wb-dialog__action--danger, .btn-danger, [data-heritage-tab-confirm-action="discard"]');
-    var primaryAction = dialog.querySelector('.wb-dialog__action--primary, .btn-primary, [data-heritage-tab-confirm-action="save"]');
+    var dangerAction = dialog.querySelector('.hg-dialog__action--danger, .btn-danger, [data-heritage-tab-confirm-action="discard"]');
+    var primaryAction = dialog.querySelector('.hg-dialog__action--primary, .btn-primary, [data-heritage-tab-confirm-action="save"]');
     dialog.setAttribute('data-heritage-dialog-tone', dangerAction ? 'warning' : (primaryAction ? 'action' : 'neutral'));
-    var body = dialog.querySelector('.wb-dialog__body');
+    var body = dialog.querySelector('.hg-dialog__body');
     if (body && !dialog.getAttribute('aria-describedby')) {
-      var description = body.querySelector('p, .wb-dialog__supporting-text');
+      var description = body.querySelector('p, .hg-dialog__supporting-text');
       if (description) {
         if (!description.id) description.id = (dialog.id || 'heritage-dialog') + '-description';
         dialog.setAttribute('aria-describedby', description.id);
       }
     }
-    var footer = dialog.querySelector('.wb-dialog__footer');
+    var footer = dialog.querySelector('.hg-dialog__footer');
     if (footer) {
       footer.setAttribute('role', 'group');
       footer.setAttribute('aria-label', localized('Dialogaktionen', 'Dialog actions'));
       Array.prototype.forEach.call(footer.querySelectorAll('button, a'), function (action) {
-        var kind = action.matches('.wb-dialog__action--primary, .btn-primary') ? 'primary' :
-          (action.matches('.wb-dialog__action--danger, .btn-danger') ? 'danger' : 'secondary');
+        var kind = action.matches('.hg-dialog__action--primary, .btn-primary') ? 'primary' :
+          (action.matches('.hg-dialog__action--danger, .btn-danger') ? 'danger' : 'secondary');
         action.setAttribute('data-heritage-dialog-action', kind);
       });
     }
-    var list = dialog.querySelector('.wb-dialog__body > ul');
+    var list = dialog.querySelector('.hg-dialog__body > ul');
     if (list) {
-      list.classList.add('wb-dialog__activity-list');
-      Array.prototype.forEach.call(list.children, function (item) { item.classList.add('wb-dialog__activity-item'); });
+      list.classList.add('hg-dialog__activity-list');
+      Array.prototype.forEach.call(list.children, function (item) { item.classList.add('hg-dialog__activity-item'); });
     }
   }
 
@@ -104,8 +104,8 @@
     var host = root && root.querySelectorAll ? root : document;
     if (host.matches && host.matches('.alert')) enhanceAlert(host);
     Array.prototype.forEach.call(host.querySelectorAll('.alert'), enhanceAlert);
-    if (host.matches && host.matches('.wb-dialog')) enhanceDialog(host);
-    Array.prototype.forEach.call(host.querySelectorAll('.wb-dialog'), enhanceDialog);
+    if (host.matches && host.matches('.hg-dialog')) enhanceDialog(host);
+    Array.prototype.forEach.call(host.querySelectorAll('.hg-dialog'), enhanceDialog);
   }
 
   function dismissGenerated(alert) {
@@ -158,7 +158,7 @@
   function actionControl(options) {
     if (!options || !options.actionLabel || (!options.actionHref && typeof options.onAction !== 'function')) return null;
     var control = document.createElement(options.actionHref ? 'a' : 'button');
-    control.className = 'wb-feedback__action';
+    control.className = 'hg-feedback__action';
     control.textContent = String(options.actionLabel);
     if (options.actionHref) control.href = new URL(options.actionHref, document.baseURI).href;
     else {
@@ -176,10 +176,10 @@
     if (!text) return null;
     var host = document.getElementById('pageContent');
     if (!host) return null;
-    var stack = host.querySelector(':scope > .wb-feedback-stack');
+    var stack = host.querySelector(':scope > .hg-feedback-stack');
     if (!stack) {
       stack = document.createElement('div');
-      stack.className = 'wb-feedback-stack';
+      stack.className = 'hg-feedback-stack';
       stack.setAttribute('aria-label', localized('Meldungen', 'Notifications'));
       stack.setAttribute('data-heritage-feedback-stack', 'true');
       stack.setAttribute('role', 'region');
@@ -192,7 +192,7 @@
         item.getAttribute('data-heritage-feedback-tone') === toneName;
     });
     if (duplicate) {
-      if (!duplicate.querySelector(':scope > .wb-feedback__action')) {
+      if (!duplicate.querySelector(':scope > .hg-feedback__action')) {
         var duplicateAction = actionControl(options);
         var duplicateDismiss = duplicate.querySelector(':scope > [data-heritage-dismiss]');
         if (duplicateAction) duplicate.insertBefore(duplicateAction, duplicateDismiss || null);
@@ -267,8 +267,8 @@
 
   function hasAuthoritativeError(host) {
     return Boolean(host && host.querySelector(
-      '.wb-content-state--error, ' +
-      '.wb-submit-feedback[data-state="failed"], ' +
+      '.hg-content-state--error, ' +
+      '.hg-submit-feedback[data-state="failed"], ' +
       '.alert-danger:not([data-heritage-generated-feedback])'
     ));
   }

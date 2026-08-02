@@ -17,6 +17,7 @@
 - Theme-owned shell, dialog, navigation, search, tooltip and generated DOM identifiers now use the HERITAGE namespace.
 - Internal JavaScript helpers, runtime properties, history state and installation guards now use the HERITAGE namespace.
 - Browser preferences migrate once from the retired Workbench storage keys to HERITAGE keys without losing theme or login choices.
+- Component classes and CSS custom properties now use the unified `hg-*` / `--hg-*` HERITAGE design namespace.
 
 ## 1.0.33 – 2026-07-31
 

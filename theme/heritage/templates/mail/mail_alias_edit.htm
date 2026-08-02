@@ -1,34 +1,34 @@
-            <div class="wb-field-group">
+            <div class="hg-field-group">
                 <label><em>*</em> {tmpl_var name='email_txt'}</label>
                 <div>
-				    <div class='wb-field-composite'>
+				    <div class='hg-field-composite'>
 						<input type="text" id="email_local_part" name="email_local_part" value="{tmpl_var name='email_local_part'}" class="form-control" data-email-domain-sync="true" />
-						<span class='wb-field-addon'>@</span>
-                        <div class='wb-field-composite__control'>
-							<select name="email_domain" id="email_domain" class="form-control wb-domain-select">{tmpl_var name='email_domain'}</select>
+						<span class='hg-field-addon'>@</span>
+                        <div class='hg-field-composite__control'>
+							<select name="email_domain" id="email_domain" class="form-control hg-domain-select">{tmpl_var name='email_domain'}</select>
                         </div>
                     </div>
 				</div>
             </div>
-            <div class="wb-field-group">
+            <div class="hg-field-group">
                 <label for="destination">{tmpl_var name='destination_txt'}</label>
                 <div><select name="destination" id="destination" class="form-control">
                     {tmpl_var name='destination'}
                 </select></div>
             </div>
-            <div class="wb-field-group">
+            <div class="hg-field-group">
                 <label>{tmpl_var name='send_as_txt'}</label>
                 <div>
                     {tmpl_var name='allow_send_as'} <small> {tmpl_var name='send_as_exp'}</small>
                 </div>
             </div>
-            <div class="wb-field-group">
+            <div class="hg-field-group">
                 <label>{tmpl_var name='greylisting_txt'}</label>
                 <div>
                     {tmpl_var name='greylisting'}
                 </div>
             </div>
-            <div class="wb-field-group">
+            <div class="hg-field-group">
                 <label>{tmpl_var name='active_txt'}</label>
                 <div>
                     {tmpl_var name='active'}
@@ -38,7 +38,7 @@
         <input type="hidden" name="id" value="{tmpl_var name='id'}">
         <input type="hidden" name="type" value="alias">
 
-        <div class="wb-form-actions">
+        <div class="hg-form-actions">
             <tmpl_if name='id'><tmpl_if name='show_delete_on_forms' op="==" value="y">
                 <a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="mail/mail_alias_del.php?id={tmpl_var name='id'}&_csrf_id={tmpl_var name='_csrf_id'}&_csrf_key={tmpl_var name='_csrf_key'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete"></span></a>
             </tmpl_if></tmpl_if>

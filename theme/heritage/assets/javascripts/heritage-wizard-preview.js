@@ -17,15 +17,15 @@
     if (!active || active !== request) return;
     active = null;
     var root = document.getElementById('pageContent');
-    if (root) { root.classList.remove('wb-wizard-preview-active'); root.setAttribute('aria-busy', 'false'); var state = root.querySelector('.wb-wizard-preview-status'); if (state) state.remove(); }
+    if (root) { root.classList.remove('hg-wizard-preview-active'); root.setAttribute('aria-busy', 'false'); var state = root.querySelector('.hg-wizard-preview-status'); if (state) state.remove(); }
   }
   legacy.submitForm = function(formname, target) {
     var api = runtime();
     if (!api || !isPreview(formname, target)) return previousSubmitForm.apply(this, arguments);
     if (active && active.readyState !== 4) active.abort();
     var form = document.getElementById(formname); var root = document.getElementById('pageContent');
-    var status = document.createElement('div'); status.className = 'wb-wizard-preview-status'; status.setAttribute('role', 'status'); status.setAttribute('aria-live', 'polite'); status.textContent = 'Updating form';
-    root.prepend(status); root.classList.add('wb-wizard-preview-active'); root.setAttribute('aria-busy', 'true');
+    var status = document.createElement('div'); status.className = 'hg-wizard-preview-status'; status.setAttribute('role', 'status'); status.setAttribute('aria-live', 'polite'); status.textContent = 'Updating form';
+    root.prepend(status); root.classList.add('hg-wizard-preview-active'); root.setAttribute('aria-busy', 'true');
     var request = api.requestForm(form, target, { timeout: 30000 }); active = request;
     request.promise.then(function(responseText) {
       if (responseText.indexOf('HEADER_REDIRECT:') > -1) api.navigateTo(responseText.split(':')[1]);

@@ -5,12 +5,12 @@
  * records, actions, empty states, pagination and responsive record cards.
  */
 
-body.heritage-shell.wb-list-page #pageContent.wb-table-workspace--finalized {
+body.heritage-shell.hg-list-page #pageContent.hg-table-workspace--finalized {
   --hg-table-gap: 12px;
   container: hg-table-workspace / inline-size;
 }
 
-body.heritage-shell.wb-list-page #pageContent.wb-table-workspace--finalized > .wb-list-section-heading {
+body.heritage-shell.hg-list-page #pageContent.hg-table-workspace--finalized > .hg-list-section-heading {
   margin-block: 0 10px;
   padding-inline-start: 14px;
   border-inline-start: 3px solid var(--hg-accent);
@@ -19,7 +19,7 @@ body.heritage-shell.wb-list-page #pageContent.wb-table-workspace--finalized > .w
   line-height: 1.25;
 }
 
-body.heritage-shell.wb-list-page #pageContent.wb-table-workspace--finalized > .wb-list-command-bar {
+body.heritage-shell.hg-list-page #pageContent.hg-table-workspace--finalized > .hg-list-command-bar {
   gap: 12px 18px;
   margin-block-end: var(--hg-table-gap);
   padding: 12px 14px;
@@ -29,33 +29,33 @@ body.heritage-shell.wb-list-page #pageContent.wb-table-workspace--finalized > .w
   box-shadow: var(--hg-shadow-xs);
 }
 
-body.heritage-shell.wb-list-page .wb-list-command-bar__meta,
-body.heritage-shell.wb-list-page .wb-list-command-bar__actions {
+body.heritage-shell.hg-list-page .hg-list-command-bar__meta,
+body.heritage-shell.hg-list-page .hg-list-command-bar__actions {
   min-block-size: 42px;
 }
 
-body.heritage-shell.wb-list-page .wb-list-result-count {
+body.heritage-shell.hg-list-page .hg-list-result-count {
   color: var(--hg-text-muted);
   border-color: var(--hg-border);
   background: var(--hg-surface-subtle);
 }
 
-body.heritage-shell.wb-list-page :is(
-  .wb-list-command-bar__primary,
-  .wb-filter-toggle,
-  .wb-filter-reset
+body.heritage-shell.hg-list-page :is(
+  .hg-list-command-bar__primary,
+  .hg-filter-toggle,
+  .hg-filter-reset
 ) {
   min-block-size: 42px;
   border-radius: var(--hg-radius-md);
 }
 
-body.heritage-shell.wb-list-page .wb-filter-toolbar {
+body.heritage-shell.hg-list-page .hg-filter-toolbar {
   border: 0;
   background: transparent;
   box-shadow: none;
 }
 
-body.heritage-shell.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport {
+body.heritage-shell.hg-list-page .hg-table-workspace--finalized > .hg-table-viewport {
   position: relative;
   overflow-x: auto !important;
   overflow-y: hidden !important;
@@ -66,7 +66,7 @@ body.heritage-shell.wb-list-page .wb-table-workspace--finalized > .wb-table-view
   box-shadow: var(--hg-shadow-sm);
 }
 
-body.heritage-shell.wb-list-page .wb-data-table {
+body.heritage-shell.hg-list-page .hg-data-table {
   inline-size: 100%;
   min-inline-size: 100%;
   table-layout: auto;
@@ -74,7 +74,7 @@ body.heritage-shell.wb-list-page .wb-data-table {
   background: transparent;
 }
 
-body.heritage-shell.wb-list-page .wb-data-table > thead > tr:first-child > :is(th, td) {
+body.heritage-shell.hg-list-page .hg-data-table > thead > tr:first-child > :is(th, td) {
   position: sticky;
   z-index: 3;
   top: 0;
@@ -90,11 +90,11 @@ body.heritage-shell.wb-list-page .wb-data-table > thead > tr:first-child > :is(t
   text-transform: uppercase;
 }
 
-body.heritage-shell.wb-list-page .wb-data-table > thead > tr:first-child > [aria-sort] {
+body.heritage-shell.hg-list-page .hg-data-table > thead > tr:first-child > [aria-sort] {
   cursor: pointer;
 }
 
-body.heritage-shell.wb-list-page .wb-data-table > thead > tr:first-child > [aria-sort]::after {
+body.heritage-shell.hg-list-page .hg-data-table > thead > tr:first-child > [aria-sort]::after {
   display: inline-block;
   width: 12px;
   margin-inline-start: 6px;
@@ -104,17 +104,17 @@ body.heritage-shell.wb-list-page .wb-data-table > thead > tr:first-child > [aria
   text-align: center;
 }
 
-body.heritage-shell.wb-list-page .wb-data-table > thead > tr:first-child > [aria-sort='ascending']::after {
+body.heritage-shell.hg-list-page .hg-data-table > thead > tr:first-child > [aria-sort='ascending']::after {
   color: var(--hg-accent);
   content: '\2191';
 }
 
-body.heritage-shell.wb-list-page .wb-data-table > thead > tr:first-child > [aria-sort='descending']::after {
+body.heritage-shell.hg-list-page .hg-data-table > thead > tr:first-child > [aria-sort='descending']::after {
   color: var(--hg-accent);
   content: '\2193';
 }
 
-body.heritage-shell.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] > :is(th, td) {
+body.heritage-shell.hg-list-page .hg-data-table > thead > tr[data-heritage-filter-row] > :is(th, td) {
   position: sticky;
   z-index: 3;
   top: 48px;
@@ -124,19 +124,19 @@ body.heritage-shell.wb-list-page .wb-data-table > thead > tr[data-heritage-filte
   background: color-mix(in srgb, var(--hg-surface-subtle) 76%, var(--hg-surface));
 }
 
-body.heritage-shell.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] > :is(th, td):first-child {
+body.heritage-shell.hg-list-page .hg-data-table > thead > tr[data-heritage-filter-row] > :is(th, td):first-child {
   padding-inline-start: 16px;
 }
 
-body.heritage-shell.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] > :is(th, td):last-child {
+body.heritage-shell.hg-list-page .hg-data-table > thead > tr[data-heritage-filter-row] > :is(th, td):last-child {
   padding-inline-end: 16px;
 }
 
-body.heritage-shell.wb-list-page .wb-data-table > thead > tr[data-heritage-filter-row] :is(
+body.heritage-shell.hg-list-page .hg-data-table > thead > tr[data-heritage-filter-row] :is(
   input,
   select,
   .form-control,
-  .wb-select__control
+  .hg-select__control
 ) {
   min-block-size: 40px !important;
   color: var(--hg-text) !important;
@@ -146,11 +146,11 @@ body.heritage-shell.wb-list-page .wb-data-table > thead > tr[data-heritage-filte
   box-shadow: none !important;
 }
 
-body.heritage-shell.wb-list-page .wb-data-table > tbody > tr {
+body.heritage-shell.hg-list-page .hg-data-table > tbody > tr {
   transition: background-color .16s ease, box-shadow .16s ease;
 }
 
-body.heritage-shell.wb-list-page .wb-data-table > tbody > tr > :is(th, td) {
+body.heritage-shell.hg-list-page .hg-data-table > tbody > tr > :is(th, td) {
   padding: 14px 16px;
   color: var(--hg-text);
   border-block: 0 1px;
@@ -159,19 +159,19 @@ body.heritage-shell.wb-list-page .wb-data-table > tbody > tr > :is(th, td) {
   vertical-align: middle;
 }
 
-body.heritage-shell.wb-list-page .wb-data-table > tbody > tr:is(:hover, :focus-within) {
+body.heritage-shell.hg-list-page .hg-data-table > tbody > tr:is(:hover, :focus-within) {
   background: color-mix(in srgb, var(--hg-accent) 5%, var(--hg-surface));
   box-shadow: inset 3px 0 0 color-mix(in srgb, var(--hg-accent) 68%, transparent);
 }
 
-body.heritage-shell.wb-list-page .wb-data-table :is(th, td).hg-table-column--identity {
+body.heritage-shell.hg-list-page .hg-data-table :is(th, td).hg-table-column--identity {
   display: none !important;
 }
 
 /* Legacy list templates distribute percentage widths across their data
  * columns before an action column is appended. Clear those per-template width
  * hints so the browser can reserve the shared action lane consistently. */
-body.heritage-shell.wb-list-page .wb-data-table :is(thead, tbody) > tr > :is(th, td):not(.wb-table-actions) {
+body.heritage-shell.hg-list-page .hg-data-table :is(thead, tbody) > tr > :is(th, td):not(.hg-table-actions) {
   width: auto !important;
   inline-size: auto !important;
 }
@@ -179,17 +179,17 @@ body.heritage-shell.wb-list-page .wb-data-table :is(thead, tbody) > tr > :is(th,
 /* The compact identity chip is authored for record cards. On full tables the
  * original identity column is intentionally folded into the primary link but
  * must not be appended as an unspaced text fragment. */
-body.heritage-shell.wb-list-page .hg-record-identity {
+body.heritage-shell.hg-list-page .hg-record-identity {
   display: none;
 }
 
 /* ISPConfig may retain historical service flags in core-owned list markup.
  * HERITAGE does not present retired XMPP or virtual-server surfaces. */
-body.heritage-shell.wb-list-page .wb-data-table .hg-table-column--retired {
+body.heritage-shell.hg-list-page .hg-data-table .hg-table-column--retired {
   display: none !important;
 }
 
-body.heritage-shell.wb-list-page .wb-data-table .wb-table-actions {
+body.heritage-shell.hg-list-page .hg-data-table .hg-table-actions {
   position: sticky;
   inset-inline-end: 0;
   z-index: 2;
@@ -204,27 +204,27 @@ body.heritage-shell.wb-list-page .wb-data-table .wb-table-actions {
   box-shadow: -12px 0 22px color-mix(in srgb, var(--hg-page) 36%, transparent);
 }
 
-body.heritage-shell.wb-list-page .wb-data-table .wb-table-actions:has(.wb-row-actions > :nth-child(3)) {
+body.heritage-shell.hg-list-page .hg-data-table .hg-table-actions:has(.hg-row-actions > :nth-child(3)) {
   inline-size: 148px;
   min-inline-size: 148px;
 }
 
-body.heritage-shell.wb-list-page .wb-data-table .wb-table-actions:has(.wb-row-actions > :nth-child(4)) {
+body.heritage-shell.hg-list-page .hg-data-table .hg-table-actions:has(.hg-row-actions > :nth-child(4)) {
   inline-size: 192px;
   min-inline-size: 192px;
 }
 
-body.heritage-shell.wb-list-page .wb-data-table .wb-table-actions:has(.wb-row-actions > :nth-child(5)) {
+body.heritage-shell.hg-list-page .hg-data-table .hg-table-actions:has(.hg-row-actions > :nth-child(5)) {
   inline-size: 236px;
   min-inline-size: 236px;
 }
 
-body.heritage-shell.wb-list-page .wb-data-table > thead .wb-table-actions {
+body.heritage-shell.hg-list-page .hg-data-table > thead .hg-table-actions {
   z-index: 4;
   background: var(--hg-surface-subtle);
 }
 
-body.heritage-shell.wb-list-page .wb-row-actions {
+body.heritage-shell.hg-list-page .hg-row-actions {
   gap: 6px;
   justify-content: flex-end;
 }
@@ -232,32 +232,32 @@ body.heritage-shell.wb-list-page .wb-row-actions {
 /* A list may expose more than one create path (DNS is the canonical case).
  * Preserve one clear primary action and render sibling paths as calm
  * alternatives instead of presenting a row of equally urgent red buttons. */
-body.heritage-shell.wb-list-page #pageContent .wb-list-command-bar__primary.hg-list-action--secondary {
+body.heritage-shell.hg-list-page #pageContent .hg-list-command-bar__primary.hg-list-action--secondary {
   color: var(--hg-accent-strong) !important;
   border: 1px solid color-mix(in srgb, var(--hg-accent) 26%, var(--hg-border)) !important;
   background: var(--hg-surface) !important;
   box-shadow: none !important;
 }
 
-body.heritage-shell.wb-list-page #pageContent .wb-list-command-bar__primary.hg-list-action--secondary:is(:hover, :focus-visible) {
+body.heritage-shell.hg-list-page #pageContent .hg-list-command-bar__primary.hg-list-action--secondary:is(:hover, :focus-visible) {
   color: var(--hg-accent-contrast) !important;
   border-color: var(--hg-accent) !important;
   background: var(--hg-accent) !important;
 }
 
-body.heritage-shell.wb-list-page .wb-row-actions :is(a, button) {
+body.heritage-shell.hg-list-page .hg-row-actions :is(a, button) {
   inline-size: 38px;
   min-inline-size: 38px;
   block-size: 38px;
   border-radius: 10px;
 }
 
-body.heritage-shell.wb-list-page .wb-empty-state--table {
+body.heritage-shell.hg-list-page .hg-empty-state--table {
   min-block-size: clamp(180px, 25cqi, 280px);
   padding: clamp(24px, 5cqi, 54px);
 }
 
-body.heritage-shell.wb-list-page .wb-table-workspace--finalized > .wb-table-footer {
+body.heritage-shell.hg-list-page .hg-table-workspace--finalized > .hg-table-footer {
   min-block-size: 62px;
   padding: 10px 14px;
   color: var(--hg-text-muted);
@@ -268,7 +268,7 @@ body.heritage-shell.wb-list-page .wb-table-workspace--finalized > .wb-table-foot
   box-shadow: var(--hg-shadow-sm);
 }
 
-body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li > :is(a, span) {
+body.heritage-shell.hg-list-page .hg-table-footer :is(.pagination, .pager) > li > :is(a, span) {
   min-inline-size: 38px;
   block-size: 38px;
   border: 1px solid var(--hg-border);
@@ -277,24 +277,24 @@ body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li 
   background: var(--hg-surface-subtle);
 }
 
-body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > .active > :is(a, span),
-body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li > :is(a, span)[aria-current='page'] {
+body.heritage-shell.hg-list-page .hg-table-footer :is(.pagination, .pager) > .active > :is(a, span),
+body.heritage-shell.hg-list-page .hg-table-footer :is(.pagination, .pager) > li > :is(a, span)[aria-current='page'] {
   color: var(--hg-accent-contrast);
   border-color: var(--hg-accent);
   background: var(--hg-accent);
 }
 
 @container hg-table-workspace (max-width: 760px) {
-  body.heritage-shell.wb-list-page #pageContent.wb-table-workspace--finalized > .wb-list-command-bar {
+  body.heritage-shell.hg-list-page #pageContent.hg-table-workspace--finalized > .hg-list-command-bar {
     padding: 12px;
   }
 
-  body.heritage-shell.wb-list-page .wb-list-command-bar__actions {
+  body.heritage-shell.hg-list-page .hg-list-command-bar__actions {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
   }
 
-  body.heritage-shell.wb-list-page .wb-data-table > tbody > tr {
+  body.heritage-shell.hg-list-page .hg-data-table > tbody > tr {
     gap: 0;
     margin-block-end: 12px;
     padding: 6px 14px;
@@ -304,31 +304,31 @@ body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li 
     box-shadow: var(--hg-shadow-xs);
   }
 
-  body.heritage-shell.wb-list-page .wb-data-table > tbody > tr > :is(th, td) {
+  body.heritage-shell.hg-list-page .hg-data-table > tbody > tr > :is(th, td) {
     min-block-size: 42px;
     padding: 9px 0;
     border-block-end: 1px solid var(--hg-border);
   }
 
-  body.heritage-shell.wb-list-page .wb-data-table > tbody > tr > :is(th, td):last-child {
+  body.heritage-shell.hg-list-page .hg-data-table > tbody > tr > :is(th, td):last-child {
     border-block-end: 0;
   }
 
-  body.heritage-shell.wb-list-page .wb-data-table .wb-table-actions {
+  body.heritage-shell.hg-list-page .hg-data-table .hg-table-actions {
     position: static;
     border-inline-start: 0;
     background: transparent;
     box-shadow: none;
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized > .hg-table-viewport {
     border: 0;
     border-radius: 0;
     background: transparent;
     box-shadow: none;
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized > .wb-table-footer {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized > .hg-table-footer {
     border-block-start: 1px solid var(--hg-border);
     border-radius: var(--hg-radius-lg);
   }
@@ -338,38 +338,38 @@ body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li 
  * their container query from becoming narrow enough. Heritage must still
  * present records as complete cards on phones. */
 @media (max-width: 1180px) {
-  body.heritage-shell.wb-list-page #pageContent.wb-table-workspace--finalized > .wb-list-command-bar {
+  body.heritage-shell.hg-list-page #pageContent.hg-table-workspace--finalized > .hg-list-command-bar {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) !important;
     align-items: stretch;
   }
 
-  body.heritage-shell.wb-list-page .wb-list-command-bar__meta {
+  body.heritage-shell.hg-list-page .hg-list-command-bar__meta {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
     gap: 8px;
   }
 
-  body.heritage-shell.wb-list-page .wb-list-command-bar__actions,
-  body.heritage-shell.wb-list-page .wb-list-command-bar__actions > :is(
-    .wb-list-command-bar__primary,
-    .wb-filter-toolbar
+  body.heritage-shell.hg-list-page .hg-list-command-bar__actions,
+  body.heritage-shell.hg-list-page .hg-list-command-bar__actions > :is(
+    .hg-list-command-bar__primary,
+    .hg-filter-toolbar
   ),
-  body.heritage-shell.wb-list-page .wb-filter-toggle {
+  body.heritage-shell.hg-list-page .hg-filter-toggle {
     inline-size: 100% !important;
     max-inline-size: 100% !important;
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table,
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > :is(thead, tbody, tfoot) {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized .hg-data-table,
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized .hg-data-table > :is(thead, tbody, tfoot) {
     display: block !important;
     inline-size: 100% !important;
     min-inline-size: 0 !important;
     background: transparent !important;
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr:first-child:not([data-heritage-filter-row]) {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized .hg-data-table > thead > tr:first-child:not([data-heritage-filter-row]) {
     position: absolute !important;
     inline-size: 1px;
     block-size: 1px;
@@ -378,7 +378,7 @@ body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li 
     white-space: nowrap;
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row] {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized .hg-data-table > thead > tr[data-heritage-filter-row] {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr);
     gap: 8px;
@@ -389,11 +389,11 @@ body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li 
     background: var(--hg-surface-subtle);
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row][hidden] {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized .hg-data-table > thead > tr[data-heritage-filter-row][hidden] {
     display: none !important;
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row] > :is(th, td) {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized .hg-data-table > thead > tr[data-heritage-filter-row] > :is(th, td) {
     display: block !important;
     position: static;
     inline-size: 100%;
@@ -402,19 +402,19 @@ body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li 
     background: transparent;
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr);
     gap: 12px;
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr);
     overflow: hidden;
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > :is(th, td) {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row > :is(th, td) {
     display: grid !important;
     grid-template-columns: minmax(112px, 40%) minmax(0, 1fr);
     gap: 12px;
@@ -425,7 +425,7 @@ body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li 
     overflow-wrap: anywhere;
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > :is(th, td)::before {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row > :is(th, td)::before {
     align-self: start;
     color: var(--hg-text-muted);
     content: attr(data-heritage-label);
@@ -437,22 +437,22 @@ body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li 
     word-break: normal;
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > .hg-table-column--identity {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row > .hg-table-column--identity {
     display: none !important;
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > .hg-table-column--retired {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row > .hg-table-column--retired {
     display: none !important;
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > .hg-table-column--primary {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row > .hg-table-column--primary {
     order: -10;
     padding-block: 14px;
     border-block-end: 1px solid var(--hg-border);
     background: linear-gradient(90deg, var(--hg-accent-soft), transparent 72%);
   }
 
-  body.heritage-shell.wb-list-page .hg-record-primary-link {
+  body.heritage-shell.hg-list-page .hg-record-primary-link {
     display: inline-flex;
     align-items: center;
     color: var(--hg-text);
@@ -461,7 +461,7 @@ body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li 
     text-decoration: none;
   }
 
-  body.heritage-shell.wb-list-page .hg-record-identity {
+  body.heritage-shell.hg-list-page .hg-record-identity {
     display: inline-flex;
     align-items: center;
     justify-self: start;
@@ -476,36 +476,36 @@ body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li 
     line-height: 1.35;
   }
 
-  body.heritage-shell.wb-list-page .hg-record-primary-link::after {
+  body.heritage-shell.hg-list-page .hg-record-primary-link::after {
     margin-inline-start: 7px;
     color: var(--hg-accent);
     content: '\203A';
     font-size: 1.15em;
   }
 
-  body.heritage-shell.wb-list-page .hg-record-primary-link:is(:hover, :focus-visible) {
+  body.heritage-shell.hg-list-page .hg-record-primary-link:is(:hover, :focus-visible) {
     color: var(--hg-accent-strong);
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 4px;
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row[data-heritage-record-card='true'] {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row[data-heritage-record-card='true'] {
     border: 1px solid var(--hg-border);
     border-radius: var(--hg-radius-lg);
     background: var(--hg-surface);
     box-shadow: var(--hg-shadow-xs);
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > .hg-table-column--status {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row > .hg-table-column--status {
     background: color-mix(in srgb, var(--hg-surface-subtle) 86%, transparent);
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > .wb-table-cell--empty {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row > .hg-table-cell--empty {
     display: none !important;
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > .wb-table-actions {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row > .hg-table-actions {
     display: flex !important;
     align-items: center;
     justify-content: flex-end;
@@ -517,11 +517,11 @@ body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li 
     background: var(--hg-surface-subtle);
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > .wb-table-actions::before {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row > .hg-table-actions::before {
     margin-inline-end: auto;
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > :is(.wb-table-empty-row, .wb-table-empty-row > td) {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > :is(.hg-table-empty-row, .hg-table-empty-row > td) {
     display: block !important;
     inline-size: 100% !important;
     width: 100% !important;
@@ -529,27 +529,27 @@ body.heritage-shell.wb-list-page .wb-table-footer :is(.pagination, .pager) > li 
 }
 
 @media (min-width: 640px) and (max-width: 1180px) {
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > :is(th, td) {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row > :is(th, td) {
     grid-template-columns: minmax(0, 1fr);
     align-content: start;
     gap: 4px;
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > :is(.hg-table-column--primary, .wb-table-actions) {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row > :is(.hg-table-column--primary, .hg-table-actions) {
     grid-column: 1 / -1;
   }
 
-  body.heritage-shell.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > .hg-table-column--primary {
+  body.heritage-shell.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row > .hg-table-column--primary {
     grid-template-columns: minmax(112px, 40%) minmax(0, 1fr);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body.heritage-shell.wb-list-page .wb-data-table > tbody > tr {
+  body.heritage-shell.hg-list-page .hg-data-table > tbody > tr {
     transition: none;
   }
 }

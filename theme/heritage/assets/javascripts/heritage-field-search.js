@@ -62,7 +62,7 @@
 
   function setBusy(state, busy) {
     state.input.classList.toggle(state.options.cssPrefix + 'loading', busy);
-    state.input.classList.toggle('wb-field-search__input--loading', busy);
+    state.input.classList.toggle('hg-field-search__input--loading', busy);
     state.input.setAttribute('aria-busy', busy ? 'true' : 'false');
   }
 
@@ -81,7 +81,7 @@
 
   function statusRow(state, message, limit, kind) {
     var item = document.createElement('li');
-    item.className = state.options.cssPrefix + 'cheader wb-field-search__status wb-field-search__status--' + kind;
+    item.className = state.options.cssPrefix + 'cheader hg-field-search__status hg-field-search__status--' + kind;
     item.setAttribute('role', 'presentation');
     item.setAttribute('aria-hidden', 'true');
     var title = document.createElement('p');
@@ -129,7 +129,7 @@
     var row = document.createElement('li');
     var optionId = state.list.id + '-option-' + state.optionsList.length;
     row.id = optionId;
-    row.className = state.options.cssPrefix + 'cdata wb-field-search__option';
+    row.className = state.options.cssPrefix + 'cdata hg-field-search__option';
     row.setAttribute('role', 'option');
     row.setAttribute('aria-selected', 'false');
     row.tabIndex = -1;
@@ -143,7 +143,7 @@
     }
     if (item.description !== undefined) {
       var description = document.createElement('span');
-      description.className = 'wb-field-search__description';
+      description.className = 'hg-field-search__description';
       description.textContent = String(item.description);
       content.appendChild(description);
     }
@@ -257,7 +257,7 @@
     state.listeners.forEach(function(listener) { input.removeEventListener(listener.type, listener.handler); });
     state.container.parentNode.insertBefore(input, state.container);
     state.container.remove();
-    input.classList.remove('wb-field-search__input', 'wb-field-search__input--loading');
+    input.classList.remove('hg-field-search__input', 'hg-field-search__input--loading');
     ['role', 'aria-autocomplete', 'aria-controls', 'aria-expanded', 'aria-activedescendant', 'aria-busy'].forEach(function(name) {
       input.removeAttribute(name);
     });
@@ -274,14 +274,14 @@
     var container = document.createElement('div');
     var list = document.createElement('ul');
     var live = document.createElement('div');
-    var id = 'wb-field-search-' + (++sequence);
-    container.className = settings.cssPrefix + 'container wb-field-search';
+    var id = 'hg-field-search-' + (++sequence);
+    container.className = settings.cssPrefix + 'container hg-field-search';
     list.id = id + '-listbox';
-    list.className = settings.cssPrefix + 'resultbox wb-field-search__results';
+    list.className = settings.cssPrefix + 'resultbox hg-field-search__results';
     list.setAttribute('role', 'listbox');
     list.hidden = true;
     live.id = id + '-status';
-    live.className = 'sr-only wb-field-search__live';
+    live.className = 'sr-only hg-field-search__live';
     live.setAttribute('role', 'status');
     live.setAttribute('aria-live', 'polite');
     live.setAttribute('aria-atomic', 'true');
@@ -291,7 +291,7 @@
     container.appendChild(list);
     container.appendChild(live);
     input.autocomplete = 'off';
-    input.classList.add('wb-field-search__input');
+    input.classList.add('hg-field-search__input');
     input.setAttribute('role', 'combobox');
     input.setAttribute('aria-autocomplete', 'list');
     input.setAttribute('aria-controls', list.id);

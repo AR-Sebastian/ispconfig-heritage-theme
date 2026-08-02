@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='en'>
 <head>
-  <style id='heritage-branding-vars'>:root { --wb-accent: #cc151c; --wb-action: #cc151c; --wb-dark-logo: url('/themes/heritage/assets/images/ispconfig-heritage-logo-dark.svg'); } .wb-skip-link:focus, .wb-skip-link:focus-visible { transform: none !important; }</style>
+  <style id='heritage-branding-vars'>:root { --hg-accent: #cc151c; --hg-action: #cc151c; --hg-dark-logo: url('/themes/heritage/assets/images/ispconfig-heritage-logo-dark.svg'); } .hg-skip-link:focus, .hg-skip-link:focus-visible { transform: none !important; }</style>
   <meta charset='utf-8' />
 
   <title><tmpl_var name="company_name"><tmpl_var name="app_title"></title>
@@ -25,21 +25,21 @@
   <link rel='stylesheet' href='themes/heritage/assets/stylesheets/heritage-app.bundle.css?ver=1.0.34' />
 </head>
 
-<body class='wb-app-navigation-enabled' data-heritage-filter-reset="Reset filters" data-heritage-filter-reset-active="Reset active filters" data-heritage-search-clear="Clear search" data-heritage-filter-toggle="Toggle filters" data-heritage-filter-show="Show filters" data-heritage-filter-hide="Hide filters" data-heritage-pagination="Pagination" data-heritage-pagination-page="Page" data-heritage-pagination-summary="Page {current} of {total}" data-heritage-list-visible-results="{count} items on this page" data-heritage-table-actions="Actions" data-heritage-tab-change-discard="<tmpl_var name='tabchange_discard_enabled'>" data-heritage-tab-change-warning="<tmpl_var name='tabchange_warning_enabled'>" data-heritage-tab-change-warning-text="<tmpl_var name='global_tabchange_warning_txt'>" data-heritage-tab-change-discard-text="<tmpl_var name='global_tabchange_discard_txt'>" data-heritage-use-load-indicator="<tmpl_if name='use_loadindicator' value='y'>true<tmpl_else>false</tmpl_if>" data-heritage-use-combobox="<tmpl_if name='use_combobox' value='y'>true<tmpl_else>false</tmpl_if>">
-  <a class='wb-skip-link' href='#pageContent' data-heritage-i18n-de='Zum Hauptinhalt springen' data-heritage-i18n-en='Skip to main content'>Skip to main content</a>
-  <div id='heritage-mobile-navigation' class='wb-mobile-navigation' role='dialog' aria-modal='true' aria-label='Open navigation' data-heritage-i18n-aria-label-de='Navigation öffnen' data-heritage-i18n-aria-label-en='Open navigation' aria-hidden='true'>
-    <div class='wb-mobile-navigation__header'>
+<body class='hg-app-navigation-enabled' data-heritage-filter-reset="Reset filters" data-heritage-filter-reset-active="Reset active filters" data-heritage-search-clear="Clear search" data-heritage-filter-toggle="Toggle filters" data-heritage-filter-show="Show filters" data-heritage-filter-hide="Hide filters" data-heritage-pagination="Pagination" data-heritage-pagination-page="Page" data-heritage-pagination-summary="Page {current} of {total}" data-heritage-list-visible-results="{count} items on this page" data-heritage-table-actions="Actions" data-heritage-tab-change-discard="<tmpl_var name='tabchange_discard_enabled'>" data-heritage-tab-change-warning="<tmpl_var name='tabchange_warning_enabled'>" data-heritage-tab-change-warning-text="<tmpl_var name='global_tabchange_warning_txt'>" data-heritage-tab-change-discard-text="<tmpl_var name='global_tabchange_discard_txt'>" data-heritage-use-load-indicator="<tmpl_if name='use_loadindicator' value='y'>true<tmpl_else>false</tmpl_if>" data-heritage-use-combobox="<tmpl_if name='use_combobox' value='y'>true<tmpl_else>false</tmpl_if>">
+  <a class='hg-skip-link' href='#pageContent' data-heritage-i18n-de='Zum Hauptinhalt springen' data-heritage-i18n-en='Skip to main content'>Skip to main content</a>
+  <div id='heritage-mobile-navigation' class='hg-mobile-navigation' role='dialog' aria-modal='true' aria-label='Open navigation' data-heritage-i18n-aria-label-de='Navigation öffnen' data-heritage-i18n-aria-label-en='Open navigation' aria-hidden='true'>
+    <div class='hg-mobile-navigation__header'>
       <strong data-heritage-i18n-de='Navigation öffnen' data-heritage-i18n-en='Open navigation'>Open navigation</strong>
-      <button type='button' class='wb-mobile-navigation__close' aria-label='{tmpl_var name="datalog_changes_close_txt"}'>&times;</button>
+      <button type='button' class='hg-mobile-navigation__close' aria-label='{tmpl_var name="datalog_changes_close_txt"}'>&times;</button>
     </div>
-    <nav class='wb-mobile-navigation__content' aria-label='Open navigation' data-heritage-i18n-aria-label-de='Navigation öffnen' data-heritage-i18n-aria-label-en='Open navigation'></nav>
-    <div class='wb-app-navigation__footer'>
-      <span class='wb-app-navigation__status' aria-hidden='true'></span>
-      <span class='wb-app-navigation__user'><strong><tmpl_var name='cpuser'></strong><small>ISPConfig Heritage</small></span>
-      <button type='button' class='wb-app-navigation__logout' data-heritage-load-content='login/logout.php' aria-label='{tmpl_var name="logout_txt"} {tmpl_var name="cpuser"}' title='{tmpl_var name="logout_txt"}'><svg viewBox='0 0 24 24' aria-hidden='true' focusable='false'><path d='M14 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9M10 12h11m-5-5 5 5-5 5'/></svg></button>
+    <nav class='hg-mobile-navigation__content' aria-label='Open navigation' data-heritage-i18n-aria-label-de='Navigation öffnen' data-heritage-i18n-aria-label-en='Open navigation'></nav>
+    <div class='hg-app-navigation__footer'>
+      <span class='hg-app-navigation__status' aria-hidden='true'></span>
+      <span class='hg-app-navigation__user'><strong><tmpl_var name='cpuser'></strong><small>ISPConfig Heritage</small></span>
+      <button type='button' class='hg-app-navigation__logout' data-heritage-load-content='login/logout.php' aria-label='{tmpl_var name="logout_txt"} {tmpl_var name="cpuser"}' title='{tmpl_var name="logout_txt"}'><svg viewBox='0 0 24 24' aria-hidden='true' focusable='false'><path d='M14 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9M10 12h11m-5-5 5 5-5 5'/></svg></button>
     </div>
   </div>
-  <button type='button' class='wb-navigation-overlay' aria-label='{tmpl_var name="datalog_changes_close_txt"}' aria-hidden='true' tabindex='-1'></button>
+  <button type='button' class='hg-navigation-overlay' aria-label='{tmpl_var name="datalog_changes_close_txt"}' aria-hidden='true' tabindex='-1'></button>
 
   <div id='container'>
     <div id='main-wrapper'>
@@ -54,13 +54,13 @@
             <tmpl_if name="cpuser">
 				<tmpl_if name='usertype' op='==' value='normaluser'>
 					<!-- search field -->
-					<form action='#' method='get' id='searchform' role='search' class='wb-global-search-form' autocomplete='off' novalidate>
-					  <label class='wb-visually-hidden' for='globalsearch'>{tmpl_var name="globalsearch_searchfield_watermark_txt"}</label>
-					  <div class='wb-global-search__field'>
+					<form action='#' method='get' id='searchform' role='search' class='hg-global-search-form' autocomplete='off' novalidate>
+					  <label class='hg-visually-hidden' for='globalsearch'>{tmpl_var name="globalsearch_searchfield_watermark_txt"}</label>
+					  <div class='hg-global-search__field'>
 						<input id='globalsearch' type='search' class='form-control' aria-label='{tmpl_var name="globalsearch_searchfield_watermark_txt"}' placeholder='{tmpl_var name="globalsearch_searchfield_watermark_txt"}' autocomplete='off' title='Suche fokussieren: / oder Strg+K' data-heritage-i18n-title-de='Suche fokussieren: / oder Strg+K' data-heritage-i18n-title-en='Focus search: / or Ctrl+K' />
-						<kbd class='wb-search-shortcut' aria-hidden='true'>/</kbd>
-						<button type='button' class='wb-search-clear' id='globalsearch-clear' aria-label='Clear search' data-heritage-i18n-aria-label-de='Suche leeren' data-heritage-i18n-aria-label-en='Clear search' hidden>&times;</button>
-						<button type='submit' class='wb-shell-button wb-shell-button--icon wb-global-search-submit' title='{tmpl_var name="globalsearch_searchfield_watermark_txt"}' aria-label='{tmpl_var name="globalsearch_searchfield_watermark_txt"}'>
+						<kbd class='hg-search-shortcut' aria-hidden='true'>/</kbd>
+						<button type='button' class='hg-search-clear' id='globalsearch-clear' aria-label='Clear search' data-heritage-i18n-aria-label-de='Suche leeren' data-heritage-i18n-aria-label-en='Clear search' hidden>&times;</button>
+						<button type='submit' class='hg-shell-button hg-shell-button--icon hg-global-search-submit' title='{tmpl_var name="globalsearch_searchfield_watermark_txt"}' aria-label='{tmpl_var name="globalsearch_searchfield_watermark_txt"}'>
 						  <svg viewBox='0 0 24 24' aria-hidden='true' focusable='false'><circle cx='11' cy='11' r='6.2'></circle><path d='m16 16 4.5 4.5'></path></svg>
 						</button>
 					  </div>
@@ -68,46 +68,46 @@
 				</tmpl_if>
             </tmpl_if>
           </div>
-		  <div class='wb-header-actions'>
-					<button type='button' class='wb-theme-toggle' aria-label='Zum dunklen Design wechseln' data-heritage-i18n-aria-label-de='Zum dunklen Design wechseln' data-heritage-i18n-aria-label-en='Switch to dark theme'><svg viewBox='0 0 24 24' aria-hidden='true' focusable='false'><path d='M20.7 15.3A8.5 8.5 0 0 1 8.7 3.3 8.5 8.5 0 1 0 20.7 15.3Z' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
+		  <div class='hg-header-actions'>
+					<button type='button' class='hg-theme-toggle' aria-label='Zum dunklen Design wechseln' data-heritage-i18n-aria-label-de='Zum dunklen Design wechseln' data-heritage-i18n-aria-label-en='Switch to dark theme'><svg viewBox='0 0 24 24' aria-hidden='true' focusable='false'><path d='M20.7 15.3A8.5 8.5 0 0 1 8.7 3.3 8.5 8.5 0 1 0 20.7 15.3Z' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
 					<button type="button" class="notification" data-heritage-dialog="datalogModal" aria-haspopup="dialog" aria-controls="datalogModal" aria-expanded="false" style="display: none;">
 	            <span class="notification_text">{tmpl_var name="datalog_changes_count"}</span>
             </button>
 		  </div>
 			<!-- Native read-only HERITAGE datalog dialog. -->
-			<div id="datalogModal" class="wb-dialog" role="dialog" aria-modal="true" aria-labelledby="datalogModalTitle" aria-hidden="true" tabindex="-1" hidden>
-			  <button type="button" class="wb-dialog__backdrop" data-heritage-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}" tabindex="-1"></button>
-			  <div class="wb-dialog__surface" role="document">
-			      <div class="wb-dialog__header">
-			        <h2 class="wb-dialog__title" id="datalogModalTitle">{tmpl_var name="datalog_changes_txt"}</h2>
-			        <button type="button" class="wb-dialog__close" data-heritage-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}">&times;</button>
+			<div id="datalogModal" class="hg-dialog" role="dialog" aria-modal="true" aria-labelledby="datalogModalTitle" aria-hidden="true" tabindex="-1" hidden>
+			  <button type="button" class="hg-dialog__backdrop" data-heritage-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}" tabindex="-1"></button>
+			  <div class="hg-dialog__surface" role="document">
+			      <div class="hg-dialog__header">
+			        <h2 class="hg-dialog__title" id="datalogModalTitle">{tmpl_var name="datalog_changes_txt"}</h2>
+			        <button type="button" class="hg-dialog__close" data-heritage-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}">&times;</button>
 			      </div>
-			      <div class="wb-dialog__body">
+			      <div class="hg-dialog__body">
 			        <ul>
 				    <tmpl_loop name="datalog_changes">
 				        <li><strong>{tmpl_var name="text"}:</strong> {tmpl_var name="count"}</li>
 				    </tmpl_loop>
 				    </ul>
-			        <p class="wb-dialog__supporting-text">{tmpl_var name="datalog_changes_end_txt"}</p>
+			        <p class="hg-dialog__supporting-text">{tmpl_var name="datalog_changes_end_txt"}</p>
 			      </div>
-			      <div class="wb-dialog__footer">
-			        <button type="button" class="wb-dialog__action wb-dialog__action--secondary" data-heritage-dialog-close data-heritage-dialog-autofocus>{tmpl_var name="datalog_changes_close_txt"}</button>
+			      <div class="hg-dialog__footer">
+			        <button type="button" class="hg-dialog__action hg-dialog__action--secondary" data-heritage-dialog-close data-heritage-dialog-autofocus>{tmpl_var name="datalog_changes_close_txt"}</button>
 			      </div>
 			  </div>
 			</div>
 			<!-- END native datalog dialog -->
-			<div id="heritageTabChangeDialog" class="wb-dialog wb-tab-change-dialog" role="dialog" aria-modal="true" aria-labelledby="heritageTabChangeDialogTitle" aria-describedby="heritageTabChangeDialogMessage" aria-hidden="true" tabindex="-1" hidden data-warning-message="This page contains unsaved changes." data-discard-message="Discard the unsaved changes and continue?">
-			  <button type="button" class="wb-dialog__backdrop" data-heritage-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}" tabindex="-1"></button>
-			  <div class="wb-dialog__surface" role="document">
-			    <div class="wb-dialog__header">
-			      <h2 class="wb-dialog__title" id="heritageTabChangeDialogTitle" data-heritage-i18n-de="Ungespeicherte Änderungen" data-heritage-i18n-en="Unsaved changes">Unsaved changes</h2>
-			      <button type="button" class="wb-dialog__close" data-heritage-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}">&times;</button>
+			<div id="heritageTabChangeDialog" class="hg-dialog hg-tab-change-dialog" role="dialog" aria-modal="true" aria-labelledby="heritageTabChangeDialogTitle" aria-describedby="heritageTabChangeDialogMessage" aria-hidden="true" tabindex="-1" hidden data-warning-message="This page contains unsaved changes." data-discard-message="Discard the unsaved changes and continue?">
+			  <button type="button" class="hg-dialog__backdrop" data-heritage-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}" tabindex="-1"></button>
+			  <div class="hg-dialog__surface" role="document">
+			    <div class="hg-dialog__header">
+			      <h2 class="hg-dialog__title" id="heritageTabChangeDialogTitle" data-heritage-i18n-de="Ungespeicherte Änderungen" data-heritage-i18n-en="Unsaved changes">Unsaved changes</h2>
+			      <button type="button" class="hg-dialog__close" data-heritage-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}">&times;</button>
 			    </div>
-			    <div class="wb-dialog__body"><p id="heritageTabChangeDialogMessage" data-heritage-tab-confirm-message></p></div>
-			    <div class="wb-dialog__footer">
-			      <button type="button" class="wb-dialog__action wb-dialog__action--secondary" data-heritage-tab-confirm-action="cancel" data-heritage-dialog-autofocus data-heritage-i18n-de="Weiter bearbeiten" data-heritage-i18n-en="Keep editing">Keep editing</button>
-			      <button type="button" class="wb-dialog__action wb-dialog__action--danger" data-heritage-tab-confirm-action="discard" data-heritage-i18n-de="Verwerfen und fortfahren" data-heritage-i18n-en="Discard and continue">Discard and continue</button>
-			      <button type="button" class="wb-dialog__action wb-dialog__action--primary" data-heritage-tab-confirm-action="save" data-heritage-i18n-de="Speichern und fortfahren" data-heritage-i18n-en="Save and continue">Save and continue</button>
+			    <div class="hg-dialog__body"><p id="heritageTabChangeDialogMessage" data-heritage-tab-confirm-message></p></div>
+			    <div class="hg-dialog__footer">
+			      <button type="button" class="hg-dialog__action hg-dialog__action--secondary" data-heritage-tab-confirm-action="cancel" data-heritage-dialog-autofocus data-heritage-i18n-de="Weiter bearbeiten" data-heritage-i18n-en="Keep editing">Keep editing</button>
+			      <button type="button" class="hg-dialog__action hg-dialog__action--danger" data-heritage-tab-confirm-action="discard" data-heritage-i18n-de="Verwerfen und fortfahren" data-heritage-i18n-en="Discard and continue">Discard and continue</button>
+			      <button type="button" class="hg-dialog__action hg-dialog__action--primary" data-heritage-tab-confirm-action="save" data-heritage-i18n-de="Speichern und fortfahren" data-heritage-i18n-en="Save and continue">Save and continue</button>
 			    </div>
 			  </div>
 			</div>

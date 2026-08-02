@@ -59,7 +59,7 @@
     var parent;
     try { parent = document.querySelector(parentSelector); } catch (error) { parent = null; }
     if (!parent) return;
-    parent.querySelectorAll('.collapse.in, .wb-collapse.in').forEach(function (peer) {
+    parent.querySelectorAll('.collapse.in, .hg-collapse.in').forEach(function (peer) {
       if (peer !== target) setCollapse(peer, false, trigger);
     });
   }
@@ -93,7 +93,7 @@
     if (tooltipNode && tooltipNode.isConnected) return tooltipNode;
     tooltipNode = document.createElement('div');
     tooltipNode.id = tooltipId;
-    tooltipNode.className = 'wb-native-tooltip';
+    tooltipNode.className = 'hg-native-tooltip';
     tooltipNode.setAttribute('role', 'tooltip');
     tooltipNode.hidden = true;
     document.body.appendChild(tooltipNode);
@@ -181,13 +181,13 @@
       trigger.removeAttribute('data-dismiss');
       trigger.removeAttribute('data-bs-dismiss');
     });
-    host.querySelectorAll('.wb-row-action[title]').forEach(function(element) {
+    host.querySelectorAll('.hg-row-action[title]').forEach(function(element) {
       element.setAttribute('data-heritage-tooltip', 'true');
     });
     host.querySelectorAll('[data-heritage-tooltip]').forEach(function (element) {
       initializeTooltip(element);
     });
-    host.querySelectorAll('.collapse, .wb-collapse').forEach(function (target) {
+    host.querySelectorAll('.collapse, .hg-collapse').forEach(function (target) {
       var expanded = target.classList.contains('in');
       target.hidden = !expanded;
       target.setAttribute('aria-hidden', expanded ? 'false' : 'true');

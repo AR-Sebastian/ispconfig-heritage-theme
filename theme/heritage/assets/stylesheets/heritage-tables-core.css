@@ -7,15 +7,15 @@
  * but it is no longer the table source of truth.
  */
 
-body.wb-list-page .wb-table-workspace {
-  --wb-table-radius: 1.35rem;
-  --wb-table-control-height: 2.9rem;
-  --wb-table-cell-padding-block: 0.92rem;
-  --wb-table-cell-padding-inline: 1rem;
-  --wb-table-min-width: min(62rem, 100%);
+body.hg-list-page .hg-table-workspace {
+  --hg-table-radius: 1.35rem;
+  --hg-table-control-height: 2.9rem;
+  --hg-table-cell-padding-block: 0.92rem;
+  --hg-table-cell-padding-inline: 1rem;
+  --hg-table-min-width: min(62rem, 100%);
 }
 
-body.wb-list-page .wb-table-workspace > .wb-list-command-bar {
+body.hg-list-page .hg-table-workspace > .hg-list-command-bar {
   inline-size: 100%;
   max-inline-size: 100%;
   display: grid;
@@ -24,26 +24,26 @@ body.wb-list-page .wb-table-workspace > .wb-list-command-bar {
   align-items: center;
   margin-block: 0 1rem;
   padding: clamp(0.85rem, 1.5vw, 1.15rem);
-  border: 1px solid color-mix(in srgb, var(--wb-border) 88%, transparent);
-  border-radius: var(--wb-table-radius);
+  border: 1px solid color-mix(in srgb, var(--hg-border) 88%, transparent);
+  border-radius: var(--hg-table-radius);
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--wb-surface) 94%, #fff 4%), var(--wb-surface));
-  box-shadow: var(--wb-shadow-sm);
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface) 94%, #fff 4%), var(--hg-surface));
+  box-shadow: var(--hg-shadow-sm);
   overflow: visible;
   isolation: isolate;
 }
 
-html[data-heritage-theme='dark'] body.wb-list-page .wb-table-workspace > .wb-list-command-bar {
+html[data-heritage-theme='dark'] body.hg-list-page .hg-table-workspace > .hg-list-command-bar {
   background:
-    linear-gradient(180deg, color-mix(in srgb, var(--wb-surface-muted) 76%, #fff 2%), var(--wb-surface));
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 76%, #fff 2%), var(--hg-surface));
 }
 
-body.wb-list-page .wb-table-workspace .wb-list-command-bar__meta,
-body.wb-list-page .wb-table-workspace .wb-list-command-bar__actions {
+body.hg-list-page .hg-table-workspace .hg-list-command-bar__meta,
+body.hg-list-page .hg-table-workspace .hg-list-command-bar__actions {
   min-inline-size: 0;
 }
 
-body.wb-list-page .wb-table-workspace .wb-list-command-bar__actions {
+body.hg-list-page .hg-table-workspace .hg-list-command-bar__actions {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
@@ -51,23 +51,23 @@ body.wb-list-page .wb-table-workspace .wb-list-command-bar__actions {
   gap: 0.65rem;
 }
 
-body.wb-list-page .wb-table-workspace .wb-list-command-bar__primary,
-body.wb-list-page .wb-table-workspace .wb-filter-toggle,
-body.wb-list-page .wb-table-workspace .wb-filter-reset,
-body.wb-list-page .wb-table-workspace .wb-list-page-size .wb-select__control,
-body.wb-list-page .wb-table-workspace .wb-page-size-select {
-  min-block-size: var(--wb-table-control-height) !important;
+body.hg-list-page .hg-table-workspace .hg-list-command-bar__primary,
+body.hg-list-page .hg-table-workspace .hg-filter-toggle,
+body.hg-list-page .hg-table-workspace .hg-filter-reset,
+body.hg-list-page .hg-table-workspace .hg-list-page-size .hg-select__control,
+body.hg-list-page .hg-table-workspace .hg-page-size-select {
+  min-block-size: var(--hg-table-control-height) !important;
   min-inline-size: 0;
   border-radius: 0.95rem !important;
   line-height: 1.1;
 }
 
-body.wb-list-page .wb-table-workspace .wb-list-command-bar__primary,
-body.wb-list-page .wb-table-workspace .wb-filter-toggle {
+body.hg-list-page .hg-table-workspace .hg-list-command-bar__primary,
+body.hg-list-page .hg-table-workspace .hg-filter-toggle {
   padding-inline: 1rem;
 }
 
-body.wb-list-page .wb-table-workspace .wb-filter-toolbar {
+body.hg-list-page .hg-table-workspace .hg-filter-toolbar {
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
@@ -77,7 +77,7 @@ body.wb-list-page .wb-table-workspace .wb-filter-toolbar {
   max-inline-size: 100%;
 }
 
-body.wb-list-page .wb-table-workspace .wb-list-page-size {
+body.hg-list-page .hg-table-workspace .hg-list-page-size {
   flex: 0 0 4.9rem;
   inline-size: 4.9rem;
   min-inline-size: 4.9rem;
@@ -87,7 +87,7 @@ body.wb-list-page .wb-table-workspace .wb-list-page-size {
   background: transparent;
 }
 
-body.wb-list-page .wb-table-workspace .wb-list-page-size__label {
+body.hg-list-page .hg-table-workspace .hg-list-page-size__label {
   position: absolute;
   inline-size: 1px;
   block-size: 1px;
@@ -96,37 +96,37 @@ body.wb-list-page .wb-table-workspace .wb-list-page-size__label {
   clip: rect(0 0 0 0);
 }
 
-body.wb-list-page .wb-table-workspace .wb-list-page-size .wb-select,
-body.wb-list-page .wb-table-workspace .wb-list-page-size .wb-select__control,
-body.wb-list-page .wb-table-workspace .wb-page-size-select {
+body.hg-list-page .hg-table-workspace .hg-list-page-size .hg-select,
+body.hg-list-page .hg-table-workspace .hg-list-page-size .hg-select__control,
+body.hg-list-page .hg-table-workspace .hg-page-size-select {
   inline-size: 100% !important;
   max-inline-size: 100% !important;
 }
 
-body.wb-list-page .wb-table-workspace .wb-list-page-size .wb-select__control,
-body.wb-list-page .wb-table-workspace .wb-page-size-select {
+body.hg-list-page .hg-table-workspace .hg-list-page-size .hg-select__control,
+body.hg-list-page .hg-table-workspace .hg-page-size-select {
   padding-inline: 0.85rem 1.75rem !important;
-  color: var(--wb-text) !important;
-  background: color-mix(in srgb, var(--wb-surface-muted) 72%, var(--wb-surface)) !important;
+  color: var(--hg-text) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 72%, var(--hg-surface)) !important;
 }
 
-body.wb-list-page .wb-table-workspace > .wb-table-viewport,
-body.wb-list-page #pageContent .wb-table-viewport {
+body.hg-list-page .hg-table-workspace > .hg-table-viewport,
+body.hg-list-page #pageContent .hg-table-viewport {
   inline-size: 100%;
   max-inline-size: 100%;
   min-inline-size: 0;
   min-block-size: 9rem;
-  border: 1px solid color-mix(in srgb, var(--wb-border) 88%, transparent);
-  border-radius: var(--wb-table-radius) var(--wb-table-radius) 0 0;
-  background: var(--wb-surface);
-  box-shadow: var(--wb-shadow-sm);
+  border: 1px solid color-mix(in srgb, var(--hg-border) 88%, transparent);
+  border-radius: var(--hg-table-radius) var(--hg-table-radius) 0 0;
+  background: var(--hg-surface);
+  box-shadow: var(--hg-shadow-sm);
   overflow: auto hidden;
   overscroll-behavior-inline: contain;
   scrollbar-gutter: stable;
 }
 
-body.wb-list-page #pageContent .wb-table-viewport + .wb-table-footer,
-body.wb-list-page #pageContent .wb-table-footer {
+body.hg-list-page #pageContent .hg-table-viewport + .hg-table-footer,
+body.hg-list-page #pageContent .hg-table-footer {
   inline-size: 100%;
   max-inline-size: 100%;
   min-block-size: 4rem;
@@ -136,15 +136,15 @@ body.wb-list-page #pageContent .wb-table-footer {
   gap: 0.85rem;
   margin-block-start: 0;
   padding: 0.85rem 1rem;
-  border: 1px solid color-mix(in srgb, var(--wb-border) 88%, transparent);
+  border: 1px solid color-mix(in srgb, var(--hg-border) 88%, transparent);
   border-top: 0;
-  border-radius: 0 0 var(--wb-table-radius) var(--wb-table-radius);
-  background: color-mix(in srgb, var(--wb-surface) 92%, var(--wb-surface-muted));
+  border-radius: 0 0 var(--hg-table-radius) var(--hg-table-radius);
+  background: color-mix(in srgb, var(--hg-surface) 92%, var(--hg-surface-muted));
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table {
+body.hg-list-page .hg-table-workspace .hg-data-table {
   inline-size: 100%;
-  min-inline-size: var(--wb-table-min-width);
+  min-inline-size: var(--hg-table-min-width);
   margin: 0;
   border: 0;
   border-collapse: separate;
@@ -153,23 +153,23 @@ body.wb-list-page .wb-table-workspace .wb-data-table {
   background: transparent;
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table--empty {
+body.hg-list-page .hg-table-workspace .hg-data-table--empty {
   min-inline-size: 100% !important;
 }
 
-body.wb-list-page .wb-table-workspace > .wb-table-viewport--empty,
-body.wb-list-page #pageContent .wb-table-viewport--empty {
+body.hg-list-page .hg-table-workspace > .hg-table-viewport--empty,
+body.hg-list-page #pageContent .hg-table-viewport--empty {
   overflow-x: hidden;
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr:first-child > :is(th, td) {
+body.hg-list-page .hg-table-workspace .hg-data-table > thead > tr:first-child > :is(th, td) {
   position: sticky;
   top: 0;
   z-index: 2;
-  padding: 1rem var(--wb-table-cell-padding-inline);
-  border-bottom: 1px solid color-mix(in srgb, var(--wb-border) 84%, transparent);
-  color: var(--wb-text-muted);
-  background: color-mix(in srgb, var(--wb-surface) 88%, var(--wb-surface-muted));
+  padding: 1rem var(--hg-table-cell-padding-inline);
+  border-bottom: 1px solid color-mix(in srgb, var(--hg-border) 84%, transparent);
+  color: var(--hg-text-muted);
+  background: color-mix(in srgb, var(--hg-surface) 88%, var(--hg-surface-muted));
   font-size: 0.78rem;
   font-weight: 850;
   letter-spacing: 0.06em;
@@ -177,62 +177,62 @@ body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr:first-child > 
   white-space: nowrap;
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr[data-heritage-filter-row] {
-  background: color-mix(in srgb, var(--wb-surface-muted) 78%, var(--wb-surface));
+body.hg-list-page .hg-table-workspace .hg-data-table > thead > tr[data-heritage-filter-row] {
+  background: color-mix(in srgb, var(--hg-surface-muted) 78%, var(--hg-surface));
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr[data-heritage-filter-row] > :is(th, td) {
-  padding: 0.72rem var(--wb-table-cell-padding-inline);
-  border-bottom: 1px solid color-mix(in srgb, var(--wb-border) 76%, transparent);
+body.hg-list-page .hg-table-workspace .hg-data-table > thead > tr[data-heritage-filter-row] > :is(th, td) {
+  padding: 0.72rem var(--hg-table-cell-padding-inline);
+  border-bottom: 1px solid color-mix(in srgb, var(--hg-border) 76%, transparent);
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr[data-heritage-filter-row] :is(input, select, .form-control, .wb-select__control) {
+body.hg-list-page .hg-table-workspace .hg-data-table > thead > tr[data-heritage-filter-row] :is(input, select, .form-control, .hg-select__control) {
   inline-size: 100%;
   min-inline-size: 0 !important;
   min-block-size: 2.65rem !important;
-  border: 1px solid color-mix(in srgb, var(--wb-border) 82%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--hg-border) 82%, transparent) !important;
   border-radius: 0.85rem !important;
-  color: var(--wb-text) !important;
-  background: color-mix(in srgb, var(--wb-surface) 88%, var(--wb-surface-muted)) !important;
+  color: var(--hg-text) !important;
+  background: color-mix(in srgb, var(--hg-surface) 88%, var(--hg-surface-muted)) !important;
   box-shadow: none !important;
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table > tbody > .wb-table-data-row > :is(td, th) {
+body.hg-list-page .hg-table-workspace .hg-data-table > tbody > .hg-table-data-row > :is(td, th) {
   min-inline-size: 0;
   max-inline-size: 1px;
-  padding: var(--wb-table-cell-padding-block) var(--wb-table-cell-padding-inline);
-  border-bottom: 1px solid color-mix(in srgb, var(--wb-border) 58%, transparent);
-  color: var(--wb-text);
+  padding: var(--hg-table-cell-padding-block) var(--hg-table-cell-padding-inline);
+  border-bottom: 1px solid color-mix(in srgb, var(--hg-border) 58%, transparent);
+  color: var(--hg-text);
   background: transparent;
   overflow: hidden;
   text-overflow: ellipsis;
   overflow-wrap: anywhere;
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table > tbody > .wb-table-data-row:nth-child(even) > :is(td, th) {
-  background: color-mix(in srgb, var(--wb-surface-muted) 36%, transparent);
+body.hg-list-page .hg-table-workspace .hg-data-table > tbody > .hg-table-data-row:nth-child(even) > :is(td, th) {
+  background: color-mix(in srgb, var(--hg-surface-muted) 36%, transparent);
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table > tbody > .wb-table-data-row:hover > :is(td, th),
-body.wb-list-page .wb-table-workspace .wb-data-table > tbody > .wb-table-data-row:focus-within > :is(td, th) {
-  background: color-mix(in srgb, var(--wb-action) 7%, var(--wb-surface));
+body.hg-list-page .hg-table-workspace .hg-data-table > tbody > .hg-table-data-row:hover > :is(td, th),
+body.hg-list-page .hg-table-workspace .hg-data-table > tbody > .hg-table-data-row:focus-within > :is(td, th) {
+  background: color-mix(in srgb, var(--hg-action) 7%, var(--hg-surface));
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table :is(.wb-record-link, a:not(.btn)) {
-  color: var(--wb-text) !important;
+body.hg-list-page .hg-table-workspace .hg-data-table :is(.hg-record-link, a:not(.btn)) {
+  color: var(--hg-text) !important;
   font-weight: 680;
   text-decoration: none;
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table :is(.wb-record-link, a:not(.btn)):hover,
-body.wb-list-page .wb-table-workspace .wb-data-table :is(.wb-record-link, a:not(.btn)):focus-visible {
-  color: var(--wb-action);
+body.hg-list-page .hg-table-workspace .hg-data-table :is(.hg-record-link, a:not(.btn)):hover,
+body.hg-list-page .hg-table-workspace .hg-data-table :is(.hg-record-link, a:not(.btn)):focus-visible {
+  color: var(--hg-action);
   text-decoration: underline;
   text-decoration-thickness: 0.12em;
   text-underline-offset: 0.2em;
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table .wb-table-actions {
+body.hg-list-page .hg-table-workspace .hg-data-table .hg-table-actions {
   inline-size: 7rem;
   width: 7rem;
   min-inline-size: 6rem;
@@ -241,7 +241,7 @@ body.wb-list-page .wb-table-workspace .wb-data-table .wb-table-actions {
   text-overflow: clip;
 }
 
-body.wb-list-page .wb-table-workspace .wb-row-actions {
+body.hg-list-page .hg-table-workspace .hg-row-actions {
   display: inline-flex;
   flex-wrap: nowrap;
   align-items: center;
@@ -249,7 +249,7 @@ body.wb-list-page .wb-table-workspace .wb-row-actions {
   gap: 0.42rem;
 }
 
-body.wb-list-page .wb-table-workspace .wb-row-action {
+body.hg-list-page .hg-table-workspace .hg-row-action {
   inline-size: 2.35rem;
   block-size: 2.35rem;
   display: inline-grid;
@@ -257,14 +257,14 @@ body.wb-list-page .wb-table-workspace .wb-row-action {
   border-radius: 0.8rem;
 }
 
-body.wb-list-page .wb-table-workspace .wb-table-empty-row > td {
+body.hg-list-page .hg-table-workspace .hg-table-empty-row > td {
   padding: 0 !important;
   background:
-    radial-gradient(circle at 12% 10%, color-mix(in srgb, var(--wb-action) 8%, transparent), transparent 34%),
-    color-mix(in srgb, var(--wb-surface-muted) 52%, var(--wb-surface)) !important;
+    radial-gradient(circle at 12% 10%, color-mix(in srgb, var(--hg-action) 8%, transparent), transparent 34%),
+    color-mix(in srgb, var(--hg-surface-muted) 52%, var(--hg-surface)) !important;
 }
 
-body.wb-list-page .wb-table-workspace .wb-empty-state--table {
+body.hg-list-page .hg-table-workspace .hg-empty-state--table {
   min-block-size: clamp(12rem, 24cqi, 18rem);
   border: 0;
   border-radius: 0;
@@ -272,31 +272,31 @@ body.wb-list-page .wb-table-workspace .wb-empty-state--table {
   box-shadow: none;
 }
 
-body.wb-list-page .wb-table-workspace .wb-list-footer__summary {
+body.hg-list-page .hg-table-workspace .hg-list-footer__summary {
   min-inline-size: 0;
   overflow: hidden;
-  color: var(--wb-text-muted);
+  color: var(--hg-text-muted);
   font-size: 0.82rem;
   font-weight: 800;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-body.wb-list-page .wb-table-workspace .wb-list-footer__pagination {
+body.hg-list-page .hg-table-workspace .hg-list-footer__pagination {
   min-inline-size: 0;
   display: flex;
   justify-content: flex-end;
 }
 
-body.wb-list-page .wb-table-workspace .wb-list-footer__pagination[hidden] {
+body.hg-list-page .hg-table-workspace .hg-list-footer__pagination[hidden] {
   display: none !important;
 }
 
-body.wb-list-page .wb-table-workspace .wb-table-footer:has(.wb-list-footer__pagination[hidden]) {
+body.hg-list-page .hg-table-workspace .hg-table-footer:has(.hg-list-footer__pagination[hidden]) {
   grid-template-columns: minmax(0, 1fr);
 }
 
-body.wb-list-page .wb-table-workspace .wb-list-footer__pagination :where(.pagination, .pager) {
+body.hg-list-page .hg-table-workspace .hg-list-footer__pagination :where(.pagination, .pager) {
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
@@ -307,87 +307,87 @@ body.wb-list-page .wb-table-workspace .wb-list-footer__pagination :where(.pagina
   padding: 0;
 }
 
-body.wb-list-page .wb-table-workspace :where(.pagination, .pager) > li {
+body.hg-list-page .hg-table-workspace :where(.pagination, .pager) > li {
   display: inline-flex;
 }
 
-body.wb-list-page .wb-table-workspace :where(.pagination, .pager) > li > :is(a, span) {
+body.hg-list-page .hg-table-workspace :where(.pagination, .pager) > li > :is(a, span) {
   min-inline-size: 2.45rem;
   min-block-size: 2.45rem;
   display: inline-grid;
   place-items: center;
   padding-inline: 0.75rem;
-  border: 1px solid color-mix(in srgb, var(--wb-border) 82%, transparent);
+  border: 1px solid color-mix(in srgb, var(--hg-border) 82%, transparent);
   border-radius: 0.85rem;
-  color: var(--wb-text);
-  background: color-mix(in srgb, var(--wb-surface-muted) 72%, var(--wb-surface));
+  color: var(--hg-text);
+  background: color-mix(in srgb, var(--hg-surface-muted) 72%, var(--hg-surface));
   font-weight: 850;
   text-decoration: none;
 }
 
-body.wb-list-page .wb-table-workspace :where(.pagination, .pager) > .active > :is(a, span),
-body.wb-list-page .wb-table-workspace :where(.pagination, .pager) > li > :is(a, span)[aria-current='page'] {
-  color: var(--wb-action-contrast);
+body.hg-list-page .hg-table-workspace :where(.pagination, .pager) > .active > :is(a, span),
+body.hg-list-page .hg-table-workspace :where(.pagination, .pager) > li > :is(a, span)[aria-current='page'] {
+  color: var(--hg-action-contrast);
   border-color: transparent;
-  background: var(--wb-action);
+  background: var(--hg-action);
 }
 
-body.wb-list-page .wb-table-workspace :where(.pagination, .pager) > li > :is(a, span):hover,
-body.wb-list-page .wb-table-workspace :where(.pagination, .pager) > li > :is(a, span):focus-visible {
-  color: var(--wb-action);
-  border-color: color-mix(in srgb, var(--wb-action) 28%, var(--wb-border));
+body.hg-list-page .hg-table-workspace :where(.pagination, .pager) > li > :is(a, span):hover,
+body.hg-list-page .hg-table-workspace :where(.pagination, .pager) > li > :is(a, span):focus-visible {
+  color: var(--hg-action);
+  border-color: color-mix(in srgb, var(--hg-action) 28%, var(--hg-border));
   outline: none;
 }
 
-body > .wb-select__panel--page-size {
+body > .hg-select__panel--page-size {
   inline-size: auto !important;
   min-inline-size: 6.75rem !important;
   max-inline-size: min(7.5rem, calc(100vw - 1.5rem)) !important;
-  max-block-size: min(var(--wb-select-overlay-max-height, 15rem), 15rem) !important;
+  max-block-size: min(var(--hg-select-overlay-max-height, 15rem), 15rem) !important;
   padding: 0.35rem !important;
   overflow: hidden !important;
 }
 
-body > .wb-select__panel--page-size .wb-select__search {
+body > .hg-select__panel--page-size .hg-select__search {
   display: none !important;
 }
 
-body > .wb-select__panel--page-size .wb-select__list {
-  max-block-size: min(var(--wb-select-overlay-max-height, 15rem), 15rem) !important;
+body > .hg-select__panel--page-size .hg-select__list {
+  max-block-size: min(var(--hg-select-overlay-max-height, 15rem), 15rem) !important;
   overflow-x: hidden;
 }
 
-body > .wb-select__panel--page-size .wb-select__option {
+body > .hg-select__panel--page-size .hg-select__option {
   min-block-size: 2.7rem;
   justify-content: flex-start;
   border-radius: 0.8rem;
 }
 
-body > .wb-select__panel:not(.wb-select__panel--page-size) {
+body > .hg-select__panel:not(.hg-select__panel--page-size) {
   max-inline-size: min(24rem, calc(100vw - 1.5rem)) !important;
 }
 
-html[data-heritage-theme='dark'] body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr:first-child > :is(th, td),
-html[data-heritage-theme='dark'] body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr[data-heritage-filter-row],
-html[data-heritage-theme='dark'] body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr[data-heritage-filter-row] :is(input, select, .form-control, .wb-select__control),
-html[data-heritage-theme='dark'] body.wb-list-page #pageContent .wb-table-footer {
-  color: var(--wb-text) !important;
-  background: color-mix(in srgb, var(--wb-surface-muted) 84%, var(--wb-surface)) !important;
+html[data-heritage-theme='dark'] body.hg-list-page .hg-table-workspace .hg-data-table > thead > tr:first-child > :is(th, td),
+html[data-heritage-theme='dark'] body.hg-list-page .hg-table-workspace .hg-data-table > thead > tr[data-heritage-filter-row],
+html[data-heritage-theme='dark'] body.hg-list-page .hg-table-workspace .hg-data-table > thead > tr[data-heritage-filter-row] :is(input, select, .form-control, .hg-select__control),
+html[data-heritage-theme='dark'] body.hg-list-page #pageContent .hg-table-footer {
+  color: var(--hg-text) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 84%, var(--hg-surface)) !important;
 }
 
-@container wb-table-workspace (max-width: 820px) {
-  body.wb-list-page .wb-table-workspace > .wb-list-command-bar {
+@container hg-table-workspace (max-width: 820px) {
+  body.hg-list-page .hg-table-workspace > .hg-list-command-bar {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  body.wb-list-page .wb-table-workspace .wb-list-command-bar__actions {
+  body.hg-list-page .hg-table-workspace .hg-list-command-bar__actions {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(4.9rem, auto);
     justify-content: stretch;
   }
 
-  body.wb-list-page .wb-table-workspace .wb-list-command-bar__primary,
-  body.wb-list-page .wb-table-workspace .wb-filter-toolbar {
+  body.hg-list-page .hg-table-workspace .hg-list-command-bar__primary,
+  body.hg-list-page .hg-table-workspace .hg-filter-toolbar {
     grid-column: 1 / -1;
   }
 }
@@ -399,196 +399,196 @@ html[data-heritage-theme='dark'] body.wb-list-page #pageContent .wb-table-footer
  * visible table decisions live here: command bar, filters, viewport, rows,
  * actions, empty states, pagination and responsive record cards.
  */
-body.wb-app-navigation-enabled #pageContent .wb-table-align-end {
+body.hg-app-navigation-enabled #pageContent .hg-table-align-end {
   text-align: end;
 }
 
-body.wb-app-navigation-enabled #pageContent .wb-table-actions-column {
+body.hg-app-navigation-enabled #pageContent .hg-table-actions-column {
   width: 1%;
   min-width: max-content;
   white-space: nowrap;
 }
 
-body.wb-app-navigation-enabled #pageContent .wb-table-compact-column {
+body.hg-app-navigation-enabled #pageContent .hg-table-compact-column {
   width: 1%;
   white-space: nowrap;
 }
-body.wb-list-page .wb-table-workspace {
-  container: wb-table-workspace / inline-size;
-  inline-size: min(100%, var(--wb-content-measure, 100%));
-  color: var(--wb-text);
+body.hg-list-page .hg-table-workspace {
+  container: hg-table-workspace / inline-size;
+  inline-size: min(100%, var(--hg-content-measure, 100%));
+  color: var(--hg-text);
 }
 
-body.wb-list-page .wb-table-workspace :where(.wb-list-command-bar, .wb-table-viewport, .wb-table-footer) {
+body.hg-list-page .hg-table-workspace :where(.hg-list-command-bar, .hg-table-viewport, .hg-table-footer) {
   box-sizing: border-box;
 }
 
-body.wb-list-page .wb-table-workspace > .wb-list-command-bar {
+body.hg-list-page .hg-table-workspace > .hg-list-command-bar {
   position: relative;
   z-index: 3;
 }
 
-body.wb-list-page .wb-table-workspace .wb-list-command-bar__meta {
+body.hg-list-page .hg-table-workspace .hg-list-command-bar__meta {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 0.6rem;
-  color: var(--wb-text-muted);
+  color: var(--hg-text-muted);
 }
 
-body.wb-list-page .wb-table-workspace .wb-list-command-bar__actions > :where(.wb-list-command-bar__primary, .wb-filter-toggle, .wb-filter-reset) {
+body.hg-list-page .hg-table-workspace .hg-list-command-bar__actions > :where(.hg-list-command-bar__primary, .hg-filter-toggle, .hg-filter-reset) {
   flex: 0 1 auto;
   white-space: nowrap;
 }
 
-body.wb-list-page .wb-table-workspace .wb-list-command-bar__primary {
+body.hg-list-page .hg-table-workspace .hg-list-command-bar__primary {
   border: 1px solid transparent !important;
-  color: var(--wb-action-contrast) !important;
-  background: var(--wb-action) !important;
-  box-shadow: 0 0.85rem 1.9rem color-mix(in srgb, var(--wb-action) 18%, transparent) !important;
+  color: var(--hg-action-contrast) !important;
+  background: var(--hg-action) !important;
+  box-shadow: 0 0.85rem 1.9rem color-mix(in srgb, var(--hg-action) 18%, transparent) !important;
 }
 
-body.wb-list-page .wb-table-workspace .wb-filter-toggle,
-body.wb-list-page .wb-table-workspace .wb-filter-reset,
-body.wb-list-page .wb-table-workspace .wb-table-footer :where(button, .btn, a) {
-  border: 1px solid color-mix(in srgb, var(--wb-border) 86%, transparent) !important;
-  color: var(--wb-text) !important;
-  background: color-mix(in srgb, var(--wb-surface-muted) 70%, var(--wb-surface)) !important;
+body.hg-list-page .hg-table-workspace .hg-filter-toggle,
+body.hg-list-page .hg-table-workspace .hg-filter-reset,
+body.hg-list-page .hg-table-workspace .hg-table-footer :where(button, .btn, a) {
+  border: 1px solid color-mix(in srgb, var(--hg-border) 86%, transparent) !important;
+  color: var(--hg-text) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 70%, var(--hg-surface)) !important;
   box-shadow: none !important;
 }
 
-body.wb-list-page .wb-table-workspace .wb-filter-toggle:is(:hover, :focus-visible),
-body.wb-list-page .wb-table-workspace .wb-filter-reset:is(:hover, :focus-visible),
-body.wb-list-page .wb-table-workspace .wb-table-footer :where(button, .btn, a):is(:hover, :focus-visible) {
-  border-color: color-mix(in srgb, var(--wb-action) 34%, var(--wb-border)) !important;
-  color: var(--wb-action) !important;
+body.hg-list-page .hg-table-workspace .hg-filter-toggle:is(:hover, :focus-visible),
+body.hg-list-page .hg-table-workspace .hg-filter-reset:is(:hover, :focus-visible),
+body.hg-list-page .hg-table-workspace .hg-table-footer :where(button, .btn, a):is(:hover, :focus-visible) {
+  border-color: color-mix(in srgb, var(--hg-action) 34%, var(--hg-border)) !important;
+  color: var(--hg-action) !important;
   outline: none;
 }
 
-body.wb-list-page .wb-table-workspace .wb-filter-toolbar--active .wb-filter-toggle,
-body.wb-list-page .wb-table-workspace .wb-filter-toolbar[aria-expanded='true'] .wb-filter-toggle {
-  color: var(--wb-action) !important;
-  background: color-mix(in srgb, var(--wb-action) 10%, var(--wb-surface)) !important;
+body.hg-list-page .hg-table-workspace .hg-filter-toolbar--active .hg-filter-toggle,
+body.hg-list-page .hg-table-workspace .hg-filter-toolbar[aria-expanded='true'] .hg-filter-toggle {
+  color: var(--hg-action) !important;
+  background: color-mix(in srgb, var(--hg-action) 10%, var(--hg-surface)) !important;
 }
 
-body.wb-list-page .wb-table-workspace .wb-table-viewport {
+body.hg-list-page .hg-table-workspace .hg-table-viewport {
   position: relative;
   z-index: 1;
   overflow-x: auto;
   overflow-y: clip;
-  scrollbar-color: color-mix(in srgb, var(--wb-text-muted) 46%, transparent) transparent;
+  scrollbar-color: color-mix(in srgb, var(--hg-text-muted) 46%, transparent) transparent;
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table {
-  color: var(--wb-text);
-  background: var(--wb-surface);
+body.hg-list-page .hg-table-workspace .hg-data-table {
+  color: var(--hg-text);
+  background: var(--hg-surface);
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr:first-child > :is(th, td) {
+body.hg-list-page .hg-table-workspace .hg-data-table > thead > tr:first-child > :is(th, td) {
   position: sticky;
   top: 0;
   z-index: 2;
-  border-color: color-mix(in srgb, var(--wb-border) 86%, transparent) !important;
-  color: var(--wb-text-muted) !important;
-  background: color-mix(in srgb, var(--wb-surface-muted) 86%, var(--wb-surface)) !important;
+  border-color: color-mix(in srgb, var(--hg-border) 86%, transparent) !important;
+  color: var(--hg-text-muted) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 86%, var(--hg-surface)) !important;
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr[data-heritage-filter-row] {
+body.hg-list-page .hg-table-workspace .hg-data-table > thead > tr[data-heritage-filter-row] {
   position: sticky;
   top: 3.15rem;
   z-index: 2;
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table > thead > tr[data-heritage-filter-row] > :is(th, td) {
-  border-color: color-mix(in srgb, var(--wb-border) 72%, transparent) !important;
-  background: color-mix(in srgb, var(--wb-surface-muted) 78%, var(--wb-surface)) !important;
+body.hg-list-page .hg-table-workspace .hg-data-table > thead > tr[data-heritage-filter-row] > :is(th, td) {
+  border-color: color-mix(in srgb, var(--hg-border) 72%, transparent) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 78%, var(--hg-surface)) !important;
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table :where(input, select, textarea, .form-control, .wb-select__control) {
-  color: var(--wb-text) !important;
-  border-color: color-mix(in srgb, var(--wb-border) 88%, transparent) !important;
-  background: color-mix(in srgb, var(--wb-surface) 92%, var(--wb-surface-muted)) !important;
+body.hg-list-page .hg-table-workspace .hg-data-table :where(input, select, textarea, .form-control, .hg-select__control) {
+  color: var(--hg-text) !important;
+  border-color: color-mix(in srgb, var(--hg-border) 88%, transparent) !important;
+  background: color-mix(in srgb, var(--hg-surface) 92%, var(--hg-surface-muted)) !important;
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table :where(input, select, textarea, .form-control, .wb-select__control):focus {
-  border-color: color-mix(in srgb, var(--wb-action) 42%, var(--wb-border)) !important;
-  box-shadow: 0 0 0 0.18rem color-mix(in srgb, var(--wb-action) 14%, transparent) !important;
+body.hg-list-page .hg-table-workspace .hg-data-table :where(input, select, textarea, .form-control, .hg-select__control):focus {
+  border-color: color-mix(in srgb, var(--hg-action) 42%, var(--hg-border)) !important;
+  box-shadow: 0 0 0 0.18rem color-mix(in srgb, var(--hg-action) 14%, transparent) !important;
   outline: none;
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table > tbody > tr > :is(th, td) {
-  border-color: color-mix(in srgb, var(--wb-border) 66%, transparent) !important;
-  color: var(--wb-text) !important;
+body.hg-list-page .hg-table-workspace .hg-data-table > tbody > tr > :is(th, td) {
+  border-color: color-mix(in srgb, var(--hg-border) 66%, transparent) !important;
+  color: var(--hg-text) !important;
   background: transparent !important;
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table > tbody > tr:nth-child(even) > :is(th, td) {
-  background: color-mix(in srgb, var(--wb-surface-muted) 34%, transparent) !important;
+body.hg-list-page .hg-table-workspace .hg-data-table > tbody > tr:nth-child(even) > :is(th, td) {
+  background: color-mix(in srgb, var(--hg-surface-muted) 34%, transparent) !important;
 }
 
-body.wb-list-page .wb-table-workspace .wb-data-table > tbody > tr:is(:hover, :focus-within) > :is(th, td) {
-  background: color-mix(in srgb, var(--wb-action) 7%, var(--wb-surface)) !important;
+body.hg-list-page .hg-table-workspace .hg-data-table > tbody > tr:is(:hover, :focus-within) > :is(th, td) {
+  background: color-mix(in srgb, var(--hg-action) 7%, var(--hg-surface)) !important;
 }
 
-body.wb-list-page .wb-table-workspace .wb-row-action {
-  border-color: color-mix(in srgb, var(--wb-border) 82%, transparent) !important;
-  color: var(--wb-text) !important;
-  background: color-mix(in srgb, var(--wb-surface-muted) 70%, var(--wb-surface)) !important;
+body.hg-list-page .hg-table-workspace .hg-row-action {
+  border-color: color-mix(in srgb, var(--hg-border) 82%, transparent) !important;
+  color: var(--hg-text) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 70%, var(--hg-surface)) !important;
 }
 
-body.wb-list-page .wb-table-workspace .wb-row-action:is(:hover, :focus-visible) {
-  color: var(--wb-action) !important;
-  border-color: color-mix(in srgb, var(--wb-action) 35%, var(--wb-border)) !important;
-  background: color-mix(in srgb, var(--wb-action) 9%, var(--wb-surface)) !important;
+body.hg-list-page .hg-table-workspace .hg-row-action:is(:hover, :focus-visible) {
+  color: var(--hg-action) !important;
+  border-color: color-mix(in srgb, var(--hg-action) 35%, var(--hg-border)) !important;
+  background: color-mix(in srgb, var(--hg-action) 9%, var(--hg-surface)) !important;
 }
 
-body.wb-list-page .wb-table-workspace .wb-row-action--danger:is(:hover, :focus-visible) {
-  color: var(--wb-danger, #dc2626) !important;
-  border-color: color-mix(in srgb, var(--wb-danger, #dc2626) 38%, var(--wb-border)) !important;
-  background: color-mix(in srgb, var(--wb-danger, #dc2626) 9%, var(--wb-surface)) !important;
+body.hg-list-page .hg-table-workspace .hg-row-action--danger:is(:hover, :focus-visible) {
+  color: var(--hg-danger, #dc2626) !important;
+  border-color: color-mix(in srgb, var(--hg-danger, #dc2626) 38%, var(--hg-border)) !important;
+  background: color-mix(in srgb, var(--hg-danger, #dc2626) 9%, var(--hg-surface)) !important;
 }
 
-body.wb-list-page .wb-table-workspace .wb-empty-state--table {
+body.hg-list-page .hg-table-workspace .hg-empty-state--table {
   margin: 0;
-  border-radius: 0 0 var(--wb-table-radius) var(--wb-table-radius);
-  border-color: color-mix(in srgb, var(--wb-border) 84%, transparent);
-  color: var(--wb-text-muted);
-  background: color-mix(in srgb, var(--wb-surface-muted) 48%, var(--wb-surface));
+  border-radius: 0 0 var(--hg-table-radius) var(--hg-table-radius);
+  border-color: color-mix(in srgb, var(--hg-border) 84%, transparent);
+  color: var(--hg-text-muted);
+  background: color-mix(in srgb, var(--hg-surface-muted) 48%, var(--hg-surface));
 }
 
-body.wb-list-page #pageContent .wb-table-footer,
-body.wb-list-page .wb-table-workspace .wb-list-footer {
+body.hg-list-page #pageContent .hg-table-footer,
+body.hg-list-page .hg-table-workspace .hg-list-footer {
   min-block-size: 4.1rem;
-  border-color: color-mix(in srgb, var(--wb-border) 84%, transparent) !important;
-  color: var(--wb-text-muted) !important;
-  background: color-mix(in srgb, var(--wb-surface-muted) 62%, var(--wb-surface)) !important;
+  border-color: color-mix(in srgb, var(--hg-border) 84%, transparent) !important;
+  color: var(--hg-text-muted) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 62%, var(--hg-surface)) !important;
 }
 
-html[data-heritage-theme='dark'] body.wb-list-page .wb-table-workspace .wb-data-table,
-html[data-heritage-theme='dark'] body.wb-list-page .wb-table-workspace .wb-empty-state--table,
-html[data-heritage-theme='dark'] body.wb-list-page #pageContent .wb-table-footer,
-html[data-heritage-theme='dark'] body.wb-list-page .wb-table-workspace .wb-list-footer {
-  color: var(--wb-text) !important;
-  background: color-mix(in srgb, var(--wb-surface) 92%, #020617) !important;
+html[data-heritage-theme='dark'] body.hg-list-page .hg-table-workspace .hg-data-table,
+html[data-heritage-theme='dark'] body.hg-list-page .hg-table-workspace .hg-empty-state--table,
+html[data-heritage-theme='dark'] body.hg-list-page #pageContent .hg-table-footer,
+html[data-heritage-theme='dark'] body.hg-list-page .hg-table-workspace .hg-list-footer {
+  color: var(--hg-text) !important;
+  background: color-mix(in srgb, var(--hg-surface) 92%, #020617) !important;
 }
 
-html[data-heritage-theme='dark'] body.wb-list-page .wb-table-workspace .wb-data-table > tbody > tr:nth-child(even) > :is(th, td) {
-  background: color-mix(in srgb, var(--wb-surface-muted) 46%, transparent) !important;
+html[data-heritage-theme='dark'] body.hg-list-page .hg-table-workspace .hg-data-table > tbody > tr:nth-child(even) > :is(th, td) {
+  background: color-mix(in srgb, var(--hg-surface-muted) 46%, transparent) !important;
 }
 
-@container wb-table-workspace (max-width: 720px) {
-  body.wb-list-page .wb-table-workspace > .wb-list-command-bar {
+@container hg-table-workspace (max-width: 720px) {
+  body.hg-list-page .hg-table-workspace > .hg-list-command-bar {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  body.wb-list-page .wb-table-workspace .wb-list-command-bar__actions {
+  body.hg-list-page .hg-table-workspace .hg-list-command-bar__actions {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     justify-content: stretch;
   }
 
-  body.wb-list-page .wb-table-workspace .wb-list-command-bar__actions > *,
-  body.wb-list-page .wb-table-workspace .wb-filter-toolbar {
+  body.hg-list-page .hg-table-workspace .hg-list-command-bar__actions > *,
+  body.hg-list-page .hg-table-workspace .hg-filter-toolbar {
     inline-size: 100%;
   }
 }
@@ -601,14 +601,14 @@ html[data-heritage-theme='dark'] body.wb-list-page .wb-table-workspace .wb-data-
  * not leak old white surfaces, oversized dropdowns or document-level overflow
  * back into Workbench screens.
  */
-body.wb-list-page .wb-table-workspace--finalized {
-  inline-size: min(100%, var(--wb-content-measure, 100%));
+body.hg-list-page .hg-table-workspace--finalized {
+  inline-size: min(100%, var(--hg-content-measure, 100%));
   max-inline-size: 100%;
   display: block;
   overflow: visible;
 }
 
-body.wb-list-page .wb-table-workspace--finalized > .wb-list-command-bar {
+body.hg-list-page .hg-table-workspace--finalized > .hg-list-command-bar {
   inline-size: 100%;
   max-inline-size: 100%;
   grid-template-columns: minmax(0, auto) minmax(0, 1fr);
@@ -619,7 +619,7 @@ body.wb-list-page .wb-table-workspace--finalized > .wb-list-command-bar {
   overflow: visible;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-list-command-bar__actions {
+body.hg-list-page .hg-table-workspace--finalized .hg-list-command-bar__actions {
   min-inline-size: 0;
   display: flex;
   flex-wrap: wrap;
@@ -628,34 +628,34 @@ body.wb-list-page .wb-table-workspace--finalized .wb-list-command-bar__actions {
   gap: 0.65rem;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-list-command-bar__meta {
+body.hg-list-page .hg-table-workspace--finalized .hg-list-command-bar__meta {
   min-block-size: 2.65rem;
   gap: 0.55rem;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-list-command-bar__actions > :where(.wb-list-command-bar__primary, .wb-filter-toolbar, .wb-list-page-size) {
+body.hg-list-page .hg-table-workspace--finalized .hg-list-command-bar__actions > :where(.hg-list-command-bar__primary, .hg-filter-toolbar, .hg-list-page-size) {
   max-inline-size: 100%;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-filter-toolbar {
+body.hg-list-page .hg-table-workspace--finalized .hg-filter-toolbar {
   min-inline-size: 0;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-filter-reset[disabled] {
+body.hg-list-page .hg-table-workspace--finalized .hg-filter-reset[disabled] {
   opacity: 0.58;
   pointer-events: none;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-list-page-size {
+body.hg-list-page .hg-table-workspace--finalized .hg-list-page-size {
   flex: 0 0 4.75rem;
   inline-size: 4.75rem;
   min-inline-size: 4.75rem;
   max-inline-size: 4.75rem;
 }
 
-body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport,
-body.wb-list-page #pageContent .wb-table-workspace--finalized > .wb-table-viewport,
-body.wb-list-page #pageContent .wb-table-viewport--finalized {
+body.hg-list-page .hg-table-workspace--finalized > .hg-table-viewport,
+body.hg-list-page #pageContent .hg-table-workspace--finalized > .hg-table-viewport,
+body.hg-list-page #pageContent .hg-table-viewport--finalized {
   inline-size: 100%;
   max-inline-size: 100%;
   display: block;
@@ -666,64 +666,64 @@ body.wb-list-page #pageContent .wb-table-viewport--finalized {
   -webkit-overflow-scrolling: touch;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table {
   inline-size: 100%;
-  min-inline-size: max(100%, calc(var(--wb-table-columns, 6) * 9.75rem));
+  min-inline-size: max(100%, calc(var(--hg-table-columns, 6) * 9.75rem));
   table-layout: fixed;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table--compact,
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table--empty {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table--compact,
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table--empty {
   min-inline-size: 100%;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr:first-child > :is(th, td),
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row] > :is(th, td),
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > tr > :is(th, td) {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table > thead > tr:first-child > :is(th, td),
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table > thead > tr[data-heritage-filter-row] > :is(th, td),
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > tr > :is(th, td) {
   box-sizing: border-box;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr:first-child > :is(th, td) {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table > thead > tr:first-child > :is(th, td) {
   min-inline-size: 0;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row] {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table > thead > tr[data-heritage-filter-row] {
   position: static;
   top: auto;
   z-index: auto;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row] :where(input, select, textarea, .form-control, .wb-select__control) {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table > thead > tr[data-heritage-filter-row] :where(input, select, textarea, .form-control, .hg-select__control) {
   min-inline-size: 0 !important;
   max-inline-size: 100% !important;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > tr > :is(th, td) {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > tr > :is(th, td) {
   min-inline-size: 0;
   max-inline-size: none;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > tr > :is(th, td) > :where(a, span, div, small, strong) {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > tr > :is(th, td) > :where(a, span, div, small, strong) {
   min-inline-size: 0;
   max-inline-size: 100%;
   overflow-wrap: anywhere;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-table-actions {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-table-actions {
   inline-size: 7.5rem;
   width: 7.5rem;
   min-inline-size: 7rem;
   max-inline-size: 8rem;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-row-actions {
+body.hg-list-page .hg-table-workspace--finalized .hg-row-actions {
   justify-content: flex-end;
 }
 
-body.wb-list-page .wb-table-workspace--finalized > .wb-table-footer,
-body.wb-list-page #pageContent .wb-table-workspace--finalized > .wb-table-footer {
+body.hg-list-page .hg-table-workspace--finalized > .hg-table-footer,
+body.hg-list-page #pageContent .hg-table-workspace--finalized > .hg-table-footer {
   inline-size: 100%;
   max-inline-size: 100%;
   display: grid;
@@ -733,64 +733,64 @@ body.wb-list-page #pageContent .wb-table-workspace--finalized > .wb-table-footer
   overflow: visible;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-list-footer__pagination {
+body.hg-list-page .hg-table-workspace--finalized .hg-list-footer__pagination {
   min-inline-size: 0;
   max-inline-size: 100%;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-list-footer__pagination :where(.pagination, .pager) {
+body.hg-list-page .hg-table-workspace--finalized .hg-list-footer__pagination :where(.pagination, .pager) {
   max-inline-size: 100%;
   justify-content: flex-end;
 }
 
-body > .wb-select__panel--page-size {
+body > .hg-select__panel--page-size {
   z-index: 10050 !important;
-  border: 1px solid color-mix(in srgb, var(--wb-border) 86%, transparent) !important;
-  color: var(--wb-text) !important;
-  background: var(--wb-surface) !important;
+  border: 1px solid color-mix(in srgb, var(--hg-border) 86%, transparent) !important;
+  color: var(--hg-text) !important;
+  background: var(--hg-surface) !important;
   box-shadow: 0 1.1rem 2.5rem color-mix(in srgb, #020617 18%, transparent) !important;
 }
 
-body > .wb-select__panel--page-size .wb-select__option[aria-selected='true'],
-body > .wb-select__panel--page-size .wb-select__option.is-active {
-  color: var(--wb-action) !important;
-  background: color-mix(in srgb, var(--wb-action) 12%, var(--wb-surface)) !important;
+body > .hg-select__panel--page-size .hg-select__option[aria-selected='true'],
+body > .hg-select__panel--page-size .hg-select__option.is-active {
+  color: var(--hg-action) !important;
+  background: color-mix(in srgb, var(--hg-action) 12%, var(--hg-surface)) !important;
 }
 
-html[data-heritage-theme='dark'] body.wb-list-page .wb-table-workspace--finalized > .wb-list-command-bar,
-html[data-heritage-theme='dark'] body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport,
-html[data-heritage-theme='dark'] body.wb-list-page .wb-table-workspace--finalized > .wb-table-footer,
-html[data-heritage-theme='dark'] body.wb-list-page .wb-table-workspace--finalized .wb-data-table {
-  color: var(--wb-text) !important;
-  background: color-mix(in srgb, var(--wb-surface) 94%, #020617) !important;
+html[data-heritage-theme='dark'] body.hg-list-page .hg-table-workspace--finalized > .hg-list-command-bar,
+html[data-heritage-theme='dark'] body.hg-list-page .hg-table-workspace--finalized > .hg-table-viewport,
+html[data-heritage-theme='dark'] body.hg-list-page .hg-table-workspace--finalized > .hg-table-footer,
+html[data-heritage-theme='dark'] body.hg-list-page .hg-table-workspace--finalized .hg-data-table {
+  color: var(--hg-text) !important;
+  background: color-mix(in srgb, var(--hg-surface) 94%, #020617) !important;
 }
 
-html[data-heritage-theme='dark'] body.wb-list-page .wb-table-workspace--finalized .wb-data-table :where(input, select, textarea, .form-control, .wb-select__control) {
-  color: var(--wb-text) !important;
-  background: color-mix(in srgb, var(--wb-surface-muted) 78%, #020617) !important;
+html[data-heritage-theme='dark'] body.hg-list-page .hg-table-workspace--finalized .hg-data-table :where(input, select, textarea, .form-control, .hg-select__control) {
+  color: var(--hg-text) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 78%, #020617) !important;
 }
 
-@container wb-table-workspace (max-width: 900px) {
-  body.wb-list-page .wb-table-workspace--finalized > .wb-list-command-bar {
+@container hg-table-workspace (max-width: 900px) {
+  body.hg-list-page .hg-table-workspace--finalized > .hg-list-command-bar {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-list-command-bar__actions {
+  body.hg-list-page .hg-table-workspace--finalized .hg-list-command-bar__actions {
     justify-content: flex-start;
   }
 }
 
-@container wb-table-workspace (max-width: 760px) {
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table {
+@container hg-table-workspace (max-width: 760px) {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table {
     min-inline-size: 100% !important;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row] {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table > thead > tr[data-heritage-filter-row] {
     position: static;
     top: auto;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-table-actions {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-table-actions {
     inline-size: 100%;
     width: 100%;
     min-inline-size: 0;
@@ -798,31 +798,31 @@ html[data-heritage-theme='dark'] body.wb-list-page .wb-table-workspace--finalize
   }
 }
 
-@container wb-table-workspace (max-width: 560px) {
-  body.wb-list-page .wb-table-workspace--finalized > .wb-list-command-bar,
-  body.wb-list-page .wb-table-workspace--finalized > .wb-table-footer {
+@container hg-table-workspace (max-width: 560px) {
+  body.hg-list-page .hg-table-workspace--finalized > .hg-list-command-bar,
+  body.hg-list-page .hg-table-workspace--finalized > .hg-table-footer {
     border-radius: 1.1rem;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-list-command-bar__actions,
-  body.wb-list-page .wb-table-workspace--finalized > .wb-table-footer {
+  body.hg-list-page .hg-table-workspace--finalized .hg-list-command-bar__actions,
+  body.hg-list-page .hg-table-workspace--finalized > .hg-table-footer {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     justify-items: stretch;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-list-command-bar__actions > *,
-  body.wb-list-page .wb-table-workspace--finalized .wb-filter-toolbar,
-  body.wb-list-page .wb-table-workspace--finalized .wb-list-page-size {
+  body.hg-list-page .hg-table-workspace--finalized .hg-list-command-bar__actions > *,
+  body.hg-list-page .hg-table-workspace--finalized .hg-filter-toolbar,
+  body.hg-list-page .hg-table-workspace--finalized .hg-list-page-size {
     inline-size: 100%;
     max-inline-size: 100%;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-list-page-size {
+  body.hg-list-page .hg-table-workspace--finalized .hg-list-page-size {
     min-inline-size: 0;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-list-footer__pagination :where(.pagination, .pager) {
+  body.hg-list-page .hg-table-workspace--finalized .hg-list-footer__pagination :where(.pagination, .pager) {
     justify-content: flex-start;
   }
 }
@@ -833,8 +833,8 @@ html[data-heritage-theme='dark'] body.wb-list-page .wb-table-workspace--finalize
  * The old page-content breakpoint is intentionally retired: tables decide
  * their own card layout from their own available inline size.
  */
-@container wb-table-workspace (max-width: 760px) {
-  body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport {
+@container hg-table-workspace (max-width: 760px) {
+  body.hg-list-page .hg-table-workspace--finalized > .hg-table-viewport {
     overflow: visible;
     border: 0;
     border-radius: 0;
@@ -843,15 +843,15 @@ html[data-heritage-theme='dark'] body.wb-list-page .wb-table-workspace--finalize
     scrollbar-gutter: auto;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table,
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > :is(thead, tbody, tfoot) {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table,
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table > :is(thead, tbody, tfoot) {
     display: block !important;
     inline-size: 100%;
     min-inline-size: 0 !important;
     background: transparent !important;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr:first-child:not([data-heritage-filter-row]) {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table > thead > tr:first-child:not([data-heritage-filter-row]) {
     position: absolute !important;
     inline-size: 1px;
     block-size: 1px;
@@ -860,23 +860,23 @@ html[data-heritage-theme='dark'] body.wb-list-page .wb-table-workspace--finalize
     white-space: nowrap;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row] {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table > thead > tr[data-heritage-filter-row] {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr);
     gap: 0.65rem;
     position: static !important;
     margin-block-end: 0.8rem;
     padding: 0.85rem;
-    border: 1px solid color-mix(in srgb, var(--wb-border) 82%, transparent);
+    border: 1px solid color-mix(in srgb, var(--hg-border) 82%, transparent);
     border-radius: 1rem;
-    background: color-mix(in srgb, var(--wb-surface-muted) 76%, var(--wb-surface)) !important;
+    background: color-mix(in srgb, var(--hg-surface-muted) 76%, var(--hg-surface)) !important;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row][hidden] {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table > thead > tr[data-heritage-filter-row][hidden] {
     display: none !important;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row] > :is(th, td) {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table > thead > tr[data-heritage-filter-row] > :is(th, td) {
     display: block !important;
     inline-size: 100%;
     padding: 0;
@@ -884,25 +884,25 @@ html[data-heritage-theme='dark'] body.wb-list-page .wb-table-workspace--finalize
     background: transparent !important;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr);
     inline-size: 100% !important;
     gap: 0.75rem;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr);
     overflow: hidden;
-    border: 1px solid color-mix(in srgb, var(--wb-border) 82%, transparent);
+    border: 1px solid color-mix(in srgb, var(--hg-border) 82%, transparent);
     border-radius: 1rem;
-    color: var(--wb-text);
-    background: var(--wb-surface) !important;
-    box-shadow: var(--wb-shadow-sm);
+    color: var(--hg-text);
+    background: var(--hg-surface) !important;
+    box-shadow: var(--hg-shadow-sm);
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > :is(th, td) {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row > :is(th, td) {
     display: grid !important;
     grid-template-columns: minmax(7rem, 36%) minmax(0, 1fr);
     gap: 0.75rem;
@@ -911,41 +911,41 @@ html[data-heritage-theme='dark'] body.wb-list-page .wb-table-workspace--finalize
     min-block-size: 0;
     padding: 0.68rem 0.85rem;
     border: 0;
-    border-bottom: 1px solid color-mix(in srgb, var(--wb-border) 68%, transparent);
-    color: var(--wb-text);
+    border-bottom: 1px solid color-mix(in srgb, var(--hg-border) 68%, transparent);
+    color: var(--hg-text);
     background: transparent !important;
     text-align: start;
     overflow-wrap: anywhere;
     word-break: break-word;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > :is(th, td)::before {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row > :is(th, td)::before {
     content: attr(data-heritage-label);
     align-self: start;
-    color: var(--wb-text-muted);
+    color: var(--hg-text-muted);
     font-size: 0.68rem;
     font-weight: 850;
     letter-spacing: 0.055em;
     text-transform: uppercase;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > :is(th, td) > :where(a, span, div, button) {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row > :is(th, td) > :where(a, span, div, button) {
     min-inline-size: 0;
     overflow-wrap: anywhere;
     word-break: break-word;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > .wb-table-cell--empty {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row > .hg-table-cell--empty {
     display: none !important;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > .wb-table-cell--primary {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row > .hg-table-cell--primary {
     order: -2;
     padding-block: 0.85rem;
-    background: color-mix(in srgb, var(--wb-action) 5%, var(--wb-surface)) !important;
+    background: color-mix(in srgb, var(--hg-action) 5%, var(--hg-surface)) !important;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > .wb-table-actions {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row > .hg-table-actions {
     display: flex !important;
     align-items: center;
     justify-content: flex-end;
@@ -956,97 +956,97 @@ html[data-heritage-theme='dark'] body.wb-list-page .wb-table-workspace--finalize
     border-bottom: 0;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > .wb-table-actions::before {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row > .hg-table-actions::before {
     align-self: center;
     margin-inline-end: auto;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-table-cell--numeric {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-table-cell--numeric {
     text-align: start;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-row-actions {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-row-actions {
     flex-wrap: wrap;
     max-inline-size: calc(100% - 7rem);
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-row-action {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-row-action {
     inline-size: 2.65rem;
     block-size: 2.65rem;
     min-inline-size: 2.65rem;
     min-block-size: 2.65rem;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-empty-row,
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-empty-row > td {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-empty-row,
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-empty-row > td {
     display: block !important;
     inline-size: 100% !important;
     width: 100% !important;
     max-inline-size: none !important;
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-empty-row {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-empty-row {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr);
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-empty-row > td {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-empty-row > td {
     inline-size: auto !important;
     width: auto !important;
     min-inline-size: 0 !important;
   }
 }
 
-body.wb-list-page .wb-dns-zone-actions {
+body.hg-list-page .hg-dns-zone-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.65rem;
   margin-block: 0.85rem 1rem;
 }
 
-body.wb-list-page .wb-dns-zone-actions > button {
+body.hg-list-page .hg-dns-zone-actions > button {
   min-block-size: 2.65rem;
   padding-inline: 1rem;
   border-radius: 0.85rem;
   font-weight: 720;
 }
 
-body.wb-list-page .wb-dns-zone-actions__secondary {
-  color: var(--wb-text) !important;
-  border: 1px solid var(--wb-border) !important;
-  background: var(--wb-surface) !important;
+body.hg-list-page .hg-dns-zone-actions__secondary {
+  color: var(--hg-text) !important;
+  border: 1px solid var(--hg-border) !important;
+  background: var(--hg-surface) !important;
   box-shadow: none !important;
 }
 
-body.wb-list-page .wb-dns-zone-actions__secondary:is(:hover, :focus-visible) {
-  color: var(--wb-action) !important;
-  border-color: color-mix(in srgb, var(--wb-action) 42%, var(--wb-border)) !important;
-  background: color-mix(in srgb, var(--wb-action) 6%, var(--wb-surface)) !important;
+body.hg-list-page .hg-dns-zone-actions__secondary:is(:hover, :focus-visible) {
+  color: var(--hg-action) !important;
+  border-color: color-mix(in srgb, var(--hg-action) 42%, var(--hg-border)) !important;
+  background: color-mix(in srgb, var(--hg-action) 6%, var(--hg-surface)) !important;
 }
 
 @media (max-width: 560px) {
-  body.wb-list-page .wb-dns-zone-actions {
+  body.hg-list-page .hg-dns-zone-actions {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
   }
 
-  body.wb-list-page .wb-dns-zone-actions > button {
+  body.hg-list-page .hg-dns-zone-actions > button {
     inline-size: 100%;
     justify-content: flex-start;
     text-align: start;
   }
 }
 
-@container wb-table-workspace (max-width: 560px) {
-  body.wb-list-page .wb-table-workspace--finalized .wb-list-command-bar__actions {
+@container hg-table-workspace (max-width: 560px) {
+  body.hg-list-page .hg-table-workspace--finalized .hg-list-command-bar__actions {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-list-page-size,
-  body.wb-list-page .wb-table-workspace--finalized .wb-list-command-bar__primary,
-  body.wb-list-page .wb-table-workspace--finalized .wb-filter-toolbar,
-  body.wb-list-page .wb-table-workspace--finalized .wb-filter-toggle,
-  body.wb-list-page .wb-table-workspace--finalized .wb-filter-reset {
+  body.hg-list-page .hg-table-workspace--finalized .hg-list-page-size,
+  body.hg-list-page .hg-table-workspace--finalized .hg-list-command-bar__primary,
+  body.hg-list-page .hg-table-workspace--finalized .hg-filter-toolbar,
+  body.hg-list-page .hg-table-workspace--finalized .hg-filter-toggle,
+  body.hg-list-page .hg-table-workspace--finalized .hg-filter-reset {
     inline-size: 100%;
     max-inline-size: 100%;
   }
@@ -1058,39 +1058,39 @@ body.wb-list-page .wb-dns-zone-actions__secondary:is(:hover, :focus-visible) {
  * list adapter. They are part of the final table authority so list CSS can
  * keep shrinking toward markup adaptation only.
  */
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr:first-child > :is(th, td) {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table > thead > tr:first-child > :is(th, td) {
   position: relative;
   white-space: nowrap;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr:first-child > :is(th, td)::after {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table > thead > tr:first-child > :is(th, td)::after {
   display: none;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr:first-child > .wb-table-header--sortable::after {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table > thead > tr:first-child > .hg-table-header--sortable::after {
   display: inline-block;
   margin-inline-start: 8px;
-  color: color-mix(in srgb, var(--wb-text-muted) 54%, transparent);
+  color: color-mix(in srgb, var(--hg-text-muted) 54%, transparent);
   content: '\2195';
   font-size: 10px;
   font-weight: 700;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr:first-child > :is(th, td):empty::after,
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr:first-child > .wb-table-header--actions::after {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table > thead > tr:first-child > :is(th, td):empty::after,
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table > thead > tr:first-child > .hg-table-header--actions::after {
   display: none;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row:focus-visible > :is(td, th) {
-  background: color-mix(in srgb, var(--wb-action) 7%, var(--wb-surface));
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row:focus-visible > :is(td, th) {
+  background: color-mix(in srgb, var(--hg-action) 7%, var(--hg-surface));
   outline: 0;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-table-cell--status {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-table-cell--status {
   font-weight: 760;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table :is(.wb-table-header--status, .wb-table-cell--compact-status) {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table :is(.hg-table-header--status, .hg-table-cell--compact-status) {
   width: 1%;
   min-width: 64px;
   max-width: 82px;
@@ -1099,90 +1099,90 @@ body.wb-list-page .wb-table-workspace--finalized .wb-data-table :is(.wb-table-he
   white-space: nowrap;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table--compact-status-columns {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table--compact-status-columns {
   table-layout: fixed;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table--compact-status-columns :is(.wb-table-header--actions, .wb-table-actions) {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table--compact-status-columns :is(.hg-table-header--actions, .hg-table-actions) {
   width: 120px !important;
   min-width: 120px !important;
   max-width: 120px !important;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table--compact-status-columns > colgroup > .wb-table-col--hidden {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table--compact-status-columns > colgroup > .hg-table-col--hidden {
   visibility: collapse;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-status-header-icon {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-status-header-icon {
   display: inline-grid;
   width: 24px;
   height: 24px;
   place-items: center;
-  color: var(--wb-text-muted);
-  border: 1px solid var(--wb-border);
+  color: var(--hg-text-muted);
+  border: 1px solid var(--hg-border);
   border-radius: 999px;
-  background: var(--wb-surface-muted);
+  background: var(--hg-surface-muted);
   font-size: 13px;
   font-weight: 850;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-status-header-icon--active::before { content: '\2713'; }
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-status-header-icon--locked::before { content: '!'; }
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-status-header-icon--remote::before { content: '\2194'; }
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-status-header-icon--service::before { content: '\25cf'; }
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-status-header-icon--disabled::before { content: '\2212'; }
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-status-header-icon--boolean::before { content: '\2713'; }
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-status-header-icon--active::before { content: '\2713'; }
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-status-header-icon--locked::before { content: '!'; }
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-status-header-icon--remote::before { content: '\2194'; }
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-status-header-icon--service::before { content: '\25cf'; }
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-status-header-icon--disabled::before { content: '\2212'; }
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-status-header-icon--boolean::before { content: '\2713'; }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-status-indicator {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-status-indicator {
   display: inline-grid;
   width: 24px;
   height: 24px;
   place-items: center;
-  color: var(--wb-text-muted);
-  border: 1px solid color-mix(in srgb, var(--wb-text-muted) 34%, var(--wb-border));
+  color: var(--hg-text-muted);
+  border: 1px solid color-mix(in srgb, var(--hg-text-muted) 34%, var(--hg-border));
   border-radius: 999px;
-  background: var(--wb-surface-muted);
+  background: var(--hg-surface-muted);
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-status-indicator::before {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-status-indicator::before {
   content: '\2013';
   font-size: 15px;
   font-weight: 850;
   line-height: 1;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table [data-heritage-status-state='on']:not([data-heritage-status-kind='locked']):not([data-heritage-status-kind='disabled']) .wb-status-indicator {
-  color: var(--wb-success-ink);
-  border-color: color-mix(in srgb, var(--wb-success) 40%, var(--wb-border));
-  background: color-mix(in srgb, var(--wb-success) 10%, var(--wb-surface));
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table [data-heritage-status-state='on']:not([data-heritage-status-kind='locked']):not([data-heritage-status-kind='disabled']) .hg-status-indicator {
+  color: var(--hg-success-ink);
+  border-color: color-mix(in srgb, var(--hg-success) 40%, var(--hg-border));
+  background: color-mix(in srgb, var(--hg-success) 10%, var(--hg-surface));
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table [data-heritage-status-state='on']:not([data-heritage-status-kind='locked']):not([data-heritage-status-kind='disabled']) .wb-status-indicator::before {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table [data-heritage-status-state='on']:not([data-heritage-status-kind='locked']):not([data-heritage-status-kind='disabled']) .hg-status-indicator::before {
   content: '\2713';
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table [data-heritage-status-kind='locked'][data-heritage-status-state='on'] .wb-status-indicator {
-  color: var(--wb-danger-ink);
-  border-color: color-mix(in srgb, var(--wb-danger) 38%, var(--wb-border));
-  background: color-mix(in srgb, var(--wb-danger) 9%, var(--wb-surface));
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table [data-heritage-status-kind='locked'][data-heritage-status-state='on'] .hg-status-indicator {
+  color: var(--hg-danger-ink);
+  border-color: color-mix(in srgb, var(--hg-danger) 38%, var(--hg-border));
+  background: color-mix(in srgb, var(--hg-danger) 9%, var(--hg-surface));
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table [data-heritage-status-kind='locked'][data-heritage-status-state='on'] .wb-status-indicator::before {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table [data-heritage-status-kind='locked'][data-heritage-status-state='on'] .hg-status-indicator::before {
   content: '!';
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table [data-heritage-status-kind='disabled'][data-heritage-status-state='on'] .wb-status-indicator {
-  color: var(--wb-danger-ink);
-  border-color: color-mix(in srgb, var(--wb-danger) 38%, var(--wb-border));
-  background: color-mix(in srgb, var(--wb-danger) 9%, var(--wb-surface));
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table [data-heritage-status-kind='disabled'][data-heritage-status-state='on'] .hg-status-indicator {
+  color: var(--hg-danger-ink);
+  border-color: color-mix(in srgb, var(--hg-danger) 38%, var(--hg-border));
+  background: color-mix(in srgb, var(--hg-danger) 9%, var(--hg-surface));
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table [data-heritage-status-kind='disabled'][data-heritage-status-state='on'] .wb-status-indicator::before {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table [data-heritage-status-kind='disabled'][data-heritage-status-state='on'] .hg-status-indicator::before {
   content: '!';
 }
 
-@container wb-page-content (max-width: 760px) {
-  body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-table-cell--compact-status {
+@container hg-page-content (max-width: 760px) {
+  body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-table-cell--compact-status {
     width: auto;
     min-width: 0;
     max-width: none;
@@ -1190,91 +1190,91 @@ body.wb-list-page .wb-table-workspace--finalized .wb-data-table [data-heritage-s
   }
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table--dense > tbody > .wb-table-data-row > :is(td, th) {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table--dense > tbody > .hg-table-data-row > :is(td, th) {
   padding-block: 8px;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table--compact > tbody > .wb-table-data-row > :is(td, th) {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table--compact > tbody > .hg-table-data-row > :is(td, th) {
   height: 56px;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-row-action--primary {
-  color: var(--wb-action);
-  border-color: color-mix(in srgb, var(--wb-action) 30%, var(--wb-border));
-  background: color-mix(in srgb, var(--wb-action) 7%, var(--wb-surface));
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-row-action--primary {
+  color: var(--hg-action);
+  border-color: color-mix(in srgb, var(--hg-action) 30%, var(--hg-border));
+  background: color-mix(in srgb, var(--hg-action) 7%, var(--hg-surface));
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-row-action--primary:hover,
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-row-action--primary:focus-visible {
-  color: var(--wb-action-contrast);
-  border-color: var(--wb-action);
-  background: var(--wb-action);
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-row-action--primary:hover,
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-row-action--primary:focus-visible {
+  color: var(--hg-action-contrast);
+  border-color: var(--hg-action);
+  background: var(--hg-action);
 }
 
-body.wb-list-page #pageContent .wb-table-workspace--finalized .wb-data-table .wb-row-action[data-heritage-residual-inline-icon='true'] {
+body.hg-list-page #pageContent .hg-table-workspace--finalized .hg-data-table .hg-row-action[data-heritage-residual-inline-icon='true'] {
   background-image: none !important;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-row-action--edit {
-  color: var(--wb-action);
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-row-action--edit {
+  color: var(--hg-action);
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-row-action--login {
-  color: var(--wb-success-ink);
-  border-color: color-mix(in srgb, var(--wb-success) 28%, var(--wb-border));
-  background: color-mix(in srgb, var(--wb-success) 7%, var(--wb-surface));
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-row-action--login {
+  color: var(--hg-success-ink);
+  border-color: color-mix(in srgb, var(--hg-success) 28%, var(--hg-border));
+  background: color-mix(in srgb, var(--hg-success) 7%, var(--hg-surface));
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-row-action--login:hover,
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-row-action--login:focus-visible {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-row-action--login:hover,
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-row-action--login:focus-visible {
   color: #fff;
-  border-color: var(--wb-success);
-  background: var(--wb-success);
+  border-color: var(--hg-success);
+  background: var(--hg-success);
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table--empty {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table--empty {
   min-inline-size: 100%;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-empty-state--table {
+body.hg-list-page .hg-table-workspace--finalized .hg-empty-state--table {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: 16px;
   align-items: center;
   min-height: 154px;
   padding: 24px;
-  border: 1px dashed color-mix(in srgb, var(--wb-border) 82%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--hg-border) 82%, transparent);
   border-radius: 16px;
-  background: color-mix(in srgb, var(--wb-surface-muted) 58%, var(--wb-surface));
+  background: color-mix(in srgb, var(--hg-surface-muted) 58%, var(--hg-surface));
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-empty-state--table .wb-empty-state__icon {
+body.hg-list-page .hg-table-workspace--finalized .hg-empty-state--table .hg-empty-state__icon {
   display: inline-grid;
   width: 44px;
   height: 44px;
   place-items: center;
-  border: 1px solid color-mix(in srgb, var(--wb-action) 26%, var(--wb-border));
+  border: 1px solid color-mix(in srgb, var(--hg-action) 26%, var(--hg-border));
   border-radius: 14px;
-  color: var(--wb-action);
-  background: color-mix(in srgb, var(--wb-action) 8%, var(--wb-surface));
+  color: var(--hg-action);
+  background: color-mix(in srgb, var(--hg-action) 8%, var(--hg-surface));
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-empty-state--table .wb-empty-state__icon::before {
+body.hg-list-page .hg-table-workspace--finalized .hg-empty-state--table .hg-empty-state__icon::before {
   content: '\25A1';
   font-size: 18px;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-empty-state--table .wb-empty-state__title {
+body.hg-list-page .hg-table-workspace--finalized .hg-empty-state--table .hg-empty-state__title {
   display: block;
-  color: var(--wb-text);
+  color: var(--hg-text);
   font-size: 15px;
   font-weight: 820;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-empty-state--table .wb-empty-state__description {
+body.hg-list-page .hg-table-workspace--finalized .hg-empty-state--table .hg-empty-state__description {
   display: block;
   margin-top: 4px;
-  color: var(--wb-text-muted);
+  color: var(--hg-text-muted);
   font-size: 12px;
   font-weight: 650;
 }
@@ -1284,39 +1284,39 @@ body.wb-list-page .wb-table-workspace--finalized .wb-empty-state--table .wb-empt
  * Bounded table geometry moved out of the list adapter. The finalized table
  * workspace owns fixed layout, overflow containment and action-column sizing.
  */
-body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport {
+body.hg-list-page .hg-table-workspace--finalized > .hg-table-viewport {
   overflow-x: auto;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table {
   inline-size: 100%;
   max-inline-size: 100%;
   table-layout: fixed;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > :is(thead, tbody, tfoot) > tr > :is(th, td) {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table > :is(thead, tbody, tfoot) > tr > :is(th, td) {
   min-inline-size: 0;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > :is(th, td) {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row > :is(th, td) {
   overflow-wrap: anywhere;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table :is(.wb-record-link, a:not(.btn), span, div) {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table :is(.hg-record-link, a:not(.btn), span, div) {
   max-inline-size: 100%;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-row-actions,
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table .wb-table-actions {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-row-actions,
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table .hg-table-actions {
   inline-size: 92px;
   max-inline-size: 112px;
   overflow: visible;
   text-overflow: clip;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > :is(thead, tbody, tfoot) > tr > :last-child {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table > :is(thead, tbody, tfoot) > tr > :last-child {
   inline-size: 112px;
   width: 112px;
   min-inline-size: 96px;
@@ -1325,9 +1325,9 @@ body.wb-list-page .wb-table-workspace--finalized .wb-data-table > :is(thead, tbo
   text-overflow: clip;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-data-row > :is(th, td):has(
-  .wb-row-actions,
-  .wb-row-action,
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-data-row > :is(th, td):has(
+  .hg-row-actions,
+  .hg-row-action,
   .formbutton-narrow,
   .btn
 ) {
@@ -1338,7 +1338,7 @@ body.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-ta
   text-overflow: clip;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row] :where(.form-control, input, select, .wb-select, .wb-select__control) {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table > thead > tr[data-heritage-filter-row] :where(.form-control, input, select, .hg-select, .hg-select__control) {
   min-inline-size: 0 !important;
 }
 
@@ -1348,8 +1348,8 @@ body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[dat
  * and pagination footer behavior. The list adapter no longer paints these
  * table/footer states.
  */
-body.wb-list-page #pageContent .wb-table-workspace--finalized > .wb-table-viewport,
-body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport {
+body.hg-list-page #pageContent .hg-table-workspace--finalized > .hg-table-viewport,
+body.hg-list-page .hg-table-workspace--finalized > .hg-table-viewport {
   position: relative;
   z-index: 1;
   border-top-left-radius: 20px;
@@ -1362,8 +1362,8 @@ body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport {
   box-shadow: 0 22px 54px color-mix(in srgb, #0f172a 9%, transparent);
 }
 
-body.wb-list-page #pageContent .wb-table-workspace--finalized > .wb-table-viewport::after,
-body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport::after {
+body.hg-list-page #pageContent .hg-table-workspace--finalized > .hg-table-viewport::after,
+body.hg-list-page .hg-table-workspace--finalized > .hg-table-viewport::after {
   position: sticky;
   right: 0;
   bottom: 0;
@@ -1371,12 +1371,12 @@ body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport::after {
   height: 1px;
   pointer-events: none;
   content: '';
-  box-shadow: -18px 0 32px color-mix(in srgb, var(--wb-surface) 74%, transparent);
+  box-shadow: -18px 0 32px color-mix(in srgb, var(--hg-surface) 74%, transparent);
 }
 
-body.wb-list-page .wb-table-workspace--finalized > .wb-table-footer,
-body.wb-list-page #pageContent .wb-table-workspace--finalized > .wb-table-footer,
-body.wb-list-page #pageContent > .wb-list-footer[data-heritage-list-footer='true'] {
+body.hg-list-page .hg-table-workspace--finalized > .hg-table-footer,
+body.hg-list-page #pageContent .hg-table-workspace--finalized > .hg-table-footer,
+body.hg-list-page #pageContent > .hg-list-footer[data-heritage-list-footer='true'] {
   position: relative;
   z-index: 2;
   margin-top: 0;
@@ -1387,34 +1387,34 @@ body.wb-list-page #pageContent > .wb-list-footer[data-heritage-list-footer='true
   box-shadow: 0 24px 48px color-mix(in srgb, #0f172a 7%, transparent);
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row] {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table > thead > tr[data-heritage-filter-row] {
   position: relative;
   top: auto;
   z-index: 4;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[data-heritage-filter-row] :where(input, select, .form-control, .wb-select__control) {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table > thead > tr[data-heritage-filter-row] :where(input, select, .form-control, .hg-select__control) {
   min-block-size: 2.7rem !important;
   border-radius: 0.82rem !important;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-list-footer__pagination {
+body.hg-list-page .hg-table-workspace--finalized .hg-list-footer__pagination {
   display: flex;
   justify-content: flex-end;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-list-footer__pagination :where(.pagination, .pager) {
+body.hg-list-page .hg-table-workspace--finalized .hg-list-footer__pagination :where(.pagination, .pager) {
   max-inline-size: 100%;
   overflow-x: auto;
   scrollbar-width: thin;
 }
 
-@container wb-table-workspace (max-width: 820px) {
-  body.wb-list-page .wb-table-workspace--finalized > .wb-table-footer {
+@container hg-table-workspace (max-width: 820px) {
+  body.hg-list-page .hg-table-workspace--finalized > .hg-table-footer {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  body.wb-list-page .wb-table-workspace--finalized .wb-list-footer__pagination {
+  body.hg-list-page .hg-table-workspace--finalized .hg-list-footer__pagination {
     justify-content: flex-start;
   }
 }
@@ -1425,15 +1425,15 @@ body.wb-list-page .wb-table-workspace--finalized .wb-list-footer__pagination :wh
  * primary action remains docked in the command bar while the table body
  * explains the empty state without adding a second large action surface.
  */
-body.wb-list-page .wb-table-workspace--finalized .wb-data-table > tbody > .wb-table-empty-row > td,
-body.wb-list-page .wb-table-workspace--finalized .wb-table-empty-row > td {
+body.hg-list-page .hg-table-workspace--finalized .hg-data-table > tbody > .hg-table-empty-row > td,
+body.hg-list-page .hg-table-workspace--finalized .hg-table-empty-row > td {
   padding: 0 !important;
   background:
-    radial-gradient(circle at 12% 10%, color-mix(in srgb, var(--wb-action) 8%, transparent), transparent 34%),
-    color-mix(in srgb, var(--wb-surface-muted) 58%, var(--wb-surface)) !important;
+    radial-gradient(circle at 12% 10%, color-mix(in srgb, var(--hg-action) 8%, transparent), transparent 34%),
+    color-mix(in srgb, var(--hg-surface-muted) 58%, var(--hg-surface)) !important;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-empty-state--table {
+body.hg-list-page .hg-table-workspace--finalized .hg-empty-state--table {
   min-height: clamp(150px, 24cqi, 260px);
   margin: 0;
   border: 0;
@@ -1441,29 +1441,29 @@ body.wb-list-page .wb-table-workspace--finalized .wb-empty-state--table {
   background: transparent;
 }
 
-body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport > .wb-empty-state--detached {
+body.hg-list-page .hg-table-workspace--finalized > .hg-table-viewport > .hg-empty-state--detached {
   inline-size: 100%;
   max-inline-size: 100%;
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-empty-state--table[data-heritage-primary-action-docked='true'] {
+body.hg-list-page .hg-table-workspace--finalized .hg-empty-state--table[data-heritage-primary-action-docked='true'] {
   grid-template-columns: 44px minmax(0, 1fr);
 }
 
-body.wb-list-page .wb-table-workspace--finalized .wb-empty-state--table[data-heritage-primary-action-docked='true'] .wb-empty-state__description::after {
+body.hg-list-page .hg-table-workspace--finalized .hg-empty-state--table[data-heritage-primary-action-docked='true'] .hg-empty-state__description::after {
   content: ' Die primäre Aktion befindet sich oben in der Befehlsleiste.';
 }
 
-body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport--empty {
+body.hg-list-page .hg-table-workspace--finalized > .hg-table-viewport--empty {
   min-height: 190px;
   overflow-x: clip;
 }
 
-body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport--empty .wb-data-table {
+body.hg-list-page .hg-table-workspace--finalized > .hg-table-viewport--empty .hg-data-table {
   min-inline-size: 100%;
 }
 
-body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport--empty + .wb-table-footer {
+body.hg-list-page .hg-table-workspace--finalized > .hg-table-viewport--empty + .hg-table-footer {
   margin-top: 0;
 }
 
@@ -1474,39 +1474,39 @@ body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport--empty + .
  * wrappers, residual inline geometry and Bootstrap-era pagination are kept
  * inside the same table authority as the finalized Workbench tables.
  */
-body.wb-list-page #pageContent :where(.table-wrapper, .table-responsive, .wb-table-wrapper--runtime) {
+body.hg-list-page #pageContent :where(.table-wrapper, .table-responsive, .hg-table-wrapper--runtime) {
   max-inline-size: 100%;
   min-inline-size: 0;
   overflow: auto;
   overscroll-behavior-inline: contain;
 }
 
-body.wb-list-page #pageContent .wb-table-wrapper--runtime {
-  border: 1px solid color-mix(in srgb, var(--wb-border) 88%, transparent);
+body.hg-list-page #pageContent .hg-table-wrapper--runtime {
+  border: 1px solid color-mix(in srgb, var(--hg-border) 88%, transparent);
   border-radius: 1.15rem;
-  background: var(--wb-surface);
-  box-shadow: var(--wb-shadow-sm);
+  background: var(--hg-surface);
+  box-shadow: var(--hg-shadow-sm);
 }
 
-body.wb-list-page #pageContent :where(.wb-residual-inline-geometry, .wb-residual-inline-geometry *) {
+body.hg-list-page #pageContent :where(.hg-residual-inline-geometry, .hg-residual-inline-geometry *) {
   max-inline-size: 100% !important;
 }
 
-body.wb-list-page #pageContent :where(.wb-residual-inline-colour) {
-  color: var(--wb-text) !important;
-  background-color: color-mix(in srgb, var(--wb-surface-muted) 72%, var(--wb-surface)) !important;
+body.hg-list-page #pageContent :where(.hg-residual-inline-colour) {
+  color: var(--hg-text) !important;
+  background-color: color-mix(in srgb, var(--hg-surface-muted) 72%, var(--hg-surface)) !important;
 }
 
-body.wb-list-page #pageContent :where(.wb-residual-inline-scrubbed) {
+body.hg-list-page #pageContent :where(.hg-residual-inline-scrubbed) {
   font: inherit;
   line-height: inherit;
 }
 
-body.wb-list-page #pageContent :where(.wb-residual-inline-scrubbed[style]) {
+body.hg-list-page #pageContent :where(.hg-residual-inline-scrubbed[style]) {
   max-inline-size: 100% !important;
 }
 
-body.wb-list-page #pageContent :where(.wb-pagination, .pagination, .pager) {
+body.hg-list-page #pageContent :where(.hg-pagination, .pagination, .pager) {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1516,31 +1516,31 @@ body.wb-list-page #pageContent :where(.wb-pagination, .pagination, .pager) {
   padding: 0;
 }
 
-body.wb-list-page #pageContent :where(.wb-pagination, .pagination, .pager) > li > :is(a, span) {
+body.hg-list-page #pageContent :where(.hg-pagination, .pagination, .pager) > li > :is(a, span) {
   min-inline-size: 2.55rem;
   min-block-size: 2.55rem;
   display: inline-grid;
   place-items: center;
-  border: 1px solid color-mix(in srgb, var(--wb-border) 88%, transparent);
+  border: 1px solid color-mix(in srgb, var(--hg-border) 88%, transparent);
   border-radius: 999px;
-  color: var(--wb-text);
-  background: color-mix(in srgb, var(--wb-surface-muted) 74%, var(--wb-surface));
+  color: var(--hg-text);
+  background: color-mix(in srgb, var(--hg-surface-muted) 74%, var(--hg-surface));
   font-weight: 850;
   text-decoration: none;
   box-shadow: none;
 }
 
-body.wb-list-page #pageContent :where(.wb-pagination, .pagination, .pager) > li.active > :is(a, span),
-body.wb-list-page #pageContent :where(.wb-pagination, .pagination, .pager) > li > :is(a, span)[aria-current='page'] {
-  color: var(--wb-action-contrast);
+body.hg-list-page #pageContent :where(.hg-pagination, .pagination, .pager) > li.active > :is(a, span),
+body.hg-list-page #pageContent :where(.hg-pagination, .pagination, .pager) > li > :is(a, span)[aria-current='page'] {
+  color: var(--hg-action-contrast);
   border-color: transparent;
-  background: var(--wb-action);
+  background: var(--hg-action);
 }
 
-html[data-heritage-theme='dark'] body.wb-list-page #pageContent .wb-table-wrapper--runtime,
-html[data-heritage-theme='dark'] body.wb-list-page #pageContent :where(.wb-residual-inline-colour) {
-  color: var(--wb-text) !important;
-  background-color: color-mix(in srgb, var(--wb-surface-muted) 88%, #fff 2%) !important;
+html[data-heritage-theme='dark'] body.hg-list-page #pageContent .hg-table-wrapper--runtime,
+html[data-heritage-theme='dark'] body.hg-list-page #pageContent :where(.hg-residual-inline-colour) {
+  color: var(--hg-text) !important;
+  background-color: color-mix(in srgb, var(--hg-surface-muted) 88%, #fff 2%) !important;
 }
 
 /* compact terminal state.
@@ -1549,15 +1549,15 @@ html[data-heritage-theme='dark'] body.wb-list-page #pageContent :where(.wb-resid
  * the vertical space of a populated data set or push pagination below a large
  * blank canvas.
  */
-body.wb-list-page .wb-table-workspace--finalized .wb-empty-state--table {
+body.hg-list-page .hg-table-workspace--finalized .hg-empty-state--table {
   min-height: clamp(118px, 13cqi, 168px);
   padding-block: 20px;
 }
 
-body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport--empty {
+body.hg-list-page .hg-table-workspace--finalized > .hg-table-viewport--empty {
   min-height: 0;
 }
 
-body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport--empty .wb-data-table {
+body.hg-list-page .hg-table-workspace--finalized > .hg-table-viewport--empty .hg-data-table {
   block-size: auto;
 }

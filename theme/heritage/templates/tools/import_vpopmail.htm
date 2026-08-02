@@ -3,48 +3,48 @@
 </div>
 <p><tmpl_var name="list_desc_txt"></p>
 
-<div class="wb-content-panel panel_language_import">
+<div class="hg-content-panel panel_language_import">
 
-    <div class="wb-form-surface">
+    <div class="hg-form-surface">
         <legend>{tmpl_var name="legend_txt"}</legend>
-            <div class="wb-field-group">
-                <label class="wb-field-label" for="db_hostname">Database Hostname</label>
-                <div class="wb-field-body"><input class="form-control" type="text" id="db_hostname" value="{tmpl_var name='db_hostname'}" name="db_hostname" /></div>
+            <div class="hg-field-group">
+                <label class="hg-field-label" for="db_hostname">Database Hostname</label>
+                <div class="hg-field-body"><input class="form-control" type="text" id="db_hostname" value="{tmpl_var name='db_hostname'}" name="db_hostname" /></div>
             </div>
-			<div class="wb-field-group">
-                <label class="wb-field-label" for="db_name">Database Name</label>
-                <div class="wb-field-body"><input class="form-control" type="text" id="db_name" value="{tmpl_var name='db_name'}" name="db_name" /></div>
+			<div class="hg-field-group">
+                <label class="hg-field-label" for="db_name">Database Name</label>
+                <div class="hg-field-body"><input class="form-control" type="text" id="db_name" value="{tmpl_var name='db_name'}" name="db_name" /></div>
             </div>
-            <div class="wb-field-group">
-                <label class="wb-field-label" for="db_user">Database User</label>
-                <div class="wb-field-body"><input class="form-control" type="text" id="db_user" value="{tmpl_var name='db_user'}" name="db_user" /></div>
+            <div class="hg-field-group">
+                <label class="hg-field-label" for="db_user">Database User</label>
+                <div class="hg-field-body"><input class="form-control" type="text" id="db_user" value="{tmpl_var name='db_user'}" name="db_user" /></div>
             </div>
-            <div class="wb-field-group">
-                <label class="wb-field-label" for="db_password">Database password</label>
-                <div class="wb-field-body"><input class="form-control" type="text" id="db_password" value="{tmpl_var name='db_password'}" name="db_password" /></div>
+            <div class="hg-field-group">
+                <label class="hg-field-label" for="db_password">Database password</label>
+                <div class="hg-field-body"><input class="form-control" type="text" id="db_password" value="{tmpl_var name='db_password'}" name="db_password" /></div>
             </div>
-            <div class="wb-field-group">
-                <label class="wb-field-label" for="db_options">Tupa database options</label>
-                <div class="wb-field-body" id="db_options">
-                    <label class="wb-option-inline" for="db_ssl"><input type="checkbox" id="db_ssl" value="1" name="db_ssl" <tmpl_if name='db_ssl' op='==' value='true'>checked</tmpl_if>/> Use SSL</label>
+            <div class="hg-field-group">
+                <label class="hg-field-label" for="db_options">Tupa database options</label>
+                <div class="hg-field-body" id="db_options">
+                    <label class="hg-option-inline" for="db_ssl"><input type="checkbox" id="db_ssl" value="1" name="db_ssl" <tmpl_if name='db_ssl' op='==' value='true'>checked</tmpl_if>/> Use SSL</label>
                 </div>
             </div>
-			<div class="wb-field-group">
-                <label class="wb-field-label" for="local_server_id">Server ID of local mailserver</label>
-                <div class="wb-field-body"><input class="form-control" type="text" id="local_server_id" value="{tmpl_var name='local_server_id'}" name="local_server_id" /></div>
+			<div class="hg-field-group">
+                <label class="hg-field-label" for="local_server_id">Server ID of local mailserver</label>
+                <div class="hg-field-body"><input class="form-control" type="text" id="local_server_id" value="{tmpl_var name='local_server_id'}" name="local_server_id" /></div>
             </div>
     </div>
 
     <tmpl_if name="msg">
-        <div id="OKMsg" class="wb-alert wb-alert--success" role="status"><div class="wb-alert__body"><tmpl_var name="msg"></div></div>
+        <div id="OKMsg" class="hg-alert hg-alert--success" role="status"><div class="hg-alert__body"><tmpl_var name="msg"></div></div>
     </tmpl_if>
     <tmpl_if name="error">
-			<div class='wb-alert wb-alert--danger' role='alert'>
-				<div class='wb-alert__title'>
+			<div class='hg-alert hg-alert--danger' role='alert'>
+				<div class='hg-alert__title'>
 					<strong><tmpl_var name="error_txt"></strong>
 					</div>
-				<div class='wb-alert__body'>
-					<ul class="wb-clean-list">
+				<div class='hg-alert__body'>
+					<ul class="hg-clean-list">
 						<tmpl_var name="error">
 					</ul>
 				</div>
@@ -52,7 +52,7 @@
     </tmpl_if>
 
     <input type="hidden" name="remote_session_id" value="{tmpl_var name='remote_session_id'}">
-        <div class="wb-form-actions">
+        <div class="hg-form-actions">
             <button class="formbutton-success" type="button" value="Import" data-submit-form="pageForm" data-form-action="tools/import_vpopmail.php">{tmpl_var name="btn_start_txt"}</button>
             <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-heritage-load-content="tools/index.php" data-load-content="tools/index.php">{tmpl_var name="btn_cancel_txt"}</button>
         </div>

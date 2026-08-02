@@ -1,14 +1,14 @@
 <div class='page-header'>
 	<h1><tmpl_var name="list_head_txt"></h1>
 </div>
-<section class="wb-table-workspace">
-    <div class="wb-list-toolbar">
-        <div class="wb-list-toolbar__context">
+<section class="hg-table-workspace">
+    <div class="hg-list-toolbar">
+        <div class="hg-list-toolbar__context">
             <strong><tmpl_var name="list_head_txt"></strong>
         </div>
     </div>
 
-<table class="table wb-data-table">
+<table class="table hg-data-table">
                 <thead>
                 <tr>
                     <th  data-column="domain"><tmpl_var name="domain_txt"></th>
@@ -18,7 +18,7 @@
                     <th data-column="hard"><tmpl_var name="hard_txt"></th>
                     <th data-column="files"><tmpl_var name="files_txt"></th>
                     <th data-column="percentage"><tmpl_var name="percentage_txt"></th>
-                    <th class="wb-table-actions-column wb-table-align-end">{tmpl_var name='search_limit'}</th>
+                    <th class="hg-table-actions-column hg-table-align-end">{tmpl_var name='search_limit'}</th>
                 </tr>
                 <tr>
                     <td><input class="form-control" type="text" name="search_domain" value="{tmpl_var name='search_domain'}" /></td>
@@ -28,7 +28,7 @@
                     <td class="hard">&nbsp;</td>
                     <td class="files">&nbsp;</td>
                     <td class="percentage">&nbsp;</td>
-                    <td class="wb-table-align-end">
+                    <td class="hg-table-align-end">
                         <button type="button" class="formbutton-default formbutton-narrow" name="Filter" id="Filter" value="{tmpl_var name="filter_txt"}" data-submit-form="pageForm" data-form-action="sites/user_quota_stats.php"><span class="icon icon-filter"></span></button>
                     </td>
                 </tr>
@@ -42,7 +42,7 @@
                             <td><a href="#" data-heritage-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="soft"}</a></td>
                             <td><a href="#" data-heritage-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="hard"}</a></td>
                             <td><a href="#" data-heritage-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}" data-load-content="sites/web_vhost_domain_edit.php?id={tmpl_var name='id'}">{tmpl_var name="files"}</a></td>
-                            <td colspan="2">{tmpl_if name="progressbar" op="!=" value="-1"}<div class="progress wb-quota-progress">
+                            <td colspan="2">{tmpl_if name="progressbar" op="!=" value="-1"}<div class="progress hg-quota-progress">
                                 <div class='progress-bar-striped progress-bar-{tmpl_if name="percentage" op="<" value="50"}success{tmpl_elseif name="percentage" op="<" value="75"}warning{tmpl_else}danger{/tmpl_if}' role="progressbar" style="width: {tmpl_var name="progressbar"}%;" aria-valuenow="{tmpl_var name="percentage"}" aria-valuemin="0" aria-valuemax="100"><span>{tmpl_var name="percentage"}%</span></div>
                         </div>{/tmpl_if}</td>
 

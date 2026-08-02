@@ -28,18 +28,18 @@
   }
 
   function ensureFeedback(root) {
-    var feedback = root.querySelector(':scope > .wb-upload-feedback');
+    var feedback = root.querySelector(':scope > .hg-upload-feedback');
     if (feedback) return feedback;
     feedback = document.createElement('div');
-    feedback.className = 'wb-submit-feedback wb-upload-feedback';
+    feedback.className = 'hg-submit-feedback hg-upload-feedback';
     feedback.setAttribute('role', 'status');
     feedback.setAttribute('aria-live', 'polite');
     feedback.setAttribute('aria-atomic', 'true');
     var indicator = document.createElement('span');
-    indicator.className = 'wb-submit-feedback__indicator';
+    indicator.className = 'hg-submit-feedback__indicator';
     indicator.setAttribute('aria-hidden', 'true');
     var label = document.createElement('span');
-    label.className = 'wb-submit-feedback__label';
+    label.className = 'hg-submit-feedback__label';
     feedback.appendChild(indicator);
     feedback.appendChild(label);
     var heading = root.querySelector(':scope > .page-header');
@@ -55,7 +55,7 @@
     feedback.removeAttribute('data-heritage-delayed');
     feedback.dataset.state = state;
     feedback.setAttribute('role', state === 'failed' ? 'alert' : 'status');
-    feedback.querySelector('.wb-submit-feedback__label').textContent = label;
+    feedback.querySelector('.hg-submit-feedback__label').textContent = label;
   }
 
   function csrfFrom(root) {
@@ -99,7 +99,7 @@
       current.control.disabled = current.disabled;
       if (current.ariaBusy === null) current.control.removeAttribute('aria-busy');
       else current.control.setAttribute('aria-busy', current.ariaBusy);
-      current.control.classList.remove('wb-upload-source');
+      current.control.classList.remove('hg-upload-source');
     }
     var root = document.getElementById('pageContent');
     if (root) root.setAttribute('aria-busy', 'false');
@@ -115,7 +115,7 @@
     active = { form: form, control: control, disabled: control.disabled, ariaBusy: control.getAttribute('aria-busy') };
     control.disabled = true;
     control.setAttribute('aria-busy', 'true');
-    control.classList.add('wb-upload-source');
+    control.classList.add('hg-upload-source');
     var root = document.getElementById('pageContent');
     if (root) root.setAttribute('aria-busy', 'true');
     setFeedback('uploading', messages.upload_sending || 'Upload in progress');
@@ -125,7 +125,7 @@
       setFeedback('uploading', german
         ? 'Der Upload dauert etwas l\u00e4nger. Die Datei wird weiterhin verarbeitet.'
         : 'The upload is taking a little longer. The file is still being processed.');
-      var feedback = document.querySelector('#pageContent > .wb-upload-feedback');
+      var feedback = document.querySelector('#pageContent > .hg-upload-feedback');
       if (feedback) feedback.setAttribute('data-heritage-delayed', 'true');
     }, 7000);
 

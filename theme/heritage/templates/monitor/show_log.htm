@@ -1,13 +1,13 @@
-<section class="wb-monitor-workspace">
-    <header class="wb-monitor-hero">
-        <span class="wb-module-eyebrow">ISPConfig Monitor</span>
+<section class="hg-monitor-workspace">
+    <header class="hg-monitor-hero">
+        <span class="hg-module-eyebrow">ISPConfig Monitor</span>
         <h1><tmpl_var name="list_head_txt"></h1>
         <p><tmpl_var name="list_desc_txt"></p>
     </header>
 
-    <div class="wb-content-panel wb-content-panel--monitor">
-        <div class="wb-field-group">
-            <div class="wb-field-span wb-field-span--full">
+    <div class="hg-content-panel hg-content-panel--monitor">
+        <div class="hg-field-group">
+            <div class="hg-field-span hg-field-span--full">
                 <label for="refreshinterval"><tmpl_var name="monTransRefreshsq"></label>
                 <select
                     name="refreshinterval"
@@ -19,11 +19,11 @@
             </div>
         </div>
 
-        <section class="wb-monitor-log" aria-label="<tmpl_var name='monTransDate'>">
-            <header class="wb-monitor-log__header">
-                <h2 class="wb-list-section-heading"><tmpl_var name="monTransDate"><tmpl_var name="time"></h2>
+        <section class="hg-monitor-log" aria-label="<tmpl_var name='monTransDate'>">
+            <header class="hg-monitor-log__header">
+                <h2 class="hg-list-section-heading"><tmpl_var name="monTransDate"><tmpl_var name="time"></h2>
             </header>
-            <div class="codeview wb-monitor-log__content">
+            <div class="codeview hg-monitor-log__content">
                 <pre><tmpl_var name="log_data"></pre>
             </div>
         </section>

@@ -1,25 +1,25 @@
 <div class='page-header'>
 	<h1><tmpl_var name="list_head_txt"></h1>
 </div>
-<section class="wb-table-workspace">
-    <div class="wb-list-toolbar">
-        <div class="wb-list-toolbar__context">
-            <span class="wb-list-toolbar__eyebrow">{tmpl_var name="toolsarea_head_txt"}</span>
+<section class="hg-table-workspace">
+    <div class="hg-list-toolbar">
+        <div class="hg-list-toolbar__context">
+            <span class="hg-list-toolbar__eyebrow">{tmpl_var name="toolsarea_head_txt"}</span>
             <strong><tmpl_var name="list_head_txt"></strong>
         </div>
         <button class="formbutton-success" type="button" data-heritage-load-content="admin/server_ip_edit.php" data-load-content="admin/server_ip_edit.php">{tmpl_var name="add_new_record_txt"}</button>
     </div>
 
-<table class="table wb-data-table">
+<table class="table hg-data-table">
                 <thead >
                     <tr>
                         <th data-column="server_id"><tmpl_var name="server_id_txt"></th>
-                        <th class="wb-table-compact-column" data-column="client_id"><tmpl_var name="client_id_txt"></th>
+                        <th class="hg-table-compact-column" data-column="client_id"><tmpl_var name="client_id_txt"></th>
                         <th data-column="ip_type"><tmpl_var name="ip_type_txt"></th>
                         <th data-column="ip_address"><tmpl_var name="ip_address_txt"></th>
                         <th data-column="virtualhost"><tmpl_var name="virtualhost_txt"></th>
                         <th data-column="virtualhost_port"><tmpl_var name="virtualhost_port_txt"></th>
-                        <th class="wb-table-align-end">{tmpl_var name='search_limit'}</th>
+                        <th class="hg-table-align-end">{tmpl_var name='search_limit'}</th>
                     </tr>
                     <tr>
                         <td><select class="form-control" name="search_server_id">{tmpl_var name='search_server_id'}</select></td>
@@ -28,7 +28,7 @@
                         <td><input class="form-control" type="text" name="search_ip_address" value="{tmpl_var name='search_ip_address'}" /></td>
                         <td><select class="form-control" name="search_virtualhost">{tmpl_var name='search_virtualhost'}</select></td>
                         <td><input class="form-control" type="text" name="search_virtualhost_port" value="{tmpl_var name='search_virtualhost_port'}" /></td>
-                        <td class="wb-table-align-end">
+                        <td class="hg-table-align-end">
                             <button type="button" class="formbutton-default formbutton-narrow" name="Filter" id="Filter" value="{tmpl_var name="filter_txt"}" data-submit-form="pageForm" data-form-action="admin/server_ip_list.php"><span class="icon icon-filter"></span></button>
                         </td>
                     </tr>
@@ -42,7 +42,7 @@
                             <td><a href="#" data-heritage-load-content="admin/server_ip_edit.php?id={tmpl_var name='id'}" data-load-content="admin/server_ip_edit.php?id={tmpl_var name='id'}" data-heritage-tooltip="true" data-heritage-tooltip-placement="bottom" title="{tmpl_var name='ip_address'}">{tmpl_var name="ip_address"}</a></td>
                             <td><a href="#" data-heritage-load-content="admin/server_ip_edit.php?id={tmpl_var name='id'}" data-load-content="admin/server_ip_edit.php?id={tmpl_var name='id'}">{tmpl_var name="virtualhost"}</a></td>
                             <td><a href="#" data-heritage-load-content="admin/server_ip_edit.php?id={tmpl_var name='id'}" data-load-content="admin/server_ip_edit.php?id={tmpl_var name='id'}">{tmpl_var name="virtualhost_port"}</a></td>
-                            <td class="wb-table-align-end">
+                            <td class="hg-table-align-end">
                                 <a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="admin/server_ip_del.php?id={tmpl_var name='id'}&_csrf_id={tmpl_var name='csrf_id'}&_csrf_key={tmpl_var name='csrf_key'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete"></span></a>
                             </td>
                         </tr>

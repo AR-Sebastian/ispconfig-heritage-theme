@@ -10,7 +10,7 @@
 
   function createBadge(label, value, modifier) {
     var badge = document.createElement('span');
-    badge.className = 'wb-specialty-badge' + (modifier ? ' wb-specialty-badge--' + modifier : '');
+    badge.className = 'hg-specialty-badge' + (modifier ? ' hg-specialty-badge--' + modifier : '');
     badge.setAttribute('aria-label', label + ': ' + value);
     var count = document.createElement('strong');
     count.textContent = String(value);
@@ -22,58 +22,58 @@
   }
 
   function decorateExtensionWorkspace(scope) {
-    scope.querySelectorAll('.wb-extension-workspace').forEach(function(workspace) {
-      workspace.classList.add('wb-specialty-workspace', 'wb-specialty-workspace--extension');
+    scope.querySelectorAll('.hg-extension-workspace').forEach(function(workspace) {
+      workspace.classList.add('hg-specialty-workspace', 'hg-specialty-workspace--extension');
       var pageType = workspace.getAttribute('data-heritage-extension-page') || 'extension';
       workspace.setAttribute('data-heritage-specialty-page', pageType);
 
-      var table = workspace.querySelector('.wb-data-table');
+      var table = workspace.querySelector('.hg-data-table');
       var rows = table ? Array.prototype.slice.call(table.querySelectorAll('tbody tr:not(.tbl_row_noresults)')) : [];
-      var actions = workspace.querySelectorAll('.wb-row-action, .wb-form-actions button, .wb-form-actions a').length;
-      var dangerActions = workspace.querySelectorAll('.wb-row-action--danger, .formbutton-danger').length;
+      var actions = workspace.querySelectorAll('.hg-row-action, .hg-form-actions button, .hg-form-actions a').length;
+      var dangerActions = workspace.querySelectorAll('.hg-row-action--danger, .formbutton-danger').length;
       workspace.setAttribute('data-heritage-extension-records', String(rows.length));
       workspace.setAttribute('data-heritage-extension-actions', String(actions));
 
-      var hero = workspace.querySelector('.wb-extension-hero');
-      if (hero && !hero.querySelector('.wb-specialty-badges')) {
+      var hero = workspace.querySelector('.hg-extension-hero');
+      if (hero && !hero.querySelector('.hg-specialty-badges')) {
         var badges = document.createElement('div');
-        badges.className = 'wb-specialty-badges';
+        badges.className = 'hg-specialty-badges';
         badges.appendChild(createBadge(localized('Einträge', 'Entries'), rows.length, 'records'));
         if (actions > 0) badges.appendChild(createBadge(localized('Aktionen', 'Actions'), actions, 'actions'));
         if (dangerActions > 0) badges.appendChild(createBadge(localized('Kritisch', 'Critical'), dangerActions, 'danger'));
         hero.appendChild(badges);
       }
 
-      workspace.querySelectorAll('.wb-data-table tbody tr').forEach(function(row) {
-        row.classList.add('wb-specialty-row');
-        if (row.querySelector('.wb-row-action--danger, .formbutton-danger')) row.classList.add('wb-specialty-row--destructive');
+      workspace.querySelectorAll('.hg-data-table tbody tr').forEach(function(row) {
+        row.classList.add('hg-specialty-row');
+        if (row.querySelector('.hg-row-action--danger, .formbutton-danger')) row.classList.add('hg-specialty-row--destructive');
       });
     });
   }
 
   function decorateMonitoringWorkspace(scope) {
-    scope.querySelectorAll('.wb-monitor-workspace').forEach(function(workspace) {
-      workspace.classList.add('wb-specialty-workspace', 'wb-specialty-workspace--monitoring');
+    scope.querySelectorAll('.hg-monitor-workspace').forEach(function(workspace) {
+      workspace.classList.add('hg-specialty-workspace', 'hg-specialty-workspace--monitoring');
       var charts = workspace.querySelectorAll('[data-heritage-chart-card]').length;
-      var states = workspace.querySelectorAll('.stateview .alert, .systemmonitor .alert, .wb-monitor-state-card').length;
+      var states = workspace.querySelectorAll('.stateview .alert, .systemmonitor .alert, .hg-monitor-state-card').length;
       workspace.setAttribute('data-heritage-monitor-charts', String(charts));
       workspace.setAttribute('data-heritage-monitor-states', String(states));
 
-      var hero = workspace.querySelector('.wb-monitor-hero');
-      if (hero && !hero.querySelector('.wb-specialty-badges')) {
+      var hero = workspace.querySelector('.hg-monitor-hero');
+      if (hero && !hero.querySelector('.hg-specialty-badges')) {
         var badges = document.createElement('div');
-        badges.className = 'wb-specialty-badges';
+        badges.className = 'hg-specialty-badges';
         if (states > 0) badges.appendChild(createBadge(localized('Status', 'Status'), states, 'records'));
         if (charts > 0) badges.appendChild(createBadge(localized('Diagramme', 'Charts'), charts, 'actions'));
         hero.appendChild(badges);
       }
 
-      workspace.querySelectorAll('.wb-monitor-refresh-panel, .wb-monitor-refresh').forEach(function(panel) {
-        panel.classList.add('wb-specialty-control-strip');
+      workspace.querySelectorAll('.hg-monitor-refresh-panel, .hg-monitor-refresh').forEach(function(panel) {
+        panel.classList.add('hg-specialty-control-strip');
         var select = panel.querySelector('select');
-        if (select && !panel.querySelector('.wb-specialty-control-hint')) {
+        if (select && !panel.querySelector('.hg-specialty-control-hint')) {
           var hint = document.createElement('span');
-          hint.className = 'wb-specialty-control-hint';
+          hint.className = 'hg-specialty-control-hint';
           hint.textContent = select.value
             ? localized('Automatische Aktualisierung aktiv', 'Automatic refresh active')
             : localized('Manuelle Aktualisierung', 'Manual refresh');
@@ -87,18 +87,18 @@
     var scope = root && root.querySelectorAll ? root : document;
     scope.querySelectorAll('textarea.form-control').forEach(function (field) {
       var identity = [field.name || '', field.id || ''].join(' ');
-      field.classList.add('wb-textarea-field');
+      field.classList.add('hg-textarea-field');
       if (codeFieldPattern.test(identity)) {
-        field.classList.add('wb-code-field');
+        field.classList.add('hg-code-field');
         field.setAttribute('spellcheck', 'false');
       }
-      if (field.readOnly || field.disabled) field.classList.add('wb-readonly-field');
+      if (field.readOnly || field.disabled) field.classList.add('hg-readonly-field');
     });
 
     scope.querySelectorAll('[role="progressbar"]').forEach(function (bar) {
       var value = Number(bar.getAttribute('aria-valuenow'));
       var label = bar.querySelector('span');
-      bar.closest('.progress')?.classList.add('wb-progress');
+      bar.closest('.progress')?.classList.add('hg-progress');
       if (!bar.getAttribute('aria-label') && Number.isFinite(value)) {
         bar.setAttribute('aria-label', (label && label.textContent.trim()) || (value + '% used'));
       }
@@ -106,32 +106,32 @@
 
     var monitorSurface = scope.querySelector('.systemmonitor, .stateview, .codeview, .panel_system');
     if (monitorSurface) {
-      document.body.classList.add('wb-monitor-page');
+      document.body.classList.add('hg-monitor-page');
       var page = document.getElementById('pageContent');
-      if (page) page.classList.add('wb-monitor-surface');
+      if (page) page.classList.add('hg-monitor-surface');
       scope.querySelectorAll('#refreshinterval').forEach(function (field) {
         var group = field.closest('.form-group');
-        if (group) group.classList.add('wb-monitor-refresh');
+        if (group) group.classList.add('hg-monitor-refresh');
       });
       scope.querySelectorAll('.stateview .alert, .systemmonitor .alert').forEach(function (card) {
-        card.classList.add('wb-monitor-state-card');
+        card.classList.add('hg-monitor-state-card');
         var state = card.classList.contains('alert-danger') ? 'danger' :
           card.classList.contains('alert-warning') ? 'warning' :
           card.classList.contains('alert-success') ? 'success' : 'info';
         card.setAttribute('data-heritage-monitor-state', state);
         var title = card.querySelector('h3');
-        if (title) title.classList.add('wb-monitor-state-card__title');
+        if (title) title.classList.add('hg-monitor-state-card__title');
         var summary = card.querySelector('.statusDevice > p');
-        if (summary && !summary.querySelector('.wb-monitor-state-metrics')) {
-          summary.classList.add('wb-monitor-state-card__summary');
+        if (summary && !summary.querySelector('.hg-monitor-state-metrics')) {
+          summary.classList.add('hg-monitor-state-card__summary');
           var match = summary.textContent.replace(/\s+/g, ' ').trim().match(/^(.*?)\s*\(([^)]+)\)\s*$/);
           if (match) {
             summary.textContent = match[1];
             var metrics = document.createElement('span');
-            metrics.className = 'wb-monitor-state-metrics';
+            metrics.className = 'hg-monitor-state-metrics';
             match[2].split(',').forEach(function(metric) {
               var chip = document.createElement('span');
-              chip.className = 'wb-monitor-state-metric';
+              chip.className = 'hg-monitor-state-metric';
               chip.textContent = metric.trim();
               metrics.appendChild(chip);
             });
@@ -139,11 +139,11 @@
           }
         }
         var status = card.querySelector('.statusDevice');
-        if (status) status.classList.add('wb-monitor-state-card__body');
-        card.querySelectorAll('a').forEach(function(link) { link.classList.add('wb-monitor-state-card__action'); });
+        if (status) status.classList.add('hg-monitor-state-card__body');
+        card.querySelectorAll('a').forEach(function(link) { link.classList.add('hg-monitor-state-card__action'); });
       });
     } else if (scope === document || scope.id === 'pageContent') {
-      document.body.classList.remove('wb-monitor-page');
+      document.body.classList.remove('hg-monitor-page');
     }
 
     decorateExtensionWorkspace(scope);

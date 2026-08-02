@@ -57,7 +57,7 @@
 
     var resultBox = document.createElement('div');
     resultBox.id = 'heritage-global-search-results';
-    resultBox.className = 'wb-global-search-results';
+    resultBox.className = 'hg-global-search-results';
     resultBox.setAttribute('role', 'listbox');
     resultBox.setAttribute('aria-label', input.getAttribute('aria-label') || tr('Suchergebnisse', 'Search results'));
     resultBox.hidden = true;
@@ -65,24 +65,24 @@
     input.setAttribute('aria-controls', resultBox.id);
 
     var status = document.createElement('span');
-    status.className = 'wb-visually-hidden';
+    status.className = 'hg-visually-hidden';
     status.setAttribute('role', 'status');
     status.setAttribute('aria-live', 'polite');
     status.setAttribute('aria-atomic', 'true');
     form.appendChild(status);
 
-    var clear = form.querySelector('.wb-search-clear');
+    var clear = form.querySelector('.hg-search-clear');
     if (!clear) {
       clear = document.createElement('button');
       clear.type = 'button';
-      clear.className = 'wb-search-clear';
+      clear.className = 'hg-search-clear';
       clear.setAttribute('aria-label', document.body.getAttribute('data-heritage-search-clear') || tr('Suche leeren', 'Clear search'));
       clear.textContent = '\u00d7';
       input.parentNode.appendChild(clear);
     }
     clear.hidden = true;
 
-    var shortcut = form.querySelector('.wb-search-shortcut');
+    var shortcut = form.querySelector('.hg-search-shortcut');
 
     function announce(message) {
       status.textContent = '';
@@ -104,7 +104,7 @@
       activeIndex = (index + items.length) % items.length;
       items.forEach(function (item, itemIndex) {
         var active = itemIndex === activeIndex;
-        item.classList.toggle('wb-global-search-result--active', active);
+        item.classList.toggle('hg-global-search-result--active', active);
         item.setAttribute('aria-selected', active ? 'true' : 'false');
       });
 
@@ -114,14 +114,14 @@
 
     function closeResults() {
       resultBox.hidden = true;
-      form.classList.remove('wb-global-search-open');
+      form.classList.remove('hg-global-search-open');
       input.setAttribute('aria-expanded', 'false');
       input.removeAttribute('aria-activedescendant');
       activeIndex = -1;
     }
 
     function openResults() {
-      form.classList.add('wb-global-search-open');
+      form.classList.add('hg-global-search-open');
       resultBox.hidden = false;
       input.setAttribute('aria-expanded', 'true');
     }
@@ -178,7 +178,7 @@
 
     function appendHeader(query, count) {
       var header = document.createElement('div');
-      header.className = 'wb-global-search-palette__header';
+      header.className = 'hg-global-search-palette__header';
 
       var eyebrow = document.createElement('span');
       eyebrow.textContent = tr('Globale Suche', 'Global search');
@@ -197,7 +197,7 @@
 
     function appendFooter() {
       var footer = document.createElement('div');
-      footer.className = 'wb-global-search-palette__footer';
+      footer.className = 'hg-global-search-palette__footer';
       footer.textContent = tr('Mit Pfeil hoch/runter navigieren, Enter öffnet, Esc schließt.', 'Use up/down, Enter opens, Esc closes.');
       resultBox.appendChild(footer);
     }
@@ -207,7 +207,7 @@
       appendHeader(query || input.value.trim(), null);
 
       var row = document.createElement('div');
-      row.className = 'wb-global-search-message wb-global-search-message--' + state;
+      row.className = 'hg-global-search-message hg-global-search-message--' + state;
       row.setAttribute('role', state === 'error' ? 'alert' : 'status');
       row.textContent = message;
       resultBox.appendChild(row);
@@ -222,7 +222,7 @@
       appendHeader('', null);
 
       var row = document.createElement('div');
-      row.className = 'wb-global-search-message wb-global-search-message--hint';
+      row.className = 'hg-global-search-message hg-global-search-message--hint';
       row.setAttribute('role', 'status');
       row.textContent = tr(
         'Bitte 2 Zeichen eingeben. Suche nach Kunden, Domains, E-Mails, Servern oder Tickets.',
@@ -248,11 +248,11 @@
         }
 
         var group = document.createElement('section');
-        group.className = 'wb-global-search-group';
+        group.className = 'hg-global-search-group';
         group.setAttribute('role', 'group');
 
         var header = document.createElement('div');
-        header.className = 'wb-global-search-group__header';
+        header.className = 'hg-global-search-group__header';
 
         var title = document.createElement('strong');
         title.textContent = (category.cheader && category.cheader.title) || tr('Ergebnisse', 'Results');
@@ -280,17 +280,17 @@
           var option = document.createElement('button');
           option.type = 'button';
           option.id = 'heritage-global-search-option-' + count;
-          option.className = 'wb-global-search-result';
+          option.className = 'hg-global-search-result';
           option.setAttribute('role', 'option');
           option.setAttribute('aria-selected', 'false');
 
           var icon = document.createElement('span');
-          icon.className = 'wb-global-search-result__icon';
+          icon.className = 'hg-global-search-result__icon';
           icon.setAttribute('aria-hidden', 'true');
           icon.textContent = String((title.textContent || '?').trim().charAt(0) || '?').toLocaleUpperCase();
 
           var content = document.createElement('span');
-          content.className = 'wb-global-search-result__content';
+          content.className = 'hg-global-search-result__content';
 
           var label = document.createElement('strong');
           appendText(label, item.title || '', query);
@@ -308,7 +308,7 @@
           content.appendChild(meta);
 
           var arrow = document.createElement('span');
-          arrow.className = 'wb-global-search-result__arrow';
+          arrow.className = 'hg-global-search-result__arrow';
           arrow.setAttribute('aria-hidden', 'true');
           arrow.textContent = '→';
 
@@ -334,7 +334,7 @@
         item.setAttribute('aria-posinset', String(itemIndex + 1));
       });
 
-      var resultSummary = resultBox.querySelector('.wb-global-search-palette__header strong');
+      var resultSummary = resultBox.querySelector('.hg-global-search-palette__header strong');
       if (resultSummary) {
         resultSummary.textContent = formatResultSummary(count, query);
       }
@@ -414,7 +414,7 @@
     function syncClear(scheduleSearch) {
       var hasValue = Boolean(input.value);
       clear.hidden = !hasValue;
-      form.classList.toggle('wb-global-search-has-value', hasValue);
+      form.classList.toggle('hg-global-search-has-value', hasValue);
       if (shortcut) {
         shortcut.hidden = hasValue;
       }

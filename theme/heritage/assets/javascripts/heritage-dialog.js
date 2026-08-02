@@ -42,7 +42,7 @@
     target.hidden = false;
     target.setAttribute('aria-hidden', 'false');
     target.setAttribute('data-heritage-dialog-state', 'open');
-    document.body.classList.add('wb-dialog-open');
+    document.body.classList.add('hg-dialog-open');
     document.body.setAttribute('data-heritage-dialog-active', target.id || 'dialog');
     if (returnFocus && returnFocus.setAttribute && (returnFocus.getAttribute('aria-haspopup') === 'dialog' || returnFocus.getAttribute('aria-controls') === target.id)) {
       returnFocus.setAttribute('aria-expanded', 'true');
@@ -59,7 +59,7 @@
     target.setAttribute('aria-hidden', 'true');
     target.hidden = true;
     target.setAttribute('data-heritage-dialog-state', 'closed');
-    document.body.classList.remove('wb-dialog-open');
+    document.body.classList.remove('hg-dialog-open');
     document.body.removeAttribute('data-heritage-dialog-active');
     if (returnFocus && returnFocus.setAttribute && (returnFocus.getAttribute('aria-haspopup') === 'dialog' || returnFocus.getAttribute('aria-controls') === target.id)) {
       returnFocus.setAttribute('aria-expanded', 'false');
@@ -79,9 +79,9 @@
       return;
     }
     var closeControl = event.target.closest('[data-heritage-dialog-close]');
-    if (closeControl && closeControl.closest('.wb-dialog')) {
+    if (closeControl && closeControl.closest('.hg-dialog')) {
       event.preventDefault();
-      close(closeControl.closest('.wb-dialog'), true);
+      close(closeControl.closest('.hg-dialog'), true);
     }
   });
 

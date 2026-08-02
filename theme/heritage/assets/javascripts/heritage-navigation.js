@@ -3,9 +3,9 @@
 
   var button = document.querySelector('.menu-btn');
   var panel = document.querySelector('#heritage-mobile-navigation');
-  var overlay = document.querySelector('.wb-navigation-overlay');
-  var closeButton = panel && panel.querySelector('.wb-mobile-navigation__close');
-  var content = panel && panel.querySelector('.wb-mobile-navigation__content');
+  var overlay = document.querySelector('.hg-navigation-overlay');
+  var closeButton = panel && panel.querySelector('.hg-mobile-navigation__close');
+  var content = panel && panel.querySelector('.hg-mobile-navigation__content');
   var pendingModule = null;
   var currentPageTarget = '';
   var userCollapsedModule = '';
@@ -367,18 +367,18 @@
   function isDashboardContent() {
     var pageContent = document.querySelector('#pageContent');
     if (!pageContent) return false;
-    // Regression fix: detect the raw dashboard by its shipped .wb-dashlet
-    // widgets too. The other markers (.wb-dashboard-layout, ul.modules, ...) are
-    // only added by enhance(), which itself requires body.wb-dashboard-page — so
-    // without .wb-dashlet here the detection deadlocked and the dashboard stayed
+    // Regression fix: detect the raw dashboard by its shipped .hg-dashlet
+    // widgets too. The other markers (.hg-dashboard-layout, ul.modules, ...) are
+    // only added by enhance(), which itself requires body.hg-dashboard-page — so
+    // without .hg-dashlet here the detection deadlocked and the dashboard stayed
     // unstyled.
-    return Boolean(pageContent.querySelector(':scope > .wb-dashlet, ul.modules, .wb-dashboard-layout, .wb-dashboard-hero, .wb-dashboard-overview'));
+    return Boolean(pageContent.querySelector(':scope > .hg-dashlet, ul.modules, .hg-dashboard-layout, .hg-dashboard-hero, .hg-dashboard-overview'));
   }
 
   function isGermanInterface() {
     var declared = (document.documentElement.lang || '').toLowerCase();
     var primary = document.querySelector('#main-navigation');
-    var footer = document.querySelector('.wb-app-navigation__footer');
+    var footer = document.querySelector('.hg-app-navigation__footer');
     return declared.indexOf('de') === 0 || /\u00fcbersicht|kunden|webseiten|\u00fcberwachung|einstellungen/i.test(primary ? primary.textContent : '') || /ispconfig workbench/i.test(footer ? footer.textContent : '');
   }
 
@@ -423,7 +423,7 @@
   function appendNavigationItem(groupList, source, createSource) {
     var item = document.createElement('li');
     var row = document.createElement('div');
-    var secondaryLink = cloneLink(source, 'wb-mobile-navigation__secondary-link');
+    var secondaryLink = cloneLink(source, 'hg-mobile-navigation__secondary-link');
     item.dataset.heritageSearchText = (source.textContent + ' ' + (createSource ? createSource.textContent : '')).trim();
     if (isCurrentLink(source)) secondaryLink.setAttribute('aria-current', 'page');
     compactListLabel(secondaryLink, source.dataset.heritageCompactLabel || '');
@@ -433,9 +433,9 @@
       return;
     }
 
-    row.className = 'wb-mobile-navigation__secondary-row';
+    row.className = 'hg-mobile-navigation__secondary-row';
     row.appendChild(secondaryLink);
-    var quickAction = cloneLink(createSource, 'wb-mobile-navigation__quick-action');
+    var quickAction = cloneLink(createSource, 'hg-mobile-navigation__quick-action');
     var createLabel = createSource.textContent.trim() || 'Create new';
     quickAction.replaceChildren();
     quickAction.setAttribute('aria-label', createLabel);
@@ -447,7 +447,7 @@
     quickAction.appendChild(quickIcon);
     quickAction.dataset.heritageQuickAction = 'true';
     row.appendChild(quickAction);
-    item.classList.add('wb-mobile-navigation__paired-item');
+    item.classList.add('hg-mobile-navigation__paired-item');
     item.appendChild(row);
     groupList.appendChild(item);
   }
@@ -458,13 +458,13 @@
     var item = document.createElement('li');
     var label = document.createElement('label');
     var control = select.cloneNode(true);
-    item.className = 'wb-mobile-navigation__secondary-control';
+    item.className = 'hg-mobile-navigation__secondary-control';
     item.dataset.heritageSearchText = select.textContent.trim();
-    label.className = 'wb-visually-hidden';
+    label.className = 'hg-visually-hidden';
     label.textContent = isGermanInterface() ? 'Server ausw\u00e4hlen' : 'Select server';
     control.removeAttribute('id');
     control.removeAttribute('onchange');
-    control.classList.add('wb-mobile-navigation__server-select');
+    control.classList.add('hg-mobile-navigation__server-select');
     control.setAttribute('aria-label', label.textContent);
     control.addEventListener('change', function () {
       var api = runtime();
@@ -484,7 +484,7 @@
     var labelText = header.textContent.trim();
     var listId = 'heritage-mobile-secondary-group-' + (index + 1);
     groupList.id = listId;
-    label.className = 'wb-mobile-navigation__secondary-label';
+    label.className = 'hg-mobile-navigation__secondary-label';
     label.setAttribute('role', 'presentation');
     var labelTextNode = document.createElement('span');
     labelTextNode.textContent = labelText;
@@ -496,12 +496,12 @@
   }
 
   function ensureBrand() {
-    var header = panel.querySelector('.wb-mobile-navigation__header');
+    var header = panel.querySelector('.hg-mobile-navigation__header');
     var source = document.querySelector('#logo');
-    if (!header || !source || header.querySelector('.wb-app-navigation__brand-logo')) return;
+    if (!header || !source || header.querySelector('.hg-app-navigation__brand-logo')) return;
     var brand = source.cloneNode(true);
     brand.removeAttribute('id');
-    brand.className = 'wb-app-navigation__brand-logo';
+    brand.className = 'hg-app-navigation__brand-logo';
     brand.removeAttribute('aria-hidden');
     var brandLink = brand.querySelector('a');
     if (brandLink) {
@@ -515,7 +515,7 @@
 
   function sidebarMatchesModule(sidebar, activeModule) {
     if (!sidebar || !activeModule) return false;
-    return Array.from(sidebar.querySelectorAll('#sub-navigation a, .wb-secondary-navigation__group a')).some(function (link) {
+    return Array.from(sidebar.querySelectorAll('#sub-navigation a, .hg-secondary-navigation__group a')).some(function (link) {
       return moduleFromTarget(navigationTarget(link)) === activeModule;
     });
   }
@@ -528,18 +528,18 @@
     var dashboard = activeModule === 'dashboard' && isDashboardContent();
     if (dashboard) return { node: container, count: 0 };
     var useSidebar = sidebarMatchesModule(sidebar, activeModule);
-    var links = useSidebar ? Array.from(sidebar.querySelectorAll('#sub-navigation a, .wb-secondary-navigation__group a')) : [];
-    container.className = 'wb-mobile-navigation__secondary';
+    var links = useSidebar ? Array.from(sidebar.querySelectorAll('#sub-navigation a, .hg-secondary-navigation__group a')) : [];
+    container.className = 'hg-mobile-navigation__secondary';
     container.id = 'heritage-mobile-secondary-navigation';
     if (!sidebar) return { node: container, count: 0 };
 
     var groups = useSidebar ? Array.from(sidebar.querySelectorAll(':scope > header')) : [];
     if (!groups.length) groups = [null];
     groups.forEach(function (header, groupIndex) {
-      var sourceList = useSidebar ? (header ? header.nextElementSibling : sidebar.querySelector('#sub-navigation, .wb-secondary-navigation__group')) : null;
+      var sourceList = useSidebar ? (header ? header.nextElementSibling : sidebar.querySelector('#sub-navigation, .hg-secondary-navigation__group')) : null;
       if (!sourceList || sourceList.tagName !== 'UL') return;
       var group = document.createElement('li');
-      group.className = 'wb-mobile-navigation__secondary-group';
+      group.className = 'hg-mobile-navigation__secondary-group';
       var groupList = document.createElement('ul');
       appendSecondaryGroupLabel(group, groupList, header, groupIndex, sourceList);
       var sources = Array.from(sourceList.querySelectorAll(':scope > li > a')).filter(function (source) {
@@ -580,12 +580,12 @@
       group.appendChild(groupList);
       container.appendChild(group);
     });
-    if (!container.querySelector('.wb-mobile-navigation__secondary-link, .wb-mobile-navigation__secondary-control')) {
+    if (!container.querySelector('.hg-mobile-navigation__secondary-link, .hg-mobile-navigation__secondary-control')) {
       (fallbackNavigationGroups[activeModule] || []).forEach(function (fallbackGroup, groupIndex) {
         var group = document.createElement('li');
         var groupList = document.createElement('ul');
         var header = document.createElement('header');
-        group.className = 'wb-mobile-navigation__secondary-group wb-mobile-navigation__secondary-group--fallback';
+        group.className = 'hg-mobile-navigation__secondary-group hg-mobile-navigation__secondary-group--fallback';
         header.textContent = isGermanInterface() ? fallbackGroup.titleDe : fallbackGroup.titleDe;
         appendSecondaryGroupLabel(group, groupList, header, groupIndex, groupList);
         fallbackGroup.pairs.forEach(function (pairTarget) {
@@ -599,7 +599,7 @@
         }
       });
     }
-    return { node: container, count: Math.max(links.length, container.querySelectorAll('.wb-mobile-navigation__secondary-link, .wb-mobile-navigation__secondary-control').length) };
+    return { node: container, count: Math.max(links.length, container.querySelectorAll('.hg-mobile-navigation__secondary-link, .hg-mobile-navigation__secondary-control').length) };
   }
 
   function isCurrentLink(link) {
@@ -620,9 +620,9 @@
       var list = header.nextElementSibling;
       if (!list || list.tagName !== 'UL') return;
       list.hidden = false;
-      header.classList.toggle('wb-secondary-navigation__header--active', groupContainsTarget(list, canonicalPage));
+      header.classList.toggle('hg-secondary-navigation__header--active', groupContainsTarget(list, canonicalPage));
     });
-    panel.querySelectorAll('.wb-mobile-navigation__secondary-group').forEach(function (group) {
+    panel.querySelectorAll('.hg-mobile-navigation__secondary-group').forEach(function (group) {
       var list = group.querySelector(':scope > ul');
       if (!list) return;
       if (groupContainsTarget(list, canonicalPage)) list.hidden = false;
@@ -650,14 +650,14 @@
       if (item) item.classList.toggle('active', Boolean(active));
     });
 
-    panel.querySelectorAll('.wb-mobile-navigation__module[data-heritage-module], .wb-mobile-navigation__module[data-capp]').forEach(function (link) {
+    panel.querySelectorAll('.hg-mobile-navigation__module[data-heritage-module], .hg-mobile-navigation__module[data-capp]').forEach(function (link) {
       var active = activeModule && linkModule(link) === activeModule;
-      var submenu = link.closest('li') && link.closest('li').querySelector('.wb-mobile-navigation__secondary');
+      var submenu = link.closest('li') && link.closest('li').querySelector('.hg-mobile-navigation__secondary');
       link.classList.toggle('active', Boolean(active));
       if (active) link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');
       if (!submenu) {
-        link.classList.remove('wb-has-submenu');
+        link.classList.remove('hg-has-submenu');
         link.removeAttribute('aria-controls');
         link.removeAttribute('aria-expanded');
       } else if (!active) {
@@ -672,7 +672,7 @@
     });
 
     if (!canonicalPage) return;
-    document.querySelectorAll('#sidebar a, #heritage-mobile-navigation a:not(.wb-mobile-navigation__module)').forEach(function (link) {
+    document.querySelectorAll('#sidebar a, #heritage-mobile-navigation a:not(.hg-mobile-navigation__module)').forEach(function (link) {
       var active = navigationTargetMatches(navigationTarget(link), canonicalPage);
       link.classList.toggle('active', active);
       if (active) link.setAttribute('aria-current', 'page');
@@ -689,24 +689,24 @@
   }
 
   function collapseOtherModuleSubmenus(activeLink) {
-    panel.querySelectorAll('.wb-mobile-navigation__module.wb-has-submenu[aria-expanded="true"]').forEach(function (module) {
+    panel.querySelectorAll('.hg-mobile-navigation__module.hg-has-submenu[aria-expanded="true"]').forEach(function (module) {
       if (module === activeLink) return;
       module.setAttribute('aria-expanded', 'false');
-      var moduleSubmenu = module.closest('li') && module.closest('li').querySelector('.wb-mobile-navigation__secondary');
+      var moduleSubmenu = module.closest('li') && module.closest('li').querySelector('.hg-mobile-navigation__secondary');
       if (moduleSubmenu) moduleSubmenu.hidden = true;
     });
   }
 
   function setModuleSubmenuExpanded(link, expanded) {
     if (!link) return false;
-    var submenu = link.closest('li') && link.closest('li').querySelector('.wb-mobile-navigation__secondary');
+    var submenu = link.closest('li') && link.closest('li').querySelector('.hg-mobile-navigation__secondary');
     if (!submenu) {
-      link.classList.remove('wb-has-submenu');
+      link.classList.remove('hg-has-submenu');
       link.removeAttribute('aria-controls');
       link.removeAttribute('aria-expanded');
       return false;
     }
-    link.classList.add('wb-has-submenu');
+    link.classList.add('hg-has-submenu');
     submenu.hidden = expanded === false;
     var module = linkModule(link);
     if (!expanded) {
@@ -742,16 +742,16 @@
       if (!list || list.tagName !== 'UL') return;
       var groupId = 'heritage-secondary-group-' + (index + 1);
       list.id = groupId;
-      list.classList.add('wb-secondary-navigation__group');
-      header.classList.add('wb-secondary-navigation__header');
+      list.classList.add('hg-secondary-navigation__group');
+      header.classList.add('hg-secondary-navigation__header');
       var canonicalPage = canonicalNavigationTarget(currentPageTarget);
       var active = Boolean(list.querySelector('a.active, a[aria-current="page"]')) || groupContainsTarget(list, canonicalPage);
-      var button = header.querySelector(':scope > .wb-secondary-navigation__toggle');
+      var button = header.querySelector(':scope > .hg-secondary-navigation__toggle');
       if (button) button.remove();
       list.hidden = false;
-      header.classList.toggle('wb-secondary-navigation__header--active', active);
+      header.classList.toggle('hg-secondary-navigation__header--active', active);
     });
-    sidebar.classList.toggle('wb-secondary-navigation--grouped', headers.length > 0);
+    sidebar.classList.toggle('hg-secondary-navigation--grouped', headers.length > 0);
     return headers.length;
   }
 
@@ -762,10 +762,10 @@
     var secondaryNavigation = Boolean(sidebar.querySelector('#sub-navigation'));
     var dashboardPage = isDashboardContent();
     var dashboardNews = Boolean(dashboardPage && !secondaryNavigation && sidebar.textContent.trim());
-    var newsWidget = pageContent.querySelector(':scope > .wb-dashlet-news');
+    var newsWidget = pageContent.querySelector(':scope > .hg-dashlet-news');
     if (dashboardNews && !newsWidget) {
       newsWidget = document.createElement('article');
-      newsWidget.className = 'wb-dashlet wb-dashlet-news';
+      newsWidget.className = 'hg-dashlet hg-dashlet-news';
       newsWidget.setAttribute('data-heritage-dashlet', 'news');
       newsWidget.replaceChildren.apply(newsWidget, Array.prototype.map.call(sidebar.childNodes, function(node) {
         return node.cloneNode(true);
@@ -773,17 +773,17 @@
       pageContent.appendChild(newsWidget);
       if (window.heritageDashboardLayout) window.setTimeout(window.heritageDashboardLayout.enhance, 0);
     }
-    sidebar.classList.toggle('wb-dashboard-news', dashboardNews);
-    sidebar.classList.toggle('wb-secondary-navigation', secondaryNavigation);
+    sidebar.classList.toggle('hg-dashboard-news', dashboardNews);
+    sidebar.classList.toggle('hg-secondary-navigation', secondaryNavigation);
     sidebar.hidden = !secondaryNavigation;
-    document.body.classList.toggle('wb-dashboard-news-layout', dashboardNews);
-    document.body.classList.toggle('wb-dashboard-page', dashboardPage);
+    document.body.classList.toggle('hg-dashboard-news-layout', dashboardNews);
+    document.body.classList.toggle('hg-dashboard-page', dashboardPage);
     // Regression fix: schedule dashboard enhancement whenever the page is a
     // dashboard, not only in the sidebar-news branch above. enhance() runs after
-    // this tick, by which time body.wb-dashboard-page is set, so its host lookup
+    // this tick, by which time body.hg-dashboard-page is set, so its host lookup
     // resolves and the widgets get their native layout/decoration.
     if (dashboardPage && window.heritageDashboardLayout) window.setTimeout(window.heritageDashboardLayout.enhance, 0);
-    document.body.classList.toggle('wb-content-only-layout', !dashboardNews && !secondaryNavigation);
+    document.body.classList.toggle('hg-content-only-layout', !dashboardNews && !secondaryNavigation);
     return dashboardNews;
   }
 
@@ -798,10 +798,10 @@
     var activeItem = null;
     var activeLink = null;
 
-    list.className = 'wb-mobile-navigation__modules';
+    list.className = 'hg-mobile-navigation__modules';
     primary.forEach(function (source) {
       var item = document.createElement('li');
-      var link = cloneLink(source, 'wb-mobile-navigation__module');
+      var link = cloneLink(source, 'hg-mobile-navigation__module');
       applyCompactPrimaryLabel(link);
       if (linkModule(link) === 'dashboard') {
         link.dataset.heritageDirectDashboard = 'true';
@@ -821,7 +821,7 @@
       (activeItem || list).appendChild(secondary.node);
       if (activeLink) {
         var activeCollapsed = userCollapsedModule && userCollapsedModule === linkModule(activeLink);
-        activeLink.classList.add('wb-has-submenu');
+        activeLink.classList.add('hg-has-submenu');
         activeLink.setAttribute('aria-controls', secondary.node.id);
         activeLink.setAttribute('aria-expanded', activeCollapsed ? 'false' : 'true');
         secondary.node.hidden = Boolean(activeCollapsed);
@@ -829,8 +829,8 @@
     }
 
     content.replaceChildren(list);
-    panel.classList.add('wb-app-navigation');
-    document.body.classList.add('wb-app-navigation-enabled');
+    panel.classList.add('hg-app-navigation');
+    document.body.classList.add('hg-app-navigation-enabled');
     if (window.heritageIcons) window.heritageIcons.render(panel);
     syncShellLayout();
     syncActiveNavigationState();
@@ -840,7 +840,7 @@
       var pendingLink = Array.from(panel.querySelectorAll('[data-heritage-module], [data-capp]')).find(function (link) {
         return linkModule(link) === pendingModule;
       });
-      var submenuLink = pendingLink && pendingLink.closest('li').querySelector('.wb-mobile-navigation__secondary a');
+      var submenuLink = pendingLink && pendingLink.closest('li').querySelector('.hg-mobile-navigation__secondary a');
       window.setTimeout(function () {
         if (submenuLink) {
           submenuLink.focus();
@@ -854,7 +854,7 @@
   }
 
   function isOpen() {
-    return desktopQuery.matches || document.body.classList.contains('wb-navigation-open');
+    return desktopQuery.matches || document.body.classList.contains('hg-navigation-open');
   }
 
   function syncMode() {
@@ -862,13 +862,13 @@
     panel.inert = false;
     panel.setAttribute('role', desktop ? 'navigation' : 'dialog');
     panel.setAttribute('aria-modal', desktop ? 'false' : 'true');
-    panel.setAttribute('aria-hidden', desktop ? 'false' : (document.body.classList.contains('wb-navigation-open') ? 'false' : 'true'));
+    panel.setAttribute('aria-hidden', desktop ? 'false' : (document.body.classList.contains('hg-navigation-open') ? 'false' : 'true'));
     overlay.setAttribute('aria-hidden', desktop ? 'true' : overlay.getAttribute('aria-hidden'));
-    document.body.classList.toggle('wb-app-navigation-desktop', desktop);
+    document.body.classList.toggle('hg-app-navigation-desktop', desktop);
     if (desktop) {
-      document.body.classList.remove('wb-navigation-open');
+      document.body.classList.remove('hg-navigation-open');
       button.setAttribute('aria-expanded', 'false');
-    } else if (!document.body.classList.contains('wb-navigation-open')) {
+    } else if (!document.body.classList.contains('hg-navigation-open')) {
       panel.inert = true;
     }
   }
@@ -886,7 +886,7 @@
     panel.setAttribute('aria-hidden', 'false');
     overlay.setAttribute('aria-hidden', 'false');
     button.setAttribute('aria-expanded', 'true');
-    document.body.classList.add('wb-navigation-open');
+    document.body.classList.add('hg-navigation-open');
     focusNavigation();
     window.setTimeout(focusNavigation, 0);
     window.setTimeout(function () {
@@ -896,7 +896,7 @@
 
   function close(restoreFocus) {
     if (desktopQuery.matches) return;
-    document.body.classList.remove('wb-navigation-open');
+    document.body.classList.remove('hg-navigation-open');
     panel.setAttribute('aria-hidden', 'true');
     panel.inert = true;
     overlay.setAttribute('aria-hidden', 'true');
@@ -923,8 +923,8 @@
       return;
     }
 
-    if (link.classList.contains('wb-mobile-navigation__module') && linkModule(link)) {
-      var submenu = link.closest('li').querySelector('.wb-mobile-navigation__secondary');
+    if (link.classList.contains('hg-mobile-navigation__module') && linkModule(link)) {
+      var submenu = link.closest('li').querySelector('.hg-mobile-navigation__secondary');
       var module = linkModule(link);
       if (link.classList.contains('active') && submenu) {
         event.preventDefault();
@@ -947,15 +947,15 @@
       var api = runtime();
       syncActiveNavigationState(pendingModule + '/');
       render();
-      link = Array.from(panel.querySelectorAll('.wb-mobile-navigation__module[data-heritage-module], .wb-mobile-navigation__module[data-capp]')).find(function (candidate) {
+      link = Array.from(panel.querySelectorAll('.hg-mobile-navigation__module[data-heritage-module], .hg-mobile-navigation__module[data-capp]')).find(function (candidate) {
         return linkModule(candidate) === module;
       }) || link;
-      submenu = link.closest('li') && link.closest('li').querySelector('.wb-mobile-navigation__secondary');
+      submenu = link.closest('li') && link.closest('li').querySelector('.hg-mobile-navigation__secondary');
       if (submenu) setModuleSubmenuExpanded(link, true);
       else setModuleSubmenuExpanded(link, false);
       event.preventDefault();
       event.stopPropagation();
-      link.classList.add('wb-module-transition-source');
+      link.classList.add('hg-module-transition-source');
       if (api && typeof api.capp === 'function') api.capp(pendingModule);
       return;
     }
@@ -990,7 +990,7 @@
     if (event.key === 'Escape' && isOpen()) close(true);
   });
   document.addEventListener('click', function (event) {
-    var brandLink = event.target.closest('#logo a, .wb-app-navigation__brand-logo a, #main-navigation a[data-heritage-module="dashboard"], #main-navigation a[data-capp="dashboard"]');
+    var brandLink = event.target.closest('#logo a, .hg-app-navigation__brand-logo a, #main-navigation a[data-heritage-module="dashboard"], #main-navigation a[data-capp="dashboard"]');
     if (!brandLink) return;
     event.preventDefault();
     loadDashboardFromNavigation();

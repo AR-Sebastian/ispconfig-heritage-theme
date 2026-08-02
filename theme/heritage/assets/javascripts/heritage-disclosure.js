@@ -19,16 +19,16 @@
     var panelId = 'heritage-donation-details-' + generatedId;
     var trigger = document.createElement('button');
     trigger.type = 'button';
-    trigger.className = 'wb-disclosure__trigger';
+    trigger.className = 'hg-disclosure__trigger';
     trigger.textContent = legacyTrigger.textContent.trim();
     trigger.setAttribute('aria-controls', panelId);
     trigger.setAttribute('aria-expanded', 'false');
 
     panel.id = panelId;
-    panel.classList.add('wb-disclosure__panel');
+    panel.classList.add('hg-disclosure__panel');
     panel.style.removeProperty('display');
     panel.hidden = true;
-    root.classList.add('wb-disclosure');
+    root.classList.add('hg-disclosure');
     root.dataset.heritageDisclosure = 'true';
     legacyTrigger.replaceWith(trigger);
 

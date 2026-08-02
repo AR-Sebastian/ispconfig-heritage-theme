@@ -1,22 +1,22 @@
 <tmpl_if name="msg">
-<div class="wb-auth-feedback wb-auth-feedback--success" role="alert"><tmpl_var name="msg"></div>
+<div class="hg-auth-feedback hg-auth-feedback--success" role="alert"><tmpl_var name="msg"></div>
 </tmpl_if>
 <tmpl_if name="error">
-<div class="wb-auth-feedback wb-auth-feedback--danger" role="alert"><tmpl_var name="error"></div>
+<div class="hg-auth-feedback hg-auth-feedback--danger" role="alert"><tmpl_var name="error"></div>
 </tmpl_if>
 <h2><tmpl_var name="otp_code_txt"></h2>
 <p><tmpl_var name="otp_code_desc_txt"></p>
-<form class="wb-auth-form" accept-charset="UTF-8" role="form" method="post" action="otp.php">
+<form class="hg-auth-form" accept-charset="UTF-8" role="form" method="post" action="otp.php">
 <fieldset>
-	<div class="wb-auth-field">
-		<label class="wb-visually-hidden" for="code"><tmpl_var name="otp_code_txt"></label>
+	<div class="hg-auth-field">
+		<label class="hg-visually-hidden" for="code"><tmpl_var name="otp_code_txt"></label>
 		<input class="form-control" placeholder="{tmpl_var name='otp_code_placeholder_txt'}" name="code" id="code" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="one-time-code" required aria-required="true" autofocus>
 	</div>
-	<div class="wb-auth-actions">
-			<input class="wb-auth-secondary" type="submit" value="{tmpl_var name='login_button_txt'}">
+	<div class="hg-auth-actions">
+			<input class="hg-auth-secondary" type="submit" value="{tmpl_var name='login_button_txt'}">
 	</div>
 	<tmpl_if name="token_sent_message">{tmpl_var name='token_sent_message'}<br /></tmpl_if>
-	<button class="wb-auth-secondary" type="submit" name="action" value="resend">{tmpl_var name='otp_code_resend_txt'}</button>
+	<button class="hg-auth-secondary" type="submit" name="action" value="resend">{tmpl_var name='otp_code_resend_txt'}</button>
 
 
 	<input type="hidden" name="_csrf_id" value="{tmpl_var name='_csrf_id'}" />

@@ -49,22 +49,22 @@
   }
 
   function ensureFeedback(root) {
-    var feedback = root.querySelector(':scope > .wb-page-meta > .wb-submit-feedback, :scope > .wb-submit-feedback');
+    var feedback = root.querySelector(':scope > .hg-page-meta > .hg-submit-feedback, :scope > .hg-submit-feedback');
     if (feedback) return feedback;
     feedback = document.createElement('div');
-    feedback.className = 'wb-submit-feedback';
+    feedback.className = 'hg-submit-feedback';
     feedback.setAttribute('role', 'status');
     feedback.setAttribute('aria-live', 'polite');
     feedback.setAttribute('aria-atomic', 'true');
     var indicator = document.createElement('span');
-    indicator.className = 'wb-submit-feedback__indicator';
+    indicator.className = 'hg-submit-feedback__indicator';
     indicator.setAttribute('aria-hidden', 'true');
     var label = document.createElement('span');
-    label.className = 'wb-submit-feedback__label';
+    label.className = 'hg-submit-feedback__label';
     feedback.appendChild(indicator);
     feedback.appendChild(label);
-    var meta = root.querySelector(':scope > .wb-page-meta');
-    var formState = root.querySelector(':scope > .wb-page-meta > .wb-form-state, :scope > .wb-form-state');
+    var meta = root.querySelector(':scope > .hg-page-meta');
+    var formState = root.querySelector(':scope > .hg-page-meta > .hg-form-state, :scope > .hg-form-state');
     var heading = root.querySelector(':scope > .page-header');
     if (formState) formState.insertAdjacentElement('afterend', feedback);
     else if (meta) meta.appendChild(feedback);
@@ -80,7 +80,7 @@
     feedback.removeAttribute('data-heritage-delayed');
     feedback.dataset.state = state;
     feedback.setAttribute('role', state === 'failed' ? 'alert' : 'status');
-    feedback.querySelector('.wb-submit-feedback__label').textContent = label;
+    feedback.querySelector('.hg-submit-feedback__label').textContent = label;
     return feedback;
   }
 
@@ -96,7 +96,7 @@
     };
     control.disabled = true;
     control.setAttribute('aria-busy', 'true');
-    control.classList.add('wb-submit-source');
+    control.classList.add('hg-submit-source');
     root.setAttribute('aria-busy', 'true');
     setFeedback(root, 'saving', localizedMessage('form_saving', '\u00c4nderungen werden gespeichert', 'Saving changes'));
     active.slowTimer = window.setTimeout(function() {
@@ -141,7 +141,7 @@
       control.disabled = active.disabled;
       if (active.ariaBusy === null) control.removeAttribute('aria-busy');
       else control.setAttribute('aria-busy', active.ariaBusy);
-      control.classList.remove('wb-submit-source');
+      control.classList.remove('hg-submit-source');
     }
     var root = host();
     if (root) root.setAttribute('aria-busy', 'false');

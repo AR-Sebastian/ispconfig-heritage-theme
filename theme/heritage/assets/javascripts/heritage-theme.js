@@ -78,21 +78,21 @@
   }
 
   function applyActionContrast(color) {
-    color = String(color || cssToken('--wb-action', '#cc151c')).trim();
+    color = String(color || cssToken('--hg-action', '#cc151c')).trim();
     var channels = colorChannels(color);
     if (!channels) {
-      root.style.setProperty('--wb-action-contrast', '#ffffff');
+      root.style.setProperty('--hg-action-contrast', '#ffffff');
       return '#ffffff';
     }
     var luminance = relativeLuminance(channels);
     var contrast = ((luminance + .05) / .05) >= (1.05 / (luminance + .05)) ? '#111827' : '#ffffff';
-    root.style.setProperty('--wb-action-contrast', contrast);
+    root.style.setProperty('--hg-action-contrast', contrast);
     return contrast;
   }
 
   function applyAccessibleAction(color) {
-    var adjusted = accessibleAction(color || cssToken('--wb-accent', '#cc151c'), root.getAttribute('data-heritage-theme') === 'dark');
-    root.style.setProperty('--wb-action', adjusted);
+    var adjusted = accessibleAction(color || cssToken('--hg-accent', '#cc151c'), root.getAttribute('data-heritage-theme') === 'dark');
+    root.style.setProperty('--hg-action', adjusted);
     applyActionContrast(adjusted);
     return adjusted;
   }
@@ -100,7 +100,7 @@
   function applyChartTheme() {
     if (!document.getElementById('pageContent')) return;
     Array.prototype.forEach.call(document.querySelectorAll('#pageContent canvas'), function (canvas) {
-      canvas.classList.add('wb-themed-chart');
+      canvas.classList.add('hg-themed-chart');
       canvas.style.removeProperty('background-color');
     });
   }
@@ -113,8 +113,8 @@
   function apply(theme) {
     var dark = theme === 'dark';
     root.setAttribute('data-heritage-theme', dark ? 'dark' : 'light');
-    applyAccessibleAction(cssToken('--wb-accent', '#cc151c'));
-    Array.prototype.forEach.call(document.querySelectorAll('.wb-theme-toggle'), function (button) {
+    applyAccessibleAction(cssToken('--hg-accent', '#cc151c'));
+    Array.prototype.forEach.call(document.querySelectorAll('.hg-theme-toggle'), function (button) {
       var german = typeof window.heritageLanguage === 'function' && window.heritageLanguage() === 'de';
       button.setAttribute('aria-label', dark
         ? (german ? 'Zum hellen Design wechseln' : 'Switch to light theme')
@@ -133,14 +133,14 @@
   } catch (ignore) {}
   apply(storedTheme);
   function enhanceLogin() {
-    if (!document.body.classList.contains('wb-login-page')) return;
-    var surface = document.querySelector('.wb-login-form-surface');
+    if (!document.body.classList.contains('hg-login-page')) return;
+    var surface = document.querySelector('.hg-login-form-surface');
     var form = surface && surface.querySelector('form');
     if (!surface || !form) return;
-    form.classList.add('wb-auth-form');
+    form.classList.add('hg-auth-form');
     var action = (form.getAttribute('action') || '').toLowerCase();
     var mode = action.indexOf('otp') !== -1 ? 'otp' : action.indexOf('password_reset') !== -1 ? 'reset' : action.indexOf('force_password') !== -1 ? 'password' : 'login';
-    document.querySelector('.wb-login-card').setAttribute('data-heritage-auth-mode', mode);
+    document.querySelector('.hg-login-card').setAttribute('data-heritage-auth-mode', mode);
     var fieldMap = {
       username: { text: 'Benutzername', autocomplete: 'username' },
       password: { text: 'Passwort', autocomplete: 'current-password' },
@@ -156,7 +156,7 @@
       if (field.type && input.type === 'text') input.type = field.type;
       input.setAttribute('aria-label', input.getAttribute('aria-label') || field.text);
       var group = input.closest('.form-group') || input.parentElement;
-      if (group) group.classList.add('wb-auth-field');
+      if (group) group.classList.add('hg-auth-field');
       if (group && !group.querySelector('[data-heritage-login-label]')) {
         var label = document.createElement('label');
         label.textContent = field.text;
@@ -165,10 +165,10 @@
         group.insertBefore(label, input);
       }
       if (input.type === 'password' && group && !group.querySelector('[data-heritage-password-toggle]')) {
-        group.classList.add('wb-password-field');
+        group.classList.add('hg-password-field');
         var toggle = document.createElement('button');
         toggle.type = 'button';
-        toggle.className = 'wb-password-toggle';
+        toggle.className = 'hg-password-toggle';
         toggle.setAttribute('data-heritage-password-toggle', 'true');
         setIcon(toggle, eye);
         toggle.setAttribute('aria-label', 'Passwort anzeigen');
@@ -181,25 +181,25 @@
         group.appendChild(toggle);
       }
       if ((input.id || input.name) === 'code') {
-        input.classList.add('wb-auth-code');
-        group.classList.add('wb-auth-field--code');
+        input.classList.add('hg-auth-code');
+        group.classList.add('hg-auth-field--code');
       }
     });
     Array.prototype.forEach.call(surface.querySelectorAll('.alert'), function (alert) {
-      alert.classList.add('wb-auth-feedback');
+      alert.classList.add('hg-auth-feedback');
       alert.setAttribute('aria-live', 'polite');
     });
     Array.prototype.forEach.call(form.querySelectorAll('input[type="submit"]'), function (button, index) {
-      button.classList.add(index === 0 ? 'wb-auth-primary' : 'wb-auth-secondary');
+      button.classList.add(index === 0 ? 'hg-auth-primary' : 'hg-auth-secondary');
     });
     Array.prototype.forEach.call(form.querySelectorAll('button'), function (button) {
-      if (button.type === 'submit' && button.value !== 'resend') button.classList.add('wb-auth-primary');
-      else button.classList.add('wb-auth-secondary');
+      if (button.type === 'submit' && button.value !== 'resend') button.classList.add('hg-auth-primary');
+      else button.classList.add('hg-auth-secondary');
     });
     var heading = surface.querySelector('h2');
-    if (heading) heading.classList.add('wb-auth-context-title');
+    if (heading) heading.classList.add('hg-auth-context-title');
     var description = heading && heading.nextElementSibling;
-    if (description && description.tagName === 'P') description.classList.add('wb-auth-context-copy');
+    if (description && description.tagName === 'P') description.classList.add('hg-auth-context-copy');
     if (form && !form.dataset.heritageLoginSubmitBound) {
       form.dataset.heritageLoginSubmitBound = 'true';
       form.addEventListener('submit', function () {
@@ -208,14 +208,14 @@
           submit.disabled = true;
           submit.setAttribute('aria-busy', 'true');
         }
-        var card = document.querySelector('.wb-login-card');
-        if (card) card.classList.add('wb-login-is-submitting');
+        var card = document.querySelector('.hg-login-card');
+        if (card) card.classList.add('hg-login-is-submitting');
       });
     }
   }
   enhanceLogin();
   document.addEventListener('click', function (event) {
-    var button = event.target.closest('.wb-theme-toggle');
+    var button = event.target.closest('.hg-theme-toggle');
     if (!button) return;
     var next = root.getAttribute('data-heritage-theme') === 'dark' ? 'light' : 'dark';
     try { localStorage.setItem(key, next); } catch (ignore) {}
