@@ -5,6 +5,7 @@ standalone theme. Logo artwork, accessible SVG titles, PWA metadata and the
 theme display name now consistently identify ISPConfig HERITAGE. Application,
 login, image and manifest assets also share one release cache key so an update
 cannot combine stale and current presentation layers in the browser.
+The key uses the complete semantic theme version and is enforced by validation.
 
 The technical theme identifier remains unchanged to preserve compatibility
 with existing theme-manager installations and update paths.

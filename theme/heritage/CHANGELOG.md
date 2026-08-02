@@ -8,6 +8,8 @@
 - Alle Shell-, Login- und PWA-Assets verwenden jetzt denselben Release-basierten
   Cache-Schlüssel. Dadurch können Browser nach einem Theme-Update keine alten
   CSS-, JavaScript-, Logo- oder Manifeststände mehr miteinander mischen.
+- Der Cache-Schlüssel entspricht der vollständigen Theme-Version und wird im
+  Release-Gate automatisch gegen `VERSION` geprüft.
 - Die bestehende technische Theme-ID bleibt zur Abwärtskompatibilität stabil.
 - Die Option „angemeldet bleiben“ folgt wieder vollständig dem aktuellen
   ISPConfig-Sessionvertrag und wird bei deaktiviertem Session-Timeout nicht

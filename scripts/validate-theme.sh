@@ -30,10 +30,11 @@ if grep -RIEq 'lorem ipsum|\bTODO\b|\bFIXME\b|themes/workbench/' "$theme"; then
 fi
 while IFS= read -r -d '' file; do node --check "$file"; done < <(find "$theme" -type f -name '*.js' -print0)
 
-node - "$theme" <<'NODE'
+node - "$theme" "$version" <<'NODE'
 const fs = require('fs');
 const path = require('path');
 const theme = process.argv[2];
+const releaseVersion = process.argv[3];
 const textExtensions = new Set(['.css', '.htm', '.html', '.js', '.json', '.md', '.xml', '.webmanifest', '.svg', '.php']);
 const walk = directory => fs.readdirSync(directory, {withFileTypes: true}).flatMap(entry => {
   const target = path.join(directory, entry.name);
@@ -43,6 +44,20 @@ const themeFiles = walk(theme);
 const corpus = themeFiles.filter(file => textExtensions.has(path.extname(file).toLowerCase()))
   .map(file => fs.readFileSync(file, 'utf8')).join('\n');
 const assets = walk(path.join(theme, 'assets'));
+
+const manifest = JSON.parse(fs.readFileSync(path.join(theme, 'theme-manifest.json'), 'utf8'));
+const webManifest = JSON.parse(fs.readFileSync(path.join(theme, 'assets', 'favicon', 'site.webmanifest'), 'utf8'));
+if (manifest.name !== 'ISPConfig HERITAGE') throw new Error(`Unexpected public theme name: ${manifest.name}`);
+if (webManifest.name !== 'ISPConfig HERITAGE' || webManifest.short_name !== 'HERITAGE') {
+  throw new Error('PWA branding must identify ISPConfig HERITAGE consistently.');
+}
+for (const logo of ['ispconfig-workbench-logo.svg', 'ispconfig-workbench-logo-dark.svg', 'ispconfig-workbench-favicon.svg']) {
+  const artwork = fs.readFileSync(path.join(theme, 'assets', 'images', logo), 'utf8');
+  if (!artwork.includes('<title id="title">ISPConfig HERITAGE</title>')) {
+    throw new Error(`Accessible HERITAGE title is missing from ${logo}.`);
+  }
+  if (/Heritage Glass|>WORKBENCH</i.test(artwork)) throw new Error(`Visible legacy branding remains in ${logo}.`);
+}
 const unused = assets.filter(file => !corpus.includes(path.basename(file)));
 if (unused.length) throw new Error(`Unreferenced assets: ${unused.map(file => path.relative(theme, file)).join(', ')}`);
 const total = assets.reduce((sum, file) => sum + fs.statSync(file).size, 0);
@@ -108,12 +123,14 @@ for (const [file, budget] of Object.entries(bundleBudgets)) {
 for (const shellName of ['main.tpl.htm', 'main_login.tpl.htm']) {
   const markup = fs.readFileSync(path.join(theme, 'templates', shellName), 'utf8');
   const references = [...markup.matchAll(/(?:src|href)=["']([^"']*themes\/heritage\/assets\/[^"']+)["']/g)].map(match => match[1]);
-  const uncached = references.filter(reference => !/\?ver=\d+$/.test(reference));
+  const uncached = references.filter(reference => !/\?ver=[0-9]+(?:\.[0-9]+){2}$/.test(reference));
   if (uncached.length) throw new Error(`${shellName} has unversioned assets: ${uncached.join(', ')}`);
-  const normalized = references.map(reference => reference.replace(/^\.\.\//, '').replace(/\?ver=\d+$/, ''));
+  const stale = references.filter(reference => reference.slice(reference.lastIndexOf('?ver=') + 5) !== releaseVersion);
+  if (stale.length) throw new Error(`${shellName} has assets outside release ${releaseVersion}: ${stale.join(', ')}`);
+  const normalized = references.map(reference => reference.replace(/^\.\.\//, '').replace(/\?ver=[0-9]+(?:\.[0-9]+){2}$/, ''));
   const duplicates = normalized.filter((reference, index) => normalized.indexOf(reference) !== index && !reference.endsWith('/images/ispconfig-workbench-favicon.svg'));
   if (duplicates.length) throw new Error(`${shellName} loads assets twice: ${[...new Set(duplicates)].join(', ')}`);
-  const stylesheets = [...markup.matchAll(/<link[^>]+heritage-(?:app|login)\.bundle\.css\?ver=\d+[^>]*>/g)];
+  const stylesheets = [...markup.matchAll(/<link[^>]+heritage-(?:app|login)\.bundle\.css\?ver=[0-9]+(?:\.[0-9]+){2}[^>]*>/g)];
   if (stylesheets.length !== 1) throw new Error(`${shellName} must load exactly one CSS bundle.`);
   const scripts = [...markup.matchAll(/<script\s+([^>]*\s)?src=["'][^"']+["'][^>]*>/g)].map(match => match[0]);
   const nonDeferred = scripts.filter(script => !script.includes('workbench-early.js') && !/(^|\s)defer(\s|=|>)/.test(script));
@@ -125,8 +142,23 @@ for (const shellName of ['main.tpl.htm', 'main_login.tpl.htm']) {
 const main = fs.readFileSync(path.join(theme, 'templates', 'main.tpl.htm'), 'utf8');
 const head = main.slice(0, main.toLowerCase().indexOf('</head>'));
 const blocking = [...head.matchAll(/<script[^>]+src=["']([^"']*themes\/heritage\/assets\/[^"']+)["']/g)].map(match => match[1]);
-if (blocking.length !== 1 || !/workbench-early\.js\?ver=\d+$/.test(blocking[0])) {
+if (blocking.length !== 1 || !/workbench-early\.js\?ver=[0-9]+(?:\.[0-9]+){2}$/.test(blocking[0])) {
   throw new Error('Only workbench-early.js may block authenticated-shell parsing.');
+}
+
+const login = fs.readFileSync(path.join(theme, 'templates', 'login', 'index.htm'), 'utf8');
+const timeoutGuard = login.indexOf('<tmpl_if name="session_timeout" op=">" value="0">');
+const endlessControl = login.indexOf('<tmpl_if name="session_allow_endless" value="y">');
+if (timeoutGuard < 0 || endlessControl < timeoutGuard) {
+  throw new Error('Stay-signed-in control is missing its ISPConfig session-timeout guard.');
+}
+const phpSort = fs.readFileSync(path.join(theme, 'templates', 'admin', 'server_php_sort_edit.htm'), 'utf8');
+if (!phpSort.includes('<label for="sortprio">')) throw new Error('PHP sort-priority label contract is missing.');
+const aliasDomain = fs.readFileSync(path.join(theme, 'templates', 'mail', 'mail_aliasdomain_edit.htm'), 'utf8');
+if (!aliasDomain.includes('<label for="source">')) throw new Error('Alias-domain source label contract is missing.');
+const mailQuota = fs.readFileSync(path.join(theme, 'templates', 'mail', 'user_quota_stats_list.htm'), 'utf8');
+if (!mailQuota.includes('aria-valuenow="{tmpl_var name="percentage_sort"}"')) {
+  throw new Error('Mailbox quota numeric ARIA contract is missing.');
 }
 console.log(`HERITAGE asset graph passed: ${assets.length} files, ${total} bytes.`);
 NODE
