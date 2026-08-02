@@ -3,6 +3,15 @@ set -euo pipefail
 
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 version="${1:-$(tr -d '[:space:]' < "$root/VERSION")}"
+if (($#)); then shift; fi
+require_attestation=0
+while (($#)); do
+  case "$1" in
+    --require-attestation) require_attestation=1 ;;
+    *) echo "Unknown option: $1" >&2; exit 2 ;;
+  esac
+  shift
+done
 tag="v$version"
 base_url="https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/download/$tag"
 zip_name="ispconfig-heritage-theme-$version.zip"
@@ -32,6 +41,18 @@ verified="$(cd "$audit" && sha256sum --check SHA256SUMS.txt | tee /dev/stderr | 
   echo "Expected two verified release archives, got $verified." >&2
   exit 1
 }
+
+if ((require_attestation)); then
+  command -v gh >/dev/null || {
+    echo 'GitHub CLI is required for provenance verification.' >&2
+    exit 1
+  }
+  for asset in "$zip_name" "$tar_name" SHA256SUMS.txt; do
+    gh attestation verify "$audit/$asset" \
+      --repo AR-Sebastian/ispconfig-heritage-theme \
+      --signer-workflow AR-Sebastian/ispconfig-heritage-theme/.github/workflows/release.yml
+  done
+fi
 
 if unzip -Z1 "$audit/$zip_name" | grep -Eq '(^/|(^|/)\.\.(/|$))'; then
   echo 'Published ZIP contains an unsafe path.' >&2

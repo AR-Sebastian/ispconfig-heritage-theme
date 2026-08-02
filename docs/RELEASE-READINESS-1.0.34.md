@@ -33,6 +33,7 @@ Target: ISPConfig 3.3.1p1
 - The published UTC build and a downloaded-asset verification agree: ZIP `7c10cba1bdcf3b97963f25b038861d6621b72d1240519b553c0ca26350a89ab1`, TAR.GZ `7506c43c29a033ff0e11d307c049f47d598dd92df13f176048a78ddee6aa48b2`, checksum manifest `3217f33bc1666c760c5cad25437996eb66f47b381632d9529a8f492488f6541a`.
 - Post-publication cross-timezone comparison found identical payload bytes but exposed ZIP's local wall-clock metadata. The builder now forces UTC so European and GitHub runners reproduce the same public ZIP hash without rewriting the existing tag.
 - A repository-owned public-release verifier downloads all three assets by their real names, requires both checksum validations, rejects unsafe paths, compares ZIP/TAR/Git payloads and proves install/update/rollback/uninstall/restore with normalized modes.
+- Future tag workflows create commit-pinned GitHub/Sigstore SLSA provenance for ZIP, TAR.GZ and the checksum manifest; the post-publish verifier requires those attestations and pins the signer workflow identity. Release 1.0.34 predates this additional gate and remains verifiable through its hashes and tagged payload.
 
 The detailed, reproducible evidence and the lab limitation are recorded in
 [`RUNTIME-SMOKE-1.0.34.md`](RUNTIME-SMOKE-1.0.34.md).
