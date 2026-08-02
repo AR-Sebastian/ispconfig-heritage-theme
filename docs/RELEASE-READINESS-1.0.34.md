@@ -28,7 +28,9 @@ Target: ISPConfig 3.3.1p1
 - Atomic installation normalizes staged directory/file modes to `0755`/`0644`, independent of archive or Windows-transfer metadata.
 - A cache-independent corrected-package rerun delivered HTTP 200 assets and rendered Dashboard, User Settings, System Config, Additional PHP, Domain Alias and Mailbox routes without console errors, overflow or retired component classes.
 - The complete branch-to-`main` pre-merge audit found no ISPConfig core path, unexpected binary, secret signature or file outside the declared theme/release-tooling boundary.
-- Two fully completed candidate builds are bit-identical: ZIP `fcce5674ac92f12c1c937520f8d563a92965d974d1a0da6f1fca143b5f225d26`, TAR.GZ `4e83ea55c707893f17811560efc64b33415f45a37bcf5ed70d40e920c2a7de57`.
+- The release candidate and checkout-independent follow-up were merged through green pull requests #1 and #2; final `main` merge commit: `19056b9e1ac7b3710b1a296ecaabc7e7f6d46bbe`.
+- The release builder now packages the committed Git tree and rejects uncommitted payload changes, eliminating platform-dependent checkout line endings.
+- The committed-tree build before merge and the clean final-merge build are bit-identical: ZIP `23a189343af2fdae8dc9073c79b5419be179f5e921f733a7bfc3010d42ea5850`, TAR.GZ `7506c43c29a033ff0e11d307c049f47d598dd92df13f176048a78ddee6aa48b2`, checksum manifest `36eb18952d1e3bedd472d97b8e0a66f8f6c88191bc36810ad0517b67302b6c1b`.
 
 The detailed, reproducible evidence and the lab limitation are recorded in
 [`RUNTIME-SMOKE-1.0.34.md`](RUNTIME-SMOKE-1.0.34.md).
@@ -43,8 +45,8 @@ The detailed, reproducible evidence and the lab limitation are recorded in
 - [x] Confirm Additional PHP list ordering/priority and the alias-domain source contract in the runtime lab.
 - [x] Confirm HERITAGE login controls in desktop/mobile light/dark states; conditional endless-session control correctly remains absent under the stock disabled lab policy.
 - [x] Confirm mailbox quota presentation with an isolated 100 MiB synthetic mailbox fixture on desktop/mobile, then restore the pre-fixture VM state.
-- [ ] Review and merge the release-candidate pull request into `main` with green checks.
-- [ ] Rebuild from the clean merge commit and compare the final archive hashes.
+- [x] Review and merge the release-candidate pull request into `main` with green checks.
+- [x] Rebuild from the clean merge commit and compare the final archive hashes.
 - [x] Preserve `v1.0.20` as the existing tag-only historical state; do not reconstruct or rewrite a past GitHub Release during the 1.0.34 publication.
 - [ ] Create and push `v1.0.34` only after all previous blockers are closed.
 - [ ] Verify the published release body, ZIP, TAR.GZ and `SHA256SUMS.txt` after the tag workflow completes.

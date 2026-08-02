@@ -4,7 +4,7 @@ Date: 2026-08-02
 
 Base: `e010e09af6b391b090d7770a83c5f3f78ccb9a24` (`origin/main` merge base)
 
-Candidate: `f382c8c99226ef0a97c1d353b112562b1a0c751e`
+Candidate: `02aa894` (final PR #1 head)
 
 ## Scope result
 
@@ -33,6 +33,30 @@ fully completed builds produced identical ZIP, TAR.GZ and checksum manifests:
 These are candidate-tree hashes, not published-release evidence. The release
 gate still requires a clean rebuild from the final merge commit and verification
 of every uploaded artifact.
+
+## Post-merge reproducibility closure
+
+PR #1 merged as `5fc6931c5299cdeec8623b8cf462832babf8fc98` with a tree identical to its
+candidate head. Its first Windows worktree build nevertheless differed from
+the pre-merge worktree artifacts. The audit traced this to checkout line
+endings: the builder copied worktree bytes and eight text formats were not
+covered by the explicit LF attributes.
+
+PR #2 made text normalization comprehensive, marked common media/font formats
+binary and changed release packaging to read the committed Git tree. It also
+rejects staged or unstaged payload changes. Both GitHub validation jobs passed;
+PR #2 merged as `19056b9e1ac7b3710b1a296ecaabc7e7f6d46bbe`.
+
+The committed-tree build before that merge and the clean build from the final
+merge commit produced identical artifacts:
+
+- ZIP: `23a189343af2fdae8dc9073c79b5419be179f5e921f733a7bfc3010d42ea5850`
+- TAR.GZ: `7506c43c29a033ff0e11d307c049f47d598dd92df13f176048a78ddee6aa48b2`
+- SHA256SUMS.txt: `36eb18952d1e3bedd472d97b8e0a66f8f6c88191bc36810ad0517b67302b6c1b`
+
+This closes the clean-merge reproducibility gate. These remain candidate
+hashes until the tag workflow publishes the release and every downloaded asset
+is verified independently.
 
 ## Historical release decision
 
