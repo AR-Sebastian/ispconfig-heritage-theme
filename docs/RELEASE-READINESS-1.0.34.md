@@ -20,6 +20,7 @@ Target: ISPConfig 3.3.1p1
 
 ## Open release blockers
 
+- [ ] Remove or replace the 98 `workbench_*` template-value references that are absent from the stock ISPConfig 3.3.1p1 controllers; prove the resulting shell and Admin settings view against an unmodified 3.3.1p1 checkout.
 - [ ] Run authenticated 1.0.34 visual smoke tests for light and dark desktop/mobile states.
 - [ ] Confirm the new HERITAGE logo and refreshed asset cache in a real ISPConfig session.
 - [ ] Confirm login session controls, additional-PHP sorting, alias-domain source and mailbox quota presentation in the runtime lab.
