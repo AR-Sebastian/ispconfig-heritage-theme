@@ -84,7 +84,7 @@ validate_payload() {
     "templates/main.tpl.htm"
     "templates/main_login.tpl.htm"
     "assets/stylesheets/heritage-core.css"
-    "assets/javascripts/workbench-boot.js"
+    "assets/javascripts/heritage-boot.js"
   )
   local file
   for file in "${required[@]}"; do

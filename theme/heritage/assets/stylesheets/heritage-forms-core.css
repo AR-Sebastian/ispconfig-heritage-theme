@@ -3,7 +3,7 @@
  *
  * This layer owns form geometry after the structure, shell, surface and
  * module layers. It intentionally relies on the progressive classes added by
- * workbench-content-states.js and does not alter ISPConfig field semantics.
+ * heritage-content-states.js and does not alter ISPConfig field semantics.
  */
 
 body.wb-form-page #pageForm.wb-modern-form {

@@ -34,6 +34,10 @@ All modular stylesheet sources now use explicit HERITAGE core filenames. Bundle
 order and authored CSS remain unchanged while the former Workbench source-file
 namespace is removed from the distributed package.
 
+All modular JavaScript sources and the early shell bootstrap now use HERITAGE
+filenames. Bundle order and runtime behavior remain unchanged while obsolete
+Workbench script paths are rejected by release validation.
+
 ## Previous release
 
 HERITAGE 1.0.33 extends compact states to all five server capabilities and the

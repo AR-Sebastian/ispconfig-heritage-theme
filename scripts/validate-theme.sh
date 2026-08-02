@@ -36,6 +36,10 @@ if find "$theme/assets/stylesheets" -maxdepth 1 -type f -name 'workbench*.css' -
   echo 'Theme contains a stylesheet in the obsolete Workbench filename namespace.' >&2
   exit 1
 fi
+if find "$theme/assets/javascripts" -maxdepth 1 -type f -name 'workbench-*.js' -print -quit | grep -q .; then
+  echo 'Theme contains a script in the obsolete Workbench filename namespace.' >&2
+  exit 1
+fi
 while IFS= read -r -d '' file; do node --check "$file"; done < <(find "$theme" -type f -name '*.js' -print0)
 
 node - "$theme" "$version" <<'NODE'
@@ -209,7 +213,7 @@ for (const shellName of ['main.tpl.htm', 'main_login.tpl.htm']) {
   const stylesheets = [...markup.matchAll(/<link[^>]+heritage-(?:app|login)\.bundle\.css\?ver=[0-9]+(?:\.[0-9]+){2}[^>]*>/g)];
   if (stylesheets.length !== 1) throw new Error(`${shellName} must load exactly one CSS bundle.`);
   const scripts = [...markup.matchAll(/<script\s+([^>]*\s)?src=["'][^"']+["'][^>]*>/g)].map(match => match[0]);
-  const nonDeferred = scripts.filter(script => !script.includes('workbench-early.js') && !/(^|\s)defer(\s|=|>)/.test(script));
+  const nonDeferred = scripts.filter(script => !script.includes('heritage-early.js') && !/(^|\s)defer(\s|=|>)/.test(script));
   if (nonDeferred.length) throw new Error(`${shellName} has parser-blocking runtime scripts: ${nonDeferred.join(', ')}`);
   const themeScripts = scripts.filter(script => script.includes('themes/heritage/assets/javascripts/'));
   const expected = shellName === 'main.tpl.htm' ? 3 : 2;
@@ -218,8 +222,8 @@ for (const shellName of ['main.tpl.htm', 'main_login.tpl.htm']) {
 const main = fs.readFileSync(path.join(theme, 'templates', 'main.tpl.htm'), 'utf8');
 const head = main.slice(0, main.toLowerCase().indexOf('</head>'));
 const blocking = [...head.matchAll(/<script[^>]+src=["']([^"']*themes\/heritage\/assets\/[^"']+)["']/g)].map(match => match[1]);
-if (blocking.length !== 1 || !/workbench-early\.js\?ver=[0-9]+(?:\.[0-9]+){2}$/.test(blocking[0])) {
-  throw new Error('Only workbench-early.js may block authenticated-shell parsing.');
+if (blocking.length !== 1 || !/heritage-early\.js\?ver=[0-9]+(?:\.[0-9]+){2}$/.test(blocking[0])) {
+  throw new Error('Only heritage-early.js may block authenticated-shell parsing.');
 }
 
 const login = fs.readFileSync(path.join(theme, 'templates', 'login', 'index.htm'), 'utf8');

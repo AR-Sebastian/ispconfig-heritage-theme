@@ -1,6 +1,6 @@
 /* Generated from heritage-js-bundles.json; edit the modular sources, not this file. */
 
-/* source: workbench-date-time.js */
+/* source: heritage-date-time.js */
 (function () {
   'use strict';
 
@@ -164,7 +164,7 @@
 }());
 ;
 
-/* source: workbench-native-interactions.js */
+/* source: heritage-native-interactions.js */
 (function () {
   'use strict';
 
@@ -436,7 +436,7 @@
 }());
 ;
 
-/* source: workbench-http.js */
+/* source: heritage-http.js */
 (function(window) {
   'use strict';
 
@@ -649,7 +649,7 @@
 })(window);
 ;
 
-/* source: workbench-core.js */
+/* source: heritage-core.js */
 (function(window, document) {
   'use strict';
 
@@ -2700,7 +2700,7 @@
 })(window, document);
 ;
 
-/* source: workbench-field-search.js */
+/* source: heritage-field-search.js */
 (function(window, document) {
   'use strict';
 
@@ -3036,7 +3036,7 @@
 })(window, document);
 ;
 
-/* source: workbench-message-acknowledgement.js */
+/* source: heritage-message-acknowledgement.js */
 (function (window, document) {
   'use strict';
 
@@ -3076,7 +3076,7 @@
 })(window, document);
 ;
 
-/* source: workbench-loading.js */
+/* source: heritage-loading.js */
 (function(window, document) {
   'use strict';
 
@@ -3258,7 +3258,7 @@
 })(window, document);
 ;
 
-/* source: workbench-content-states.js */
+/* source: heritage-content-states.js */
 (function(window, document) {
   'use strict';
 
@@ -5262,7 +5262,7 @@
 })(window, document);
 ;
 
-/* source: workbench-background.js */
+/* source: heritage-background.js */
 (function(window, document) {
   'use strict';
 
@@ -5435,7 +5435,7 @@
 })(window, document);
 ;
 
-/* source: workbench-icons.js */
+/* source: heritage-icons.js */
 (function(window, document) {
   'use strict';
 
@@ -5551,7 +5551,7 @@
 })(window, document);
 ;
 
-/* source: workbench-feedback.js */
+/* source: heritage-feedback.js */
 (function (window, document) {
   'use strict';
 
@@ -5865,7 +5865,7 @@
 }(window, document));
 ;
 
-/* source: workbench-navigation.js */
+/* source: heritage-navigation.js */
 (function () {
   'use strict';
 
@@ -6908,7 +6908,7 @@
 }());
 ;
 
-/* source: workbench-dashboard-metrics.js */
+/* source: heritage-dashboard-metrics.js */
 (function (window, document) {
   'use strict';
 
@@ -7278,7 +7278,7 @@
 })(window, document);
 ;
 
-/* source: workbench-dashboard-layout.js */
+/* source: heritage-dashboard-layout.js */
 (function () {
   'use strict';
 
@@ -8481,7 +8481,7 @@
 }());
 ;
 
-/* source: workbench-dialog.js */
+/* source: heritage-dialog.js */
 (function () {
   'use strict';
 
@@ -8609,7 +8609,7 @@
 }());
 ;
 
-/* source: workbench-disclosure.js */
+/* source: heritage-disclosure.js */
 (function () {
   'use strict';
 
@@ -8695,7 +8695,7 @@
 }());
 ;
 
-/* source: workbench-form-state.js */
+/* source: heritage-form-state.js */
 (function () {
   'use strict';
 
@@ -8903,7 +8903,7 @@
 }());
 ;
 
-/* source: workbench-tabstrip.js */
+/* source: heritage-tabstrip.js */
 (function () {
   'use strict';
 
@@ -9041,7 +9041,7 @@
 }());
 ;
 
-/* source: workbench-tab-confirm.js */
+/* source: heritage-tab-confirm.js */
 (function () {
   'use strict';
 
@@ -9143,7 +9143,7 @@
 }());
 ;
 
-/* source: workbench-accessibility.js */
+/* source: heritage-accessibility.js */
 (function () {
   'use strict';
 
@@ -9355,7 +9355,7 @@
 }());
 ;
 
-/* source: workbench-validation.js */
+/* source: heritage-validation.js */
 (function () {
   'use strict';
 
@@ -9522,7 +9522,7 @@
 }());
 ;
 
-/* source: workbench-submit-feedback.js */
+/* source: heritage-submit-feedback.js */
 (function () {
   'use strict';
 
@@ -9733,7 +9733,7 @@
 }());
 ;
 
-/* source: workbench-list-filter.js */
+/* source: heritage-list-filter.js */
 (function(window, document) {
   'use strict';
   function runtime() { return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null; }
@@ -9796,7 +9796,7 @@
 })(window, document);
 ;
 
-/* source: workbench-statistics.js */
+/* source: heritage-statistics.js */
 (function (window, document) {
   'use strict';
 
@@ -9992,7 +9992,7 @@
 })(window, document);
 ;
 
-/* source: workbench-wizard-preview.js */
+/* source: heritage-wizard-preview.js */
 (function(window, document) {
   'use strict';
   function runtime() { return typeof window.workbenchRuntime === 'function' ? window.workbenchRuntime() : null; }
@@ -10034,7 +10034,7 @@
 })(window, document);
 ;
 
-/* source: workbench-advanced-controls.js */
+/* source: heritage-advanced-controls.js */
 (function () {
   'use strict';
 
@@ -10195,7 +10195,7 @@
 })();
 ;
 
-/* source: workbench-upload-feedback.js */
+/* source: heritage-upload-feedback.js */
 (function (window, document) {
   'use strict';
 
@@ -10355,7 +10355,7 @@
 })(window, document);
 ;
 
-/* source: workbench-branding.js */
+/* source: heritage-branding.js */
 (function (window, document) {
   'use strict';
 
@@ -10578,7 +10578,7 @@
 })(window, document);
 ;
 
-/* source: workbench-global-search.js */
+/* source: heritage-global-search.js */
 (function (window, document) {
   'use strict';
 
@@ -11109,7 +11109,7 @@
 }(window, document));
 ;
 
-/* source: workbench-theme.js */
+/* source: heritage-theme.js */
 (function () {
   'use strict';
   var key = 'ispconfig-workbench-theme';
@@ -11330,7 +11330,7 @@
 }());
 ;
 
-/* source: workbench-select.js */
+/* source: heritage-select.js */
 (function () {
   'use strict';
 

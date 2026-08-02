@@ -1,6 +1,6 @@
 /* Generated from heritage-js-bundles.json; edit the modular sources, not this file. */
 
-/* source: workbench-monitoring.js */
+/* source: heritage-monitoring.js */
 (function (window, document) {
   'use strict';
 
@@ -1022,7 +1022,7 @@
 }());
 ;
 
-/* source: workbench-boot.js */
+/* source: heritage-boot.js */
 (function(window, document) {
   'use strict';
 

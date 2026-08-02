@@ -1,6 +1,6 @@
 /* Generated from heritage-js-bundles.json; edit the modular sources, not this file. */
 
-/* source: workbench-feedback.js */
+/* source: heritage-feedback.js */
 (function (window, document) {
   'use strict';
 
@@ -314,7 +314,7 @@
 }(window, document));
 ;
 
-/* source: workbench-login.js */
+/* source: heritage-login.js */
 (function () {
   'use strict';
 
@@ -444,7 +444,7 @@
 }());
 ;
 
-/* source: workbench-theme.js */
+/* source: heritage-theme.js */
 (function () {
   'use strict';
   var key = 'ispconfig-workbench-theme';
