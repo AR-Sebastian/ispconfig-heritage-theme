@@ -1,29 +1,28 @@
-<!-- WP-970: native Workbench help surface; controller contract unchanged. -->
-<div class='page-header' data-wb-support-surface="messages">
+<div class='page-header' data-heritage-support-surface="messages">
 	<h1><tmpl_var name="list_head_txt"></h1>
 </div>
 <p><tmpl_var name="list_desc_txt"></p>
-<section class="wb-table-workspace">
-    <div class="wb-list-toolbar">
-        <div class="wb-list-toolbar__context">
-            <span class="wb-list-toolbar__eyebrow">{tmpl_var name="toolsarea_head_txt"}</span>
+<section class="hg-table-workspace">
+    <div class="hg-list-toolbar">
+        <div class="hg-list-toolbar__context">
+            <span class="hg-list-toolbar__eyebrow">{tmpl_var name="toolsarea_head_txt"}</span>
             <strong><tmpl_var name="list_head_txt"></strong>
         </div>
-        <button class="formbutton-success" type="button" data-workbench-load-content="help/support_message_edit.php" data-load-content="help/support_message_edit.php">{tmpl_var name="add_new_record_txt"}</button>
+        <button class="formbutton-success" type="button" data-heritage-load-content="help/support_message_edit.php" data-load-content="help/support_message_edit.php">{tmpl_var name="add_new_record_txt"}</button>
     </div>
-<table class="table wb-data-table">
-                <thead class="dark wb-field-group-sm">
+<table class="table hg-data-table">
+                <thead class="dark hg-field-group-sm">
                     <tr>
                         <tmpl_if name="is_admin"><th data-column="sender_id"><tmpl_var name="sender_id_txt"></th></tmpl_if>
                         <th data-column="subject"><tmpl_var name="subject_txt"></th>
 						<th data-column="tstamp"><tmpl_var name="date_txt"></th>
-                        <th class="wb-table-actions-column wb-table-align-end">{tmpl_var name='search_limit'}</th>
+                        <th class="hg-table-actions-column hg-table-align-end">{tmpl_var name='search_limit'}</th>
                     </tr>
                     <tr>
                         <tmpl_if name="is_admin"><td><select class="form-control" name="search_sender_id">{tmpl_var name='search_sender_id'}</select></td></tmpl_if>
                         <td><input class="form-control" type="text" name="search_subject" value="{tmpl_var name='search_subject'}" /></td>
 						<td>&nbsp;</td>
-                        <td class="wb-table-align-end">
+                        <td class="hg-table-align-end">
                             <button type="button" class="formbutton-default formbutton-narrow" name="Filter" id="Filter" value="{tmpl_var name="filter_txt"}" data-submit-form="pageForm" data-form-action="help/support_message_list.php"><span class="icon icon-filter"></span></button>
                         </td>
                     </tr>
@@ -31,10 +30,10 @@
                 <tbody>
                     <tmpl_loop name="records">
                         <tr>
-                            <tmpl_if name="is_admin"><td><a href="#" data-workbench-load-content="help/support_message_edit.php?id={tmpl_var name='id'}" data-load-content="help/support_message_edit.php?id={tmpl_var name='id'}">{tmpl_var name="sender_id"}</a></td></tmpl_if>
-                            <td><a href="#" data-workbench-load-content="help/support_message_edit.php?id={tmpl_var name='id'}" data-load-content="help/support_message_edit.php?id={tmpl_var name='id'}">{tmpl_var name="subject"}</a></td>
-							<td><a href="#" data-workbench-load-content="help/support_message_edit.php?id={tmpl_var name='id'}" data-load-content="help/support_message_edit.php?id={tmpl_var name='id'}">{tmpl_var name="tstamp"}</a></td>
-                            <td class="wb-table-align-end">
+                            <tmpl_if name="is_admin"><td><a href="#" data-heritage-load-content="help/support_message_edit.php?id={tmpl_var name='id'}" data-load-content="help/support_message_edit.php?id={tmpl_var name='id'}">{tmpl_var name="sender_id"}</a></td></tmpl_if>
+                            <td><a href="#" data-heritage-load-content="help/support_message_edit.php?id={tmpl_var name='id'}" data-load-content="help/support_message_edit.php?id={tmpl_var name='id'}">{tmpl_var name="subject"}</a></td>
+							<td><a href="#" data-heritage-load-content="help/support_message_edit.php?id={tmpl_var name='id'}" data-load-content="help/support_message_edit.php?id={tmpl_var name='id'}">{tmpl_var name="tstamp"}</a></td>
+                            <td class="hg-table-align-end">
                                 <a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="help/support_message_del.php?id={tmpl_var name='id'}&_csrf_id={tmpl_var name='csrf_id'}&_csrf_key={tmpl_var name='csrf_key'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete"></span></a>
                             </td>
                         </tr>

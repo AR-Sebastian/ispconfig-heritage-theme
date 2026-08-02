@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
   "id": "com.ispconfig.heritage-glass.theme",
-  "name": "ISPConfig Heritage Glass",
-  "version": "1.0.33",
+  "name": "ISPConfig HERITAGE",
+  "version": "1.0.34",
   "stage": "stable",
-  "releaseDate": "2026-07-31",
+  "releaseDate": "2026-08-02",
   "compatibility": {
     "ispconfig": "3.3.1p1",
     "preview": "Validated on Ubuntu 22.04/24.04 and Debian 12/13 with Apache and Nginx"
   },
   "packageDirectory": "heritage",
   "distributionMode": "standalone-theme",
-  "releaseTag": "v1.0.33",
+  "releaseTag": "v1.0.34",
   "supportedModules": [
     "login",
     "dashboard",

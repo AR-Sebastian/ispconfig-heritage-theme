@@ -1,6 +1,6 @@
-/* Heritage Glass authentication surface */
+/* ISPConfig HERITAGE authentication surface */
 
-body.wb-login-page.heritage-shell {
+body.hg-login-page.heritage-shell {
   min-height: 100vh;
   color: var(--hg-text);
   background:
@@ -9,7 +9,7 @@ body.wb-login-page.heritage-shell {
     var(--hg-canvas);
 }
 
-body.wb-login-page.heritage-shell .wb-login-shell {
+body.hg-login-page.heritage-shell .hg-login-shell {
   width: min(1120px, calc(100% - 32px));
   min-height: 650px;
   margin: clamp(18px, 4vh, 46px) auto;
@@ -21,14 +21,14 @@ body.wb-login-page.heritage-shell .wb-login-shell {
   backdrop-filter: blur(24px) saturate(145%);
 }
 
-body.wb-login-page.heritage-shell .wb-login-hero {
+body.hg-login-page.heritage-shell .hg-login-hero {
   color: var(--hg-text);
   border-inline-end: 1px solid var(--hg-border);
   background:
     linear-gradient(145deg, color-mix(in srgb, var(--hg-accent) 5%, var(--hg-surface-subtle)), var(--hg-surface));
 }
 
-body.wb-login-page.heritage-shell .wb-login-hero::before {
+body.hg-login-page.heritage-shell .hg-login-hero::before {
   right: -230px;
   bottom: -245px;
   opacity: .12;
@@ -36,84 +36,84 @@ body.wb-login-page.heritage-shell .wb-login-hero::before {
     linear-gradient(90deg, var(--hg-accent), color-mix(in srgb, var(--hg-accent) 42%, transparent));
 }
 
-body.wb-login-page.heritage-shell .wb-login-hero::after {
+body.hg-login-page.heritage-shell .hg-login-hero::after {
   right: -310px;
   bottom: -325px;
   opacity: .28;
 }
 
-body.wb-login-page.heritage-shell .wb-login-hero__logo img {
+body.hg-login-page.heritage-shell .hg-login-hero__logo img {
   max-width: 196px;
   max-height: 54px;
   object-fit: contain;
   object-position: left center;
 }
 
-html[data-wb-theme='dark'] body.wb-login-page.heritage-shell .wb-login-hero__logo img {
-  content: url('../images/ispconfig-workbench-logo-dark.svg');
+html[data-heritage-theme='dark'] body.hg-login-page.heritage-shell .hg-login-hero__logo img {
+  content: url('../images/ispconfig-heritage-logo-dark.svg');
 }
 
-html[data-wb-theme='dark'] body.wb-login-page.heritage-shell .wb-login-hero__logo {
+html[data-heritage-theme='dark'] body.hg-login-page.heritage-shell .hg-login-hero__logo {
   border: 1px solid var(--hg-border);
   background: var(--hg-surface-raised);
   box-shadow: var(--hg-shadow-sm);
 }
 
-body.wb-login-page.heritage-shell .wb-login-hero__kicker {
+body.hg-login-page.heritage-shell .hg-login-hero__kicker {
   color: var(--hg-accent);
   letter-spacing: .12em;
 }
 
-body.wb-login-page.heritage-shell .wb-login-hero__copy h1 {
+body.hg-login-page.heritage-shell .hg-login-hero__copy h1 {
   color: var(--hg-text);
   font-size: clamp(40px, 5vw, 66px);
   letter-spacing: -.055em;
   line-height: .98;
 }
 
-body.wb-login-page.heritage-shell .wb-login-hero__copy p,
-body.wb-login-page.heritage-shell .wb-login-hero__copy li,
-body.wb-login-page.heritage-shell .wb-login-hero__footer {
+body.hg-login-page.heritage-shell .hg-login-hero__copy p,
+body.hg-login-page.heritage-shell .hg-login-hero__copy li,
+body.hg-login-page.heritage-shell .hg-login-hero__footer {
   color: var(--hg-text-muted);
 }
 
-body.wb-login-page.heritage-shell .wb-login-hero__copy li::before {
+body.hg-login-page.heritage-shell .hg-login-hero__copy li::before {
   color: var(--hg-success);
   background: var(--hg-success-soft);
 }
 
-body.wb-login-page.heritage-shell .wb-login-card {
+body.hg-login-page.heritage-shell .hg-login-card {
   color: var(--hg-text);
   background: var(--hg-surface);
 }
 
-body.wb-login-page.heritage-shell .wb-login-badge {
+body.hg-login-page.heritage-shell .hg-login-badge {
   color: var(--hg-accent);
   border-color: var(--hg-accent-line);
   background: var(--hg-accent-soft);
 }
 
-body.wb-login-page.heritage-shell .wb-login-card h2 {
+body.hg-login-page.heritage-shell .hg-login-card h2 {
   color: var(--hg-text);
   letter-spacing: -.035em;
 }
 
-body.wb-login-page.heritage-shell :is(
-  .wb-login-subtitle,
-  .wb-login-security,
-  .wb-login-disclaimer
+body.hg-login-page.heritage-shell :is(
+  .hg-login-subtitle,
+  .hg-login-security,
+  .hg-login-disclaimer
 ) {
   color: var(--hg-text-muted);
 }
 
-body.wb-login-page.heritage-shell .wb-login-form-surface {
+body.hg-login-page.heritage-shell .hg-login-form-surface {
   border: 1px solid var(--hg-border);
   border-radius: var(--hg-radius-lg);
   background: var(--hg-surface-subtle);
   box-shadow: var(--hg-shadow-xs);
 }
 
-body.wb-login-page.heritage-shell :is(input, select) {
+body.hg-login-page.heritage-shell :is(input, select) {
   min-height: 44px;
   color: var(--hg-text);
   border-color: var(--hg-border);
@@ -121,12 +121,12 @@ body.wb-login-page.heritage-shell :is(input, select) {
   background: var(--hg-surface);
 }
 
-body.wb-login-page.heritage-shell :is(input, select):focus {
+body.hg-login-page.heritage-shell :is(input, select):focus {
   border-color: color-mix(in srgb, var(--hg-accent) 55%, var(--hg-border));
   box-shadow: var(--hg-focus-ring);
 }
 
-body.wb-login-page.heritage-shell :is(
+body.hg-login-page.heritage-shell :is(
   button[type='submit'],
   input[type='submit'],
   .btn-primary
@@ -139,19 +139,19 @@ body.wb-login-page.heritage-shell :is(
   box-shadow: 0 8px 20px color-mix(in srgb, var(--hg-accent) 20%, transparent);
 }
 
-body.wb-login-page.heritage-shell .wb-login-security {
+body.hg-login-page.heritage-shell .hg-login-security {
   border-color: var(--hg-border);
   background: var(--hg-surface-subtle);
 }
 
-body.wb-login-page.heritage-shell .wb-login-theme-toggle {
+body.hg-login-page.heritage-shell .hg-login-theme-toggle {
   color: var(--hg-text-muted);
   border-color: var(--hg-border);
   background: var(--hg-surface-subtle);
 }
 
 /* Authentication V1: explicit, calm states without application-shell dependencies. */
-body.wb-login-page.heritage-shell .wb-auth-feedback {
+body.hg-login-page.heritage-shell .hg-auth-feedback {
   margin-block: 0 16px;
   border: 1px solid var(--hg-border);
   border-radius: var(--hg-radius-sm);
@@ -160,43 +160,43 @@ body.wb-login-page.heritage-shell .wb-auth-feedback {
   line-height: 1.45;
 }
 
-body.wb-login-page.heritage-shell .wb-auth-feedback--success {
+body.hg-login-page.heritage-shell .hg-auth-feedback--success {
   color: var(--hg-success);
   border-color: color-mix(in srgb, var(--hg-success) 30%, var(--hg-border));
   background: var(--hg-success-soft);
 }
 
-body.wb-login-page.heritage-shell .wb-auth-feedback--danger,
-body.wb-login-page.heritage-shell :is(.confirmpassworderror, [aria-invalid='true']) {
+body.hg-login-page.heritage-shell .hg-auth-feedback--danger,
+body.hg-login-page.heritage-shell :is(.confirmpassworderror, [aria-invalid='true']) {
   color: var(--hg-danger);
 }
 
-body.wb-login-page.heritage-shell .wb-auth-feedback--danger {
+body.hg-login-page.heritage-shell .hg-auth-feedback--danger {
   border-color: color-mix(in srgb, var(--hg-danger) 32%, var(--hg-border));
   background: var(--hg-danger-soft);
 }
 
-body.wb-login-page.heritage-shell :is(input, select)[aria-invalid='true'] {
+body.hg-login-page.heritage-shell :is(input, select)[aria-invalid='true'] {
   border-color: var(--hg-danger);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--hg-danger) 14%, transparent);
 }
 
-body.wb-login-page.heritage-shell :is(button, input[type='submit']):disabled,
-body.wb-login-page.heritage-shell :is(button, input[type='submit'])[aria-disabled='true'] {
+body.hg-login-page.heritage-shell :is(button, input[type='submit']):disabled,
+body.hg-login-page.heritage-shell :is(button, input[type='submit'])[aria-disabled='true'] {
   cursor: wait;
   opacity: .64;
   box-shadow: none;
 }
 
-body.wb-login-page.heritage-shell .wb-auth-actions {
+body.hg-login-page.heritage-shell .hg-auth-actions {
   align-items: stretch;
 }
 
-body.wb-login-page.heritage-shell .wb-auth-actions > * {
+body.hg-login-page.heritage-shell .hg-auth-actions > * {
   min-width: 0;
 }
 
-body.wb-login-page.heritage-shell .wb-visually-hidden {
+body.hg-login-page.heritage-shell .hg-visually-hidden {
   position: absolute !important;
   width: 1px !important;
   height: 1px !important;
@@ -208,31 +208,31 @@ body.wb-login-page.heritage-shell .wb-visually-hidden {
   border: 0 !important;
 }
 
-body.wb-login-page.heritage-shell :is(a, button, input, select):focus-visible {
+body.hg-login-page.heritage-shell :is(a, button, input, select):focus-visible {
   outline: 2px solid var(--hg-accent);
   outline-offset: 3px;
 }
 
 @media (max-width: 820px) {
-  body.wb-login-page.heritage-shell .wb-login-shell {
+  body.hg-login-page.heritage-shell .hg-login-shell {
     width: min(560px, calc(100% - 24px));
     min-height: 0;
     margin-block: 12px;
     border-radius: 18px;
   }
 
-  body.wb-login-page.heritage-shell .wb-login-hero {
+  body.hg-login-page.heritage-shell .hg-login-hero {
     border-inline-end: 0;
     border-bottom: 1px solid var(--hg-border);
   }
 
-  body.wb-login-page.heritage-shell .wb-login-hero__copy h1 {
+  body.hg-login-page.heritage-shell .hg-login-hero__copy h1 {
     font-size: clamp(34px, 10vw, 48px);
   }
 }
 
 @media (max-width: 520px) {
-  body.wb-login-page.heritage-shell .wb-login-shell {
+  body.hg-login-page.heritage-shell .hg-login-shell {
     width: 100%;
     margin: 0;
     border-inline: 0;
@@ -240,16 +240,16 @@ body.wb-login-page.heritage-shell :is(a, button, input, select):focus-visible {
     box-shadow: none;
   }
 
-  body.wb-login-page.heritage-shell .wb-login-hero__copy h1 {
+  body.hg-login-page.heritage-shell .hg-login-hero__copy h1 {
     font-size: clamp(32px, 11vw, 42px);
   }
 
-  body.wb-login-page.heritage-shell .wb-auth-actions {
+  body.hg-login-page.heritage-shell .hg-auth-actions {
     display: grid;
     grid-template-columns: 1fr;
   }
 
-  body.wb-login-page.heritage-shell .wb-auth-actions > * {
+  body.hg-login-page.heritage-shell .hg-auth-actions > * {
     width: 100%;
   }
 }

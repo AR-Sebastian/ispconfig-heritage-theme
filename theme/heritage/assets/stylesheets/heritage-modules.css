@@ -5,31 +5,31 @@
  * list/form header pipeline. It intentionally contains presentation only.
  */
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
-  .wb-monitor-workspace,
-  .wb-extension-workspace,
-  .wb-statistics-workspace,
-  .wb-specialty-workspace
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
+  .hg-monitor-workspace,
+  .hg-extension-workspace,
+  .hg-statistics-workspace,
+  .hg-specialty-workspace
 ) {
   width: 100%;
   max-width: var(--hg-content-max, 1600px);
   margin-inline: auto;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-module-workspace] {
+body.heritage-shell.hg-app-navigation-enabled #pageContent [data-heritage-module-workspace] {
   display: grid;
   gap: var(--hg-page-gap, 18px);
   align-content: start;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-module-hero='true'] {
+body.heritage-shell.hg-app-navigation-enabled #pageContent [data-heritage-module-hero='true'] {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: end;
   gap: 10px 20px;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-module-hero='true'] > :is(p, .wb-specialty-badges) {
+body.heritage-shell.hg-app-navigation-enabled #pageContent [data-heritage-module-hero='true'] > :is(p, .hg-specialty-badges) {
   grid-column: 1 / -1;
   max-width: 76ch;
   margin: 0;
@@ -37,7 +37,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-module
   line-height: 1.55;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-module-panel='true'] {
+body.heritage-shell.hg-app-navigation-enabled #pageContent [data-heritage-module-panel='true'] {
   min-width: 0;
   border: 1px solid var(--hg-border);
   border-radius: var(--hg-radius-lg);
@@ -45,10 +45,10 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-module
   box-shadow: var(--hg-shadow-xs);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-module-panel='true'] > :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent [data-heritage-module-panel='true'] > :is(
   header,
   .panel-heading,
-  .wb-content-panel__header
+  .hg-content-panel__header
 ) {
   min-height: 52px;
   padding: 12px 15px;
@@ -56,7 +56,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-module
   background: var(--hg-surface-subtle);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-module-actions='true'] {
+body.heritage-shell.hg-app-navigation-enabled #pageContent [data-heritage-module-actions='true'] {
   display: flex;
   min-height: 58px;
   align-items: center;
@@ -66,15 +66,15 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-module
 }
 
 body.heritage-shell[data-heritage-module-family='billing'] #pageContent :is(
-  .wb-billing-panel,
-  .wb-billing-settings-card
+  .hg-billing-panel,
+  .hg-billing-settings-card
 ) {
   overflow: clip;
   margin: 0;
 }
 
-body.heritage-shell[data-heritage-module-family='extension'] #pageContent .wb-extension-workspace :is(
-  .wb-table-workspace,
+body.heritage-shell[data-heritage-module-family='extension'] #pageContent .hg-extension-workspace :is(
+  .hg-table-workspace,
   .panel,
   .well
 ) {
@@ -90,9 +90,9 @@ body.heritage-shell[data-heritage-module-family='system'] #pageContent :is(
   border-color: var(--hg-border);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
-  .wb-monitor-hero,
-  .wb-extension-hero
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
+  .hg-monitor-hero,
+  .hg-extension-hero
 ) {
   min-height: 96px;
   align-content: end;
@@ -101,9 +101,9 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
   background: transparent;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
-  .wb-monitor-hero,
-  .wb-extension-hero
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
+  .hg-monitor-hero,
+  .hg-extension-hero
 ) h1 {
   max-width: 22ch;
   margin: 0;
@@ -114,7 +114,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
   overflow-wrap: anywhere;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-refresh-panel {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-monitor-refresh-panel {
   display: grid;
   grid-template-columns: minmax(180px, 1fr) minmax(220px, 320px);
   align-items: center;
@@ -126,27 +126,27 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-refresh-p
   box-shadow: var(--hg-shadow-xs);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-refresh-panel::before {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-monitor-refresh-panel::before {
   display: none;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-refresh-panel label {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-monitor-refresh-panel label {
   color: var(--hg-text);
   font-size: 12px;
   font-weight: 760;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-status-panel {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-monitor-status-panel {
   overflow: hidden;
   border-radius: var(--hg-radius-md);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-status-panel .alert {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-monitor-status-panel .alert {
   margin: 0;
   border-radius: inherit;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-chart-panel {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-monitor-chart-panel {
   padding: 15px;
   border: 1px solid var(--hg-border);
   border-radius: var(--hg-radius-lg);
@@ -154,13 +154,13 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-chart-pan
   box-shadow: var(--hg-shadow-sm);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-chart-grid {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-monitor-chart-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-chart {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-monitor-chart {
   min-height: 250px;
   border-color: var(--hg-border);
   border-radius: var(--hg-radius-md);
@@ -168,42 +168,42 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-chart {
   box-shadow: none;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-chart > header {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-monitor-chart > header {
   min-height: 52px;
   padding: 10px 13px;
   border-bottom-color: var(--hg-border);
   background: var(--hg-surface-muted);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-chart__details > div {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-monitor-chart__details > div {
   background: var(--hg-surface-muted);
 }
 
-@container wb-page-content (max-width: 820px) {
-  body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-chart-grid {
+@container hg-page-content (max-width: 820px) {
+  body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-monitor-chart-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 }
 
 @media (max-width: 620px) {
-  body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-monitor-refresh-panel {
+  body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-monitor-refresh-panel {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
-    .wb-monitor-hero,
-    .wb-extension-hero
+  body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
+    .hg-monitor-hero,
+    .hg-extension-hero
   ) {
     min-height: auto;
     padding-block: 14px;
   }
 
-  body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-module-hero='true'] {
+  body.heritage-shell.hg-app-navigation-enabled #pageContent [data-heritage-module-hero='true'] {
     grid-template-columns: minmax(0, 1fr);
     align-items: start;
   }
 
-  body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-module-actions='true'] > * {
+  body.heritage-shell.hg-app-navigation-enabled #pageContent [data-heritage-module-actions='true'] > * {
     width: 100%;
   }
 }
@@ -213,18 +213,18 @@ body.heritage-shell #pageContent .hg-redundant-heading {
   display: none;
 }
 
-body.heritage-shell.wb-form-page #pageForm .hg-single-tab-shell > .wb-tabstrip,
-body.heritage-shell.wb-form-page #pageForm .hg-single-tab-shell > .nav-tabs {
+body.heritage-shell.hg-form-page #pageForm .hg-single-tab-shell > .hg-tabstrip,
+body.heritage-shell.hg-form-page #pageForm .hg-single-tab-shell > .nav-tabs {
   display: none;
 }
 
-body.heritage-shell.wb-form-page #pageForm .hg-single-tab-shell > .tab-content {
+body.heritage-shell.hg-form-page #pageForm .hg-single-tab-shell > .tab-content {
   border-start-start-radius: var(--hg-radius-xl);
   border-start-end-radius: var(--hg-radius-xl);
 }
 
-body.heritage-shell.wb-monitor-page #pageContent .statusDevice > a,
-body.heritage-shell.wb-monitor-page #pageContent .stateview > a {
+body.heritage-shell.hg-monitor-page #pageContent .statusDevice > a,
+body.heritage-shell.hg-monitor-page #pageContent .stateview > a {
   display: inline-flex;
   min-height: 34px;
   align-items: center;
@@ -240,8 +240,8 @@ body.heritage-shell.wb-monitor-page #pageContent .stateview > a {
   text-decoration: none;
 }
 
-body.heritage-shell.wb-monitor-page #pageContent .statusDevice > a:is(:hover, :focus-visible),
-body.heritage-shell.wb-monitor-page #pageContent .stateview > a:is(:hover, :focus-visible) {
+body.heritage-shell.hg-monitor-page #pageContent .statusDevice > a:is(:hover, :focus-visible),
+body.heritage-shell.hg-monitor-page #pageContent .stateview > a:is(:hover, :focus-visible) {
   color: var(--hg-accent);
   border-color: color-mix(in srgb, var(--hg-accent) 34%, var(--hg-border));
   background: color-mix(in srgb, var(--hg-accent) 7%, var(--hg-surface));
@@ -250,6 +250,6 @@ body.heritage-shell.wb-monitor-page #pageContent .stateview > a:is(:hover, :focu
 body.heritage-shell[data-heritage-surface='list'] #pageContent .tbl_row_noresults td {
   min-height: 150px;
 }
-body.heritage-shell.wb-list-page .wb-data-table--compact-status-columns {
+body.heritage-shell.hg-list-page .hg-data-table--compact-status-columns {
   table-layout: fixed;
 }

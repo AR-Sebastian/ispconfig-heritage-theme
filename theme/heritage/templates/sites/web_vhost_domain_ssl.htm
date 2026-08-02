@@ -1,18 +1,17 @@
-<!-- WP-948: native Workbench website core surface; shared lifecycle unchanged. -->
 <tmpl_if name="config_error_msg">
     <div>
         <p>
-          <div id="errormsg" class="wb-alert wb-alert--danger wb-alert--dismissible" role="alert" data-wb-ack-url="sites/message_ack.php?relation=web_domain:{tmpl_var name='id'}&amp;_csrf_id={tmpl_var name='_csrf_id_msg'}&amp;_csrf_key={tmpl_var name='_csrf_key_msg'}">
-            <button type="button" class="wb-alert__dismiss" data-workbench-dismiss="alert" aria-label="Schließen" data-wb-i18n-aria-label-de="Schließen" data-wb-i18n-aria-label-en="Close"><span aria-hidden="true">&times;</span></button>
-            <div class="wb-config-error-time">{tmpl_var name='config_error_tstamp'} :&nbsp;</div>
-            <div class="wb-config-error-message">{tmpl_var name='config_error_msg'}</div>
+          <div id="errormsg" class="hg-alert hg-alert--danger hg-alert--dismissible" role="alert" data-heritage-ack-url="sites/message_ack.php?relation=web_domain:{tmpl_var name='id'}&amp;_csrf_id={tmpl_var name='_csrf_id_msg'}&amp;_csrf_key={tmpl_var name='_csrf_key_msg'}">
+            <button type="button" class="hg-alert__dismiss" data-heritage-dismiss="alert" aria-label="Schließen" data-heritage-i18n-aria-label-de="Schließen" data-heritage-i18n-aria-label-en="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="hg-config-error-time">{tmpl_var name='config_error_tstamp'} :&nbsp;</div>
+            <div class="hg-config-error-message">{tmpl_var name='config_error_msg'}</div>
           </div>
         </p>
       </div>
   </tmpl_if>
 
 <tmpl_if name="is_le_enabled" op="==" value="y">
-  <div class="wb-alert wb-alert--info wb-alert--centered">
+  <div class="hg-alert hg-alert--info hg-alert--centered">
     {tmpl_var name='ssl_options_not_for_le_txt'}
   </div>
 </tmpl_if>
@@ -20,54 +19,54 @@
 			<tmpl_if name='show_helper_links'>
 				<div id="show_helper_links" hidden data-ssl-client-helper="true" data-record-field="id">
 					<label></label>
-					<div class="wb-field-body">
+					<div class="hg-field-body">
 					<a href="#" data-ssl-client-data-action="load" data-endpoint-name="sitesJson" data-record-field="id" data-ssl-request-type="getclientssldata"><tmpl_if name='is_admin'>{tmpl_var name='load_client_data_txt'}</tmpl_else>{tmpl_var name='load_my_data_txt'}</tmpl_if></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" data-ssl-client-data-action="reset">{tmpl_var name='reset_client_data_txt'}</a>
 					</div>
 				</div>
 			</tmpl_if>
-            <div class="wb-field-group">
+            <div class="hg-field-group">
                 <label for="ssl_state">{tmpl_var name='ssl_state_txt'}</label>
-                <div class="wb-field-body"><input type="text" name="ssl_state" id="ssl_state" value="{tmpl_var name='ssl_state'}" class="form-control" /></div></div>
-            <div class="wb-field-group">
+                <div class="hg-field-body"><input type="text" name="ssl_state" id="ssl_state" value="{tmpl_var name='ssl_state'}" class="form-control" /></div></div>
+            <div class="hg-field-group">
                 <label for="ssl_locality">{tmpl_var name='ssl_locality_txt'}</label>
-                <div class="wb-field-body"><input type="text" name="ssl_locality" id="ssl_locality" value="{tmpl_var name='ssl_locality'}" class="form-control" /></div></div>
-            <div class="wb-field-group">
+                <div class="hg-field-body"><input type="text" name="ssl_locality" id="ssl_locality" value="{tmpl_var name='ssl_locality'}" class="form-control" /></div></div>
+            <div class="hg-field-group">
                 <label for="ssl_organisation">{tmpl_var name='ssl_organisation_txt'}</label>
-                <div class="wb-field-body"><input type="text" name="ssl_organisation" id="ssl_organisation" value="{tmpl_var name='ssl_organisation'}" class="form-control" /></div></div>
-            <div class="wb-field-group">
+                <div class="hg-field-body"><input type="text" name="ssl_organisation" id="ssl_organisation" value="{tmpl_var name='ssl_organisation'}" class="form-control" /></div></div>
+            <div class="hg-field-group">
                 <label for="ssl_organisation_unit">{tmpl_var name='ssl_organisation_unit_txt'}</label>
-                <div class="wb-field-body"><input type="text" name="ssl_organisation_unit" id="ssl_organisation_unit" value="{tmpl_var name='ssl_organisation_unit'}" class="form-control" /></div></div>
-            <div class="wb-field-group">
+                <div class="hg-field-body"><input type="text" name="ssl_organisation_unit" id="ssl_organisation_unit" value="{tmpl_var name='ssl_organisation_unit'}" class="form-control" /></div></div>
+            <div class="hg-field-group">
                 <label for="ssl_country">{tmpl_var name='ssl_country_txt'}</label>
-                <div class="wb-field-body"><select name="ssl_country" id="ssl_country" class="form-control flags">
+                <div class="hg-field-body"><select name="ssl_country" id="ssl_country" class="form-control flags">
                     {tmpl_var name='ssl_country'}
                 </select></div>
             </div>
-            <div class="wb-field-group">
+            <div class="hg-field-group">
                 <label for="client_group_id">{tmpl_var name='ssl_domain_txt'}</label>
-                <div class="wb-field-body"><select name="ssl_domain" id="ssl_domain" class="form-control">
+                <div class="hg-field-body"><select name="ssl_domain" id="ssl_domain" class="form-control">
                     {tmpl_var name='ssl_domain'}
                 </select></div>
             </div>
-			<div class="wb-field-group">
+			<div class="hg-field-group">
                 <label for="ssl_request">{tmpl_var name='ssl_key_txt'}</label>
-                <div class="wb-field-body"><textarea class="form-control" name="ssl_key" id="ssl_key" rows='10' cols='30'>{tmpl_var name='ssl_key'}</textarea></div>
+                <div class="hg-field-body"><textarea class="form-control" name="ssl_key" id="ssl_key" rows='10' cols='30'>{tmpl_var name='ssl_key'}</textarea></div>
             </div>
-            <div class="wb-field-group">
+            <div class="hg-field-group">
                 <label for="ssl_request">{tmpl_var name='ssl_request_txt'}</label>
-                <div class="wb-field-body"><textarea class="form-control" name="ssl_request" id="ssl_request" rows='10' cols='30'>{tmpl_var name='ssl_request'}</textarea></div>
+                <div class="hg-field-body"><textarea class="form-control" name="ssl_request" id="ssl_request" rows='10' cols='30'>{tmpl_var name='ssl_request'}</textarea></div>
             </div>
-            <div class="wb-field-group">
+            <div class="hg-field-group">
                 <label for="ssl_cert">{tmpl_var name='ssl_cert_txt'}</label>
-                <div class="wb-field-body"><textarea class="form-control" name="ssl_cert" id="ssl_cert" rows='10' cols='30'>{tmpl_var name='ssl_cert'}</textarea></div>
+                <div class="hg-field-body"><textarea class="form-control" name="ssl_cert" id="ssl_cert" rows='10' cols='30'>{tmpl_var name='ssl_cert'}</textarea></div>
             </div>
-            <div class="wb-field-group">
+            <div class="hg-field-group">
                 <label for="ssl_bundle">{tmpl_var name='ssl_bundle_txt'}</label>
-                <div class="wb-field-body"><textarea class="form-control" name="ssl_bundle" id="ssl_bundle" rows='10' cols='30'>{tmpl_var name='ssl_bundle'}</textarea></div>
+                <div class="hg-field-body"><textarea class="form-control" name="ssl_bundle" id="ssl_bundle" rows='10' cols='30'>{tmpl_var name='ssl_bundle'}</textarea></div>
             </div>
-            <div class="wb-field-group">
+            <div class="hg-field-group">
                 <label for="ssl_action">{tmpl_var name='ssl_action_txt'}</label>
-                <div class="wb-field-body"><select name="ssl_action" id="ssl_action" class="form-control">
+                <div class="hg-field-body"><select name="ssl_action" id="ssl_action" class="form-control">
                     {tmpl_var name='ssl_action'}
                 </select></div>
             </div>
@@ -75,7 +74,7 @@
 
         <input type="hidden" name="id" value="{tmpl_var name='id'}">
 
-        <div class="wb-form-actions"><div class="wb-form-actions__primary">
+        <div class="hg-form-actions"><div class="hg-form-actions__primary">
             <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="sites/web_vhost_domain_edit.php">{tmpl_var name='btn_save_txt'}</button>
-            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="sites/web_vhost_domain_list.php" data-load-content="sites/web_vhost_domain_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-heritage-load-content="sites/web_vhost_domain_list.php" data-load-content="sites/web_vhost_domain_list.php">{tmpl_var name='btn_cancel_txt'}</button>
         </div></div>

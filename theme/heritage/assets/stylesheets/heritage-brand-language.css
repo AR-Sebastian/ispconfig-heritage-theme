@@ -1,17 +1,17 @@
-/* ISPConfig Heritage Glass
+/* ISPConfig HERITAGE
  *
  * Brand language, typography and icon rhythm. Accent is intentionally limited
  * to orientation, active states and primary actions. Operational status keeps
  * its independent semantic palette.
  */
 
-body.heritage-shell.wb-app-navigation-enabled {
+body.heritage-shell.hg-app-navigation-enabled {
   color: var(--hg-text);
   font-size: var(--hg-font-md);
   line-height: var(--hg-leading-normal);
 }
 
-body.heritage-shell.wb-app-navigation-enabled :where(
+body.heritage-shell.hg-app-navigation-enabled :where(
   h1,
   h2,
   h3,
@@ -27,29 +27,29 @@ body.heritage-shell.wb-app-navigation-enabled :where(
   text-wrap: balance;
 }
 
-body.heritage-shell.wb-app-navigation-enabled h1 {
+body.heritage-shell.hg-app-navigation-enabled h1 {
   font-size: clamp(26px, 3vw, 38px);
   font-weight: 830;
   letter-spacing: -.045em;
 }
 
-body.heritage-shell.wb-app-navigation-enabled h2 {
+body.heritage-shell.hg-app-navigation-enabled h2 {
   font-size: clamp(20px, 2.2vw, 27px);
 }
 
-body.heritage-shell.wb-app-navigation-enabled h3 {
+body.heritage-shell.hg-app-navigation-enabled h3 {
   font-size: clamp(16px, 1.7vw, 20px);
 }
 
-body.heritage-shell.wb-app-navigation-enabled h4 {
+body.heritage-shell.hg-app-navigation-enabled h4 {
   font-size: 15px;
 }
 
-body.heritage-shell.wb-app-navigation-enabled :where(p, li, dd, dt) {
+body.heritage-shell.hg-app-navigation-enabled :where(p, li, dd, dt) {
   line-height: var(--hg-leading-normal);
 }
 
-body.heritage-shell.wb-app-navigation-enabled :where(
+body.heritage-shell.hg-app-navigation-enabled :where(
   .text-muted,
   .help-block,
   .form-text,
@@ -60,12 +60,12 @@ body.heritage-shell.wb-app-navigation-enabled :where(
   line-height: var(--hg-leading-relaxed);
 }
 
-body.heritage-shell.wb-app-navigation-enabled :where(code, kbd, pre, samp) {
+body.heritage-shell.hg-app-navigation-enabled :where(code, kbd, pre, samp) {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
   font-size: .92em;
 }
 
-body.heritage-shell.wb-app-navigation-enabled :where(code, kbd) {
+body.heritage-shell.hg-app-navigation-enabled :where(code, kbd) {
   padding: 2px 6px;
   color: color-mix(in srgb, var(--hg-accent) 72%, var(--hg-text));
   border: 1px solid var(--hg-border);
@@ -73,7 +73,7 @@ body.heritage-shell.wb-app-navigation-enabled :where(code, kbd) {
   background: var(--hg-surface-subtle);
 }
 
-body.heritage-shell.wb-app-navigation-enabled pre {
+body.heritage-shell.hg-app-navigation-enabled pre {
   overflow: auto;
   padding: 14px;
   color: var(--hg-text);
@@ -84,8 +84,8 @@ body.heritage-shell.wb-app-navigation-enabled pre {
 
 /* Icon contract */
 
-body.heritage-shell.wb-app-navigation-enabled :where(
-  .wb-svg-icon,
+body.heritage-shell.hg-app-navigation-enabled :where(
+  .hg-svg-icon,
   button svg,
   a svg,
   .btn svg
@@ -97,8 +97,8 @@ body.heritage-shell.wb-app-navigation-enabled :where(
   stroke-width: 1.8;
 }
 
-body.heritage-shell.wb-app-navigation-enabled :where(
-  .wb-svg-icon,
+body.heritage-shell.hg-app-navigation-enabled :where(
+  .hg-svg-icon,
   button svg,
   a svg,
   .btn svg
@@ -106,29 +106,29 @@ body.heritage-shell.wb-app-navigation-enabled :where(
   vector-effect: non-scaling-stroke;
 }
 
-body.heritage-shell.wb-app-navigation-enabled :where(
+body.heritage-shell.hg-app-navigation-enabled :where(
   .btn,
   button,
   [role='button']
-) > :where(.wb-svg-icon, svg, i) + :where(span, strong) {
+) > :where(.hg-svg-icon, svg, i) + :where(span, strong) {
   margin-inline-start: 7px;
 }
 
-body.heritage-shell.wb-app-navigation-enabled :where(
-  .wb-icon-button,
-  .wb-theme-toggle,
+body.heritage-shell.hg-app-navigation-enabled :where(
+  .hg-icon-button,
+  .hg-theme-toggle,
   .notification,
-  .wb-action-control
-) :where(.wb-svg-icon, svg) {
+  .hg-action-control
+) :where(.hg-svg-icon, svg) {
   width: var(--hg-icon-md);
   height: var(--hg-icon-md);
   margin: 0;
 }
 
-body.heritage-shell.wb-app-navigation-enabled :where(
-  .wb-page-header__action,
-  .wb-dashboard-button,
-  .wb-form-actions .btn,
+body.heritage-shell.hg-app-navigation-enabled :where(
+  .hg-page-header__action,
+  .hg-dashboard-button,
+  .hg-form-actions .btn,
   .button-wrapper .btn
 ) {
   display: inline-flex;
@@ -142,29 +142,29 @@ body.heritage-shell.wb-app-navigation-enabled :where(
 
 /* Accent ownership */
 
-body.heritage-shell.wb-app-navigation-enabled :where(
+body.heritage-shell.hg-app-navigation-enabled :where(
   a:not(.btn),
   .link,
-  .wb-link
+  .hg-link
 ) {
   color: color-mix(in srgb, var(--hg-accent) 76%, var(--hg-text));
   text-decoration-color: color-mix(in srgb, var(--hg-accent) 28%, transparent);
   text-underline-offset: 3px;
 }
 
-body.heritage-shell.wb-app-navigation-enabled :where(
+body.heritage-shell.hg-app-navigation-enabled :where(
   a:not(.btn),
   .link,
-  .wb-link
+  .hg-link
 ):is(:hover, :focus-visible) {
   color: var(--hg-accent-hover);
   text-decoration-color: currentColor;
 }
 
-body.heritage-shell.wb-app-navigation-enabled :where(
+body.heritage-shell.hg-app-navigation-enabled :where(
   .btn-primary,
-  .wb-page-header__action--primary,
-  .wb-dashboard-button--primary,
+  .hg-page-header__action--primary,
+  .hg-dashboard-button--primary,
   input[type='submit']
 ) {
   color: #fff;
@@ -178,10 +178,10 @@ body.heritage-shell.wb-app-navigation-enabled :where(
   box-shadow: 0 8px 20px color-mix(in srgb, var(--hg-accent) 18%, transparent);
 }
 
-body.heritage-shell.wb-app-navigation-enabled :where(
+body.heritage-shell.hg-app-navigation-enabled :where(
   .btn-primary,
-  .wb-page-header__action--primary,
-  .wb-dashboard-button--primary,
+  .hg-page-header__action--primary,
+  .hg-dashboard-button--primary,
   input[type='submit']
 ):is(:hover, :focus-visible) {
   color: #fff;
@@ -190,10 +190,10 @@ body.heritage-shell.wb-app-navigation-enabled :where(
   box-shadow: 0 10px 26px color-mix(in srgb, var(--hg-accent) 22%, transparent);
 }
 
-body.heritage-shell.wb-app-navigation-enabled :where(
+body.heritage-shell.hg-app-navigation-enabled :where(
   .btn-danger,
   .btn-delete,
-  .wb-action-control--danger,
+  .hg-action-control--danger,
   [data-action='delete']
 ) {
   color: var(--hg-danger);
@@ -202,10 +202,10 @@ body.heritage-shell.wb-app-navigation-enabled :where(
   box-shadow: none;
 }
 
-body.heritage-shell.wb-app-navigation-enabled :where(
+body.heritage-shell.hg-app-navigation-enabled :where(
   .btn-danger,
   .btn-delete,
-  .wb-action-control--danger,
+  .hg-action-control--danger,
   [data-action='delete']
 ):is(:hover, :focus-visible) {
   color: #fff;
@@ -213,23 +213,23 @@ body.heritage-shell.wb-app-navigation-enabled :where(
   background: var(--hg-danger);
 }
 
-body.heritage-shell.wb-app-navigation-enabled :where(
+body.heritage-shell.hg-app-navigation-enabled :where(
   .alert-warning,
-  .wb-dashlet-state-warning,
+  .hg-dashlet-state-warning,
   .progress-bar-warning
 ) {
   --hg-local-state: var(--hg-warning);
 }
 
-body.heritage-shell.wb-app-navigation-enabled :where(
+body.heritage-shell.hg-app-navigation-enabled :where(
   .alert-danger,
-  .wb-dashlet-state-critical,
+  .hg-dashlet-state-critical,
   .progress-bar-danger
 ) {
   --hg-local-state: var(--hg-danger);
 }
 
-body.heritage-shell.wb-app-navigation-enabled :where(
+body.heritage-shell.hg-app-navigation-enabled :where(
   .alert-success,
   .progress-bar-success
 ) {
@@ -238,38 +238,38 @@ body.heritage-shell.wb-app-navigation-enabled :where(
 
 /* Navigation logo and active-line consistency */
 
-body.heritage-shell.wb-app-navigation-enabled #logo {
+body.heritage-shell.hg-app-navigation-enabled #logo {
   filter: none;
   opacity: 1;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #logo a {
+body.heritage-shell.hg-app-navigation-enabled #logo a {
   border-radius: 8px;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #logo a:focus-visible {
+body.heritage-shell.hg-app-navigation-enabled #logo a:focus-visible {
   outline: 2px solid var(--hg-accent);
   outline-offset: 4px;
 }
 
-body.heritage-shell.wb-app-navigation-enabled :is(
-  .wb-mobile-navigation__module,
-  .wb-mobile-navigation__secondary-link
+body.heritage-shell.hg-app-navigation-enabled :is(
+  .hg-mobile-navigation__module,
+  .hg-mobile-navigation__secondary-link
 )[aria-current='page'] {
-  --wb-navigation-active: var(--hg-accent);
+  --hg-navigation-active: var(--hg-accent);
 }
 
-body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__module::before,
-body.heritage-shell.wb-app-navigation-enabled .wb-mobile-navigation__secondary-link::before {
+body.heritage-shell.hg-app-navigation-enabled .hg-mobile-navigation__module::before,
+body.heritage-shell.hg-app-navigation-enabled .hg-mobile-navigation__secondary-link::before {
   background: var(--hg-accent);
 }
 
 /* Data emphasis remains neutral until a semantic class is present. */
 
-body.heritage-shell.wb-app-navigation-enabled :where(
+body.heritage-shell.hg-app-navigation-enabled :where(
   .badge,
   .label,
-  .wb-status-chip
+  .hg-status-chip
 ):not(
   .badge-success,
   .badge-warning,
@@ -279,39 +279,39 @@ body.heritage-shell.wb-app-navigation-enabled :where(
   .label-warning,
   .label-danger,
   .label-info,
-  .wb-status-chip--success,
-  .wb-status-chip--warning,
-  .wb-status-chip--danger,
-  .wb-status-chip--info
+  .hg-status-chip--success,
+  .hg-status-chip--warning,
+  .hg-status-chip--danger,
+  .hg-status-chip--info
 ) {
   color: var(--hg-text-muted);
   border-color: var(--hg-border);
   background: var(--hg-surface-subtle);
 }
 
-body.heritage-shell.wb-app-navigation-enabled :where(
-  .wb-count,
-  .wb-summary-value,
-  .wb-dashboard-metric-card__value
+body.heritage-shell.hg-app-navigation-enabled :where(
+  .hg-count,
+  .hg-summary-value,
+  .hg-dashboard-metric-card__value
 ) {
   color: var(--hg-text);
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum";
 }
 
-body.heritage-shell.wb-app-navigation-enabled table {
+body.heritage-shell.hg-app-navigation-enabled table {
   font-variant-numeric: tabular-nums;
 }
 
 @media (max-width: 620px) {
-  body.heritage-shell.wb-app-navigation-enabled h1 {
+  body.heritage-shell.hg-app-navigation-enabled h1 {
     font-size: clamp(24px, 8vw, 31px);
   }
 
-  body.heritage-shell.wb-app-navigation-enabled :where(
-    .wb-page-header__action,
-    .wb-dashboard-button,
-    .wb-form-actions .btn,
+  body.heritage-shell.hg-app-navigation-enabled :where(
+    .hg-page-header__action,
+    .hg-dashboard-button,
+    .hg-form-actions .btn,
     .button-wrapper .btn
   ) {
     min-height: 44px;
@@ -319,10 +319,10 @@ body.heritage-shell.wb-app-navigation-enabled table {
 }
 
 @media (forced-colors: active) {
-  body.heritage-shell.wb-app-navigation-enabled :where(
+  body.heritage-shell.hg-app-navigation-enabled :where(
     .btn-primary,
-    .wb-page-header__action--primary,
-    .wb-dashboard-button--primary,
+    .hg-page-header__action--primary,
+    .hg-dashboard-button--primary,
     input[type='submit']
   ) {
     color: ButtonText;
@@ -331,8 +331,8 @@ body.heritage-shell.wb-app-navigation-enabled table {
     box-shadow: none;
   }
 
-  body.heritage-shell.wb-app-navigation-enabled :where(
-    .wb-svg-icon,
+  body.heritage-shell.hg-app-navigation-enabled :where(
+    .hg-svg-icon,
     button svg,
     a svg,
     .btn svg

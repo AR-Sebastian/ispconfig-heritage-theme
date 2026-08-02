@@ -1,18 +1,17 @@
-<!-- WP-968: native Workbench mail list; controller and list contract unchanged. -->
 <div class='page-header'>
 	<h1><tmpl_var name="list_head_txt"></h1>
 </div>
 <p><tmpl_var name="list_desc_txt"></p>
-        <p class="wb-list-section-heading">{tmpl_var name="toolsarea_head_txt"}</p>
+        <p class="hg-list-section-heading">{tmpl_var name="toolsarea_head_txt"}</p>
 
-                <button class="formbutton-success" type="button" data-workbench-load-content="mail/mail_user_edit.php" data-load-content="mail/mail_user_edit.php">{tmpl_var name="add_new_record_txt"}</button>
-
-
+                <button class="formbutton-success" type="button" data-heritage-load-content="mail/mail_user_edit.php" data-load-content="mail/mail_user_edit.php">{tmpl_var name="add_new_record_txt"}</button>
 
 
-        <p class="wb-list-section-heading"><tmpl_var name="list_head_txt"></p>
-            <div class="wb-table-workspace">
-<table class="table wb-data-table">
+
+
+        <p class="hg-list-section-heading"><tmpl_var name="list_head_txt"></p>
+            <div class="hg-table-workspace">
+<table class="table hg-data-table">
                 <thead >
                     <tr>
                         <th data-column="email"><tmpl_var name="email_txt"></th>
@@ -24,7 +23,7 @@
                         <th class="tiny-col" data-column="disabledeliver"><tmpl_var name="disabledeliver_txt"></th>
                         <th class="tiny-col" data-column="disableimap"><tmpl_var name="disableimap_txt"></th>
                         <th class="tiny-col" data-column="disablepop3"><tmpl_var name="disablepop3_txt"></th>
-                        <th class="wb-table-actions-column wb-table-align-end">{tmpl_var name='search_limit'}</th>
+                        <th class="hg-table-actions-column hg-table-align-end">{tmpl_var name='search_limit'}</th>
                     </tr>
                     <tr>
                         <td><input class="form-control" type="text" name="search_email" value="{tmpl_var name='search_email'}" /></td>
@@ -36,7 +35,7 @@
                         <td><select class="form-control" name="search_disabledeliver">{tmpl_var name='search_disabledeliver'}</select></td>
                         <td><select class="form-control" name="search_disableimap">{tmpl_var name='search_disableimap'}</select></td>
                         <td><select class="form-control" name="search_disablepop3">{tmpl_var name='search_disablepop3'}</select></td>
-                        <td class="wb-table-align-end">
+                        <td class="hg-table-align-end">
                             <button type="button" class="formbutton-default formbutton-narrow" name="Filter" id="Filter" value="{tmpl_var name="filter_txt"}" data-submit-form="pageForm" data-form-action="mail/mail_user_list.php"><span class="icon icon-filter"></span></button>
                         </td>
                     </tr>
@@ -45,17 +44,17 @@
                 <tmpl_loop name="records">
                     <tr>
                         <td class="copy-to-clipboard">
-                           <a class="copy-to-clipboard-icon-helper" href="#" data-workbench-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-workbench-tooltip="true" data-workbench-tooltip-placement="bottom" title="<tmpl_if name="mailbox_show_last_access" op="==" value="y"><tmpl_if name="last_access">{tmpl_var name='last_accessed_txt'}: {tmpl_var name='last_access'} </tmpl_if></tmpl_if>">{tmpl_var name="email"}</a>
+                           <a class="copy-to-clipboard-icon-helper" href="#" data-heritage-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-heritage-tooltip="true" data-heritage-tooltip-placement="bottom" title="<tmpl_if name="mailbox_show_last_access" op="==" value="y"><tmpl_if name="last_access">{tmpl_var name='last_accessed_txt'}: {tmpl_var name='last_access'} </tmpl_if></tmpl_if>">{tmpl_var name="email"}</a>
                         </td>
-                        <tmpl_if name="enable_custom_login"><td><a href="#" data-workbench-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="login"}</a></td></tmpl_if>
-                        <td><a href="#" data-workbench-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="name"}</a></td>
-                        <td><a href="#" data-workbench-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="autoresponder"}</a></td>
-                        <td><a href="#" data-workbench-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="postfix"}</a></td>
-                        <td><a href="#" data-workbench-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="disablesmtp"}</a></td>
-                        <td><a href="#" data-workbench-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="disabledeliver"}</a></td>
-                        <td><a href="#" data-workbench-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="disableimap"}</a></td>
-                        <td><a href="#" data-workbench-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="disablepop3"}</a></td>
-                        <td class="wb-table-align-end">
+                        <tmpl_if name="enable_custom_login"><td><a href="#" data-heritage-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="login"}</a></td></tmpl_if>
+                        <td><a href="#" data-heritage-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="name"}</a></td>
+                        <td><a href="#" data-heritage-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="autoresponder"}</a></td>
+                        <td><a href="#" data-heritage-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="postfix"}</a></td>
+                        <td><a href="#" data-heritage-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="disablesmtp"}</a></td>
+                        <td><a href="#" data-heritage-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="disabledeliver"}</a></td>
+                        <td><a href="#" data-heritage-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="disableimap"}</a></td>
+                        <td><a href="#" data-heritage-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}" data-load-content="mail/mail_user_edit.php?id={tmpl_var name='id'}">{tmpl_var name="disablepop3"}</a></td>
+                        <td class="hg-table-align-end">
                             <tmpl_if name="mailboxlist_webmail_link">
                                 <a class="formbutton-default formbutton-narrow" href="mail/webmailer.php?id={tmpl_var name='id'}" target="webmail"><span class="icon icon-mail"></span></a>
                             </tmpl_if>

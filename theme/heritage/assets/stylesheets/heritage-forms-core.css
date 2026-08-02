@@ -1,0 +1,5388 @@
+/*
+ * authoritative authenticated form workspace.
+ *
+ * This layer owns form geometry after the structure, shell, surface and
+ * module layers. It intentionally relies on the progressive classes added by
+ * heritage-content-states.js and does not alter ISPConfig field semantics.
+ */
+
+body.hg-form-page #pageForm.hg-modern-form {
+  --hg-form-card-width: 1280px;
+  --hg-form-content-width: 1120px;
+  --hg-form-label-width: clamp(176px, 18cqi, 224px);
+  --hg-form-control-width: 800px;
+  --hg-form-row-gap: clamp(18px, 2.4cqi, 30px);
+}
+
+body.hg-form-page #pageForm.hg-modern-form > #pageContent {
+  width: 100%;
+  max-width: var(--hg-form-card-width);
+  margin-inline: auto;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper {
+  min-width: 0;
+  overflow: clip;
+  border: 1px solid var(--hg-border);
+  border-radius: 18px;
+  color: var(--hg-text);
+  background: var(--hg-surface);
+  box-shadow: 0 18px 52px color-mix(in srgb, var(--hg-text) 8%, transparent);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper > .nav-tabs {
+  display: flex;
+  min-height: 64px;
+  margin: 0;
+  padding: 11px 14px;
+  gap: 8px;
+  align-items: center;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--hg-action) 24%, transparent) transparent;
+  border: 0;
+  border-bottom: 1px solid var(--hg-border);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 74%, var(--hg-surface)), var(--hg-surface-muted));
+}
+
+body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper > .nav-tabs::-webkit-scrollbar { height: 7px; }
+body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper > .nav-tabs::-webkit-scrollbar-track { background: transparent; }
+body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper > .nav-tabs::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--hg-action) 24%, transparent);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper > .nav-tabs > li {
+  float: none;
+  flex: 0 0 auto;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper > .nav-tabs > li > a {
+  min-height: 38px;
+  margin: 0;
+  padding: 10px 15px;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  color: var(--hg-text-muted);
+  background: transparent;
+  font-size: 12px;
+  font-weight: 760;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper > .nav-tabs > li.active > a,
+body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper > .nav-tabs > li > a:hover,
+body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper > .nav-tabs > li > a:focus-visible {
+  color: var(--hg-text);
+  border-color: color-mix(in srgb, var(--hg-action) 22%, var(--hg-border));
+  background: color-mix(in srgb, var(--hg-surface) 86%, var(--hg-action) 4%);
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--hg-text) 7%, transparent);
+  text-decoration: none;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper > .nav-tabs > li.active > a {
+  color: var(--hg-action-quiet-text);
+  border-color: color-mix(in srgb, var(--hg-action) 44%, var(--hg-border));
+  background: color-mix(in srgb, var(--hg-action) 10%, var(--hg-surface));
+  box-shadow: inset 0 -3px 0 var(--hg-action), 0 12px 26px color-mix(in srgb, var(--hg-action) 9%, transparent);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper > .tab-content {
+  container: hg-form / inline-size;
+  min-width: 0;
+  padding: 22px 28px 18px;
+  color: var(--hg-text);
+  background: var(--hg-surface);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper > .tab-content > .tab-pane {
+  width: 100%;
+  max-width: var(--hg-form-content-width);
+  min-width: 0;
+  margin-inline: auto;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-section,
+body.hg-form-page #pageForm.hg-modern-form .hg-field-body {
+  min-width: 0;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--hg-form-label-width) minmax(0, 1fr);
+  min-height: 0;
+  margin: 0;
+  padding: 16px 8px;
+  gap: var(--hg-form-row-gap);
+  align-items: start;
+  border-bottom: 1px solid color-mix(in srgb, var(--hg-border) 58%, transparent);
+  transition: background-color .16s ease;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group::before,
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group::after {
+  display: none;
+  content: none;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group:last-of-type {
+  border-bottom: 0;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group:focus-within {
+  border-radius: 13px;
+  background: color-mix(in srgb, var(--hg-action) 4.5%, var(--hg-surface));
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .hg-field-group--empty,
+  .hg-field-group--dormant
+) {
+  display: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group > :where(.control-label, label) {
+  width: auto;
+  margin: 0;
+  padding: 10px 0 0;
+  float: none;
+  color: var(--hg-text);
+  font-size: 12px;
+  font-weight: 760;
+  line-height: 1.4;
+  text-align: left;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--required > :where(.control-label, label)::after {
+  color: var(--hg-action);
+  content: ' \2022';
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-body {
+  width: 100%;
+  max-width: var(--hg-form-control-width);
+  padding-inline: 0;
+  float: none;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .hg-field-group--textarea,
+  .hg-field-group--content,
+  .hg-field-group--multi-body
+) > .hg-field-body {
+  max-width: none;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--unlabelled > *,
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--content > * {
+  grid-column: 1 / -1;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--multi-body {
+  grid-template-columns: var(--hg-form-label-width) repeat(2, minmax(0, 1fr));
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .hg-field-control.form-control,
+  select.hg-field-control,
+  input.hg-field-control:not([type='checkbox']):not([type='radio']),
+  textarea.hg-field-control,
+  .hg-select__control
+) {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--hg-border);
+  border-radius: 10px;
+  color: var(--hg-text);
+  background: var(--hg-surface-muted);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--hg-text) 4%, transparent);
+  transition: border-color .16s ease, box-shadow .16s ease, background-color .16s ease;
+}
+
+body.hg-form-page #pageForm.hg-modern-form textarea.hg-field-control {
+  min-height: 124px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .hg-field-control,
+  .hg-select__control
+):hover:not(:disabled):not([readonly]) {
+  border-color: color-mix(in srgb, var(--hg-action) 42%, var(--hg-border));
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .hg-field-control,
+  .hg-select__control
+):focus,
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .hg-field-control,
+  .hg-select__control
+):focus-visible,
+body.hg-form-page #pageForm.hg-modern-form .hg-select.is-open .hg-select__control {
+  outline: 0;
+  border-color: var(--hg-action);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--hg-action) 17%, transparent);
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .hg-field-group--readonly .hg-field-control,
+  .hg-field-control[readonly],
+  .hg-field-control:disabled,
+  fieldset[disabled] .hg-field-control
+) {
+  color: var(--hg-text-muted);
+  border-color: var(--hg-border);
+  background: color-mix(in srgb, var(--hg-surface-muted) 72%, var(--hg-surface));
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: .78;
+}
+
+body.hg-form-page #pageForm.hg-modern-form select.hg-field-control option,
+body.hg-form-page #pageForm.hg-modern-form select.hg-field-control optgroup {
+  color: var(--hg-text);
+  background: var(--hg-surface);
+}
+
+body.hg-form-page #pageForm.hg-modern-form input[type='checkbox'],
+body.hg-form-page #pageForm.hg-modern-form input[type='radio'] {
+  width: 19px;
+  height: 19px;
+  min-height: 19px;
+  margin: 0 8px 0 0;
+  accent-color: var(--hg-action);
+  vertical-align: middle;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .checkbox,
+  .radio,
+  .checkbox-inline,
+  .radio-inline
+) {
+  display: inline-flex;
+  min-height: 36px;
+  margin: 0;
+  align-items: center;
+  gap: 7px;
+  color: var(--hg-text);
+  line-height: 1.45;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.checkbox label, .radio label) {
+  display: inline-flex;
+  min-height: 36px;
+  padding: 0;
+  align-items: center;
+  gap: 8px;
+}
+
+body.hg-form-page #pageForm.hg-modern-form input[type='file'] {
+  width: 100%;
+  min-height: 46px;
+  padding: 6px;
+  border: 1px dashed color-mix(in srgb, var(--hg-action) 30%, var(--hg-border));
+  border-radius: 10px;
+  color: var(--hg-text-muted);
+  background: color-mix(in srgb, var(--hg-action) 3%, var(--hg-surface));
+}
+
+body.hg-form-page #pageForm.hg-modern-form input[type='file']::file-selector-button {
+  min-height: 32px;
+  margin-right: 10px;
+  padding: 6px 12px;
+  border: 1px solid var(--hg-border);
+  border-radius: 8px;
+  color: var(--hg-text);
+  background: var(--hg-surface-muted);
+  font-weight: 720;
+  cursor: pointer;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-help {
+  display: block;
+  max-width: 72ch;
+  margin: 7px 0 0;
+  color: var(--hg-text-muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.has-error, .has-warning, .has-success) {
+  padding-left: 12px;
+  border-left: 3px solid var(--hg-border);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .has-error {
+  border-left-color: var(--hg-danger);
+  background: color-mix(in srgb, var(--hg-danger) 5%, var(--hg-surface));
+}
+
+body.hg-form-page #pageForm.hg-modern-form .has-warning {
+  border-left-color: var(--hg-warning);
+  background: color-mix(in srgb, var(--hg-warning) 5%, var(--hg-surface));
+}
+
+body.hg-form-page #pageForm.hg-modern-form .has-success {
+  border-left-color: var(--hg-success);
+  background: color-mix(in srgb, var(--hg-success) 4%, var(--hg-surface));
+}
+
+body.hg-form-page #pageForm.hg-modern-form #passBar {
+  width: 100%;
+  min-height: 8px;
+  margin: 8px 0 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--hg-surface-muted);
+  box-shadow: inset 0 0 0 1px var(--hg-border);
+}
+
+body.hg-form-page #pageForm.hg-modern-form #passText {
+  display: block;
+  min-height: 1.4em;
+  color: var(--hg-text-muted);
+  font-size: 11px;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-fieldset {
+  margin: 10px 0 18px;
+  padding: 12px 16px 14px;
+  border: 1px solid var(--hg-border);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--hg-surface-muted) 52%, var(--hg-surface));
+  box-shadow: none;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .hg-form-section-heading,
+  .hg-form-fieldset > legend
+) {
+  color: var(--hg-text-muted);
+  font-size: 11px;
+  font-weight: 780;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-actions {
+  position: sticky;
+  z-index: 4;
+  bottom: 0;
+  display: flex;
+  width: auto;
+  max-width: none;
+  margin: 18px -28px 0;
+  padding: 12px 28px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 9px;
+  border: 0;
+  border-top: 1px solid var(--hg-border);
+  border-radius: 0 0 14px 14px;
+  background: color-mix(in srgb, var(--hg-surface) 95%, transparent);
+  box-shadow: 0 -10px 26px color-mix(in srgb, var(--hg-text) 8%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-actions > :where(
+  .btn,
+  button,
+  input[type='button'],
+  input[type='submit']
+) {
+  min-width: 108px;
+  min-height: 42px;
+  margin: 0;
+  border-radius: 9px;
+  font-weight: 740;
+  box-shadow: none;
+}
+
+/* complex form sections and branding tools belong to the form owner. */
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--with-affix { align-items: start; }
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-affix {
+  display: flex;
+  width: auto;
+  max-width: 180px;
+  min-height: 44px;
+  align-items: center;
+  padding: 8px 12px;
+  color: var(--hg-text-muted);
+  border: 1px solid var(--hg-border);
+  border-radius: 10px;
+  background: var(--hg-surface-muted);
+  font-size: 12px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-accordion {
+  display: grid;
+  gap: 10px;
+  margin: 8px 0 18px;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-panel {
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid var(--hg-border);
+  border-radius: 12px;
+  background: var(--hg-surface);
+  box-shadow: none;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-panel-heading {
+  min-height: 48px;
+  padding: 0;
+  border: 0;
+  background: var(--hg-surface-muted);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-panel-trigger {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto 18px;
+  gap: 10px;
+  width: 100%;
+  min-height: 48px;
+  align-items: center;
+  padding: 11px 14px;
+  color: var(--hg-text);
+  background: transparent;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 780;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-panel-trigger::after {
+  grid-column: 3;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  content: '';
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform .16s ease;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-panel-trigger[aria-expanded='true']::after {
+  transform: rotate(225deg) translate(-1px, -1px);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-panel-trigger:is(:hover, :focus-visible) {
+  color: var(--hg-action);
+  background: color-mix(in srgb, var(--hg-action) 6%, var(--hg-surface-muted));
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-panel-count {
+  grid-column: 2;
+  display: inline-flex;
+  min-width: 28px;
+  min-height: 24px;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 7px;
+  color: var(--hg-text-muted);
+  border: 1px solid var(--hg-border);
+  border-radius: 999px;
+  background: var(--hg-surface);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-panel .panel-body {
+  padding: 8px 18px 14px;
+  border-top: 1px solid var(--hg-border);
+  background: var(--hg-surface);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .tab-pane > :where(.alert, .alert-info, .alert-warning, .alert-success, .alert-danger):first-child,
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--content > .hg-field-body > :where(.alert, .alert-info, .alert-warning, .alert-success, .alert-danger):only-child {
+  min-height: 86px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 12px;
+  padding: 16px 18px;
+  border-width: 1px;
+  border-left-width: 4px;
+  border-radius: 11px;
+  text-align: center;
+  box-shadow: none;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .tab-pane > :where(.alert, .alert-info):first-child {
+  color: var(--hg-info-ink);
+  border-color: color-mix(in srgb, var(--hg-info) 38%, var(--hg-border));
+  background: color-mix(in srgb, var(--hg-info) 7%, var(--hg-surface));
+}
+
+body.hg-app-navigation-enabled .hg-settings-section { margin: 18px 0; overflow: hidden; border: 1px solid var(--hg-border); border-radius: var(--hg-radius-lg); background: var(--hg-surface); box-shadow: var(--hg-shadow-sm); }
+body.hg-app-navigation-enabled .hg-settings-section__header,
+body.hg-app-navigation-enabled .hg-settings-section > summary { padding: 16px 20px; border-bottom: 1px solid var(--hg-border); background: var(--hg-surface-muted); }
+body.hg-app-navigation-enabled .hg-settings-section__header h3,
+body.hg-app-navigation-enabled .hg-settings-section > summary span { margin: 0; color: var(--hg-text); font-size: 15px; font-weight: 750; }
+body.hg-app-navigation-enabled .hg-settings-section__header p,
+body.hg-app-navigation-enabled .hg-settings-section > summary small { display: block; margin: 4px 0 0; color: var(--hg-text-muted); line-height: 1.45; }
+body.hg-app-navigation-enabled .hg-settings-section > .form-group,
+body.hg-app-navigation-enabled .hg-settings-section__body > .form-group { margin: 0; padding: 14px 20px; border-bottom: 1px solid var(--hg-border); }
+body.hg-app-navigation-enabled .hg-settings-section > .form-group:last-child,
+body.hg-app-navigation-enabled .hg-settings-section__body > .form-group:last-child { border-bottom: 0; }
+body.hg-app-navigation-enabled .hg-settings-section > summary { cursor: pointer; list-style: none; }
+body.hg-app-navigation-enabled .hg-settings-section > summary::-webkit-details-marker { display: none; }
+body.hg-app-navigation-enabled .hg-settings-section > summary::after { content: '+'; float: right; margin-top: -28px; color: var(--hg-accent); font-size: 21px; font-weight: 700; }
+body.hg-app-navigation-enabled .hg-settings-section[open] > summary::after { content: '\2212'; }
+
+/* final form contrast guard.
+ *
+ * Complex ISPConfig forms can still inject legacy columns, native controls and
+ * plugin widgets. This guard keeps them readable in light and dark mode without
+ * taking ownership away from the form-specific component layer above. */
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .form-group,
+  .form-row,
+  .controls,
+  .input-append,
+  .input-prepend,
+  .checkbox,
+  .radio
+) {
+  min-width: 0;
+  color: var(--hg-text);
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .control-label,
+  label,
+  legend,
+  .radio label,
+  .checkbox label,
+  .help-block,
+  .help-inline,
+  .description,
+  small
+) {
+  color: var(--hg-text);
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.help-block, .help-inline, .description, small) {
+  color: var(--hg-text-muted);
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  input,
+  select,
+  textarea,
+  .form-control,
+  .uneditable-input,
+  .input-group-addon,
+  .input-group-btn > .btn
+) {
+  max-width: 100%;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :where(
+  .content-tab-wrapper,
+  .content-tab-wrapper > .tab-content,
+  .tab-content,
+  .tab-pane,
+  .panel,
+  .panel-body,
+  .well,
+  .box,
+  .hg-field-control,
+  .hg-select__control,
+  .input-group-addon,
+  .input-group-btn > .btn,
+  input[type='file'],
+  input[type='file']::file-selector-button
+) {
+  color: var(--hg-text);
+  border-color: var(--hg-border);
+  background-color: var(--hg-surface-muted);
+}
+
+/* premium branding manager finish.
+ *
+ * The branding section remains a normal ISPConfig form, but visually it is a
+ * product configuration surface: calm cards, clear previews and less noisy
+ * native upload controls. */
+
+@container hg-form (max-width: 760px) {
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-group,
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-group--multi-body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 7px;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-group > :where(.control-label, label) {
+    padding-top: 0;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-group > * {
+    grid-column: 1;
+  }
+}
+
+@media (min-width: 900px) {
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-group--with-affix {
+    grid-template-columns: var(--hg-form-label-width) minmax(220px, var(--hg-form-control-width)) minmax(80px, auto);
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-group--with-affix > .hg-field-body:not(.hg-field-affix) { grid-column: 2; }
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-group--with-affix > .hg-field-affix { grid-column: 3; }
+}
+
+@media (max-width: 670px) {
+
+  body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper {
+    margin-inline: -4px;
+    border-radius: 12px;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper > .nav-tabs {
+    min-height: 52px;
+    padding: 7px;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper > .nav-tabs > li > a {
+    min-height: 38px;
+    padding: 9px 11px;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper > .tab-content {
+    padding: 7px 14px 0;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-group,
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-group--multi-body {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 12px 0;
+    gap: 7px;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-group > :where(.control-label, label) {
+    padding-top: 0;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-group > * {
+    grid-column: 1;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form .input-group {
+    display: grid;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-affix { max-width: none; min-height: 36px; }
+  body.hg-form-page #pageForm.hg-modern-form .hg-form-panel .panel-body { padding-inline: 12px; }
+
+  body.hg-form-page #pageForm.hg-modern-form .input-group > *,
+  body.hg-form-page #pageForm.hg-modern-form .input-group-btn,
+  body.hg-form-page #pageForm.hg-modern-form .input-group-btn > .btn {
+    width: 100%;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form .hg-form-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 14px -14px 0;
+    padding: 10px 14px;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form .hg-form-actions > :where(
+    .btn,
+    button,
+    input[type='button'],
+    input[type='submit']
+  ) {
+    width: 100%;
+    min-width: 0;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 420px) {
+  body.hg-form-page #pageForm.hg-modern-form .hg-form-actions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-group,
+  body.hg-form-page #pageForm.hg-modern-form :where(.hg-field-control, .hg-select__control) {
+    transition: none;
+  }
+}
+
+/* form-specific server-rendered structure presentation. */
+
+body.hg-app-navigation-enabled .form-horizontal .control-label { padding-top: 10px; color: var(--hg-text); font-size: 13px; font-weight: 700; letter-spacing: .01em; line-height: 1.35; }
+body.hg-app-navigation-enabled .form-horizontal .form-group { margin-right: 0; margin-left: 0; padding: 14px 0; border-bottom: 1px solid var(--hg-border); }
+body.hg-app-navigation-enabled .form-horizontal .form-group:last-child { border-bottom: 0; }
+body.hg-app-navigation-enabled .form-horizontal .right { display: flex; justify-content: flex-end; gap: 8px; padding-top: 12px; }
+body.hg-app-navigation-enabled .fieldset-legend { margin: 20px 0 10px; color: var(--hg-text); font-size: 15px; font-weight: 700; }
+body.hg-app-navigation-enabled .control-label { color: var(--hg-text); font-weight: 600; }
+body.hg-app-navigation-enabled .form-group { margin-bottom: 18px; }
+body.hg-app-navigation-enabled .confirmpassworderror { color: var(--hg-danger-ink); font-weight: 600; }
+body.hg-app-navigation-enabled .confirmpasswordok { color: var(--hg-success-ink); font-weight: 600; }
+body.hg-app-navigation-enabled #passBar { overflow: hidden; border-radius: 999px; }
+
+/* final readable form guard for legacy/addon fragments. */
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm, .pnl_formsarea, .tab-content, .tab-pane) {
+  min-width: 0;
+  color: var(--hg-text);
+}
+
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(
+  .form-group,
+  .row,
+  [class*='col-'],
+  .controls,
+  .checkbox,
+  .radio,
+  .input-group,
+  .input-append,
+  .input-prepend
+) {
+  min-width: 0;
+}
+
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(.input-group, .input-append, .input-prepend) {
+  display: flex;
+  max-width: 100%;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 8px;
+}
+
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(.input-group > .form-control, .input-group-field, .input-append > input, .input-prepend > input) {
+  min-width: min(220px, 100%);
+  flex: 1 1 220px;
+}
+
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(
+  label,
+  .control-label,
+  legend,
+  .fieldset-legend,
+  .checkbox label,
+  .radio label
+) {
+  color: var(--hg-text);
+}
+
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(
+  label *,
+  .control-label *,
+  legend *,
+  .fieldset-legend *
+) {
+  color: inherit;
+}
+
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(
+  .help-block,
+  .help-inline,
+  .description,
+  .text-muted,
+  .small,
+  small
+) {
+  color: var(--hg-text-muted);
+}
+
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(
+  input:not([type='checkbox']):not([type='radio']),
+  select,
+  textarea,
+  .form-control,
+  .uneditable-input
+) {
+  width: 100%;
+  max-width: 100%;
+  color: var(--hg-text);
+  border-color: var(--hg-border);
+  background-color: var(--hg-surface-muted);
+}
+
+/* residual form-surface contrast hardening.
+ *
+ * Some module pages still inject Bootstrap-era panels, wells, tab panes and
+ * muted labels inside the modern form. These elements must inherit the
+ * Heritage semantic surface instead of carrying pale text on pale backgrounds
+ * or white panels inside dark mode. */
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .panel,
+  .panel-default,
+  .panel-body,
+  .well,
+  .box,
+  .tab-content,
+  .tab-pane,
+  .table,
+  .table > tbody,
+  .table > tbody > tr,
+  .table > tbody > tr > td,
+  .table > tbody > tr > th
+) {
+  color: var(--hg-text);
+  border-color: var(--hg-border);
+  background-color: var(--hg-surface);
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .panel-heading,
+  .panel-footer,
+  .table > thead,
+  .table > thead > tr,
+  .table > thead > tr > th,
+  .table > tfoot,
+  .table > tfoot > tr,
+  .table > tfoot > tr > td
+) {
+  color: var(--hg-text);
+  border-color: var(--hg-border);
+  background-color: var(--hg-surface-muted);
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .control-label,
+  .hg-field-group > label,
+  .hg-field-group > .control-label,
+  .checkbox,
+  .radio,
+  .checkbox label,
+  .radio label,
+  .text-muted,
+  .muted
+) {
+  color: var(--hg-text) !important;
+  opacity: 1;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.help-block, .help-inline, .description, small, .text-muted, .muted) {
+  color: var(--hg-text-muted) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(input, textarea, select, .form-control)::placeholder {
+  color: color-mix(in srgb, var(--hg-text-muted) 78%, transparent);
+  opacity: 1;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :where(
+  .panel,
+  .panel-default,
+  .panel-body,
+  .well,
+  .box,
+  .tab-content,
+  .tab-pane,
+  .table,
+  .table > tbody,
+  .table > tbody > tr,
+  .table > tbody > tr > td,
+  .table > tbody > tr > th
+) {
+  color: var(--hg-text);
+  border-color: var(--hg-border);
+  background-color: var(--hg-surface);
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :where(
+  .panel-heading,
+  .panel-footer,
+  .table > thead,
+  .table > thead > tr,
+  .table > thead > tr > th,
+  .table > tfoot,
+  .table > tfoot > tr,
+  .table > tfoot > tr > td
+) {
+  color: var(--hg-text);
+  border-color: var(--hg-border);
+  background-color: var(--hg-surface-muted);
+}
+
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(
+  select,
+  option,
+  optgroup
+) {
+  color: var(--hg-text);
+  background-color: var(--hg-surface);
+}
+
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(
+  input[readonly],
+  input[disabled],
+  select[disabled],
+  textarea[readonly],
+  textarea[disabled],
+  .form-control[readonly],
+  .form-control[disabled],
+  .uneditable-input
+) {
+  color: var(--hg-text-muted);
+  border-color: var(--hg-border);
+  background-color: color-mix(in srgb, var(--hg-surface-muted) 76%, var(--hg-surface));
+  opacity: .82;
+}
+
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(input[type='checkbox'], input[type='radio']) {
+  accent-color: var(--hg-action);
+}
+
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(
+  .input-group-addon,
+  .add-on,
+  .input-group-btn > .btn,
+  .btn-default,
+  .btn-secondary
+) {
+  min-height: 42px;
+  border-radius: 11px;
+  color: var(--hg-text);
+  border-color: var(--hg-border);
+  background-color: color-mix(in srgb, var(--hg-surface-muted) 88%, var(--hg-surface));
+  background-image: none;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control
+) {
+  min-height: 44px;
+  color: var(--hg-text);
+  border-color: var(--hg-border);
+  background: var(--hg-surface-muted);
+  box-shadow: none;
+}
+
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(
+  .hg-owned-enhanced-select__value,
+  .hg-owned-enhanced-select__value,
+  .hg-owned-enhanced-select__control span,
+  .hg-owned-enhanced-select__control li.search-choice
+) {
+  color: var(--hg-text);
+}
+
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(
+  .hg-owned-enhanced-select__arrow,
+  .hg-owned-enhanced-select__control div
+) {
+  color: var(--hg-text-muted);
+  border-left-color: var(--hg-border);
+  background: color-mix(in srgb, var(--hg-surface-muted) 78%, var(--hg-surface));
+}
+
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(
+  input:not([type='checkbox']):not([type='radio']),
+  select,
+  textarea,
+  .form-control,
+  .uneditable-input,
+  .input-group-btn > .btn
+):focus,
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(
+  input:not([type='checkbox']):not([type='radio']),
+  select,
+  textarea,
+  .form-control,
+  .uneditable-input,
+  .input-group-btn > .btn
+):focus-visible {
+  color: var(--hg-text);
+  border-color: var(--hg-action);
+  background-color: var(--hg-surface);
+  outline: 0;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--hg-action) 16%, transparent);
+}
+
+html[data-heritage-theme='dark'] body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) {
+  color-scheme: dark;
+}
+
+body.hg-form-page {
+  scrollbar-color: color-mix(in srgb, var(--hg-action) 25%, transparent) transparent;
+}
+
+body.hg-form-page::-webkit-scrollbar { width: 11px; }
+body.hg-form-page::-webkit-scrollbar-track { background: transparent; }
+body.hg-form-page::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--hg-action) 25%, transparent);
+  background-clip: padding-box;
+}
+
+body.hg-form-page::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--hg-action) 38%, transparent);
+  background-clip: padding-box;
+}
+
+html[data-heritage-theme='dark'] body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(
+  option,
+  optgroup,
+  .hg-owned-enhanced-select__panel,
+  .hg-owned-enhanced-select .hg-owned-enhanced-select__panel,
+  .hg-owned-enhanced-select__results,
+  .hg-owned-enhanced-select .hg-owned-enhanced-select__results
+) {
+  color: var(--hg-text);
+  border-color: var(--hg-border);
+  background: var(--hg-surface);
+}
+
+/* last-mile legacy form contrast safety net.
+ *
+ * A few rarely used ISPConfig and addon templates still ship inline white text,
+ * pale table cells or white background snippets. This guard catches those
+ * fragments only inside authenticated form workspaces and maps them back to
+ * the active Heritage tokens, so light and dark modes stay readable during
+ * the migration away from old Bootstrap-era markup. */
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm, .pnl_formsarea, .tab-content, .tab-pane) :where(
+  [style*='color: #fff'],
+  [style*='color:#fff'],
+  [style*='color: white'],
+  [style*='color:white'],
+  [style*='color: rgb(255, 255, 255)'],
+  [style*='color:rgb(255,255,255)']
+) {
+  color: var(--hg-text) !important;
+}
+
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm, .pnl_formsarea, .tab-content, .tab-pane) :where(
+  [style*='background: #fff'],
+  [style*='background:#fff'],
+  [style*='background-color: #fff'],
+  [style*='background-color:#fff'],
+  [style*='background: white'],
+  [style*='background:white'],
+  [style*='background-color: white'],
+  [style*='background-color:white']
+) {
+  color: var(--hg-text) !important;
+  border-color: var(--hg-border) !important;
+  background-color: var(--hg-surface) !important;
+  background-image: none !important;
+}
+
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm, .pnl_formsarea, .tab-content, .tab-pane) :where(
+  .muted,
+  .text-muted,
+  .disabled,
+  [disabled],
+  [readonly],
+  [aria-disabled='true']
+) {
+  opacity: 1 !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm, .pnl_formsarea, .tab-content, .tab-pane) :where(
+  .table,
+  .table > tbody,
+  .table > tbody > tr,
+  .table > tbody > tr > td,
+  .table > tbody > tr > th,
+  .table > tfoot,
+  .table > tfoot > tr,
+  .table > tfoot > tr > td,
+  .table > tfoot > tr > th,
+  .form-control,
+  .uneditable-input,
+  .input-group-addon,
+  .add-on
+) {
+  color: var(--hg-text) !important;
+  border-color: var(--hg-border) !important;
+  background-color: var(--hg-surface-muted) !important;
+  background-image: none !important;
+  text-shadow: none !important;
+}
+
+@media (max-width: 1100px) and (min-width: 671px) {
+}
+
+/* premium form density pass.
+ *
+ * Long ISPConfig settings pages are generated from legacy form definitions and
+ * can otherwise feel like stretched tables. This final Heritage layer keeps
+ * the backend contract untouched while making those forms denser, clearer and
+ * more product-like in light and dark themes. */
+body.hg-form-page #pageForm.hg-modern-form {
+  --hg-form-card-width: 1320px;
+  --hg-form-content-width: 1180px;
+  --hg-form-label-width: clamp(190px, 17cqi, 236px);
+  --hg-form-control-width: 100%;
+  --hg-form-row-gap: clamp(16px, 2cqi, 34px);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper {
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface) 96%, var(--hg-action) 2%), var(--hg-surface));
+  box-shadow:
+    0 24px 64px color-mix(in srgb, var(--hg-text) 8%, transparent),
+    inset 0 1px 0 color-mix(in srgb, #fff 24%, transparent);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper > .nav-tabs {
+  min-height: 54px;
+  padding: 9px 12px 0;
+  gap: 6px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 82%, var(--hg-surface)), color-mix(in srgb, var(--hg-surface-muted) 68%, var(--hg-surface)));
+}
+
+body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper > .nav-tabs > li > a {
+  min-height: 36px;
+  padding: 8px 14px;
+  border-radius: 12px 12px 0 0;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper > .nav-tabs > li.active > a {
+  color: var(--hg-action-quiet-text);
+  background: color-mix(in srgb, var(--hg-surface) 94%, var(--hg-action) 3%);
+  box-shadow:
+    inset 0 -3px 0 var(--hg-action),
+    0 10px 22px color-mix(in srgb, var(--hg-action) 6%, transparent);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper > .tab-content {
+  padding: clamp(18px, 2.2cqi, 28px) clamp(18px, 3.2cqi, 34px);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper > .tab-content > .tab-pane {
+  max-width: var(--hg-form-content-width);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group {
+  grid-template-columns: minmax(180px, var(--hg-form-label-width)) minmax(0, 1fr);
+  min-height: 0;
+  padding: 13px 4px;
+  gap: var(--hg-form-row-gap);
+  align-items: center;
+  border-bottom-color: color-mix(in srgb, var(--hg-border) 52%, transparent);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group:focus-within {
+  border-radius: 15px;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--hg-action) 6%, transparent), transparent 58%),
+    color-mix(in srgb, var(--hg-surface-muted) 36%, var(--hg-surface));
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group > :where(.control-label, label) {
+  align-self: center;
+  padding: 0;
+  color: color-mix(in srgb, var(--hg-text) 88%, var(--hg-text-muted));
+  letter-spacing: -.005em;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-body {
+  max-width: none;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .hg-field-control.form-control,
+  select.hg-field-control,
+  input.hg-field-control:not([type='checkbox']):not([type='radio']),
+  textarea.hg-field-control,
+  .hg-select__control,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control
+) {
+  min-height: 42px;
+  border-radius: 13px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 86%, var(--hg-surface)), color-mix(in srgb, var(--hg-surface-muted) 74%, var(--hg-surface)));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #fff 18%, transparent),
+    0 1px 2px color-mix(in srgb, var(--hg-text) 3%, transparent);
+}
+
+body.hg-form-page #pageForm.hg-modern-form textarea.hg-field-control {
+  min-height: 108px;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .input-group {
+  gap: 10px;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .input-group .input-group-btn > .btn,
+body.hg-form-page #pageForm.hg-modern-form .input-group-btn > .btn,
+body.hg-form-page #pageForm.hg-modern-form :where(.btn, button, input[type='button'], input[type='submit']).btn-default {
+  min-height: 42px;
+  border-radius: 13px;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-actions,
+body.hg-form-page #pageForm.hg-modern-form .form-actions,
+body.hg-form-page #pageForm.hg-modern-form .buttonHolder,
+body.hg-form-page #pageForm.hg-modern-form .ctrlHolder:last-child {
+  position: sticky;
+  right: 0;
+  bottom: 18px;
+  z-index: 20;
+  display: flex;
+  width: max-content;
+  max-width: 100%;
+  margin: 18px 0 0 auto;
+  padding: 11px;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+  border: 1px solid color-mix(in srgb, var(--hg-border) 82%, transparent);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--hg-surface) 88%, transparent);
+  box-shadow: 0 18px 42px color-mix(in srgb, var(--hg-text) 10%, transparent);
+  backdrop-filter: blur(16px);
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-form-actions, .form-actions, .buttonHolder) :where(.btn, button, input[type='button'], input[type='submit']) {
+  min-height: 40px;
+  border-radius: 12px;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface) 92%, #fff 3%), var(--hg-surface));
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, .34),
+    inset 0 1px 0 rgba(255, 255, 255, .04);
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :where(
+  .hg-field-control.form-control,
+  select.hg-field-control,
+  input.hg-field-control:not([type='checkbox']):not([type='radio']),
+  textarea.hg-field-control,
+  .hg-select__control,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control
+) {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 88%, #fff 2%), var(--hg-surface-muted));
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :where(.hg-form-actions, .form-actions, .buttonHolder, .ctrlHolder:last-child) {
+  background: color-mix(in srgb, var(--hg-surface) 78%, transparent);
+  box-shadow: 0 20px 52px rgba(0, 0, 0, .38);
+}
+
+/* generated form surface hardening.
+ *
+ * The remaining ISPConfig pages are a mixture of generated form rows,
+ * Bootstrap fragments and addon widgets. This pass makes those fragments use
+ * Heritage tokens by default, so old light/dark leftovers do not punch holes
+ * into the premium interface while backend templates are still being migrated.
+ */
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .tab-pane,
+  .pnl_formsarea,
+  .panel,
+  .panel-default,
+  .panel-body,
+  .well,
+  .box,
+  .ctrlHolder,
+  .form-group,
+  .form-row,
+  .row,
+  .controls,
+  .field,
+  .fieldset,
+  fieldset
+) {
+  min-width: 0;
+  color: var(--hg-text);
+  border-color: var(--hg-border);
+  background-image: none;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .control-label,
+  .form-label,
+  label,
+  legend,
+  .fieldset-legend,
+  .alert-label,
+  .alert-content,
+  .checkbox,
+  .radio,
+  .checkbox label,
+  .radio label
+) {
+  color: var(--hg-text) !important;
+  text-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .help-block,
+  .help-inline,
+  .description,
+  .hint,
+  .form-text,
+  .small,
+  small,
+  .text-muted,
+  .muted
+) {
+  color: var(--hg-text-muted) !important;
+  opacity: 1 !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']),
+  select,
+  textarea,
+  .form-control,
+  .uneditable-input,
+  .inputbox,
+  .text,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control
+) {
+  width: 100%;
+  max-width: 100%;
+  min-height: 42px;
+  color: var(--hg-text) !important;
+  border: 1px solid var(--hg-border) !important;
+  border-radius: 13px !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 88%, var(--hg-surface)), var(--hg-surface-muted)) !important;
+  background-color: var(--hg-surface-muted) !important;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #fff 14%, transparent),
+    0 1px 2px color-mix(in srgb, var(--hg-text) 3%, transparent) !important;
+  text-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']),
+  select,
+  textarea,
+  .form-control,
+  .uneditable-input,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control
+):is(:hover, :focus, :focus-visible) {
+  border-color: color-mix(in srgb, var(--hg-action) 48%, var(--hg-border)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']),
+  select,
+  textarea,
+  .form-control,
+  .uneditable-input
+):focus,
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control
+) {
+  outline: 0 !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--hg-action) 17%, transparent) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .hg-owned-enhanced-select__panel,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__results,
+  .hg-owned-enhanced-select .hg-owned-enhanced-select__panel,
+  .hg-owned-enhanced-select .hg-owned-enhanced-select__results,
+  .hg-owned-enhanced-select .hg-owned-enhanced-select__option
+) {
+  color: var(--hg-text);
+  border-color: var(--hg-border);
+  background: var(--hg-surface);
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .hg-owned-enhanced-select__option--active,
+  .hg-owned-enhanced-select .hg-owned-enhanced-select__option--active
+) {
+  color: var(--hg-action-contrast, #fff);
+  background: var(--hg-action);
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .alert,
+  .alert-info,
+  .alert-warning,
+  .alert-success,
+  .alert-danger,
+  .box_error,
+  .box_warning,
+  .box_success
+) {
+  display: block;
+  min-height: auto;
+  margin: 12px 0;
+  padding: 14px 16px;
+  color: var(--hg-text);
+  border: 1px solid var(--hg-border);
+  border-left: 4px solid var(--hg-action);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--hg-action) 7%, var(--hg-surface));
+  box-shadow: none;
+  text-align: left;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.alert *, .box_error *, .box_warning *, .box_success *) {
+  color: inherit;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.alert-danger, .box_error) {
+  border-left-color: var(--hg-danger);
+  background: color-mix(in srgb, var(--hg-danger) 9%, var(--hg-surface));
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.alert-warning, .box_warning) {
+  border-left-color: var(--hg-warning);
+  background: color-mix(in srgb, var(--hg-warning) 10%, var(--hg-surface));
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.alert-success, .box_success) {
+  border-left-color: var(--hg-success);
+  background: color-mix(in srgb, var(--hg-success) 8%, var(--hg-surface));
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form {
+  color-scheme: dark;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :where(
+  input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']),
+  select,
+  textarea,
+  .form-control,
+  .uneditable-input,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control
+) {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 88%, #fff 2%), var(--hg-surface-muted)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .035),
+    0 1px 2px rgba(0, 0, 0, .2) !important;
+}
+
+@media (max-width: 900px) {
+  body.hg-form-page #pageForm.hg-modern-form :where(
+    .input-group,
+    .input-append,
+    .input-prepend,
+    .hg-form-actions,
+    .form-actions,
+    .buttonHolder
+  ) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form :where(
+    .input-group > *,
+    .input-append > *,
+    .input-prepend > *,
+    .hg-form-actions > *,
+    .form-actions > *,
+    .buttonHolder > *
+  ) {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@container hg-form (max-width: 760px) {
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-group,
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-group--multi-body {
+    grid-template-columns: 1fr;
+    padding: 14px 0;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-group > :where(.control-label, label) {
+    align-self: start;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form :where(.hg-form-actions, .form-actions, .buttonHolder, .ctrlHolder:last-child) {
+    width: 100%;
+    margin-top: 16px;
+    bottom: 10px;
+  }
+}
+
+/* final generated form contrast and legacy fragment ownership.
+ *
+ * Real ISPConfig forms and add-ons still emit a mix of legacy tables,
+ * Bootstrap rows, inline helpers and old enhanced-select markup. This final
+ * scoped layer makes Heritage own those surfaces consistently in light and
+ * dark mode without touching the default theme. */
+body.hg-form-page #pageForm.hg-modern-form :where(
+  table,
+  tbody,
+  tfoot,
+  tr,
+  td,
+  th,
+  .table,
+  .table-wrapper,
+  .panel,
+  .panel-body,
+  .pnl_formsarea,
+  .formtable,
+  .form-table,
+  .fieldset,
+  .fieldset-container,
+  .well,
+  .box,
+  .box-content,
+  .ctrlHolder,
+  .form-group
+) {
+  color: var(--hg-text) !important;
+  border-color: var(--hg-border) !important;
+  background-color: transparent !important;
+  text-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .panel,
+  .panel-body,
+  .pnl_formsarea,
+  .fieldset,
+  .fieldset-container,
+  .well,
+  .box,
+  .box-content
+) {
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 58%, var(--hg-surface)), var(--hg-surface)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .control-label,
+  label,
+  legend,
+  .fieldset-legend,
+  .help-block,
+  .help-inline,
+  .description,
+  .form-text,
+  .input-help,
+  .text-muted,
+  .muted,
+  small
+)[style] {
+  color: inherit !important;
+  opacity: 1 !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  input,
+  select,
+  textarea,
+  button,
+  .btn,
+  .form-control,
+  .inputbox,
+  .uneditable-input,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select .hg-owned-enhanced-select__value,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__search,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control span,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select .hg-owned-enhanced-select__search,
+  .hg-owned-enhanced-select .hg-owned-enhanced-select__option
+) {
+  text-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .hg-owned-enhanced-select__panel,
+  .hg-owned-enhanced-select__panel,
+  .hg-owned-enhanced-select__results,
+  .hg-owned-enhanced-select .hg-owned-enhanced-select__panel
+) {
+  color: var(--hg-text) !important;
+  border-color: var(--hg-border) !important;
+  background: var(--hg-surface) !important;
+  box-shadow: 0 22px 56px color-mix(in srgb, var(--hg-text) 16%, transparent) !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :where(
+  .panel,
+  .panel-body,
+  .pnl_formsarea,
+  .fieldset,
+  .fieldset-container,
+  .well,
+  .box,
+  .box-content,
+  .table-wrapper
+) {
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 86%, #fff 2%), var(--hg-surface)) !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :where(
+  td,
+  th,
+  .control-label,
+  label,
+  legend,
+  .fieldset-legend,
+  .help-block,
+  .help-inline,
+  .description,
+  .form-text,
+  .text-muted,
+  .muted,
+  small
+) {
+  text-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  input[style*='background: #fff'],
+  input[style*='background-color: #fff'],
+  textarea[style*='background: #fff'],
+  textarea[style*='background-color: #fff'],
+  select[style*='background: #fff'],
+  select[style*='background-color: #fff'],
+  .form-control[style*='background: #fff'],
+  .form-control[style*='background-color: #fff']
+) {
+  color: var(--hg-text) !important;
+  background: var(--hg-surface-muted) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  [style*='color: #fff'],
+  [style*='color:#fff'],
+  [style*='color: white'],
+  [style*='color:white']
+) {
+  color: var(--hg-text) !important;
+}
+
+/* broad generated-form surface quarantine.
+ *
+ * After the navigation and dashboard conversion the remaining visual defects
+ * are mostly generated module forms: nested Bootstrap panels, old table-based
+ * form layouts, add-on snippets and inline white fragments. This layer keeps
+ * those fragments inside the Heritage card system, especially in dark mode
+ * and during live resizing. */
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .content-tab-wrapper,
+  .tab-content,
+  .tab-pane,
+  .panel,
+  .panel-default,
+  .panel-body,
+  .pnl_formsarea,
+  .fieldset,
+  fieldset,
+  .fieldset-container,
+  .formtable,
+  .form-table,
+  .table,
+  .table-wrapper,
+  .table-responsive,
+  .well,
+  .box,
+  .box-content,
+  .form-group,
+  .ctrlHolder,
+  .input-group,
+  .input-append,
+  .input-prepend
+) {
+  min-inline-size: 0 !important;
+  max-inline-size: 100% !important;
+  box-sizing: border-box !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .tab-content,
+  .tab-pane,
+  .panel,
+  .panel-default,
+  .panel-body,
+  .pnl_formsarea,
+  .fieldset,
+  fieldset,
+  .fieldset-container,
+  .well,
+  .box,
+  .box-content
+) {
+  color: var(--hg-text) !important;
+  border-color: color-mix(in srgb, var(--hg-action) 9%, var(--hg-border)) !important;
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 56%, var(--hg-surface)), var(--hg-surface)) !important;
+  background-color: var(--hg-surface) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  table,
+  .table,
+  .formtable,
+  .form-table
+) {
+  inline-size: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  color: var(--hg-text) !important;
+  background: transparent !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  table,
+  .table,
+  .formtable,
+  .form-table
+) :where(th, td) {
+  color: var(--hg-text) !important;
+  border-color: var(--hg-border) !important;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']),
+  select,
+  textarea,
+  .form-control,
+  .inputbox,
+  .uneditable-input,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select .hg-owned-enhanced-select__value,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control span,
+  .hg-owned-enhanced-select__control
+) {
+  color: var(--hg-text) !important;
+  border-color: color-mix(in srgb, var(--hg-action) 10%, var(--hg-border)) !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 72%, var(--hg-surface)), var(--hg-surface-muted)) !important;
+  text-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  input::placeholder,
+  textarea::placeholder,
+  .form-control::placeholder
+) {
+  color: var(--hg-text-muted) !important;
+  opacity: 1 !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .hg-owned-enhanced-select__panel,
+  .hg-owned-enhanced-select__panel,
+  .hg-owned-enhanced-select__results,
+  .hg-owned-enhanced-select__option,
+  .hg-owned-enhanced-select .hg-owned-enhanced-select__panel,
+  .hg-owned-enhanced-select .hg-owned-enhanced-select__results,
+  .hg-owned-enhanced-select .hg-owned-enhanced-select__option,
+  .dropdown-menu,
+  .dropdown-menu > li > a
+) {
+  color: var(--hg-text) !important;
+  border-color: var(--hg-border) !important;
+  background: var(--hg-surface) !important;
+  text-shadow: none !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :where(
+  .tab-content,
+  .tab-pane,
+  .panel,
+  .panel-default,
+  .panel-body,
+  .pnl_formsarea,
+  .fieldset,
+  fieldset,
+  .fieldset-container,
+  .well,
+  .box,
+  .box-content
+) {
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 88%, #fff 2%), var(--hg-surface)) !important;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #fff 4%, transparent),
+    0 22px 60px color-mix(in srgb, #000 22%, transparent) !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :where(
+  input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']),
+  select,
+  textarea,
+  .form-control,
+  .inputbox,
+  .uneditable-input,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select .hg-owned-enhanced-select__value,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control span,
+  .hg-owned-enhanced-select__control
+) {
+  color-scheme: dark;
+  color: var(--hg-text) !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 90%, #fff 2%), var(--hg-surface-muted)) !important;
+}
+
+/* premium form orientation layer.
+ *
+ * Generated ISPConfig forms can be very long and inconsistent. The
+ * JavaScript decorator now exposes field counts, required fields and visible
+ * error states per section. This CSS turns those facts into quiet orientation
+ * chips without changing the submitted form data or the underlying module
+ * behaviour. */
+body.hg-form-page #pageForm.hg-modern-form .hg-form-section {
+  position: relative;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-section-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  align-items: center;
+  max-inline-size: var(--hg-form-control-width);
+  margin: -0.15rem 0 1rem var(--hg-form-label-width);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-section-summary__item {
+  display: inline-flex;
+  gap: 0.38rem;
+  align-items: center;
+  min-block-size: 2rem;
+  padding: 0.32rem 0.65rem;
+  border: 1px solid color-mix(in srgb, var(--hg-action) 12%, var(--hg-border));
+  border-radius: 999px;
+  color: var(--hg-text-muted);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 82%, #fff 8%), var(--hg-surface-muted));
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 22%, transparent);
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.01em;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-section-summary__item strong {
+  color: var(--hg-text);
+  font-size: 0.92rem;
+  line-height: 1;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-section-summary__item--required {
+  color: color-mix(in srgb, var(--hg-warning) 74%, var(--hg-text));
+  border-color: color-mix(in srgb, var(--hg-warning) 26%, var(--hg-border));
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-warning-soft) 54%, var(--hg-surface)), var(--hg-surface-muted));
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-section-summary__item--invalid {
+  color: color-mix(in srgb, var(--hg-danger) 76%, var(--hg-text));
+  border-color: color-mix(in srgb, var(--hg-danger) 34%, var(--hg-border));
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-danger-soft) 62%, var(--hg-surface)), var(--hg-surface-muted));
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-section-summary__item--locked {
+  color: var(--hg-text-muted);
+  border-style: dashed;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-section--has-errors {
+  box-shadow: inset 4px 0 0 color-mix(in srgb, var(--hg-danger) 72%, transparent);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-panel--has-errors {
+  border-color: color-mix(in srgb, var(--hg-danger) 36%, var(--hg-border)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-panel-trigger--has-errors .hg-form-panel-count {
+  color: var(--hg-danger);
+  border-color: color-mix(in srgb, var(--hg-danger) 38%, var(--hg-border));
+  background: color-mix(in srgb, var(--hg-danger-soft) 70%, var(--hg-surface));
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form .hg-form-section-summary__item {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 88%, #fff 3%), var(--hg-surface-muted));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #fff 5%, transparent),
+    0 0.75rem 1.8rem color-mix(in srgb, #000 14%, transparent);
+}
+
+@container hg-form (max-width: 760px) {
+  body.hg-form-page #pageForm.hg-modern-form .hg-form-section-summary {
+    max-inline-size: 100%;
+    margin-inline-start: 0;
+  }
+}
+
+@media (max-width: 670px) {
+  body.hg-form-page #pageForm.hg-modern-form .hg-form-section-summary {
+    margin-block-start: 0.35rem;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form .hg-form-section-summary__item {
+    flex: 1 1 auto;
+    justify-content: center;
+    min-inline-size: min(9rem, 100%);
+  }
+}
+
+/* premium form workspace convergence.
+ *
+ * This is the late authority layer for generated ISPConfig forms. It keeps
+ * all server-rendered controls and submissions intact, but makes the form
+ * shell, tabs, labels, native fields, branding manager and action shelf read
+ * as one deliberate Heritage workspace in both light and dark themes.
+ */
+body.hg-form-page #pageContent {
+  --hg-form-label-fluid: clamp(9.5rem, 18cqi, 15rem);
+  --hg-form-row-gap-fluid: clamp(0.75rem, 1.4cqi, 1.15rem);
+}
+
+body.hg-form-page #pageForm.hg-modern-form,
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm, .pnl_formsarea, .tab-content, .tab-pane) {
+  color: var(--hg-text);
+}
+
+body.hg-app-navigation-enabled :where(.content-tab-wrapper, .tab-content, .pnl_formsarea, .panel, fieldset, .formtable, .fieldset-container) {
+  color: var(--hg-text);
+  border-color: color-mix(in srgb, var(--hg-action) 7%, var(--hg-border)) !important;
+  background:
+    radial-gradient(circle at 0 0, color-mix(in srgb, var(--hg-action) 2.5%, transparent), transparent 34%),
+    var(--hg-surface) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper {
+  overflow: clip;
+  border-radius: clamp(1rem, 1.9cqi, 1.45rem);
+  box-shadow:
+    0 1.7rem 4rem color-mix(in srgb, #0f172a 10%, transparent),
+    inset 0 1px 0 color-mix(in srgb, #fff 20%, transparent);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .content-tab-wrapper > .nav-tabs,
+body.hg-app-navigation-enabled :where(.content-tab-wrapper > .nav-tabs, .nav-tabs) {
+  border-color: color-mix(in srgb, var(--hg-border) 86%, transparent);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 74%, #fff 8%), var(--hg-surface-muted));
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.form-group, .ctrlHolder, .hg-field-group) {
+  display: grid;
+  grid-template-columns: minmax(0, var(--hg-form-label-fluid)) minmax(0, 1fr);
+  gap: 0.7rem 1.2rem;
+  align-items: center;
+  min-block-size: 3.65rem;
+  margin: 0;
+  padding: var(--hg-form-row-gap-fluid) clamp(1rem, 2cqi, 1.55rem);
+  border-bottom: 1px solid color-mix(in srgb, var(--hg-border) 82%, transparent);
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.form-group, .ctrlHolder, .hg-field-group):focus-within {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--hg-action) 5%, transparent), transparent 42%);
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(label, .control-label, .hg-field-label),
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(label, .control-label, .hg-field-label) {
+  min-inline-size: 0;
+  margin: 0;
+  color: color-mix(in srgb, var(--hg-text) 88%, var(--hg-text-muted));
+  font-size: 0.82rem;
+  font-weight: 820;
+  letter-spacing: 0.005em;
+  line-height: 1.35;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.help-block, .form-text, .description, .hint, small),
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(.help-block, .form-text, .description, .hint, small) {
+  color: var(--hg-text-muted) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']), select, textarea, .form-control, .inputbox, .hg-select__control),
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']), select, textarea, .form-control, .inputbox, .hg-select__control) {
+  inline-size: 100%;
+  min-inline-size: 0;
+  min-block-size: 2.75rem;
+  color: var(--hg-text) !important;
+  border-color: color-mix(in srgb, var(--hg-action) 9%, var(--hg-border)) !important;
+  border-radius: 0.9rem !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface) 96%, #fff 4%), var(--hg-surface-muted)) !important;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 20%, transparent) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(input, select, textarea, .form-control, .inputbox, .hg-select__control):focus,
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(input, select, textarea, .form-control, .inputbox, .hg-select__control):focus,
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) .hg-select__control:focus-visible {
+  border-color: color-mix(in srgb, var(--hg-action) 44%, var(--hg-border)) !important;
+  box-shadow:
+    0 0 0 3px var(--hg-action-ring),
+    inset 0 1px 0 color-mix(in srgb, #fff 24%, transparent) !important;
+  outline: none;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-form-actions, .form-actions, .buttonHolder),
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(.hg-form-actions, .form-actions, .buttonHolder),
+body.hg-app-navigation-enabled .hg-form-action-shelf {
+  position: sticky;
+  z-index: 8;
+  inset-block-end: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.65rem;
+  margin: 1.1rem;
+  padding: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--hg-action) 8%, var(--hg-border));
+  border-radius: 1.15rem;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface) 91%, transparent), var(--hg-surface-muted));
+  box-shadow:
+    0 1.1rem 2.8rem color-mix(in srgb, #0f172a 14%, transparent),
+    inset 0 1px 0 color-mix(in srgb, #fff 16%, transparent);
+  backdrop-filter: blur(16px);
+}
+
+/* form actions are visually owned by hg-action-control. Legacy
+ * Bootstrap/formbutton classes remain as runtime input signals only. */
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :where(input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']), select, textarea, .form-control, .inputbox, .hg-select__control),
+html[data-heritage-theme='dark'] body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']), select, textarea, .form-control, .inputbox, .hg-select__control) {
+  color-scheme: dark;
+  color: var(--hg-text) !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 86%, #fff 2%), var(--hg-surface)) !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-app-navigation-enabled :where(.content-tab-wrapper, .tab-content, .pnl_formsarea, .panel, fieldset, .formtable, .fieldset-container) {
+  color: var(--hg-text) !important;
+  background:
+    radial-gradient(circle at 10% 0, color-mix(in srgb, var(--hg-action) 4%, transparent), transparent 36%),
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 82%, #fff 1.5%), var(--hg-surface)) !important;
+}
+
+@container hg-form (max-width: 760px) {
+  body.hg-form-page #pageForm.hg-modern-form :where(.form-group, .ctrlHolder, .hg-field-group) {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: stretch;
+    padding: 0.85rem 0.95rem;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form :where(.hg-form-actions, .form-actions, .buttonHolder) {
+    justify-content: stretch;
+    margin: 0.75rem;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form :where(.hg-form-actions, .form-actions, .buttonHolder) > :where(button, input[type='submit'], input[type='button'], .btn) {
+    flex: 1 1 9rem;
+  }
+}
+
+/* premium form completion pass.
+ *
+ * This final authority layer normalizes generated ISPConfig edit masks into a
+ * calmer product-grade workspace. It does not change form submission or server
+ * behavior; it only gives native fields, selects, uploads, choices, help text
+ * and action rows one predictable visual contract in light and dark themes.
+ */
+body.hg-form-page #pageForm.hg-modern-form {
+  --hg-form-field-radius: 1.05rem;
+  --hg-form-field-min: 2.95rem;
+  --hg-form-field-pad-x: 1rem;
+  --hg-form-soft-border: color-mix(in srgb, var(--hg-action) 8%, var(--hg-border));
+  --hg-form-focus-border: color-mix(in srgb, var(--hg-action) 48%, var(--hg-border));
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.content-tab-wrapper, .tab-content, .pnl_formsarea, .panel, fieldset, .formtable, .fieldset-container) {
+  overflow: clip;
+  border-color: var(--hg-form-soft-border) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group {
+  position: relative;
+  isolation: isolate;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group::before {
+  content: '';
+  position: absolute;
+  inset-block: 0.65rem;
+  inset-inline-start: 0;
+  inline-size: 3px;
+  border-radius: 999px;
+  background: transparent;
+  opacity: 0;
+  transition: opacity 160ms ease, background-color 160ms ease;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group:focus-within::before {
+  opacity: 1;
+  background: color-mix(in srgb, var(--hg-action) 70%, transparent);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--required > :where(.control-label, label, .hg-field-label)::after {
+  content: 'Pflicht';
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 1.25rem;
+  margin-inline-start: 0.45rem;
+  padding: 0.08rem 0.42rem;
+  border: 1px solid color-mix(in srgb, var(--hg-action) 14%, var(--hg-border));
+  border-radius: 999px;
+  color: color-mix(in srgb, var(--hg-action) 68%, var(--hg-text));
+  background: color-mix(in srgb, var(--hg-action) 7%, transparent);
+  font-size: 0.64rem;
+  font-weight: 850;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-field-group--secret, .hg-field-group--file, .hg-field-group--enhanced-select, .hg-field-group--compound) {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--hg-action) 3.5%, transparent), transparent 45%);
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']), select, textarea, .form-control, .inputbox, .hg-select__control),
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']), select, textarea, .form-control, .inputbox, .hg-select__control) {
+  min-block-size: var(--hg-form-field-min);
+  padding-inline: var(--hg-form-field-pad-x);
+  border-color: var(--hg-form-soft-border) !important;
+  border-radius: var(--hg-form-field-radius) !important;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease, transform 160ms ease;
+}
+
+body.hg-form-page #pageForm.hg-modern-form textarea.hg-field-control,
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) textarea {
+  min-block-size: clamp(7rem, 18cqi, 13rem);
+  padding-block: 0.85rem;
+  resize: vertical;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(input, select, textarea, .form-control, .inputbox, .hg-select__control):focus-visible,
+body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(input, select, textarea, .form-control, .inputbox, .hg-select__control):focus-visible {
+  border-color: var(--hg-form-focus-border) !important;
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--hg-action) 14%, transparent),
+    inset 0 1px 0 color-mix(in srgb, #fff 22%, transparent) !important;
+  outline: none;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(input[readonly], input[disabled], select[disabled], textarea[readonly], textarea[disabled], .form-control[readonly], .form-control[disabled]) {
+  cursor: not-allowed;
+  color: color-mix(in srgb, var(--hg-text-muted) 86%, var(--hg-text)) !important;
+  border-style: dashed !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 92%, transparent), color-mix(in srgb, var(--hg-surface-muted) 76%, var(--hg-surface))) !important;
+  opacity: 1;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--choice .hg-field-body,
+body.hg-form-page #pageForm.hg-modern-form :where(.checkbox, .radio, .checkbox-inline, .radio-inline) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.checkbox label, .radio label, .checkbox-inline, .radio-inline) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-block-size: 2.35rem;
+  margin: 0;
+  padding: 0.42rem 0.72rem;
+  border: 1px solid color-mix(in srgb, var(--hg-action) 8%, var(--hg-border));
+  border-radius: 999px;
+  color: var(--hg-text);
+  background: color-mix(in srgb, var(--hg-surface-muted) 72%, var(--hg-surface));
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(input[type='checkbox'], input[type='radio']) {
+  accent-color: var(--hg-action);
+  inline-size: 1.05rem;
+  block-size: 1.05rem;
+  margin: 0;
+}
+
+/* single boolean settings are native, legible switches rather than
+   detached legacy checkboxes. The original input remains the form authority. */
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--boolean {
+  align-items: center;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--boolean .hg-field-body {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.7rem 0.85rem;
+  min-block-size: 2.75rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid color-mix(in srgb, var(--hg-border) 76%, transparent);
+  border-radius: 0.85rem;
+  color: var(--hg-text-muted);
+  background: color-mix(in srgb, var(--hg-surface-muted) 64%, var(--hg-surface));
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--boolean input[type='checkbox'][role='switch'] {
+  appearance: none;
+  position: relative;
+  inline-size: 2.55rem;
+  min-inline-size: 2.55rem;
+  block-size: 1.45rem;
+  margin: 0;
+  border: 1px solid color-mix(in srgb, var(--hg-text-muted) 34%, var(--hg-border));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--hg-text-muted) 18%, var(--hg-surface));
+  cursor: pointer;
+  transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--boolean input[type='checkbox'][role='switch']::before {
+  content: '';
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 0.2rem;
+  inline-size: 0.93rem;
+  block-size: 0.93rem;
+  border-radius: 50%;
+  background: var(--hg-surface);
+  box-shadow: 0 0.12rem 0.35rem color-mix(in srgb, #020617 22%, transparent);
+  transform: translateY(-50%);
+  transition: transform 160ms ease, background-color 160ms ease;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--boolean input[type='checkbox'][role='switch']:checked {
+  border-color: color-mix(in srgb, var(--hg-action) 72%, var(--hg-border));
+  background: var(--hg-action);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--boolean input[type='checkbox'][role='switch']:checked::before {
+  background: #fff;
+  transform: translate(1.08rem, -50%);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--boolean input[type='checkbox'][role='switch']:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 0.22rem color-mix(in srgb, var(--hg-action) 18%, transparent);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--boolean input[type='checkbox'][role='switch']:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+body.hg-form-page #pageForm.hg-modern-form input[type='file'] {
+  padding-block: 0.42rem;
+}
+
+body.hg-form-page #pageForm.hg-modern-form input[type='file']::file-selector-button {
+  min-block-size: 2.15rem;
+  margin-inline-end: 0.75rem;
+  padding: 0.38rem 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--hg-action) 18%, var(--hg-border));
+  border-radius: 0.75rem;
+  color: var(--hg-text);
+  background: color-mix(in srgb, var(--hg-action) 7%, var(--hg-surface));
+  font-weight: 800;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.input-group, .input-append, .input-prepend) {
+  display: flex;
+  align-items: stretch;
+  inline-size: 100%;
+  min-inline-size: 0;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.input-group > .form-control, .input-append > input, .input-prepend > input) {
+  min-inline-size: 0;
+  flex: 1 1 auto;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.input-group-addon, .add-on, .input-group-btn > .btn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: var(--hg-form-field-min);
+  border-color: var(--hg-form-soft-border) !important;
+  color: var(--hg-text);
+  background: color-mix(in srgb, var(--hg-surface-muted) 82%, var(--hg-surface)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-help {
+  display: block;
+  max-inline-size: 62rem;
+  margin-block-start: 0.42rem;
+  color: color-mix(in srgb, var(--hg-text-muted) 92%, var(--hg-text)) !important;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--file .hg-field-help,
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--secret .hg-field-help {
+  padding-inline-start: 0.75rem;
+  border-inline-start: 3px solid color-mix(in srgb, var(--hg-action) 18%, var(--hg-border));
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-actions,
+body.hg-form-page #pageForm.hg-modern-form :where(.form-actions, .buttonHolder),
+body.hg-app-navigation-enabled .hg-form-action-shelf {
+  align-items: center;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-actions::before,
+body.hg-form-page #pageForm.hg-modern-form :where(.form-actions, .buttonHolder)::before,
+body.hg-app-navigation-enabled .hg-form-action-shelf::before {
+  content: 'Änderungen prüfen und speichern';
+  margin-inline-end: auto;
+  color: var(--hg-text-muted);
+  font-size: 0.8rem;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-form-actions, .form-actions, .buttonHolder, .hg-form-action-shelf) :where(.btn, button, input[type='button'], input[type='submit']) {
+  min-block-size: 2.65rem;
+  border-radius: 0.9rem !important;
+  font-weight: 850;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.has-error, .error, [aria-invalid='true']) {
+  --hg-form-soft-border: color-mix(in srgb, var(--hg-status-danger) 34%, var(--hg-border));
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.has-error, .error) .hg-field-help,
+body.hg-form-page #pageForm.hg-modern-form :where(.text-danger, .invalid-feedback) {
+  color: var(--hg-status-danger) !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :where(input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']), select, textarea, .form-control, .inputbox, .hg-select__control) {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 88%, #fff 2%), color-mix(in srgb, var(--hg-surface) 94%, #fff 1%)) !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :where(.checkbox label, .radio label, .checkbox-inline, .radio-inline),
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :where(.input-group-addon, .add-on, .input-group-btn > .btn) {
+  color: var(--hg-text);
+  background: color-mix(in srgb, var(--hg-surface-muted) 84%, #fff 2%) !important;
+}
+
+@container hg-form (max-width: 900px) {
+  body.hg-form-page #pageForm.hg-modern-form .hg-form-actions::before,
+  body.hg-form-page #pageForm.hg-modern-form :where(.form-actions, .buttonHolder)::before,
+  body.hg-app-navigation-enabled .hg-form-action-shelf::before {
+    content: none;
+  }
+}
+
+@container hg-form (max-width: 760px) {
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-group::before {
+    inset-inline-start: 0.25rem;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form :where(.input-group, .input-append, .input-prepend) {
+    flex-wrap: wrap;
+    gap: 0.45rem;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form :where(.input-group > .form-control, .input-append > input, .input-prepend > input, .input-group-btn, .input-group-btn > .btn) {
+    flex: 1 1 100%;
+    inline-size: 100%;
+  }
+}
+
+/* detail-mask finish pass.
+ *
+ * The previous pass gave every generated field a shared baseline. This layer
+ * handles the harder real edit screens: long tabbed forms, System Config style
+ * pages, branding uploads, inline action fields and dense validation states.
+ */
+body.hg-form-page #pageForm.hg-modern-form--long {
+  --hg-form-row-gap-fluid: clamp(0.68rem, 1.1cqi, 0.95rem);
+}
+
+body.hg-form-page #pageForm.hg-modern-form--huge {
+  --hg-form-label-fluid: clamp(8.8rem, 15cqi, 13.5rem);
+}
+
+body.hg-form-page #pageForm.hg-modern-form--tabbed .content-tab-wrapper > .nav-tabs {
+  position: sticky;
+  z-index: 6;
+  inset-block-start: 0;
+  gap: 0.35rem;
+  padding: 0.55rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--hg-action) 8%, var(--hg-border));
+  backdrop-filter: blur(14px);
+}
+
+body.hg-form-page #pageForm.hg-modern-form--tabbed .content-tab-wrapper > .nav-tabs > li > a {
+  min-block-size: 2.45rem;
+  padding-inline: 0.85rem;
+  border-radius: 0.85rem;
+}
+
+body.hg-form-page #pageForm.hg-modern-form--tabbed .content-tab-wrapper > .nav-tabs > li.active > a {
+  box-shadow:
+    0 0.75rem 1.45rem color-mix(in srgb, #0f172a 9%, transparent),
+    inset 0 -2px 0 var(--hg-action);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-section {
+  border-radius: 1.1rem;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-section:not(:first-child) {
+  margin-block-start: 0.85rem;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-section-summary {
+  opacity: 0.88;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-modern-form--long .hg-form-section-summary,
+body.hg-form-page #pageForm.hg-modern-form--long .hg-form-section-summary {
+  margin-block-end: 0.35rem;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-field-group--textarea, .hg-field-group--file, .hg-field-group--choice, .hg-field-group--content, .hg-field-group--with-action) {
+  align-items: start;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--choice {
+  padding-block: 1rem;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--color .hg-field-body {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--color input[type='color'] {
+  inline-size: 4.2rem;
+  min-inline-size: 4.2rem;
+  block-size: 2.75rem;
+  padding: 0.22rem;
+  border-radius: 0.85rem;
+  cursor: pointer;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--with-action .hg-field-body,
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--compound .hg-field-body {
+  max-inline-size: 100%;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--with-action :where(.btn, button, input[type='button'], input[type='submit'], .formbutton-default, .formbutton-success) {
+  white-space: nowrap;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-action--secondary {
+  color: var(--hg-text) !important;
+  border-color: color-mix(in srgb, var(--hg-border) 92%, var(--hg-action)) !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface) 94%, #fff 4%), var(--hg-surface-muted)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-action--danger {
+  color: #fff !important;
+  border-color: color-mix(in srgb, var(--hg-status-danger) 58%, #7f1d1d) !important;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--hg-status-danger) 86%, #7f1d1d), #7f1d1d) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--secret {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--hg-action) 4%, transparent), transparent 42%),
+    linear-gradient(180deg, transparent, color-mix(in srgb, var(--hg-surface-muted) 24%, transparent));
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--file {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--hg-action) 4%, transparent), transparent 48%);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--file input[type='file'] {
+  border-style: dashed !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.has-success, .has-warning, .has-error) {
+  border-radius: 1rem;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .has-success {
+  background: color-mix(in srgb, var(--hg-status-success) 5%, transparent);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .has-warning {
+  background: color-mix(in srgb, var(--hg-status-warning) 8%, transparent);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .has-error {
+  background: color-mix(in srgb, var(--hg-status-danger) 8%, transparent);
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form .hg-form-action--secondary {
+  color: var(--hg-text) !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 86%, #fff 2%), color-mix(in srgb, var(--hg-surface) 94%, #fff 1%)) !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form--tabbed .content-tab-wrapper > .nav-tabs {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 88%, #fff 2%), color-mix(in srgb, var(--hg-surface) 96%, #fff 1%));
+}
+
+@container hg-form (max-width: 960px) {
+  body.hg-form-page #pageForm.hg-modern-form--tabbed .content-tab-wrapper > .nav-tabs {
+    position: static;
+  }
+}
+
+@container hg-form (max-width: 760px) {
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-group--color .hg-field-body,
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-group--choice .hg-field-body {
+    align-items: stretch;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form :where(.checkbox label, .radio label, .checkbox-inline, .radio-inline) {
+    inline-size: 100%;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-group--with-action :where(.btn, button, input[type='button'], input[type='submit']) {
+    inline-size: 100%;
+    white-space: normal;
+  }
+}
+
+/* form intelligence and section polish.
+ *
+ * Real ISPConfig masks vary wildly: some sections contain a single notice,
+ * others carry dozens of generated rows. These rules use the runtime section
+ * and field-state markers to keep every edit mask calm, readable and clearly
+ * structured without touching submitted values or backend behaviour.
+ */
+body.hg-form-page #pageForm.hg-modern-form .hg-form-section--empty {
+  display: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-section--compact {
+  padding-block: 0.35rem;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-section--large {
+  border-top: 1px solid color-mix(in srgb, var(--hg-action) 12%, var(--hg-border));
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-section--large > .hg-form-section-summary {
+  position: sticky;
+  z-index: 4;
+  inset-block-start: 3.25rem;
+  margin-inline: clamp(0.75rem, 2cqi, 1.25rem);
+  padding: 0.55rem;
+  border: 1px solid color-mix(in srgb, var(--hg-action) 8%, var(--hg-border));
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface) 88%, transparent), color-mix(in srgb, var(--hg-surface-muted) 92%, transparent));
+  box-shadow: 0 0.85rem 1.8rem color-mix(in srgb, #0f172a 9%, transparent);
+  backdrop-filter: blur(14px);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-section--notice-heavy {
+  background:
+    radial-gradient(circle at 0 0, color-mix(in srgb, var(--hg-action) 3%, transparent), transparent 32%),
+    var(--hg-surface);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--notice {
+  padding-block: 0.85rem;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--notice > :where(.hg-field-body, [class*='col-']) {
+  max-inline-size: none;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--notice :where(.alert, .alert-info, .alert-warning, .alert-danger, .alert-success, .box_error, .box_warning, .box_success) {
+  inline-size: 100%;
+  margin: 0;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--invalid::before,
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group.has-error::before {
+  opacity: 1;
+  background: var(--hg-status-danger);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--warning::before,
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group.has-warning::before {
+  opacity: 1;
+  background: var(--hg-status-warning);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--success::before,
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group.has-success::before {
+  opacity: 1;
+  background: var(--hg-status-success);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--invalid :where(input, select, textarea, .form-control, .hg-select__control),
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group.has-error :where(input, select, textarea, .form-control, .hg-select__control) {
+  border-color: color-mix(in srgb, var(--hg-status-danger) 44%, var(--hg-border)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--warning :where(input, select, textarea, .form-control, .hg-select__control),
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group.has-warning :where(input, select, textarea, .form-control, .hg-select__control) {
+  border-color: color-mix(in srgb, var(--hg-status-warning) 44%, var(--hg-border)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--success :where(input, select, textarea, .form-control, .hg-select__control),
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group.has-success :where(input, select, textarea, .form-control, .hg-select__control) {
+  border-color: color-mix(in srgb, var(--hg-status-success) 36%, var(--hg-border)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--readonly,
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--disabled {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--hg-text-muted) 4%, transparent), transparent 48%);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--readonly > :where(.control-label, label, .hg-field-label)::after,
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--disabled > :where(.control-label, label, .hg-field-label)::after {
+  content: 'gesperrt';
+  display: inline-flex;
+  margin-inline-start: 0.45rem;
+  padding: 0.08rem 0.42rem;
+  border: 1px solid color-mix(in srgb, var(--hg-text-muted) 16%, var(--hg-border));
+  border-radius: 999px;
+  color: var(--hg-text-muted);
+  background: color-mix(in srgb, var(--hg-text-muted) 6%, transparent);
+  font-size: 0.62rem;
+  font-weight: 850;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--readonly.hg-field-group--required > :where(.control-label, label, .hg-field-label)::after,
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--disabled.hg-field-group--required > :where(.control-label, label, .hg-field-label)::after {
+  content: 'Pflicht · gesperrt';
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--textarea .hg-field-body,
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--notice .hg-field-body,
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--content .hg-field-body {
+  inline-size: 100%;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--multi-body:not(.hg-field-group--with-affix) {
+  grid-template-columns: minmax(0, var(--hg-form-label-fluid)) repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--with-affix .hg-field-affix {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--hg-form-field-min, 2.75rem);
+  padding-inline: 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--hg-action) 8%, var(--hg-border));
+  border-radius: 0.9rem;
+  color: var(--hg-text-muted);
+  background: color-mix(in srgb, var(--hg-surface-muted) 78%, var(--hg-surface));
+  font-weight: 750;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-actions .hg-form-action--primary:first-child:last-child {
+  min-inline-size: min(100%, 14rem);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-actions--has-danger {
+  border-color: color-mix(in srgb, var(--hg-status-danger) 18%, var(--hg-border));
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form .hg-form-section--large > .hg-form-section-summary {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 84%, #fff 2%), color-mix(in srgb, var(--hg-surface) 94%, #fff 1%));
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form .hg-field-group--with-affix .hg-field-affix {
+  color: color-mix(in srgb, var(--hg-text-muted) 90%, var(--hg-text));
+  background: color-mix(in srgb, var(--hg-surface-muted) 86%, #fff 2%);
+}
+
+@container hg-form (max-width: 960px) {
+  body.hg-form-page #pageForm.hg-modern-form .hg-form-section--large > .hg-form-section-summary {
+    position: static;
+    border-radius: 1rem;
+  }
+}
+
+@container hg-form (max-width: 760px) {
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-group--multi-body:not(.hg-field-group--with-affix) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-group--with-affix .hg-field-affix {
+    inline-size: 100%;
+  }
+}
+
+/* form profile stabilization for high-risk real-world masks.
+   Runtime-owned page profiles keep the remaining large legacy masks calm
+   without changing form names, submit targets or business behaviour. */
+body.hg-form-page:is(.hg-form-profile--system-config, .hg-form-profile--server-config, .hg-form-profile--limits) #pageForm.hg-modern-form {
+  --hg-form-label-fluid: clamp(13rem, 22cqi, 18rem);
+}
+
+body.hg-form-page:is(.hg-form-profile--system-config, .hg-form-profile--server-config, .hg-form-profile--limits) #pageForm.hg-modern-form .content-tab-wrapper > .nav-tabs {
+  position: sticky;
+  top: calc(var(--hg-shell-top-offset, 0px) + 0.5rem);
+  z-index: 5;
+  align-items: stretch;
+  padding-block: 0.45rem;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface) 94%, transparent), color-mix(in srgb, var(--hg-surface-muted) 92%, transparent));
+  backdrop-filter: blur(16px);
+}
+
+body.hg-form-page.hg-form-profile--deep-tabs #pageForm.hg-modern-form .content-tab-wrapper > .nav-tabs > li > a {
+  min-block-size: 2.65rem;
+  padding-inline: 0.8rem;
+  font-size: 0.78rem;
+}
+
+body.hg-form-page.hg-form-profile--system-mail #pageForm.hg-modern-form :where(#smtp_pass, #smtp_user, #smtp_host, #smtp_port, #smtp_crypt, #default_mailserver) {
+  font-family: inherit;
+}
+
+body.hg-form-page.hg-form-profile--system-mail #pageForm.hg-modern-form .hg-field-group--mail-credential {
+  border-color: color-mix(in srgb, var(--hg-status-warning) 18%, var(--hg-border));
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--hg-status-warning) 6%, transparent), transparent 44%);
+}
+
+body.hg-form-page.hg-form-profile--system-mail #pageForm.hg-modern-form .hg-field-group--mail-credential .hg-field-body::after {
+  display: block;
+  margin-block-start: 0.45rem;
+  color: var(--hg-text-muted);
+  font-size: 0.74rem;
+  font-weight: 700;
+  content: 'Zugangsdaten werden nicht angezeigt und bleiben serverseitig geschuetzt.';
+}
+
+body.hg-form-page.hg-form-profile--extension #pageForm.hg-modern-form :where(.panel, .well, .alert, .table-wrapper) {
+  border-radius: 1.05rem;
+}
+
+body.hg-form-page.hg-form-profile--extension #pageForm.hg-modern-form :where(.formbutton-success, .formbutton-default, .formbutton-danger, .btn) {
+  min-block-size: 2.55rem;
+}
+
+body.hg-form-page.hg-form-profile--billing #pageForm.hg-modern-form .hg-billing-product {
+  container: hg-billing-form / inline-size;
+}
+
+body.hg-form-page.hg-form-profile--billing #pageForm.hg-modern-form .hg-billing-form {
+  gap: clamp(0.75rem, 1.8cqi, 1.1rem);
+}
+
+body.hg-form-page.hg-form-profile--billing #pageForm.hg-modern-form .hg-billing-form :where(input, select, textarea, .form-control) {
+  min-block-size: 2.7rem;
+  border-radius: 0.95rem;
+}
+
+body.hg-form-page.hg-form-profile--billing #pageForm.hg-modern-form .hg-billing-settings-card,
+body.hg-form-page.hg-form-profile--billing #pageForm.hg-modern-form .hg-billing-panel {
+  min-inline-size: 0;
+}
+
+body.hg-form-page.hg-form-profile--limits #pageForm.hg-modern-form .hg-form-section--large {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 72%, transparent), transparent 18rem);
+}
+
+body.hg-form-page.hg-form-profile--limits #pageForm.hg-modern-form .hg-field-group--limit-value :where(input, .form-control) {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+body.hg-form-page.hg-form-profile--server-config #pageForm.hg-modern-form .hg-field-group--path-value .hg-field-body {
+  font-family: var(--hg-font-mono, ui-monospace, SFMono-Regular, Consolas, monospace);
+}
+
+body.hg-form-page.hg-form-profile--uploads #pageForm.hg-modern-form input[type='file'] {
+  border-style: dashed;
+}
+
+body.hg-form-page.hg-form-profile--secrets #pageForm.hg-modern-form input[type='password'] {
+  letter-spacing: 0.08em;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page:is(.hg-form-profile--system-config, .hg-form-profile--server-config, .hg-form-profile--limits) #pageForm.hg-modern-form .content-tab-wrapper > .nav-tabs {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface) 88%, #fff 2%), color-mix(in srgb, var(--hg-surface-muted) 88%, #fff 1%));
+}
+
+@container hg-form (max-width: 820px) {
+  body.hg-form-page:is(.hg-form-profile--system-config, .hg-form-profile--server-config, .hg-form-profile--limits) #pageForm.hg-modern-form .content-tab-wrapper > .nav-tabs {
+    position: static;
+  }
+
+  body.hg-form-page.hg-form-profile--billing #pageForm.hg-modern-form .hg-billing-form,
+  body.hg-form-page.hg-form-profile--billing #pageForm.hg-modern-form .hg-billing-settings-form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body.hg-form-page.hg-form-profile--billing #pageForm.hg-modern-form .hg-billing-settings-card {
+    grid-column: 1 / -1;
+  }
+}
+
+/* real-mask premium stabilization.
+   This pass targets the remaining generated ISPConfig form shapes that still
+   looked like old Bootstrap islands: accordions, panels, select overlays,
+   technical textareas, SSL/certificate fields and compound button groups. */
+body.hg-form-page:is(.hg-form-profile--legacy-panels, .hg-form-profile--limits) #pageForm.hg-modern-form :where(.panel-group, .panel, .well) {
+  border: 1px solid color-mix(in srgb, var(--hg-action) 8%, var(--hg-border));
+  border-radius: 1.1rem;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface) 96%, transparent), color-mix(in srgb, var(--hg-surface-muted) 92%, transparent));
+  box-shadow: 0 1rem 2.4rem color-mix(in srgb, var(--hg-text) 5%, transparent);
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-limit-sections, .hg-form-sections) {
+  display: grid;
+  gap: clamp(0.8rem, 1.25cqi, 1.15rem);
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-limit-section, .hg-form-section) {
+  overflow: clip;
+  border: 1px solid color-mix(in srgb, var(--hg-action) 8%, var(--hg-border));
+  border-radius: 1.15rem;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface) 96%, transparent), color-mix(in srgb, var(--hg-surface-muted) 92%, transparent));
+  box-shadow: 0 1rem 2.4rem color-mix(in srgb, var(--hg-text) 5%, transparent);
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-limit-section__header, .hg-form-section__header) {
+  border: 0;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--hg-action) 7%, transparent), transparent 64%);
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-limit-section__title, .hg-form-section__title) {
+  margin: 0;
+  font: inherit;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-limit-section__title, .hg-form-section__title) :where(a, button) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  inline-size: 100%;
+  padding: 0.85rem 1rem;
+  color: var(--hg-text);
+  font-weight: 850;
+  text-decoration: none;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-limit-section__title, .hg-form-section__title) :where(a, button)::after {
+  content: '\2304';
+  display: inline-grid;
+  place-items: center;
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
+  border: 1px solid color-mix(in srgb, var(--hg-action) 18%, var(--hg-border));
+  border-radius: 999px;
+  color: var(--hg-action);
+  background: color-mix(in srgb, var(--hg-action) 7%, transparent);
+  font-size: 1rem;
+  line-height: 1;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-limit-section__title, .hg-form-section__title) :where(a.collapsed, button.collapsed)::after {
+  transform: rotate(-90deg);
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-limit-section__content, .hg-form-section__content) {
+  padding: clamp(0.9rem, 1.7cqi, 1.25rem);
+  border-top: 1px solid color-mix(in srgb, var(--hg-action) 8%, var(--hg-border));
+}
+
+body.hg-form-page.hg-form-profile--legacy-panels #pageForm.hg-modern-form :where(.panel-heading, .panel-title) {
+  border: 0;
+  border-radius: 1rem 1rem 0 0;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--hg-action) 9%, transparent), transparent 62%);
+}
+
+body.hg-form-page.hg-form-profile--legacy-panels #pageForm.hg-modern-form .panel-heading {
+  padding: 0.85rem 1rem;
+}
+
+body.hg-form-page.hg-form-profile--legacy-panels #pageForm.hg-modern-form .panel-title :where(a, button) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  inline-size: 100%;
+  color: var(--hg-text);
+  font-weight: 850;
+  text-decoration: none;
+}
+
+body.hg-form-page.hg-form-profile--legacy-panels #pageForm.hg-modern-form .panel-title :where(a, button)::after {
+  content: '⌄';
+  display: inline-grid;
+  place-items: center;
+  inline-size: 1.7rem;
+  block-size: 1.7rem;
+  border: 1px solid color-mix(in srgb, var(--hg-action) 18%, var(--hg-border));
+  border-radius: 999px;
+  color: var(--hg-action);
+  background: color-mix(in srgb, var(--hg-action) 8%, transparent);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+body.hg-form-page.hg-form-profile--legacy-panels #pageForm.hg-modern-form .panel-title :where(a.collapsed, button.collapsed)::after {
+  transform: rotate(-90deg);
+}
+
+body.hg-form-page.hg-form-profile--legacy-panels #pageForm.hg-modern-form .panel-body {
+  padding: clamp(0.9rem, 1.7cqi, 1.25rem);
+  border-top: 1px solid color-mix(in srgb, var(--hg-action) 8%, var(--hg-border));
+}
+
+body.hg-form-page.hg-form-profile--legacy-selects #pageForm.hg-modern-form :where(.hg-owned-enhanced-select) {
+  min-inline-size: min(100%, 18rem);
+  color: var(--hg-text);
+  font: inherit;
+}
+
+body.hg-form-page.hg-form-profile--legacy-selects #pageForm.hg-modern-form :where(.hg-owned-enhanced-select__control) {
+  min-block-size: var(--hg-form-field-min, 2.75rem);
+  border: 1px solid color-mix(in srgb, var(--hg-action) 9%, var(--hg-border)) !important;
+  border-radius: 0.95rem !important;
+  background: var(--hg-surface-muted) !important;
+  box-shadow: none !important;
+  color: var(--hg-text) !important;
+}
+
+body.hg-form-page.hg-form-profile--legacy-selects #pageForm.hg-modern-form :where(.hg-owned-enhanced-select__value, .hg-owned-enhanced-select__search) {
+  color: var(--hg-text) !important;
+}
+
+body.hg-form-page.hg-form-profile--compound-controls #pageForm.hg-modern-form :where(.input-group, .input-append, .input-prepend, .btn-group),
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--compound .hg-field-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.55rem;
+}
+
+body.hg-form-page.hg-form-profile--compound-controls #pageForm.hg-modern-form :where(.input-group > .form-control, .input-append > .form-control, .input-prepend > .form-control) {
+  flex: 1 1 16rem;
+  min-inline-size: 0;
+}
+
+body.hg-form-page.hg-form-profile--compound-controls #pageForm.hg-modern-form :where(.input-group-btn, .input-append .btn, .input-prepend .btn, .btn-group .btn) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: var(--hg-form-field-min, 2.75rem);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--technical-text textarea,
+body.hg-form-page.hg-form-profile--technical-text #pageForm.hg-modern-form textarea {
+  min-block-size: clamp(9rem, 22cqi, 18rem);
+  font-family: var(--hg-font-mono, ui-monospace, SFMono-Regular, Consolas, monospace);
+  font-size: 0.86rem;
+  line-height: 1.55;
+  tab-size: 2;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--certificate {
+  border-color: color-mix(in srgb, var(--hg-status-warning) 14%, var(--hg-border));
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--hg-status-warning) 5%, transparent), transparent 46%);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--certificate textarea,
+body.hg-form-page.hg-form-profile--certificate #pageForm.hg-modern-form textarea[id*='ssl'],
+body.hg-form-page.hg-form-profile--certificate #pageForm.hg-modern-form textarea[name*='ssl'],
+body.hg-form-page.hg-form-profile--certificate #pageForm.hg-modern-form textarea[id*='cert'],
+body.hg-form-page.hg-form-profile--certificate #pageForm.hg-modern-form textarea[name*='cert'] {
+  min-block-size: 12rem;
+  font-family: var(--hg-font-mono, ui-monospace, SFMono-Regular, Consolas, monospace);
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.form-control-static, .help-block, .text-muted, .hint, small) {
+  color: var(--hg-text-muted);
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page:is(.hg-form-profile--legacy-panels, .hg-form-profile--limits) #pageForm.hg-modern-form :where(.panel-group, .panel, .well),
+html[data-heritage-theme='dark'] body.hg-form-page.hg-form-profile--legacy-selects #pageForm.hg-modern-form :where(.hg-owned-enhanced-select__control) {
+  background: color-mix(in srgb, var(--hg-surface-muted) 88%, #fff 2%) !important;
+  color: var(--hg-text) !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :where(.form-control-static, .help-block, .text-muted, .hint, small) {
+  color: color-mix(in srgb, var(--hg-text-muted) 88%, var(--hg-text));
+}
+
+@container hg-form (max-width: 760px) {
+  body.hg-form-page.hg-form-profile--legacy-panels #pageForm.hg-modern-form .panel-heading,
+  body.hg-form-page.hg-form-profile--legacy-panels #pageForm.hg-modern-form .panel-body {
+    padding-inline: 0.8rem;
+  }
+
+  body.hg-form-page.hg-form-profile--compound-controls #pageForm.hg-modern-form :where(.input-group-btn, .input-append .btn, .input-prepend .btn, .btn-group .btn) {
+    inline-size: 100%;
+  }
+}
+
+/* form completion surface pass.
+   Final broad guard for mixed legacy masks: tables embedded in forms,
+   fieldsets, static/locked values, dense help text and over-wide controls. */
+body.hg-form-page.hg-form-profile--wide-content #pageForm.hg-modern-form,
+body.hg-form-page.hg-form-profile--embedded-tables #pageForm.hg-modern-form {
+  overflow-x: clip;
+}
+
+body.hg-form-page.hg-form-profile--wide-content #pageForm.hg-modern-form :where(.tab-content, .tab-pane, .panel-body, .fieldset-container, .pnl_formsarea, .table-wrapper, .table-responsive) {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+
+body.hg-form-page.hg-form-profile--embedded-tables #pageForm.hg-modern-form :where(.formtable, table.table, .table-wrapper, .table-responsive),
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--embedded-table {
+  inline-size: 100%;
+  overflow: auto;
+  border: 1px solid color-mix(in srgb, var(--hg-action) 8%, var(--hg-border));
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--hg-surface-muted) 70%, var(--hg-surface));
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 14%, transparent);
+}
+
+body.hg-form-page.hg-form-profile--embedded-tables #pageForm.hg-modern-form :where(.formtable, table.table) {
+  margin: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+body.hg-form-page.hg-form-profile--embedded-tables #pageForm.hg-modern-form :where(.formtable th, .formtable td, table.table th, table.table td) {
+  border-color: color-mix(in srgb, var(--hg-border) 84%, transparent);
+  color: var(--hg-text);
+  background: transparent;
+}
+
+body.hg-form-page.hg-form-profile--fieldsets #pageForm.hg-modern-form :where(fieldset, .fieldset, .fieldset-container) {
+  min-inline-size: 0;
+  border: 1px solid color-mix(in srgb, var(--hg-action) 8%, var(--hg-border));
+  border-radius: 1.15rem;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 72%, transparent), transparent 12rem);
+}
+
+body.hg-form-page.hg-form-profile--fieldsets #pageForm.hg-modern-form :where(legend, .fieldset-legend) {
+  display: inline-flex;
+  align-items: center;
+  max-inline-size: 100%;
+  margin: 0 0 0.75rem;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid color-mix(in srgb, var(--hg-action) 12%, var(--hg-border));
+  border-radius: 999px;
+  color: var(--hg-text);
+  background: var(--hg-surface);
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--with-help .hg-field-help,
+body.hg-form-page.hg-form-profile--help-rich #pageForm.hg-modern-form :where(.help-block, .help-inline, .description, .hint, small, .form-text) {
+  display: block;
+  max-inline-size: 72ch;
+  margin-block-start: 0.42rem;
+  color: var(--hg-text-muted);
+  font-size: 0.78rem;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--static-value :where(.form-control-static, output, code, pre),
+body.hg-form-page.hg-form-profile--locked-values #pageForm.hg-modern-form :where(.form-control-static, output) {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 2.55rem;
+  max-inline-size: 100%;
+  padding: 0.62rem 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--hg-border) 88%, transparent);
+  border-radius: 0.9rem;
+  color: var(--hg-text);
+  background: color-mix(in srgb, var(--hg-surface-muted) 78%, var(--hg-surface));
+  overflow-wrap: anywhere;
+}
+
+body.hg-form-page.hg-form-profile--locked-values #pageForm.hg-modern-form :where(input[readonly], textarea[readonly], select[readonly], input[disabled], textarea[disabled], select[disabled], .form-control[readonly], .form-control[disabled]) {
+  opacity: 1;
+  border-style: dashed;
+  color: color-mix(in srgb, var(--hg-text) 82%, var(--hg-text-muted));
+  background: color-mix(in srgb, var(--hg-surface-muted) 84%, var(--hg-surface));
+  cursor: not-allowed;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-group--empty {
+  display: none !important;
+}
+
+body.hg-form-page .hg-form-utility-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-block-size: 2.25rem;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--hg-action) 18%, var(--hg-border));
+  border-radius: 999px;
+  color: var(--hg-action);
+  background: color-mix(in srgb, var(--hg-action) 7%, var(--hg-surface));
+  box-shadow: 0 0.55rem 1.4rem color-mix(in srgb, var(--hg-shadow) 8%, transparent);
+  font-size: 0.82rem;
+  font-weight: 850;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+body.hg-form-page .hg-form-utility-link:hover,
+body.hg-form-page .hg-form-utility-link:focus-visible {
+  border-color: color-mix(in srgb, var(--hg-action) 48%, var(--hg-border));
+  color: var(--hg-action-contrast);
+  background: var(--hg-action);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(input[size], textarea[cols], table[width]) {
+  max-inline-size: 100%;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page.hg-form-profile--embedded-tables #pageForm.hg-modern-form :where(.formtable, table.table, .table-wrapper, .table-responsive),
+html[data-heritage-theme='dark'] body.hg-form-page.hg-form-profile--fieldsets #pageForm.hg-modern-form :where(fieldset, .fieldset, .fieldset-container),
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form .hg-field-group--static-value :where(.form-control-static, output, code, pre) {
+  background: color-mix(in srgb, var(--hg-surface-muted) 88%, #fff 2%);
+  color: var(--hg-text);
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page.hg-form-profile--embedded-tables #pageForm.hg-modern-form :where(.formtable th, .formtable td, table.table th, table.table td) {
+  color: var(--hg-text);
+}
+
+@container hg-form (max-width: 680px) {
+  body.hg-form-page #pageForm.hg-modern-form .hg-form-actions {
+    position: sticky;
+    inset-block-end: 0.75rem;
+    z-index: 7;
+    margin-inline: -0.15rem;
+    border-radius: 1rem;
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--hg-surface) 82%, transparent), color-mix(in srgb, var(--hg-surface) 96%, transparent));
+    backdrop-filter: blur(18px);
+  }
+
+  body.hg-form-page.hg-form-profile--fieldsets #pageForm.hg-modern-form :where(legend, .fieldset-legend) {
+    white-space: normal;
+  }
+}
+
+/* premium working density.
+ *
+ * The final form surface keeps generous focus targets while removing the
+ * presentation-like vertical rhythm that made long ISPConfig masks feel
+ * slower than they are. Technical editors and upload/branding surfaces retain
+ * their dedicated sizing rules.
+ */
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] {
+  --hg-form-final-control-height: 2.75rem;
+  --hg-form-final-label-width: clamp(10rem, 18cqi, 14rem);
+  --hg-form-final-row-gap: clamp(0.72rem, 1.25cqi, 1rem);
+  --hg-form-content-width: 78rem;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .nav-tabs {
+  min-block-size: 3.55rem;
+  padding: 0.5rem;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .nav-tabs > li > a {
+  min-block-size: 2.4rem;
+  padding-block: 0.55rem;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .tab-content {
+  padding: clamp(0.85rem, 1.55vw, 1.35rem);
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group {
+  padding-block: clamp(0.68rem, 1.1cqi, 0.9rem);
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group > :where(.control-label, label) {
+  padding-block-start: 0.62rem;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .help-block,
+  .help-inline,
+  .form-text,
+  .description,
+  .hint,
+  small
+) {
+  margin-block-start: 0.35rem;
+  font-size: 0.82rem;
+  line-height: 1.48;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group:has(
+  > .hg-field-body > :is(input[type='checkbox'], input[type='radio'], .checkbox, .radio)
+) {
+  padding-block: 0.58rem;
+}
+
+/* form V1 premium convergence.
+ *
+ * The final form layer is intentionally calm and information-led. Required
+ * state, focus and actions remain obvious without turning every field into a
+ * badge, card or accent surface.
+ */
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] {
+  --hg-form-final-control-height: 2.7rem;
+  --hg-form-final-row-gap: clamp(0.75rem, 1.6cqi, 1.35rem);
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group {
+  padding: clamp(0.68rem, 1.25cqi, 0.92rem) 0.3rem;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group::before {
+  inline-size: 2px;
+  opacity: 0;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group:focus-within {
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, var(--hg-action) 3%, var(--hg-surface)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group:focus-within::before {
+  opacity: 0.55;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group--required > :where(
+  .control-label,
+  label,
+  .hg-field-label
+)::after {
+  content: '*';
+  margin-inline-start: 0.3rem;
+  padding: 0;
+  color: var(--hg-action);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  font-size: 1em;
+  font-weight: 850;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .hg-field-control.form-control,
+  input.hg-field-control:not([type='checkbox']):not([type='radio']),
+  select.hg-field-control,
+  textarea.hg-field-control,
+  .hg-select__control,
+  .input-group-addon,
+  .input-group-btn > .btn
+) {
+  border-radius: 0.78rem !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .hg-field-control.form-control,
+  input.hg-field-control:not([type='checkbox']):not([type='radio']),
+  select.hg-field-control,
+  textarea.hg-field-control,
+  .hg-select__control
+):is(:hover, :focus, :focus-visible),
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-select.is-open .hg-select__control {
+  box-shadow: 0 0 0 0.13rem color-mix(in srgb, var(--hg-action) 11%, transparent) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .hg-field-group--secret,
+  .hg-field-group--file,
+  .hg-field-group--enhanced-select,
+  .hg-field-group--compound
+) {
+  background: transparent !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group--choice :where(
+  label,
+  .checkbox,
+  .radio
+) {
+  border-radius: 0.72rem !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-form-actions {
+  padding: 0.55rem;
+  border-radius: 0.9rem !important;
+  background: color-mix(in srgb, var(--hg-surface) 94%, transparent) !important;
+  box-shadow: 0 0.75rem 2rem color-mix(in srgb, #020617 9%, transparent) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-form-action-control {
+  min-block-size: 2.7rem !important;
+  border-radius: 0.72rem !important;
+}
+
+body.hg-form-page:is(.hg-form-profile--system-config, .hg-form-profile--server-config, .hg-form-profile--limits)
+  #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group {
+  padding-inline: clamp(0.65rem, 1.2cqi, 1rem);
+  border-color: color-mix(in srgb, var(--hg-border) 54%, transparent) !important;
+  border-radius: 0.78rem;
+  background: transparent !important;
+}
+
+@container hg-form (max-width: 760px) {
+  body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group {
+    padding-block: 0.72rem;
+  }
+}
+
+/* native customer/reseller composition.
+   These primitives replace the last Bootstrap input groups, suffix columns,
+   identity summaries and alert boxes used by the client module. */
+body.hg-form-page #pageForm.hg-modern-form .hg-field-control {
+  min-inline-size: 0;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-control-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: stretch;
+  gap: 0.65rem;
+  min-inline-size: 0;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-action {
+  display: inline-flex;
+  align-items: stretch;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-action > :where(button, a) {
+  min-block-size: 2.75rem;
+  white-space: nowrap;
+}
+
+/* native compound fields used by the complete Sites V1 surface. */
+body.hg-form-page #pageForm.hg-modern-form .hg-field-composite {
+  display: flex;
+  inline-size: 100%;
+  min-inline-size: 0;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-composite > :where(
+  .form-control,
+  .hg-select,
+  .hg-field-composite__body
+) {
+  min-inline-size: 0;
+  flex: 1 1 auto;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-composite__body > .form-control {
+  inline-size: 100%;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-field-addon, .hg-input-group-actions) {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: stretch;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-addon {
+  min-block-size: 2.75rem;
+  padding-inline: 0.85rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--hg-border);
+  border-radius: 0.7rem;
+  color: var(--hg-text-muted);
+  background: var(--hg-surface-muted);
+  font-size: 0.78rem;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-input-group-actions > :where(button, a) {
+  min-block-size: 2.75rem;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-tabs {
+  display: flex;
+  gap: 0.35rem;
+  margin: 0 0 1rem;
+  padding: 0.3rem;
+  overflow-x: auto;
+  border: 1px solid var(--hg-border);
+  border-radius: 0.9rem;
+  background: var(--hg-surface-muted);
+  list-style: none;
+  scrollbar-width: thin;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-tabs > li {
+  flex: 0 0 auto;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-tabs > li > a {
+  display: block;
+  padding: 0.58rem 0.82rem;
+  border-radius: 0.65rem;
+  color: var(--hg-text-muted);
+  font-weight: 780;
+  text-decoration: none;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-tabs > li.active > a,
+body.hg-form-page #pageForm.hg-modern-form .hg-tabs > li > a:focus-visible {
+  color: var(--hg-text);
+  background: var(--hg-surface);
+  box-shadow: 0 0.35rem 1rem color-mix(in srgb, var(--hg-text) 7%, transparent);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-content-panel {
+  min-inline-size: 0;
+  padding: clamp(0.9rem, 1.8cqi, 1.3rem);
+  border: 1px solid var(--hg-border);
+  border-radius: 1.05rem;
+  background: var(--hg-surface);
+  box-shadow: 0 0.9rem 2.4rem color-mix(in srgb, var(--hg-text) 5%, transparent);
+}
+
+/* explicit spans for operational forms that previously relied on
+   Bootstrap's twelve-column grid. They stay intrinsic inside native fields. */
+body.hg-form-page #pageForm.hg-modern-form .hg-field-label {
+  color: var(--hg-text);
+  font-weight: 760;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-label--plain {
+  font-weight: 560;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-span {
+  min-inline-size: 0;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-span--full {
+  inline-size: 100%;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-field-span--wide, .hg-field-span--offset) {
+  inline-size: min(100%, 54rem);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-span--half {
+  inline-size: min(100%, 28rem);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-span--compact {
+  inline-size: min(100%, 16rem);
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-field-caption, .hg-field-suffix) {
+  align-self: center;
+  color: var(--hg-text-muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-control--text {
+  color: var(--hg-text-muted);
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-identity-summary {
+  display: grid;
+  gap: 1rem;
+  padding: clamp(1rem, 2cqi, 1.45rem);
+  border: 1px solid color-mix(in srgb, var(--hg-action) 10%, var(--hg-border));
+  border-radius: 1.15rem;
+  color: var(--hg-text);
+  background:
+    radial-gradient(circle at 100% 0, color-mix(in srgb, var(--hg-action) 6%, transparent), transparent 36%),
+    var(--hg-surface);
+  box-shadow: 0 1rem 2.6rem color-mix(in srgb, var(--hg-text) 5%, transparent);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-identity-summary h2 {
+  margin: 0;
+  font-size: clamp(1rem, 2cqi, 1.25rem);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-identity-summary ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 0.7rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-identity-summary li {
+  min-inline-size: 0;
+  padding: 0.72rem 0.8rem;
+  border: 1px solid var(--hg-border);
+  border-radius: 0.8rem;
+  background: color-mix(in srgb, var(--hg-surface-muted) 72%, var(--hg-surface));
+  overflow-wrap: anywhere;
+}
+
+@container hg-form (max-width: 620px) {
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-control-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form .hg-field-action > :where(button, a) {
+    inline-size: 100%;
+    justify-content: center;
+  }
+}
+
+/* form authority pass.
+ *
+ * ISPConfig forms still arrive from many old templates. The modern Heritage
+ * layer now provides a final contrast and geometry floor so white-on-white or
+ * dark-on-dark form fragments cannot reappear while individual templates are
+ * being retired.
+ */
+body.hg-form-page #pageForm.hg-modern-form .hg-option-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: var(--hg-control-height);
+  color: var(--hg-text);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-option-inline > input {
+  flex: 0 0 auto;
+  margin: 0;
+}
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .form-group,
+  .ctrlHolder,
+  .form-group-inline,
+  .formRow,
+  .panel,
+  .well,
+  .box,
+  .content-box,
+  .tab-content,
+  .tab-pane
+) {
+  color: var(--hg-text) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  label,
+  .control-label,
+  .form-label,
+  .fieldlabel,
+  .label,
+  legend,
+  .legend
+) {
+  color: color-mix(in srgb, var(--hg-text) 90%, var(--hg-text-muted)) !important;
+  text-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  input[type='number'],
+  input[type='search'],
+  input[type='url'],
+  input[type='tel'],
+  textarea,
+  select,
+  .form-control,
+  .uneditable-input
+) {
+  color: var(--hg-text) !important;
+  border-color: color-mix(in srgb, var(--hg-border) 88%, transparent) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 76%, var(--hg-surface)) !important;
+  background-image: none !important;
+  text-shadow: none !important;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 10%, transparent) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  input[type='number'],
+  input[type='search'],
+  input[type='url'],
+  input[type='tel'],
+  textarea,
+  select,
+  .form-control
+)::placeholder {
+  color: color-mix(in srgb, var(--hg-text-muted) 78%, transparent) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.btn, button, input[type='button'], input[type='submit'], input[type='reset']) {
+  text-shadow: none !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :where(
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  input[type='number'],
+  input[type='search'],
+  input[type='url'],
+  input[type='tel'],
+  textarea,
+  select,
+  .form-control,
+  .uneditable-input
+) {
+  color: var(--hg-text) !important;
+  border-color: color-mix(in srgb, var(--hg-border) 78%, transparent) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 88%, #fff 2%) !important;
+}
+
+/* runtime form authority pass.
+ *
+ * The content runtime now marks residual inline geometry and colour fragments
+ * after every page load. Forms use that signal to keep old generated masks
+ * readable without waiting for each historic template to be rewritten.
+ */
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-residual-inline-geometry, .hg-residual-inline-geometry *) {
+  max-inline-size: 100% !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-residual-inline-colour) {
+  color: var(--hg-text) !important;
+  background-color: color-mix(in srgb, var(--hg-surface-muted) 74%, var(--hg-surface)) !important;
+  background-image: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-residual-inline-scrubbed) {
+  font: inherit;
+  line-height: inherit;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-residual-inline-scrubbed[style]) {
+  max-inline-size: 100% !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-table-wrapper--runtime) {
+  display: block;
+  max-inline-size: 100%;
+  min-inline-size: 0;
+  overflow: auto;
+  border: 1px solid color-mix(in srgb, var(--hg-border) 86%, transparent);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--hg-surface-muted) 72%, var(--hg-surface));
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-table-wrapper--runtime table) {
+  margin: 0;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-control--filter-reset, .hg-control--filter-toggle) {
+  white-space: nowrap;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :where(.hg-residual-inline-colour, .hg-table-wrapper--runtime) {
+  color: var(--hg-text) !important;
+  background-color: color-mix(in srgb, var(--hg-surface-muted) 88%, #fff 2%) !important;
+}
+
+/* native form and option surface closure.
+ *
+ * The old template stack can still expose browser-native option lists,
+ * disabled rows, add-on dropdowns and generated action bars. This layer gives
+ * those surfaces the same token contract as the rest of the Premium Heritage
+ * without reintroducing plugin-specific JavaScript or legacy Bootstrap chrome.
+ */
+body.hg-form-page #pageForm.hg-modern-form :where(select, option, optgroup) {
+  color: var(--hg-text) !important;
+  background-color: color-mix(in srgb, var(--hg-surface-muted) 82%, var(--hg-surface)) !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :where(select, option, optgroup) {
+  color-scheme: dark;
+  color: var(--hg-text) !important;
+  background-color: color-mix(in srgb, var(--hg-surface-muted) 92%, #fff 1%) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  input[disabled],
+  input[readonly],
+  textarea[disabled],
+  textarea[readonly],
+  select[disabled],
+  .form-control[disabled],
+  .form-control[readonly],
+  .disabled,
+  [aria-disabled='true']
+) {
+  opacity: 1 !important;
+  color: color-mix(in srgb, var(--hg-text) 72%, var(--hg-text-muted)) !important;
+  border-color: color-mix(in srgb, var(--hg-border) 70%, transparent) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 82%, var(--hg-surface)) !important;
+  box-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .dropdown-menu,
+  .hg-owned-enhanced-select__panel,
+  .hg-owned-enhanced-select__panel,
+  .hg-owned-enhanced-select .hg-owned-enhanced-select__panel,
+  .hg-select__menu
+) {
+  color: var(--hg-text) !important;
+  border: 1px solid color-mix(in srgb, var(--hg-border) 88%, transparent) !important;
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 88%, #fff 2%), var(--hg-surface)) !important;
+  box-shadow: 0 1.2rem 2.8rem color-mix(in srgb, var(--hg-shadow) 18%, transparent) !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :where(
+  .dropdown-menu,
+  .hg-owned-enhanced-select__panel,
+  .hg-owned-enhanced-select__panel,
+  .hg-owned-enhanced-select .hg-owned-enhanced-select__panel,
+  .hg-select__menu
+) {
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 94%, #fff 2%), var(--hg-surface)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .dropdown-menu > li > a,
+  .dropdown-menu > li > button,
+  .hg-owned-enhanced-select__option,
+  .hg-owned-enhanced-select .hg-owned-enhanced-select__option,
+  .hg-select__option
+) {
+  color: var(--hg-text) !important;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .dropdown-menu > li > a:hover,
+  .dropdown-menu > li > a:focus,
+  .dropdown-menu > li > button:hover,
+  .dropdown-menu > li > button:focus,
+  .hg-owned-enhanced-select__option--active,
+  .hg-owned-enhanced-select .hg-owned-enhanced-select__option--active,
+  .hg-select__option[aria-selected='true']
+) {
+  color: var(--hg-action-contrast) !important;
+  background: var(--hg-action) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-form-actions, .form-actions, .buttonHolder, .submitForm) {
+  color: var(--hg-text) !important;
+  border-color: color-mix(in srgb, var(--hg-border) 82%, transparent) !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface) 86%, transparent), color-mix(in srgb, var(--hg-surface-muted) 88%, var(--hg-surface))) !important;
+}
+
+/* premium form authority closure.
+ *
+ * This is the final form surface guard for real ISPConfig pages and installed
+ * addons. It removes the remaining Bootstrap-era white islands, forced dark
+ * text, oversized generated rows and detached button styling without changing
+ * field names, permissions or server-side behaviour.
+ */
+body.hg-form-page #pageForm.hg-modern-form {
+  color-scheme: light;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form {
+  color-scheme: dark;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .content-tab-wrapper,
+  .tab-content,
+  .tab-pane,
+  .pnl_formsarea,
+  .pnl_formarea,
+  .pnl_formarea_data,
+  .panel,
+  .panel-default,
+  .panel-body,
+  .panel-footer,
+  .content-box,
+  .content-box-body,
+  .content-box-footer,
+  .well,
+  .box,
+  .card,
+  fieldset,
+  .fieldset,
+  table,
+  tbody,
+  tr,
+  td,
+  th
+) {
+  color: var(--hg-text) !important;
+  border-color: color-mix(in srgb, var(--hg-border) 82%, transparent) !important;
+  background-image: none !important;
+  text-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .tab-content,
+  .tab-pane,
+  .pnl_formsarea,
+  .pnl_formarea,
+  .pnl_formarea_data,
+  .panel,
+  .panel-default,
+  .panel-body,
+  .content-box,
+  .content-box-body,
+  .well,
+  .box,
+  .card,
+  fieldset,
+  .fieldset
+) {
+  background-color: var(--hg-surface) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .panel-heading,
+  .content-box-header,
+  .fieldset-legend,
+  legend,
+  thead,
+  tfoot,
+  .panel-footer,
+  .content-box-footer
+) {
+  color: var(--hg-text) !important;
+  border-color: color-mix(in srgb, var(--hg-border) 82%, transparent) !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 82%, var(--hg-surface)), var(--hg-surface-muted)) !important;
+  text-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .form-group,
+  .hg-field-group,
+  .row-fluid,
+  .row,
+  [class*='col-'],
+  .control-group,
+  .controls
+) {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  label,
+  .control-label,
+  .form-label,
+  .fieldlabel,
+  .label,
+  .checkbox,
+  .radio,
+  .checkbox label,
+  .radio label,
+  .help-block,
+  .help-inline,
+  .description,
+  .muted,
+  .text-muted,
+  small
+) {
+  text-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  label,
+  .control-label,
+  .form-label,
+  .fieldlabel,
+  .checkbox,
+  .radio,
+  .checkbox label,
+  .radio label
+) {
+  color: color-mix(in srgb, var(--hg-text) 92%, var(--hg-text-muted)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.help-block, .help-inline, .description, .muted, .text-muted, small) {
+  color: var(--hg-text-muted) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  input:not([type='checkbox']):not([type='radio']):not([type='range']),
+  textarea,
+  select,
+  .form-control,
+  .uneditable-input,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control
+) {
+  min-block-size: var(--hg-form-field-min, 2.95rem);
+  color: var(--hg-text) !important;
+  border: 1px solid color-mix(in srgb, var(--hg-border) 86%, transparent) !important;
+  border-radius: 0.95rem !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 72%, var(--hg-surface)), var(--hg-surface-muted)) !important;
+  background-image: none !important;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 10%, transparent) !important;
+  text-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  input:not([type='checkbox']):not([type='radio']):not([type='range']),
+  textarea,
+  select,
+  .form-control,
+  .uneditable-input,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control,
+  .hg-owned-enhanced-select__control
+):focus,
+body.hg-form-page #pageForm.hg-modern-form :where(
+  input:not([type='checkbox']):not([type='radio']):not([type='range']),
+  textarea,
+  select,
+  .form-control
+):focus-visible {
+  border-color: color-mix(in srgb, var(--hg-action) 48%, var(--hg-border)) !important;
+  outline: 0;
+  box-shadow:
+    0 0 0 0.18rem color-mix(in srgb, var(--hg-action) 16%, transparent),
+    inset 0 1px 0 color-mix(in srgb, #fff 10%, transparent) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  input[type='checkbox'],
+  input[type='radio']
+) {
+  accent-color: var(--hg-action);
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .btn,
+  button,
+  input[type='button'],
+  input[type='submit'],
+  input[type='reset'],
+  .formbutton-default,
+  .formbutton-success,
+  .formbutton-danger,
+  .formbutton-narrow
+) {
+  min-block-size: 2.65rem;
+  border-radius: 0.9rem !important;
+  text-shadow: none !important;
+  box-shadow: none;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(
+  .formbutton-default,
+  .btn-default,
+  .btn-secondary,
+  input[type='reset']
+) {
+  color: var(--hg-text) !important;
+  border-color: color-mix(in srgb, var(--hg-border) 86%, transparent) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 78%, var(--hg-surface)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.alert, .alert-info, .alert-success, .alert-warning, .alert-danger) {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 1rem;
+  text-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.alert-info) {
+  color: var(--hg-text) !important;
+  border-color: color-mix(in srgb, var(--hg-info, var(--hg-action)) 24%, var(--hg-border)) !important;
+  background: color-mix(in srgb, var(--hg-info, var(--hg-action)) 9%, var(--hg-surface)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.alert-success) {
+  color: var(--hg-success-ink) !important;
+  border-color: color-mix(in srgb, var(--hg-success) 28%, var(--hg-border)) !important;
+  background: color-mix(in srgb, var(--hg-success) 10%, var(--hg-surface)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.alert-warning) {
+  color: var(--hg-warning-ink) !important;
+  border-color: color-mix(in srgb, var(--hg-warning) 34%, var(--hg-border)) !important;
+  background: color-mix(in srgb, var(--hg-warning) 12%, var(--hg-surface)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.alert-danger) {
+  color: var(--hg-danger-ink) !important;
+  border-color: color-mix(in srgb, var(--hg-danger) 34%, var(--hg-border)) !important;
+  background: color-mix(in srgb, var(--hg-danger) 12%, var(--hg-surface)) !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :where(
+  .tab-content,
+  .tab-pane,
+  .pnl_formsarea,
+  .pnl_formarea,
+  .pnl_formarea_data,
+  .panel,
+  .panel-default,
+  .panel-body,
+  .content-box,
+  .content-box-body,
+  .well,
+  .box,
+  .card,
+  fieldset,
+  .fieldset
+) {
+  background-color: color-mix(in srgb, var(--hg-surface) 92%, #fff 1%) !important;
+}
+
+/* premium form finalization contract */
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'],
+body.hg-form-page [data-heritage-form-finalized='true'] {
+  color-scheme: light;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'],
+html[data-heritage-theme='dark'] body.hg-form-page [data-heritage-form-finalized='true'] {
+  color-scheme: dark;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-control-deck {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+  inline-size: 100%;
+  min-inline-size: 0;
+  padding: 0.18rem;
+  border: 1px solid color-mix(in srgb, var(--hg-border) 82%, transparent);
+  border-radius: 1.05rem;
+  background: color-mix(in srgb, var(--hg-surface-muted) 72%, var(--hg-surface));
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 9%, transparent);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-control-deck > :where(input, select, textarea, .form-control, .uneditable-input) {
+  flex: 1 1 auto;
+  min-inline-size: 8rem;
+  border-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-control-deck__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 2.75rem;
+  min-block-size: 2.5rem;
+  margin: 0 !important;
+  border-radius: 0.85rem !important;
+  white-space: nowrap;
+}
+
+body.hg-form-page #pageForm.hg-modern-form :where(.hg-upload-dropzone, .hg-color-control-deck) {
+  display: grid;
+  gap: 0.65rem;
+  inline-size: 100%;
+  padding: 0.75rem;
+  border: 1px dashed color-mix(in srgb, var(--hg-action) 30%, var(--hg-border));
+  border-radius: 1.1rem;
+  background: color-mix(in srgb, var(--hg-action) 4%, var(--hg-surface-muted));
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-upload-dropzone__input {
+  inline-size: 100%;
+  min-block-size: 3rem;
+  cursor: pointer;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-upload-dropzone__input::file-selector-button {
+  min-block-size: 2.45rem;
+  margin-inline-end: 0.75rem;
+  padding: 0 0.95rem;
+  color: var(--hg-action-contrast);
+  border: 0;
+  border-radius: 0.75rem;
+  background: var(--hg-action);
+  font-weight: 750;
+  cursor: pointer;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-color-control-deck__swatch {
+  inline-size: min(100%, 10rem) !important;
+  min-block-size: 3rem !important;
+  padding: 0.28rem !important;
+  border-radius: 1rem !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-code-input {
+  min-block-size: 12rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  tab-size: 2;
+  white-space: pre;
+  overflow: auto;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-field-body--locked :where(input, select, textarea, .form-control, .uneditable-input) {
+  color: color-mix(in srgb, var(--hg-text) 76%, var(--hg-text-muted)) !important;
+  border-style: dashed !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 58%, var(--hg-surface)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-action-control {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-block-size: 2.8rem;
+  padding-inline: 1.1rem !important;
+  border-radius: 0.95rem !important;
+  font-weight: 780;
+  letter-spacing: -0.01em;
+  text-decoration: none !important;
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease,
+    border-color 140ms ease,
+    background-color 140ms ease;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-action-control:hover {
+  transform: translateY(-1px);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-action-control--primary {
+  color: var(--hg-action-contrast) !important;
+  border-color: transparent !important;
+  background: linear-gradient(135deg, var(--hg-action), color-mix(in srgb, var(--hg-action) 78%, #000)) !important;
+  box-shadow: 0 0.75rem 1.45rem color-mix(in srgb, var(--hg-action) 18%, transparent);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-action-control--secondary {
+  color: var(--hg-text) !important;
+  border-color: color-mix(in srgb, var(--hg-border) 86%, transparent) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 78%, var(--hg-surface)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-form-action-control--danger {
+  color: var(--hg-danger-contrast, #fff) !important;
+  border-color: transparent !important;
+  background: linear-gradient(135deg, var(--hg-danger, #dc2626), color-mix(in srgb, var(--hg-danger, #dc2626) 78%, #000)) !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :where(option, optgroup) {
+  color: #e5edf8 !important;
+  background: #111c2b !important;
+}
+
+html[data-heritage-theme='light'] body.hg-form-page #pageForm.hg-modern-form :where(option, optgroup) {
+  color: #122033 !important;
+  background: #ffffff !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :where(.hg-upload-dropzone, .hg-color-control-deck, .hg-form-control-deck) {
+  background: color-mix(in srgb, var(--hg-surface-muted) 86%, #fff 2%);
+}
+
+html[data-heritage-theme='light'] body.hg-form-page #pageForm.hg-modern-form :where(.hg-field-label, label, .control-label) {
+  color: color-mix(in srgb, var(--hg-text) 88%, #000) !important;
+}
+
+@media (max-width: 760px) {
+  body.hg-form-page #pageForm.hg-modern-form .hg-form-control-deck {
+    flex-wrap: wrap;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form .hg-form-control-deck > :where(input, select, textarea, .form-control, .uneditable-input),
+  body.hg-form-page #pageForm.hg-modern-form .hg-form-control-deck__item {
+    flex: 1 1 100%;
+    inline-size: 100%;
+  }
+}
+
+/* real form mask premium convergence.
+ * This layer targets the actual generated edit masks that still leak old
+ * geometry: tabbed System Config pages, branding uploads, dense user/customer
+ * forms, extension panels and billing/product forms. It remains presentation
+ * only; field names, submit buttons and server routes stay untouched.
+ */
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] {
+  --hg-form-row-gap: clamp(0.85rem, 1.4cqi, 1.15rem);
+  --hg-form-section-gap: clamp(1rem, 2cqi, 1.65rem);
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-form-section {
+  min-inline-size: 0;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group:not(.hg-field-group--empty) {
+  margin-block: 0;
+  padding-block: var(--hg-form-row-gap);
+  border-bottom: 1px solid color-mix(in srgb, var(--hg-border) 58%, transparent);
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group:last-child {
+  border-bottom-color: transparent;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-label,
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(label, .control-label) {
+  align-self: start;
+  padding-block-start: 0.72rem;
+  letter-spacing: -0.012em;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-body {
+  display: grid;
+  align-content: start;
+  gap: 0.55rem;
+  min-inline-size: 0;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-body--compound,
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-body--select {
+  gap: 0.45rem;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.hg-owned-enhanced-select) {
+  inline-size: 100% !important;
+  max-inline-size: 100%;
+  min-inline-size: 0;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.hg-owned-enhanced-select__control) {
+  min-block-size: var(--hg-form-field-min, 2.95rem) !important;
+  border-radius: 0.95rem !important;
+  color: var(--hg-text) !important;
+  border-color: color-mix(in srgb, var(--hg-border) 82%, transparent) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 74%, var(--hg-surface)) !important;
+  box-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.hg-owned-enhanced-select__panel, .hg-owned-enhanced-select__results, .hg-owned-enhanced-select__panel, .hg-owned-enhanced-select__results) {
+  color: var(--hg-text) !important;
+  border-color: color-mix(in srgb, var(--hg-border) 82%, transparent) !important;
+  background: var(--hg-surface) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.hg-owned-enhanced-select__option--active, .hg-owned-enhanced-select .hg-owned-enhanced-select__option--active) {
+  color: var(--hg-action-contrast) !important;
+  background: var(--hg-action) !important;
+}
+
+body.hg-form-page:is(.hg-form-profile--system-config, .hg-form-profile--server-config, .hg-form-profile--limits) #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .tab-content {
+  display: grid;
+  gap: var(--hg-form-section-gap);
+}
+
+body.hg-form-page:is(.hg-form-profile--system-config, .hg-form-profile--server-config, .hg-form-profile--limits) #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .tab-pane.active {
+  display: grid;
+  gap: var(--hg-form-row-gap);
+}
+
+body.hg-form-page:is(.hg-form-profile--system-config, .hg-form-profile--server-config, .hg-form-profile--limits) #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .nav-tabs {
+  margin-block-end: 0;
+  border-end-start-radius: 0;
+  border-end-end-radius: 0;
+}
+
+body.hg-form-page.hg-form-profile--billing #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.hg-billing-form, .hg-billing-settings-form) {
+  align-items: start;
+}
+
+body.hg-form-page.hg-form-profile--billing #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.hg-billing-panel, .hg-billing-settings-card, .panel, .well) {
+  border-color: color-mix(in srgb, var(--hg-action) 10%, var(--hg-border));
+  background: color-mix(in srgb, var(--hg-surface) 90%, var(--hg-surface-muted));
+}
+
+body.hg-form-page.hg-form-profile--extension #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.panel, .well, .alert, .content-box) {
+  color: var(--hg-text);
+  background: color-mix(in srgb, var(--hg-surface) 88%, var(--hg-surface-muted)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-form-actions {
+  position: sticky;
+  inset-block-end: clamp(0.75rem, 2vw, 1.25rem);
+  z-index: 8;
+  margin-block-start: clamp(1.2rem, 2.4cqi, 2rem);
+  margin-inline-start: auto;
+  inline-size: fit-content;
+  max-inline-size: min(100%, 42rem);
+  border-radius: 1.2rem;
+  backdrop-filter: blur(18px);
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-form-actions--has-danger {
+  border-color: color-mix(in srgb, var(--hg-danger, #dc2626) 24%, var(--hg-border));
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.hg-owned-enhanced-select__panel, .hg-owned-enhanced-select__results, .hg-owned-enhanced-select__panel, .hg-owned-enhanced-select__results) {
+  background: #111c2b !important;
+}
+
+html[data-heritage-theme='light'] body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group:not(.hg-field-group--empty) {
+  border-bottom-color: color-mix(in srgb, var(--hg-border) 76%, transparent);
+}
+
+@media (max-width: 860px) {
+  body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-form-actions {
+    position: static;
+    inline-size: 100%;
+    max-inline-size: none;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-form-actions > * {
+    flex: 1 1 100%;
+  }
+}
+
+/* residual legacy form surface closure.
+ * This is the broad guardrail for generated masks after the real-form pass:
+ * Bootstrap wells/panels, legacy form tables, Select2/Chosen search boxes,
+ * dropdowns, popovers, tooltips, datepickers, jQuery UI widgets and progress
+ * strips must use Heritage surfaces in both themes.
+ */
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .well,
+  .panel,
+  .panel-default,
+  .panel-body,
+  .panel-footer,
+  .content-box,
+  .content-box-body,
+  .box,
+  .card,
+  .fieldset-container,
+  .pnl_formsarea,
+  .pnl_formarea,
+  .pnl_formarea_data
+) {
+  color: var(--hg-text) !important;
+  border-color: color-mix(in srgb, var(--hg-border) 82%, transparent) !important;
+  background: color-mix(in srgb, var(--hg-surface) 88%, var(--hg-surface-muted)) !important;
+  text-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .panel-heading,
+  .content-box-header,
+  legend,
+  .fieldset-legend
+) {
+  color: var(--hg-text) !important;
+  border-color: color-mix(in srgb, var(--hg-border) 78%, transparent) !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 84%, var(--hg-surface)), var(--hg-surface-muted)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .formtable,
+  table.formtable,
+  table.table,
+  .table,
+  .table-striped,
+  .table-condensed,
+  .table-bordered
+) {
+  color: var(--hg-text) !important;
+  border-color: color-mix(in srgb, var(--hg-border) 78%, transparent) !important;
+  background: var(--hg-surface) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .formtable th,
+  .formtable td,
+  table.table th,
+  table.table td,
+  .table > thead > tr > th,
+  .table > tbody > tr > td,
+  .table > tbody > tr > th
+) {
+  color: var(--hg-text) !important;
+  border-color: color-mix(in srgb, var(--hg-border) 72%, transparent) !important;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .table-striped > tbody > tr:nth-child(odd) > td,
+  .table-striped > tbody > tr:nth-child(odd) > th,
+  .formtable tr:nth-child(odd) > td
+) {
+  background: color-mix(in srgb, var(--hg-surface-muted) 58%, transparent) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .dropdown-menu,
+  .hg-owned-enhanced-select__panel,
+  .hg-owned-enhanced-select__panel,
+  .hg-owned-enhanced-select__results,
+  .hg-owned-enhanced-select__panel,
+  .hg-owned-enhanced-select__results,
+  .ui-widget,
+  .ui-widget-content,
+  .datepicker,
+  .datetimepicker,
+  .popover,
+  .tooltip-inner
+) {
+  color: var(--hg-text) !important;
+  border: 1px solid color-mix(in srgb, var(--hg-border) 82%, transparent) !important;
+  border-radius: 1rem !important;
+  background: var(--hg-surface) !important;
+  box-shadow: 0 1.2rem 3rem color-mix(in srgb, var(--hg-text) 14%, transparent) !important;
+  text-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .dropdown-menu > li > a,
+  .dropdown-menu > li > button,
+  .hg-owned-enhanced-select__option,
+  .hg-owned-enhanced-select__option,
+  .ui-menu-item,
+  .ui-state-default,
+  .ui-widget-content .ui-state-default,
+  .datepicker td,
+  .datepicker th,
+  .datetimepicker td,
+  .datetimepicker th
+) {
+  color: var(--hg-text) !important;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .dropdown-menu > li > a:hover,
+  .dropdown-menu > li > a:focus,
+  .dropdown-menu > li > button:hover,
+  .dropdown-menu > li > button:focus,
+  .hg-owned-enhanced-select__option--active,
+  .hg-owned-enhanced-select__option--active,
+  .ui-state-hover,
+  .ui-state-active,
+  .datepicker td.active,
+  .datepicker td.active:hover,
+  .datetimepicker td.active,
+  .datetimepicker td.active:hover
+) {
+  color: var(--hg-action-contrast) !important;
+  background: var(--hg-action) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .hg-owned-enhanced-select__search,
+  .hg-owned-enhanced-select__search,
+  .ui-widget input,
+  .ui-widget select,
+  .ui-widget textarea,
+  .ui-widget button
+) {
+  color: var(--hg-text) !important;
+  border-color: color-mix(in srgb, var(--hg-border) 82%, transparent) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 72%, var(--hg-surface)) !important;
+  box-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.progress, .progress-striped) {
+  overflow: hidden;
+  min-block-size: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--hg-border) 76%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--hg-surface-muted) 72%, var(--hg-surface)) !important;
+  box-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.progress-bar, .bar) {
+  background: linear-gradient(90deg, var(--hg-action), color-mix(in srgb, var(--hg-action) 72%, #fff 12%)) !important;
+  box-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.badge, .label) {
+  color: var(--hg-text) !important;
+  border: 1px solid color-mix(in srgb, var(--hg-border) 78%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--hg-surface-muted) 78%, var(--hg-surface)) !important;
+  text-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.label-success, .badge-success) {
+  color: var(--hg-success-ink) !important;
+  border-color: color-mix(in srgb, var(--hg-success) 34%, var(--hg-border));
+  background: color-mix(in srgb, var(--hg-success) 12%, var(--hg-surface)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.label-warning, .badge-warning) {
+  color: var(--hg-warning-ink) !important;
+  border-color: color-mix(in srgb, var(--hg-warning) 38%, var(--hg-border));
+  background: color-mix(in srgb, var(--hg-warning) 12%, var(--hg-surface)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.label-danger, .badge-danger, .label-important, .badge-important) {
+  color: var(--hg-danger-ink) !important;
+  border-color: color-mix(in srgb, var(--hg-danger) 38%, var(--hg-border));
+  background: color-mix(in srgb, var(--hg-danger) 12%, var(--hg-surface)) !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .dropdown-menu,
+  .hg-owned-enhanced-select__panel,
+  .hg-owned-enhanced-select__panel,
+  .ui-widget,
+  .ui-widget-content,
+  .datepicker,
+  .datetimepicker,
+  .popover,
+  .tooltip-inner
+) {
+  background: #111c2b !important;
+  box-shadow: 0 1.2rem 3rem rgb(0 0 0 / 0.36) !important;
+}
+
+html[data-heritage-theme='light'] body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .dropdown-menu,
+  .hg-owned-enhanced-select__panel,
+  .hg-owned-enhanced-select__panel,
+  .ui-widget,
+  .ui-widget-content,
+  .datepicker,
+  .datetimepicker,
+  .popover,
+  .tooltip-inner
+) {
+  background: #ffffff !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form #template_additional_list ul {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body.hg-form-page #pageForm.hg-modern-form #template_additional_list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-block-size: 2.35rem;
+  padding: 0.45rem 0.55rem 0.45rem 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--hg-border) 82%, transparent);
+  border-radius: 0.8rem;
+  background: color-mix(in srgb, var(--hg-surface-muted) 74%, var(--hg-surface));
+  color: var(--hg-text);
+}
+
+body.hg-form-page #pageForm.hg-modern-form #template_additional_list li em {
+  color: var(--hg-muted);
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-template-remove {
+  display: inline-grid;
+  flex: 0 0 auto;
+  place-items: center;
+  inline-size: 1.85rem;
+  block-size: 1.85rem;
+  border: 1px solid color-mix(in srgb, var(--hg-danger) 24%, var(--hg-border));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--hg-danger) 7%, var(--hg-surface));
+  color: var(--hg-danger-ink);
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1;
+  text-decoration: none;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+body.hg-form-page #pageForm.hg-modern-form .hg-template-remove:is(:hover, :focus-visible) {
+  border-color: color-mix(in srgb, var(--hg-danger) 56%, var(--hg-border));
+  background: color-mix(in srgb, var(--hg-danger) 14%, var(--hg-surface));
+  color: var(--hg-danger);
+  outline: none;
+  transform: translateY(-1px);
+}
+body.hg-app-navigation-enabled .hg-jail-symbol {
+  display: inline-grid;
+  width: 30px;
+  height: 30px;
+  margin-left: 8px;
+  place-items: center;
+  vertical-align: middle;
+  color: var(--hg-warning-ink);
+  border: 1px solid color-mix(in srgb, var(--hg-warning) 34%, var(--hg-border));
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--hg-warning) 8%, var(--hg-surface));
+}
+
+body.hg-app-navigation-enabled .hg-jail-symbol svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* form surface finalization.
+ *
+ * Detail masks now finish as one premium Heritage surface. This block is the
+ * final visual owner for form cards, tab strips, field rows, native controls,
+ * compound controls, embedded legacy panels/tables and the sticky action dock.
+ */
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] {
+  --hg-form-final-radius: 1.35rem;
+  --hg-form-final-control-height: 2.95rem;
+  --hg-form-final-label-width: clamp(10.5rem, 20cqi, 15rem);
+  --hg-form-final-row-gap: clamp(0.95rem, 2cqi, 1.45rem);
+  color: var(--hg-text);
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper {
+  overflow: clip;
+  border-color: color-mix(in srgb, var(--hg-border) 84%, transparent) !important;
+  border-radius: var(--hg-form-final-radius) !important;
+  background: var(--hg-surface) !important;
+  box-shadow: 0 1.6rem 4.25rem color-mix(in srgb, #020617 9%, transparent) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .nav-tabs {
+  min-block-size: 4rem;
+  padding: 0.65rem;
+  gap: 0.5rem;
+  border-color: color-mix(in srgb, var(--hg-border) 78%, transparent) !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 78%, var(--hg-surface)), var(--hg-surface-muted)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .nav-tabs > li > a {
+  min-block-size: 2.55rem;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 0.95rem !important;
+  color: var(--hg-text-muted) !important;
+  border-color: transparent !important;
+  background: transparent !important;
+  text-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .nav-tabs > li.active > a {
+  color: var(--hg-action-quiet-text) !important;
+  border-color: color-mix(in srgb, var(--hg-action) 32%, var(--hg-border)) !important;
+  background: color-mix(in srgb, var(--hg-action) 9%, var(--hg-surface)) !important;
+  box-shadow: inset 0 -0.18rem 0 var(--hg-action) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .tab-content {
+  padding: clamp(1rem, 2vw, 1.7rem);
+  color: var(--hg-text) !important;
+  background: var(--hg-surface) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .tab-content > .tab-pane {
+  max-inline-size: min(100%, var(--hg-form-content-width, 72rem));
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group {
+  grid-template-columns: var(--hg-form-final-label-width) minmax(0, 1fr);
+  gap: var(--hg-form-final-row-gap);
+  min-inline-size: 0;
+  padding: clamp(0.85rem, 1.6cqi, 1.15rem) 0.35rem;
+  border-color: color-mix(in srgb, var(--hg-border) 64%, transparent) !important;
+  background: transparent !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group:focus-within {
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--hg-action) 5%, var(--hg-surface)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group > :where(.control-label, label) {
+  padding-block-start: 0.75rem;
+  color: var(--hg-text) !important;
+  text-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-body {
+  min-inline-size: 0;
+  max-inline-size: min(100%, var(--hg-form-control-width, 52rem));
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .hg-field-control.form-control,
+  input.hg-field-control:not([type='checkbox']):not([type='radio']),
+  select.hg-field-control,
+  textarea.hg-field-control,
+  .hg-select__control,
+  .input-group-addon,
+  .input-group-btn > .btn
+) {
+  min-block-size: var(--hg-form-final-control-height) !important;
+  min-inline-size: 0 !important;
+  max-inline-size: 100% !important;
+  border-color: color-mix(in srgb, var(--hg-border) 84%, transparent) !important;
+  border-radius: 0.95rem !important;
+  color: var(--hg-text) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 68%, var(--hg-surface)) !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .hg-field-control.form-control,
+  input.hg-field-control:not([type='checkbox']):not([type='radio']),
+  select.hg-field-control,
+  textarea.hg-field-control,
+  .hg-select__control
+):is(:hover, :focus, :focus-visible),
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-select.is-open .hg-select__control {
+  border-color: color-mix(in srgb, var(--hg-action) 42%, var(--hg-border)) !important;
+  box-shadow: 0 0 0 0.18rem color-mix(in srgb, var(--hg-action) 14%, transparent) !important;
+  outline: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .hg-field-control[readonly],
+  .hg-field-control:disabled,
+  .hg-field-group--readonly .hg-field-control,
+  fieldset[disabled] .hg-field-control
+) {
+  color: var(--hg-text-muted) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 82%, var(--hg-surface)) !important;
+  opacity: 0.72;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.input-group, .hg-form-control-deck, .hg-color-control-deck) {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  align-items: stretch;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.input-group > .hg-field-control, .hg-form-control-deck > .hg-field-control) {
+  flex: 1 1 16rem;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.hg-upload-dropzone, .hg-code-input) {
+  inline-size: 100%;
+  max-inline-size: 100%;
+  color: var(--hg-text) !important;
+  border-color: color-mix(in srgb, var(--hg-border) 84%, transparent) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 62%, var(--hg-surface)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.hg-upload-dropzone):is(:hover, :focus-within) {
+  border-color: color-mix(in srgb, var(--hg-action) 38%, var(--hg-border)) !important;
+  background: color-mix(in srgb, var(--hg-action) 6%, var(--hg-surface)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-form-actions {
+  max-inline-size: min(100%, 42rem);
+  padding: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--hg-border) 82%, transparent) !important;
+  border-radius: 1.15rem !important;
+  background: color-mix(in srgb, var(--hg-surface) 86%, transparent) !important;
+  box-shadow: 0 1.1rem 2.75rem color-mix(in srgb, #020617 13%, transparent) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-form-action-control {
+  min-block-size: 2.85rem !important;
+  border-radius: 0.9rem !important;
+  font-weight: 850 !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-form-action-control--primary {
+  color: var(--hg-action-contrast) !important;
+  border-color: transparent !important;
+  background: var(--hg-action) !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper,
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .tab-content,
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.hg-field-control, .hg-select__control, .hg-upload-dropzone, .hg-code-input) {
+  color: var(--hg-text) !important;
+  background: color-mix(in srgb, var(--hg-surface) 92%, #020617) !important;
+}
+
+html[data-heritage-theme='light'] body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper,
+html[data-heritage-theme='light'] body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .tab-content {
+  color: var(--hg-text) !important;
+  background: #fff !important;
+}
+
+@container hg-form (max-width: 760px) {
+  body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group,
+  body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group--multi-body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.55rem;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group > :where(.control-label, label) {
+    padding-block-start: 0;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-body,
+  body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-form-actions {
+    inline-size: 100%;
+    max-inline-size: 100%;
+  }
+}
+
+/* special form finalization.
+ *
+ * High-risk detail masks no longer borrow accidental layout from generic
+ * Bootstrap-era forms. Branding/System Config, billing, extensions, technical
+ * text, uploads and wide configuration fields receive explicit Heritage
+ * composition on top of the finalized form base.
+ */
+body.hg-form-page:is(
+  .hg-form-profile--system-config,
+  .hg-form-profile--server-config,
+  .hg-form-profile--billing,
+  .hg-form-profile--extension,
+  .hg-form-profile--technical-text,
+  .hg-form-profile--uploads,
+  .hg-form-profile--wide-content
+) #pageForm.hg-modern-form[data-heritage-form-finalized='true'] {
+  --hg-form-control-width: 64rem;
+  --hg-form-content-width: 86rem;
+}
+
+body.hg-form-page:is(.hg-form-profile--system-config, .hg-form-profile--server-config, .hg-form-profile--deep-tabs)
+  #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .nav-tabs {
+  position: sticky;
+  top: var(--hg-shell-sticky-offset, 0);
+  z-index: 5;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+body.hg-form-page:is(.hg-form-profile--system-config, .hg-form-profile--server-config, .hg-form-profile--limits)
+  #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .tab-pane.active {
+  display: grid;
+  gap: 0.85rem;
+}
+
+body.hg-form-page:is(.hg-form-profile--system-config, .hg-form-profile--server-config, .hg-form-profile--limits)
+  #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group {
+  padding-inline: clamp(0.75rem, 1.5cqi, 1.25rem);
+  border: 1px solid color-mix(in srgb, var(--hg-border) 62%, transparent) !important;
+  border-radius: 1.05rem;
+  background: color-mix(in srgb, var(--hg-surface-muted) 38%, transparent) !important;
+}
+
+body.hg-form-page.hg-form-profile--billing #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .hg-billing-form,
+  .hg-billing-settings-form,
+  .hg-billing-panel,
+  .hg-billing-settings-card,
+  .panel,
+  .well
+) {
+  border-color: color-mix(in srgb, var(--hg-border) 72%, transparent) !important;
+  border-radius: 1.2rem !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 44%, var(--hg-surface)) !important;
+  color: var(--hg-text) !important;
+  box-shadow: none !important;
+}
+
+body.hg-form-page:is(.hg-form-profile--technical-text, .hg-form-profile--certificate)
+  #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(textarea.hg-code-input, textarea.hg-field-control) {
+  min-block-size: clamp(11rem, 26vh, 24rem) !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace !important;
+  font-size: 0.875rem !important;
+  line-height: 1.65 !important;
+  resize: vertical;
+  tab-size: 2;
+}
+
+body.hg-form-page.hg-form-profile--uploads #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-upload-dropzone {
+  display: grid;
+  gap: 0.65rem;
+  min-block-size: 5.5rem;
+  padding: 1rem;
+  border-style: dashed !important;
+}
+
+body.hg-form-page.hg-form-profile--uploads #pageForm.hg-modern-form[data-heritage-form-finalized='true'] input[type='file'].hg-upload-dropzone__input {
+  inline-size: 100%;
+}
+
+body.hg-form-page.hg-form-profile--wide-content #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .hg-field-body,
+  .hg-form-control-deck,
+  .input-group,
+  textarea,
+  select
+) {
+  max-inline-size: 100%;
+}
+
+body.hg-form-page.hg-form-profile--wide-content #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .tab-content {
+  overflow-x: auto;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page:is(
+  .hg-form-profile--system-config,
+  .hg-form-profile--server-config,
+  .hg-form-profile--billing,
+  .hg-form-profile--extension) #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.panel, .well, .content-box, .hg-billing-panel) {
+  background: color-mix(in srgb, var(--hg-surface) 88%, #020617) !important;
+  color: var(--hg-text) !important;
+}
+
+@container hg-form (max-width: 760px) {
+  body.hg-form-page:is(.hg-form-profile--system-config, .hg-form-profile--server-config, .hg-form-profile--limits)
+    #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group {
+    padding-inline: 0.85rem;
+  }
+}
+
+/* form state and guidance finalization.
+ *
+ * The final form layer now treats feedback, help text, fieldsets, locked
+ * values and sensitive technical inputs as first-class UI states. Accent
+ * colour stays restrained; warning, danger and success keep separate semantic
+ * colours.
+ */
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .help-block,
+  .help-inline,
+  .form-text,
+  .description,
+  .hint,
+  small
+) {
+  max-inline-size: 62ch;
+  margin-block-start: 0.45rem;
+  color: var(--hg-text-muted) !important;
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group--with-help {
+  align-items: start;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group--notice {
+  border-radius: 1.05rem;
+  background: color-mix(in srgb, var(--hg-info) 6%, var(--hg-surface)) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.alert, .box_error, .box_warning, .box_success) {
+  position: relative;
+  overflow: hidden;
+  border-width: 1px !important;
+  border-radius: 1.05rem !important;
+  padding: 0.9rem 1rem 0.9rem 1.15rem !important;
+  color: var(--hg-text) !important;
+  background: color-mix(in srgb, var(--hg-info) 7%, var(--hg-surface)) !important;
+  box-shadow: none !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.alert, .box_error, .box_warning, .box_success)::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  inline-size: 0.22rem;
+  background: var(--hg-info);
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.alert-danger, .alert-error, .box_error) {
+  border-color: color-mix(in srgb, var(--hg-danger) 40%, var(--hg-border)) !important;
+  background: color-mix(in srgb, var(--hg-danger) 9%, var(--hg-surface)) !important;
+  color: var(--hg-danger-ink) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.alert-danger, .alert-error, .box_error)::before {
+  background: var(--hg-danger);
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.alert-warning, .box_warning) {
+  border-color: color-mix(in srgb, var(--hg-warning) 42%, var(--hg-border)) !important;
+  background: color-mix(in srgb, var(--hg-warning) 11%, var(--hg-surface)) !important;
+  color: var(--hg-warning-ink) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.alert-warning, .box_warning)::before {
+  background: var(--hg-warning);
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.alert-success, .box_success) {
+  border-color: color-mix(in srgb, var(--hg-success) 42%, var(--hg-border)) !important;
+  background: color-mix(in srgb, var(--hg-success) 10%, var(--hg-surface)) !important;
+  color: var(--hg-success-ink) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(.alert-success, .box_success)::before {
+  background: var(--hg-success);
+}
+
+body.hg-form-page:is(.hg-form-profile--fieldsets, .hg-form-profile--legacy-panels)
+  #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(fieldset, .fieldset, .fieldset-container, .hg-form-fieldset, .panel, .well) {
+  border: 1px solid color-mix(in srgb, var(--hg-border) 72%, transparent) !important;
+  border-radius: 1.15rem !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 42%, var(--hg-surface)) !important;
+  color: var(--hg-text) !important;
+}
+
+body.hg-form-page:is(.hg-form-profile--fieldsets, .hg-form-profile--legacy-panels)
+  #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(legend, .fieldset-legend, .hg-form-section-heading, .panel-heading) {
+  color: var(--hg-text) !important;
+  font-size: 0.82rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+body.hg-form-page.hg-form-profile--locked-values #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  [readonly],
+  [disabled],
+  .readonly,
+  .disabled,
+  .form-control-static,
+  output
+) {
+  cursor: default;
+  border-color: color-mix(in srgb, var(--hg-border) 58%, transparent) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 76%, var(--hg-surface)) !important;
+  color: var(--hg-text-muted) !important;
+}
+
+body.hg-form-page.hg-form-profile--system-mail #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group--mail-credential {
+  border-color: color-mix(in srgb, var(--hg-warning) 24%, var(--hg-border)) !important;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--hg-warning) 5%, var(--hg-surface)), var(--hg-surface)) !important;
+}
+
+body.hg-form-page.hg-form-profile--system-mail #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group--mail-credential .hg-field-body::after {
+  content: 'Zugangsdaten nur in geschuetzten Test-/Admin-Kontexten bearbeiten.';
+  display: block;
+  max-inline-size: 52ch;
+  margin-block-start: 0.45rem;
+  color: var(--hg-text-muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+body.hg-form-page.hg-form-profile--certificate #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group--certificate {
+  border-color: color-mix(in srgb, var(--hg-info) 30%, var(--hg-border)) !important;
+  background: color-mix(in srgb, var(--hg-info) 5%, var(--hg-surface)) !important;
+}
+
+body.hg-form-page.hg-form-profile--certificate #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group--certificate textarea {
+  min-block-size: clamp(14rem, 34vh, 28rem) !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .alert,
+  .box_error,
+  .box_warning,
+  .box_success,
+  fieldset,
+  .fieldset,
+  .fieldset-container,
+  .panel,
+  .well
+) {
+  background-color: color-mix(in srgb, var(--hg-surface) 90%, #020617) !important;
+}
+
+/* special forms DONE contract.
+ *
+ * This is the final authority layer for high-risk and historically uneven form
+ * masks: System Config, branding uploads, billing settings, extension screens,
+ * secret fields and technical textarea editors. It does not change submitted
+ * data. It closes visual ownership, readability and responsive behaviour.
+ */
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] {
+  --hg-special-form-ring: color-mix(in srgb, var(--hg-text-muted) 13%, var(--hg-border));
+  --hg-special-form-ring-focus: color-mix(in srgb, var(--hg-action) 34%, var(--hg-border));
+  --hg-special-form-calm-accent: color-mix(in srgb, var(--hg-action) 28%, var(--hg-text-muted));
+}
+
+body.hg-form-page:is(
+  .hg-form-profile--system-config,
+  .hg-form-profile--server-config,
+  .hg-form-profile--billing,
+  .hg-form-profile--extension,
+  .hg-form-profile--uploads,
+  .hg-form-profile--technical-text,
+  .hg-form-profile--certificate
+) #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .content-tab-wrapper,
+  .tab-content,
+  .tab-pane,
+  .pnl_formsarea,
+  .panel,
+  .panel-default,
+  .panel-body,
+  .well,
+  .content-box,
+  .fieldset-container,
+  .hg-settings-section,
+  .hg-billing-panel,
+  .hg-billing-settings-card
+) {
+  border-color: var(--hg-special-form-ring) !important;
+  background:
+    radial-gradient(circle at 100% 0, color-mix(in srgb, var(--hg-special-form-calm-accent) 3%, transparent), transparent 34%),
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 42%, var(--hg-surface)), var(--hg-surface) 68%) !important;
+  color: var(--hg-text) !important;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  input,
+  select,
+  textarea,
+  .form-control,
+  .hg-field-control,
+  .hg-owned-enhanced-select__button
+) {
+  min-inline-size: 0;
+}
+
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  input,
+  select,
+  textarea,
+  .form-control,
+  .hg-field-control
+):focus {
+  border-color: var(--hg-special-form-ring-focus) !important;
+  box-shadow: 0 0 0 0.22rem color-mix(in srgb, var(--hg-action) 12%, transparent) !important;
+}
+
+body.hg-form-page.hg-form-profile--billing #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .hg-billing-form,
+  .hg-billing-settings-form
+) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: 1rem;
+}
+
+body.hg-form-page.hg-form-profile--billing #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .hg-billing-settings-card,
+  .hg-billing-panel
+) {
+  min-inline-size: 0;
+  overflow: clip;
+}
+
+body.hg-form-page.hg-form-profile--extension #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .formbutton-success,
+  .formbutton-default,
+  .formbutton-danger,
+  .btn,
+  button
+) {
+  min-block-size: 2.55rem;
+  border-radius: 0.85rem !important;
+  font-weight: 820;
+}
+
+body.hg-form-page:is(.hg-form-profile--technical-text, .hg-form-profile--certificate)
+  #pageForm.hg-modern-form[data-heritage-form-finalized='true'] textarea {
+  white-space: pre;
+  overflow: auto;
+  scrollbar-gutter: stable;
+}
+
+body.hg-form-page.hg-form-profile--uploads #pageForm.hg-modern-form[data-heritage-form-finalized='true'] input[type='file'] {
+  border-style: dashed !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 66%, var(--hg-surface)) !important;
+}
+
+body.hg-form-page.hg-form-profile--secrets #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(input[type='password'], .hg-field-group--secret) {
+  border-color: color-mix(in srgb, var(--hg-warning) 22%, var(--hg-border)) !important;
+  background: color-mix(in srgb, var(--hg-warning) 4%, var(--hg-surface)) !important;
+}
+
+body.hg-form-page.hg-form-profile--deep-tabs #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .nav-tabs {
+  scrollbar-gutter: stable;
+}
+
+body.hg-form-page.hg-form-profile--deep-tabs #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .nav-tabs > li > a {
+  max-inline-size: 18rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] {
+  --hg-special-form-ring: color-mix(in srgb, var(--hg-text-muted) 20%, var(--hg-border));
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page:is(
+  .hg-form-profile--system-config,
+  .hg-form-profile--server-config,
+  .hg-form-profile--billing,
+  .hg-form-profile--extension,
+  .hg-form-profile--uploads,
+  .hg-form-profile--technical-text,
+  .hg-form-profile--certificate
+) #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
+  .content-tab-wrapper,
+  .tab-content,
+  .tab-pane,
+  .pnl_formsarea,
+  .panel,
+  .panel-body,
+  .well,
+  .content-box,
+  .fieldset-container,
+  .hg-settings-section,
+  .hg-billing-panel,
+  .hg-billing-settings-card
+) {
+  background:
+    radial-gradient(circle at 100% 0, color-mix(in srgb, var(--hg-special-form-calm-accent) 4%, transparent), transparent 34%),
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 86%, #fff 1.5%), var(--hg-surface) 72%) !important;
+}
+
+/* validation guidance follows the control axis instead of wrapping
+   inside the narrow label column. */
+body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group.has-error > :where(
+  .help-block,
+  .help-inline,
+  .error,
+  [role='alert']
+) {
+  grid-column: 2 / -1;
+  inline-size: fit-content;
+  max-inline-size: min(100%, 62ch);
+  margin: 0.5rem 0 0;
+  padding: 0.45rem 0.65rem;
+  border-radius: 0.65rem;
+  color: var(--hg-danger-ink) !important;
+  background: color-mix(in srgb, var(--hg-danger) 7%, transparent);
+  font-weight: 700;
+}
+
+@container hg-form (max-width: 680px) {
+  body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-field-group.has-error > :where(
+    .help-block,
+    .help-inline,
+    .error,
+    [role='alert']
+  ) {
+    grid-column: 1 / -1;
+  }
+
+  body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .hg-form-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body.hg-form-page.hg-form-profile--deep-tabs #pageForm.hg-modern-form[data-heritage-form-finalized='true'] .content-tab-wrapper > .nav-tabs > li > a {
+    max-inline-size: 12rem;
+  }
+}

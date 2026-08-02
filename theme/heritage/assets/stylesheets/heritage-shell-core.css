@@ -1,0 +1,1779 @@
+/* authoritative authenticated application shell.
+ *
+ * This final layer owns header, global search, persistent navigation, compact
+ * drawer and shell geometry. The native ISPConfig menus remain hidden data
+ * sources. There are exactly two layout transitions: compact navigation at
+ * 1024px and the compact two-row header at 670px. */
+
+:root {
+  --hg-shell-navigation-width: clamp(216px, 17vw, 248px);
+  --hg-shell-gutter: clamp(14px, 2.15vw, 32px);
+  --hg-shell-header-gap: clamp(10px, 1.4vw, 18px);
+  --hg-shell-header-height: 70px;
+  --hg-shell-control-size: 42px;
+}
+
+html,
+body { min-height: 100%; }
+
+body.hg-app-navigation-enabled {
+  width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+}
+
+body.hg-app-navigation-enabled #container,
+body.hg-app-navigation-enabled #main-wrapper,
+body.hg-app-navigation-enabled #inner-wrapper,
+body.hg-app-navigation-enabled #content,
+body.hg-app-navigation-enabled #pageContent {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+}
+
+body.hg-app-navigation-enabled #main-wrapper {
+  min-height: 100vh;
+  margin: 0;
+  padding-inline-start: var(--hg-shell-navigation-width);
+}
+
+body.hg-app-navigation-enabled #inner-wrapper {
+  display: flex;
+  min-height: 100vh;
+  margin: 0;
+  flex-direction: column;
+}
+
+/* The permission-filtered native menus stay available to the Heritage
+ * controller but never create a second visible navigation surface. */
+body.hg-app-navigation-enabled #topnav-container,
+body.hg-app-navigation-enabled #main-navigation,
+body.hg-app-navigation-enabled #sidebar { display: none !important; }
+
+body.hg-app-navigation-enabled #topnav-container + .clear {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  flex: 1 0 auto;
+}
+
+body.hg-app-navigation-enabled #footer { flex: 0 0 auto; }
+
+body.hg-app-navigation-enabled #topnav-container + .clear > #content {
+  width: 100%;
+  min-width: 0;
+  padding: clamp(20px, 2.2vw, 32px) var(--hg-shell-gutter);
+}
+
+body.hg-app-navigation-enabled #pageContent {
+  max-width: 1480px;
+  margin-inline: auto;
+}
+
+body.hg-app-navigation-enabled :is(.table-wrapper, .table-responsive, .panel, .content-box) {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Header */
+body.hg-app-navigation-enabled #inner-wrapper > .clear:first-child {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) auto;
+  gap: var(--hg-shell-header-gap);
+  min-height: var(--hg-shell-header-height);
+  align-items: center;
+  padding: 10px var(--hg-shell-gutter);
+  border: 0;
+  border-bottom: 1px solid var(--hg-border);
+  border-radius: 0;
+  background: color-mix(in srgb, var(--hg-surface) 97%, transparent);
+  box-shadow: 0 5px 18px rgba(24, 39, 75, .045);
+  backdrop-filter: blur(16px);
+}
+
+html[data-heritage-theme='dark'] body.hg-app-navigation-enabled #inner-wrapper > .clear:first-child {
+  box-shadow: 0 7px 22px rgba(0, 0, 0, .18);
+}
+
+body.hg-app-navigation-enabled #inner-wrapper > .clear:first-child > .left.clear {
+  display: none;
+  min-width: 0;
+  align-items: center;
+}
+
+body.hg-app-navigation-enabled #headerbar {
+  grid-column: 1;
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+body.hg-app-navigation-enabled #headerbar > * { min-width: 0; }
+body.hg-app-navigation-enabled #headerbar > * + * { margin-left: 0; }
+/* Branding belongs to the application shell. The fallback also wins over the
+   legacy inline background declaration emitted by the ISPConfig template. */
+body.hg-app-navigation-enabled #logo,
+body.hg-app-navigation-enabled .hg-app-navigation__brand-logo {
+  background-image: url('../images/ispconfig-heritage-logo.svg') !important;
+  background-repeat: no-repeat !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-app-navigation-enabled #logo,
+html[data-heritage-theme='dark'] body.hg-app-navigation-enabled .hg-app-navigation__brand-logo {
+  background-image: var(--hg-dark-logo) !important;
+}
+
+body.hg-app-navigation-enabled .hg-header-actions {
+  grid-column: 2;
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin: 0;
+}
+
+body.hg-app-navigation-enabled :is(.hg-theme-toggle, .notification) {
+  display: inline-grid;
+  width: var(--hg-shell-control-size);
+  height: var(--hg-shell-control-size);
+  min-width: var(--hg-shell-control-size);
+  margin: 0;
+  padding: 0;
+  place-items: center;
+  border: 1px solid var(--hg-border);
+  border-radius: 11px;
+  box-shadow: none;
+}
+
+body.hg-app-navigation-enabled .hg-theme-toggle {
+  color: var(--hg-text);
+  background: var(--hg-surface-muted);
+}
+
+body.hg-app-navigation-enabled .hg-theme-toggle svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
+body.hg-app-navigation-enabled .notification {
+  color: var(--hg-action-contrast);
+  border-color: color-mix(in srgb, var(--hg-action) 72%, var(--hg-border));
+  background: var(--hg-action);
+  font-weight: 800;
+}
+
+/* Global search */
+body.hg-app-navigation-enabled #searchform {
+  --hg-global-search-submit-lane: var(--hg-shell-control-size);
+  --hg-global-search-shortcut-lane: 32px;
+  --hg-global-search-clear-lane: 36px;
+  --hg-global-search-trailing-padding: calc(var(--hg-global-search-submit-lane) + var(--hg-global-search-shortcut-lane) + 16px);
+  position: relative;
+  z-index: 30;
+  width: min(100%, 520px);
+  min-width: 0;
+  margin: 0;
+}
+
+/* the header is only for global utilities. User identity and logout
+ * belong to the navigation footer so the shell never shows two competing
+ * account areas at once. These guards also neutralise late legacy fragments
+ * from modules that still try to render account/logout affordances in the
+ * topbar. */
+body.hg-app-navigation-enabled .hg-header-actions :where(.hg-user-summary, .hg-user-menu, .hg-account-menu, .cpuser, [data-heritage-account], [data-heritage-user], [href*='login/logout.php']) {
+  display: none !important;
+}
+
+body.hg-app-navigation-enabled #headerbar :where(.hg-user-summary, .hg-user-menu, .hg-account-menu, .cpuser, [data-heritage-account], [data-heritage-user], [href*='login/logout.php']) {
+  display: none !important;
+}
+
+body.hg-app-navigation-enabled #searchform.hg-global-search-has-value {
+  --hg-global-search-trailing-padding: calc(var(--hg-global-search-submit-lane) + var(--hg-global-search-clear-lane) + 18px);
+}
+
+body.hg-app-navigation-enabled #searchform .hg-global-search__field {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  min-height: var(--hg-shell-control-size);
+  overflow: hidden;
+  border: 1px solid var(--hg-border);
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--hg-surface-muted) 92%, var(--hg-surface));
+  background-clip: padding-box;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+}
+
+body.hg-app-navigation-enabled #searchform .hg-global-search__field:focus-within {
+  border-color: var(--hg-action);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--hg-action) 14%, transparent),
+    0 16px 36px color-mix(in srgb, var(--hg-action) 8%, transparent);
+}
+
+body.hg-app-navigation-enabled #searchform .form-control {
+  width: auto;
+  min-width: 0;
+  height: var(--hg-shell-control-size);
+  flex: 1 1 0;
+  padding-inline: 13px var(--hg-global-search-trailing-padding);
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: var(--hg-text);
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body.hg-app-navigation-enabled #searchform .hg-global-search-submit {
+  position: absolute;
+  z-index: 4;
+  inset-block: 0;
+  right: 0;
+  display: grid;
+  width: var(--hg-shell-control-size);
+  place-items: stretch;
+  flex: 0 0 var(--hg-shell-control-size);
+}
+
+body.hg-app-navigation-enabled #searchform .hg-global-search-submit {
+  appearance: none;
+  display: inline-grid;
+  width: var(--hg-global-search-submit-lane);
+  min-width: var(--hg-global-search-submit-lane);
+  inline-size: var(--hg-global-search-submit-lane);
+  height: 100%;
+  padding: 0;
+  place-items: center;
+  border: 0 !important;
+  border-left: 1px solid var(--hg-border) !important;
+  border-radius: 0 10px 10px 0 !important;
+  color: var(--hg-text-muted) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 94%, var(--hg-surface)) !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+body.hg-app-navigation-enabled #searchform .hg-global-search-submit:empty {
+  position: relative;
+}
+
+body.hg-app-navigation-enabled #searchform .hg-global-search-submit:empty::before {
+  width: 15px;
+  height: 15px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  content: '';
+}
+
+body.hg-app-navigation-enabled #searchform .hg-global-search-submit:empty::after {
+  position: absolute;
+  width: 7px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  content: '';
+  transform: translate(8px, 8px) rotate(45deg);
+}
+
+body.hg-app-navigation-enabled #searchform .hg-global-search-submit svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+body.hg-app-navigation-enabled #searchform .hg-global-search-submit:hover,
+body.hg-app-navigation-enabled #searchform .hg-global-search-submit:focus-visible {
+  color: var(--hg-action) !important;
+  background: color-mix(in srgb, var(--hg-action) 9%, var(--hg-surface-muted)) !important;
+  background-image: none !important;
+  outline: 0;
+}
+
+body.hg-app-navigation-enabled .hg-search-shortcut {
+  position: absolute;
+  z-index: 2;
+  top: 12px;
+  right: calc(var(--hg-global-search-submit-lane) + 8px);
+  padding: 2px 6px;
+  border: 1px solid var(--hg-border);
+  border-radius: 5px;
+  color: var(--hg-text-muted);
+  background: var(--hg-surface);
+  font-size: 11px;
+  line-height: 1.2;
+  pointer-events: none;
+}
+
+body.hg-app-navigation-enabled .hg-search-clear {
+  position: absolute;
+  z-index: 3;
+  top: 7px;
+  right: calc(var(--hg-global-search-submit-lane) + 8px);
+  display: inline-grid;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  color: var(--hg-text-muted);
+  background: var(--hg-surface-muted);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+body.hg-app-navigation-enabled .hg-search-clear[hidden],
+body.hg-app-navigation-enabled .hg-search-shortcut[hidden] {
+  display: none !important;
+}
+
+body.hg-app-navigation-enabled .hg-search-clear:hover,
+body.hg-app-navigation-enabled .hg-search-clear:focus-visible {
+  color: var(--hg-action);
+  background: color-mix(in srgb, var(--hg-action) 9%, var(--hg-surface-muted));
+}
+
+body.hg-app-navigation-enabled .hg-global-search-results {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 1200;
+  width: min(640px, calc(100vw - 28px));
+  max-height: min(620px, calc(100vh - 120px));
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 10px;
+  border: 1px solid var(--hg-border);
+  border-radius: 20px;
+  color: var(--hg-text);
+  background:
+    radial-gradient(circle at 12% 0, color-mix(in srgb, var(--hg-action) 7%, transparent), transparent 32%),
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface) 96%, var(--hg-surface-muted)), var(--hg-surface));
+  box-shadow:
+    0 28px 80px rgba(15, 23, 42, .24),
+    inset 0 1px 0 color-mix(in srgb, #fff 35%, transparent);
+}
+
+body.hg-app-navigation-enabled .hg-global-search-results[hidden] { display: none !important; }
+body.hg-app-navigation-enabled .hg-global-search-palette__header { display: grid; gap: 4px; padding: 12px 13px 10px; border-bottom: 1px solid color-mix(in srgb, var(--hg-border) 78%, transparent); }
+body.hg-app-navigation-enabled .hg-global-search-palette__header > span { color: color-mix(in srgb, var(--hg-action) 76%, var(--hg-text-muted)); font-size: 10px; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+body.hg-app-navigation-enabled .hg-global-search-palette__header > strong { color: var(--hg-text); font-size: 14px; font-weight: 850; letter-spacing: -.01em; }
+body.hg-app-navigation-enabled .hg-global-search-palette__footer { margin-top: 8px; padding: 9px 12px 4px; color: var(--hg-text-muted); border-top: 1px solid color-mix(in srgb, var(--hg-border) 58%, transparent); font-size: 11px; font-weight: 650; }
+body.hg-app-navigation-enabled .hg-global-search-group { padding: 7px 0; }
+body.hg-app-navigation-enabled .hg-global-search-group + .hg-global-search-group { border-top: 1px solid color-mix(in srgb, var(--hg-border) 72%, transparent); }
+body.hg-app-navigation-enabled .hg-global-search-group__header { display: flex; min-height: 34px; align-items: center; justify-content: space-between; gap: 12px; padding: 5px 8px 6px; color: var(--hg-text-muted); font-size: 10px; font-weight: 850; letter-spacing: .065em; text-transform: uppercase; }
+body.hg-app-navigation-enabled .hg-global-search-group__header > span { display: inline-grid; min-width: 26px; height: 24px; padding: 0 7px; place-items: center; border: 1px solid color-mix(in srgb, var(--hg-action) 20%, transparent); border-radius: 999px; color: color-mix(in srgb, var(--hg-action) 82%, var(--hg-text)); background: color-mix(in srgb, var(--hg-action) 8%, transparent); }
+body.hg-app-navigation-enabled .hg-global-search-result { display: grid; width: 100%; min-height: 64px; grid-template-columns: 36px minmax(0, 1fr) 24px; align-items: center; gap: 10px; padding: 10px 11px; border: 1px solid transparent; border-radius: 14px; color: var(--hg-text); background: transparent; text-align: left; cursor: pointer; }
+body.hg-app-navigation-enabled .hg-global-search-result__icon { display: grid; width: 34px; height: 34px; place-items: center; border: 1px solid color-mix(in srgb, var(--hg-action) 16%, var(--hg-border)); border-radius: 12px; color: color-mix(in srgb, var(--hg-action) 76%, var(--hg-text)); background: color-mix(in srgb, var(--hg-action) 8%, var(--hg-surface-muted)); font-size: 12px; font-weight: 900; }
+body.hg-app-navigation-enabled .hg-global-search-result__content { display: grid; min-width: 0; gap: 2px; }
+body.hg-app-navigation-enabled .hg-global-search-result__content > strong { overflow: hidden; color: var(--hg-text); font-size: 13px; font-weight: 850; text-overflow: ellipsis; white-space: nowrap; }
+body.hg-app-navigation-enabled .hg-global-search-result__content > span { overflow: hidden; color: var(--hg-text-muted); font-size: 11px; line-height: 1.4; text-overflow: ellipsis; white-space: nowrap; }
+body.hg-app-navigation-enabled .hg-global-search-result__content > small { overflow: hidden; color: color-mix(in srgb, var(--hg-text-muted) 82%, var(--hg-action)); font-size: 10px; font-weight: 750; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
+body.hg-app-navigation-enabled .hg-global-search-result mark { color: inherit; border-radius: 4px; background: color-mix(in srgb, var(--hg-action) 18%, transparent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--hg-action) 18%, transparent); }
+body.hg-app-navigation-enabled .hg-global-search-result__arrow { justify-self: end; color: var(--hg-text-muted); font-size: 16px; transition: transform .16s ease, color .16s ease; }
+body.hg-app-navigation-enabled :is(.hg-global-search-result:hover, .hg-global-search-result:focus-visible, .hg-global-search-result--active) { outline: 0; color: var(--hg-action); border-color: color-mix(in srgb, var(--hg-action) 20%, var(--hg-border)); background: color-mix(in srgb, var(--hg-action) 7%, var(--hg-surface)); box-shadow: inset 3px 0 var(--hg-action), 0 8px 18px color-mix(in srgb, var(--hg-action) 8%, transparent); }
+body.hg-app-navigation-enabled :is(.hg-global-search-result:hover, .hg-global-search-result:focus-visible, .hg-global-search-result--active) .hg-global-search-result__arrow { color: var(--hg-action); transform: translateX(2px); }
+body.hg-app-navigation-enabled .hg-global-search-message { display: grid; min-height: 116px; padding: 22px 18px; place-items: center; color: var(--hg-text-muted); font-size: 12px; font-weight: 720; line-height: 1.5; text-align: center; }
+body.hg-app-navigation-enabled .hg-global-search-message--loading::before { width: 22px; height: 22px; margin-bottom: 8px; border: 2px solid var(--hg-border); border-top-color: var(--hg-action); border-radius: 50%; content: ''; animation: hg-shell-spin .8s linear infinite; }
+body.hg-app-navigation-enabled .hg-global-search-message--error { color: var(--hg-danger-ink); }
+body.hg-app-navigation-enabled #globalsearch[aria-busy='true'] { padding-right: 76px; }
+html[data-heritage-theme='dark'] body.hg-app-navigation-enabled .hg-global-search-results { box-shadow: 0 22px 60px rgba(0, 0, 0, .52); }
+
+html[data-heritage-theme='dark'] body.hg-app-navigation-enabled #searchform .hg-global-search__field,
+html[data-heritage-theme='dark'] body.hg-app-navigation-enabled #searchform .hg-global-search-submit,
+html[data-heritage-theme='dark'] body.hg-app-navigation-enabled .hg-search-clear,
+html[data-heritage-theme='dark'] body.hg-app-navigation-enabled .hg-search-shortcut {
+  color-scheme: dark;
+  background-image: none !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-app-navigation-enabled #searchform .hg-global-search-submit {
+  color: var(--hg-text-muted) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 92%, #000) !important;
+}
+
+/* Navigation drawer base */
+body.hg-app-navigation-enabled .menu-btn { display: none; }
+body.hg-app-navigation-enabled .hg-mobile-navigation {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 10020;
+  display: flex;
+  width: min(88vw, 360px);
+  flex-direction: column;
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(-104%);
+  color: #d7deeb;
+  background: var(--hg-nav-bg);
+  box-shadow: 18px 0 48px rgba(15, 23, 42, .28);
+  transition: transform .2s ease, visibility .2s linear;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 74px;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 14px 14px 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, .09);
+  background: var(--hg-nav-bg);
+}
+
+body.hg-app-navigation-enabled .hg-app-navigation__brand-logo {
+  width: min(176px, calc(100% - 54px)) !important;
+  height: 44px !important;
+  background-position: left center !important;
+  background-size: contain !important;
+}
+
+body.hg-app-navigation-enabled .hg-app-navigation__brand-logo a { display: block; width: 100%; height: 100%; pointer-events: auto; }
+body.hg-app-navigation-enabled .hg-mobile-navigation__header strong { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__close {
+  display: inline-grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 10px;
+  color: #d7deeb;
+  background: rgba(255, 255, 255, .06);
+  font-size: 26px;
+  line-height: 1;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__content {
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  padding: 8px 10px 18px;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--hg-action) 44%, transparent) transparent;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__content::-webkit-scrollbar { width: 8px; }
+body.hg-app-navigation-enabled .hg-mobile-navigation__content::-webkit-scrollbar-track { background: transparent; }
+body.hg-app-navigation-enabled .hg-mobile-navigation__content::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--hg-action) 42%, transparent);
+  background-clip: padding-box;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__content ul { margin: 0; padding: 0; list-style: none; }
+body.hg-app-navigation-enabled .hg-mobile-navigation__modules > li { border-bottom: 1px solid rgba(255, 255, 255, .055); }
+
+body.hg-app-navigation-enabled :is(.hg-mobile-navigation__module, .hg-mobile-navigation__secondary-link) {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  border: 0;
+  color: #aebbd0;
+  background: transparent;
+  box-shadow: none;
+  text-decoration: none;
+  text-align: left;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__module {
+  min-height: 48px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-weight: 720;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__module > :not(.hg-svg-icon) {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__module:not(.hg-has-submenu)::after {
+  display: none !important;
+  content: none !important;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__module.hg-has-submenu::after {
+  display: block !important;
+  content: '' !important;
+}
+
+body.hg-app-navigation-enabled :is(.hg-mobile-navigation__module:hover, .hg-mobile-navigation__module:focus-visible, .hg-mobile-navigation__module.active, .hg-mobile-navigation__module[aria-current='page']) {
+  color: #fff;
+  background: rgba(255, 255, 255, .075);
+  text-decoration: none;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__module.active:not(.hg-has-submenu),
+body.hg-app-navigation-enabled .hg-mobile-navigation__module[aria-current='page']:not(.hg-has-submenu) {
+  background: color-mix(in srgb, var(--hg-action) 10%, rgba(255, 255, 255, .055));
+}
+
+body.hg-app-navigation-enabled :is(.hg-mobile-navigation__module.active, .hg-mobile-navigation__module[aria-current='page'])::before {
+  position: absolute;
+  inset: 9px auto 9px -10px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--hg-action);
+  content: '';
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary {
+  margin: 2px 0 8px !important;
+  padding: 5px 5px 10px !important;
+  border-radius: 10px;
+  background: color-mix(in srgb, #000 13%, transparent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .035);
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__module:not(.hg-has-submenu) + .hg-mobile-navigation__secondary,
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary:empty {
+  display: none !important;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-group > ul { margin: 0 !important; padding: 0 !important; list-style: none; }
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-group > ul[hidden] { display: none !important; }
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-label {
+  display: grid;
+  width: 100%;
+  max-width: 100%;
+  min-height: 38px;
+  grid-template-columns: auto minmax(24px, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 13px 12px 7px 28px;
+  border: 0;
+  color: color-mix(in srgb, var(--hg-action) 68%, #aab6c8);
+  background: transparent;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .09em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-label i {
+  display: block;
+  height: 1px;
+  min-width: 22px;
+  background: color-mix(in srgb, var(--hg-action) 30%, transparent);
+}
+
+/* Shell-owned notification affordance and unread counter. */
+body.hg-app-navigation-enabled .notification { position: relative; display: inline-grid; place-items: center; }
+body.hg-app-navigation-enabled .notification::before { width: 16px; height: 16px; border: 1.8px solid currentColor; border-radius: 9px 9px 6px 6px; content: ''; opacity: .9; }
+body.hg-app-navigation-enabled .notification::after { position: absolute; top: 7px; right: 7px; width: 7px; height: 7px; border: 2px solid var(--hg-surface); border-radius: 50%; background: var(--hg-danger); content: ''; }
+body.hg-app-navigation-enabled .notification .notification_text { position: absolute; right: -7px; bottom: -7px; display: inline-grid; min-width: 20px; height: 20px; padding: 0 5px; place-items: center; color: #fff; border: 2px solid var(--hg-surface); border-radius: 999px; background: var(--hg-danger); box-shadow: 0 4px 10px color-mix(in srgb, var(--hg-danger) 25%, transparent); font-size: 10px; font-weight: 800; line-height: 1; }
+
+body.hg-app-navigation-enabled .hg-navigation-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10010;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  color: #fff;
+  background: rgba(7, 12, 22, .68);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .2s ease, visibility .2s linear;
+}
+
+body.hg-navigation-open { overflow: hidden; }
+body.hg-navigation-open .hg-mobile-navigation { visibility: visible; pointer-events: auto; transform: translateX(0); }
+body.hg-navigation-open .hg-navigation-overlay { opacity: 1; visibility: visible; pointer-events: auto; }
+
+/* Module transitions use the selected module's accent instead of a detached
+ * page loader. Fast transitions finish before the delayed pulse is visible. */
+body.hg-app-navigation-enabled .hg-module-transition-source { position: relative; }
+body.hg-app-navigation-enabled .hg-module-transition-source::after {
+  position: absolute;
+  z-index: 4;
+  right: 12%;
+  bottom: 0;
+  left: 12%;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--hg-action) 28%, var(--hg-action) 72%, transparent);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--hg-action) 52%, transparent);
+  content: '';
+  opacity: 0;
+  transform: scaleX(.18);
+  transform-origin: center;
+  animation: hg-shell-navigation-progress 1.15s ease-in-out .18s infinite;
+}
+
+body.hg-app-navigation-enabled .hg-module-transition { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+
+@keyframes hg-shell-navigation-progress {
+  0% { opacity: .38; transform: scaleX(.18); }
+  48% { opacity: .9; transform: scaleX(.86); }
+  100% { opacity: .38; transform: scaleX(.18); }
+}
+
+@keyframes hg-shell-spin { to { transform: rotate(360deg); } }
+
+@media (min-width: 1025px) {
+  body.hg-app-navigation-enabled .hg-mobile-navigation {
+    width: var(--hg-shell-navigation-width);
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+    border-right: 1px solid rgba(255, 255, 255, .07);
+    box-shadow: none;
+  }
+
+  body.hg-app-navigation-enabled .hg-mobile-navigation__header { min-height: 86px; padding: 20px 18px; }
+  body.hg-app-navigation-enabled .hg-mobile-navigation__close,
+  body.hg-app-navigation-enabled .hg-navigation-overlay,
+  body.hg-app-navigation-enabled .menu-btn { display: none !important; }
+}
+
+@media (max-width: 1024px) {
+  :root { --hg-shell-navigation-width: 0px; }
+
+  body.hg-app-navigation-enabled #main-wrapper { padding-inline-start: 0; }
+
+  body.hg-app-navigation-enabled #inner-wrapper > .clear:first-child {
+    grid-template-columns: minmax(160px, auto) minmax(220px, 1fr) auto;
+  }
+
+  body.hg-app-navigation-enabled #inner-wrapper > .clear:first-child > .left.clear {
+    grid-column: 1;
+    display: flex;
+  }
+
+  body.hg-app-navigation-enabled #headerbar { grid-column: 2; }
+  body.hg-app-navigation-enabled .hg-header-actions { grid-column: 3; }
+
+  body.hg-app-navigation-enabled .menu-btn {
+    display: inline-grid !important;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    margin: 0 9px 0 0;
+    padding: 0;
+    place-items: center;
+    border: 1px solid var(--hg-border);
+    border-radius: 10px;
+    color: var(--hg-text);
+    background: var(--hg-surface-muted);
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  body.hg-app-navigation-enabled #logo {
+    width: clamp(92px, 14vw, 116px) !important;
+    height: 36px !important;
+    max-width: calc(100vw - 190px);
+    margin: 0;
+    background-position: left center !important;
+    background-size: contain !important;
+  }
+
+  body.hg-app-navigation-enabled #logo a { display: block; width: 100%; height: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.hg-app-navigation-enabled #inner-wrapper > .clear:first-child { backdrop-filter: none; }
+  body.hg-app-navigation-enabled :is(.hg-mobile-navigation, .hg-navigation-overlay) { transition: none; }
+  body.hg-app-navigation-enabled .hg-module-transition-source::after { animation: none; opacity: .72; transform: scaleX(.7); }
+  body.hg-app-navigation-enabled .hg-global-search-message--loading::before { animation: none; border-color: var(--hg-action); }
+}
+
+/* shell convergence guard.
+ *
+ * This final guard catches intermediate viewport states where old Bootstrap
+ * widths, native controls or injected module content would otherwise push the
+ * Heritage shell wider than the visible page. The only intentional horizontal
+ * scroll owner is a bounded table workspace. */
+html:has(body.hg-app-navigation-enabled),
+body.hg-app-navigation-enabled {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+body.hg-app-navigation-enabled *,
+body.hg-app-navigation-enabled *::before,
+body.hg-app-navigation-enabled *::after {
+  box-sizing: border-box;
+}
+
+body.hg-app-navigation-enabled #pageContent,
+body.hg-app-navigation-enabled #pageContent > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+body.hg-app-navigation-enabled :where(input, select, textarea, button, .btn, .form-control, .input-group, .hg-owned-enhanced-select, .hg-owned-enhanced-select) {
+  max-width: 100%;
+}
+
+body.hg-app-navigation-enabled :where(.hg-owned-enhanced-select__panel, .dropdown-menu, .hg-global-search-results) {
+  max-width: min(560px, calc(100vw - 24px));
+}
+
+html[data-heritage-theme='dark'] body.hg-app-navigation-enabled :where(.dropdown-menu, .hg-owned-enhanced-select__panel) {
+  color: var(--hg-text);
+  border-color: var(--hg-border);
+  background: var(--hg-surface);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .42);
+}
+
+body.hg-app-navigation-enabled :where(.dropdown-menu, .hg-owned-enhanced-select__panel) :where(a, li, .hg-owned-enhanced-select__option) {
+  color: inherit;
+}
+
+body.hg-app-navigation-enabled :where(.dropdown-menu, .hg-owned-enhanced-select__option--active) {
+  color: var(--hg-action-contrast);
+  background: var(--hg-action);
+}
+
+@media (min-width: 671px) and (max-width: 1024px) {
+  body.hg-app-navigation-enabled #inner-wrapper > .clear:first-child {
+    grid-template-columns: minmax(150px, auto) minmax(260px, 1fr) auto;
+  }
+
+  body.hg-app-navigation-enabled #headerbar {
+    justify-content: flex-end;
+  }
+
+  body.hg-app-navigation-enabled #searchform {
+    width: min(100%, 520px);
+  }
+}
+
+/* remove the remaining "between states".
+ *
+ * The Heritage shell has one account surface: the navigation footer. Header
+ * identity fragments, legacy logout buttons and late module account snippets
+ * are treated as data leaks from the old UI and are suppressed globally. */
+body.hg-app-navigation-enabled :where(
+  #headerbar,
+  .hg-header-actions,
+  #inner-wrapper > .clear:first-child
+) :where(
+  .user,
+  .username,
+  .user-info,
+  .user-menu,
+  .user-profile,
+  .account,
+  .account-menu,
+  .logout,
+  .logout-button,
+  [class*='logout'],
+  [id*='logout'],
+  [class*='user-'],
+  [id*='user-'],
+  [href*='login/logout.php']
+) {
+  display: none !important;
+}
+
+
+/* calmer navigation chrome.
+ *
+ * Sidebar markers and scrollbars should feel like part of the shell, not red
+ * rendering artefacts while the user scrolls through long module trees. */
+body.hg-app-navigation-enabled .hg-mobile-navigation__content {
+  scrollbar-color: color-mix(in srgb, var(--hg-action) 24%, rgba(148, 163, 184, .26)) transparent;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__content::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--hg-action) 24%, rgba(148, 163, 184, .22));
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__content:hover::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--hg-action) 34%, rgba(148, 163, 184, .32));
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__modules > li {
+  border-bottom-color: rgba(255, 255, 255, .04);
+}
+
+body.hg-app-navigation-enabled :is(.hg-mobile-navigation__module.active, .hg-mobile-navigation__module[aria-current='page'])::before {
+  inset: 12px auto 12px -10px;
+  width: 4px;
+  opacity: .86;
+  box-shadow: 0 0 18px color-mix(in srgb, var(--hg-action) 45%, transparent);
+}
+
+body.hg-app-navigation-enabled :is(.hg-mobile-navigation__module:hover, .hg-mobile-navigation__module:focus-visible, .hg-mobile-navigation__module.active, .hg-mobile-navigation__module[aria-current='page']) {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--hg-action) 13%, rgba(255, 255, 255, .045)), rgba(255, 255, 255, .055));
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary {
+  background: linear-gradient(180deg, rgba(255, 255, 255, .032), rgba(255, 255, 255, .018));
+}
+
+body.hg-app-navigation-enabled .hg-app-navigation__footer {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, .058), rgba(255, 255, 255, .026));
+}
+
+/* deterministic navigation groups.
+ *
+ * The secondary navigation is no longer an old sidebar list hidden inside the
+ * new shell. Groups look and behave like a first-class part of the Heritage
+ * navigation: groups are calm section labels, not interactive accordions.
+ * Links and adjacent quick actions carry the interaction weight; the groups
+ * simply structure the module like a premium, always-readable drawer. */
+body.hg-app-navigation-enabled #sidebar.hg-secondary-navigation {
+  align-self: start;
+}
+
+body.hg-app-navigation-enabled #sidebar.hg-secondary-navigation--grouped > header.hg-secondary-navigation__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 12px 14px 6px;
+  padding: 8px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--hg-action) 22%, rgba(148, 163, 184, .18));
+  color: color-mix(in srgb, var(--hg-action) 78%, var(--hg-text));
+  font-size: .76rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+body.hg-app-navigation-enabled #sidebar.hg-secondary-navigation--grouped > header.hg-secondary-navigation__header--active {
+  color: var(--hg-action);
+}
+
+body.hg-app-navigation-enabled #sidebar.hg-secondary-navigation--grouped > ul.hg-secondary-navigation__group {
+  margin: 0 12px 10px;
+  padding: 4px;
+  border: 1px solid color-mix(in srgb, var(--hg-border) 72%, transparent);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--hg-surface-muted) 44%, transparent);
+}
+
+body.hg-app-navigation-enabled #sidebar.hg-secondary-navigation--grouped > ul.hg-secondary-navigation__group[hidden] {
+  display: grid !important;
+}
+
+body.hg-app-navigation-enabled #sidebar.hg-secondary-navigation--grouped > ul.hg-secondary-navigation__group > li > a {
+  border-radius: 12px;
+}
+
+body.hg-app-navigation-enabled #sidebar.hg-secondary-navigation--grouped > ul.hg-secondary-navigation__group > li > a.active,
+body.hg-app-navigation-enabled #sidebar.hg-secondary-navigation--grouped > ul.hg-secondary-navigation__group > li > a[aria-current='page'] {
+  color: var(--hg-action-contrast);
+  background:
+    linear-gradient(135deg, var(--hg-action), color-mix(in srgb, var(--hg-action) 78%, var(--hg-text)));
+  box-shadow: 0 12px 24px color-mix(in srgb, var(--hg-action) 20%, transparent);
+}
+
+/* left-aligned secondary navigation rhythm.
+ *
+ * The secondary menu should feel like part of the application chrome, not a
+ * centered card list. Keep every submenu label on one readable left axis,
+ * reserve a calm right slot for quick actions, and prevent long German labels
+ * such as Reseller/Kundenkreise/System from drifting out of the grid.
+ */
+body.hg-app-navigation-enabled #sidebar.hg-secondary-navigation,
+body.hg-app-navigation-enabled #sidebar.hg-secondary-navigation * {
+  text-align: left;
+}
+
+body.hg-app-navigation-enabled #sidebar.hg-secondary-navigation--grouped > header.hg-secondary-navigation__header {
+  justify-content: flex-start;
+  gap: 0.6rem;
+  padding-inline: 0.2rem 0;
+}
+
+body.hg-app-navigation-enabled #sidebar.hg-secondary-navigation--grouped > header.hg-secondary-navigation__header > span,
+body.hg-app-navigation-enabled #sidebar.hg-secondary-navigation--grouped > header.hg-secondary-navigation__header > strong {
+  min-inline-size: 0;
+  flex: 1 1 auto;
+}
+
+body.hg-app-navigation-enabled #sidebar.hg-secondary-navigation--grouped > header.hg-secondary-navigation__header::after {
+  min-inline-size: clamp(1.5rem, 16%, 2.15rem);
+  border-bottom-color: color-mix(in srgb, var(--hg-action) 20%, transparent);
+}
+
+body.hg-app-navigation-enabled #sidebar.hg-secondary-navigation--grouped > ul.hg-secondary-navigation__group {
+  display: grid;
+  justify-items: stretch;
+}
+
+body.hg-app-navigation-enabled #sidebar.hg-secondary-navigation--grouped > ul.hg-secondary-navigation__group > li {
+  min-inline-size: 0;
+}
+
+body.hg-app-navigation-enabled #sidebar.hg-secondary-navigation--grouped > ul.hg-secondary-navigation__group > li > a,
+body.hg-app-navigation-enabled #sidebar.hg-secondary-navigation--grouped > ul.hg-secondary-navigation__group > li > .hg-secondary-navigation__row,
+body.hg-app-navigation-enabled .hg-secondary-navigation__group a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  justify-content: stretch;
+  justify-items: start;
+  align-items: center;
+  column-gap: 0.65rem;
+  inline-size: 100%;
+  min-inline-size: 0;
+}
+
+body.hg-app-navigation-enabled #sidebar.hg-secondary-navigation--grouped > ul.hg-secondary-navigation__group > li > a > :where(span, strong, em),
+body.hg-app-navigation-enabled .hg-secondary-navigation__group a > :where(span, strong, em) {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+body.hg-app-navigation-enabled #sidebar.hg-secondary-navigation--grouped > ul.hg-secondary-navigation__group > li > a::after,
+body.hg-app-navigation-enabled .hg-secondary-navigation__group a::after {
+  justify-self: end;
+}
+
+/* semantic accent discipline for the app shell.
+ * Navigation uses the accent as quiet orientation. Destructive/error meaning is
+ * reserved for explicit status components and badges. */
+body.hg-app-navigation-enabled .notification {
+  color: var(--hg-text);
+  border-color: color-mix(in srgb, var(--hg-action) 14%, var(--hg-border));
+  background:
+    radial-gradient(circle at 74% 18%, color-mix(in srgb, var(--hg-action) 10%, transparent), transparent 38%),
+    var(--hg-action-softer);
+}
+
+body.hg-app-navigation-enabled #searchform .hg-global-search__field:focus-within,
+body.hg-app-navigation-enabled .hg-global-search-results {
+  border-color: color-mix(in srgb, var(--hg-action) 30%, var(--hg-border));
+  box-shadow: 0 0 0 3px var(--hg-action-ring), var(--hg-shadow-sm);
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__content {
+  scrollbar-color: color-mix(in srgb, var(--hg-action) 22%, rgba(148, 163, 184, .26)) transparent;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__content::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--hg-action) 24%, rgba(148, 163, 184, .26));
+  background-clip: padding-box;
+}
+
+body.hg-app-navigation-enabled :is(.hg-mobile-navigation__module.active, .hg-mobile-navigation__module[aria-current='page'])::before {
+  background: var(--hg-action-muted);
+  box-shadow: none;
+}
+
+body.hg-app-navigation-enabled :is(.hg-mobile-navigation__secondary-link[aria-current='page'], .hg-mobile-navigation__secondary-link.active) {
+  box-shadow: inset 3px 0 0 var(--hg-action-muted);
+}
+
+body.hg-app-navigation-enabled :is(.hg-mobile-navigation__module:hover, .hg-mobile-navigation__module:focus-visible, .hg-mobile-navigation__module.active, .hg-mobile-navigation__module[aria-current='page']) {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--hg-action) 7%, rgba(255, 255, 255, .045)), rgba(255, 255, 255, .052));
+}
+
+body.hg-app-navigation-enabled :is(.hg-mobile-navigation__secondary-link[aria-current='page'], .hg-mobile-navigation__secondary-link.active) {
+  background: color-mix(in srgb, var(--hg-action) 6%, rgba(255, 255, 255, .046));
+}
+
+body.hg-app-navigation-enabled :is(.hg-mobile-navigation__quick-action:hover, .hg-mobile-navigation__quick-action:focus-visible, .hg-mobile-navigation__quick-action[aria-current='page']) {
+  border-color: color-mix(in srgb, var(--hg-action) 22%, transparent);
+  background: color-mix(in srgb, var(--hg-action) 10%, transparent);
+}
+
+body.hg-app-navigation-enabled .hg-app-navigation__logout:hover,
+body.hg-app-navigation-enabled .hg-app-navigation__logout:focus-visible {
+  border-color: color-mix(in srgb, var(--hg-action) 24%, rgba(255,255,255,.12));
+  background: color-mix(in srgb, var(--hg-action) 9%, transparent);
+  box-shadow: 0 0 0 3px var(--hg-action-ring);
+}
+
+/* single identity owner and stable utility header.
+ *
+ * The authenticated header is now only a utility strip: search, theme and
+ * datalog. User identity and logout live in the navigation footer. This
+ * prevents the "admin" duplication reported in compact and desktop states and
+ * removes the remaining white/legacy search-submit lane flashes.
+ */
+body.hg-app-navigation-enabled :where(
+  .hg-user-summary,
+  .hg-user-menu,
+  .hg-account-menu,
+  .cpuser,
+  [data-heritage-account],
+  [data-heritage-user],
+  .user,
+  .username,
+  .user-info,
+  .user-menu,
+  .user-profile,
+  [href*='login/logout.php']
+) {
+  display: none !important;
+}
+
+body.hg-app-navigation-enabled .hg-app-navigation__footer,
+body.hg-app-navigation-enabled .hg-app-navigation__footer :where(.hg-app-navigation__user, .hg-app-navigation__logout, .hg-app-navigation__status) {
+  display: grid !important;
+}
+
+body.hg-app-navigation-enabled .hg-app-navigation__footer {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.7rem;
+  min-inline-size: 0;
+}
+
+body.hg-app-navigation-enabled .hg-app-navigation__user {
+  min-inline-size: 0;
+}
+
+body.hg-app-navigation-enabled .hg-app-navigation__user > :where(strong, small) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* final navigation authority.
+ * One final block owns the visible Heritage navigation contract. Main modules
+ * may disclose or hide their submenu. Submenu groups are static dividers, not
+ * nested accordions. This replaces the previous late override
+ * split with one deterministic navigation endpoint.
+ */
+body.hg-app-navigation-enabled .hg-mobile-navigation__module.hg-has-submenu {
+  grid-template-columns: 1.45rem minmax(0, 1fr) auto !important;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__module.hg-has-submenu::after {
+  display: block !important;
+  content: '' !important;
+  inline-size: .48rem;
+  block-size: .48rem;
+  justify-self: end;
+  border-inline-end: 2px solid currentColor;
+  border-block-end: 2px solid currentColor;
+  opacity: .52;
+  transform: rotate(45deg) translateY(-.1rem);
+  transition: transform .16s ease, opacity .16s ease;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__module.hg-has-submenu[aria-expanded='true']::after {
+  opacity: .78;
+  transform: rotate(-135deg) translateY(-.05rem);
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-group,
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-group > ul,
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-group > ul[hidden] {
+  display: grid !important;
+  min-inline-size: 0;
+  gap: .18rem;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-group > .hg-mobile-navigation__secondary-label {
+  pointer-events: none !important;
+  cursor: default !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-group > .hg-mobile-navigation__secondary-label::after,
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-group > .hg-mobile-navigation__secondary-label::before {
+  display: none !important;
+  content: none !important;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-label i {
+  display: block;
+  inline-size: 100%;
+  block-size: 1px;
+  border: 0;
+  background: color-mix(in srgb, var(--hg-action) 26%, transparent);
+  opacity: .76;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-row,
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-link {
+  text-align: left !important;
+}
+
+/* navigation and shell finalization.
+ *
+ * The application shell now owns the visible navigation endpoint: primary
+ * modules, secondary groups, utility header and account/logout footer. This is
+ * intentionally calm and left-aligned; empty submenu containers and old header
+ * identity fragments must not reappear as visual noise.
+ */
+body.hg-app-navigation-enabled .hg-mobile-navigation__content {
+  inline-size: 100%;
+  min-inline-size: 0;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__modules,
+body.hg-app-navigation-enabled .hg-mobile-navigation__modules > li,
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary,
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-group,
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-group > ul {
+  inline-size: 100%;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__module,
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-link,
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-row,
+body.hg-app-navigation-enabled #sidebar.hg-secondary-navigation--grouped > ul.hg-secondary-navigation__group > li > a {
+  justify-content: flex-start !important;
+  text-align: left !important;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__module:not(.hg-has-submenu)::after,
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary:empty,
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-group:empty,
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-group > ul:empty {
+  display: none !important;
+  content: none !important;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__module.hg-has-submenu[aria-expanded='false'] + .hg-mobile-navigation__secondary,
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary[hidden] {
+  display: none !important;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-label {
+  display: grid !important;
+  grid-template-columns: auto minmax(1.5rem, 1fr);
+  gap: 0.75rem;
+  align-items: center;
+  min-block-size: 2rem;
+  padding-inline: 0.55rem;
+  color: color-mix(in srgb, var(--hg-action) 72%, var(--hg-text-muted)) !important;
+  font-size: 0.78rem !important;
+  font-weight: 780 !important;
+  letter-spacing: 0.02em !important;
+  text-transform: none !important;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-label i {
+  display: block;
+  inline-size: 100%;
+  block-size: 1px;
+  background: color-mix(in srgb, var(--hg-action) 24%, transparent);
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__quick-action {
+  color: var(--hg-text-muted) !important;
+  border-color: color-mix(in srgb, var(--hg-border) 76%, transparent) !important;
+  background: transparent !important;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__quick-action:is(:hover, :focus-visible) {
+  color: var(--hg-action) !important;
+  border-color: color-mix(in srgb, var(--hg-action) 36%, var(--hg-border)) !important;
+  background: color-mix(in srgb, var(--hg-action) 8%, var(--hg-surface)) !important;
+}
+
+/* final navigation composition.
+ *
+ * This block replaces the older navigation generations
+ * with one readable left-axis contract. Modules, section dividers, quick
+ * create actions, server selectors and the account footer share one geometry.
+ */
+body.hg-app-navigation-enabled .hg-mobile-navigation__module {
+  display: grid !important;
+  grid-template-columns: 1.45rem minmax(0, 1fr) auto;
+  align-items: center;
+  justify-items: start;
+  column-gap: 0.75rem;
+  text-align: left !important;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__module .hg-svg-icon,
+body.hg-app-navigation-enabled .hg-mobile-navigation .hg-svg-icon {
+  flex: 0 0 1.45rem;
+  justify-self: center;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__module > :not(.hg-svg-icon) {
+  min-inline-size: 0;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary {
+  display: grid;
+  margin: 0.12rem 0 0.65rem !important;
+  padding: 0.25rem 0.25rem 0.65rem !important;
+  border-radius: 0.85rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .032), rgba(255, 255, 255, .018));
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-group > ul[hidden],
+body.hg-app-navigation-enabled #sidebar.hg-secondary-navigation--grouped > ul.hg-secondary-navigation__group[hidden] {
+  display: grid !important;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-label {
+  display: grid !important;
+  inline-size: 100%;
+  grid-template-columns: auto minmax(1.5rem, 1fr);
+  align-items: center;
+  justify-items: start;
+  gap: 0.75rem;
+  min-block-size: 2rem;
+  padding: 0.78rem 0.55rem 0.35rem;
+  border: 0 !important;
+  color: color-mix(in srgb, var(--hg-action) 72%, var(--hg-text-muted)) !important;
+  background: transparent !important;
+  font-size: 0.78rem !important;
+  font-weight: 780 !important;
+  letter-spacing: 0.02em !important;
+  text-align: left !important;
+  text-transform: none !important;
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-label > span:first-child,
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-link {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  overflow: hidden;
+  text-align: left !important;
+  text-overflow: ellipsis;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-label i {
+  display: block;
+  inline-size: 100%;
+  block-size: 1px;
+  border: 0;
+  background: color-mix(in srgb, var(--hg-action) 24%, transparent);
+  opacity: .76;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-control {
+  padding: 0.5rem 0.65rem 0.75rem 1.65rem;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__server-select {
+  inline-size: 100%;
+  min-block-size: 2.65rem;
+  padding: 0.5rem 2.15rem 0.5rem 0.75rem;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 0.7rem;
+  color: #e8eef8;
+  background-color: #172236;
+  font-size: 0.82rem;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__server-select:focus {
+  border-color: var(--hg-action);
+  outline: 3px solid color-mix(in srgb, var(--hg-action) 24%, transparent);
+  outline-offset: 0;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 2.35rem;
+  align-items: center;
+  justify-items: stretch;
+  gap: 0.25rem;
+  padding-inline: 0 0.35rem;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-link {
+  display: flex;
+  min-block-size: 2.5rem;
+  align-items: center;
+  justify-content: flex-start !important;
+  padding: 0.5rem 0.6rem 0.5rem 1.7rem;
+  border-radius: 0.6rem;
+  color: #aebbd0;
+  font-size: 0.82rem;
+  font-weight: 540;
+  white-space: normal;
+  text-decoration: none;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-row .hg-mobile-navigation__secondary-link {
+  padding-inline-end: 0.4rem;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__quick-action {
+  display: inline-grid;
+  inline-size: 2rem;
+  block-size: 2rem;
+  align-self: center;
+  justify-self: end;
+  padding: 0;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--hg-action) 18%, rgba(255, 255, 255, .12)) !important;
+  border-radius: 0.65rem;
+  color: color-mix(in srgb, var(--hg-action) 72%, #aebbd0) !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .025)),
+    color-mix(in srgb, var(--hg-action) 4%, #172236) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .08),
+    0 4px 12px rgba(3, 9, 20, .14);
+  font-size: 1.15rem;
+  font-weight: 560;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    color 150ms ease,
+    border-color 150ms ease,
+    background-color 150ms ease,
+    box-shadow 150ms ease,
+    transform 150ms ease;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__quick-action:is(:hover, :focus-visible) {
+  color: var(--hg-action-contrast) !important;
+  border-color: color-mix(in srgb, var(--hg-action) 72%, transparent) !important;
+  background: var(--hg-action) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .18),
+    0 7px 18px color-mix(in srgb, var(--hg-action) 22%, transparent);
+  transform: translateY(-1px);
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__quick-action:active {
+  transform: translateY(0);
+  box-shadow: inset 0 1px 2px rgba(3, 9, 20, .2);
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__quick-action:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--hg-action) 24%, transparent);
+  outline-offset: 2px;
+}
+
+body.hg-app-navigation-enabled :is(.hg-mobile-navigation__secondary-link:hover, .hg-mobile-navigation__secondary-link:focus-visible, .hg-mobile-navigation__secondary-link[aria-current='page'], .hg-mobile-navigation__secondary-link.active) {
+  color: #fff;
+  background: rgba(255, 255, 255, .055);
+  text-decoration: none;
+}
+
+body.hg-app-navigation-enabled :is(.hg-mobile-navigation__secondary-link[aria-current='page'], .hg-mobile-navigation__secondary-link.active) {
+  color: #fff;
+  box-shadow: inset 3px 0 0 var(--hg-action-muted);
+  background: color-mix(in srgb, var(--hg-action) 6%, rgba(255, 255, 255, .046));
+}
+
+body.hg-app-navigation-enabled .hg-app-navigation__footer {
+  min-block-size: 4.5rem;
+  flex: 0 0 auto;
+  grid-template-columns: 0.6rem minmax(0, 1fr) 2.4rem !important;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 0.75rem 0.75rem;
+  padding: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, .09);
+  border-radius: 1rem;
+  color: #d7deeb;
+  background: linear-gradient(135deg, rgba(255, 255, 255, .058), rgba(255, 255, 255, .026));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06);
+  font-size: 0.75rem;
+}
+
+body.hg-app-navigation-enabled .hg-app-navigation__footer :is(strong, small) {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.hg-app-navigation-enabled .hg-app-navigation__footer strong {
+  color: #eef4ff;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+body.hg-app-navigation-enabled .hg-app-navigation__footer small {
+  margin-top: 0.18rem;
+  color: #8290a7;
+  font-size: 0.65rem;
+  font-weight: 600;
+}
+
+body.hg-app-navigation-enabled .hg-app-navigation__status {
+  inline-size: 0.58rem;
+  block-size: 0.58rem;
+  flex: 0 0 0.58rem;
+  border-radius: 50%;
+  background: #23b27b;
+  box-shadow: 0 0 0 0.25rem rgba(35, 178, 123, .14);
+}
+
+body.hg-app-navigation-enabled :is(.hg-app-navigation__theme, .hg-app-navigation__logout) {
+  display: inline-grid;
+  inline-size: 2.4rem;
+  block-size: 2.4rem;
+  margin: 0;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 0.8rem;
+  color: #9eabc0;
+  background: rgba(255, 255, 255, .035);
+}
+
+body.hg-app-navigation-enabled :is(.hg-app-navigation__theme, .hg-app-navigation__logout) svg {
+  inline-size: 1.1rem;
+  block-size: 1.1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (min-width: 1025px) {
+  body.hg-app-navigation-enabled .hg-mobile-navigation__header {
+    border-bottom-color: rgba(255, 255, 255, .055);
+  }
+
+  body.hg-app-navigation-enabled .hg-mobile-navigation__content {
+    padding-bottom: 6rem;
+  }
+
+  body.hg-app-navigation-enabled .hg-mobile-navigation__modules > li:last-child {
+    margin-bottom: 0.65rem;
+  }
+
+  body.hg-app-navigation-enabled .hg-app-navigation__footer {
+    position: sticky;
+    bottom: 0.65rem;
+    z-index: 2;
+    margin-top: auto;
+    backdrop-filter: blur(18px);
+  }
+}
+
+/* final chrome surface polish.
+ *
+ * This is the authoritative endpoint for the authenticated shell chrome. It
+ * neutralizes older Bootstrap/search states that could still flash during
+ * viewport resizing: the header has one deterministic grid, the global search
+ * has one bounded submit lane, and compact widths use one horizontal utility
+ * row. Theme switching remains available in the navigation footer.
+ */
+body.hg-app-navigation-enabled #inner-wrapper > .clear:first-child {
+  --hg-shell-search-submit-size: 46px;
+  display: grid !important;
+  grid-template-columns: minmax(11rem, 1fr) minmax(18rem, 35rem) auto;
+  grid-template-areas: 'brand search actions';
+  align-items: center;
+  gap: 0.75rem;
+}
+
+body.hg-app-navigation-enabled #inner-wrapper > .clear:first-child > .left.clear {
+  grid-area: brand;
+  min-inline-size: 0;
+}
+
+body.hg-app-navigation-enabled #headerbar {
+  grid-area: search;
+  display: flex !important;
+  min-inline-size: 0;
+  justify-content: flex-end;
+}
+
+body.hg-app-navigation-enabled .hg-header-actions {
+  grid-area: actions;
+  min-inline-size: max-content;
+  justify-self: end;
+}
+
+body.hg-app-navigation-enabled #searchform {
+  --hg-global-search-submit-lane: var(--hg-shell-search-submit-size);
+  --hg-global-search-trailing-padding: calc(var(--hg-shell-search-submit-size) + var(--hg-global-search-shortcut-lane) + 1rem);
+  inline-size: min(100%, 35rem);
+  max-inline-size: 100%;
+}
+
+body.hg-app-navigation-enabled #searchform.hg-global-search-has-value {
+  --hg-global-search-trailing-padding: calc(var(--hg-shell-search-submit-size) + var(--hg-global-search-clear-lane) + 1.05rem);
+}
+
+body.hg-app-navigation-enabled .hg-search-shortcut,
+body.hg-app-navigation-enabled .hg-search-clear {
+  grid-column: 1 / 3;
+  grid-row: 1;
+}
+
+body.hg-app-navigation-enabled .hg-global-search-results {
+  max-inline-size: min(42rem, calc(100vw - 1.5rem));
+}
+
+@media (min-width: 761px) and (max-width: 1180px) {
+  body.hg-app-navigation-enabled #inner-wrapper > .clear:first-child {
+    grid-template-columns: minmax(9.5rem, 1fr) minmax(16rem, 31rem) auto;
+  }
+}
+
+@media (max-width: 670px) {
+  :root {
+    --hg-shell-gutter: clamp(10px, 3.5vw, 16px);
+    --hg-shell-header-height: auto;
+    --hg-shell-control-size: 40px;
+  }
+
+  body.hg-app-navigation-enabled #inner-wrapper > .clear:first-child {
+    --hg-shell-search-submit-size: 42px;
+    grid-template-columns: 42px minmax(0, 1fr);
+    grid-template-areas: 'brand search';
+    grid-template-rows: 42px;
+    gap: 0.625rem;
+    align-items: center;
+    padding: 8px var(--hg-shell-gutter);
+  }
+
+  body.hg-app-navigation-enabled #inner-wrapper > .clear:first-child > .left.clear {
+    inline-size: 42px;
+  }
+
+  body.hg-app-navigation-enabled #logo {
+    display: none !important;
+  }
+
+  body.hg-app-navigation-enabled #headerbar {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    inline-size: 100%;
+  }
+
+  body.hg-app-navigation-enabled #searchform {
+    inline-size: 100%;
+  }
+
+  body.hg-app-navigation-enabled .hg-header-actions {
+    display: none !important;
+  }
+
+  body.hg-app-navigation-enabled #searchform:not(.hg-global-search-has-value) {
+    --hg-global-search-trailing-padding: calc(var(--hg-shell-search-submit-size) + 0.75rem);
+  }
+
+  body.hg-app-navigation-enabled #searchform:not(.hg-global-search-has-value) .hg-search-shortcut {
+    display: none !important;
+  }
+
+  body.hg-app-navigation-enabled .hg-global-search-results {
+    position: fixed;
+    top: 4.25rem;
+    right: var(--hg-shell-gutter);
+    left: var(--hg-shell-gutter);
+    width: auto;
+    max-block-size: calc(100dvh - 5rem);
+  }
+
+  body.hg-app-navigation-enabled .hg-global-search-result {
+    min-block-size: 58px;
+  }
+
+  body.hg-app-navigation-enabled #topnav-container + .clear > #content {
+    padding: 14px var(--hg-shell-gutter) 22px;
+  }
+}
+
+/* navigation DONE contract.
+ *
+ * The final Heritage navigation is a single left-axis product surface:
+ * - primary modules may disclose one submenu;
+ * - secondary group labels are static section dividers;
+ * - quick actions live on the right edge of a row;
+ * - local menu search must not return because global search owns discovery.
+ */
+body.hg-app-navigation-enabled .hg-mobile-navigation__modules,
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary,
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-group,
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-group > ul {
+  display: grid !important;
+  inline-size: 100%;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  justify-items: stretch;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__module {
+  grid-template-columns: 1.45rem minmax(0, 1fr) auto !important;
+  justify-content: stretch !important;
+  justify-items: start !important;
+  text-align: left !important;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__module > :where(span, strong, em),
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-link > :where(span, strong, em),
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-row > :where(span, strong, em) {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  overflow: hidden;
+  text-align: left !important;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-group > .hg-mobile-navigation__secondary-label {
+  display: grid !important;
+  grid-template-columns: max-content minmax(1.5rem, 1fr) !important;
+  align-items: center;
+  justify-items: start;
+  pointer-events: none !important;
+  cursor: default !important;
+  user-select: none;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-group > .hg-mobile-navigation__secondary-label::before,
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-group > .hg-mobile-navigation__secondary-label::after {
+  display: none !important;
+  content: none !important;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-group > .hg-mobile-navigation__secondary-label i {
+  justify-self: stretch;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-link,
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-row,
+body.hg-app-navigation-enabled #sidebar.hg-secondary-navigation--grouped > ul.hg-secondary-navigation__group > li > a {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto;
+  justify-content: stretch !important;
+  justify-items: start;
+  text-align: left !important;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__quick-action {
+  justify-self: end;
+}
+
+/* premium navigation density and geometry.
+ *
+ * Navigation is persistent application chrome, not a stack of large cards.
+ * Every row keeps the same inline geometry across rest, hover and active
+ * states; quick-create controls stay aligned to one quiet action rail.
+ */
+body.hg-app-navigation-enabled .hg-mobile-navigation__content {
+  padding: 0.4rem 0.625rem 0.85rem;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__modules {
+  gap: 0.1rem;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__modules > li {
+  min-inline-size: 0;
+  padding-block: 0.08rem;
+  border-bottom-color: rgba(255, 255, 255, 0.035);
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__module {
+  inline-size: 100%;
+  min-block-size: 2.75rem;
+  box-sizing: border-box;
+  padding: 0.38rem 0.75rem;
+  border: 1px solid transparent;
+  border-radius: 0.75rem;
+  column-gap: 0.68rem;
+}
+
+body.hg-app-navigation-enabled :is(
+  .hg-mobile-navigation__module:hover,
+  .hg-mobile-navigation__module:focus-visible,
+  .hg-mobile-navigation__module.active,
+  .hg-mobile-navigation__module[aria-current='page']
+) {
+  border-color: color-mix(in srgb, var(--hg-action) 12%, rgba(255, 255, 255, 0.055));
+}
+
+body.hg-app-navigation-enabled :is(
+  .hg-mobile-navigation__module.active,
+  .hg-mobile-navigation__module[aria-current='page']
+)::before {
+  inset-block: 0.72rem;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary {
+  margin-block: 0.08rem 0.45rem !important;
+  padding: 0.18rem 0.2rem 0.42rem !important;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-label {
+  min-block-size: 1.75rem;
+  padding: 0.58rem 0.5rem 0.24rem;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-row {
+  min-inline-size: 0;
+  min-block-size: 2.35rem;
+  grid-template-columns: minmax(0, 1fr) 2.15rem;
+  gap: 0.3rem;
+  padding-inline: 0 0.2rem;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-link {
+  inline-size: 100%;
+  min-block-size: 2.35rem;
+  box-sizing: border-box;
+  padding: 0.42rem 0.5rem 0.42rem 1.55rem;
+  line-height: 1.3;
+}
+
+body.hg-app-navigation-enabled .hg-mobile-navigation__quick-action {
+  inline-size: 2.15rem;
+  min-inline-size: 2.15rem;
+  block-size: 2.15rem;
+  min-block-size: 2.15rem;
+  border-radius: 0.7rem;
+}
+
+@media (max-width: 41.875rem) {
+  body.hg-app-navigation-enabled .hg-mobile-navigation__module {
+    min-block-size: 3rem;
+  }
+
+  body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-link,
+  body.hg-app-navigation-enabled .hg-mobile-navigation__secondary-row {
+    min-block-size: 2.75rem;
+  }
+}
+

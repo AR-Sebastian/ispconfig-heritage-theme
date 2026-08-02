@@ -1,4 +1,3 @@
-<!-- WP-965: native Workbench operations surface; controller contract unchanged. -->
 <div class='page-header'>
 	<h1><tmpl_var name="tpl_default_head_txt"></h1>
 </div>
@@ -6,16 +5,16 @@
 
 
 
-            <div class="wb-field-group">
+            <div class="hg-field-group">
                 <label for="logo_url" >{tmpl_var name='logo_url_txt'}Logo URL</label>
-                <div class="wb-field-body wb-field-body--medium"><input type="text" name="logo_url" id="logo_url" value="{tmpl_var name='logo_url'}" size="" maxlength="" class="form-control" /></div><div class="wb-field-suffix"> 152x46px
+                <div class="hg-field-body hg-field-body--medium"><input type="text" name="logo_url" id="logo_url" value="{tmpl_var name='logo_url'}" size="" maxlength="" class="form-control" /></div><div class="hg-field-suffix"> 152x46px
             </div></div>
 
 
         <input type="hidden" name="id" value="{tmpl_var name='id'}">
         <input type="hidden" name="username" value="global">
 
-        <div class="wb-form-actions"><div class="wb-form-actions__primary">
+        <div class="hg-form-actions"><div class="hg-form-actions__primary">
             <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="admin/tpl_default.php">{tmpl_var name='btn_save_txt'}</button>
-            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="admin/server_list.php" data-load-content="admin/server_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-heritage-load-content="admin/server_list.php" data-load-content="admin/server_list.php">{tmpl_var name='btn_cancel_txt'}</button>
         </div></div>

@@ -4,14 +4,14 @@
 		</div>
 	</tmpl_if>
 	<tmpl_if name="msg">
-		<div class='wb-alert wb-alert--info' role='status'><div class='wb-alert__body'><tmpl_var name="msg"></div></div>
+		<div class='hg-alert hg-alert--info' role='status'><div class='hg-alert__body'><tmpl_var name="msg"></div></div>
 	</tmpl_if>
 	<tmpl_if name="error">
-		<div class='wb-alert wb-alert--danger' role='alert'>
-			<div class='wb-alert__title'><strong>
+		<div class='hg-alert hg-alert--danger' role='alert'>
+			<div class='hg-alert__title'><strong>
 					<tmpl_var name="error_txt">
 				</strong></div>
-			<div class='wb-alert__body'>
+			<div class='hg-alert__body'>
 				<ul style="list-style-type:none">
 					<tmpl_var name="error">
 				</ul>
@@ -20,9 +20,9 @@
 	</tmpl_if>
 
 	<!-- content in tabs -->
-	<div class='content-tab-wrapper wb-form-tabs-shell'>
+	<div class='content-tab-wrapper hg-form-tabs-shell'>
 		<!-- tabs -->
-		<ul class='wb-form-tabs' role='tablist'>
+		<ul class='hg-form-tabs' role='tablist'>
 			<tmpl_loop name="formTab">
 				<li<tmpl_if name="active"> class='active'</tmpl_if>>
 					<a href='#' role='tab'<tmpl_if name="active"> aria-selected='true'</tmpl_if> data-change-tab="<tmpl_var name='name'>" data-tab-target="<tmpl_var name='app_module'>/<tmpl_var name='form_action'>">

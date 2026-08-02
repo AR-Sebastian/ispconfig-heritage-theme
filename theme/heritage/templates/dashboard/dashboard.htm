@@ -1,28 +1,27 @@
-<!-- WP-975: native Workbench dashboard surface; dashlet contract unchanged. -->
-<div class="page-header wb-dashboard-heading">
+<div class="page-header hg-dashboard-heading">
   <h1>{tmpl_var name='welcome_user'}</h1>
 </div>
 
-<div class="wb-dashboard-feedback" aria-live="polite">
+<div class="hg-dashboard-feedback" aria-live="polite">
   <tmpl_if name='error'>
-    <div id="errormsg" class="wb-alert wb-alert--danger wb-alert--dismissible" role="alert" data-wb-ack-url="dashboard/message_ack.php?message_state=error">
-      <button type="button" class="wb-alert__dismiss" data-workbench-dismiss="alert" aria-label="Schließen" data-wb-i18n-aria-label-de="Schließen" data-wb-i18n-aria-label-en="Close"><span aria-hidden="true">&times;</span></button>
+    <div id="errormsg" class="hg-alert hg-alert--danger hg-alert--dismissible" role="alert" data-heritage-ack-url="dashboard/message_ack.php?message_state=error">
+      <button type="button" class="hg-alert__dismiss" data-heritage-dismiss="alert" aria-label="Schließen" data-heritage-i18n-aria-label-de="Schließen" data-heritage-i18n-aria-label-en="Close"><span aria-hidden="true">&times;</span></button>
       <tmpl_loop name="error">
         {tmpl_var name='error_msg'}
       </tmpl_loop>
     </div>
   </tmpl_if>
   <tmpl_if name='warning'>
-    <div id="warningmsg" class="wb-alert wb-alert--warning wb-alert--dismissible" role="alert" data-wb-ack-url="dashboard/message_ack.php?message_state=warning">
-      <button type="button" class="wb-alert__dismiss" data-workbench-dismiss="alert" aria-label="Schließen" data-wb-i18n-aria-label-de="Schließen" data-wb-i18n-aria-label-en="Close"><span aria-hidden="true">&times;</span></button>
+    <div id="warningmsg" class="hg-alert hg-alert--warning hg-alert--dismissible" role="alert" data-heritage-ack-url="dashboard/message_ack.php?message_state=warning">
+      <button type="button" class="hg-alert__dismiss" data-heritage-dismiss="alert" aria-label="Schließen" data-heritage-i18n-aria-label-de="Schließen" data-heritage-i18n-aria-label-en="Close"><span aria-hidden="true">&times;</span></button>
       <tmpl_loop name="warning">
         {tmpl_var name='warning_msg'}
       </tmpl_loop>
     </div>
   </tmpl_if>
   <tmpl_if name='info'>
-    <div id="infomsg" class="wb-alert wb-alert--info wb-alert--dismissible" role="status" data-wb-ack-url="dashboard/message_ack.php?message_state=info">
-      <button type="button" class="wb-alert__dismiss" data-workbench-dismiss="alert" aria-label="Schließen" data-wb-i18n-aria-label-de="Schließen" data-wb-i18n-aria-label-en="Close"><span aria-hidden="true">&times;</span></button>
+    <div id="infomsg" class="hg-alert hg-alert--info hg-alert--dismissible" role="status" data-heritage-ack-url="dashboard/message_ack.php?message_state=info">
+      <button type="button" class="hg-alert__dismiss" data-heritage-dismiss="alert" aria-label="Schließen" data-heritage-i18n-aria-label-de="Schließen" data-heritage-i18n-aria-label-en="Close"><span aria-hidden="true">&times;</span></button>
       <tmpl_loop name="info">
         {tmpl_var name='info_msg'}
       </tmpl_loop>
@@ -30,7 +29,7 @@
   </tmpl_if>
 </div>
 
-<div class="wb-dashboard-server-content" data-wb-dashboard-server-content>
+<div class="hg-dashboard-server-content" data-heritage-dashboard-server-content>
   <tmpl_loop name='leftcol'>
     {tmpl_var name='content'}
   </tmpl_loop>

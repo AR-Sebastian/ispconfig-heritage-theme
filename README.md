@@ -4,6 +4,24 @@
 [![Release](https://img.shields.io/github/v/release/AR-Sebastian/ispconfig-heritage-theme?display_name=tag)](https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/latest)
 [![ISPConfig](https://img.shields.io/badge/ISPConfig-3.3.1p1-d71920)](docs/COMPATIBILITY.md)
 
+## Vorschau / Preview
+
+Aktuelle authentisierte Laufzeitaufnahmen von HERITAGE 1.0.33 auf ISPConfig
+3.3.1p1. Alle sichtbaren Datensätze und `.test`-Adressen sind synthetisch.
+
+Current authenticated runtime captures of HERITAGE 1.0.33 on ISPConfig
+3.3.1p1. All visible records and `.test` addresses are synthetic.
+
+| Desktop hell / light | Kompakt dunkel / compact dark |
+|---|---|
+| [![Serverübersicht im hellen Desktop-Modus](docs/images/heritage-1.0.33-servers-desktop-light.png)](docs/images/heritage-1.0.33-servers-desktop-light.png) | [![Webseiten im kompakten dunklen Modus](docs/images/heritage-1.0.33-websites-compact-dark.png)](docs/images/heritage-1.0.33-websites-compact-dark.png) |
+
+| E-Mail Desktop hell / light | E-Mail mobil dunkel / mobile dark |
+|---|---|
+| [![E-Mail-Konten im hellen Desktop-Modus](docs/images/heritage-1.0.33-mailboxes-desktop-light.png)](docs/images/heritage-1.0.33-mailboxes-desktop-light.png) | [![Responsive E-Mail-Konten im dunklen Mobilmodus](docs/images/heritage-1.0.33-mailboxes-mobile-dark.png)](docs/images/heritage-1.0.33-mailboxes-mobile-dark.png) |
+
+[Aufnahme- und Datenschutzangaben / Capture and privacy notes](docs/SCREENSHOTS.md)
+
 ## Deutsch
 
 HERITAGE ist ein eigenständiges Premium-Theme für ISPConfig 3.3.1p1. Es
@@ -29,19 +47,19 @@ fachlichen Aktionen, APIs und Provisionierungsabläufe bleiben bei ISPConfig.
 - eigenständiges Paket ohne NEXT-, LIQUID- oder Workbench-Abhängigkeit;
 - atomare Installation mit Backup und Rollback.
 
-### Version 1.0.33
+### Version 1.0.34
 
 Geprüft mit ISPConfig 3.3.1p1 für Administrator-, Reseller-, Kunden- und
 Mailuser-Ansichten sowie Ubuntu 22.04/24.04 und Debian 12/13 mit Apache und
 Nginx. Das originale ISPConfig-Theme `default` muss als Rückfallebene
 installiert bleiben.
 
-**[HERITAGE 1.0.33 herunterladen](https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/latest)**
+**[HERITAGE 1.0.34 herunterladen](https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/latest)**
 
 ### Schnellstart
 
 ```bash
-git clone --branch v1.0.33 --depth 1 https://github.com/AR-Sebastian/ispconfig-heritage-theme.git
+git clone --branch v1.0.34 --depth 1 https://github.com/AR-Sebastian/ispconfig-heritage-theme.git
 cd ispconfig-heritage-theme
 sudo ./scripts/manage-theme.sh install
 sudo ./scripts/manage-theme.sh status
@@ -54,6 +72,7 @@ Update automatisch eine rücksetzbare Sicherung des Themes an.
 - [Installation auf Deutsch](docs/INSTALLATION-DE.md)
 - [Problemlösung und Rückkehr](docs/TROUBLESHOOTING-DE.md)
 - [Kompatibilität und Prüfbereich](docs/COMPATIBILITY.md)
+- [Release-Bereitschaft 1.0.34](docs/RELEASE-READINESS-1.0.34.md)
 - [Release-Abnahme 1.0.0](docs/RELEASE-GATE-1.0.0.md)
 - [Änderungsprotokoll](CHANGELOG.md)
 - [Lizenz](LICENSE.md)
@@ -95,18 +114,28 @@ remain owned by ISPConfig.
 - standalone package without NEXT, LIQUID or Workbench dependencies;
 - atomic installation with backup and rollback.
 
-### Version 1.0.33
+### Version 1.0.34
 
 Validated with ISPConfig 3.3.1p1 for administrator, reseller, client and
 mail-user views, plus Ubuntu 22.04/24.04 and Debian 12/13 with Apache and Nginx.
 Keep ISPConfig's original `default` theme installed as the recovery path.
 
-**[Download HERITAGE 1.0.33](https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/latest)**
+**[Download HERITAGE 1.0.34](https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/latest)**
+
+### Development validation
+
+After changing a modular stylesheet or script, rebuild the committed bundles
+and run the complete release gate:
+
+```bash
+node scripts/build-bundles.js
+bash scripts/validate-theme.sh
+```
 
 ### Quick start
 
 ```bash
-git clone --branch v1.0.33 --depth 1 https://github.com/AR-Sebastian/ispconfig-heritage-theme.git
+git clone --branch v1.0.34 --depth 1 https://github.com/AR-Sebastian/ispconfig-heritage-theme.git
 cd ispconfig-heritage-theme
 sudo ./scripts/manage-theme.sh install
 sudo ./scripts/manage-theme.sh status
@@ -119,6 +148,7 @@ backup during updates.
 - [Installation in English](docs/INSTALLATION-EN.md)
 - [Troubleshooting and recovery](docs/TROUBLESHOOTING-EN.md)
 - [Compatibility and validation scope](docs/COMPATIBILITY.md)
+- [Release readiness 1.0.34](docs/RELEASE-READINESS-1.0.34.md)
 - [Release gate 1.0.0](docs/RELEASE-GATE-1.0.0.md)
 - [Changelog](CHANGELOG.md)
 - [License](LICENSE.md)

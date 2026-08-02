@@ -1,0 +1,2914 @@
+/* authoritative dashboard workspace.
+ * The dashboard owns one fluid, container-driven composition. Historical
+ * dashboard declarations in heritage-core.css are structural input only and
+ * must not decide the rendered geometry. */
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout {
+  --hg-dashboard-column-min: clamp(204px, 19cqi, 248px);
+  container: hg-dashboard / inline-size;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--hg-dashboard-column-min)), 1fr));
+  grid-auto-flow: row dense;
+  grid-auto-rows: auto;
+  gap: 12px;
+  align-items: stretch;
+  min-width: 0;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .page-header,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-hero,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-overview,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-toolbar,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-feedback,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-empty-state,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-server-content,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > #errormsg,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > #warningmsg,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > #infomsg {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-feedback:empty {
+  display: none;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet {
+  --hg-dashlet-accent: var(--hg-action);
+  --hg-dashlet-tint: color-mix(in srgb, var(--hg-dashlet-accent) 2.5%, var(--hg-surface));
+  --hg-dashlet-soft-border: color-mix(in srgb, var(--hg-dashlet-accent) 10%, var(--hg-border));
+  position: relative;
+  isolation: isolate;
+  width: auto;
+  height: 100%;
+  min-width: 0;
+  min-height: 132px;
+  margin: 0;
+  padding: 12px;
+  overflow: hidden;
+  border: 1px solid var(--hg-dashlet-soft-border);
+  border-radius: 14px;
+  color: var(--hg-text);
+  background: linear-gradient(145deg, var(--hg-dashlet-tint), var(--hg-surface) 46%);
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--hg-text) 6%, transparent);
+  transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet::before {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  inset: 0 16px auto;
+  height: 2px;
+  border-radius: 0 0 999px 999px;
+  background: var(--hg-dashlet-accent);
+  opacity: .38;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet:hover,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet:focus-within {
+  border-color: color-mix(in srgb, var(--hg-dashlet-accent) 38%, var(--hg-border));
+  box-shadow: 0 16px 38px color-mix(in srgb, var(--hg-text) 11%, transparent);
+  transform: translateY(-1px);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-size-1x1 { grid-column: span 1; grid-row: auto; }
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-size-1x2 { grid-column: span 1; grid-row: auto; min-height: clamp(280px, 30cqi, 390px); }
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-size-2x2 { grid-column: span 2; grid-row: auto; min-height: clamp(320px, 34cqi, 460px); }
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-size-1x1 .table-wrapper { max-height: 170px; overflow: auto; }
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-size-1x2 .table-wrapper { max-height: 300px; overflow: auto; }
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-state-warning { --hg-dashlet-accent: var(--hg-warning); }
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-state-critical { --hg-dashlet-accent: var(--hg-danger); }
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashlet='metrics'] { --hg-dashlet-accent: color-mix(in srgb, var(--hg-action) 72%, #31b8c4); }
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='metrics'] { --hg-dashlet-accent: color-mix(in srgb, var(--hg-action) 72%, #31b8c4); }
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'] { --hg-dashlet-accent: var(--hg-action); }
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashlet='news'] { --hg-dashlet-accent: var(--hg-text-muted); }
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashlet='donate'] { --hg-dashlet-accent: var(--hg-success); }
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-priority='primary'] {
+  border-color: color-mix(in srgb, var(--hg-dashlet-accent) 16%, var(--hg-border));
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-priority='operational'] {
+  min-height: 0;
+  padding: 14px;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-priority='secondary'] {
+  min-height: 0;
+  padding: 13px 14px;
+  border-style: solid;
+  box-shadow: none;
+}
+
+/* Page command area */
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  row-gap: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 2px 2px 12px;
+  overflow: visible;
+  border: 0;
+  border-bottom: 1px solid var(--hg-border);
+  border-radius: 0;
+  color: var(--hg-text);
+  background: transparent;
+  box-shadow: none;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-hero::after { display: none; }
+body.hg-dashboard-page .hg-dashboard-hero__eyebrow {
+  display: inline-flex;
+  width: max-content;
+  margin-bottom: 5px;
+  color: var(--hg-action);
+  font-size: 9px;
+  font-weight: 820;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  grid-column: 1 / -1;
+}
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-hero h1 {
+  margin: 0;
+  color: var(--hg-text);
+  font-size: clamp(23px, 2.2vw, 31px);
+  letter-spacing: -.04em;
+}
+body.hg-dashboard-page .hg-dashboard-hero__summary {
+  max-width: 620px;
+  margin: 6px 0 0;
+  color: var(--hg-text-muted);
+  font-size: 12px;
+  line-height: 1.5;
+  justify-self: start;
+  text-align: left;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-overview {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+.hg-dashboard-overview__stat {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 5px 14px;
+  min-width: 0;
+  min-height: 68px;
+  align-content: center;
+  padding: 9px 13px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--hg-action) 8%, var(--hg-border));
+  border-radius: 13px;
+  background: var(--hg-surface);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--hg-text) 5%, transparent);
+}
+.hg-dashboard-overview__stat::before { content: ''; position: absolute; inset: 13px auto 13px 0; width: 2px; border-radius: 999px; background: var(--hg-action); opacity: .52; }
+.hg-dashboard-overview__stat > span { align-self: end; color: var(--hg-text-muted); font-size: 10px; font-weight: 740; text-transform: uppercase; }
+.hg-dashboard-overview__stat > strong { grid-row: 1 / span 2; grid-column: 2; align-self: center; color: var(--hg-text); font-size: clamp(23px, 2.3vw, 30px); font-weight: 820; letter-spacing: -.055em; }
+.hg-dashboard-overview__stat > strong > em { color: var(--hg-text-muted); font-size: .48em; font-style: normal; }
+.hg-dashboard-overview__stat > small { color: var(--hg-text-muted); font-size: 11px; }
+.hg-dashboard-overview__stat--healthy::before { background: var(--hg-success); }
+.hg-dashboard-overview__stat--attention::before { background: var(--hg-warning); }
+.hg-dashboard-overview__stat--attention > strong { color: var(--hg-warning-ink); }
+
+/* Personal layout controls */
+.hg-dashboard-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  min-height: 50px;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 7px 9px 7px 13px;
+  border: 1px solid var(--hg-border);
+  border-radius: 13px;
+  background: var(--hg-surface);
+  box-shadow: var(--hg-shadow-sm);
+}
+.hg-dashboard-toolbar__status { position: relative; min-width: 0; padding-left: 23px; color: var(--hg-text-muted); font-size: 12px; font-weight: 700; line-height: 1.45; }
+.hg-dashboard-toolbar__status::before { content: ''; position: absolute; left: 1px; top: .32em; width: 10px; height: 10px; border-radius: 50%; background: var(--hg-success); box-shadow: 0 0 0 4px color-mix(in srgb, var(--hg-success) 13%, transparent); }
+.hg-dashboard-toolbar__actions { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.hg-dashboard-toolbar__actions > :is(.btn, .hg-dashboard-button) { min-height: 38px; margin: 0; padding: 7px 13px; border-radius: 9px; font-size: 12px; font-weight: 750; }
+.hg-dashboard-button { appearance: none; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--hg-border); color: var(--hg-text); background: var(--hg-surface); box-shadow: none; font: inherit; text-decoration: none; cursor: pointer; }
+.hg-dashboard-button:is(:hover, :focus-visible) { color: var(--hg-action); border-color: color-mix(in srgb, var(--hg-action) 34%, var(--hg-border)); background: color-mix(in srgb, var(--hg-action) 7%, var(--hg-surface)); outline: 0; }
+.hg-dashboard-toolbar__primary,
+.hg-dashboard-button--primary { color: var(--hg-action-contrast) !important; border-color: var(--hg-action) !important; background: var(--hg-action) !important; }
+.hg-dashboard-toolbar:not(.hg-dashboard-toolbar--editing) .hg-dashboard-layout-reset,
+.hg-dashboard-toolbar .hg-dashboard-layout-show-hidden:disabled { display: none; }
+.hg-dashboard-toolbar--editing { border-color: color-mix(in srgb, var(--hg-action) 30%, var(--hg-border)); background: color-mix(in srgb, var(--hg-action) 3%, var(--hg-surface)); }
+.hg-dashboard-toolbar--editing .hg-dashboard-toolbar__status { color: var(--hg-action); }
+.hg-dashboard-toolbar--editing .hg-dashboard-toolbar__status::before { background: var(--hg-action); box-shadow: 0 0 0 4px color-mix(in srgb, var(--hg-action) 15%, transparent); animation: hg-dashboard-edit-pulse 1.8s ease-in-out infinite; }
+.hg-dashboard-layout-reset--armed { color: #fff !important; border-color: var(--hg-danger) !important; background: var(--hg-danger) !important; }
+@keyframes hg-dashboard-edit-pulse { 0%, 100% { transform: scale(.9); opacity: .68; } 50% { transform: scale(1); opacity: 1; } }
+
+/* Shared widget header and edit controls */
+.hg-dashlet__header { display: flex; min-width: 0; min-height: 38px; align-items: center; gap: 9px; margin: 0 0 10px; padding: 0 0 9px; border-bottom: 1px solid color-mix(in srgb, var(--hg-border) 72%, transparent); }
+.hg-dashlet__header > h2, .hg-dashlet__header > h3, .hg-dashlet__header > header { flex: 1 1 auto; min-width: 0; margin: 0; padding: 0; border: 0; color: var(--hg-text); background: transparent; font-size: 14px; font-weight: 820; line-height: 1.25; }
+.hg-dashlet__type-icon { display: inline-grid; width: 30px; height: 30px; flex: 0 0 30px; place-items: center; margin: 0; border: 1px solid color-mix(in srgb, var(--hg-dashlet-accent) 16%, var(--hg-border)); border-radius: 9px; color: var(--hg-dashlet-accent); background: color-mix(in srgb, var(--hg-dashlet-accent) 3%, var(--hg-surface)); }
+.hg-dashlet__type-icon::before { content: ''; width: 13px; height: 13px; border: 1.7px solid currentColor; border-radius: 3px; }
+.hg-dashlet__context { display: inline-flex; min-height: 24px; align-items: center; margin-left: auto; padding: 3px 8px; border: 1px solid color-mix(in srgb, var(--hg-dashlet-accent) 14%, var(--hg-border)); border-radius: 999px; color: var(--hg-text-muted); background: var(--hg-surface-muted); font-size: 10px; font-weight: 760; white-space: nowrap; }
+.hg-dashlet__context--capacity[data-heritage-state='healthy'] { color: var(--hg-success-ink); border-color: color-mix(in srgb, var(--hg-success) 30%, var(--hg-border)); background: color-mix(in srgb, var(--hg-success) 7%, var(--hg-surface)); }
+.hg-dashlet__context--capacity[data-heritage-state='attention'] { color: var(--hg-warning-ink); border-color: color-mix(in srgb, var(--hg-warning) 36%, var(--hg-border)); background: color-mix(in srgb, var(--hg-warning) 8%, var(--hg-surface)); }
+.hg-dashlet__context--secondary { border-color: var(--hg-border); background: var(--hg-surface-muted); }
+.hg-dashlet__drag-handle, .hg-dashlet__layout-controls, .hg-dashlet__edit-hint { display: none; }
+.hg-dashboard-layout-edit > .hg-dashlet { cursor: default; outline: 1px dashed color-mix(in srgb, var(--hg-action) 35%, var(--hg-border)); outline-offset: -5px; }
+.hg-dashboard-layout-edit > .hg-dashlet .hg-dashlet__drag-handle { display: grid; width: 32px; height: 32px; grid-template-columns: repeat(2, 3px); place-content: center; gap: 3px; padding: 0; border: 1px solid var(--hg-border); border-radius: 9px; cursor: grab; }
+.hg-dashboard-layout-edit > .hg-dashlet .hg-dashlet__drag-handle i { width: 3px; height: 3px; border-radius: 50%; background: var(--hg-action); }
+.hg-dashboard-layout-edit > .hg-dashlet .hg-dashlet__layout-controls { display: flex; flex: 1 0 100%; order: 5; width: 100%; min-height: 42px; align-items: center; justify-content: flex-end; gap: 3px; margin: 0 0 12px; padding: 4px; border: 1px solid var(--hg-border); border-radius: 11px; background: var(--hg-surface-muted); }
+.hg-dashboard-layout-edit > .hg-dashlet > .hg-dashlet__header { flex-wrap: wrap; }
+.hg-dashlet__layout-controls button { min-width: 36px; min-height: 32px; margin: 0; padding: 5px 9px; border: 0; border-radius: 8px; color: var(--hg-text-muted); background: transparent; font-size: 11px; cursor: pointer; }
+.hg-dashlet__layout-controls button[aria-pressed='true'] { color: var(--hg-action-contrast); background: var(--hg-action); }
+.hg-dashlet__layout-controls [data-heritage-layout-hide] { margin-left: auto; color: var(--hg-danger-ink); }
+.hg-dashlet--dragging { opacity: .72; outline: 2px solid var(--hg-action) !important; transform: scale(.985) !important; user-select: none; }
+[data-heritage-density-hidden='true'] { display: none !important; }
+.hg-dashlet__density-note { display: flex; min-height: 38px; align-items: center; justify-content: space-between; gap: 10px; margin: 12px 0 0; padding: 8px 9px 8px 12px; border: 1px solid var(--hg-border); border-radius: 10px; color: var(--hg-text-muted); background: var(--hg-surface-muted); font-size: 11px; }
+.hg-dashlet__density-expand { min-height: 30px; padding: 4px 9px; border: 1px solid var(--hg-border); border-radius: 7px; color: var(--hg-action); background: var(--hg-surface); font-size: 11px; font-weight: 780; cursor: pointer; }
+body.hg-dashboard-page .hg-dashlet[data-heritage-density='compact'] .modules { grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr)) !important; }
+
+/* Module launchers */
+.dashboard-modules-wrapper { width: 100%; min-width: 0; margin: 0 !important; }
+.hg-dashlet-modules .modules { display: grid !important; grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr)) !important; gap: 8px !important; width: 100% !important; margin: 10px 0 0 !important; padding: 0 !important; float: none !important; }
+.hg-module-launcher { position: relative; display: grid !important; grid-template-columns: 38px minmax(0, 1fr) 34px; gap: 9px; min-width: 0; min-height: 68px !important; align-items: center; padding: 9px 10px !important; border: 1px solid var(--hg-border) !important; border-radius: 11px !important; background: var(--hg-surface-muted) !important; box-shadow: none !important; transform: none !important; }
+.hg-module-launcher > .clear { display: contents; }
+.hg-module-launcher > .clear > :first-child { display: grid; width: 38px; height: 38px; grid-column: 1; place-items: center; margin: 0 !important; border: 1px solid color-mix(in srgb, var(--hg-action) 18%, var(--hg-border)); border-radius: 10px; color: var(--hg-action); background: color-mix(in srgb, var(--hg-action) 4%, var(--hg-surface)); }
+.hg-module-launcher > .clear > .left { display: grid; min-width: 0; grid-column: 2; gap: 3px; margin: 0 !important; }
+.hg-module-launcher .title { overflow: hidden; color: var(--hg-text); font-size: 13px; font-weight: 780; text-overflow: ellipsis; white-space: nowrap; }
+.hg-module-launcher__meta { color: var(--hg-text-muted); font-size: 10px; font-weight: 650; }
+.hg-module-launcher__action { display: grid !important; width: 34px !important; height: 34px !important; min-height: 34px !important; grid-column: 3; place-items: center; margin: 0 !important; padding: 0 !important; border-color: transparent !important; border-radius: 9px !important; color: var(--hg-action) !important; background: transparent !important; font-size: 0 !important; }
+.hg-module-launcher__action::before { content: '\2192'; font-size: 18px; }
+.hg-module-launcher__action:hover, .hg-module-launcher__action:focus-visible { color: var(--hg-action-contrast) !important; background: var(--hg-action) !important; }
+
+/* Atomic dashboard cards: each module can become an independent dashboard widget. */
+.hg-dashlet-module-atomic .hg-dashboard-atomic-module,
+.hg-dashlet-module-atomic .modules {
+  display: grid !important;
+  width: 100% !important;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+.hg-dashlet-module-atomic .hg-module-launcher {
+  grid-template-columns: 46px minmax(0, 1fr) 38px;
+  gap: 12px;
+  padding: 14px !important;
+  border-color: color-mix(in srgb, var(--hg-dashlet-accent) 14%, var(--hg-border)) !important;
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-dashlet-accent) 4%, var(--hg-surface-muted)), var(--hg-surface-muted)) !important;
+}
+
+.hg-dashlet-module-atomic[data-heritage-size='2x2'] .hg-module-launcher {
+  grid-template-columns: 64px minmax(0, 1fr) 46px;
+  padding: 22px !important;
+}
+
+.hg-dashlet-module-atomic[data-heritage-size='2x2'] .hg-module-launcher > .clear > :first-child {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+}
+
+.hg-dashlet-module-atomic[data-heritage-size='2x2'] .hg-module-launcher .title {
+  font-size: clamp(18px, 2cqi, 24px);
+}
+
+.hg-dashlet-module-atomic[data-heritage-size='2x2'] .hg-module-launcher__meta {
+  font-size: 12px;
+}
+
+/* Metrics, limits and quotas */
+.hg-dashboard-metrics-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.hg-dashboard-metric-card { display: grid; grid-template-rows: auto minmax(66px, 1fr); min-width: 0; min-height: 112px; overflow: hidden; padding: 10px 10px 7px !important; border: 1px solid var(--hg-border); border-radius: 11px; background: var(--hg-surface-muted); }
+.hg-dashboard-metric-card__header { display: flex; min-width: 0; align-items: baseline; justify-content: space-between; gap: 12px; padding-bottom: 5px; }
+.hg-dashboard-metric-card__label { overflow: hidden; color: var(--hg-text-muted); font-size: 10px; font-weight: 780; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
+.hg-dashboard-metric-card__value { color: var(--hg-text); font-size: 18px; font-weight: 820; }
+.hg-dashboard-metric-card canvas, .hg-dashboard-metric-card .hg-themed-chart, .hg-dashboard-sparkline { width: 100% !important; height: 66px !important; min-height: 66px; border: 0 !important; background: transparent !important; }
+.hg-dashboard-sparkline { position: relative; display: block; overflow: visible; color: var(--hg-action); border-radius: 8px; }
+.hg-dashboard-sparkline svg { display: block; width: 100%; height: 100%; }
+.hg-dashboard-sparkline__area { fill: color-mix(in srgb, var(--hg-action) 17%, transparent); }
+.hg-dashboard-sparkline__line { fill: none; stroke: var(--hg-action); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.hg-dashboard-sparkline__point { fill: var(--hg-surface); stroke: var(--hg-action); stroke-width: 2; }
+.hg-dashboard-sparkline__guide { stroke: color-mix(in srgb, var(--hg-action) 55%, var(--hg-border)); stroke-width: 1; stroke-dasharray: 3 3; pointer-events: none; }
+.hg-dashboard-sparkline__tooltip {
+  position: absolute;
+  z-index: 4;
+  left: clamp(48px, var(--hg-metric-point-x, 50%), calc(100% - 48px));
+  bottom: calc(100% - 8px);
+  max-width: min(190px, calc(100% - 12px));
+  padding: 5px 8px;
+  border: 1px solid color-mix(in srgb, var(--hg-action) 28%, var(--hg-border));
+  border-radius: 8px;
+  color: var(--hg-text);
+  background: color-mix(in srgb, var(--hg-surface) 94%, transparent);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--hg-shadow, #0f172a) 18%, transparent);
+  font-size: 10px;
+  font-weight: 760;
+  line-height: 1.35;
+  text-align: center;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+.hg-dashboard-sparkline__tooltip[hidden], .hg-dashboard-sparkline__guide[hidden] { display: none; }
+.hg-dashboard-sparkline[data-heritage-metric-pinned] .hg-dashboard-sparkline__tooltip {
+  border-color: color-mix(in srgb, var(--hg-action) 48%, var(--hg-border));
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--hg-action) 15%, transparent);
+}
+.hg-dashboard-sparkline__hit {
+  cursor: crosshair;
+  opacity: .34;
+  transition: opacity 140ms ease, r 140ms ease, filter 140ms ease;
+}
+.hg-dashboard-sparkline__hit:is(:hover, :focus-visible, .is-active) {
+  opacity: 1;
+  r: 4.5px;
+  filter: drop-shadow(0 0 5px color-mix(in srgb, var(--hg-action) 70%, transparent));
+  outline: none;
+}
+.hg-dashboard-sparkline--empty, .hg-dashboard-sparkline--error { display: grid; place-items: center; overflow: hidden; color: var(--hg-text-muted); font-size: 11px; font-weight: 760; }
+.hg-dashboard-sparkline--error { color: var(--hg-danger); }
+.hg-dashboard-sparkline__state { display: inline-flex; align-items: center; gap: 6px; }
+.hg-dashboard-metric-card[data-heritage-metric-state='loading'] { opacity: .72; }
+.hg-dashboard-metric-card[data-heritage-metric-state='empty'] {
+  border-color: color-mix(in srgb, var(--hg-text-muted) 20%, var(--hg-border));
+  background: color-mix(in srgb, var(--hg-surface-muted) 88%, var(--hg-surface));
+}
+.hg-dashboard-metric-card[data-heritage-metric-state='error'] {
+  border-color: color-mix(in srgb, var(--hg-danger) 38%, var(--hg-border));
+  background: color-mix(in srgb, var(--hg-danger) 5%, var(--hg-surface));
+}
+.hg-dashboard-metric-card[data-heritage-metric-state='error'] .hg-dashboard-metric-card__value { color: var(--hg-danger-ink); }
+@media (prefers-reduced-motion: reduce) {
+  .hg-dashboard-sparkline__hit, .hg-dashboard-metric-card { transition: none; }
+}
+.hg-dashlet-metrics[data-heritage-size='1x1'] .hg-dashboard-metrics-grid { grid-template-columns: minmax(0, 1fr); }
+
+.hg-limit-summary { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 8px; }
+.hg-limit-summary > span { display: inline-flex; min-height: 28px; align-items: center; gap: 4px; padding: 4px 8px; border: 1px solid var(--hg-border); border-radius: 999px; color: var(--hg-text-muted); background: var(--hg-surface-muted); font-size: 10px; }
+.hg-limit-summary__toggle { min-height: 28px; margin-left: auto; padding: 4px 9px; border: 1px solid var(--hg-border); border-radius: 999px; color: var(--hg-text); background: var(--hg-surface); font-size: 10px; cursor: pointer; }
+.hg-limit-groups, .hg-quota-summary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin: 0 0 8px; }
+.hg-limit-group, .hg-quota-summary > article { position: relative; display: grid; min-width: 0; min-height: 56px; align-content: center; gap: 3px 8px; padding: 8px 9px; border: 1px solid var(--hg-border); border-left: 3px solid var(--hg-success); border-radius: 9px; background: var(--hg-surface-muted); }
+.hg-limit-group { grid-template-columns: minmax(0, 1fr) auto; }
+.hg-limit-group > span, .hg-quota-summary > article > span { overflow: hidden; color: var(--hg-text-muted); font-size: 9px; font-weight: 760; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
+.hg-limit-group > strong { grid-column: 2; grid-row: 1 / span 2; align-self: center; color: var(--hg-text); font-size: 18px; }
+.hg-limit-group > small { color: var(--hg-text-muted); font-size: 9px; }
+.hg-limit-group--attention { border-color: color-mix(in srgb, var(--hg-warning) 38%, var(--hg-border)); background: color-mix(in srgb, var(--hg-surface) 92%, var(--hg-warning) 8%); }
+.hg-quota-summary > article > strong { color: var(--hg-text); font-size: 16px; font-weight: 820; }
+.hg-quota-alerts, .hg-limit-alerts { display: grid; gap: 5px; margin: 0 0 7px; }
+.hg-quota-alert, .hg-limit-alert { display: flex; min-height: 30px; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 8px; border: 1px solid var(--hg-border); border-left: 3px solid var(--hg-warning); border-radius: 8px; color: var(--hg-text); background: var(--hg-surface-muted); font-size: 10px; }
+.hg-limit-alert--critical { border-left-color: var(--hg-danger); }
+.hg-quota-details-toggle { width: auto; min-height: 30px; padding: 5px 10px; border: 1px solid var(--hg-border); border-radius: 9px; color: var(--hg-action); background: var(--hg-surface-muted); font-size: 10px; font-weight: 780; cursor: pointer; }
+.hg-dashlet-limits:not(.hg-dashlet-limits--expanded) .table-wrapper, .hg-dashlet-quota-collapsed:not(.hg-dashlet-quota-expanded) > .table-wrapper { display: none; }
+
+/* Editorial and statistics widgets */
+.hg-dashlet-news > ul { max-height: 260px; margin: 0; padding: 0; overflow-y: auto; list-style: none; }
+.hg-dashlet-news > ul > li { padding: 8px 2px; border-bottom: 1px solid var(--hg-border); }
+.hg-dashlet-news > ul > li:last-child { border-bottom: 0; }
+.hg-dashlet-news a { display: block; color: var(--hg-text-muted); font-size: 10px; line-height: 1.45; text-decoration: none; }
+.hg-dashlet-news a:hover, .hg-dashlet-news a:focus-visible { color: var(--hg-action); }
+.hg-donate-card { display: grid; min-width: 0; gap: 11px; color: var(--hg-text); background: transparent; }
+.hg-donate-card__header { display: flex; min-width: 0; align-items: center; justify-content: space-between; gap: 10px; }
+.hg-donate-card__header h4 { overflow: hidden; margin: 0; color: var(--hg-text); font-size: 12px; font-weight: 820; text-overflow: ellipsis; white-space: nowrap; }
+.hg-donate-card__toggle { min-height: 28px; padding: 3px 7px !important; border: 1px solid transparent !important; border-radius: 999px !important; color: var(--hg-action) !important; background: transparent !important; font-size: 10px !important; font-weight: 780 !important; text-decoration: none !important; }
+.hg-donate-card__toggle:hover, .hg-donate-card__toggle:focus-visible { border-color: var(--hg-border) !important; background: var(--hg-surface-muted) !important; }
+.hg-donate-card__description { display: -webkit-box; overflow: hidden; margin: 0; color: var(--hg-text-muted); font-size: 10px; line-height: 1.45; -webkit-box-orient: vertical; -webkit-line-clamp: 4; }
+.hg-donate-card__description[hidden] { display: none !important; }
+.hg-donate-card__actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 7px; margin: 0; }
+.hg-donate-card__actions .btn { min-height: 30px; padding: 5px 9px !important; border-radius: 9px !important; font-size: 10px !important; font-weight: 780 !important; }
+.hg-statistics-dashlet__intro { margin: -2px 0 13px; color: var(--hg-text-muted); font-size: 11px; line-height: 1.5; }
+.hg-statistics-launchers { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 126px), 1fr)); gap: 8px; }
+.hg-statistics-launcher { position: relative; display: flex; min-width: 0; min-height: 62px; align-items: flex-start; flex-direction: column; justify-content: center; gap: 4px; padding: 10px 32px 10px 12px; color: var(--hg-text); border: 1px solid var(--hg-border); border-radius: 11px; background: var(--hg-surface-muted); text-decoration: none; }
+.hg-statistics-launcher::after { content: '\2192'; position: absolute; right: 12px; color: var(--hg-action); font-size: 16px; }
+.hg-statistics-launcher > span { overflow: hidden; max-width: 100%; font-size: 12px; font-weight: 800; text-overflow: ellipsis; white-space: nowrap; }
+.hg-statistics-launcher > small { color: var(--hg-text-muted); font-size: 10px; }
+.hg-statistics-launcher:hover, .hg-statistics-launcher:focus-visible { color: var(--hg-text); border-color: var(--hg-action); background: color-mix(in srgb, var(--hg-action) 7%, var(--hg-surface)); text-decoration: none; }
+.hg-dashlet-statistics[data-heritage-size='1x1'] .hg-statistics-launchers { grid-template-columns: minmax(0, 1fr); }
+.hg-dashlet-statistics[data-heritage-size='2x2'] .hg-statistics-launchers { grid-template-columns: repeat(auto-fit, minmax(min(100%, 126px), 1fr)); }
+
+/* Recovery state */
+.hg-dashboard-empty-state { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; min-height: 170px; align-items: center; gap: 18px; padding: 26px 28px; border: 1px dashed color-mix(in srgb, var(--hg-action) 34%, var(--hg-border)); border-radius: 16px; color: var(--hg-text); background: color-mix(in srgb, var(--hg-action) 4%, var(--hg-surface)); }
+.hg-dashboard-empty-state__icon { position: relative; width: 48px; height: 48px; border: 1px solid var(--hg-border); border-radius: 14px; background: color-mix(in srgb, var(--hg-action) 8%, var(--hg-surface)); }
+.hg-dashboard-empty-state h2 { margin: 0 0 5px; color: var(--hg-text); font-size: 18px; }
+.hg-dashboard-empty-state p { margin: 0; color: var(--hg-text-muted); font-size: 12px; line-height: 1.55; }
+
+/* Fluid container transitions: one composition, no device-specific states. */
+@container hg-dashboard (max-width: 1180px) {
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@container hg-dashboard (max-width: 760px) {
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout { grid-template-columns: minmax(0, 1fr); grid-auto-rows: auto; gap: 12px; }
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-size-1x1,
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-size-1x2,
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-size-2x2 { grid-column: span 1; grid-row: span 1; height: auto; min-height: 0; }
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-hero { grid-template-columns: minmax(0, 1fr); row-gap: 8px; }
+  body.hg-dashboard-page .hg-dashboard-hero__summary { justify-self: start; text-align: left; }
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-overview { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .hg-dashboard-overview__stat:last-child { grid-column: auto; }
+  .hg-dashboard-toolbar { grid-template-columns: minmax(0, 1fr); }
+  .hg-dashboard-toolbar__actions { display: grid; grid-template-columns: minmax(0, 1fr); justify-content: stretch; }
+  .hg-dashboard-toolbar__actions > :is(.btn, .hg-dashboard-button) { width: 100%; min-height: 42px; }
+  .hg-dashboard-metrics-grid, .hg-statistics-launchers, .hg-dashlet-statistics[data-heritage-size='2x2'] .hg-statistics-launchers { grid-template-columns: minmax(0, 1fr); }
+  .hg-dashboard-layout-edit > .hg-dashlet .hg-dashlet__layout-controls { overflow-x: auto; justify-content: flex-start; }
+  .hg-dashlet__layout-controls button { min-width: 40px; min-height: 40px; }
+  .hg-dashlet__density-note { align-items: stretch; flex-direction: column; }
+  .hg-dashlet__density-expand { width: 100%; min-height: 40px; }
+}
+
+@container hg-dashboard (max-width: 440px) {
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet { padding: 13px; border-radius: 13px; }
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-hero { padding: 2px 0 13px; }
+  .hg-dashboard-overview__stat { min-height: 78px; padding: 11px 12px; }
+  .hg-dashlet-modules .modules, .hg-limit-groups, .hg-quota-summary { grid-template-columns: minmax(0, 1fr) !important; }
+  body.hg-dashboard-page .hg-dashlet[data-heritage-density='compact'] .modules { grid-template-columns: minmax(0, 1fr) !important; }
+  .hg-quota-details-toggle { width: 100%; }
+  .hg-dashboard-empty-state { grid-template-columns: minmax(0, 1fr); padding: 20px; }
+}
+
+/* Viewport fallback for older or transitional ISPConfig markup states where
+ * the dashboard container can briefly report a desktop width while the shell is
+ * already in the mobile header. This keeps the real demo from showing clipped
+ * multi-column widget tops during resize or first paint. */
+@media (max-width: 760px) {
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout {
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-auto-rows: auto;
+    gap: 12px;
+    overflow-x: clip;
+  }
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet,
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-size-1x1,
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-size-1x2,
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-size-2x2 {
+    width: 100%;
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+    min-height: 0;
+  }
+}
+
+/* intentional secondary-content composition.
+ *
+ * News is useful context, not a narrow metric tile. Whenever it is the only
+ * remaining dashboard card it owns the available row; in a populated
+ * dashboard it still receives enough width for readable editorial copy.
+ */
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > :is(
+  .hg-dashlet-news,
+  .hg-dashlet[data-heritage-dashlet='news']
+) {
+  min-inline-size: min(100%, 320px);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout:has(> .hg-dashboard-empty-state) > :is(
+  .hg-dashlet-news,
+  .hg-dashlet[data-heritage-dashlet='news']
+) {
+  grid-column: 1 / -1;
+  inline-size: 100%;
+  max-inline-size: none;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout:has(> .hg-dashboard-empty-state) > :is(
+  .hg-dashlet-news,
+  .hg-dashlet[data-heritage-dashlet='news']
+) > ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  max-height: none;
+  gap: 0 18px;
+}
+
+html[data-heritage-theme='dark'] body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet,
+html[data-heritage-theme='dark'] .hg-dashboard-overview__stat {
+  border-color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 14%, var(--hg-border));
+  background: linear-gradient(145deg, color-mix(in srgb, var(--hg-surface) 98%, var(--hg-dashlet-accent, var(--hg-action)) 2%), var(--hg-surface) 48%);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .24);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet,
+  .hg-dashboard-toolbar--editing .hg-dashboard-toolbar__status::before { animation: none; transition: none; }
+}
+
+@media (forced-colors: active) {
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet,
+  .hg-dashboard-overview__stat,
+  .hg-dashboard-toolbar,
+  .hg-module-launcher,
+  .hg-dashboard-metric-card { border: 1px solid CanvasText !important; box-shadow: none !important; }
+}
+
+/* premium operations workspace direction.
+ * The dashboard may exceed the original visual demo when real ISPConfig
+ * workflows need stronger hierarchy. Warnings, capacity and shortcuts stay
+ * operationally prominent; news remains a secondary widget. */
+body.hg-dashboard-page #pageContent.hg-dashboard-layout {
+  --hg-dashboard-news-opacity: .82;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-priority='primary'],
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-priority='operational'],
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-state-warning,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-state-critical {
+  box-shadow:
+    0 18px 44px color-mix(in srgb, var(--hg-text) 8%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 11%, transparent);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashlet='news'] {
+  order: 90;
+  min-height: 0;
+  opacity: var(--hg-dashboard-news-opacity);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashlet='news']::before {
+  opacity: .28;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashlet='news'] :is(h3, h4, .hg-dashlet__title) {
+  color: var(--hg-text-muted);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashlet='news']:hover,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashlet='news']:focus-within {
+  opacity: 1;
+}
+
+body.hg-dashboard-page .hg-dashboard-overview__stat {
+  border-left: 3px solid color-mix(in srgb, var(--hg-action) 42%, transparent);
+}
+
+body.hg-dashboard-page .hg-dashboard-toolbar {
+  border-color: color-mix(in srgb, var(--hg-action) 10%, var(--hg-border));
+}
+
+/* premium calm layer.
+ *
+ * The first dashboard passes proved the structure, but the red default accent
+ * was too dominant. The dashboard now treats accent as guidance and state,
+ * not as a frame around every surface. */
+body.hg-dashboard-page #pageContent.hg-dashboard-layout {
+  --hg-dashboard-hairline: color-mix(in srgb, var(--hg-action) 7%, var(--hg-border));
+  --hg-dashboard-accent-line: color-mix(in srgb, var(--hg-action) 48%, transparent);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet {
+  border-color: var(--hg-dashboard-hairline);
+  background:
+    radial-gradient(circle at 0 0, color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 5%, transparent), transparent 38%),
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 24%, var(--hg-surface)), var(--hg-surface) 58%);
+  box-shadow:
+    0 14px 34px color-mix(in srgb, var(--hg-text) 7%, transparent),
+    inset 0 1px 0 color-mix(in srgb, #fff 38%, transparent);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet::before {
+  inset: 0 18px auto;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--hg-dashlet-accent, var(--hg-action)) 18%, var(--hg-dashlet-accent, var(--hg-action)) 82%, transparent);
+  opacity: .36;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet:hover,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet:focus-within {
+  border-color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 22%, var(--hg-border));
+  box-shadow:
+    0 18px 42px color-mix(in srgb, var(--hg-text) 9%, transparent),
+    inset 0 1px 0 color-mix(in srgb, #fff 42%, transparent);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > :is(.hg-dashlet[data-heritage-priority='primary'], .hg-dashlet[data-heritage-priority='operational'], .hg-dashlet-state-warning, .hg-dashlet-state-critical) {
+  box-shadow:
+    0 16px 40px color-mix(in srgb, var(--hg-text) 8%, transparent),
+    inset 0 1px 0 color-mix(in srgb, #fff 35%, transparent);
+}
+
+body.hg-dashboard-page .hg-dashboard-overview__stat {
+  border-left: 0;
+  border-color: var(--hg-dashboard-hairline);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 22%, var(--hg-surface)), var(--hg-surface));
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--hg-text) 6%, transparent);
+}
+
+body.hg-dashboard-page .hg-dashboard-overview__stat::before {
+  inset: auto 16px 10px 16px;
+  width: auto;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--hg-dashboard-accent-line);
+  opacity: .62;
+}
+
+body.hg-dashboard-page .hg-dashboard-overview__stat--healthy::before { background: color-mix(in srgb, var(--hg-success) 58%, transparent); }
+body.hg-dashboard-page .hg-dashboard-overview__stat--attention::before { background: color-mix(in srgb, var(--hg-warning) 62%, transparent); }
+
+body.hg-dashboard-page .hg-dashboard-toolbar {
+  min-height: 70px;
+  border-color: color-mix(in srgb, var(--hg-action) 6%, var(--hg-border));
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--hg-action) 2.5%, var(--hg-surface)), var(--hg-surface));
+}
+
+body.hg-dashboard-page .hg-dashboard-toolbar__primary {
+  border-radius: 12px;
+  box-shadow: 0 12px 24px color-mix(in srgb, var(--hg-action) 16%, transparent);
+}
+
+html[data-heritage-theme='dark'] body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet,
+html[data-heritage-theme='dark'] .hg-dashboard-overview__stat,
+html[data-heritage-theme='dark'] body.hg-dashboard-page .hg-dashboard-toolbar {
+  border-color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 9%, var(--hg-border));
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, .25),
+    inset 0 1px 0 rgba(255, 255, 255, .035);
+}
+
+/* atomic dashboard visual calm pass.
+ *
+ * made modules and metric charts individually placeable. This layer
+ * makes those smaller widgets feel intentional instead of looking like red
+ * fragments cut out of the former combined dashboard panels. */
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] {
+  --hg-dashlet-accent-soft: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 58%, var(--hg-text-muted));
+  --hg-dashlet-atomic-border: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 8%, var(--hg-border));
+  --hg-dashlet-atomic-tint: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 2%, var(--hg-surface));
+  border-color: var(--hg-dashlet-atomic-border);
+  background:
+    radial-gradient(circle at 16% 0, color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 4%, transparent), transparent 38%),
+    linear-gradient(145deg, var(--hg-dashlet-atomic-tint), var(--hg-surface) 64%);
+  box-shadow:
+    0 16px 38px color-mix(in srgb, var(--hg-text) 5%, transparent),
+    inset 0 1px 0 color-mix(in srgb, #fff 30%, transparent);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source]::before {
+  inset: 0 24px auto;
+  height: 2px;
+  opacity: .26;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source]:hover,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source]:focus-within {
+  border-color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 18%, var(--hg-border));
+  box-shadow:
+    0 20px 44px color-mix(in srgb, var(--hg-text) 7%, transparent),
+    inset 0 1px 0 color-mix(in srgb, #fff 34%, transparent);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] .hg-dashlet__type-icon {
+  color: var(--hg-dashlet-accent-soft);
+  border-color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 13%, var(--hg-border));
+  background: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 3%, var(--hg-surface-muted));
+  box-shadow: none;
+}
+
+/* premium atomic dashboard resize controls.
+ *
+ * The dashboard already splits module shortcuts and metrics into independent
+ * widgets. These controls make the behaviour understandable: small, tall and
+ * detail sizes are labelled, and metric cards explicitly adapt their chart
+ * viewport instead of just stretching content. */
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] .hg-dashlet__layout-controls {
+  justify-content: stretch;
+  gap: 6px;
+  padding: 6px;
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 4%, var(--hg-surface-muted)), var(--hg-surface-muted));
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] .hg-dashlet__layout-controls button {
+  display: inline-grid;
+  min-width: 38px;
+  min-height: 36px;
+  place-items: center;
+  gap: 1px;
+  border: 1px solid transparent;
+  font-weight: 820;
+  line-height: 1.05;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] .hg-dashlet__layout-controls button[data-heritage-layout-size] {
+  min-width: min(94px, 31%);
+  flex: 1 1 0;
+  padding: 5px 8px;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] .hg-dashlet__layout-controls button[data-heritage-layout-size]::after {
+  content: attr(data-heritage-size-label);
+  display: block;
+  color: currentColor;
+  font-size: 9px;
+  font-weight: 760;
+  letter-spacing: .01em;
+  opacity: .76;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] .hg-dashlet__layout-controls button[data-heritage-layout-size][aria-pressed='true']::after {
+  opacity: .92;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] .hg-dashlet__layout-controls button:is(:hover, :focus-visible) {
+  border-color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 26%, var(--hg-border));
+  color: var(--hg-text);
+  background: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 8%, var(--hg-surface));
+  outline: none;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] .hg-dashlet__layout-controls button[aria-pressed='true'] {
+  border-color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 34%, transparent);
+  color: var(--hg-action-contrast);
+  background: var(--hg-dashlet-accent, var(--hg-action));
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 18%, transparent);
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='compact'] .hg-dashboard-metric-card__label::after,
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='tall'] .hg-dashboard-metric-card__label::after,
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='detail'] .hg-dashboard-metric-card__label::after {
+  display: inline-block;
+  margin-left: 7px;
+  color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 70%, var(--hg-text-muted));
+  font-size: 9px;
+  font-weight: 820;
+  letter-spacing: .04em;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='compact'] .hg-dashboard-metric-card__label::after { content: '1\00d7 1'; }
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='tall'] .hg-dashboard-metric-card__label::after { content: '1\00d7 2'; }
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='detail'] .hg-dashboard-metric-card__label::after { content: '2\00d7 2'; }
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='detail'] .hg-dashboard-metric-card__value {
+  font-size: clamp(24px, 4cqi, 42px);
+  letter-spacing: -.04em;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher {
+  border-color: color-mix(in srgb, var(--hg-border) 88%, transparent) !important;
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 72%, var(--hg-surface)), var(--hg-surface)) !important;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #fff 24%, transparent) !important;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher > .clear > :first-child {
+  color: var(--hg-dashlet-accent-soft);
+  border-color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 13%, var(--hg-border));
+  background: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 3%, var(--hg-surface-muted));
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher .title {
+  letter-spacing: -.02em;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher .title {
+  display: -webkit-box;
+  overflow: hidden;
+  line-height: 1.18;
+  text-overflow: initial;
+  white-space: normal;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic[data-heritage-size='1x2'] .hg-module-launcher .title,
+body.hg-dashboard-page .hg-dashlet-module-atomic[data-heritage-size='2x2'] .hg-module-launcher .title {
+  -webkit-line-clamp: 3;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher__action {
+  color: var(--hg-dashlet-accent-soft) !important;
+  opacity: .9;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 16%, var(--hg-border)) !important;
+  box-shadow:
+    0 14px 30px color-mix(in srgb, var(--hg-text) 7%, transparent),
+    inset 0 1px 0 color-mix(in srgb, #fff 30%, transparent) !important;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card {
+  border-color: color-mix(in srgb, var(--hg-border) 86%, transparent);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 70%, var(--hg-surface)), var(--hg-surface));
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 25%, transparent);
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card__label {
+  color: color-mix(in srgb, var(--hg-text-muted) 88%, var(--hg-dashlet-accent-soft));
+  letter-spacing: .06em;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card__value {
+  color: color-mix(in srgb, var(--hg-text) 90%, var(--hg-dashlet-accent, var(--hg-action)));
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-sparkline,
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-themed-chart {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='compact'] .hg-dashboard-metric-card {
+  grid-template-rows: auto minmax(92px, 1fr);
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='tall'] .hg-dashboard-metric-card {
+  grid-template-rows: auto minmax(176px, 1fr);
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='detail'] .hg-dashboard-metric-card {
+  grid-template-rows: auto minmax(250px, 1fr);
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='detail'] .hg-dashboard-metric-card__header {
+  padding-bottom: 12px;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='detail'] .hg-dashboard-sparkline__line {
+  stroke-width: 2.4;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] .hg-dashlet__context {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+html[data-heritage-theme='dark'] body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] {
+  --hg-dashlet-accent-soft: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 64%, #cbd6e7);
+  --hg-dashlet-atomic-border: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 9%, var(--hg-border));
+  --hg-dashlet-atomic-tint: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 3%, var(--hg-surface));
+  background:
+    radial-gradient(circle at 12% 0, color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 5%, transparent), transparent 36%),
+    linear-gradient(145deg, var(--hg-dashlet-atomic-tint), var(--hg-surface) 66%);
+  box-shadow:
+    0 18px 46px rgba(0, 0, 0, .22),
+    inset 0 1px 0 rgba(255, 255, 255, .035);
+}
+
+html[data-heritage-theme='dark'] body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source]::before {
+  opacity: .34;
+}
+
+html[data-heritage-theme='dark'] body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher,
+html[data-heritage-theme='dark'] body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card {
+  border-color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 9%, var(--hg-border)) !important;
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 84%, #fff 2%), var(--hg-surface)) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .035) !important;
+}
+
+/* individual atomic widget polish.
+ *
+ * Each module shortcut and each metric chart can now live as its own dashboard
+ * widget. This layer makes the individual widgets read like first-class
+ * dashboard cards at all sizes instead of small fragments of the former
+ * combined modules/metrics panels. */
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] {
+  contain: inline-size style;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] > .hg-dashlet__header h3 {
+  display: -webkit-box;
+  min-width: 0;
+  overflow: hidden;
+  line-height: 1.14;
+  text-overflow: initial;
+  white-space: normal;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher {
+  min-height: clamp(118px, 32cqi, 168px) !important;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic[data-heritage-size='1x2'] .hg-module-launcher,
+body.hg-dashboard-page .hg-dashlet-module-atomic[data-heritage-size='2x2'] .hg-module-launcher {
+  min-height: clamp(214px, 52cqi, 330px) !important;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic[data-heritage-size='2x2'] .hg-module-launcher .title {
+  -webkit-line-clamp: 4;
+  font-size: clamp(20px, 8cqi, 34px);
+  line-height: 1.05;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic[data-heritage-size='2x2'] .hg-module-launcher__meta {
+  max-width: max-content;
+  padding: 5px 8px;
+  border: 1px solid color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 16%, var(--hg-border));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 5%, var(--hg-surface-muted));
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card {
+  align-content: stretch;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card__header {
+  position: relative;
+  z-index: 1;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='compact'] .hg-dashboard-metric-card {
+  min-height: clamp(128px, 34cqi, 172px);
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='tall'] .hg-dashboard-metric-card {
+  min-height: clamp(230px, 60cqi, 340px);
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='detail'] .hg-dashboard-metric-card {
+  min-height: clamp(300px, 72cqi, 440px);
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='detail'] .hg-dashboard-metric-card canvas,
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='detail'] .hg-dashboard-metric-card .hg-themed-chart,
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='detail'] .hg-dashboard-sparkline {
+  height: clamp(260px, 46cqi, 360px) !important;
+  min-height: 260px;
+}
+
+@container hg-dashboard (max-width: 520px) {
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] > .hg-dashlet__header h3 {
+    -webkit-line-clamp: 1;
+  }
+
+  body.hg-dashboard-page .hg-dashlet-module-atomic[data-heritage-size='2x2'] .hg-module-launcher .title {
+    -webkit-line-clamp: 3;
+    font-size: clamp(18px, 10cqi, 28px);
+  }
+}
+
+/* self-healing dashboard grid.
+ *
+ * The old step-down model still acted like a set of fixed intermediate
+ * layouts while resizing. This final layer lets the dashboard choose as many
+ * useful columns as actually fit, then clamps oversized widgets when the
+ * available content width can no longer support them. */
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-size-2x2 {
+  grid-column: span 2;
+}
+
+@container hg-dashboard (max-width: 900px) {
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-size-2x2 {
+    grid-column: 1 / -1;
+  }
+}
+
+@container hg-dashboard (max-width: 660px) {
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-overview,
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-toolbar,
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-size-1x1,
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-size-1x2,
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-size-2x2 {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+}
+
+/* premium atomic widget refinement.
+ *
+ * Module and metric widgets are now individual dashboard objects. This layer
+ * makes that explicit: each card has a clearer handle, calmer header rhythm,
+ * richer module launch affordance and chart viewport states that scale with
+ * the selected widget size.
+ */
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] {
+  --hg-atomic-card-min: 148px;
+  min-height: var(--hg-atomic-card-min);
+  padding: 16px;
+  border-color: var(--hg-dashlet-atomic-border, color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 12%, var(--hg-border)));
+  background:
+    radial-gradient(circle at 12% 0, color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 7%, transparent), transparent 38%),
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 4%, var(--hg-surface)), var(--hg-surface) 72%);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] > .hg-dashlet__header {
+  min-height: 42px;
+  margin-bottom: 12px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 12%, var(--hg-border));
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] > .hg-dashlet__header h3 {
+  display: -webkit-box;
+  overflow: hidden;
+  max-width: 100%;
+  color: var(--hg-text);
+  font-size: clamp(14px, 1.8cqi, 18px);
+  font-weight: 850;
+  letter-spacing: -.035em;
+  line-height: 1.12;
+  text-overflow: initial;
+  white-space: normal;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] .hg-dashlet__context {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 24px;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 8px;
+  border: 1px solid color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 18%, var(--hg-border));
+  border-radius: 999px;
+  color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 78%, var(--hg-text));
+  background: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 7%, var(--hg-surface-muted));
+  font-size: 10px;
+  font-weight: 820;
+  letter-spacing: .01em;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] .hg-dashlet__drag-handle {
+  color: var(--hg-dashlet-accent, var(--hg-action));
+  background: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 8%, var(--hg-surface-muted));
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic {
+  --hg-atomic-card-min: 172px;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher {
+  border-radius: 18px !important;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #fff 24%, transparent),
+    0 12px 28px color-mix(in srgb, var(--hg-text) 5%, transparent) !important;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher > .clear > :first-child {
+  box-shadow: 0 10px 22px color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 10%, transparent);
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher__meta {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 22px;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: 999px;
+  color: color-mix(in srgb, var(--hg-text-muted) 82%, var(--hg-dashlet-accent, var(--hg-action)));
+  background: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 6%, transparent);
+  font-weight: 760;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher__action {
+  border: 1px solid color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 14%, var(--hg-border)) !important;
+  background: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 5%, var(--hg-surface)) !important;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic {
+  --hg-atomic-card-min: 180px;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card {
+  min-height: 140px;
+  border-radius: 18px;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card__header {
+  align-items: start;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card__value {
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='detail'] .hg-dashboard-metric-card__value {
+  font-size: clamp(28px, 4.2cqi, 42px);
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-sparkline__area {
+  fill: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 18%, transparent);
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-sparkline__line {
+  stroke: var(--hg-dashlet-accent, var(--hg-action));
+}
+
+@container hg-dashboard (max-width: 660px) {
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] {
+    padding: 14px;
+  }
+
+}
+
+/* atomic dashboard controls as first-class demo widgets.
+ *
+ * The user should not have to infer that a split module card or a split metric
+ * chart is movable on its own. This layer gives every atomic widget an explicit
+ * type badge, calmer editing controls and size buttons that read like display
+ * modes instead of leftover grid coordinates.
+ */
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-label] {
+  scroll-margin-top: 24px;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-label] > .hg-dashlet__header {
+  gap: 10px;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-label] .hg-dashlet__context {
+  text-transform: none;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'] .hg-dashlet__context::before,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='metrics'] .hg-dashlet__context::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: currentColor;
+  box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 10%, transparent);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-label] .hg-dashlet__layout-controls {
+  align-items: stretch;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-label] .hg-dashlet__layout-label {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  padding: 0 9px;
+  border-right: 1px solid color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 12%, var(--hg-border));
+  color: var(--hg-text-muted);
+  font-size: 10px;
+  font-weight: 820;
+  letter-spacing: .045em;
+  text-transform: uppercase;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-label] .hg-dashlet__layout-controls button[data-heritage-layout-size] {
+  min-width: min(122px, 32%);
+  border-color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 10%, transparent);
+  background: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 3%, var(--hg-surface));
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-label] .hg-dashlet__layout-controls button[data-heritage-layout-size]::before {
+  content: attr(data-heritage-size-code);
+  display: block;
+  color: currentColor;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: -.02em;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-label] .hg-dashlet__layout-controls button[data-heritage-layout-size] {
+  font-size: 0;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-label] .hg-dashlet__layout-controls button[data-heritage-layout-size]::after {
+  font-size: 9px;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'][data-heritage-size='2x2'] .hg-module-launcher {
+  display: grid !important;
+  align-content: space-between;
+  padding: clamp(18px, 4cqi, 28px) !important;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'][data-heritage-size='2x2'] .hg-module-launcher > .clear > :first-child {
+  transform: scale(1.06);
+  transform-origin: left top;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='metrics'] .hg-dashboard-single-metric {
+  display: grid;
+  min-height: 100%;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='metrics'] .hg-dashboard-metric-card {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='metrics'] .hg-dashboard-metric-card canvas {
+  align-self: end;
+}
+
+@container hg-dashboard (max-width: 540px) {
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-label] .hg-dashlet__layout-controls {
+    flex-wrap: wrap;
+  }
+
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-label] .hg-dashlet__layout-label {
+    width: 100%;
+    border-right: 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 12%, var(--hg-border));
+  }
+}
+
+/* premium atomic dashboard cockpit pass.
+ *
+ * The dashboard now treats split modules and split metric charts as deliberate
+ * cockpit objects. This final layer improves card hierarchy, edit affordances,
+ * hover/focus states and the visual relationship between the selected widget
+ * size and the content viewport.
+ */
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] {
+  --hg-atomic-focus-ring: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 32%, transparent);
+  --hg-atomic-glow: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 12%, transparent);
+  position: relative;
+  overflow: clip;
+  transition:
+    border-color .18s ease,
+    box-shadow .18s ease,
+    transform .18s ease,
+    background .18s ease;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source]::after {
+  position: absolute;
+  inset: auto 18px 18px auto;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 16%, transparent), transparent 68%);
+  content: '';
+  opacity: .42;
+  pointer-events: none;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source]:is(:hover, :focus-within) {
+  border-color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 34%, var(--hg-border));
+  box-shadow:
+    0 22px 54px color-mix(in srgb, var(--hg-text) 9%, transparent),
+    0 0 0 4px var(--hg-atomic-focus-ring),
+    inset 0 1px 0 color-mix(in srgb, #fff 26%, transparent);
+  transform: translateY(-1px);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout.hg-dashboard-layout-edit > .hg-dashlet[data-heritage-atomic-source] {
+  outline: 1px dashed color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 34%, transparent);
+  outline-offset: -7px;
+  cursor: grab;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout.hg-dashboard-layout-edit > .hg-dashlet[data-heritage-atomic-source]:active {
+  cursor: grabbing;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] .hg-dashlet__drag-handle {
+  min-width: 34px;
+  min-height: 34px;
+  border: 1px solid color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 22%, var(--hg-border));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #fff 28%, transparent),
+    0 8px 18px var(--hg-atomic-glow);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] .hg-dashlet__edit-hint {
+  color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 66%, var(--hg-text-muted));
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] .hg-dashlet__layout-controls {
+  border-color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 14%, var(--hg-border));
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 5%, var(--hg-surface-muted)), var(--hg-surface));
+  box-shadow: 0 16px 34px color-mix(in srgb, var(--hg-text) 8%, transparent);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] .hg-dashlet__layout-controls button[aria-pressed='true'] {
+  border-color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 46%, var(--hg-border));
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 18%, var(--hg-surface)), color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 8%, var(--hg-surface)));
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, #fff 20%, transparent),
+    0 8px 18px var(--hg-atomic-glow);
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher {
+  position: relative;
+  isolation: isolate;
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 12px;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher::after {
+  position: absolute;
+  right: 14px;
+  bottom: 13px;
+  color: var(--hg-dashlet-accent, var(--hg-action));
+  content: '\2192';
+  font-size: 18px;
+  font-weight: 900;
+  opacity: .78;
+  transform: translateX(0);
+  transition: transform .18s ease, opacity .18s ease;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher:is(:hover, :focus-within)::after {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic[data-heritage-size='1x1'] .hg-module-launcher .title {
+  -webkit-line-clamp: 2;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic[data-heritage-size='1x2'] .hg-module-launcher .title {
+  -webkit-line-clamp: 3;
+  font-size: clamp(18px, 6cqi, 27px);
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic[data-heritage-size='2x2'] .hg-module-launcher .title {
+  max-width: min(100%, 15ch);
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-single-metric {
+  container-type: inline-size;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 80% 14%, color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 9%, transparent), transparent 34%),
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 76%, var(--hg-surface)), var(--hg-surface)) !important;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card::after {
+  position: absolute;
+  inset: auto 12px 12px 12px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 32%, transparent), transparent);
+  content: '';
+  opacity: .72;
+  pointer-events: none;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-size='1x1'] .hg-dashboard-metric-card__label,
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-size='1x1'] .hg-dashboard-metric-card__value {
+  letter-spacing: -.015em;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-size='1x2'] .hg-dashboard-metric-card__value {
+  font-size: clamp(24px, 8cqi, 34px);
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-size='2x2'] .hg-dashboard-metric-card__label {
+  font-size: clamp(12px, 1.7cqi, 15px);
+}
+
+@container hg-dashboard (max-width: 720px) {
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source]:is(:hover, :focus-within) {
+    transform: none;
+  }
+
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout.hg-dashboard-layout-edit > .hg-dashlet[data-heritage-atomic-source] {
+    outline-offset: -5px;
+  }
+}
+
+/* atomic dashboard resilience and preview parity.
+ *
+ * Module shortcuts and metric graphs are no longer a grouped afterthought.
+ * Each card is a standalone cockpit object with predictable clipping,
+ * resize-aware content and safe one-column fallback during live resizing.
+ */
+body.hg-dashboard-page #pageContent.hg-dashboard-layout {
+  inline-size: 100%;
+  max-inline-size: 100%;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] {
+  contain: layout paint;
+  min-inline-size: 0;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher,
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card {
+  block-size: 100%;
+  min-inline-size: 0;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher .title {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic[data-heritage-size='1x1'] .hg-module-launcher {
+  min-block-size: 132px !important;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic[data-heritage-size='1x2'] .hg-module-launcher,
+body.hg-dashboard-page .hg-dashlet-module-atomic[data-heritage-size='2x2'] .hg-module-launcher {
+  min-block-size: 240px !important;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-single-metric {
+  block-size: 100%;
+  min-block-size: 0;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card {
+  grid-template-rows: auto minmax(72px, 1fr);
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='compact'] .hg-dashboard-metric-card {
+  min-block-size: 132px;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='tall'] .hg-dashboard-metric-card {
+  min-block-size: 250px;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='detail'] .hg-dashboard-metric-card {
+  min-block-size: 320px;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card canvas,
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-sparkline {
+  align-self: stretch;
+  block-size: 100% !important;
+  min-block-size: 76px;
+}
+
+@container hg-dashboard (max-width: 620px) {
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] {
+    min-block-size: 0 !important;
+  }
+
+  body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher,
+  body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card {
+    min-block-size: 132px !important;
+  }
+}
+
+/* flatten atomic module widgets.
+ * The module dashlet is now split into individual dashboard widgets. Once a
+ * module has its own card header, repeating the same title inside a nested
+ * launcher makes the card feel generated instead of designed. Keep the
+ * existing link and permission-safe launcher markup, but present it as one
+ * direct action surface.
+ */
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: minmax(0, 1fr) auto;
+  min-block-size: 92px !important;
+  padding: 12px !important;
+  align-items: end;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher > .clear {
+  display: contents;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher > .clear > :first-child,
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher .title {
+  display: none !important;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher > .clear > .left {
+  display: contents !important;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher__meta {
+  align-self: end;
+  justify-self: start;
+  display: inline-flex;
+  grid-column: 1;
+  grid-row: 2;
+  width: auto;
+  max-width: 100%;
+  min-block-size: 28px;
+  align-items: center;
+  padding: 6px 10px;
+  border: 1px solid color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 14%, var(--hg-border));
+  border-radius: 999px;
+  color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 72%, var(--hg-text));
+  background: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 5%, var(--hg-surface));
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .01em;
+  line-height: 1;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher__action {
+  grid-column: 2;
+  grid-row: 2;
+  inline-size: 38px !important;
+  block-size: 38px !important;
+  border: 1px solid color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 16%, var(--hg-border)) !important;
+  border-radius: 12px !important;
+  background: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 6%, var(--hg-surface)) !important;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher::after {
+  display: none;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic[data-heritage-size='1x2'] .hg-module-launcher,
+body.hg-dashboard-page .hg-dashlet-module-atomic[data-heritage-size='2x2'] .hg-module-launcher {
+  min-block-size: 100% !important;
+}
+
+/* follow-up: keep the visual identity of each atomic module. */
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher > .clear > :first-child {
+  display: grid !important;
+  grid-column: 1 / -1;
+  grid-row: 1;
+  inline-size: 48px;
+  block-size: 48px;
+  align-self: start;
+  justify-self: start;
+  place-items: center;
+  margin: 0 !important;
+  border: 1px solid color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 16%, var(--hg-border));
+  border-radius: 16px;
+  color: var(--hg-dashlet-accent, var(--hg-action));
+  background:
+    radial-gradient(circle at 28% 20%, color-mix(in srgb, #fff 70%, transparent), transparent 42%),
+    color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 7%, var(--hg-surface));
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 8%, transparent);
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic[data-heritage-size='1x2'] .hg-module-launcher > .clear > :first-child,
+body.hg-dashboard-page .hg-dashlet-module-atomic[data-heritage-size='2x2'] .hg-module-launcher > .clear > :first-child {
+  inline-size: 62px;
+  block-size: 62px;
+  border-radius: 20px;
+  font-size: 1.2em;
+}
+
+/* restore useful, interactive system metric widgets.
+ * The dashboard now splits every live metric into its own movable widget, but the
+ * card must still expose the information users had before the atomic refactor:
+ * trend, current value, range and sample context. Details stay quiet in compact
+ * mode and become useful when the widget is enlarged.
+ */
+.hg-dashboard-metric-card__toggle {
+  justify-self: start;
+  min-height: 28px;
+  margin: -2px 0 6px;
+  padding: 4px 9px;
+  border: 1px solid color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 16%, var(--hg-border));
+  border-radius: 999px;
+  color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 78%, var(--hg-text));
+  background: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 5%, var(--hg-surface));
+  font-size: 10px;
+  font-weight: 820;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.hg-dashboard-metric-card__toggle::after {
+  content: '+';
+  display: inline-block;
+  margin-left: 7px;
+  font-weight: 900;
+}
+
+.hg-dashboard-metric-card__toggle[aria-expanded='true']::after {
+  content: '\2212';
+}
+
+.hg-dashboard-metric-card__toggle:hover,
+.hg-dashboard-metric-card__toggle:focus-visible {
+  color: var(--hg-action-contrast);
+  background: var(--hg-dashlet-accent, var(--hg-action));
+  outline: 0;
+}
+
+.hg-dashboard-metric-card__details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  margin: 9px 0 0;
+  padding: 9px;
+  border: 1px solid color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 14%, var(--hg-border));
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 4%, var(--hg-surface));
+}
+
+.hg-dashboard-metric-card__details[hidden] {
+  display: none !important;
+}
+
+.hg-dashboard-metric-card__details > div {
+  min-width: 0;
+}
+
+.hg-dashboard-metric-card__details dt {
+  margin: 0 0 2px;
+  color: var(--hg-text-muted);
+  font-size: 9px;
+  font-weight: 820;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+}
+
+.hg-dashboard-metric-card__details dd {
+  margin: 0;
+  overflow: hidden;
+  color: var(--hg-text);
+  font-size: 12px;
+  font-weight: 780;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hg-dashboard-sparkline:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 44%, transparent);
+  outline-offset: 3px;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-size='1x1'] .hg-dashboard-metric-card__details {
+  grid-template-columns: minmax(0, 1fr);
+  font-size: 11px;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-size='1x1'] .hg-dashboard-metric-card__details > div:nth-child(n+4) {
+  display: none;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-size='1x2'] .hg-dashboard-metric-card__details,
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-size='2x2'] .hg-dashboard-metric-card__details {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='metrics'] .hg-dashboard-metric-card .hg-dashboard-sparkline {
+  align-self: end;
+}
+
+/* metric cards become analysis cards instead of flat sparklines. */
+.hg-dashboard-metric-card__toggle[aria-expanded='true']::after {
+  content: '-';
+}
+
+.hg-dashboard-metric-card__trend {
+  justify-self: start;
+  margin: -3px 0 4px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  color: color-mix(in srgb, var(--hg-text-muted) 82%, var(--hg-text));
+  background: color-mix(in srgb, var(--hg-surface-muted) 76%, transparent);
+  font-size: 10px;
+  font-weight: 820;
+  letter-spacing: .01em;
+}
+
+.hg-dashboard-metric-card__trend[data-heritage-metric-trend-direction='up'] {
+  color: color-mix(in srgb, #d97706 76%, var(--hg-text));
+  background: color-mix(in srgb, #f59e0b 11%, var(--hg-surface));
+}
+
+.hg-dashboard-metric-card__trend[data-heritage-metric-trend-direction='down'] {
+  color: color-mix(in srgb, #0f9f8e 78%, var(--hg-text));
+  background: color-mix(in srgb, #14b8a6 10%, var(--hg-surface));
+}
+
+.hg-dashboard-metric-card__trend[data-heritage-metric-trend-direction='flat'] {
+  color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 72%, var(--hg-text));
+  background: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 8%, var(--hg-surface));
+}
+
+.hg-dashboard-metric-card__meta {
+  margin: 6px 0 0;
+  overflow: hidden;
+  color: var(--hg-text-muted);
+  font-size: 10px;
+  font-weight: 720;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-size='1x1'] .hg-dashboard-metric-card__meta {
+  display: none;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-size='2x2'] .hg-dashboard-metric-card__meta {
+  font-size: 12px;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-size='2x2'] .hg-dashboard-metric-card__details {
+  margin-top: 12px;
+  padding: 12px;
+}
+
+/* premium dashboard cockpit convergence.
+ *
+ * The dashboard is now treated as one calm cockpit instead of a set of
+ * disconnected generated cards. This last layer intentionally overrides older
+ * dashboard experiments: less dead space, calmer module cards, more useful
+ * metric cards and container-driven density instead of fragile intermediate
+ * viewport states.
+ */
+body.hg-dashboard-page #pageContent.hg-dashboard-layout {
+  --hg-dashboard-rhythm: clamp(12px, 1.4cqi, 18px);
+  --hg-dashboard-card-radius: 22px;
+  gap: var(--hg-dashboard-rhythm);
+  padding-block-start: 0;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-hero {
+  min-height: 0;
+  margin-block: 0;
+  padding: 0 0 clamp(12px, 1.8cqi, 20px);
+  align-items: start;
+  column-gap: clamp(18px, 3cqi, 44px);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-hero h1 {
+  max-width: 15ch;
+  font-size: clamp(28px, 4cqi, 46px);
+  line-height: .98;
+}
+
+body.hg-dashboard-page .hg-dashboard-hero__summary {
+  max-width: 42ch;
+  margin-block-start: 4px;
+  color: color-mix(in srgb, var(--hg-text-muted) 88%, var(--hg-text));
+  font-size: clamp(12px, 1.25cqi, 14px);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-overview {
+  gap: clamp(10px, 1.2cqi, 14px);
+  margin-block-start: -2px;
+}
+
+body.hg-dashboard-page .hg-dashboard-overview__stat {
+  min-height: clamp(66px, 7cqi, 82px);
+  padding: clamp(10px, 1.2cqi, 15px);
+  border-radius: 18px;
+}
+
+body.hg-dashboard-page .hg-dashboard-toolbar {
+  min-height: 0;
+  padding: clamp(10px, 1.15cqi, 14px);
+  border-radius: 18px;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet {
+  min-height: clamp(150px, 16cqi, 210px);
+  padding: clamp(14px, 1.5cqi, 20px);
+  border-radius: var(--hg-dashboard-card-radius);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-size-1x2,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-size-2x2 {
+  min-height: clamp(320px, 34cqi, 460px);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet::before {
+  inset-inline: clamp(24px, 5cqi, 54px);
+  opacity: .32;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet > .hg-dashlet__header {
+  min-height: 40px;
+  margin-block-end: clamp(10px, 1.2cqi, 16px);
+  padding-block-end: clamp(9px, 1cqi, 13px);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet > .hg-dashlet__header :is(h2, h3, h4, header) {
+  letter-spacing: -.035em;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] {
+  min-height: clamp(132px, 14cqi, 188px);
+  background:
+    radial-gradient(circle at 12% 0, color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 6%, transparent), transparent 42%),
+    radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 4%, transparent), transparent 36%),
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 22%, var(--hg-surface)), var(--hg-surface) 68%);
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic {
+  --hg-atomic-card-min: 178px;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher {
+  min-block-size: clamp(84px, 12cqi, 112px) !important;
+  padding: clamp(11px, 1.3cqi, 16px) !important;
+  border-radius: 20px !important;
+  align-content: space-between;
+  background:
+    radial-gradient(circle at 12% 4%, color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 7%, transparent), transparent 38%),
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 58%, var(--hg-surface)), var(--hg-surface)) !important;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher > .clear > :first-child {
+  inline-size: clamp(44px, 6cqi, 58px);
+  block-size: clamp(44px, 6cqi, 58px);
+  border-radius: 17px;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher__meta {
+  min-height: 30px;
+  padding-inline: 10px;
+  color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 72%, var(--hg-text));
+  background: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 6%, var(--hg-surface));
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher__action {
+  inline-size: 40px !important;
+  block-size: 40px !important;
+  border-radius: 14px !important;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic[data-heritage-size='1x2'] .hg-module-launcher,
+body.hg-dashboard-page .hg-dashlet-module-atomic[data-heritage-size='2x2'] .hg-module-launcher {
+  min-block-size: 100% !important;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic {
+  --hg-atomic-card-min: 196px;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card {
+  min-block-size: clamp(152px, 18cqi, 220px);
+  padding: clamp(13px, 1.5cqi, 18px) !important;
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at 84% 10%, color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 10%, transparent), transparent 34%),
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 64%, var(--hg-surface)), var(--hg-surface)) !important;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card__label {
+  font-size: clamp(10px, 1.05cqi, 12px);
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card__value {
+  font-size: clamp(22px, 3.2cqi, 36px);
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card canvas,
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card .hg-themed-chart,
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-sparkline {
+  min-block-size: clamp(92px, 13cqi, 150px);
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='tall'] .hg-dashboard-metric-card {
+  min-block-size: clamp(260px, 30cqi, 390px);
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='detail'] .hg-dashboard-metric-card {
+  min-block-size: clamp(330px, 40cqi, 520px);
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='detail'] .hg-dashboard-metric-card canvas,
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='detail'] .hg-dashboard-metric-card .hg-themed-chart,
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='detail'] .hg-dashboard-sparkline {
+  min-block-size: clamp(230px, 30cqi, 360px);
+}
+
+body.hg-dashboard-page .hg-dashlet-news {
+  opacity: .74;
+}
+
+body.hg-dashboard-page .hg-dashlet-news:is(:hover, :focus-within) {
+  opacity: 1;
+}
+
+@container hg-dashboard (max-width: 980px) {
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout {
+    --hg-dashboard-column-min: min(100%, 214px);
+  }
+}
+
+@container hg-dashboard (max-width: 700px) {
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout {
+    --hg-dashboard-rhythm: 12px;
+  }
+
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-hero {
+    padding-block-end: 12px;
+  }
+
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-hero h1 {
+    max-width: none;
+    font-size: clamp(28px, 9cqi, 38px);
+  }
+
+  body.hg-dashboard-page .hg-dashboard-overview__stat,
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet {
+    border-radius: 18px;
+  }
+
+  body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher {
+    min-block-size: 124px !important;
+  }
+}
+
+html[data-heritage-theme='dark'] body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source] {
+  background:
+    radial-gradient(circle at 12% 0, color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 7%, transparent), transparent 42%),
+    radial-gradient(circle at 100% 100%, color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 5%, transparent), transparent 36%),
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 86%, #fff 2%), var(--hg-surface) 70%);
+}
+
+/* follow-up: accent is guidance, not wallpaper. */
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'] {
+  border-color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 11%, var(--hg-border));
+  background:
+    radial-gradient(circle at 9% 0, color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 3.5%, transparent), transparent 38%),
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 18%, var(--hg-surface)), var(--hg-surface) 72%);
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher {
+  border-color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 9%, var(--hg-border)) !important;
+  background:
+    radial-gradient(circle at 12% 8%, color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 4%, transparent), transparent 36%),
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 44%, var(--hg-surface)), var(--hg-surface)) !important;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher > .clear > :first-child {
+  color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 76%, var(--hg-text));
+  background:
+    radial-gradient(circle at 28% 20%, color-mix(in srgb, #fff 54%, transparent), transparent 40%),
+    color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 5%, var(--hg-surface));
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher__meta,
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher__action {
+  border-color: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 12%, var(--hg-border)) !important;
+  background: color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 3.5%, var(--hg-surface)) !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'] {
+  background:
+    radial-gradient(circle at 9% 0, color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 5%, transparent), transparent 38%),
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 82%, #fff 1.5%), var(--hg-surface) 72%);
+}
+
+/* dashboard accent is orientation, not danger. */
+body.hg-dashboard-page #pageContent.hg-dashboard-layout {
+  --hg-dashboard-accent-line: var(--hg-action-line);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'] {
+  --hg-dashlet-accent-soft: var(--hg-action-muted);
+  border-color: color-mix(in srgb, var(--hg-action) 8%, var(--hg-border));
+  background:
+    radial-gradient(circle at 9% 0, color-mix(in srgb, var(--hg-action) 2.5%, transparent), transparent 38%),
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 14%, var(--hg-surface)), var(--hg-surface) 74%);
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher {
+  border-color: color-mix(in srgb, var(--hg-action) 7%, var(--hg-border)) !important;
+  background:
+    radial-gradient(circle at 12% 8%, color-mix(in srgb, var(--hg-action) 3%, transparent), transparent 36%),
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 34%, var(--hg-surface)), var(--hg-surface)) !important;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher__meta,
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher__action {
+  color: var(--hg-action-quiet-text) !important;
+  border-color: color-mix(in srgb, var(--hg-action) 10%, var(--hg-border)) !important;
+  background: var(--hg-action-softer) !important;
+}
+
+body.hg-dashboard-page .hg-dashboard-toolbar__primary {
+  border-color: color-mix(in srgb, var(--hg-action) 58%, var(--hg-border)) !important;
+  background: color-mix(in srgb, var(--hg-action) 86%, #000) !important;
+}
+
+body.hg-dashboard-page .hg-dashboard-overview__stat::before {
+  background: var(--hg-action-line);
+}
+
+body.hg-dashboard-page .hg-dashboard-overview__stat--healthy::before {
+  background: color-mix(in srgb, var(--hg-status-success) 58%, transparent);
+}
+
+body.hg-dashboard-page .hg-dashboard-overview__stat--attention::before {
+  background: color-mix(in srgb, var(--hg-status-warning) 64%, transparent);
+}
+
+/* dashboard toolbar contrast hardening.
+ *
+ * The dashboard customization action must read as a calm primary control, not
+ * as an error/warning surface. A solid neutral background also gives the
+ * rendered contrast audit an unambiguous color to evaluate instead of relying
+ * on mixed accent backgrounds.
+ */
+body.hg-dashboard-page .hg-dashboard-toolbar__primary,
+body.hg-dashboard-page .hg-dashboard-layout-toggle {
+  color: #fff !important;
+  border-color: color-mix(in srgb, var(--hg-action) 42%, #172033) !important;
+  background-color: #172033 !important;
+  background-image:
+    linear-gradient(135deg, #172033, color-mix(in srgb, var(--hg-action) 24%, #172033)) !important;
+  box-shadow:
+    0 14px 28px color-mix(in srgb, #172033 20%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, .10) !important;
+  text-shadow: none !important;
+}
+
+body.hg-dashboard-page .hg-dashboard-toolbar__primary:hover,
+body.hg-dashboard-page .hg-dashboard-toolbar__primary:focus-visible,
+body.hg-dashboard-page .hg-dashboard-layout-toggle:hover,
+body.hg-dashboard-page .hg-dashboard-layout-toggle:focus-visible {
+  color: #fff !important;
+  border-color: color-mix(in srgb, var(--hg-action) 58%, #101827) !important;
+  background-color: #101827 !important;
+  background-image:
+    linear-gradient(135deg, #101827, color-mix(in srgb, var(--hg-action) 30%, #101827)) !important;
+}
+
+/* dashboard no longer owns legacy Bootstrap/formbutton action tones.
+ * Shared hg-action-control classes provide the visible action authority. */
+
+/* calm dashboard accent discipline.
+ *
+ * The user-facing default accent can still be ISPConfig red, but normal
+ * dashboard information must not read as danger. This final dashboard layer
+ * reduces accent paint on ordinary widgets to hairlines and tiny signals,
+ * while warnings/errors continue to use the dedicated semantic status tokens.
+ */
+body.hg-dashboard-page #pageContent.hg-dashboard-layout {
+  --hg-dashboard-accent-hairline: color-mix(in srgb, var(--hg-action) 18%, transparent);
+  --hg-dashboard-accent-whisper: color-mix(in srgb, var(--hg-action) 2.5%, transparent);
+  --hg-dashboard-neutral-border: color-mix(in srgb, var(--hg-text-muted) 12%, var(--hg-border));
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-overview .hg-dashboard-overview__stat,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-toolbar,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet {
+  border-color: var(--hg-dashboard-neutral-border) !important;
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 26%, var(--hg-surface)), var(--hg-surface) 76%) !important;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-overview .hg-dashboard-overview__stat::before,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet::before {
+  background: var(--hg-dashboard-accent-hairline) !important;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-overview .hg-dashboard-overview__stat--healthy::before {
+  background: color-mix(in srgb, var(--hg-status-success) 58%, transparent) !important;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-overview .hg-dashboard-overview__stat--attention::before,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-overview .hg-dashboard-overview__stat--warning::before {
+  background: color-mix(in srgb, var(--hg-status-warning) 64%, transparent) !important;
+}
+
+body.hg-dashboard-page .hg-dashlet__type-icon,
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher > .clear > :first-child {
+  color: color-mix(in srgb, var(--hg-text) 78%, var(--hg-action)) !important;
+  border-color: color-mix(in srgb, var(--hg-text-muted) 12%, var(--hg-border)) !important;
+  background:
+    radial-gradient(circle at 28% 18%, color-mix(in srgb, #fff 50%, transparent), transparent 38%),
+    color-mix(in srgb, var(--hg-surface-muted) 72%, var(--hg-surface)) !important;
+}
+
+body.hg-dashboard-page .hg-dashlet__context {
+  color: var(--hg-text-muted) !important;
+  border-color: color-mix(in srgb, var(--hg-text-muted) 14%, var(--hg-border)) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 76%, var(--hg-surface)) !important;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher {
+  min-block-size: clamp(108px, 14cqi, 168px) !important;
+  border-color: color-mix(in srgb, var(--hg-text-muted) 11%, var(--hg-border)) !important;
+  background:
+    radial-gradient(circle at 12% 8%, var(--hg-dashboard-accent-whisper), transparent 34%),
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 28%, var(--hg-surface)), var(--hg-surface)) !important;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher::after {
+  background: linear-gradient(90deg, transparent, var(--hg-dashboard-accent-hairline), transparent) !important;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher__meta,
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher__action {
+  color: var(--hg-text-muted) !important;
+  border-color: color-mix(in srgb, var(--hg-text-muted) 14%, var(--hg-border)) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 66%, var(--hg-surface)) !important;
+}
+
+body.hg-dashboard-page .hg-dashlet-module-atomic .hg-module-launcher__action:is(:hover, :focus-visible),
+body.hg-dashboard-page .hg-module-launcher:is(:hover, :focus-within) .hg-module-launcher__action {
+  color: #fff !important;
+  border-color: #172033 !important;
+  background: #172033 !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-dashboard-page #pageContent.hg-dashboard-layout {
+  --hg-dashboard-neutral-border: color-mix(in srgb, #fff 9%, var(--hg-border));
+  --hg-dashboard-accent-whisper: color-mix(in srgb, var(--hg-action) 4%, transparent);
+}
+
+html[data-heritage-theme='dark'] body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-overview .hg-dashboard-overview__stat,
+html[data-heritage-theme='dark'] body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-toolbar,
+html[data-heritage-theme='dark'] body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet {
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 82%, #fff 1%), var(--hg-surface) 76%) !important;
+}
+
+/* system metrics as real, independent dashboard widgets.
+ *
+ * The metric split is intentionally kept, but the cards now behave less like
+ * static chart thumbnails and more like compact live-analysis tiles. The
+ * viewport chosen by the dashboard size controls owns how much information is
+ * shown: 1x1 stays glanceable, 1x2 becomes operational, 2x2 becomes a readable
+ * analysis card. The chart surface keeps pointer/focus access so the original
+ * interactive value of the system graphs is not lost.
+ */
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='metrics'] {
+  --hg-dashlet-accent: color-mix(in srgb, var(--hg-action) 62%, #22c3d6);
+  --hg-metric-chart-min: clamp(104px, 15cqi, 168px);
+  --hg-metric-card-gap: clamp(8px, 1cqi, 12px);
+  contain: layout paint;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='metrics'] > .hg-dashlet__header {
+  margin-block-end: clamp(8px, 1cqi, 12px);
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-single-metric,
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card {
+  min-inline-size: 0;
+  block-size: 100%;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card {
+  container: hg-metric-card / inline-size;
+  grid-template-rows: auto auto minmax(var(--hg-metric-chart-min), 1fr) auto auto;
+  gap: var(--hg-metric-card-gap);
+  min-block-size: clamp(176px, 21cqi, 250px);
+  overflow: clip;
+  border-color: color-mix(in srgb, var(--hg-dashlet-accent) 15%, var(--hg-border));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #fff 42%, transparent),
+    0 18px 38px color-mix(in srgb, var(--hg-text) 7%, transparent);
+}
+
+html[data-heritage-theme='dark'] body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .045),
+    0 18px 42px rgba(0, 0, 0, .28);
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card__header {
+  align-items: start;
+  padding-block-end: 0;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card__label {
+  color: color-mix(in srgb, var(--hg-text-muted) 86%, var(--hg-text));
+  line-height: 1.2;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card__value {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.055em;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-sparkline,
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card canvas,
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card .hg-themed-chart {
+  inline-size: 100% !important;
+  height: auto !important;
+  block-size: auto !important;
+  min-block-size: var(--hg-metric-chart-min);
+  pointer-events: auto;
+  touch-action: manipulation;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-sparkline {
+  position: relative;
+  align-self: stretch;
+  padding: clamp(2px, .6cqi, 8px);
+  border: 1px solid color-mix(in srgb, var(--hg-dashlet-accent) 8%, var(--hg-border));
+  border-radius: clamp(13px, 1.6cqi, 18px);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-dashlet-accent) 4%, transparent), transparent 62%),
+    color-mix(in srgb, var(--hg-surface-muted) 55%, var(--hg-surface));
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-sparkline svg {
+  block-size: 100%;
+  min-block-size: inherit;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card__trend,
+body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card__toggle {
+  justify-self: start;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='compact'] {
+  --hg-metric-chart-min: clamp(94px, 13cqi, 138px);
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='compact'] .hg-dashboard-metric-card__toggle,
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='compact'] .hg-dashboard-metric-card__meta {
+  display: none;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='tall'] {
+  --hg-metric-chart-min: clamp(172px, 24cqi, 260px);
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='tall'] .hg-dashboard-metric-card {
+  grid-template-rows: auto auto minmax(var(--hg-metric-chart-min), 1fr) auto;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='detail'] {
+  --hg-metric-chart-min: clamp(228px, 31cqi, 390px);
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='detail'] .hg-dashboard-metric-card {
+  grid-template-rows: auto auto minmax(var(--hg-metric-chart-min), 1fr) auto auto;
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='detail'] .hg-dashboard-metric-card__details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
+}
+
+body.hg-dashboard-page .hg-dashlet-metric-atomic[data-heritage-metric-viewport='detail'] .hg-dashboard-metric-card__details[hidden] {
+  display: none !important;
+}
+
+@container hg-metric-card (max-width: 230px) {
+  body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card__header {
+    align-items: start;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card__value {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 760px) {
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='metrics'] {
+    --hg-metric-chart-min: clamp(118px, 32vw, 190px);
+  }
+
+  body.hg-dashboard-page .hg-dashlet-metric-atomic .hg-dashboard-metric-card {
+    min-block-size: 0;
+  }
+}
+
+/* stable dashboard editing controls.
+ *
+ * The dashboard editor is part of the product surface, not a temporary debug
+ * strip. Keep movement, size and hide actions in a predictable control deck so
+ * the "show/hide widgets" flow does not collapse into the widget title at
+ * awkward widths.
+ */
+body.hg-dashboard-page #pageContent.hg-dashboard-layout.hg-dashboard-layout-edit > .hg-dashlet {
+  outline-offset: -6px;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout.hg-dashboard-layout-edit > .hg-dashlet > .hg-dashlet__header {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(8px, 1cqi, 12px);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout.hg-dashboard-layout-edit > .hg-dashlet .hg-dashlet__drag-handle {
+  inline-size: 38px;
+  block-size: 38px;
+  min-inline-size: 38px;
+  min-block-size: 38px;
+  border-radius: 12px;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout.hg-dashboard-layout-edit > .hg-dashlet .hg-dashlet__edit-hint {
+  display: inline-flex;
+  min-inline-size: 0;
+  align-items: center;
+  justify-self: end;
+  color: var(--hg-text-muted);
+  font-size: 10px;
+  font-weight: 820;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout.hg-dashboard-layout-edit > .hg-dashlet .hg-dashlet__layout-controls {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: auto repeat(3, minmax(64px, 1fr)) auto;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+  margin: 4px 0 12px;
+  overflow: visible;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout.hg-dashboard-layout-edit > .hg-dashlet .hg-dashlet__layout-label {
+  display: inline-flex;
+  min-width: 0;
+  min-height: 38px;
+  align-items: center;
+  padding: 0 10px;
+  border-right: 1px solid color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 12%, var(--hg-border));
+  color: var(--hg-text-muted);
+  font-size: 10px;
+  font-weight: 820;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout.hg-dashboard-layout-edit > .hg-dashlet .hg-dashlet__layout-controls button {
+  min-width: 0;
+  min-height: 38px;
+  border: 1px solid color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 10%, var(--hg-border));
+  border-radius: 11px;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout.hg-dashboard-layout-edit > .hg-dashlet .hg-dashlet__layout-controls [data-heritage-layout-hide] {
+  margin-left: 0;
+  padding-inline: 12px;
+  color: var(--hg-danger-ink);
+  background: color-mix(in srgb, var(--hg-danger) 5%, var(--hg-surface));
+}
+
+@container hg-dashboard (max-width: 700px) {
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout.hg-dashboard-layout-edit > .hg-dashlet > .hg-dashlet__header {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout.hg-dashboard-layout-edit > .hg-dashlet .hg-dashlet__edit-hint {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout.hg-dashboard-layout-edit > .hg-dashlet .hg-dashlet__layout-controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow-x: visible;
+  }
+
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout.hg-dashboard-layout-edit > .hg-dashlet .hg-dashlet__layout-label,
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout.hg-dashboard-layout-edit > .hg-dashlet .hg-dashlet__layout-controls [data-heritage-layout-hide] {
+    grid-column: 1 / -1;
+    justify-content: center;
+  }
+}
+
+/* premium dashboard cockpit closure.
+ *
+ * Atomic module and metric widgets are now first-class cockpit cards. This
+ * final dashboard layer avoids another round of selector patching by binding
+ * the visual contract to explicit JS metadata:
+ *   data-heritage-dashboard-cockpit="module|metric"
+ *
+ * Result:
+ * - available modules are independent dashboard tiles;
+ * - every system metric is an independent, resizable tile;
+ * - 1x1 stays glanceable, 1x2 becomes operational, 2x2 becomes analytical;
+ * - accent color remains a quiet affordance, not a warning color.
+ */
+body.hg-dashboard-page #pageContent.hg-dashboard-layout {
+  --hg-dashboard-cockpit-gap: clamp(12px, 1.25vw, 18px);
+  --hg-dashboard-cockpit-radius: clamp(14px, 1.25vw, 18px);
+  gap: var(--hg-dashboard-cockpit-gap) !important;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit] {
+  isolation: isolate;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-inline-size: 0;
+  border-radius: var(--hg-dashboard-cockpit-radius) !important;
+  overflow: clip;
+  contain: layout paint;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit]::before {
+  inline-size: 100% !important;
+  block-size: 2px !important;
+  inset: 0 0 auto 0 !important;
+  border-radius: 0 !important;
+  opacity: .38 !important;
+  background:
+    linear-gradient(90deg,
+      transparent,
+      color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 46%, transparent) 22%,
+      color-mix(in srgb, var(--hg-dashlet-accent, var(--hg-action)) 30%, transparent) 68%,
+      transparent) !important;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit] > .hg-dashlet__header {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(8px, 1cqi, 12px);
+  align-items: center;
+  min-inline-size: 0;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit] > .hg-dashlet__header > .hg-dashlet__type-icon,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='module'] > .hg-dashlet__header > .hg-dashlet__context,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='metric'] > .hg-dashlet__header > .hg-dashlet__context {
+  display: none;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit] > .hg-dashlet__header :is(h2, h3, h4, header) {
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='metric'] > .hg-dashlet__header :is(h2, h3, h4, header) {
+  display: -webkit-box;
+  white-space: normal;
+  line-height: 1.15;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit] .hg-dashlet__context {
+  justify-self: end;
+  max-inline-size: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='module'] {
+  --hg-dashlet-accent: color-mix(in srgb, var(--hg-action) 55%, var(--hg-text-muted));
+  min-block-size: clamp(112px, 12cqi, 138px);
+  padding: clamp(10px, 1.1cqi, 14px);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='module'] > .hg-dashlet__header {
+  min-block-size: 28px;
+  margin-block-end: 6px;
+  padding-block-end: 6px;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='module'] .hg-dashboard-atomic-module,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='module'] .modules {
+  display: grid !important;
+  min-block-size: 0;
+  block-size: 100%;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='module'] .modules {
+  grid-template-columns: minmax(0, 1fr) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='module'] .hg-module-launcher {
+  position: relative;
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-rows: minmax(0, 1fr);
+  gap: clamp(9px, 1cqi, 12px);
+  min-block-size: clamp(58px, 9cqi, 76px) !important;
+  block-size: 100%;
+  align-items: center;
+  padding: clamp(8px, 1cqi, 12px) !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='module'] .hg-module-launcher > .clear {
+  display: contents !important;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='module'] .hg-module-launcher > .clear > :first-child {
+  grid-column: 1;
+  grid-row: 1;
+  inline-size: clamp(34px, 4cqi, 42px) !important;
+  block-size: clamp(34px, 4cqi, 42px) !important;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='module'] .hg-module-launcher .title {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  min-inline-size: 0;
+  color: var(--hg-text) !important;
+  font-size: clamp(14px, 1.5cqi, 18px) !important;
+  font-weight: 860 !important;
+  letter-spacing: -.045em;
+  line-height: 1.04;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='module'] .hg-module-launcher__meta {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  justify-self: stretch;
+  max-inline-size: 100%;
+  color: var(--hg-text-muted) !important;
+  border: 0 !important;
+  background: transparent !important;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='module'] .hg-module-launcher__action {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
+  justify-content: center;
+  inline-size: 34px !important;
+  min-block-size: 34px;
+  border-radius: 10px !important;
+  color: var(--hg-text) !important;
+  border-color: color-mix(in srgb, var(--hg-text-muted) 15%, var(--hg-border)) !important;
+  background: color-mix(in srgb, var(--hg-surface-muted) 72%, var(--hg-surface)) !important;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='module'] .hg-module-launcher__action:is(:hover, :focus-visible) {
+  color: #fff !important;
+  border-color: color-mix(in srgb, var(--hg-action) 72%, #172033) !important;
+  background: color-mix(in srgb, var(--hg-action) 82%, #172033) !important;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='metric'] {
+  --hg-dashlet-accent: color-mix(in srgb, var(--hg-action) 42%, #22c3d6);
+  --hg-metric-chart-min: clamp(118px, 18cqi, 176px);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='metric'] .hg-dashboard-single-metric,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='metric'] .hg-dashboard-metric-card {
+  min-inline-size: 0;
+  min-block-size: 0;
+  block-size: 100%;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='metric'] .hg-dashboard-metric-card {
+  display: grid !important;
+  grid-template-rows: auto minmax(var(--hg-metric-chart-min), 1fr) auto;
+  gap: clamp(10px, 1.2cqi, 16px);
+  padding: clamp(14px, 1.5cqi, 22px) !important;
+  border: 1px solid color-mix(in srgb, var(--hg-dashlet-accent) 14%, var(--hg-border)) !important;
+  border-radius: clamp(17px, 1.5cqi, 22px) !important;
+  background:
+    radial-gradient(circle at 100% 0, color-mix(in srgb, var(--hg-dashlet-accent) 9%, transparent), transparent 38%),
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 34%, var(--hg-surface)), var(--hg-surface)) !important;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='metric'] .hg-dashboard-metric-card__header {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: start;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='metric'] .hg-dashboard-metric-card__label {
+  min-inline-size: 0;
+  color: var(--hg-text-muted) !important;
+  font-size: clamp(11px, 1.15cqi, 13px);
+  font-weight: 830;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='metric'] .hg-dashboard-metric-card__value {
+  color: var(--hg-text) !important;
+  font-size: clamp(28px, 4cqi, 52px) !important;
+  font-weight: 900;
+  letter-spacing: -.07em;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='metric'] :where(.hg-dashboard-sparkline, canvas, .hg-themed-chart) {
+  align-self: stretch;
+  inline-size: 100% !important;
+  min-block-size: var(--hg-metric-chart-min) !important;
+  block-size: auto !important;
+  max-block-size: none !important;
+  border-radius: 16px;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='metric'][data-heritage-metric-viewport='compact'] {
+  --hg-metric-chart-min: clamp(98px, 15cqi, 136px);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='metric'][data-heritage-metric-viewport='tall'] {
+  --hg-metric-chart-min: clamp(170px, 25cqi, 270px);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='metric'][data-heritage-metric-viewport='detail'] {
+  --hg-metric-chart-min: clamp(236px, 34cqi, 430px);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='metric'][data-heritage-metric-viewport='compact'] .hg-dashboard-metric-card__details,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='metric'][data-heritage-metric-viewport='compact'] .hg-dashboard-metric-card__meta {
+  display: none !important;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='metric'][data-heritage-metric-viewport='detail'] .hg-dashboard-metric-card__details:not([hidden]) {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
+  gap: 8px;
+}
+
+html[data-heritage-theme='dark'] body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit] {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .045),
+    0 22px 54px rgba(0, 0, 0, .32) !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='module'] .hg-module-launcher,
+html[data-heritage-theme='dark'] body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='metric'] .hg-dashboard-metric-card {
+  background:
+    radial-gradient(circle at 100% 0, color-mix(in srgb, var(--hg-dashlet-accent) 10%, transparent), transparent 38%),
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 86%, #fff 1.5%), var(--hg-surface) 76%) !important;
+}
+
+@media (max-width: 760px) {
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit] > .hg-dashlet__header {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit] .hg-dashlet__context {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='module'] .hg-module-launcher {
+    min-block-size: 78px !important;
+  }
+}
+
+/* final dashboard widget granularity.
+ *
+ * Dashboard modules and system metrics are no longer treated as previews inside
+ * a large collection widget. They are independent workspace objects with their
+ * own size semantics:
+ *   - compact: quick glance and direct launch;
+ *   - tall: more readable operational tile;
+ *   - detail: presentation/detail surface.
+ *
+ * This layer intentionally binds to runtime state, not viewport guesses.
+ */
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'],
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='metrics'] {
+  container: hg-dashboard-widget / inline-size;
+  resize: none;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'] {
+  --hg-module-widget-icon: clamp(34px, 10cqi, 42px);
+  --hg-module-widget-title: clamp(14px, 5cqi, 18px);
+  --hg-module-widget-body: clamp(76px, 18cqi, 96px);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'][data-heritage-module-viewport='compact'] {
+  --hg-module-widget-icon: clamp(32px, 11cqi, 38px);
+  --hg-module-widget-title: clamp(14px, 5cqi, 17px);
+  --hg-module-widget-body: clamp(72px, 17cqi, 88px);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'][data-heritage-module-viewport='tall'] {
+  --hg-module-widget-icon: clamp(40px, 12cqi, 52px);
+  --hg-module-widget-title: clamp(17px, 6cqi, 22px);
+  --hg-module-widget-body: clamp(132px, 38cqi, 196px);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'][data-heritage-module-viewport='detail'] {
+  --hg-module-widget-icon: clamp(48px, 10cqi, 66px);
+  --hg-module-widget-title: clamp(20px, 5cqi, 28px);
+  --hg-module-widget-body: clamp(196px, 38cqi, 330px);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'] .hg-module-launcher {
+  min-block-size: var(--hg-module-widget-body) !important;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'] .hg-module-launcher > .clear > :first-child {
+  inline-size: var(--hg-module-widget-icon) !important;
+  block-size: var(--hg-module-widget-icon) !important;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'] .hg-module-launcher .title {
+  font-size: var(--hg-module-widget-title) !important;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'][data-heritage-module-viewport='compact'] .hg-module-launcher__meta {
+  display: none;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='metrics'][data-heritage-metric-viewport='compact'] .hg-dashboard-metric-card {
+  grid-template-rows: auto minmax(var(--hg-metric-chart-min), 1fr);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='metrics'][data-heritage-metric-viewport='tall'] .hg-dashboard-metric-card__meta {
+  display: block;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='metrics'][data-heritage-metric-viewport='detail'] .hg-dashboard-metric-card__meta,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='metrics'][data-heritage-metric-viewport='detail'] .hg-dashboard-metric-card__details:not([hidden]) {
+  display: grid;
+}
+
+@container hg-dashboard-widget (max-width: 180px) {
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'] .hg-module-launcher {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'] .hg-module-launcher > .clear > :first-child,
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'] .hg-module-launcher .title,
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='module'] .hg-module-launcher__meta,
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-dashboard-cockpit='module'] .hg-module-launcher__action {
+    grid-column: 1 / -1;
+  }
+
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='metrics'] .hg-dashboard-metric-card__header {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* dashboard DONE contract.
+ *
+ * The dashboard is now treated as the first-class Heritage cockpit:
+ * independent cards, calm accent usage, browser-saved layout, accessible edit
+ * controls and responsive widget-owned sizing. Accent colors are informational
+ * by default; warning and danger remain reserved for real status messages.
+ */
+body.hg-dashboard-page #pageContent.hg-dashboard-layout {
+  --hg-dashboard-card-ring: color-mix(in srgb, var(--hg-text-muted) 12%, var(--hg-border));
+  --hg-dashboard-card-ring-hover: color-mix(in srgb, var(--hg-action) 22%, var(--hg-border));
+  --hg-dashboard-accent-calm: color-mix(in srgb, var(--hg-action) 32%, var(--hg-text-muted));
+  align-items: start;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet {
+  --hg-dashlet-soft-border: var(--hg-dashboard-card-ring);
+  --hg-dashlet-tint: color-mix(in srgb, var(--hg-dashlet-accent) 1.6%, var(--hg-surface));
+  overflow: clip;
+  border-color: var(--hg-dashboard-card-ring) !important;
+  background:
+    radial-gradient(circle at 100% 0, color-mix(in srgb, var(--hg-dashlet-accent) 3%, transparent), transparent 34%),
+    linear-gradient(145deg, var(--hg-dashlet-tint), var(--hg-surface) 58%) !important;
+  box-shadow:
+    0 18px 42px color-mix(in srgb, var(--hg-text) 7%, transparent),
+    inset 0 1px 0 color-mix(in srgb, #fff 34%, transparent) !important;
+  height: auto;
+  align-self: start;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet::before {
+  inline-size: 100%;
+  block-size: 2px;
+  opacity: .5;
+  background: linear-gradient(90deg, transparent, var(--hg-dashboard-accent-calm), transparent);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet:is(:hover, :focus-within) {
+  border-color: var(--hg-dashboard-card-ring-hover) !important;
+  box-shadow:
+    0 22px 56px color-mix(in srgb, var(--hg-text) 9%, transparent),
+    inset 0 1px 0 color-mix(in srgb, #fff 38%, transparent) !important;
+  transform: translateY(-1px);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-state-warning {
+  --hg-dashboard-accent-calm: var(--hg-warning);
+  border-color: color-mix(in srgb, var(--hg-warning) 34%, var(--hg-border)) !important;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-state-critical {
+  --hg-dashboard-accent-calm: var(--hg-danger);
+  border-color: color-mix(in srgb, var(--hg-danger) 38%, var(--hg-border)) !important;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'],
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='metrics'] {
+  contain: layout paint;
+  min-inline-size: 0;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='metrics'] .hg-dashboard-single-metric,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='metrics'] .hg-dashboard-metric-card {
+  block-size: auto;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'] .hg-module-launcher,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='metrics'] .hg-dashboard-metric-card {
+  border-color: color-mix(in srgb, var(--hg-text-muted) 13%, var(--hg-border)) !important;
+  background:
+    radial-gradient(circle at 100% 0, color-mix(in srgb, var(--hg-dashlet-accent) 4%, transparent), transparent 38%),
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 48%, var(--hg-surface)), var(--hg-surface)) !important;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'] .hg-module-launcher__action,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'] .hg-module-launcher__meta {
+  color: color-mix(in srgb, var(--hg-text-muted) 86%, var(--hg-dashboard-accent-calm)) !important;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='metrics'] :where(.hg-dashboard-sparkline, canvas, .hg-themed-chart) {
+  pointer-events: auto;
+  touch-action: manipulation;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='metrics'][data-heritage-metric-viewport='detail'] .hg-dashboard-metric-card {
+  grid-template-rows: auto minmax(var(--hg-metric-chart-min), 1fr) auto;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout .hg-dashboard-toolbar {
+  border-color: color-mix(in srgb, var(--hg-text-muted) 12%, var(--hg-border));
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 68%, var(--hg-surface)), var(--hg-surface));
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout .hg-dashboard-button {
+  min-block-size: 38px;
+  border-color: color-mix(in srgb, var(--hg-text-muted) 16%, var(--hg-border));
+  border-radius: 12px;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout .hg-dashboard-button--primary,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout .hg-dashboard-toolbar__primary {
+  box-shadow: 0 10px 24px color-mix(in srgb, var(--hg-action) 18%, transparent);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout.hg-dashboard-layout-edit > .hg-dashlet {
+  outline: 1px dashed color-mix(in srgb, var(--hg-dashboard-accent-calm) 38%, var(--hg-border));
+  outline-offset: -7px;
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout.hg-dashboard-layout-edit > .hg-dashlet .hg-dashlet__drag-handle {
+  border-color: color-mix(in srgb, var(--hg-dashboard-accent-calm) 22%, var(--hg-border));
+  background: color-mix(in srgb, var(--hg-dashboard-accent-calm) 4%, var(--hg-surface));
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout.hg-dashboard-layout-edit > .hg-dashlet .hg-dashlet__drag-handle i {
+  background: var(--hg-dashboard-accent-calm);
+}
+
+body.hg-dashboard-page #pageContent.hg-dashboard-layout.hg-dashboard-layout-edit > .hg-dashlet .hg-dashlet__layout-controls {
+  border-color: color-mix(in srgb, var(--hg-text-muted) 14%, var(--hg-border));
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 78%, var(--hg-surface)), var(--hg-surface-muted));
+}
+
+html[data-heritage-theme='dark'] body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet {
+  box-shadow:
+    0 22px 58px rgba(0, 0, 0, .34),
+    inset 0 1px 0 rgba(255, 255, 255, .045) !important;
+}
+
+html[data-heritage-theme='dark'] body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='modules'] .hg-module-launcher,
+html[data-heritage-theme='dark'] body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-heritage-atomic-source='metrics'] .hg-dashboard-metric-card {
+  background:
+    radial-gradient(circle at 100% 0, color-mix(in srgb, var(--hg-dashlet-accent) 5%, transparent), transparent 38%),
+    linear-gradient(145deg, color-mix(in srgb, var(--hg-surface-muted) 86%, #fff 1.25%), var(--hg-surface) 78%) !important;
+}
+
+@container hg-dashboard (max-width: 900px) {
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-size-2x2 {
+    grid-column: span 1;
+  }
+
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout .hg-dashboard-toolbar {
+    align-items: stretch;
+  }
+}
+
+/* stable first-login dashboard composition.
+ *
+ * Widget sizes describe the card itself, never a shared CSS-grid row. A long
+ * statistics or quota widget must not stretch the row occupied by unrelated
+ * module and metric cards. Wide/detail widgets may span columns, while every
+ * widget advances through an intrinsic row of its own.
+ */
+@container hg-dashboard (max-width: 760px) {
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet,
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-size-1x1,
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-size-1x2,
+  body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet-size-2x2 {
+    grid-column: 1 / -1 !important;
+    grid-row: auto;
+    height: auto;
+    align-self: start;
+    min-height: 0;
+  }
+}

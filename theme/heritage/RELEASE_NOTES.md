@@ -1,4 +1,63 @@
-# ISPConfig HERITAGE 1.0.33
+# ISPConfig HERITAGE 1.0.34
+
+HERITAGE 1.0.34 removes the final visible Workbench-era branding from the
+standalone theme. Logo artwork, accessible SVG titles, PWA metadata and the
+theme display name now consistently identify ISPConfig HERITAGE. Application,
+login, image and manifest assets also share one release cache key so an update
+cannot combine stale and current presentation layers in the browser.
+The key uses the complete semantic theme version and is enforced by validation.
+
+The technical theme identifier remains unchanged to preserve compatibility
+with existing theme-manager installations and update paths.
+
+All theme-owned DOM attributes, events, identifiers, generated state and
+JavaScript runtime interfaces now use the HERITAGE namespace. Component classes
+and CSS custom properties share the `hg-*` / `--hg-*` design-system namespace
+across the complete template set; transitional Workbench-era runtime names and
+styling contracts have been removed.
+
+Existing browser preferences remain intact during the upgrade. Colour mode,
+remembered login name, stay-signed-in choice and personal dashboard layout are
+migrated once to HERITAGE storage keys. Only isolated read compatibility for
+those keys and the external reload response marker remain.
+
+Shell, login and Admin settings rendering no longer depends on template values
+or endpoints supplied only by modified controllers. The package therefore
+retains its theme-only boundary against an unmodified ISPConfig 3.3.1p1 core.
+
+The login template also restores the current ISPConfig session-timeout guard
+around the stay-signed-in option. The control is therefore only presented when
+the configured session lifecycle can actually honor it.
+
+Label associations for the additional-PHP sort priority and alias-domain source
+controls are corrected as well, restoring predictable click focus and assistive
+technology output on those theme-owned forms.
+
+Mailbox quota progress bars now expose the numeric controller value through
+`aria-valuenow`; a legacy whitespace typo had previously referenced a missing
+template variable.
+
+Release ZIP and TAR.GZ files are reproducible from the same source revision.
+The builder normalizes path order, timestamps, file modes, ownership metadata
+and compression headers before generating SHA-256 checksums.
+
+Public logo and favicon asset filenames now use the HERITAGE namespace. Internal
+work-package annotations have been removed from the complete template set
+without changing controller variables, markup contracts or runtime hooks.
+
+All modular stylesheet sources now use explicit HERITAGE core filenames. Bundle
+order and authored CSS remain unchanged while the former Workbench source-file
+namespace is removed from the distributed package.
+
+All modular JavaScript sources and the early shell bootstrap now use HERITAGE
+filenames. Bundle order and runtime behavior remain unchanged while obsolete
+Workbench script paths are rejected by release validation.
+
+Theme-owned global runtime interfaces now use the `window.heritage*` namespace.
+The separate `window.ISPConfig` integration boundary remains intact for current
+ISPConfig controller and navigation compatibility.
+
+## Previous release
 
 HERITAGE 1.0.33 extends compact states to all five server capabilities and the
 SMTP, delivery, IMAP and POP3 states of mailbox lists. Enabled services use a

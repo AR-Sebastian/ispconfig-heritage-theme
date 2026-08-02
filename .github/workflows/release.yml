@@ -12,8 +12,8 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: "22"
       - name: Install release tooling
@@ -22,9 +22,33 @@ jobs:
         run: test "${GITHUB_REF_NAME#v}" = "$(tr -d '[:space:]' < VERSION)"
       - name: Build assets
         run: bash scripts/build-release.sh
+      - name: Verify reproducible release assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="$(tr -d '[:space:]' < VERSION)"
+          sha256sum dist/ispconfig-heritage-theme-"$version".zip \
+            dist/ispconfig-heritage-theme-"$version".tar.gz > /tmp/heritage-first-build.sha256
+          bash scripts/build-release.sh
+          sha256sum dist/ispconfig-heritage-theme-"$version".zip \
+            dist/ispconfig-heritage-theme-"$version".tar.gz > /tmp/heritage-second-build.sha256
+          diff -u /tmp/heritage-first-build.sha256 /tmp/heritage-second-build.sha256
+          (cd dist && sha256sum -c SHA256SUMS.txt)
+          if unzip -Z1 dist/ispconfig-heritage-theme-"$version".zip | grep -Eq '(^/|(^|/)\.\.(/|$))'; then
+            echo 'ZIP archive contains an unsafe path.' >&2
+            exit 1
+          fi
+          if tar -tzf dist/ispconfig-heritage-theme-"$version".tar.gz | grep -Eq '(^/|(^|/)\.\.(/|$))'; then
+            echo 'TAR.GZ archive contains an unsafe path.' >&2
+            exit 1
+          fi
+          test -f "RELEASE_NOTES_$version.md"
+          cp "RELEASE_NOTES_$version.md" dist/RELEASE_NOTES.md
       - name: Publish assets
-        uses: softprops/action-gh-release@v3
+        uses: softprops/action-gh-release@c12583777ecdfd3be55c69cf75464299dc01057e # v3.0.2
         with:
+          body_path: dist/RELEASE_NOTES.md
+          fail_on_unmatched_files: true
           files: |
             dist/ispconfig-heritage-theme-*.zip
             dist/ispconfig-heritage-theme-*.tar.gz

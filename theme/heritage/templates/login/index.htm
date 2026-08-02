@@ -1,45 +1,44 @@
-<!-- WP-974: native Workbench authentication surface; controller contract unchanged. -->
 					<tmpl_if name="msg">
-					<div class="wb-auth-feedback wb-auth-feedback--success" role="alert"><tmpl_var name="msg"></div>
+					<div class="hg-auth-feedback hg-auth-feedback--success" role="alert"><tmpl_var name="msg"></div>
 					</tmpl_if>
 					<tmpl_if name="error">
-					<div class="wb-auth-feedback wb-auth-feedback--danger" role="alert"><tmpl_var name="error"></div>
+					<div class="hg-auth-feedback hg-auth-feedback--danger" role="alert"><tmpl_var name="error"></div>
 					</tmpl_if>
-					<form class="wb-auth-form" accept-charset="UTF-8" role="form" method="post" action="index.php">
+					<form class="hg-auth-form" accept-charset="UTF-8" role="form" method="post" action="index.php">
                     <fieldset>
-						<div class="wb-auth-field">
-							<label class="wb-visually-hidden" for="username">{tmpl_var name='username_txt'}</label>
+						<div class="hg-auth-field">
+							<label class="hg-visually-hidden" for="username">{tmpl_var name='username_txt'}</label>
 							<input class="form-control" placeholder="{tmpl_var name='username_txt'}" name="username" id="username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required aria-required="true" autofocus>
 			    		</div>
-			    		<div class="wb-auth-field">
-							<label class="wb-visually-hidden" for="password">{tmpl_var name='password_txt'}</label>
+						<div class="hg-auth-field">
+							<label class="hg-visually-hidden" for="password">{tmpl_var name='password_txt'}</label>
 							<input class="form-control" placeholder="{tmpl_var name='password_txt'}" name="password" id="password" type="password" value="" autocomplete="current-password" enterkeyhint="go" required aria-required="true">
 			    		</div>
+						<tmpl_if name="session_timeout" op=">" value="0">
 						<tmpl_if name="session_allow_endless" value="y">
-						<div class="checkbox wb-login-stay-option">
+						<div class="checkbox hg-login-stay-option">
 			    	    	<label>
-								<input name="stay" id="stay" type="checkbox" value="1" data-wb-remember-login="1"> <span>{tmpl_var name='stay_logged_in_txt'}</span>
+								<input name="stay" id="stay" type="checkbox" value="1" data-heritage-remember-login="1"> <span>{tmpl_var name='stay_logged_in_txt'}</span>
 			    	    	</label>
-							<small>{tmpl_var name='stay_logged_in_hint_txt'}</small>
+							<small data-heritage-i18n-de="Hält diese Browsersitzung geöffnet, wenn der Server es erlaubt." data-heritage-i18n-en="Keeps this browser session open when the server allows it.">Keeps this browser session open when the server allows it.</small>
 							</div>
 						</tmpl_if>
-						<tmpl_if name="workbench_remember_username" value="y">
-						<div class="checkbox wb-login-remember-option">
+						</tmpl_if>
+						<div class="checkbox hg-login-remember-option">
 							<label>
-								<input name="remember_username" id="remember_username" type="checkbox" value="1" data-wb-remember-username="1"> <span data-wb-i18n-de="Benutzername merken" data-wb-i18n-en="Remember username">{tmpl_var name='remember_username_txt'}</span>
+								<input name="remember_username" id="remember_username" type="checkbox" value="1" data-heritage-remember-username="1"> <span data-heritage-i18n-de="Benutzername merken" data-heritage-i18n-en="Remember username">Remember username</span>
 							</label>
-							<small data-wb-i18n-de="Auf diesem Gerät wird nur der Benutzername gespeichert." data-wb-i18n-en="Store only the username on this device.">{tmpl_var name='remember_username_hint_txt'}</small>
+							<small data-heritage-i18n-de="Auf diesem Gerät wird nur der Benutzername gespeichert." data-heritage-i18n-en="Store only the username on this device.">Store only the username on this device.</small>
 							</div>
-						</tmpl_if>
-						<div class="wb-login-password-manager-hint" role="note">
+						<div class="hg-login-password-manager-hint" role="note">
 							<span aria-hidden="true">&#10003;</span>
-							<small data-wb-i18n-de="Ein Passwortmanager kann das Kennwort sicher speichern." data-wb-i18n-en="Your password manager can securely store the password.">{tmpl_var name='password_manager_hint_txt'}</small>
+							<small data-heritage-i18n-de="Ein Passwortmanager kann das Kennwort sicher speichern." data-heritage-i18n-en="Your password manager can securely store the password.">Your password manager can securely store the password.</small>
 						</div>
 						<input type="hidden" name="s_mod" value="login" />
 						<input type="hidden" name="s_pg" value="index" />
-						<div class="wb-auth-actions">
-			    		<input class="wb-auth-secondary" type="submit" value="{tmpl_var name='login_txt'}">
-						<tmpl_if name="pw_lost_show"><button class="wb-auth-secondary" type="button" value="{tmpl_var name='pw_lost_txt'}" data-login-navigate="password_reset.php">{tmpl_var name='pw_lost_txt'}</button></tmpl_if>
+						<div class="hg-auth-actions">
+						<input class="hg-auth-secondary" type="submit" value="{tmpl_var name='login_txt'}">
+						<tmpl_if name="pw_lost_show"><button class="hg-auth-secondary" type="button" value="{tmpl_var name='pw_lost_txt'}" data-login-navigate="password_reset.php">{tmpl_var name='pw_lost_txt'}</button></tmpl_if>
 						</div>
 			    	</fieldset>
 			      	</form>

@@ -1,5 +1,34 @@
 # Changelog
 
+## 1.0.34 – 2026-08-02
+
+- Sichtbare Altbezeichnungen aus der Workbench-Entwicklung wurden in Logo,
+  Favicon-Metadaten, PWA-Name und Theme-Anzeige durch die einheitliche
+  Produktbezeichnung `ISPConfig HERITAGE` ersetzt.
+- Alle Shell-, Login- und PWA-Assets verwenden jetzt denselben Release-basierten
+  Cache-Schlüssel. Dadurch können Browser nach einem Theme-Update keine alten
+  CSS-, JavaScript-, Logo- oder Manifeststände mehr miteinander mischen.
+- Der Cache-Schlüssel entspricht der vollständigen Theme-Version und wird im
+  Release-Gate automatisch gegen `VERSION` geprüft.
+- Die bestehende technische Theme-ID bleibt zur Abwärtskompatibilität stabil.
+- Die Option „angemeldet bleiben“ folgt wieder vollständig dem aktuellen
+  ISPConfig-Sessionvertrag und wird bei deaktiviertem Session-Timeout nicht
+  mehr als wirkungslose, visuell irreführende Auswahl angeboten.
+- Sortierpriorität und Aliasdomain-Quelle besitzen wieder eindeutige
+  Label-Eingabefeld-Zuordnungen für korrekten Klickfokus und Screenreader.
+- Mail-Quota-Fortschrittsanzeigen liefern wieder einen gültigen numerischen
+  `aria-valuenow`-Wert statt einer nicht existierenden Template-Variable.
+- ZIP- und TAR.GZ-Release-Artefakte werden deterministisch mit sortierten
+  Pfaden, normalisierten Zeitstempeln, Rechten und Besitzermetadaten erzeugt.
+- Öffentliche Logo- und Favicon-Assets tragen ausschließlich HERITAGE-Namen;
+  interne Arbeitspaket-Kommentare wurden aus allen Theme-Templates entfernt.
+- Alle modularen CSS-Quellen wurden aus dem historischen Workbench-Dateinamensraum
+  in eindeutige `heritage-*-core.css`-Autoritäten überführt.
+- Alle modularen JavaScript-Quellen und der frühe Shell-Bootstrap verwenden
+  ausschließlich den HERITAGE-Dateinamensraum.
+- Alle theme-eigenen globalen Runtime-Schnittstellen wurden geschlossen von
+  `window.workbench*` auf `window.heritage*` migriert.
+
 ## 1.0.33 – 2026-07-31
 
 - Extended compact state columns to E-mail, Web, DNS, file and database server capabilities.

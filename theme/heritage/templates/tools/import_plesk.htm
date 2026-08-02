@@ -1,54 +1,53 @@
-<!-- WP-970: native Workbench tools surface; controller contract unchanged. -->
 <h2><tmpl_var name="list_head_txt">Import plesk panel data</h2>
 <p><tmpl_var name="list_desc_txt"></p>
 
 
         <legend>Plesk data import</legend>
-            <div class="wb-field-group">
-                <label class="wb-field-label">Plesk database hostname</label>
-                <div class="wb-field-body"><input class="form-control" type="text" id="dbhost" value="{tmpl_var name='dbhost'}" name="dbhost" /></div>
+            <div class="hg-field-group">
+                <label class="hg-field-label">Plesk database hostname</label>
+                <div class="hg-field-body"><input class="form-control" type="text" id="dbhost" value="{tmpl_var name='dbhost'}" name="dbhost" /></div>
             </div>
-            <div class="wb-field-group">
-                <label class="wb-field-label">Plesk database name</label>
-                <div class="wb-field-body"><input class="form-control" type="text" id="dbname" value="{tmpl_var name='dbname'}" name="dbname" /></div>
+            <div class="hg-field-group">
+                <label class="hg-field-label">Plesk database name</label>
+                <div class="hg-field-body"><input class="form-control" type="text" id="dbname" value="{tmpl_var name='dbname'}" name="dbname" /></div>
             </div>
-            <div class="wb-field-group">
-                <label class="wb-field-label">Plesk database user</label>
-                <div class="wb-field-body"><input class="form-control" type="text" id="dbuser" value="{tmpl_var name='dbuser'}" name="dbuser" /></div>
+            <div class="hg-field-group">
+                <label class="hg-field-label">Plesk database user</label>
+                <div class="hg-field-body"><input class="form-control" type="text" id="dbuser" value="{tmpl_var name='dbuser'}" name="dbuser" /></div>
             </div>
-            <div class="wb-field-group">
-                <label class="wb-field-label">Plesk database password</label>
-                <div class="wb-field-body"><input class="form-control" type="text" id="dbpassword" value="{tmpl_var name='dbpassword'}" name="dbpassword" /></div>
+            <div class="hg-field-group">
+                <label class="hg-field-label">Plesk database password</label>
+                <div class="hg-field-body"><input class="form-control" type="text" id="dbpassword" value="{tmpl_var name='dbpassword'}" name="dbpassword" /></div>
             </div>
-            <div class="wb-field-group">
-                <label class="wb-field-label">Web content backup file (on this server, optional)</label>
-                <div class="wb-field-body"><input class="form-control" type="text" id="webcontent" value="{tmpl_var name='webcontent'}" name="webcontent" /></div>
+            <div class="hg-field-group">
+                <label class="hg-field-label">Web content backup file (on this server, optional)</label>
+                <div class="hg-field-body"><input class="form-control" type="text" id="webcontent" value="{tmpl_var name='webcontent'}" name="webcontent" /></div>
             </div>
-            <div class="wb-field-group">
-                <label class="wb-field-label">Maildir content backup file (on this server, optional)</label>
-                <div class="wb-field-body"><input class="form-control" type="text" id="mailcontent" value="{tmpl_var name='mailcontent'}" name="mailcontent" /></div>
+            <div class="hg-field-group">
+                <label class="hg-field-label">Maildir content backup file (on this server, optional)</label>
+                <div class="hg-field-body"><input class="form-control" type="text" id="mailcontent" value="{tmpl_var name='mailcontent'}" name="mailcontent" /></div>
             </div>
 
-            <div class="wb-field-group">
-                <label class="wb-field-label">Import all data (that can be imported)</label>
-                <div class="wb-field-body"><input class="form-control" type="checkbox" id="start" value="1" name="start" checked/></div>
+            <div class="hg-field-group">
+                <label class="hg-field-label">Import all data (that can be imported)</label>
+                <div class="hg-field-body"><input class="form-control" type="checkbox" id="start" value="1" name="start" checked/></div>
             </div>
-            <div class="wb-field-group">
-                <label class="wb-field-label">Import database contents (make sure the database user has the rights to do so)</label>
-                <div class="wb-field-body"><input class="form-control" type="checkbox" id="dbdata" value="1" name="dbdata" checked/></div>
+            <div class="hg-field-group">
+                <label class="hg-field-label">Import database contents (make sure the database user has the rights to do so)</label>
+                <div class="hg-field-body"><input class="form-control" type="checkbox" id="dbdata" value="1" name="dbdata" checked/></div>
             </div>
 
 
         <tmpl_if name="msg">
-            <div id="OKMsg" class="wb-alert wb-alert--success" role="status"><div class="wb-alert__body"><tmpl_var name="msg"></div></div>
+            <div id="OKMsg" class="hg-alert hg-alert--success" role="status"><div class="hg-alert__body"><tmpl_var name="msg"></div></div>
         </tmpl_if>
         <tmpl_if name="error">
-          <div class='wb-alert wb-alert--danger' role='alert'>
-            <div class='wb-alert__title'>
+          <div class='hg-alert hg-alert--danger' role='alert'>
+            <div class='hg-alert__title'>
               <strong><tmpl_var name="error_txt"></strong>
               </div>
-            <div class='wb-alert__body'>
-              <ul class="wb-clean-list">
+            <div class='hg-alert__body'>
+              <ul class="hg-clean-list">
                 <tmpl_var name="error">
               </ul>
             </div>
@@ -57,7 +56,7 @@
 
         <input type="hidden" name="id" value="{tmpl_var name='id'}">
 
-        <div class="wb-form-actions">
+        <div class="hg-form-actions">
             <button class="formbutton-success" type="button" value="Import" data-submit-form="pageForm" data-form-action="tools/import_plesk.php">Start</button>
-            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="tools/index.php" data-load-content="tools/index.php">{tmpl_var name='btn_cancel_txt'}</button>
+            <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-heritage-load-content="tools/index.php" data-load-content="tools/index.php">{tmpl_var name='btn_cancel_txt'}</button>
         </div>

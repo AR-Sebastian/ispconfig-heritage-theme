@@ -12,7 +12,7 @@ body:
     id: version
     attributes:
       label: HERITAGE-Version
-      placeholder: "1.0.0"
+      placeholder: "z. B. 1.0.34 / e.g. 1.0.34"
     validations:
       required: true
   - type: input

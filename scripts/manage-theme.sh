@@ -83,8 +83,8 @@ validate_payload() {
     "theme-manifest.json"
     "templates/main.tpl.htm"
     "templates/main_login.tpl.htm"
-    "assets/stylesheets/workbench.css"
-    "assets/javascripts/workbench-boot.js"
+    "assets/stylesheets/heritage-core.css"
+    "assets/javascripts/heritage-boot.js"
   )
   local file
   for file in "${required[@]}"; do
@@ -112,6 +112,11 @@ case "$command_name" in
     run rm -rf "$stage_dir"
     run mkdir -p "$stage_dir"
     run cp -a "$source_dir/." "$stage_dir/"
+    # Archive extraction and Windows-to-Linux copies can carry unsuitable mode
+    # bits. Normalize the web payload before the atomic swap so Apache can
+    # traverse every directory and read every theme asset reproducibly.
+    run find "$stage_dir" -type d -exec chmod 0755 {} +
+    run find "$stage_dir" -type f -exec chmod 0644 {} +
     if [[ -d "$target_dir" ]]; then
       run mv "$target_dir" "$backup_dir"
     fi

@@ -1,9 +1,8 @@
-<!-- WP-963: native Workbench client surface; controller contract unchanged. -->
 <div class='page-header'><h1><tmpl_var name="list_head_txt"> <tmpl_var name="contactname"></h1></div>
 <tmpl_if name='number_records'>
 	<tmpl_var name="delete_explanation">:<br /><br />
-	<div class="wb-table-workspace">
-		<table class="table wb-data-table">
+	<div class="hg-table-workspace">
+		<table class="table hg-data-table">
 		<thead >
 			<tr>
 				<th class="tiny-col"><tmpl_var name="table_txt"></th>
@@ -27,7 +26,7 @@
 <div> <input type="checkbox" name="confirm" value="yes" /> <b><tmpl_var name="confirm_action_txt"></b></div>
 &nbsp;
 <input type="hidden" name="id" value="{tmpl_var name='id'}">
-<div class="wb-form-actions"><div class="wb-form-actions__primary">
+<div class="hg-form-actions"><div class="hg-form-actions__primary">
 	<button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="client/client_del.php">{tmpl_var name='btn_save_txt'}</button>
-	<button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="client/client_list.php" data-load-content="client/client_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+	<button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-heritage-load-content="client/client_list.php" data-load-content="client/client_list.php">{tmpl_var name='btn_cancel_txt'}</button>
 </div></div>

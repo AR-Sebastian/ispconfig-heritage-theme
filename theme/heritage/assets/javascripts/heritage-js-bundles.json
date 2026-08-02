@@ -2,23 +2,23 @@
   "applicationBeforeChart": {
     "output": "heritage-app-before-chart.bundle.js",
     "sources": [
-      "workbench-date-time.js", "workbench-native-interactions.js", "workbench-http.js", "workbench-core.js",
-      "workbench-field-search.js", "workbench-message-acknowledgement.js", "workbench-loading.js",
-      "workbench-content-states.js", "workbench-background.js", "workbench-icons.js", "workbench-feedback.js",
-      "workbench-navigation.js", "workbench-dashboard-metrics.js", "workbench-dashboard-layout.js",
-      "workbench-dialog.js", "workbench-disclosure.js", "workbench-form-state.js", "workbench-tabstrip.js",
-      "workbench-tab-confirm.js", "workbench-accessibility.js", "workbench-validation.js",
-      "workbench-submit-feedback.js", "workbench-list-filter.js", "workbench-statistics.js",
-      "workbench-wizard-preview.js", "workbench-advanced-controls.js", "workbench-upload-feedback.js",
-      "workbench-branding.js", "workbench-global-search.js", "workbench-theme.js", "workbench-select.js"
+      "heritage-date-time.js", "heritage-native-interactions.js", "heritage-http.js", "heritage-core.js",
+      "heritage-field-search.js", "heritage-message-acknowledgement.js", "heritage-loading.js",
+      "heritage-content-states.js", "heritage-background.js", "heritage-icons.js", "heritage-feedback.js",
+      "heritage-navigation.js", "heritage-dashboard-metrics.js", "heritage-dashboard-layout.js",
+      "heritage-dialog.js", "heritage-disclosure.js", "heritage-form-state.js", "heritage-tabstrip.js",
+      "heritage-tab-confirm.js", "heritage-accessibility.js", "heritage-validation.js",
+      "heritage-submit-feedback.js", "heritage-list-filter.js", "heritage-statistics.js",
+      "heritage-wizard-preview.js", "heritage-advanced-controls.js", "heritage-upload-feedback.js",
+      "heritage-global-search.js", "heritage-theme.js", "heritage-select.js"
     ]
   },
   "applicationAfterChart": {
     "output": "heritage-app-after-chart.bundle.js",
-    "sources": ["workbench-monitoring.js", "heritage-runtime.js", "workbench-boot.js"]
+    "sources": ["heritage-monitoring.js", "heritage-runtime.js", "heritage-boot.js"]
   },
   "login": {
     "output": "heritage-login.bundle.js",
-    "sources": ["workbench-feedback.js", "workbench-login.js", "workbench-theme.js", "heritage-runtime.js"]
+    "sources": ["heritage-feedback.js", "heritage-login.js", "heritage-theme.js", "heritage-runtime.js"]
   }
 }

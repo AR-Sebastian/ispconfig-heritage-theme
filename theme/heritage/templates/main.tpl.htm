@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang='<tmpl_var name="html_language">'>
+<html lang='en'>
 <head>
-  <style id='workbench-branding-vars'>:root { --wb-accent: <tmpl_var name='workbench_accent_color'>; --wb-action: <tmpl_var name='workbench_accent_color'>; --wb-dark-logo: url('<tmpl_var name="workbench_dark_logo_url">'); } .wb-skip-link:focus, .wb-skip-link:focus-visible { transform: none !important; }</style>
+  <style id='heritage-branding-vars'>:root { --hg-accent: #cc151c; --hg-action: #cc151c; --hg-dark-logo: url('/themes/heritage/assets/images/ispconfig-heritage-logo-dark.svg'); } .hg-skip-link:focus, .hg-skip-link:focus-visible { transform: none !important; }</style>
   <meta charset='utf-8' />
 
   <title><tmpl_var name="company_name"><tmpl_var name="app_title"></title>
@@ -10,44 +10,43 @@
   <meta name='description' lang='en' content='' />
   <meta name='keywords' lang='en' content='' />
   <meta name='robots' content='noindex, nofollow' />
-  <meta name='workbench-language-probe' content="<tmpl_var name='logout_txt'>|<tmpl_var name='globalsearch_searchfield_watermark_txt'>" />
+  <meta name='heritage-language-probe' content="<tmpl_var name='logout_txt'>|<tmpl_var name='globalsearch_searchfield_watermark_txt'>" />
 
-  <link rel='apple-touch-icon' sizes='180x180' href='<tmpl_var name="workbench_favicon_url">'>
-  <link rel='icon' type='image/png' sizes='32x32' href='<tmpl_var name="workbench_favicon_url">'>
-  <link rel='icon' type='image/png' sizes='16x16' href='<tmpl_var name="workbench_favicon_url">'>
-  <link rel='manifest' href='/themes/heritage/assets/favicon/site.webmanifest?ver=1'>
-  <link rel='mask-icon' href='<tmpl_var name="workbench_favicon_url">' color='<tmpl_var name="workbench_accent_color">'>
-  <link rel='shortcut icon' href='<tmpl_var name="workbench_favicon_url">'>
-  <meta name='msapplication-TileColor' content='<tmpl_var name="workbench_accent_color">'>
+  <link rel='apple-touch-icon' href='/themes/heritage/assets/images/ispconfig-heritage-favicon.svg?ver=1.0.34'>
+  <link rel='icon' type='image/svg+xml' href='/themes/heritage/assets/images/ispconfig-heritage-favicon.svg?ver=1.0.34'>
+  <link rel='manifest' href='/themes/heritage/assets/favicon/site.webmanifest?ver=1.0.34'>
+  <link rel='mask-icon' href='/themes/heritage/assets/images/ispconfig-heritage-favicon.svg?ver=1.0.34' color='#cc151c'>
+  <link rel='shortcut icon' href='/themes/heritage/assets/images/ispconfig-heritage-favicon.svg?ver=1.0.34'>
+  <meta name='msapplication-TileColor' content='#cc151c'>
   <meta name='msapplication-config' content='/themes/heritage/assets/favicon/browserconfig.xml'>
-  <meta name='theme-color' content='<tmpl_var name="workbench_accent_color">'>
-  <script src='themes/heritage/assets/javascripts/workbench-early.js?ver=3'></script>
+  <meta name='theme-color' content='#cc151c'>
+  <script src='themes/heritage/assets/javascripts/heritage-early.js?ver=1.0.34'></script>
 
-  <link rel='stylesheet' href='themes/heritage/assets/stylesheets/heritage-app.bundle.css?ver=2' />
+  <link rel='stylesheet' href='themes/heritage/assets/stylesheets/heritage-app.bundle.css?ver=1.0.34' />
 </head>
 
-<body class='wb-app-navigation-enabled' data-workbench-filter-reset="{tmpl_var name='workbench_filter_reset_txt'}" data-workbench-filter-reset-active="{tmpl_var name='workbench_filter_reset_active_txt'}" data-workbench-search-clear="{tmpl_var name='workbench_search_clear_txt'}" data-workbench-filter-toggle="{tmpl_var name='workbench_filter_toggle_txt'}" data-workbench-filter-show="{tmpl_var name='workbench_filter_show_txt'}" data-workbench-filter-hide="{tmpl_var name='workbench_filter_hide_txt'}" data-workbench-pagination="{tmpl_var name='workbench_pagination_txt'}" data-workbench-pagination-page="{tmpl_var name='workbench_pagination_page_txt'}" data-workbench-pagination-summary="{tmpl_var name='workbench_pagination_summary_txt'}" data-workbench-list-visible-results="{tmpl_var name='workbench_list_visible_results_txt'}" data-workbench-table-actions="{tmpl_var name='workbench_table_actions_txt'}" data-workbench-tab-change-discard="<tmpl_var name='tabchange_discard_enabled'>" data-workbench-tab-change-warning="<tmpl_var name='tabchange_warning_enabled'>" data-workbench-tab-change-warning-text="<tmpl_var name='global_tabchange_warning_txt'>" data-workbench-tab-change-discard-text="<tmpl_var name='global_tabchange_discard_txt'>" data-workbench-use-load-indicator="<tmpl_if name='use_loadindicator' value='y'>true<tmpl_else>false</tmpl_if>" data-workbench-use-combobox="<tmpl_if name='use_combobox' value='y'>true<tmpl_else>false</tmpl_if>">
-  <a class='wb-skip-link' href='#pageContent'><tmpl_var name='workbench_skip_main_txt'></a>
-  <div id='workbench-mobile-navigation' class='wb-mobile-navigation' role='dialog' aria-modal='true' aria-label='{tmpl_var name="workbench_open_navigation_txt"}' aria-hidden='true'>
-    <div class='wb-mobile-navigation__header'>
-      <strong><tmpl_var name='workbench_open_navigation_txt'></strong>
-      <button type='button' class='wb-mobile-navigation__close' aria-label='{tmpl_var name="datalog_changes_close_txt"}'>&times;</button>
+<body class='hg-app-navigation-enabled' data-heritage-filter-reset="Reset filters" data-heritage-filter-reset-active="Reset active filters" data-heritage-search-clear="Clear search" data-heritage-filter-toggle="Toggle filters" data-heritage-filter-show="Show filters" data-heritage-filter-hide="Hide filters" data-heritage-pagination="Pagination" data-heritage-pagination-page="Page" data-heritage-pagination-summary="Page {current} of {total}" data-heritage-list-visible-results="{count} items on this page" data-heritage-table-actions="Actions" data-heritage-tab-change-discard="<tmpl_var name='tabchange_discard_enabled'>" data-heritage-tab-change-warning="<tmpl_var name='tabchange_warning_enabled'>" data-heritage-tab-change-warning-text="<tmpl_var name='global_tabchange_warning_txt'>" data-heritage-tab-change-discard-text="<tmpl_var name='global_tabchange_discard_txt'>" data-heritage-use-load-indicator="<tmpl_if name='use_loadindicator' value='y'>true<tmpl_else>false</tmpl_if>" data-heritage-use-combobox="<tmpl_if name='use_combobox' value='y'>true<tmpl_else>false</tmpl_if>">
+  <a class='hg-skip-link' href='#pageContent' data-heritage-i18n-de='Zum Hauptinhalt springen' data-heritage-i18n-en='Skip to main content'>Skip to main content</a>
+  <div id='heritage-mobile-navigation' class='hg-mobile-navigation' role='dialog' aria-modal='true' aria-label='Open navigation' data-heritage-i18n-aria-label-de='Navigation öffnen' data-heritage-i18n-aria-label-en='Open navigation' aria-hidden='true'>
+    <div class='hg-mobile-navigation__header'>
+      <strong data-heritage-i18n-de='Navigation öffnen' data-heritage-i18n-en='Open navigation'>Open navigation</strong>
+      <button type='button' class='hg-mobile-navigation__close' aria-label='{tmpl_var name="datalog_changes_close_txt"}'>&times;</button>
     </div>
-    <nav class='wb-mobile-navigation__content' aria-label='{tmpl_var name="workbench_open_navigation_txt"}'></nav>
-    <div class='wb-app-navigation__footer'>
-      <span class='wb-app-navigation__status' aria-hidden='true'></span>
-      <span class='wb-app-navigation__user'><strong><tmpl_var name='cpuser'></strong><small>ISPConfig Heritage</small></span>
-      <button type='button' class='wb-app-navigation__logout' data-workbench-load-content='login/logout.php' aria-label='{tmpl_var name="logout_txt"} {tmpl_var name="cpuser"}' title='{tmpl_var name="logout_txt"}'><svg viewBox='0 0 24 24' aria-hidden='true' focusable='false'><path d='M14 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9M10 12h11m-5-5 5 5-5 5'/></svg></button>
+    <nav class='hg-mobile-navigation__content' aria-label='Open navigation' data-heritage-i18n-aria-label-de='Navigation öffnen' data-heritage-i18n-aria-label-en='Open navigation'></nav>
+    <div class='hg-app-navigation__footer'>
+      <span class='hg-app-navigation__status' aria-hidden='true'></span>
+      <span class='hg-app-navigation__user'><strong><tmpl_var name='cpuser'></strong><small>ISPConfig Heritage</small></span>
+      <button type='button' class='hg-app-navigation__logout' data-heritage-load-content='login/logout.php' aria-label='{tmpl_var name="logout_txt"} {tmpl_var name="cpuser"}' title='{tmpl_var name="logout_txt"}'><svg viewBox='0 0 24 24' aria-hidden='true' focusable='false'><path d='M14 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9M10 12h11m-5-5 5 5-5 5'/></svg></button>
     </div>
   </div>
-  <button type='button' class='wb-navigation-overlay' aria-label='{tmpl_var name="datalog_changes_close_txt"}' aria-hidden='true' tabindex='-1'></button>
+  <button type='button' class='hg-navigation-overlay' aria-label='{tmpl_var name="datalog_changes_close_txt"}' aria-hidden='true' tabindex='-1'></button>
 
   <div id='container'>
     <div id='main-wrapper'>
       <div id='inner-wrapper'>
         <div class='clear'>
           <div class='left clear'>
-            <button type='button' class='menu-btn left' aria-label='{tmpl_var name="workbench_open_navigation_txt"}' aria-controls='workbench-mobile-navigation' aria-expanded='false'>&#9776;</button>
+            <button type='button' class='menu-btn left' aria-label='Open navigation' data-heritage-i18n-aria-label-de='Navigation öffnen' data-heritage-i18n-aria-label-en='Open navigation' aria-controls='heritage-mobile-navigation' aria-expanded='false'>&#9776;</button>
             <!-- logo -->
             <div id='logo' style="background: url({tmpl_var name="base64_logo_txt"}) no-repeat;width:{tmpl_var name="base64_logo_width"};height:{tmpl_var name="base64_logo_height"}"><a href='#'></a></div>
           </div>
@@ -55,13 +54,13 @@
             <tmpl_if name="cpuser">
 				<tmpl_if name='usertype' op='==' value='normaluser'>
 					<!-- search field -->
-					<form action='#' method='get' id='searchform' role='search' class='wb-global-search-form' autocomplete='off' novalidate>
-					  <label class='wb-visually-hidden' for='globalsearch'>{tmpl_var name="globalsearch_searchfield_watermark_txt"}</label>
-					  <div class='wb-global-search__field'>
-						<input id='globalsearch' type='search' class='form-control' aria-label='{tmpl_var name="globalsearch_searchfield_watermark_txt"}' placeholder='{tmpl_var name="globalsearch_searchfield_watermark_txt"}' autocomplete='off' title='Suche fokussieren: / oder Strg+K' data-wb-i18n-title-de='Suche fokussieren: / oder Strg+K' data-wb-i18n-title-en='Focus search: / or Ctrl+K' />
-						<kbd class='wb-search-shortcut' aria-hidden='true'>/</kbd>
-						<button type='button' class='wb-search-clear' id='globalsearch-clear' aria-label='{tmpl_var name="workbench_search_clear_txt"}' hidden>&times;</button>
-						<button type='submit' class='wb-shell-button wb-shell-button--icon wb-global-search-submit' title='{tmpl_var name="globalsearch_searchfield_watermark_txt"}' aria-label='{tmpl_var name="globalsearch_searchfield_watermark_txt"}'>
+					<form action='#' method='get' id='searchform' role='search' class='hg-global-search-form' autocomplete='off' novalidate>
+					  <label class='hg-visually-hidden' for='globalsearch'>{tmpl_var name="globalsearch_searchfield_watermark_txt"}</label>
+					  <div class='hg-global-search__field'>
+						<input id='globalsearch' type='search' class='form-control' aria-label='{tmpl_var name="globalsearch_searchfield_watermark_txt"}' placeholder='{tmpl_var name="globalsearch_searchfield_watermark_txt"}' autocomplete='off' title='Suche fokussieren: / oder Strg+K' data-heritage-i18n-title-de='Suche fokussieren: / oder Strg+K' data-heritage-i18n-title-en='Focus search: / or Ctrl+K' />
+						<kbd class='hg-search-shortcut' aria-hidden='true'>/</kbd>
+						<button type='button' class='hg-search-clear' id='globalsearch-clear' aria-label='Clear search' data-heritage-i18n-aria-label-de='Suche leeren' data-heritage-i18n-aria-label-en='Clear search' hidden>&times;</button>
+						<button type='submit' class='hg-shell-button hg-shell-button--icon hg-global-search-submit' title='{tmpl_var name="globalsearch_searchfield_watermark_txt"}' aria-label='{tmpl_var name="globalsearch_searchfield_watermark_txt"}'>
 						  <svg viewBox='0 0 24 24' aria-hidden='true' focusable='false'><circle cx='11' cy='11' r='6.2'></circle><path d='m16 16 4.5 4.5'></path></svg>
 						</button>
 					  </div>
@@ -69,46 +68,46 @@
 				</tmpl_if>
             </tmpl_if>
           </div>
-		  <div class='wb-header-actions'>
-					<button type='button' class='wb-theme-toggle' aria-label='Zum dunklen Design wechseln' data-wb-i18n-aria-label-de='Zum dunklen Design wechseln' data-wb-i18n-aria-label-en='Switch to dark theme'><svg viewBox='0 0 24 24' aria-hidden='true' focusable='false'><path d='M20.7 15.3A8.5 8.5 0 0 1 8.7 3.3 8.5 8.5 0 1 0 20.7 15.3Z' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
-					<button type="button" class="notification" data-workbench-dialog="datalogModal" aria-haspopup="dialog" aria-controls="datalogModal" aria-expanded="false" style="display: none;">
+		  <div class='hg-header-actions'>
+					<button type='button' class='hg-theme-toggle' aria-label='Zum dunklen Design wechseln' data-heritage-i18n-aria-label-de='Zum dunklen Design wechseln' data-heritage-i18n-aria-label-en='Switch to dark theme'><svg viewBox='0 0 24 24' aria-hidden='true' focusable='false'><path d='M20.7 15.3A8.5 8.5 0 0 1 8.7 3.3 8.5 8.5 0 1 0 20.7 15.3Z' fill='none' stroke='currentColor' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></svg></button>
+					<button type="button" class="notification" data-heritage-dialog="datalogModal" aria-haspopup="dialog" aria-controls="datalogModal" aria-expanded="false" style="display: none;">
 	            <span class="notification_text">{tmpl_var name="datalog_changes_count"}</span>
             </button>
 		  </div>
-			<!-- Native read-only Workbench datalog dialog. -->
-			<div id="datalogModal" class="wb-dialog" role="dialog" aria-modal="true" aria-labelledby="datalogModalTitle" aria-hidden="true" tabindex="-1" hidden>
-			  <button type="button" class="wb-dialog__backdrop" data-workbench-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}" tabindex="-1"></button>
-			  <div class="wb-dialog__surface" role="document">
-			      <div class="wb-dialog__header">
-			        <h2 class="wb-dialog__title" id="datalogModalTitle">{tmpl_var name="datalog_changes_txt"}</h2>
-			        <button type="button" class="wb-dialog__close" data-workbench-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}">&times;</button>
+			<!-- Native read-only HERITAGE datalog dialog. -->
+			<div id="datalogModal" class="hg-dialog" role="dialog" aria-modal="true" aria-labelledby="datalogModalTitle" aria-hidden="true" tabindex="-1" hidden>
+			  <button type="button" class="hg-dialog__backdrop" data-heritage-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}" tabindex="-1"></button>
+			  <div class="hg-dialog__surface" role="document">
+			      <div class="hg-dialog__header">
+			        <h2 class="hg-dialog__title" id="datalogModalTitle">{tmpl_var name="datalog_changes_txt"}</h2>
+			        <button type="button" class="hg-dialog__close" data-heritage-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}">&times;</button>
 			      </div>
-			      <div class="wb-dialog__body">
+			      <div class="hg-dialog__body">
 			        <ul>
 				    <tmpl_loop name="datalog_changes">
 				        <li><strong>{tmpl_var name="text"}:</strong> {tmpl_var name="count"}</li>
 				    </tmpl_loop>
 				    </ul>
-			        <p class="wb-dialog__supporting-text">{tmpl_var name="datalog_changes_end_txt"}</p>
+			        <p class="hg-dialog__supporting-text">{tmpl_var name="datalog_changes_end_txt"}</p>
 			      </div>
-			      <div class="wb-dialog__footer">
-			        <button type="button" class="wb-dialog__action wb-dialog__action--secondary" data-workbench-dialog-close data-workbench-dialog-autofocus>{tmpl_var name="datalog_changes_close_txt"}</button>
+			      <div class="hg-dialog__footer">
+			        <button type="button" class="hg-dialog__action hg-dialog__action--secondary" data-heritage-dialog-close data-heritage-dialog-autofocus>{tmpl_var name="datalog_changes_close_txt"}</button>
 			      </div>
 			  </div>
 			</div>
 			<!-- END native datalog dialog -->
-			<div id="workbenchTabChangeDialog" class="wb-dialog wb-tab-change-dialog" role="dialog" aria-modal="true" aria-labelledby="workbenchTabChangeDialogTitle" aria-describedby="workbenchTabChangeDialogMessage" aria-hidden="true" tabindex="-1" hidden data-warning-message="{tmpl_var name='workbench_tab_warning_message_txt'}" data-discard-message="{tmpl_var name='workbench_tab_discard_message_txt'}">
-			  <button type="button" class="wb-dialog__backdrop" data-workbench-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}" tabindex="-1"></button>
-			  <div class="wb-dialog__surface" role="document">
-			    <div class="wb-dialog__header">
-			      <h2 class="wb-dialog__title" id="workbenchTabChangeDialogTitle">{tmpl_var name='workbench_tab_change_title_txt'}</h2>
-			      <button type="button" class="wb-dialog__close" data-workbench-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}">&times;</button>
+			<div id="heritageTabChangeDialog" class="hg-dialog hg-tab-change-dialog" role="dialog" aria-modal="true" aria-labelledby="heritageTabChangeDialogTitle" aria-describedby="heritageTabChangeDialogMessage" aria-hidden="true" tabindex="-1" hidden data-warning-message="This page contains unsaved changes." data-discard-message="Discard the unsaved changes and continue?">
+			  <button type="button" class="hg-dialog__backdrop" data-heritage-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}" tabindex="-1"></button>
+			  <div class="hg-dialog__surface" role="document">
+			    <div class="hg-dialog__header">
+			      <h2 class="hg-dialog__title" id="heritageTabChangeDialogTitle" data-heritage-i18n-de="Ungespeicherte Änderungen" data-heritage-i18n-en="Unsaved changes">Unsaved changes</h2>
+			      <button type="button" class="hg-dialog__close" data-heritage-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}">&times;</button>
 			    </div>
-			    <div class="wb-dialog__body"><p id="workbenchTabChangeDialogMessage" data-workbench-tab-confirm-message></p></div>
-			    <div class="wb-dialog__footer">
-			      <button type="button" class="wb-dialog__action wb-dialog__action--secondary" data-workbench-tab-confirm-action="cancel" data-workbench-dialog-autofocus>{tmpl_var name='workbench_tab_keep_editing_txt'}</button>
-			      <button type="button" class="wb-dialog__action wb-dialog__action--danger" data-workbench-tab-confirm-action="discard">{tmpl_var name='workbench_tab_discard_continue_txt'}</button>
-			      <button type="button" class="wb-dialog__action wb-dialog__action--primary" data-workbench-tab-confirm-action="save">{tmpl_var name='workbench_tab_save_continue_txt'}</button>
+			    <div class="hg-dialog__body"><p id="heritageTabChangeDialogMessage" data-heritage-tab-confirm-message></p></div>
+			    <div class="hg-dialog__footer">
+			      <button type="button" class="hg-dialog__action hg-dialog__action--secondary" data-heritage-tab-confirm-action="cancel" data-heritage-dialog-autofocus data-heritage-i18n-de="Weiter bearbeiten" data-heritage-i18n-en="Keep editing">Keep editing</button>
+			      <button type="button" class="hg-dialog__action hg-dialog__action--danger" data-heritage-tab-confirm-action="discard" data-heritage-i18n-de="Verwerfen und fortfahren" data-heritage-i18n-en="Discard and continue">Discard and continue</button>
+			      <button type="button" class="hg-dialog__action hg-dialog__action--primary" data-heritage-tab-confirm-action="save" data-heritage-i18n-de="Speichern und fortfahren" data-heritage-i18n-en="Save and continue">Save and continue</button>
 			    </div>
 			  </div>
 			</div>
@@ -120,7 +119,7 @@
           <div id='content' class='right'>
 			<noscript>Für diese Seite muss JavaScript aktiviert sein. / This page requires JavaScript.</noscript>
 			<form method="post" action="" id="pageForm" name="pageForm" enctype="multipart/form-data" class='form-horizontal' role='form'>
-				<div id="pageContent" role="main" aria-live="polite" tabindex="-1" data-startpage="{tmpl_var name="startpage"}"><!-- Workbench native fragment content --></div>
+				<div id="pageContent" role="main" aria-live="polite" tabindex="-1" data-startpage="{tmpl_var name="startpage"}"><!-- HERITAGE fragment content --></div>
 			</form>
           </div>
           <!-- news sidebar -->
@@ -134,10 +133,10 @@
     </div>
   </div>
 
-  <script type='application/json' id='workbench-content-messages'><tmpl_var name='workbench_content_messages_json'></script>
-  <script defer src='themes/heritage/assets/javascripts/heritage-app-before-chart.bundle.js?ver=1'></script>
+  <script type='application/json' id='heritage-content-messages'>{}</script>
+  <script defer src='themes/heritage/assets/javascripts/heritage-app-before-chart.bundle.js?ver=1.0.34'></script>
   <script defer src="js/chartjs/chart.umd.js"></script>
-  <script defer src='themes/heritage/assets/javascripts/heritage-app-after-chart.bundle.js?ver=1'></script>
+  <script defer src='themes/heritage/assets/javascripts/heritage-app-after-chart.bundle.js?ver=1.0.34'></script>
 </body>
 
 </html>

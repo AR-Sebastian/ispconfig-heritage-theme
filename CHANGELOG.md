@@ -1,11 +1,65 @@
 # Changelog
 
+## 1.0.34 – 2026-08-02
+
+- Public branding is consistently presented as ISPConfig HERITAGE.
+- Release-version cache fingerprints prevent mixed old and current assets.
+- Login, form-label and mailbox-quota accessibility contracts are corrected.
+- Validation permanently protects branding and the repaired UI contracts.
+- ZIP and TAR.GZ release artifacts are reproducible and traversal-checked.
+- Theme-owned DOM contracts use the HERITAGE namespace while ISPConfig compatibility attributes remain intact.
+- Theme-owned lifecycle and interaction events use the `heritage:*` namespace.
+- JavaScript-generated DOM state uses `data-heritage-*` consistently, including localized early-boot values.
+- Release readiness now explicitly blocks publication on removal of non-stock `workbench_*` controller dependencies.
+- Shell, login and Admin settings templates no longer require Workbench-only controller values or the custom branding endpoint.
+- Retired branding-editor CSS and its dedicated form profile were removed without changing shared form surfaces.
+- Abbreviated `data-wb-*` contracts and their JavaScript dataset properties were migrated to the explicit HERITAGE namespace.
+- Theme-owned shell, dialog, navigation, search, tooltip and generated DOM identifiers now use the HERITAGE namespace.
+- Internal JavaScript helpers, runtime properties, history state and installation guards now use the HERITAGE namespace.
+- Browser preferences migrate once from the retired Workbench storage keys to HERITAGE keys without losing theme or login choices.
+- Component classes and CSS custom properties now use the unified `hg-*` / `--hg-*` HERITAGE design namespace.
+- Dashboard layout preferences migrate to the HERITAGE storage key; internal runtime names and generated classes no longer expose Workbench-era terminology.
+- Release notes and readiness evidence now describe the completed namespace architecture and keep unproven runtime gates explicitly open.
+- Dashboard fallback content spans the complete responsive grid instead of collapsing into a narrow implicit column.
+- The redundant legacy jQuery donation toggle is skipped safely when the ISPConfig shell does not provide jQuery; unrelated inline scripts remain observable.
+- Authenticated Debian 13 desktop/mobile and light/dark smoke evidence is recorded separately from the still-open stock 3.3.1p1 release gate.
+- Theme compatibility markers match the literal `3.3dev` ABI exposed by stock ISPConfig 3.3.1p1 while the manifest retains the public release target.
+- Managed installation normalizes directory and file permissions before the atomic swap, preventing transport-specific modes from blocking Apache asset delivery.
+- Stock-runtime evidence now distinguishes authenticated account theming from ISPConfig's operator-controlled global pre-login theme.
+- An isolated real-runtime mailbox fixture verifies the localized 100 MB quota control, accessible unit association and compact mobile containment.
+- Global HERITAGE login is verified as an explicit operator opt-in; the installer preserves ISPConfig's default pre-login configuration and its conditional session-security policy.
+- The full pre-merge scope/secret/binary audit and two completed reproducible candidate builds pass; historical tag-only releases remain untouched.
+
 ## 1.0.33 – 2026-07-31
 
 - Tools and Admin now expose explicit, stable semantic workspaces.
 - Personal settings no longer inherit stale table state after dynamic navigation.
 - Resynchronization, ISPConfig import, users, PHP versions, firewall and IP addresses join real-browser acceptance.
 - Eighty-four browser states protect seven surfaces across six widths and both colour schemes.
+
+## 1.0.32 – 2026-07-31
+
+- Boolean active, locked and remote-access states use compact accessible indicators.
+- Content columns retain more useful width while row actions remain stable.
+- The full navigation remains available at 721 pixels and switches below 670 pixels.
+
+## 1.0.31 – 2026-07-31
+
+- Tools and Admin expose explicit, stable semantic workspaces.
+- Dynamic navigation clears stale table state before rendering non-table views.
+- Seven real surfaces are protected across six widths and both colour schemes.
+
+## 1.0.30 – 2026-07-31
+
+- System configuration, extensions and monitoring share one specialty-surface contract.
+- Monitoring navigation removes stale form profiles correctly.
+- Long operational headings remain contained at compact intermediate widths.
+
+## 1.0.29 – 2026-07-31
+
+- Dashboard and monitoring received dedicated real-browser acceptance coverage.
+- Embedded quota tables no longer classify the dashboard as a list page.
+- Charts, widgets and refresh controls are protected across responsive light and dark states.
 
 ## 1.0.28 – 2026-07-31
 

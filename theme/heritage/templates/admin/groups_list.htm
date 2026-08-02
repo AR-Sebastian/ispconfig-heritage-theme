@@ -1,29 +1,28 @@
-<!-- WP-965: native Workbench operations surface; controller contract unchanged. -->
 <div class='page-header'>
 	<h1><tmpl_var name="list_head_txt"></h1>
 </div>
 <p><tmpl_var name="list_desc_txt"></p>
-<section class="wb-table-workspace">
-    <div class="wb-list-toolbar">
-        <div class="wb-list-toolbar__context">
-            <span class="wb-list-toolbar__eyebrow">{tmpl_var name="toolsarea_head_txt"}</span>
+<section class="hg-table-workspace">
+    <div class="hg-list-toolbar">
+        <div class="hg-list-toolbar__context">
+            <span class="hg-list-toolbar__eyebrow">{tmpl_var name="toolsarea_head_txt"}</span>
             <strong><tmpl_var name="list_head_txt"></strong>
         </div>
-        <button class="formbutton-success" type="button" data-workbench-load-content="admin/groups_edit.php" data-load-content="admin/groups_edit.php">{tmpl_var name="add_new_record_txt"}</button>
+        <button class="formbutton-success" type="button" data-heritage-load-content="admin/groups_edit.php" data-load-content="admin/groups_edit.php">{tmpl_var name="add_new_record_txt"}</button>
     </div>
     <p><tmpl_var name="warning_txt"></p>
 
-<table class="table wb-data-table">
+<table class="table hg-data-table">
                 <thead >
                     <tr>
                         <th data-column="name"><tmpl_var name="name_txt"></th>
                         <th data-column="description"><tmpl_var name="description_txt"></th>
-                        <th class="wb-table-align-end">&nbsp;</th>
+                        <th class="hg-table-align-end">&nbsp;</th>
                     </tr>
                     <tr>
                         <td><input class="form-control" type="text" name="search_name" value="{tmpl_var name='search_name'}" /></td>
                         <td><input class="form-control" type="text" name="search_description" value="{tmpl_var name='search_description'}" /></td>
-                        <td class="wb-table-align-end">
+                        <td class="hg-table-align-end">
                             <button type="button" class="formbutton-default formbutton-narrow" name="Filter" id="Filter" value="{tmpl_var name="filter_txt"}" data-submit-form="pageForm" data-form-action="admin/groups_list.php"><span class="icon icon-filter"></span></button>
                         </td>
                     </tr>
@@ -31,9 +30,9 @@
                 <tbody>
                     <tmpl_loop name="records">
                         <tr>
-                            <td><a href="#" data-workbench-load-content="admin/groups_edit.php?id={tmpl_var name='id'}" data-load-content="admin/groups_edit.php?id={tmpl_var name='id'}">{tmpl_var name="name"}</a></td>
-                            <td><a href="#" data-workbench-load-content="admin/groups_edit.php?id={tmpl_var name='id'}" data-load-content="admin/groups_edit.php?id={tmpl_var name='id'}">{tmpl_var name="description"}</a></td>
-                            <td class="wb-table-align-end">
+                            <td><a href="#" data-heritage-load-content="admin/groups_edit.php?id={tmpl_var name='id'}" data-load-content="admin/groups_edit.php?id={tmpl_var name='id'}">{tmpl_var name="name"}</a></td>
+                            <td><a href="#" data-heritage-load-content="admin/groups_edit.php?id={tmpl_var name='id'}" data-load-content="admin/groups_edit.php?id={tmpl_var name='id'}">{tmpl_var name="description"}</a></td>
+                            <td class="hg-table-align-end">
                                 <a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="admin/groups_del.php?id={tmpl_var name='id'}&_csrf_id={tmpl_var name='csrf_id'}&_csrf_key={tmpl_var name='csrf_key'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete"></span></a>
                             </td>
                         </tr>

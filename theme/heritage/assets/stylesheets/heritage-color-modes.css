@@ -9,31 +9,31 @@ html {
   color-scheme: light;
 }
 
-html[data-wb-theme='dark'] {
+html[data-heritage-theme='dark'] {
   color-scheme: dark;
 }
 
-body.heritage-shell.wb-app-navigation-enabled {
+body.heritage-shell.hg-app-navigation-enabled {
   background: var(--hg-canvas);
   color: var(--hg-text);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-row-action--primary {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-row-action--primary {
   color: var(--hg-accent) !important;
   border-color: color-mix(in srgb, var(--hg-accent) 32%, var(--hg-border)) !important;
   background: color-mix(in srgb, var(--hg-accent) 7%, var(--hg-surface)) !important;
   box-shadow: none !important;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-row-action--primary:is(:hover, :focus-visible) {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-row-action--primary:is(:hover, :focus-visible) {
   color: var(--hg-surface) !important;
   border-color: var(--hg-accent) !important;
   background: var(--hg-accent) !important;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
-  .wb-row-action--danger,
-  .wb-action-control--danger
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
+  .hg-row-action--danger,
+  .hg-action-control--danger
 ) {
   color: var(--hg-danger) !important;
   border-color: color-mix(in srgb, var(--hg-danger) 34%, var(--hg-border)) !important;
@@ -41,61 +41,61 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
   box-shadow: none !important;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
-  .wb-row-action--danger,
-  .wb-action-control--danger
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
+  .hg-row-action--danger,
+  .hg-action-control--danger
 ):is(:hover, :focus-visible) {
   color: var(--hg-surface) !important;
   border-color: var(--hg-danger) !important;
   background: var(--hg-danger) !important;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   .alert-danger,
-  .wb-feedback--danger
+  .hg-feedback--danger
 ) {
   color: var(--hg-text);
   border-color: color-mix(in srgb, var(--hg-danger) 34%, var(--hg-border));
   background: var(--hg-danger-soft);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   .alert-warning,
-  .wb-feedback--warning
+  .hg-feedback--warning
 ) {
   color: var(--hg-text);
   border-color: color-mix(in srgb, var(--hg-warning) 32%, var(--hg-border));
   background: var(--hg-warning-soft);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   .alert-success,
-  .wb-feedback--success
+  .hg-feedback--success
 ) {
   color: var(--hg-text);
   border-color: color-mix(in srgb, var(--hg-success) 30%, var(--hg-border));
   background: var(--hg-success-soft);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
   input,
   select,
   textarea,
-  .wb-select__control,
-  .wb-owned-enhanced-select__control
+  .hg-select__control,
+  .hg-owned-enhanced-select__control
 ) {
   color-scheme: inherit;
 }
 
-html[data-wb-theme='dark'] body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-row-action--primary {
+html[data-heritage-theme='dark'] body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-row-action--primary {
   color: color-mix(in srgb, var(--hg-accent) 72%, var(--hg-text)) !important;
   border-color: color-mix(in srgb, var(--hg-accent) 32%, var(--hg-border)) !important;
   background: color-mix(in srgb, var(--hg-accent) 9%, var(--hg-surface)) !important;
 }
 
-html[data-wb-theme='dark'] body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
-  .wb-row-action--danger,
-  .wb-action-control--danger
+html[data-heritage-theme='dark'] body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
+  .hg-row-action--danger,
+  .hg-action-control--danger
 ) {
   color: var(--hg-danger) !important;
   border-color: color-mix(in srgb, var(--hg-danger) 34%, var(--hg-border)) !important;

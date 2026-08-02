@@ -1,10 +1,10 @@
-/* Heritage Glass design tokens
+/* ISPConfig HERITAGE design tokens
  *
  * Brand/accent values orient and trigger actions. Semantic states retain their
  * own colors so an ISPConfig red accent never makes ordinary UI look unsafe. */
 
 :root {
-  --hg-accent: var(--wb-action, #d71920);
+  --hg-accent: var(--hg-action, #d71920);
   --hg-accent-hover: color-mix(in srgb, var(--hg-accent) 86%, #000);
   --hg-accent-soft: color-mix(in srgb, var(--hg-accent) 7%, transparent);
   --hg-accent-line: color-mix(in srgb, var(--hg-accent) 28%, transparent);
@@ -45,23 +45,23 @@
   --hg-shadow-md: 0 14px 38px rgba(24, 39, 75, .085);
   --hg-focus-ring: 0 0 0 3px color-mix(in srgb, var(--hg-accent) 18%, transparent);
 
-  --wb-bg: var(--hg-canvas);
-  --wb-surface: var(--hg-surface);
-  --wb-surface-muted: var(--hg-surface-subtle);
-  --wb-text: var(--hg-text);
-  --wb-muted: var(--hg-text-muted);
-  --wb-text-muted: var(--hg-text-muted);
-  --wb-border: var(--hg-border);
-  --wb-success: var(--hg-success);
-  --wb-warning: var(--hg-warning);
-  --wb-danger: var(--hg-danger);
-  --wb-info: var(--hg-info);
-  --wb-shadow: var(--hg-shadow-md);
-  --wb-shadow-sm: var(--hg-shadow-sm);
-  --wb-radius: var(--hg-radius-md);
+  --hg-bg: var(--hg-canvas);
+  --hg-surface: var(--hg-surface);
+  --hg-surface-muted: var(--hg-surface-subtle);
+  --hg-text: var(--hg-text);
+  --hg-muted: var(--hg-text-muted);
+  --hg-text-muted: var(--hg-text-muted);
+  --hg-border: var(--hg-border);
+  --hg-success: var(--hg-success);
+  --hg-warning: var(--hg-warning);
+  --hg-danger: var(--hg-danger);
+  --hg-info: var(--hg-info);
+  --hg-shadow: var(--hg-shadow-md);
+  --hg-shadow-sm: var(--hg-shadow-sm);
+  --hg-radius: var(--hg-radius-md);
 }
 
-html[data-wb-theme='dark'] {
+html[data-heritage-theme='dark'] {
   --hg-accent-hover: color-mix(in srgb, var(--hg-accent) 82%, #fff);
   --hg-accent-soft: color-mix(in srgb, var(--hg-accent) 10%, transparent);
   --hg-accent-line: color-mix(in srgb, var(--hg-accent) 34%, transparent);

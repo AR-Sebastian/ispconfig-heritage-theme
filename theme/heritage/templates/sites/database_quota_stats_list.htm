@@ -1,15 +1,14 @@
-<!-- WP-945: native Workbench database list; shared template and list backend unchanged. -->
 <div class='page-header'>
 	<h1><tmpl_var name="list_head_txt"></h1>
 </div>
-<section class="wb-table-workspace">
-    <div class="wb-list-toolbar">
-        <div class="wb-list-toolbar__context">
+<section class="hg-table-workspace">
+    <div class="hg-list-toolbar">
+        <div class="hg-list-toolbar__context">
             <strong><tmpl_var name="list_head_txt"></strong>
         </div>
     </div>
 
-<table class="table wb-data-table">
+<table class="table hg-data-table">
 				<thead >
 				<tr>
 					<th data-column="database_name"><tmpl_var name="database_txt"></th>
@@ -18,7 +17,7 @@
 					<th data-column="used"><tmpl_var name="used_txt"></th>
 					<th data-column="quota"><tmpl_var name="quota_txt"></th>
 					<th data-column="percentage"><tmpl_var name="percentage_txt">
-					<th class="wb-table-actions-column wb-table-align-end">{tmpl_var name='search_limit'}</th>
+					<th class="hg-table-actions-column hg-table-align-end">{tmpl_var name='search_limit'}</th>
 				</tr>
 				<tr>
 					<td><input class="form-control" type="text" name="search_database_name" value="{tmpl_var name='search_database_name'}" /></td>
@@ -27,7 +26,7 @@
 					<td class="used">&nbsp;</td>
 					<td class="quota">&nbsp;</td>
 					<td class="percentage">&nbsp;</td>
-					<td class="wb-table-align-end">
+					<td class="hg-table-align-end">
 						<button type="button" class="formbutton-default formbutton-narrow" name="Filter" id="Filter" value="{tmpl_var name="filter_txt"}" data-submit-form="pageForm" data-form-action="sites/database_quota_stats.php"><span class="icon icon-filter"></span></button>
 					</td>
 				</tr>
@@ -35,11 +34,11 @@
 				<tbody>
 					<tmpl_loop name="records">
 						<tr>
-							<td><a href="#" data-workbench-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}">{tmpl_var name="database"}</a></td>
-							<td><a href="#" data-workbench-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}">{tmpl_var name="server_name"}</a></td>
-							<td><a href="#" data-workbench-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}">{tmpl_var name="client"}</a></td>
-							<td><a href="#" data-workbench-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}">{tmpl_var name="used"}</a></td>
-							<td><a href="#" data-workbench-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}">{tmpl_var name="quota"}</a></td>
+							<td><a href="#" data-heritage-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}">{tmpl_var name="database"}</a></td>
+							<td><a href="#" data-heritage-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}">{tmpl_var name="server_name"}</a></td>
+							<td><a href="#" data-heritage-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}">{tmpl_var name="client"}</a></td>
+							<td><a href="#" data-heritage-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}">{tmpl_var name="used"}</a></td>
+							<td><a href="#" data-heritage-load-content="sites/database_edit.php?id={tmpl_var name='id'}" data-load-content="sites/database_edit.php?id={tmpl_var name='id'}">{tmpl_var name="quota"}</a></td>
 							<td colspan="2">{tmpl_if name="progressbar" op="!=" value="-1"}<div class="progress">
 								<div class='progress-bar-striped progress-bar-{tmpl_if name="percentage" op="<" value="50"}success{tmpl_elseif name="percentage" op="<" value="75"}warning{tmpl_else}danger{/tmpl_if}' role="progressbar" style="width: {tmpl_var name="progressbar_value"}%;" aria-valuenow="{tmpl_var name="percentage"}" aria-valuemin="0" aria-valuemax="100"><span>{tmpl_var name="percentage"}%</span></div>
 						</div>{/tmpl_if}

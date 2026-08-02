@@ -1,22 +1,21 @@
-<!-- WP-970: native Workbench help surface; controller contract unchanged. -->
-<div class="page-header" data-wb-support-surface="faq-questions">
+<div class="page-header" data-heritage-support-surface="faq-questions">
     <h1>{tmpl_var name="faq_faq_questions_txt"}</h1>
 </div>
-<section class="wb-table-workspace">
-    <div class="wb-list-toolbar">
-        <div class="wb-list-toolbar__context">
-            <span class="wb-list-toolbar__eyebrow">{tmpl_var name="toolsarea_head_txt"}</span>
+<section class="hg-table-workspace">
+    <div class="hg-list-toolbar">
+        <div class="hg-list-toolbar__context">
+            <span class="hg-list-toolbar__eyebrow">{tmpl_var name="toolsarea_head_txt"}</span>
             <strong><tmpl_var name="faq_sections_txt"></strong>
         </div>
-        <button class="formbutton-success" type="button" data-workbench-load-content="help/faq_edit.php" data-load-content="help/faq_edit.php">{tmpl_var name="faq_new_question_txt"}</button>
+        <button class="formbutton-success" type="button" data-heritage-load-content="help/faq_edit.php" data-load-content="help/faq_edit.php">{tmpl_var name="faq_new_question_txt"}</button>
     </div>
-<table class="table wb-data-table">
-                <thead class="dark wb-field-group-sm">
+<table class="table hg-data-table">
+                <thead class="dark hg-field-group-sm">
                     <tr>
                         <th>{tmpl_var name="faq_question_txt"}</th>
                         <th>{tmpl_var name="faq_section_name_txt"}</th>
-                        <th class="wb-table-align-end">{tmpl_var name="faq_delete_txt"}</th>
-                        <th class="wb-table-align-end">{tmpl_var name="faq_edit_txt"}</th>
+                        <th class="hg-table-align-end">{tmpl_var name="faq_delete_txt"}</th>
+                        <th class="hg-table-align-end">{tmpl_var name="faq_edit_txt"}</th>
                     </tr>
                 </thead>
 				<tbody>
@@ -24,11 +23,11 @@
                     <tr>
                         <td width="60%">{tmpl_var name='hf_question'}</td>
                         <td width="30%">{tmpl_var name='hf_section'}</td>
-                        <td class="wb-table-align-end" width="5%">
+                        <td class="hg-table-align-end" width="5%">
                             <a class="formbutton-danger formbutton-narrow" href="#" data-confirm-action="help/faq_delete.php?id={tmpl_var name='id'}&_csrf_id={tmpl_var name='csrf_id'}&_csrf_key={tmpl_var name='csrf_key'}&phpsessid={tmpl_var name='phpsessid'}" data-confirm-message="{tmpl_var name='delete_confirmation'}"><span class="icon icon-delete"></span></a>
                         </td>
-                        <td class="wb-table-align-end" width="5%">
-                            <a class="formbutton-default formbutton-narrow" data-workbench-load-content="help/faq_edit.php?id={tmpl_var name='id'}" data-load-content="help/faq_edit.php?id={tmpl_var name='id'}"><span class="icon icon-edit"></span></a>
+                        <td class="hg-table-align-end" width="5%">
+                            <a class="formbutton-default formbutton-narrow" data-heritage-load-content="help/faq_edit.php?id={tmpl_var name='id'}" data-load-content="help/faq_edit.php?id={tmpl_var name='id'}"><span class="icon icon-edit"></span></a>
                         </td>
                     </tr>
                 </tmpl_loop>

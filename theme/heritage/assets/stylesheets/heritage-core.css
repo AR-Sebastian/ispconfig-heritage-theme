@@ -1,0 +1,160 @@
+:root {
+  --hg-bg: #f4f6fa;
+  --hg-surface: #ffffff;
+  --hg-surface-muted: #f8faff;
+  --hg-text: #172033;
+  --hg-muted: #5f6b80;
+  --hg-text-muted: var(--hg-muted);
+  --hg-border: #e1e5ed;
+  --hg-success: #117551;
+  --hg-success-ink: #117551;
+  --hg-warning: #a65f00;
+  --hg-warning-ink: #8a4e00;
+  --hg-danger: #b4232a;
+  --hg-danger-ink: #a51f27;
+  --hg-info: #1769aa;
+  --hg-info-ink: #1769aa;
+  --hg-focus: var(--hg-action, #3768e5);
+  --hg-nav-bg: #111827;
+  --hg-shadow: 0 10px 30px rgba(26, 39, 68, .08);
+  --hg-shadow-sm: 0 4px 14px rgba(26, 39, 68, .08);
+  --hg-action-contrast: #ffffff;
+  --hg-radius: 12px;
+}
+
+/* The shell sets --hg-accent from the saved branding value. Keep a fallback
+   for contexts that render the stylesheet without the shell inline style. */
+:root { --hg-action: var(--hg-accent, #cc151c); }
+
+/* semantic accent discipline.
+ *
+ * The selected accent is a brand/action signal. It must not make ordinary
+ * navigation, dashboards or filters read as warning/danger. Dedicated status
+ * tokens stay reserved for real success/warning/danger/info states. */
+:root {
+  --hg-brand-accent: var(--hg-accent, #cc151c);
+  --hg-action-muted: color-mix(in srgb, var(--hg-brand-accent) 64%, var(--hg-text-muted));
+  --hg-action-soft: color-mix(in srgb, var(--hg-brand-accent) 5%, var(--hg-surface));
+  --hg-action-softer: color-mix(in srgb, var(--hg-brand-accent) 2.5%, var(--hg-surface));
+  --hg-action-line: color-mix(in srgb, var(--hg-brand-accent) 42%, transparent);
+  --hg-action-ring: color-mix(in srgb, var(--hg-brand-accent) 16%, transparent);
+  --hg-action-quiet-text: color-mix(in srgb, var(--hg-brand-accent) 78%, var(--hg-text));
+  --hg-status-success: var(--hg-success);
+  --hg-status-warning: var(--hg-warning);
+  --hg-status-danger: var(--hg-danger);
+  --hg-status-info: var(--hg-info);
+}
+
+html[data-heritage-theme="dark"] {
+  --hg-bg: #0d1320;
+  --hg-surface: #151e2d;
+  --hg-surface-muted: #1a2638;
+  --hg-text: #edf2fb;
+  --hg-muted: #9caac0;
+  --hg-text-muted: var(--hg-muted);
+  --hg-success-ink: #68d7ae;
+  --hg-warning-ink: #f2c36b;
+  --hg-danger-ink: #ff8b93;
+  --hg-info-ink: #7ac2f2;
+  --hg-border: #2b3950;
+  --hg-nav-bg: #090e18;
+  --hg-shadow: 0 10px 30px rgba(0, 0, 0, .24);
+  --hg-shadow-sm: 0 4px 16px rgba(0, 0, 0, .28);
+  --hg-action-soft: color-mix(in srgb, var(--hg-brand-accent) 8%, var(--hg-surface));
+  --hg-action-softer: color-mix(in srgb, var(--hg-brand-accent) 4%, var(--hg-surface));
+  --hg-action-muted: color-mix(in srgb, var(--hg-brand-accent) 58%, #cbd6e7);
+  --hg-action-quiet-text: color-mix(in srgb, var(--hg-brand-accent) 56%, #edf2fb);
+  --hg-action-line: color-mix(in srgb, var(--hg-brand-accent) 34%, transparent);
+  --hg-action-ring: color-mix(in srgb, var(--hg-brand-accent) 18%, transparent);
+}
+html[data-heritage-theme="dark"] body,
+html[data-heritage-theme="dark"] #container,
+html[data-heritage-theme="dark"] #main-wrapper,
+html[data-heritage-theme="dark"] #inner-wrapper { background: var(--hg-bg); color: var(--hg-text); }
+html[data-heritage-theme="dark"] .table > thead > tr > th,
+html[data-heritage-theme="dark"] .table tfoot td,
+html[data-heritage-theme="dark"] #searchform .form-control { background: #1c2738; color: var(--hg-text); }
+html[data-heritage-theme="dark"] .form-control,
+html[data-heritage-theme="dark"] .btn-default { background: #1c2738; color: var(--hg-text); border-color: var(--hg-border); }
+.hg-password-toggle svg { width: 18px; height: 18px; display: block; }
+
+html, body { background: var(--hg-bg); color: var(--hg-text); }
+body { margin: 0; font-family: Inter, "Segoe UI", system-ui, sans-serif; }
+.hg-skip-link {
+  position: fixed;
+  z-index: 10000;
+  top: 12px;
+  left: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: var(--hg-surface);
+  color: var(--hg-action);
+  font-weight: 700;
+  box-shadow: var(--hg-shadow);
+  transform: translateY(-160%);
+}
+.hg-skip-link:focus,
+.hg-skip-link:focus-visible { transform: translateY(0) !important; }
+.hg-visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+#container, #main-wrapper, #inner-wrapper { background: transparent; }
+#pageContent *, #sidebar * { box-sizing: border-box; }
+#pageContent img, #sidebar img { max-width: 100%; height: auto; }
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--hg-focus);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --hg-border: #69758a;
+    --hg-muted: #344054;
+  }
+  html[data-heritage-theme="dark"] {
+    --hg-border: #b8c4d8;
+    --hg-muted: #e1e8f5;
+  }
+  a, button, input, select, textarea { text-decoration-thickness: 2px; }
+  button:focus-visible, a:focus-visible, input:focus-visible,
+  select:focus-visible, textarea:focus-visible {
+    outline-width: 4px;
+    outline-offset: 3px;
+  }
+  .panel, .content-box, .table-wrapper, #sidebar,
+  .hg-dashlet, .hg-dialog__surface { border-width: 2px; }
+  .alert-success, .alert-danger, .alert-warning, .alert-info,
+  .alert-notification { border-left-width: 6px; }
+}
+#pageContent:focus { outline: none; }
+#content { padding: 24px; }
+
+/* Heritage owns visual theming without default theme.min.css. */
+body.hg-app-navigation-enabled {
+  color: var(--hg-text);
+  background: var(--hg-canvas);
+  -webkit-tap-highlight-color: color-mix(in srgb, var(--hg-action) 24%, transparent);
+}
+
+body.hg-app-navigation-enabled .green { color: var(--hg-success-ink); }

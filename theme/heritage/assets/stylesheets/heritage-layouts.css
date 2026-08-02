@@ -1,16 +1,16 @@
-/* ISPConfig Heritage Glass
+/* ISPConfig HERITAGE
  *
  * Page-level composition for dashboard, lists and forms. This layer does not
  * alter application behaviour; it turns the shared runtime primitives into a
  * coherent Heritage workspace.
  */
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent {
+body.heritage-shell.hg-app-navigation-enabled #pageContent {
   --hg-page-gap: clamp(14px, 1.5vw, 22px);
   display: flow-root;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-header {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-page-header {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 8px 24px;
@@ -20,20 +20,20 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-header {
   border-bottom: 1px solid var(--hg-border);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-page-header='true'] {
+body.heritage-shell.hg-app-navigation-enabled #pageContent [data-heritage-page-header='true'] {
   inline-size: 100%;
   text-align: start;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-page-header='true'] :is(h1, h2) {
+body.heritage-shell.hg-app-navigation-enabled #pageContent [data-heritage-page-header='true'] :is(h1, h2) {
   text-wrap: balance;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-page-header='true'] .wb-page-header__actions > :is(a, button) {
+body.heritage-shell.hg-app-navigation-enabled #pageContent [data-heritage-page-header='true'] .hg-page-header__actions > :is(a, button) {
   min-block-size: 42px;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-header__eyebrow {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-page-header__eyebrow {
   color: var(--hg-accent);
   font-size: 10px;
   font-weight: 820;
@@ -41,14 +41,14 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-header__eyeb
   text-transform: uppercase;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-header > h1 {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-page-header > h1 {
   max-width: 28ch;
   margin: 2px 0 0;
   font-size: clamp(25px, 3vw, 38px);
   line-height: 1.05;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-header__actions {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-page-header__actions {
   display: flex;
   grid-column: 2;
   grid-row: 1 / span 2;
@@ -57,7 +57,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-header__acti
   gap: 8px;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-meta {
+body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-page-meta {
   display: flex;
   min-height: 34px;
   align-items: center;
@@ -66,27 +66,27 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-meta {
   margin-block: 10px var(--hg-page-gap);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-page-meta='true'] {
+body.heritage-shell.hg-app-navigation-enabled #pageContent [data-heritage-page-meta='true'] {
   inline-size: 100%;
   justify-content: flex-start;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-command-bar='true'] {
+body.heritage-shell.hg-app-navigation-enabled #pageContent [data-heritage-command-bar='true'] {
   isolation: isolate;
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-primary-action='true'] {
+body.heritage-shell.hg-app-navigation-enabled #pageContent [data-heritage-primary-action='true'] {
   min-block-size: 42px;
   box-shadow: 0 8px 20px color-mix(in srgb, var(--hg-accent) 15%, transparent);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-primary-action='true']:is(:hover, :focus-visible) {
+body.heritage-shell.hg-app-navigation-enabled #pageContent [data-heritage-primary-action='true']:is(:hover, :focus-visible) {
   box-shadow: 0 10px 24px color-mix(in srgb, var(--hg-accent) 22%, transparent);
 }
 
-body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
-  .wb-form-state,
-  .wb-submit-feedback
+body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
+  .hg-form-state,
+  .hg-submit-feedback
 ) {
   min-height: 32px;
   padding: 6px 11px;
@@ -98,7 +98,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
 
 /* Lists */
 
-body.heritage-shell.wb-list-page #pageContent > .table-wrapper {
+body.heritage-shell.hg-list-page #pageContent > .table-wrapper {
   position: relative;
   overflow: clip;
   margin-block: var(--hg-page-gap);
@@ -107,7 +107,7 @@ body.heritage-shell.wb-list-page #pageContent > .table-wrapper {
   box-shadow: var(--hg-shadow-sm);
 }
 
-body.heritage-shell.wb-list-page #pageContent > .table-wrapper > :is(
+body.heritage-shell.hg-list-page #pageContent > .table-wrapper > :is(
   .table-responsive,
   .table-scroll-wrapper
 ) {
@@ -116,10 +116,10 @@ body.heritage-shell.wb-list-page #pageContent > .table-wrapper > :is(
   box-shadow: none;
 }
 
-body.heritage-shell.wb-list-page #pageContent :is(
-  .wb-list-toolbar,
-  .wb-list-summary,
-  .wb-table-commandbar
+body.heritage-shell.hg-list-page #pageContent :is(
+  .hg-list-toolbar,
+  .hg-list-summary,
+  .hg-table-commandbar
 ) {
   display: flex;
   min-height: 62px;
@@ -133,24 +133,24 @@ body.heritage-shell.wb-list-page #pageContent :is(
     var(--hg-surface);
 }
 
-body.heritage-shell.wb-list-page #pageContent :is(
-  .wb-list-toolbar,
-  .wb-list-summary,
-  .wb-table-commandbar
+body.heritage-shell.hg-list-page #pageContent :is(
+  .hg-list-toolbar,
+  .hg-list-summary,
+  .hg-table-commandbar
 ) > :last-child {
   margin-inline-start: auto;
 }
 
-body.heritage-shell.wb-list-page #pageContent :is(
-  .wb-filter-row,
+body.heritage-shell.hg-list-page #pageContent :is(
+  .hg-filter-row,
   tr.filter,
   tr[class*='filter']
 ) {
   background: var(--hg-surface-subtle);
 }
 
-body.heritage-shell.wb-list-page #pageContent :is(
-  .wb-filter-row,
+body.heritage-shell.hg-list-page #pageContent :is(
+  .hg-filter-row,
   tr.filter,
   tr[class*='filter']
 ) > :is(td, th) {
@@ -161,8 +161,8 @@ body.heritage-shell.wb-list-page #pageContent :is(
   vertical-align: middle;
 }
 
-body.heritage-shell.wb-list-page #pageContent :is(
-  .wb-filter-row,
+body.heritage-shell.hg-list-page #pageContent :is(
+  .hg-filter-row,
   tr.filter,
   tr[class*='filter']
 ) > :is(td, th):empty {
@@ -171,8 +171,8 @@ body.heritage-shell.wb-list-page #pageContent :is(
   border-color: var(--hg-border);
 }
 
-body.heritage-shell.wb-list-page #pageContent :is(
-  .wb-filter-row,
+body.heritage-shell.hg-list-page #pageContent :is(
+  .hg-filter-row,
   tr.filter,
   tr[class*='filter']
 ) :is(input, select) {
@@ -181,9 +181,9 @@ body.heritage-shell.wb-list-page #pageContent :is(
   min-height: 38px;
 }
 
-body.heritage-shell.wb-list-page #pageContent :is(
+body.heritage-shell.hg-list-page #pageContent :is(
   .pagination,
-  .wb-pagination
+  .hg-pagination
 ) {
   display: flex;
   min-height: 58px;
@@ -196,16 +196,16 @@ body.heritage-shell.wb-list-page #pageContent :is(
   background: var(--hg-surface);
 }
 
-body.heritage-shell.wb-list-page #pageContent :is(
+body.heritage-shell.hg-list-page #pageContent :is(
   .pagination,
-  .wb-pagination
+  .hg-pagination
 ) :is(a, button, span) {
   min-width: 36px;
   min-height: 36px;
   border-radius: 10px;
 }
 
-body.heritage-shell.wb-list-page #pageContent .wb-content-state {
+body.heritage-shell.hg-list-page #pageContent .hg-content-state {
   min-height: 270px;
   margin: 0;
   border: 0;
@@ -214,12 +214,12 @@ body.heritage-shell.wb-list-page #pageContent .wb-content-state {
 
 /* Forms */
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form {
   display: grid;
   gap: var(--hg-page-gap);
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .hg-form-tabs-shell {
   overflow: clip;
   border: 1px solid var(--hg-border);
   border-radius: var(--hg-radius-xl);
@@ -227,7 +227,7 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell {
   box-shadow: var(--hg-shadow-sm);
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .hg-form-tabs {
   min-height: 55px;
   margin: 0;
   padding: 0 12px;
@@ -235,25 +235,25 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs {
     linear-gradient(180deg, var(--hg-surface), var(--hg-surface-subtle));
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell > .tab-content {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .hg-form-tabs-shell > .tab-content {
   padding: clamp(18px, 2.3vw, 32px);
   border: 0;
   background: var(--hg-surface);
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form :is(
   fieldset,
   .panel,
-  .wb-content-panel
+  .hg-content-panel
 ) {
   margin-block-end: var(--hg-page-gap);
   padding: clamp(16px, 2vw, 26px);
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form :is(
   legend,
   .panel-heading,
-  .wb-content-panel__header
+  .hg-content-panel__header
 ) {
   margin-block-end: 18px;
   padding-block-end: 12px;
@@ -262,7 +262,7 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
   font-weight: 780;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .form-group {
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .form-group {
   display: grid;
   grid-template-columns: minmax(145px, .38fr) minmax(220px, 1fr);
   gap: 10px clamp(14px, 2vw, 28px);
@@ -270,14 +270,14 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form .form-group {
   margin-block-end: 16px;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .form-group > :is(
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .form-group > :is(
   label,
   .control-label
 ) {
   padding-block-start: 10px;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form .form-group > :is(
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form .form-group > :is(
   .form-control,
   .input-group,
   .controls,
@@ -286,10 +286,10 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form .form-group > :is(
   min-width: 0;
 }
 
-body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+body.heritage-shell.hg-form-page #pageForm.hg-modern-form :is(
   .button-wrapper,
   .form-actions,
-  .wb-form-actions
+  .hg-form-actions
 ) {
   position: sticky;
   z-index: 12;
@@ -308,29 +308,29 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
   backdrop-filter: blur(18px) saturate(130%);
 }
 
-@container wb-page-content (max-width: 760px) {
-  body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-header {
+@container hg-page-content (max-width: 760px) {
+  body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-page-header {
     grid-template-columns: minmax(0, 1fr);
     align-items: start;
   }
 
-  body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-header__actions {
+  body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-page-header__actions {
     grid-column: 1;
     grid-row: auto;
     width: 100%;
     justify-content: stretch;
   }
 
-  body.heritage-shell.wb-app-navigation-enabled #pageContent .wb-page-header__actions > * {
+  body.heritage-shell.hg-app-navigation-enabled #pageContent .hg-page-header__actions > * {
     flex: 1 1 180px;
   }
 
-  body.heritage-shell.wb-form-page #pageForm.wb-modern-form .form-group {
+  body.heritage-shell.hg-form-page #pageForm.hg-modern-form .form-group {
     grid-template-columns: minmax(0, 1fr);
     gap: 6px;
   }
 
-  body.heritage-shell.wb-form-page #pageForm.wb-modern-form .form-group > :is(
+  body.heritage-shell.hg-form-page #pageForm.hg-modern-form .form-group > :is(
     label,
     .control-label
   ) {
@@ -338,34 +338,34 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
   }
 }
 
-@container wb-page-content (max-width: 520px) {
-  body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-page-header='true'] {
+@container hg-page-content (max-width: 520px) {
+  body.heritage-shell.hg-app-navigation-enabled #pageContent [data-heritage-page-header='true'] {
     gap: 10px;
     padding-block-end: 14px;
   }
 
-  body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-page-header='true'] :is(h1, h2) {
+  body.heritage-shell.hg-app-navigation-enabled #pageContent [data-heritage-page-header='true'] :is(h1, h2) {
     max-inline-size: none;
     font-size: clamp(24px, 8vw, 32px);
     text-align: start;
   }
 
-  body.heritage-shell.wb-app-navigation-enabled #pageContent [data-heritage-page-meta='true'] {
+  body.heritage-shell.hg-app-navigation-enabled #pageContent [data-heritage-page-meta='true'] {
     align-items: stretch;
   }
 
-  body.heritage-shell.wb-list-page #pageContent :is(
-    .wb-list-toolbar,
-    .wb-list-summary,
-    .wb-table-commandbar
+  body.heritage-shell.hg-list-page #pageContent :is(
+    .hg-list-toolbar,
+    .hg-list-summary,
+    .hg-table-commandbar
   ) > * {
     flex: 1 1 100%;
   }
 
-  body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
+  body.heritage-shell.hg-form-page #pageForm.hg-modern-form :is(
     .button-wrapper,
     .form-actions,
-    .wb-form-actions
+    .hg-form-actions
   ) > * {
     flex: 1 1 100%;
   }

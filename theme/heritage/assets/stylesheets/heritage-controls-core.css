@@ -1,0 +1,569 @@
+/*
+ * authoritative authenticated control surfaces.
+ *
+ * Native ISPConfig fields remain the source of truth. This layer owns only
+ * the presentation of advanced text fields, date/time helpers and searchable
+ * selects after the shared form workspace has established its geometry.
+ */
+
+body.hg-form-page #pageForm.hg-modern-form textarea.hg-textarea-field {
+  min-height: 132px;
+  padding: 12px 14px;
+  resize: vertical;
+  line-height: 1.55;
+  tab-size: 2;
+}
+
+body.hg-form-page #pageForm.hg-modern-form textarea.hg-code-field {
+  min-height: 210px;
+  overflow: auto;
+  color: color-mix(in srgb, var(--hg-text) 94%, var(--hg-action));
+  border-color: color-mix(in srgb, var(--hg-action) 18%, var(--hg-border));
+  background: color-mix(in srgb, var(--hg-surface-muted) 92%, var(--hg-action));
+  font-family: ui-monospace, SFMono-Regular, Consolas, 'Liberation Mono', monospace;
+  font-size: 13px;
+  white-space: pre;
+}
+
+body.hg-form-page #pageForm.hg-modern-form textarea.hg-code-field:focus {
+  border-color: var(--hg-action);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--hg-action) 15%, transparent);
+}
+
+body.hg-form-page #pageForm.hg-modern-form textarea.hg-readonly-field {
+  cursor: text;
+  opacity: .88;
+}
+
+.hg-date-time-control {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  align-items: stretch;
+}
+
+.hg-date-time-control > .form-control {
+  min-width: 0;
+  padding-right: 52px !important;
+  flex: 1 1 auto;
+}
+
+.hg-date-time-control__trigger {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  display: inline-grid !important;
+  width: 36px !important;
+  min-width: 36px !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  padding: 0 !important;
+  place-items: center;
+  color: var(--hg-text-muted) !important;
+  border: 1px solid transparent !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  transform: translateY(-50%) !important;
+}
+
+.hg-date-time-control__trigger:hover,
+.hg-date-time-control__trigger:focus-visible {
+  color: var(--hg-action) !important;
+  border-color: color-mix(in srgb, var(--hg-action) 32%, var(--hg-border)) !important;
+  background: color-mix(in srgb, var(--hg-action) 7%, var(--hg-surface)) !important;
+}
+
+.hg-date-time-control__trigger:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--hg-action) 38%, transparent);
+  outline-offset: 1px;
+}
+
+.hg-date-time-control__trigger svg {
+  width: 19px;
+  height: 19px;
+}
+
+.hg-date-time-control__native {
+  position: absolute;
+  right: 8px;
+  bottom: 2px;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  border: 0;
+  opacity: .001;
+  pointer-events: none;
+}
+
+.hg-date-time-control__text--invalid:not(:focus) {
+  border-color: color-mix(in srgb, var(--hg-warning) 58%, var(--hg-border)) !important;
+}
+
+.hg-select {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  min-width: 0;
+  color: var(--hg-text);
+  vertical-align: middle;
+}
+
+.hg-select__native {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.hg-select__control {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 22px;
+  align-items: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 7px 10px 7px 12px;
+  color: var(--hg-text);
+  text-align: left;
+  border: 1px solid var(--hg-border);
+  border-radius: var(--hg-radius-sm, 9px);
+  background: var(--hg-field-bg, var(--hg-surface));
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.hg-select__control:hover {
+  border-color: color-mix(in srgb, var(--hg-action) 55%, var(--hg-border));
+}
+
+.hg-select__control:focus-visible,
+.hg-select.is-open .hg-select__control {
+  border-color: var(--hg-action);
+  outline: 2px solid color-mix(in srgb, var(--hg-action) 38%, transparent);
+  outline-offset: 1px;
+}
+
+.hg-select__control:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.hg-select__value {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hg-select__value--placeholder { color: var(--hg-text-muted); }
+
+.hg-select__value--multiple {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  white-space: normal;
+}
+
+.hg-select__chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 2px 8px;
+  color: var(--hg-text);
+  border: 1px solid color-mix(in srgb, var(--hg-action) 30%, var(--hg-border));
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--hg-action) 12%, var(--hg-surface));
+}
+
+.hg-select__arrow {
+  display: grid;
+  width: 18px;
+  height: 18px;
+  place-items: center;
+  color: var(--hg-text-muted);
+  transition: transform .16s ease;
+}
+
+.hg-select__arrow svg { width: 16px; height: 16px; }
+.hg-select.is-open .hg-select__arrow { transform: rotate(180deg); }
+
+.hg-select__panel {
+  position: absolute;
+  z-index: 10020;
+  top: calc(100% + 6px);
+  left: 0;
+  width: max(100%, 260px);
+  max-width: min(520px, calc(100vw - 28px));
+  padding: 8px;
+  color: var(--hg-text);
+  border: 1px solid var(--hg-border);
+  border-radius: var(--hg-radius-md, 12px);
+  background: var(--hg-surface);
+  box-shadow: var(--hg-shadow-lg, 0 18px 45px rgba(15, 23, 42, .2));
+  overflow: hidden;
+}
+
+.hg-select__panel[hidden] { display: none !important; }
+
+.hg-select__search {
+  width: 100%;
+  min-height: 40px;
+  margin: 0 0 7px;
+  padding: 7px 10px;
+  color: var(--hg-text);
+  border: 1px solid var(--hg-border);
+  border-radius: 8px;
+  outline: 0;
+  background: var(--hg-field-bg, var(--hg-surface));
+}
+
+.hg-select__search:focus {
+  border-color: var(--hg-action);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--hg-action) 25%, transparent);
+}
+
+.hg-select__list {
+  display: block;
+  max-height: min(300px, 48vh);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+body > .hg-select__panel {
+  z-index: 10080;
+  box-shadow: 0 24px 70px color-mix(in srgb, var(--hg-text) 20%, transparent);
+}
+
+body > .hg-select__panel .hg-select__list {
+  max-height: min(300px, calc(var(--hg-select-overlay-max-height, 48vh) - 60px));
+}
+
+.hg-select__group { display: block; }
+
+.hg-select__group + .hg-select__group {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--hg-border);
+}
+
+.hg-select__group-label {
+  padding: 7px 10px 4px;
+  color: var(--hg-text-muted);
+  font-size: .76rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.hg-select__option {
+  display: block;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 10px;
+  color: var(--hg-text);
+  text-align: left;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.hg-select__option:hover,
+.hg-select__option:focus-visible {
+  color: var(--hg-action-contrast);
+  outline: 0;
+  background: var(--hg-action);
+}
+
+.hg-select__option.is-selected {
+  color: var(--hg-action);
+  background: color-mix(in srgb, var(--hg-action) 13%, var(--hg-surface));
+  font-weight: 700;
+}
+
+.hg-select__option.is-selected:hover,
+.hg-select__option.is-selected:focus-visible {
+  color: var(--hg-action-contrast);
+  background: var(--hg-action);
+}
+
+.hg-select__option:disabled {
+  opacity: .48;
+  cursor: not-allowed;
+}
+
+.hg-select__empty {
+  padding: 14px 10px;
+  color: var(--hg-text-muted);
+  text-align: center;
+}
+
+.hg-select--compact {
+  width: auto;
+  min-width: 0;
+}
+
+.hg-select--compact .hg-select__control {
+  min-height: 36px;
+  padding: 6px 8px 6px 10px;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 760;
+}
+
+.hg-select--compact .hg-select__panel,
+.hg-select__panel--compact {
+  right: 0;
+  left: auto;
+  width: max(100%, 92px);
+  min-width: 92px;
+  max-width: min(180px, calc(100vw - 28px));
+  padding: 5px;
+}
+
+.hg-select--compact .hg-select__list,
+.hg-select__panel--compact .hg-select__list {
+  max-height: min(220px, 42vh);
+}
+
+.hg-select--compact .hg-select__option,
+.hg-select__panel--compact .hg-select__option {
+  min-height: 34px;
+  padding: 7px 9px;
+  font-size: 12px;
+  font-weight: 760;
+}
+
+.hg-select--page-size {
+  width: 72px;
+  min-width: 72px;
+}
+
+.hg-select__panel--page-size {
+  width: max(92px, min(100%, 128px));
+}
+
+html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form textarea.hg-code-field,
+html[data-heritage-theme='dark'] .hg-select__control,
+html[data-heritage-theme='dark'] .hg-select__search,
+html[data-heritage-theme='dark'] .hg-select__panel,
+html[data-heritage-theme='dark'] body > .hg-select__panel {
+  color: var(--hg-text);
+  border-color: var(--hg-border);
+  background: var(--hg-surface);
+}
+
+@media (max-width: 720px) {
+  body.hg-form-page #pageForm.hg-modern-form textarea.hg-code-field {
+    min-height: 180px;
+    font-size: 12px;
+  }
+
+  .hg-select__panel {
+    position: fixed;
+    z-index: 10040;
+    top: auto;
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    width: auto;
+    max-width: none;
+  }
+
+  .hg-select__list { max-height: min(52vh, 420px); }
+  .hg-select__option { min-height: 46px; }
+
+  .hg-select--compact .hg-select__panel,
+  .hg-select__panel--compact {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    bottom: auto;
+    left: auto;
+    width: max(100%, 92px);
+    max-width: min(180px, calc(100vw - 28px));
+  }
+
+  .hg-select--compact .hg-select__list { max-height: min(220px, 42vh); }
+  .hg-select--compact .hg-select__option { min-height: 34px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hg-select__arrow { transition: none; }
+}
+
+/* portaled select overlay hardening for list controls. */
+body > .hg-select__panel {
+  box-sizing: border-box;
+  color: var(--hg-text);
+  border-color: var(--hg-border);
+  background: var(--hg-surface);
+}
+
+body > .hg-select__panel--compact,
+body > .hg-select__panel--page-size {
+  padding: 6px;
+}
+
+body > .hg-select__panel--page-size {
+  width: 108px !important;
+  inline-size: 108px !important;
+  min-width: 92px !important;
+  min-inline-size: 92px !important;
+  max-width: min(128px, calc(100vw - 28px)) !important;
+  max-inline-size: min(128px, calc(100vw - 28px)) !important;
+  overflow: hidden;
+  border-radius: 14px;
+  box-shadow: 0 18px 44px color-mix(in srgb, #0f172a 18%, transparent);
+}
+
+body > .hg-select__panel--page-size .hg-select__search {
+  display: none !important;
+}
+
+body > .hg-select__panel--page-size .hg-select__list {
+  max-height: min(228px, 44vh);
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--hg-action) 36%, transparent) transparent;
+}
+
+body > .hg-select__panel--page-size .hg-select__list::-webkit-scrollbar { width: 8px; }
+body > .hg-select__panel--page-size .hg-select__list::-webkit-scrollbar-track { background: transparent; }
+body > .hg-select__panel--page-size .hg-select__list::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--hg-action) 36%, transparent);
+  background-clip: padding-box;
+}
+
+body > .hg-select__panel--page-size .hg-select__option {
+  min-height: 40px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  justify-content: flex-start;
+  font-weight: 820;
+  white-space: nowrap;
+}
+
+body > .hg-select__panel--page-size .hg-select__option.is-selected {
+  color: var(--hg-action);
+  background: color-mix(in srgb, var(--hg-action) 14%, var(--hg-surface));
+}
+
+body > .hg-select__panel--page-size .hg-select__option:is(:hover, :focus-visible) {
+  color: var(--hg-action-contrast);
+  background: var(--hg-action);
+}
+
+html[data-heritage-theme='dark'] body > .hg-select__panel--page-size .hg-select__option.is-selected {
+  color: color-mix(in srgb, var(--hg-action) 54%, #fff);
+  background: color-mix(in srgb, var(--hg-action) 18%, var(--hg-surface));
+}
+
+/* compact table dropdown convergence.
+ * Page-size controls can come from different templates or addons. Once the
+ * controller detects a page-size-like select, the overlay must stay compact,
+ * free of the searchable field and detached from wide table scrollbars. */
+body.hg-list-page .hg-select--page-size .hg-select__control {
+  min-width: 72px;
+  max-width: 84px;
+  justify-self: end;
+}
+
+body > .hg-select__panel--page-size {
+  display: block;
+  overscroll-behavior: contain;
+}
+
+body > .hg-select__panel--page-size .hg-select__option {
+  display: flex;
+  align-items: center;
+}
+
+body > .hg-select__panel--page-size .hg-select__option::after {
+  width: 8px;
+  height: 8px;
+  margin-left: auto;
+  border-radius: 999px;
+  background: transparent;
+  content: '';
+}
+
+body > .hg-select__panel--page-size .hg-select__option.is-selected::after {
+  background: currentColor;
+  box-shadow: 0 0 0 3px color-mix(in srgb, currentColor 14%, transparent);
+}
+
+@media (max-width: 720px) {
+  body > .hg-select__panel--page-size {
+    position: fixed !important;
+    inline-size: 108px !important;
+    max-inline-size: min(128px, calc(100vw - 28px)) !important;
+  }
+}
+
+/* resilient premium overlay layer.
+ *
+ * Selects are used inside tables, forms, branding settings and addons. The
+ * visual shell must never expose a full-width table popup, a white native
+ * panel or clipped controls while the viewport is being resized.
+ */
+.hg-select,
+.hg-select__control,
+:where(.hg-select__panel) {
+  box-sizing: border-box;
+}
+
+:where(.hg-select__panel) {
+  min-inline-size: min(100%, 220px);
+}
+
+body > .hg-select__panel {
+  position: fixed !important;
+  max-block-size: min(420px, calc(100vh - 24px));
+  overflow: hidden;
+}
+
+body > .hg-select__panel:not(.hg-select__panel--page-size):not(.hg-select__panel--compact) {
+  inline-size: min(max(var(--hg-select-overlay-width, 300px), 220px), calc(100vw - 24px)) !important;
+}
+
+body > .hg-select__panel .hg-select__search,
+body > .hg-select__panel .hg-select__option {
+  color: var(--hg-text) !important;
+  background-color: transparent;
+}
+
+body > .hg-select__panel .hg-select__option:is(:hover, :focus-visible) {
+  color: var(--hg-action-contrast) !important;
+  background: var(--hg-action) !important;
+}
+
+html[data-heritage-theme='dark'] body > .hg-select__panel,
+html[data-heritage-theme='dark'] body > .hg-select__panel .hg-select__search {
+  color-scheme: dark;
+  color: var(--hg-text) !important;
+  border-color: color-mix(in srgb, var(--hg-action) 12%, var(--hg-border)) !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--hg-surface-muted) 78%, var(--hg-surface)), var(--hg-surface)) !important;
+}
+
+@media (max-width: 520px) {
+  body > .hg-select__panel:not(.hg-select__panel--compact):not(.hg-select__panel--page-size) {
+    inset-inline: 12px !important;
+    inline-size: auto !important;
+    max-inline-size: none !important;
+  }
+
+  body > .hg-select__panel--page-size {
+    right: 12px !important;
+    left: auto !important;
+  }
+}

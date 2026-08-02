@@ -4,10 +4,10 @@
   document.documentElement.classList.add('heritage-runtime');
 
   function syncThemeToggleLabel() {
-    var toggle = document.querySelector('.wb-theme-toggle');
+    var toggle = document.querySelector('.hg-theme-toggle');
     if (!toggle) return;
 
-    var isDark = document.documentElement.getAttribute('data-wb-theme') === 'dark';
+    var isDark = document.documentElement.getAttribute('data-heritage-theme') === 'dark';
     var isGerman = (document.documentElement.lang || '').toLowerCase().indexOf('de') === 0;
     var label = isGerman
       ? (isDark ? 'Zum hellen Design wechseln' : 'Zum dunklen Design wechseln')
@@ -18,14 +18,14 @@
   }
 
   function markIdentityColumns() {
-    document.querySelectorAll('.wb-list-command-bar__actions').forEach(function (actions) {
-      var primaryActions = actions.querySelectorAll(':scope > .wb-list-command-bar__primary');
+    document.querySelectorAll('.hg-list-command-bar__actions').forEach(function (actions) {
+      var primaryActions = actions.querySelectorAll(':scope > .hg-list-command-bar__primary');
       primaryActions.forEach(function (action, index) {
         action.classList.toggle('hg-list-action--secondary', index > 0);
       });
     });
 
-    document.querySelectorAll('.wb-data-table').forEach(function (table) {
+    document.querySelectorAll('.hg-data-table').forEach(function (table) {
       var headers = Array.prototype.slice.call(table.querySelectorAll('thead tr:first-child > th, thead tr:first-child > td'));
       if (!headers.length) return;
       var labels = headers.map(function (header) {
@@ -43,11 +43,11 @@
           if (row.children[index]) row.children[index].classList.add('hg-table-column--retired');
         });
       });
-      var firstDataRow = table.querySelector('tbody > tr.wb-table-data-row');
-      var actionCell = firstDataRow ? firstDataRow.querySelector('.wb-table-actions') : null;
+      var firstDataRow = table.querySelector('tbody > tr.hg-table-data-row');
+      var actionCell = firstDataRow ? firstDataRow.querySelector('.hg-table-actions') : null;
       var actionIndex = actionCell ? Array.prototype.indexOf.call(firstDataRow.children, actionCell) : -1;
       if (actionIndex >= 0 && headers[actionIndex]) {
-        headers[actionIndex].classList.add('wb-table-actions');
+        headers[actionIndex].classList.add('hg-table-actions');
         if (!headers[actionIndex].textContent.trim()) {
           headers[actionIndex].textContent = (document.documentElement.lang || '').toLowerCase().indexOf('de') === 0
             ? 'Aktionen'
@@ -87,7 +87,7 @@
       });
 
       table.querySelectorAll('tbody > tr').forEach(function (row) {
-        if (!row.classList.contains('wb-table-data-row')) return;
+        if (!row.classList.contains('hg-table-data-row')) return;
         var identity = identityIndex >= 0 ? row.children[identityIndex] : null;
         var primary = row.children[primaryIndex];
         if (!primary) return;
@@ -163,15 +163,15 @@
 
     if (title) {
       var normalizedTitle = title.textContent.trim().replace(/\s+/g, ' ').toLowerCase();
-      pageContent.querySelectorAll('h2, h3, .fieldset-legend, .wb-list-section-heading').forEach(function (heading) {
+      pageContent.querySelectorAll('h2, h3, .fieldset-legend, .hg-list-section-heading').forEach(function (heading) {
         if (heading === title || heading.querySelector('button, a, input, select')) return;
         var normalizedHeading = heading.textContent.trim().replace(/\s+/g, ' ').toLowerCase();
         heading.classList.toggle('hg-redundant-heading', normalizedHeading !== '' && normalizedHeading === normalizedTitle);
       });
     }
 
-    pageContent.querySelectorAll('.wb-form-tabs-shell').forEach(function (shell) {
-      var tabs = shell.querySelectorAll('.wb-form-tabs > li, .nav-tabs > li');
+    pageContent.querySelectorAll('.hg-form-tabs-shell').forEach(function (shell) {
+      var tabs = shell.querySelectorAll('.hg-form-tabs > li, .nav-tabs > li');
       shell.classList.toggle('hg-single-tab-shell', tabs.length === 1);
     });
 
@@ -212,24 +212,24 @@
   function syncModuleContext() {
     var pageContent = document.getElementById('pageContent');
     if (!pageContent) return;
-    var activeModule = String(window.ISPConfig && window.ISPConfig.workbenchActiveModule || '').toLowerCase();
-    var isMonitor = !!pageContent.querySelector('.wb-monitor-workspace, .systemmonitor, .stateview, .panel_system, .codeview');
-    var family = document.body.classList.contains('wb-dashboard-page') ? 'dashboard' :
+    var activeModule = String(window.ISPConfig && window.ISPConfig.heritageActiveModule || '').toLowerCase();
+    var isMonitor = !!pageContent.querySelector('.hg-monitor-workspace, .systemmonitor, .stateview, .panel_system, .codeview');
+    var family = document.body.classList.contains('hg-dashboard-page') ? 'dashboard' :
       (isMonitor ? 'monitor' :
-        (pageContent.querySelector('.wb-extension-workspace') ? 'extension' :
-          (document.body.classList.contains('wb-form-profile--billing') || pageContent.querySelector('.wb-billing-product, .wb-billing-form, [data-billing-scope]') ? 'billing' :
-            (document.body.classList.contains('wb-form-profile--system-config') || pageContent.querySelector('.wb-system-workspace, .system-config') ? 'system' :
+        (pageContent.querySelector('.hg-extension-workspace') ? 'extension' :
+          (document.body.classList.contains('hg-form-profile--billing') || pageContent.querySelector('.hg-billing-product, .hg-billing-form, [data-billing-scope]') ? 'billing' :
+            (document.body.classList.contains('hg-form-profile--system-config') || pageContent.querySelector('.hg-system-workspace, .system-config') ? 'system' :
               (/^(tools|admin)$/.test(activeModule) ? activeModule : 'standard')))));
-    document.body.classList.toggle('wb-monitor-page', isMonitor);
-    pageContent.classList.toggle('wb-monitor-surface', isMonitor);
+    document.body.classList.toggle('hg-monitor-page', isMonitor);
+    pageContent.classList.toggle('hg-monitor-surface', isMonitor);
     if (isMonitor) {
-      document.body.classList.remove('wb-list-page', 'wb-form-page');
+      document.body.classList.remove('hg-list-page', 'hg-form-page');
       Array.prototype.slice.call(document.body.classList).forEach(function (className) {
-        if (className.indexOf('wb-form-profile--') === 0) document.body.classList.remove(className);
+        if (className.indexOf('hg-form-profile--') === 0) document.body.classList.remove(className);
       });
-      delete document.body.dataset.wbFormProfiles;
+      delete document.body.dataset.heritageFormProfiles;
     }
-    if (!pageContent.querySelector('table')) pageContent.classList.remove('wb-table-workspace', 'wb-table-workspace--finalized');
+    if (!pageContent.querySelector('table')) pageContent.classList.remove('hg-table-workspace', 'hg-table-workspace--finalized');
     document.body.setAttribute('data-heritage-module-family', family);
     pageContent.setAttribute('data-heritage-module-family', family);
     if (isMonitor) pageContent.setAttribute('data-heritage-module-workspace', 'monitor');
@@ -237,13 +237,13 @@
     else if (/^(tools|admin)$/.test(family)) pageContent.setAttribute('data-heritage-module-workspace', family);
     else if (/^(monitor|system|tools|admin)$/.test(pageContent.getAttribute('data-heritage-module-workspace') || '')) pageContent.removeAttribute('data-heritage-module-workspace');
     document.body.setAttribute('data-heritage-surface', isMonitor ? 'monitor' :
-      (document.body.classList.contains('wb-list-page') ? 'list' :
-        (document.body.classList.contains('wb-form-page') ? 'form' : 'module')));
+      (document.body.classList.contains('hg-list-page') ? 'list' :
+        (document.body.classList.contains('hg-form-page') ? 'form' : 'module')));
 
-    pageContent.querySelectorAll('.wb-monitor-workspace, .wb-extension-workspace, .wb-statistics-workspace, .wb-specialty-workspace, .wb-billing-product, .wb-billing-form, .wb-system-workspace').forEach(function (workspace) {
+    pageContent.querySelectorAll('.hg-monitor-workspace, .hg-extension-workspace, .hg-statistics-workspace, .hg-specialty-workspace, .hg-billing-product, .hg-billing-form, .hg-system-workspace').forEach(function (workspace) {
       workspace.setAttribute('data-heritage-module-workspace', family);
     });
-    pageContent.querySelectorAll('.wb-monitor-hero, .wb-extension-hero, .wb-dashboard-hero').forEach(function (hero, index) {
+    pageContent.querySelectorAll('.hg-monitor-hero, .hg-extension-hero, .hg-dashboard-hero').forEach(function (hero, index) {
       hero.setAttribute('data-heritage-module-hero', 'true');
       var heading = hero.querySelector('h1, h2');
       if (heading) {
@@ -251,7 +251,7 @@
         hero.setAttribute('aria-labelledby', heading.id);
       }
     });
-    pageContent.querySelectorAll('.wb-monitor-chart-panel, .wb-monitor-status-panel, .wb-content-panel--monitor, .wb-monitor-log, .wb-monitor-workspace > .panel_system, .wb-monitor-workspace > .panel, .panel_system, .codeview, .wb-billing-panel, .wb-billing-settings-card, .wb-extension-workspace .panel, .wb-extension-workspace .wb-table-workspace, .wb-system-workspace .panel').forEach(function (panel, index) {
+    pageContent.querySelectorAll('.hg-monitor-chart-panel, .hg-monitor-status-panel, .hg-content-panel--monitor, .hg-monitor-log, .hg-monitor-workspace > .panel_system, .hg-monitor-workspace > .panel, .panel_system, .codeview, .hg-billing-panel, .hg-billing-settings-card, .hg-extension-workspace .panel, .hg-extension-workspace .hg-table-workspace, .hg-system-workspace .panel').forEach(function (panel, index) {
       panel.setAttribute('data-heritage-module-panel', 'true');
       var heading = panel.querySelector('h2, h3, .panel-title, .panel-heading');
       if (heading) {
@@ -260,7 +260,7 @@
         panel.setAttribute('aria-labelledby', heading.id);
       }
     });
-    pageContent.querySelectorAll('.wb-monitor-refresh-panel, .wb-monitor-refresh, .wb-specialty-actions, .wb-extension-actions, .wb-billing-actions, .wb-form-actions').forEach(function (actions) {
+    pageContent.querySelectorAll('.hg-monitor-refresh-panel, .hg-monitor-refresh, .hg-specialty-actions, .hg-extension-actions, .hg-billing-actions, .hg-form-actions').forEach(function (actions) {
       actions.setAttribute('data-heritage-module-actions', 'true');
       actions.setAttribute('role', 'toolbar');
       actions.setAttribute('aria-label', (document.documentElement.lang || '').toLowerCase().indexOf('de') === 0 ? 'Modulaktionen' : 'Module actions');
@@ -288,8 +288,8 @@
       }
     });
 
-    pageContent.querySelectorAll('.alert, .alert-notification, .wb-feedback').forEach(function (notice) {
-      var urgent = notice.classList.contains('alert-danger') || notice.classList.contains('wb-feedback--danger');
+    pageContent.querySelectorAll('.alert, .alert-notification, .hg-feedback').forEach(function (notice) {
+      var urgent = notice.classList.contains('alert-danger') || notice.classList.contains('hg-feedback--danger');
       notice.setAttribute('role', urgent ? 'alert' : 'status');
       notice.setAttribute('aria-live', urgent ? 'assertive' : 'polite');
       notice.setAttribute('aria-atomic', 'true');
@@ -307,7 +307,7 @@
       field.setAttribute('aria-invalid', 'true');
     });
 
-    pageContent.querySelectorAll('.table-responsive, .wb-table-scroll, .wb-table-viewport, .wb-owned-scroll-region').forEach(function (region) {
+    pageContent.querySelectorAll('.table-responsive, .hg-table-scroll, .hg-table-viewport, .hg-owned-scroll-region').forEach(function (region) {
       var table = region.querySelector('table');
       if (!table) return;
       var caption = table.querySelector('caption');
@@ -330,75 +330,75 @@
     var host = document.getElementById('pageContent');
     if (!host) return;
     var german = (document.documentElement.lang || '').toLowerCase().indexOf('de') === 0;
-    var heading = host.querySelector(':scope > .wb-page-header, :scope > .page-header');
+    var heading = host.querySelector(':scope > .hg-page-header, :scope > .page-header');
     var title = heading && heading.querySelector('h1, h2');
 
     if (heading) {
       heading.setAttribute('data-heritage-page-header', 'true');
       if (title && !title.id) title.id = 'heritage-page-title';
       if (title) host.setAttribute('aria-labelledby', title.id);
-      var headingActions = heading.querySelector('.wb-page-header__actions');
+      var headingActions = heading.querySelector('.hg-page-header__actions');
       if (headingActions) {
         headingActions.setAttribute('role', 'group');
         headingActions.setAttribute('aria-label', german ? 'Seitenaktionen' : 'Page actions');
       }
     }
 
-    var meta = host.querySelector(':scope > .wb-page-meta');
+    var meta = host.querySelector(':scope > .hg-page-meta');
     if (meta) {
       meta.setAttribute('data-heritage-page-meta', 'true');
       meta.setAttribute('aria-label', german ? 'Seitenstatus' : 'Page status');
     }
 
-    host.querySelectorAll(':scope > .wb-page-notices, :scope > .wb-feedback-stack').forEach(function (stack) {
+    host.querySelectorAll(':scope > .hg-page-notices, :scope > .hg-feedback-stack').forEach(function (stack) {
       stack.setAttribute('data-heritage-notice-stack', 'true');
       stack.setAttribute('aria-label', german ? 'Meldungen' : 'Messages');
     });
-    host.querySelectorAll('.alert, .alert-notification, .wb-feedback').forEach(function (notice) {
-      var severity = notice.classList.contains('alert-danger') || notice.classList.contains('wb-feedback--danger') ? 'danger' :
-        (notice.classList.contains('alert-warning') || notice.classList.contains('wb-feedback--warning') ? 'warning' :
-          (notice.classList.contains('alert-success') || notice.classList.contains('wb-feedback--success') ? 'success' : 'info'));
+    host.querySelectorAll('.alert, .alert-notification, .hg-feedback').forEach(function (notice) {
+      var severity = notice.classList.contains('alert-danger') || notice.classList.contains('hg-feedback--danger') ? 'danger' :
+        (notice.classList.contains('alert-warning') || notice.classList.contains('hg-feedback--warning') ? 'warning' :
+          (notice.classList.contains('alert-success') || notice.classList.contains('hg-feedback--success') ? 'success' : 'info'));
       notice.setAttribute('data-heritage-notice', severity);
     });
 
-    host.querySelectorAll('.wb-list-command-bar').forEach(function (bar) {
+    host.querySelectorAll('.hg-list-command-bar').forEach(function (bar) {
       bar.setAttribute('data-heritage-command-bar', 'true');
       bar.setAttribute('role', 'toolbar');
       bar.setAttribute('aria-label', german ? 'Listenaktionen' : 'List actions');
-      var primary = bar.querySelector('.wb-list-command-bar__primary, .btn-primary');
+      var primary = bar.querySelector('.hg-list-command-bar__primary, .btn-primary');
       if (primary) primary.setAttribute('data-heritage-primary-action', 'true');
     });
 
-    host.querySelectorAll('.wb-content-state').forEach(function (state) {
+    host.querySelectorAll('.hg-content-state').forEach(function (state) {
       state.setAttribute('data-heritage-content-state', 'true');
-      state.setAttribute('role', state.classList.contains('wb-content-state--error') ? 'alert' : 'status');
-      state.setAttribute('aria-live', state.classList.contains('wb-content-state--error') ? 'assertive' : 'polite');
+      state.setAttribute('role', state.classList.contains('hg-content-state--error') ? 'alert' : 'status');
+      state.setAttribute('aria-live', state.classList.contains('hg-content-state--error') ? 'assertive' : 'polite');
     });
   }
 
   function enhanceDashboard() {
     var host = document.getElementById('pageContent');
-    if (!host || !document.body.classList.contains('wb-dashboard-page')) return;
+    if (!host || !document.body.classList.contains('hg-dashboard-page')) return;
     /* Dashboard widgets may contain small quota tables. They are enhanced as
      * tables, but must not reclassify the complete cockpit as a list page. */
-    host.classList.remove('wb-table-workspace', 'wb-table-workspace--finalized');
-    document.body.classList.remove('wb-list-page', 'wb-form-page');
+    host.classList.remove('hg-table-workspace', 'hg-table-workspace--finalized');
+    document.body.classList.remove('hg-list-page', 'hg-form-page');
     var german = (document.documentElement.lang || '').toLowerCase().indexOf('de') === 0;
     var sections = [
       {
-        selector: '.wb-dashlet-module-atomic',
+        selector: '.hg-dashlet-module-atomic',
         key: 'modules',
         title: german ? 'Bereiche' : 'Modules',
         description: german ? 'Direkteinstiege in deine Arbeitsbereiche' : 'Direct access to your work areas'
       },
       {
-        selector: '.wb-dashlet-metric-atomic',
+        selector: '.hg-dashlet-metric-atomic',
         key: 'metrics',
         title: german ? 'Systemmetriken' : 'System metrics',
         description: german ? 'Aktuelle Messwerte und interaktive Verläufe' : 'Current readings and interactive trends'
       },
       {
-        selector: '.wb-dashlet-limits, .wb-dashlet-quota, .wb-dashlet-mailquota, .wb-dashlet-databasequota',
+        selector: '.hg-dashlet-limits, .hg-dashlet-quota, .hg-dashlet-mailquota, .hg-dashlet-databasequota',
         key: 'capacity',
         title: german ? 'Kapazitäten' : 'Capacity',
         description: german ? 'Kontingente, Nutzung und verfügbare Reserven' : 'Limits, usage and available headroom'
@@ -406,7 +406,7 @@
     ];
 
     sections.forEach(function (section) {
-      var first = host.querySelector(section.selector + ':not([data-wb-hidden="true"])');
+      var first = host.querySelector(section.selector + ':not([data-heritage-hidden="true"])');
       var marker = host.querySelector('[data-heritage-dashboard-section="' + section.key + '"]');
       if (!first || first.hidden || first.getClientRects().length === 0) {
         if (marker) marker.hidden = true;
@@ -426,9 +426,9 @@
       if (marker.nextElementSibling !== first) host.insertBefore(marker, first);
     });
 
-    host.querySelectorAll('[data-wb-metric-toggle]').forEach(function (toggle, index) {
-      var metric = toggle.getAttribute('data-wb-metric-toggle') || String(index);
-      var details = host.querySelector('[data-wb-metric-details="' + metric + '"]');
+    host.querySelectorAll('[data-heritage-metric-toggle]').forEach(function (toggle, index) {
+      var metric = toggle.getAttribute('data-heritage-metric-toggle') || String(index);
+      var details = host.querySelector('[data-heritage-metric-details="' + metric + '"]');
       if (!details) return;
       var id = details.id || ('heritage-metric-details-' + metric.replace(/[^a-z0-9_-]/gi, '-'));
       details.id = id;
@@ -440,7 +440,7 @@
   function enhanceForms() {
     var host = document.getElementById('pageContent');
     var form = document.getElementById('pageForm');
-    if (!host || !form || !form.contains(host) || !host.querySelector('.wb-form-actions')) {
+    if (!host || !form || !form.contains(host) || !host.querySelector('.hg-form-actions')) {
       if (form) {
         form.removeAttribute('data-heritage-form-density');
         form.removeAttribute('data-heritage-form-system');
@@ -482,8 +482,8 @@
       });
     });
 
-    form.querySelectorAll('.wb-form-section, fieldset, .panel, .wb-content-panel').forEach(function (section, sectionIndex) {
-      var heading = section.querySelector(':scope > .wb-form-section-heading, :scope > legend, :scope > .panel-heading, :scope > .wb-content-panel__header');
+    form.querySelectorAll('.hg-form-section, fieldset, .panel, .hg-content-panel').forEach(function (section, sectionIndex) {
+      var heading = section.querySelector(':scope > .hg-form-section-heading, :scope > legend, :scope > .panel-heading, :scope > .hg-content-panel__header');
       section.setAttribute('data-heritage-form-section', 'true');
       section.setAttribute('role', section.tagName === 'FIELDSET' ? 'group' : 'region');
       if (heading) {
@@ -492,15 +492,15 @@
       }
     });
 
-    form.querySelectorAll('.wb-field-group, .form-group, .ctrlHolder').forEach(function (group, groupIndex) {
+    form.querySelectorAll('.hg-field-group, .form-group, .ctrlHolder').forEach(function (group, groupIndex) {
       var field = group.querySelector('input:not([type="hidden"]), select, textarea');
       if (!field) return;
       group.setAttribute('data-heritage-field', 'true');
       var label = group.querySelector('label, .control-label');
       if (label && !label.id) label.id = 'heritage-field-label-' + groupIndex;
       if (label && !field.getAttribute('aria-labelledby') && !field.getAttribute('aria-label')) field.setAttribute('aria-labelledby', label.id);
-      var help = group.querySelector('.help-block, .form-text, .field-help, .wb-field-help');
-      var error = group.querySelector('.help-block-error, .field-error, .wb-field-error');
+      var help = group.querySelector('.help-block, .form-text, .field-help, .hg-field-help');
+      var error = group.querySelector('.help-block-error, .field-error, .hg-field-error');
       var descriptions = (field.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean);
       [help, error].forEach(function (description, index) {
         if (!description) return;
@@ -509,8 +509,8 @@
       });
       if (descriptions.length) field.setAttribute('aria-describedby', descriptions.join(' '));
       group.classList.toggle('hg-field-group--disabled', field.disabled);
-      group.toggleAttribute('data-heritage-required', field.required || field.getAttribute('aria-required') === 'true' || group.classList.contains('wb-field-group--required'));
-      group.toggleAttribute('data-heritage-invalid', field.getAttribute('aria-invalid') === 'true' || group.classList.contains('has-error') || group.classList.contains('wb-field-group--invalid'));
+      group.toggleAttribute('data-heritage-required', field.required || field.getAttribute('aria-required') === 'true' || group.classList.contains('hg-field-group--required'));
+      group.toggleAttribute('data-heritage-invalid', field.getAttribute('aria-invalid') === 'true' || group.classList.contains('has-error') || group.classList.contains('hg-field-group--invalid'));
       if (help) help.setAttribute('role', 'note');
       if (error) {
         error.setAttribute('role', 'alert');
@@ -518,15 +518,15 @@
       }
     });
 
-    form.querySelectorAll('.wb-form-actions').forEach(function (actions) {
+    form.querySelectorAll('.hg-form-actions').forEach(function (actions) {
       actions.setAttribute('role', 'region');
       actions.setAttribute('aria-label', german ? 'Formularaktionen' : 'Form actions');
       actions.setAttribute('data-heritage-form-actions', 'true');
       var actionControls = actions.querySelectorAll('button, a, input[type="button"], input[type="submit"]');
       actions.setAttribute('data-heritage-action-count', String(actionControls.length));
       actionControls.forEach(function (action) {
-        if (action.matches('.formbutton-success, .btn-primary, .wb-form-action--primary, .wb-action-control--primary')) action.setAttribute('data-heritage-action', 'primary');
-        else if (action.matches('.formbutton-danger, .btn-danger, .wb-form-action--danger')) action.setAttribute('data-heritage-action', 'danger');
+        if (action.matches('.formbutton-success, .btn-primary, .hg-form-action--primary, .hg-action-control--primary')) action.setAttribute('data-heritage-action', 'primary');
+        else if (action.matches('.formbutton-danger, .btn-danger, .hg-form-action--danger')) action.setAttribute('data-heritage-action', 'danger');
         else action.setAttribute('data-heritage-action', 'secondary');
       });
     });
@@ -546,7 +546,7 @@
     var host = document.getElementById('pageContent');
     if (!host) return;
     var german = (document.documentElement.lang || '').toLowerCase().indexOf('de') === 0;
-    host.querySelectorAll('.wb-data-table').forEach(function (table) {
+    host.querySelectorAll('.hg-data-table').forEach(function (table) {
       var headingRow = table.querySelector('thead > tr:first-child');
       var headers = headingRow ? Array.prototype.slice.call(headingRow.children) : [];
       headers.forEach(function (header) {
@@ -555,7 +555,7 @@
         else if (header.matches('.sorting, [data-sortable="true"]')) header.setAttribute('aria-sort', 'none');
       });
 
-      var filterRow = table.querySelector('thead > tr[data-workbench-filter-row]');
+      var filterRow = table.querySelector('thead > tr[data-heritage-filter-row]');
       if (filterRow) {
         filterRow.setAttribute('aria-label', german ? 'Tabellenfilter' : 'Table filters');
         filterRow.querySelectorAll('input, select').forEach(function (control) {
@@ -567,14 +567,14 @@
         });
       }
 
-      table.querySelectorAll('.wb-row-action').forEach(function (control) {
+      table.querySelectorAll('.hg-row-action').forEach(function (control) {
         var current = (control.getAttribute('aria-label') || control.getAttribute('title') || '').trim();
         var generic = /^(?:aktion|action)\s*\d*$/i.test(current);
         var href = (control.getAttribute('href') || '').toLowerCase();
         var label = current;
-        if (control.classList.contains('wb-row-action--danger') || /delete|del=/.test(href)) label = german ? 'Löschen' : 'Delete';
-        else if (control.classList.contains('wb-row-action--login') || /login/.test(href)) label = german ? 'Anmelden' : 'Log in';
-        else if (control.classList.contains('wb-row-action--edit') || /edit/.test(href)) label = german ? 'Bearbeiten' : 'Edit';
+        if (control.classList.contains('hg-row-action--danger') || /delete|del=/.test(href)) label = german ? 'Löschen' : 'Delete';
+        else if (control.classList.contains('hg-row-action--login') || /login/.test(href)) label = german ? 'Anmelden' : 'Log in';
+        else if (control.classList.contains('hg-row-action--edit') || /edit/.test(href)) label = german ? 'Bearbeiten' : 'Edit';
         else if (/stat|traffic/.test(href)) label = german ? 'Statistiken' : 'Statistics';
         else if (!label || generic) label = german ? 'Weitere Aktion' : 'More action';
         control.setAttribute('aria-label', label);
@@ -587,7 +587,7 @@
     var fields = [];
     form.querySelectorAll(
       '[aria-invalid="true"], .has-error input, .has-error select, .has-error textarea, ' +
-      '.wb-field-error input, .wb-field-error select, .wb-field-error textarea'
+      '.hg-field-error input, .hg-field-error select, .hg-field-error textarea'
     ).forEach(function (field) {
       if (field.matches('input, select, textarea') && fields.indexOf(field) < 0) fields.push(field);
     });
@@ -596,7 +596,7 @@
 
   function syncFormValidation(form, german) {
     var invalid = explicitInvalidFields(form);
-    var tabs = form.querySelectorAll('.wb-form-tabs a[href^="#"], .nav-tabs a[href^="#"]');
+    var tabs = form.querySelectorAll('.hg-form-tabs a[href^="#"], .nav-tabs a[href^="#"]');
     tabs.forEach(function (tab) {
       var target = tab.getAttribute('href');
       var pane = target && target.length > 1 ? form.querySelector(target) : null;
@@ -639,7 +639,7 @@
         if (!first) return;
         var pane = first.closest('.tab-pane');
         if (pane && !pane.classList.contains('active')) {
-          var tab = form.querySelector('.wb-form-tabs a[href="#' + pane.id + '"], .nav-tabs a[href="#' + pane.id + '"]');
+          var tab = form.querySelector('.hg-form-tabs a[href="#' + pane.id + '"], .nav-tabs a[href="#' + pane.id + '"]');
           if (tab) tab.click();
         }
         window.setTimeout(function () { first.focus(); first.scrollIntoView({ block: 'center', behavior: 'smooth' }); }, 40);
@@ -662,13 +662,13 @@
     });
     window.setTimeout(enhanceForms, 0);
 
-    var navigation = document.getElementById('workbench-mobile-navigation');
+    var navigation = document.getElementById('heritage-mobile-navigation');
     if (navigation) {
       navigation.setAttribute('data-heritage-navigation', 'true');
       navigation.setAttribute('aria-label', 'Navigation');
       var navigationLandmark = navigation.querySelector('nav');
       if (navigationLandmark) navigationLandmark.setAttribute('aria-label', 'Navigation');
-      var homeLink = navigation.querySelector('.wb-mobile-navigation__header a');
+      var homeLink = navigation.querySelector('.hg-mobile-navigation__header a');
       if (homeLink) homeLink.setAttribute('aria-label', 'Übersicht');
     }
     syncThemeToggleLabel();
@@ -685,7 +685,7 @@
 
     new MutationObserver(syncThemeToggleLabel).observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ['data-wb-theme']
+      attributeFilter: ['data-heritage-theme']
     });
 
     var pageContent = document.getElementById('pageContent');
@@ -721,7 +721,7 @@
 
   }
 
-  document.addEventListener('workbench:navigation-complete', function () {
+  document.addEventListener('heritage:navigation-complete', function () {
     enhancePageComposition();
     markIdentityColumns();
     localizeComponentLabels();
@@ -734,13 +734,13 @@
     window.setTimeout(enhanceForms, 120);
   });
   document.addEventListener('click', function (event) {
-    var reset = event.target.closest && event.target.closest('.wb-filter-reset');
+    var reset = event.target.closest && event.target.closest('.hg-filter-reset');
     if (!reset || !document.body.classList.contains('heritage-shell')) return;
     event.preventDefault();
     event.stopImmediatePropagation();
 
     var host = document.getElementById('pageContent');
-    var row = host && host.querySelector('thead tr[data-workbench-filter-row]');
+    var row = host && host.querySelector('thead tr[data-heritage-filter-row]');
     if (!row) return;
 
     row.querySelectorAll('input, select').forEach(function (control) {

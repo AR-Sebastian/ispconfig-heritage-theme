@@ -1,63 +1,62 @@
-<!-- WP-948: native Workbench website core surface; shared lifecycle unchanged. -->
 <tmpl_if name="config_error_msg">
   <div>
       <p>
-        <div id="errormsg" class="wb-alert wb-alert--danger wb-alert--dismissible" role="alert" data-wb-ack-url="sites/message_ack.php?relation=web_domain:{tmpl_var name='id'}&amp;_csrf_id={tmpl_var name='_csrf_id_msg'}&amp;_csrf_key={tmpl_var name='_csrf_key_msg'}">
-          <button type="button" class="wb-alert__dismiss" data-workbench-dismiss="alert" aria-label="Schließen" data-wb-i18n-aria-label-de="Schließen" data-wb-i18n-aria-label-en="Close"><span aria-hidden="true">&times;</span></button>
-          <div class="wb-config-error-time">{tmpl_var name='config_error_tstamp'} :&nbsp;</div>
-          <div class="wb-config-error-message">{tmpl_var name='config_error_msg'}</div>
+        <div id="errormsg" class="hg-alert hg-alert--danger hg-alert--dismissible" role="alert" data-heritage-ack-url="sites/message_ack.php?relation=web_domain:{tmpl_var name='id'}&amp;_csrf_id={tmpl_var name='_csrf_id_msg'}&amp;_csrf_key={tmpl_var name='_csrf_key_msg'}">
+          <button type="button" class="hg-alert__dismiss" data-heritage-dismiss="alert" aria-label="Schließen" data-heritage-i18n-aria-label-de="Schließen" data-heritage-i18n-aria-label-en="Close"><span aria-hidden="true">&times;</span></button>
+          <div class="hg-config-error-time">{tmpl_var name='config_error_tstamp'} :&nbsp;</div>
+          <div class="hg-config-error-message">{tmpl_var name='config_error_msg'}</div>
         </div>
       </p>
     </div>
 </tmpl_if>
 
-<div class="wb-field-group">
+<div class="hg-field-group">
   <label for="backup_interval">{tmpl_var name='backup_interval_txt'}</label>
-  <div class="wb-field-body"><select name="backup_interval" id="backup_interval" class="form-control">
+  <div class="hg-field-body"><select name="backup_interval" id="backup_interval" class="form-control">
     {tmpl_var name='backup_interval'}
     </select>
   </div>
 </div>
-<div class="wb-field-group">
+<div class="hg-field-group">
   <label for="backup_copies">{tmpl_var name='backup_copies_txt'}</label>
-  <div class="wb-field-body"><select name="backup_copies" id="backup_copies" class="form-control">
+  <div class="hg-field-body"><select name="backup_copies" id="backup_copies" class="form-control">
     {tmpl_var name='backup_copies'}
     </select>
   </div>
 </div>
-<div class="wb-field-group">
+<div class="hg-field-group">
   <label for="backup_excludes">{tmpl_var name='backup_excludes_txt'}</label>
-  <div class="wb-field-body"><input type="text" name="backup_excludes" id="backup_excludes" value="{tmpl_var name='backup_excludes'}" class="form-control" /></div>
-  <div class="wb-field-affix">&nbsp;{tmpl_var name='backup_excludes_note_txt'}
+  <div class="hg-field-body"><input type="text" name="backup_excludes" id="backup_excludes" value="{tmpl_var name='backup_excludes'}" class="form-control" /></div>
+  <div class="hg-field-affix">&nbsp;{tmpl_var name='backup_excludes_note_txt'}
   </div>
 </div>
-<div class="wb-form-sections" id="accordion" role="tablist" aria-multiselectable="true">
-  <div class="wb-form-section">
-    <div class="wb-form-section__header" role="tab" id="headingCompression">
-    <h4 class="wb-form-section__title">
-      <a class="collapsed" role="button" data-workbench-collapse="true" data-parent="#accordion" href="#collapseCompression" aria-expanded="false" aria-controls="collapseCompression">
+<div class="hg-form-sections" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="hg-form-section">
+    <div class="hg-form-section__header" role="tab" id="headingCompression">
+    <h4 class="hg-form-section__title">
+      <a class="collapsed" role="button" data-heritage-collapse="true" data-parent="#accordion" href="#collapseCompression" aria-expanded="false" aria-controls="collapseCompression">
       {tmpl_var name='backup_compression_options_txt'}
       </a>
     </h4>
   </div>
-  <div id="collapseCompression" class="wb-form-section__body wb-collapse" role="tabpanel" aria-labelledby="headingCompression">
-    <div class="wb-form-section__content">
+  <div id="collapseCompression" class="hg-form-section__body hg-collapse" role="tabpanel" aria-labelledby="headingCompression">
+    <div class="hg-form-section__content">
       <tmpl_if name="missing_utils">
-        <div class="wb-alert wb-alert--warning">
+        <div class="hg-alert hg-alert--warning">
           {tmpl_var name='backup_missing_utils_txt'} {tmpl_var name='missing_utils'}
         </div>
       </tmpl_if>
-      <div class="wb-field-group">
+      <div class="hg-field-group">
         <label for="backup_format_web">{tmpl_var name='backup_format_web_txt'}</label>
-        <div class="wb-field-body">
+        <div class="hg-field-body">
           <select name="backup_format_web" id="backup_format_web" class="form-control">
           {tmpl_var name='backup_format_web'}
           </select>
         </div>
       </div>
-      <div class="wb-field-group">
+      <div class="hg-field-group">
         <label for="backup_format_db">{tmpl_var name='backup_format_db_txt'}</label>
-        <div class="wb-field-body">
+        <div class="hg-field-body">
           <select name="backup_format_db" id="backup_format_db" class="form-control">
           {tmpl_var name='backup_format_db'}
           </select>
@@ -66,32 +65,32 @@
     </div>
   </div>
   </div>
-  <div class="wb-form-section">
-  <div class="wb-form-section__header" role="tab" id="headingEncryption">
-    <h4 class="wb-form-section__title">
-      <a class="collapsed" role="button" data-workbench-collapse="true" data-parent="#accordion" href="#collapseEncryption" aria-expanded="false" aria-controls="collapseEncryption">
+  <div class="hg-form-section">
+  <div class="hg-form-section__header" role="tab" id="headingEncryption">
+    <h4 class="hg-form-section__title">
+      <a class="collapsed" role="button" data-heritage-collapse="true" data-parent="#accordion" href="#collapseEncryption" aria-expanded="false" aria-controls="collapseEncryption">
       {tmpl_var name='backup_encryption_options_txt'}
       </a>
     </h4>
   </div>
-  <div id="collapseEncryption" class="wb-form-section__body wb-collapse" role="tabpanel" aria-labelledby="headingEncryption">
-    <div class="wb-form-section__content">
-      <div class="wb-alert wb-alert--info">
+  <div id="collapseEncryption" class="hg-form-section__body hg-collapse" role="tabpanel" aria-labelledby="headingEncryption">
+    <div class="hg-form-section__content">
+      <div class="hg-alert hg-alert--info">
         {tmpl_var name='backup_encryption_note_txt'}
       </div>
-      <div class="wb-field-group">
+      <div class="hg-field-group">
         <label>
         {tmpl_var name='backup_enable_encryption_txt'}
         </label>
-        <div class="wb-field-body">
+        <div class="hg-field-body">
           {tmpl_var name="backup_encrypt"}
         </div>
       </div>
-      <div class="wb-field-group">
+      <div class="hg-field-group">
         <label for="backup_password">
         {tmpl_var name='backup_password_txt'}
         </label>
-        <div class="wb-field-body">
+        <div class="hg-field-body">
           <input type="text" name="backup_password" id="backup_password" value="{tmpl_var name='backup_password'}" class="form-control" />
         </div>
       </div>
@@ -101,9 +100,9 @@
 </div>
 {tmpl_var name='backup_records'}
 <input type="hidden" name="id" value="{tmpl_var name='id'}">
-<div class="wb-form-actions">
-  <div class="wb-form-actions__primary">
+<div class="hg-form-actions">
+  <div class="hg-form-actions__primary">
     <button class="formbutton-success" type="button" value="{tmpl_var name='btn_save_txt'}" data-submit-form="pageForm" data-form-action="sites/web_vhost_domain_edit.php">{tmpl_var name='btn_save_txt'}</button>
-    <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-workbench-load-content="sites/web_vhost_domain_list.php" data-load-content="sites/web_vhost_domain_list.php">{tmpl_var name='btn_cancel_txt'}</button>
+    <button class="formbutton-default" type="button" value="{tmpl_var name='btn_cancel_txt'}" data-heritage-load-content="sites/web_vhost_domain_list.php" data-load-content="sites/web_vhost_domain_list.php">{tmpl_var name='btn_cancel_txt'}</button>
   </div>
 </div>
