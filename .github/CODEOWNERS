@@ -1,0 +1,10 @@
+# Default ownership keeps every repository path attributable.
+* @AR-Sebastian
+
+# Protect the ownership policy and supply-chain automation explicitly.
+/.github/ @AR-Sebastian
+/scripts/ @AR-Sebastian
+/SECURITY.md @AR-Sebastian
+
+# HERITAGE remains a theme-only integration boundary.
+/theme/heritage/ @AR-Sebastian

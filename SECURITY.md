@@ -33,6 +33,10 @@ is restricted to:
 AR-Sebastian/ispconfig-heritage-theme/.github/workflows/release.yml
 ```
 
+GitHub Actions dependencies are commit-pinned. Dependabot checks those pins
+weekly; updates must still pass the complete repository validator. CODEOWNERS
+assigns the workflow, verifier, security and theme boundaries explicitly.
+
 ## Sicherheitsprüfung von Releases
 
 Installiere niemals ein Archiv nach einer abweichenden Prüfsumme, Payload oder
