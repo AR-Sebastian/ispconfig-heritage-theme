@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.34 – 2026-08-02
+
+- Sichtbare Altbezeichnungen aus der Workbench-Entwicklung wurden in Logo,
+  Favicon-Metadaten, PWA-Name und Theme-Anzeige durch die einheitliche
+  Produktbezeichnung `ISPConfig HERITAGE` ersetzt.
+- Alle Shell-, Login- und PWA-Assets verwenden jetzt denselben Release-basierten
+  Cache-Schlüssel. Dadurch können Browser nach einem Theme-Update keine alten
+  CSS-, JavaScript-, Logo- oder Manifeststände mehr miteinander mischen.
+- Die bestehende technische Theme-ID bleibt zur Abwärtskompatibilität stabil.
+
 ## 1.0.33 – 2026-07-31
 
 - Extended compact state columns to E-mail, Web, DNS, file and database server capabilities.

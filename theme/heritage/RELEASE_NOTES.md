@@ -1,4 +1,15 @@
-# ISPConfig HERITAGE 1.0.33
+# ISPConfig HERITAGE 1.0.34
+
+HERITAGE 1.0.34 removes the final visible Workbench-era branding from the
+standalone theme. Logo artwork, accessible SVG titles, PWA metadata and the
+theme display name now consistently identify ISPConfig HERITAGE. Application,
+login, image and manifest assets also share one release cache key so an update
+cannot combine stale and current presentation layers in the browser.
+
+The technical theme identifier remains unchanged to preserve compatibility
+with existing theme-manager installations and update paths.
+
+## Previous release
 
 HERITAGE 1.0.33 extends compact states to all five server capabilities and the
 SMTP, delivery, IMAP and POP3 states of mailbox lists. Enabled services use a

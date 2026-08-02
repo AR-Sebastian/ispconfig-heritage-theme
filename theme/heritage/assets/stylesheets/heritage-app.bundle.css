@@ -18617,7 +18617,7 @@ html[data-wb-theme='dark'] body.wb-dashboard-page #pageContent.wb-dashboard-layo
 }
 
 /* source: heritage-tokens.css */
-/* Heritage Glass design tokens
+/* ISPConfig HERITAGE design tokens
  *
  * Brand/accent values orient and trigger actions. Semantic states retain their
  * own colors so an ISPConfig red accent never makes ordinary UI look unsafe. */
@@ -18725,7 +18725,7 @@ body {
 }
 
 /* source: heritage-components.css */
-/* Heritage Glass component system */
+/* ISPConfig HERITAGE component system */
 
 body.heritage-shell.wb-app-navigation-enabled #pageContent {
   color: var(--hg-text);
@@ -19005,7 +19005,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent .alert-info {
 }
 
 /* source: heritage-layouts.css */
-/* ISPConfig Heritage Glass
+/* ISPConfig HERITAGE
  *
  * Page-level composition for dashboard, lists and forms. This layer does not
  * alter application behaviour; it turns the shared runtime primitives into a
@@ -19379,7 +19379,7 @@ body.heritage-shell.wb-form-page #pageForm.wb-modern-form :is(
 }
 
 /* source: heritage-detail.css */
-/* ISPConfig Heritage Glass
+/* ISPConfig HERITAGE
  *
  * Detail-workspace primitives for real ISPConfig forms. The selectors enhance
  * existing semantic markup and progressive Workbench classes only.
@@ -20124,7 +20124,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
 }
 
 /* source: heritage-tables.css */
-/* ISPConfig Heritage Glass — table-system authority.
+/* ISPConfig HERITAGE — table-system authority.
  *
  * The shared Workbench adapters provide semantics and lifecycle behavior.
  * This layer owns the Heritage composition only: command bar, filter row,
@@ -21221,7 +21221,7 @@ body.heritage-shell.wb-dashboard-page .wb-dashboard-layout-edit > .wb-dashlet--d
 }
 
 /* source: heritage-interactions.css */
-/* ISPConfig Heritage Glass
+/* ISPConfig HERITAGE
  *
  * Interaction surfaces and transient states. This layer intentionally keeps
  * the native event model intact and only standardises visual feedback.
@@ -22645,7 +22645,7 @@ body.heritage-shell.wb-app-navigation-enabled #pageContent :is(
 }
 
 /* source: heritage-brand-language.css */
-/* ISPConfig Heritage Glass
+/* ISPConfig HERITAGE
  *
  * Brand language, typography and icon rhythm. Accent is intentionally limited
  * to orientation, active states and primary actions. Operational status keeps
@@ -22989,7 +22989,7 @@ body.heritage-shell.wb-app-navigation-enabled table {
 }
 
 /* source: heritage-shell.css */
-/* ISPConfig Heritage Glass
+/* ISPConfig HERITAGE
  *
  * This final layer changes shell composition only. Forms, tables, dynamic
  * loading, permissions and module templates remain owned by the native theme
