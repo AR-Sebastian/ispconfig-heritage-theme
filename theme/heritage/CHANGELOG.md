@@ -20,6 +20,8 @@
   `aria-valuenow`-Wert statt einer nicht existierenden Template-Variable.
 - ZIP- und TAR.GZ-Release-Artefakte werden deterministisch mit sortierten
   Pfaden, normalisierten Zeitstempeln, Rechten und Besitzermetadaten erzeugt.
+- Öffentliche Logo- und Favicon-Assets tragen ausschließlich HERITAGE-Namen;
+  interne Arbeitspaket-Kommentare wurden aus allen Theme-Templates entfernt.
 
 ## 1.0.33 – 2026-07-31
 

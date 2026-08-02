@@ -1,5 +1,5 @@
-﻿/*
- * WP-357: authoritative authenticated surface layer.
+/*
+ * authoritative authenticated surface layer.
  *
  * ISPConfig still renders a mixture of legacy Bootstrap-era components and
  * newer Workbench components. This last-loaded layer maps their presentation
@@ -90,7 +90,7 @@ body.wb-app-navigation-enabled :where(
   color: var(--wb-muted);
 }
 
-/* WP-369: generic authenticated controls, actions and secondary navigation. */
+/* generic authenticated controls, actions and secondary navigation. */
 body.wb-app-navigation-enabled :where(
   .form-control,
   input[type='text'],
@@ -320,7 +320,7 @@ body.wb-app-navigation-enabled :where(.btn-default, .btn-secondary):focus-visibl
   background-color: color-mix(in srgb, var(--wb-action) 8%, var(--wb-surface));
 }
 
-/* WP-827: old Bootstrap button classes are still emitted by many ISPConfig
+/* old Bootstrap button classes are still emitted by many ISPConfig
  * modules, but visible tones are now owned by wb-action-control classes. This
  * reset keeps legacy gradients and text shadows out without reintroducing
  * Bootstrap/formbutton color authority. */
@@ -382,7 +382,7 @@ body.wb-app-navigation-enabled .tab-content {
   background-color: var(--wb-surface);
 }
 
-/* WP-368: one shared table and pagination surface for every authenticated module. */
+/* one shared table and pagination surface for every authenticated module. */
 body.wb-app-navigation-enabled #pageContent :where(.table-wrapper, .table-responsive) {
   min-width: 0;
   max-width: 100%;
@@ -904,7 +904,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled :where(
   }
 }
 
-/* WP-370: shared validation, icon and overflow-tab surfaces. */
+/* shared validation, icon and overflow-tab surfaces. */
 body.wb-app-navigation-enabled .wb-validation-summary { border-left: 4px solid var(--wb-danger); text-align: left; }
 body.wb-app-navigation-enabled .wb-validation-summary--generated {
   display: block;
@@ -928,7 +928,7 @@ body.wb-app-navigation-enabled .wb-validation-summary__list a:focus-visible { ou
 
 body.wb-app-navigation-enabled .tab-content > .tab-pane { min-width: 0; }
 
-/* WP-576: residual contrast and legacy-surface convergence.
+/* residual contrast and legacy-surface convergence.
  *
  * Some rarely visited ISPConfig and addon screens still emit Bootstrap-era
  * surfaces after the main Workbench decorators have run. This guard keeps
@@ -1060,7 +1060,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
   color: var(--wb-text);
 }
 
-/* WP-608: final legacy chrome neutralisation for rarely visited pages.
+/* final legacy chrome neutralisation for rarely visited pages.
  *
  * The old UI still emits gradients, text shadows and white table fragments in
  * several modules and addons. This layer does not change behaviour; it only
@@ -1213,7 +1213,7 @@ body.wb-app-navigation-enabled .wb-svg-icon > svg {
   body.wb-app-navigation-enabled .wb-tabstrip > .nav-tabs > li > a { padding: 9px 12px; }
 }
 
-/* WP-637: authenticated contrast cleanup guard.
+/* authenticated contrast cleanup guard.
  *
  * Some ISPConfig pages and addons still arrive with old Bootstrap/default-theme
  * fragments after Ajax navigation. This final surface guard deliberately stays
@@ -1463,7 +1463,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
   background-color: color-mix(in srgb, var(--wb-action) 7%, var(--wb-surface-muted)) !important;
 }
 
-/* WP-713: semantic accent discipline for shared controls.
+/* semantic accent discipline for shared controls.
  * Primary actions may use the brand accent, but neutral hover/focus states and
  * informational surfaces stay quiet so status colors remain unmistakable. */
 body.wb-app-navigation-enabled :where(.btn-default, .btn-secondary):hover,
@@ -1501,7 +1501,7 @@ body.wb-app-navigation-enabled .alert-info {
   background-color: color-mix(in srgb, var(--wb-status-info) 8%, var(--wb-surface));
 }
 
-/* WP-805: runtime-owned residual surface quarantine.
+/* runtime-owned residual surface quarantine.
  * Dynamic ISPConfig fragments can still emit Bootstrap-era panels, overlays,
  * compound controls and inline bright surfaces. The runtime now marks those
  * fragments explicitly; this layer gives them one Workbench-owned visual
@@ -1582,7 +1582,7 @@ body.wb-app-navigation-enabled #pageContent :where(.wb-owned-control-cluster > .
   white-space: nowrap;
 }
 
-/* WP-828: semantic bridge for residual Select2/Chosen fragments.
+/* semantic bridge for residual Select2/Chosen fragments.
  * The Workbench runtime marks old enhanced-select markup with these classes so
  * vendor selectors can be retired without losing readable, premium controls. */
 body.wb-app-navigation-enabled #pageContent :where(.wb-owned-enhanced-select) {
@@ -1689,7 +1689,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
   background: var(--wb-surface) !important;
 }
 
-/* WP-996: one native feedback surface for forms, lists and module pages. */
+/* one native feedback surface for forms, lists and module pages. */
 body.wb-app-navigation-enabled #pageContent .wb-alert {
   position: relative;
   display: grid;

@@ -1,4 +1,4 @@
-﻿/* WP-360: authoritative authenticated list and filter workspace. */
+/* authoritative authenticated list and filter workspace. */
 
 body.wb-list-page #pageContent {
   container: wb-page-content / inline-size;
@@ -147,7 +147,7 @@ body.wb-list-page .wb-list-command-bar__primary:focus-visible {
   background: color-mix(in srgb, var(--wb-action) 86%, #000);
 }
 
-/* WP-740: premium table completion pass.
+/* premium table completion pass.
  *
  * Tables are one of the oldest rendered surfaces in ISPConfig. This final
  * list layer makes the shared Workbench treatment explicit: calm command
@@ -909,7 +909,7 @@ html[data-wb-theme='dark'] body.wb-list-page .wb-data-table .wb-table-actions .w
   }
 }
 
-/* WP-570: list convergence guard.
+/* list convergence guard.
  *
  * List pages are allowed to scroll inside their table workspace, never by
  * enlarging the complete document. This layer also catches browser-native
@@ -999,7 +999,7 @@ html[data-wb-theme='dark'] body.wb-list-page .wb-data-table > thead > tr[data-wo
   }
 }
 
-/* WP-604: deterministic list controls across in-between widths. */
+/* deterministic list controls across in-between widths. */
 body.wb-list-page #pageContent > .wb-list-command-bar {
   container-type: inline-size;
 }
@@ -1149,7 +1149,7 @@ body.wb-list-page .wb-filter-toolbar--idle .wb-filter-toggle {
   }
 }
 
-/* WP-614: container-owned list command convergence.
+/* container-owned list command convergence.
    The toolbar now responds to its own available width, not to fragile viewport
    bands. This prevents old desktop/tablet states from leaking into resized
    windows where primary actions, filters and page-size controls used to float
@@ -1261,7 +1261,7 @@ body.wb-list-page #pageContent > .table-wrapper:has(> .wb-data-table) + .wb-list
   }
 }
 
-/* WP-621: final premium list controls.
+/* final premium list controls.
  * These rules intentionally live after the older convergence guards. They
  * polish the remaining list edges without changing filtering, paging or row
  * action semantics. */
@@ -1347,7 +1347,7 @@ html[data-wb-theme='dark'] body.wb-list-page .wb-list-footer {
   }
 }
 
-/* WP-625: modern table command workspace.
+/* modern table command workspace.
  * Filters are moving away from legacy header-row editing toward a toolbar,
  * drawer and chip model. The old row remains functional during migration but
  * should visually read as a contained filter panel, not as a second table
@@ -1414,7 +1414,7 @@ body.wb-list-page .wb-list-filter-status::before {
   body.wb-list-page .wb-list-filter-status::before { animation: none; }
 }
 
-/* WP-626: list overlay and table-width hardening.
+/* list overlay and table-width hardening.
  *
  * Select/dropdown overlays must belong to the table workspace visually, not
  * float as old white Bootstrap panels across the page. */
@@ -1496,7 +1496,7 @@ body.wb-list-page .wb-data-table {
   }
 }
 
-/* WP-630: premium list calm layer.
+/* premium list calm layer.
  *
  * Tables keep the modern command model, but the old hard table chrome is
  * softened while the table-owned footer reads as a control area, not as a
@@ -1541,7 +1541,7 @@ html[data-wb-theme='dark'] body.wb-list-page #pageContent > :where(.wb-list-comm
     inset 0 1px 0 rgba(255, 255, 255, .035);
 }
 
-/* WP-642: list workspace containment pass.
+/* list workspace containment pass.
  *
  * Filters and page-size choices stay attached while the table-owned footer stays aligned with
  * the table workspace. This layer prevents legacy controls from creating
@@ -1607,7 +1607,7 @@ html[data-wb-theme='dark'] body > .wb-select__panel--page-size {
   border-color: color-mix(in srgb, var(--wb-action) 22%, var(--wb-border));
 }
 
-/* WP-648: premium list workspace finalization.
+/* premium list workspace finalization.
  *
  * The list workspace now behaves like one product surface: command bar,
  * table-scroll card and table-owned footer stay visually connected while
@@ -1761,7 +1761,7 @@ html[data-wb-theme='dark'] body.wb-list-page :where(.wb-owned-enhanced-select__p
 
 }
 
-/* WP-655: premium list control docking and resize stability.
+/* premium list control docking and resize stability.
  *
  * Real list pages still expose many old table/control combinations. The
  * Workbench now treats the command bar, table scroller, page-size picker and
@@ -1913,7 +1913,7 @@ body > .wb-select__panel--page-size .wb-select__option[aria-selected='true'] {
 
 }
 
-/* WP-658: list workspace resize lock.
+/* list workspace resize lock.
  *
  * The list command bar, filter buttons and page-size menu now keep one
  * deliberate layout across awkward intermediate widths. The table may scroll,
@@ -1983,7 +1983,7 @@ body.wb-list-page .wb-list-command-bar__primary {
   }
 }
 
-/* WP-714: premium list control deck.
+/* premium list control deck.
  *
  * List pages must read as one deliberate workspace: command bar, bounded table
  * viewport and detached table-owned footer. Controls may move responsively, but
@@ -2080,7 +2080,7 @@ html[data-wb-theme='dark'] body.wb-list-page .wb-page-size-select {
   }
 }
 
-/* WP-720: list controls and filter overlay stabilization.
+/* list controls and filter overlay stabilization.
  *
  * Tables can be much wider than the viewport, but their controls must not feel
  * trapped inside the scrollable grid. This late layer keeps command actions,

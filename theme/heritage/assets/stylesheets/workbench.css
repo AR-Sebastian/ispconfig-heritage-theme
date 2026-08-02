@@ -26,7 +26,7 @@
    for contexts that render the stylesheet without the shell inline style. */
 :root { --wb-action: var(--wb-accent, #cc151c); }
 
-/* WP-713: semantic accent discipline.
+/* semantic accent discipline.
  *
  * The selected accent is a brand/action signal. It must not make ordinary
  * navigation, dashboards or filters read as warning/danger. Dedicated status
@@ -150,7 +150,7 @@ textarea:focus-visible,
 #pageContent:focus { outline: none; }
 #content { padding: 24px; }
 
-/* WP-308: Workbench owns visual theming without default theme.min.css. */
+/* Workbench owns visual theming without default theme.min.css. */
 body.wb-app-navigation-enabled {
   color: var(--wb-text);
   background: var(--wb-canvas);

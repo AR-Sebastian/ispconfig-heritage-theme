@@ -4730,7 +4730,7 @@
         var legend = section.querySelector(':scope > legend, :scope > .fieldset-legend');
         if (legend) legend.classList.add('wb-form-section-heading');
       });
-      // WP-925: also decorate native .wb-field-group templates (Bootstrap-free forms),
+      // also decorate native .wb-field-group templates (Bootstrap-free forms),
       // not only legacy Bootstrap .form-group. Static NodeList + idempotent add =>
       // no double processing; legacy .form-group templates behave exactly as before.
       Array.prototype.forEach.call(scope.querySelectorAll('.form-group, .wb-field-group'), function(group, groupIndex) {
@@ -5106,7 +5106,7 @@
     var request = typeof cached === 'string' ? resolvedMenuRequest(cached) : requestHtml('nav.php', data, 30000);
     request.promise = request.promise.then(function(response) {
         if (token !== menuSequence) return;
-        // WP-864 regression fix: `var api` was declared below but referenced
+        // regression fix: `var api` was declared below but referenced
         // here first; hoisting made it undefined, so every menu response threw
         // "fragment renderer is not available" and the nav silently failed.
         var api = runtime();

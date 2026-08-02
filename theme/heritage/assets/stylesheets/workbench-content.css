@@ -1,5 +1,5 @@
 /*
- * WP-361: authoritative page-content surface layer.
+ * authoritative page-content surface layer.
  *
  * This file owns authenticated page hierarchy, page feedback, content cards,
  * legacy panel bridges, dialogs and operational states. It is intentionally
@@ -7,7 +7,7 @@
  * No route, value, permission, request or ISPConfig behavior is changed here.
  */
 
-/* WP-367: authoritative feedback, operational-state and dialog presentation. */
+/* authoritative feedback, operational-state and dialog presentation. */
 
 body.wb-app-navigation-enabled #pageContent {
   container: wb-page-content / inline-size;
@@ -568,7 +568,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled #pageContent :is(.wb-n
   body.wb-app-navigation-enabled :is(.modal-content, .wb-dialog__surface) { border: 1px solid CanvasText; }
 }
 
-/* WP-370: bounded native and extension content utilities. */
+/* bounded native and extension content utilities. */
 body.wb-app-navigation-enabled #pageContent .page-header { margin: 0 0 20px; border-color: var(--wb-border); }
 body.wb-app-navigation-enabled #pageContent .page-header h1 { margin-top: 0; font-size: 24px; font-weight: 700; letter-spacing: -.02em; }
 body.wb-app-navigation-enabled #pageContent .panel-group { display: grid; gap: 10px; margin-bottom: 18px; }
@@ -639,7 +639,7 @@ html[data-wb-theme='dark'] .wb-code-surface {
   background: var(--wb-surface-elevated);
 }
 
-/* WP-983: native informational, FAQ and operation-result surfaces. */
+/* native informational, FAQ and operation-result surfaces. */
 body.wb-app-navigation-enabled #pageContent .wb-content-panel__header {
   display: grid;
   gap: .45rem;
@@ -703,7 +703,7 @@ body.wb-app-navigation-enabled #pageContent .wb-faq-item__actions {
   }
 }
 
-/* WP-984: native tabbed-form navigation, independent of Bootstrap tabs. */
+/* native tabbed-form navigation, independent of Bootstrap tabs. */
 body.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell {
   min-inline-size: 0;
   border: 1px solid var(--wb-border);

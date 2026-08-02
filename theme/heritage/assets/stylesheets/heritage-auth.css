@@ -50,7 +50,7 @@ body.wb-login-page.heritage-shell .wb-login-hero__logo img {
 }
 
 html[data-wb-theme='dark'] body.wb-login-page.heritage-shell .wb-login-hero__logo img {
-  content: url('../images/ispconfig-workbench-logo-dark.svg');
+  content: url('../images/ispconfig-heritage-logo-dark.svg');
 }
 
 html[data-wb-theme='dark'] body.wb-login-page.heritage-shell .wb-login-hero__logo {

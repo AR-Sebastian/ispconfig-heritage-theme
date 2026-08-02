@@ -1,4 +1,4 @@
-﻿/* WP-364: authoritative authenticated application shell.
+/* authoritative authenticated application shell.
  *
  * This final layer owns header, global search, persistent navigation, compact
  * drawer and shell geometry. The native ISPConfig menus remain hidden data
@@ -120,7 +120,7 @@ body.wb-app-navigation-enabled #headerbar > * + * { margin-left: 0; }
    legacy inline background declaration emitted by the ISPConfig template. */
 body.wb-app-navigation-enabled #logo,
 body.wb-app-navigation-enabled .wb-app-navigation__brand-logo {
-  background-image: url('../images/ispconfig-workbench-logo.svg') !important;
+  background-image: url('../images/ispconfig-heritage-logo.svg') !important;
   background-repeat: no-repeat !important;
 }
 
@@ -183,7 +183,7 @@ body.wb-app-navigation-enabled #searchform {
   margin: 0;
 }
 
-/* WP-605: the header is only for global utilities. User identity and logout
+/* the header is only for global utilities. User identity and logout
  * belong to the navigation footer so the shell never shows two competing
  * account areas at once. These guards also neutralise late legacy fragments
  * from modules that still try to render account/logout affordances in the
@@ -717,7 +717,7 @@ body.wb-app-navigation-enabled .wb-module-transition { position: absolute; width
   body.wb-app-navigation-enabled .wb-global-search-message--loading::before { animation: none; border-color: var(--wb-action); }
 }
 
-/* WP-570: shell convergence guard.
+/* shell convergence guard.
  *
  * This final guard catches intermediate viewport states where old Bootstrap
  * widths, native controls or injected module content would otherwise push the
@@ -779,7 +779,7 @@ body.wb-app-navigation-enabled :where(.dropdown-menu, .wb-owned-enhanced-select_
   }
 }
 
-/* WP-626: remove the remaining "between states".
+/* remove the remaining "between states".
  *
  * The Workbench shell has one account surface: the navigation footer. Header
  * identity fragments, legacy logout buttons and late module account snippets
@@ -808,7 +808,7 @@ body.wb-app-navigation-enabled :where(
 }
 
 
-/* WP-630: calmer navigation chrome.
+/* calmer navigation chrome.
  *
  * Sidebar markers and scrollbars should feel like part of the shell, not red
  * rendering artefacts while the user scrolls through long module trees. */
@@ -849,7 +849,7 @@ body.wb-app-navigation-enabled .wb-app-navigation__footer {
     linear-gradient(135deg, rgba(255, 255, 255, .058), rgba(255, 255, 255, .026));
 }
 
-/* WP-642: deterministic navigation groups.
+/* deterministic navigation groups.
  *
  * The secondary navigation is no longer an old sidebar list hidden inside the
  * new shell. Groups look and behave like a first-class part of the Workbench
@@ -903,7 +903,7 @@ body.wb-app-navigation-enabled #sidebar.wb-secondary-navigation--grouped > ul.wb
   box-shadow: 0 12px 24px color-mix(in srgb, var(--wb-action) 20%, transparent);
 }
 
-/* WP-718: left-aligned secondary navigation rhythm.
+/* left-aligned secondary navigation rhythm.
  *
  * The secondary menu should feel like part of the application chrome, not a
  * centered card list. Keep every submenu label on one readable left axis,
@@ -969,7 +969,7 @@ body.wb-app-navigation-enabled .wb-secondary-navigation__group a::after {
   justify-self: end;
 }
 
-/* WP-713: semantic accent discipline for the app shell.
+/* semantic accent discipline for the app shell.
  * Navigation uses the accent as quiet orientation. Destructive/error meaning is
  * reserved for explicit status components and badges. */
 body.wb-app-navigation-enabled .notification {
@@ -1025,7 +1025,7 @@ body.wb-app-navigation-enabled .wb-app-navigation__logout:focus-visible {
   box-shadow: 0 0 0 3px var(--wb-action-ring);
 }
 
-/* WP-725: single identity owner and stable utility header.
+/* single identity owner and stable utility header.
  *
  * The authenticated header is now only a utility strip: search, theme and
  * datalog. User identity and logout live in the navigation footer. This
@@ -1071,10 +1071,10 @@ body.wb-app-navigation-enabled .wb-app-navigation__user > :where(strong, small) 
   white-space: nowrap;
 }
 
-/* WP-811: final navigation authority.
+/* final navigation authority.
  * One final block owns the visible Workbench navigation contract. Main modules
  * may disclose or hide their submenu. Submenu groups are static dividers, not
- * nested accordions. This replaces the previous late WP-782/WP-798 override
+ * nested accordions. This replaces the previous late override
  * split with one deterministic navigation endpoint.
  */
 body.wb-app-navigation-enabled .wb-mobile-navigation__module.wb-has-submenu {
@@ -1135,7 +1135,7 @@ body.wb-app-navigation-enabled .wb-mobile-navigation__secondary-link {
   text-align: left !important;
 }
 
-/* WP-869: navigation and shell finalization.
+/* navigation and shell finalization.
  *
  * The application shell now owns the visible navigation endpoint: primary
  * modules, secondary groups, utility header and account/logout footer. This is
@@ -1211,9 +1211,9 @@ body.wb-app-navigation-enabled .wb-mobile-navigation__quick-action:is(:hover, :f
   background: color-mix(in srgb, var(--wb-action) 8%, var(--wb-surface)) !important;
 }
 
-/* WP-876: final navigation composition.
+/* final navigation composition.
  *
- * This block replaces the older WP-782/WP-719/WP-758 navigation generations
+ * This block replaces the older navigation generations
  * with one readable left-axis contract. Modules, section dividers, quick
  * create actions, server selectors and the account footer share one geometry.
  */
@@ -1488,7 +1488,7 @@ body.wb-app-navigation-enabled :is(.wb-app-navigation__theme, .wb-app-navigation
   }
 }
 
-/* WP-874: final chrome surface polish.
+/* final chrome surface polish.
  *
  * This is the authoritative endpoint for the authenticated shell chrome. It
  * neutralizes older Bootstrap/search states that could still flash during
@@ -1615,7 +1615,7 @@ body.wb-app-navigation-enabled .wb-global-search-results {
   }
 }
 
-/* WP-890: navigation DONE contract.
+/* navigation DONE contract.
  *
  * The final Workbench navigation is a single left-axis product surface:
  * - primary modules may disclose one submenu;
@@ -1686,7 +1686,7 @@ body.wb-app-navigation-enabled .wb-mobile-navigation__quick-action {
   justify-self: end;
 }
 
-/* WP-1139: premium navigation density and geometry.
+/* premium navigation density and geometry.
  *
  * Navigation is persistent application chrome, not a stack of large cards.
  * Every row keeps the same inline geometry across rest, hover and active

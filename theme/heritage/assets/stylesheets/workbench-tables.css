@@ -392,7 +392,7 @@ html[data-wb-theme='dark'] body.wb-list-page #pageContent .wb-table-footer {
   }
 }
 
-/* WP-812: final table surface authority.
+/* final table surface authority.
  *
  * Tables are now a first-class Workbench surface. The older list stylesheet
  * may still bridge ISPConfig's legacy markup into stable classes, but all
@@ -593,7 +593,7 @@ html[data-wb-theme='dark'] body.wb-list-page .wb-table-workspace .wb-data-table 
   }
 }
 
-/* WP-867: table surface finalization.
+/* table surface finalization.
  *
  * This is the visible contract for list/table pages. The table workspace owns
  * its command deck, scroll boundary, footer and responsive card conversion.
@@ -827,7 +827,7 @@ html[data-wb-theme='dark'] body.wb-list-page .wb-table-workspace--finalized .wb-
   }
 }
 
-/* WP-877: final table card composition.
+/* final table card composition.
  *
  * Compact table behavior now belongs to the finalized table workspace itself.
  * The old page-content breakpoint is intentionally retired: tables decide
@@ -1052,7 +1052,7 @@ body.wb-list-page .wb-dns-zone-actions__secondary:is(:hover, :focus-visible) {
   }
 }
 
-/* WP-879: list adapter boundary hardening.
+/* list adapter boundary hardening.
  *
  * Row headers, table actions and empty-table states no longer live in the
  * list adapter. They are part of the final table authority so list CSS can
@@ -1279,7 +1279,7 @@ body.wb-list-page .wb-table-workspace--finalized .wb-empty-state--table .wb-empt
   font-weight: 650;
 }
 
-/* WP-880: bounded table geometry authority.
+/* bounded table geometry authority.
  *
  * Bounded table geometry moved out of the list adapter. The finalized table
  * workspace owns fixed layout, overflow containment and action-column sizing.
@@ -1342,7 +1342,7 @@ body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[dat
   min-inline-size: 0 !important;
 }
 
-/* WP-881: table footer and filter-row authority.
+/* table footer and filter-row authority.
  *
  * The final table workspace owns table viewport chrome, filter-row containment
  * and pagination footer behavior. The list adapter no longer paints these
@@ -1419,7 +1419,7 @@ body.wb-list-page .wb-table-workspace--finalized .wb-list-footer__pagination :wh
   }
 }
 
-/* WP-882: empty table state authority.
+/* empty table state authority.
  *
  * Empty table rows are final table states, not list-adapter decoration. The
  * primary action remains docked in the command bar while the table body
@@ -1467,7 +1467,7 @@ body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport--empty + .
   margin-top: 0;
 }
 
-/* WP-883: runtime wrapper and pagination authority.
+/* runtime wrapper and pagination authority.
  *
  * Runtime remnants that still appear after module scripts run are table
  * concerns. Lists may provide command bars and filters, but naked table
@@ -1543,7 +1543,7 @@ html[data-wb-theme='dark'] body.wb-list-page #pageContent :where(.wb-residual-in
   background-color: color-mix(in srgb, var(--wb-surface-muted) 88%, #fff 2%) !important;
 }
 
-/* WP-1137: compact terminal state.
+/* compact terminal state.
  *
  * An empty result is a short, informative terminal state. It must not reserve
  * the vertical space of a populated data set or push pagination below a large

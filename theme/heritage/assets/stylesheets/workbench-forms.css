@@ -1,5 +1,5 @@
-﻿/*
- * WP-359: authoritative authenticated form workspace.
+/*
+ * authoritative authenticated form workspace.
  *
  * This layer owns form geometry after the structure, shell, surface and
  * module layers. It intentionally relies on the progressive classes added by
@@ -406,7 +406,7 @@ body.wb-form-page #pageForm.wb-modern-form .wb-form-actions > :where(
   box-shadow: none;
 }
 
-/* WP-369: complex form sections and branding tools belong to the form owner. */
+/* complex form sections and branding tools belong to the form owner. */
 body.wb-form-page #pageForm.wb-modern-form .wb-field-group--with-affix { align-items: start; }
 
 body.wb-form-page #pageForm.wb-modern-form .wb-field-affix {
@@ -639,7 +639,7 @@ body.wb-app-navigation-enabled .wb-branding-manager[data-branding-locked='true']
   border-color: color-mix(in srgb, var(--wb-danger) 55%, var(--wb-border));
 }
 
-/* WP-572: final form contrast guard.
+/* final form contrast guard.
  *
  * Complex ISPConfig forms can still inject legacy columns, native controls and
  * plugin widgets. This guard keeps them readable in light and dark mode without
@@ -715,7 +715,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form :where(
   background-color: var(--wb-surface-muted);
 }
 
-/* WP-630: premium branding manager finish.
+/* premium branding manager finish.
  *
  * The branding section remains a normal ISPConfig form, but visually it is a
  * product configuration surface: calm cards, clear previews and less noisy
@@ -901,7 +901,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled .wb-branding-manager i
   }
 }
 
-/* WP-370/WP-510: form-specific server-rendered structure presentation. */
+/* form-specific server-rendered structure presentation. */
 
 body.wb-app-navigation-enabled .form-horizontal .control-label { padding-top: 10px; color: var(--wb-text); font-size: 13px; font-weight: 700; letter-spacing: .01em; line-height: 1.35; }
 body.wb-app-navigation-enabled .form-horizontal .form-group { margin-right: 0; margin-left: 0; padding: 14px 0; border-bottom: 1px solid var(--wb-border); }
@@ -914,7 +914,7 @@ body.wb-app-navigation-enabled .confirmpassworderror { color: var(--wb-danger-in
 body.wb-app-navigation-enabled .confirmpasswordok { color: var(--wb-success-ink); font-weight: 600; }
 body.wb-app-navigation-enabled #passBar { overflow: hidden; border-radius: 999px; }
 
-/* WP-576: final readable form guard for legacy/addon fragments. */
+/* final readable form guard for legacy/addon fragments. */
 body.wb-app-navigation-enabled :where(.form-horizontal, #pageForm, .pnl_formsarea, .tab-content, .tab-pane) {
   min-width: 0;
   color: var(--wb-text);
@@ -992,7 +992,7 @@ body.wb-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(
   background-color: var(--wb-surface-muted);
 }
 
-/* WP-601: residual form-surface contrast hardening.
+/* residual form-surface contrast hardening.
  *
  * Some module pages still inject Bootstrap-era panels, wells, tab panes and
  * muted labels inside the modern form. These elements must inherit the
@@ -1225,7 +1225,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled :where(.form-horizonta
   background: var(--wb-surface);
 }
 
-/* WP-615: last-mile legacy form contrast safety net.
+/* last-mile legacy form contrast safety net.
  *
  * A few rarely used ISPConfig and addon templates still ship inline white text,
  * pale table cells or white background snippets. This guard catches those
@@ -1296,7 +1296,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled :where(.form-horizonta
   body.wb-app-navigation-enabled .wb-branding-manager__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-/* WP-631: premium form density pass.
+/* premium form density pass.
  *
  * Long ISPConfig settings pages are generated from legacy form definitions and
  * can otherwise feel like stretched tables. This final Workbench layer keeps
@@ -1467,7 +1467,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form :where(.wb
   box-shadow: 0 20px 52px rgba(0, 0, 0, .38);
 }
 
-/* WP-645: generated form surface hardening.
+/* generated form surface hardening.
  *
  * The remaining ISPConfig pages are a mixture of generated form rows,
  * Bootstrap fragments and addon widgets. This pass makes those fragments use
@@ -1719,7 +1719,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form :where(
   }
 }
 
-/* WP-653: final generated form contrast and legacy fragment ownership.
+/* final generated form contrast and legacy fragment ownership.
  *
  * Real ISPConfig forms and add-ons still emit a mix of legacy tables,
  * Bootstrap rows, inline helpers and old enhanced-select markup. This final
@@ -1875,7 +1875,7 @@ body.wb-form-page #pageForm.wb-modern-form :where(
   color: var(--wb-text) !important;
 }
 
-/* WP-671: broad generated-form surface quarantine.
+/* broad generated-form surface quarantine.
  *
  * After the navigation and dashboard conversion the remaining visual defects
  * are mostly generated module forms: nested Bootstrap panels, old table-based
@@ -2046,7 +2046,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form :where(
     linear-gradient(180deg, color-mix(in srgb, var(--wb-surface-muted) 90%, #fff 2%), var(--wb-surface-muted)) !important;
 }
 
-/* WP-709: premium form orientation layer.
+/* premium form orientation layer.
  *
  * Generated ISPConfig forms can be very long and inconsistent. The
  * JavaScript decorator now exposes field counts, required fields and visible
@@ -2149,7 +2149,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form .wb-form-s
   }
 }
 
-/* WP-716: premium form workspace convergence.
+/* premium form workspace convergence.
  *
  * This is the late authority layer for generated ISPConfig forms. It keeps
  * all server-rendered controls and submissions intact, but makes the form
@@ -2312,7 +2312,7 @@ body.wb-app-navigation-enabled .wb-branding-manager [data-workbench-logo-reset] 
   background: color-mix(in srgb, var(--wb-status-warning) 8%, var(--wb-surface));
 }
 
-/* WP-827: form actions are visually owned by wb-action-control. Legacy
+/* form actions are visually owned by wb-action-control. Legacy
  * Bootstrap/formbutton classes remain as runtime input signals only. */
 
 html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form :where(input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']), select, textarea, .form-control, .inputbox, .wb-select__control),
@@ -2353,7 +2353,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled .wb-branding-manager__
   }
 }
 
-/* WP-742: premium form completion pass.
+/* premium form completion pass.
  *
  * This final authority layer normalizes generated ISPConfig edit masks into a
  * calmer product-grade workspace. It does not change form submission or server
@@ -2482,7 +2482,7 @@ body.wb-form-page #pageForm.wb-modern-form :where(input[type='checkbox'], input[
   margin: 0;
 }
 
-/* WP-1009: single boolean settings are native, legible switches rather than
+/* single boolean settings are native, legible switches rather than
    detached legacy checkboxes. The original input remains the form authority. */
 body.wb-form-page #pageForm.wb-modern-form .wb-field-group--boolean {
   align-items: center;
@@ -2668,7 +2668,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form :where(.in
   }
 }
 
-/* WP-743: detail-mask finish pass.
+/* detail-mask finish pass.
  *
  * The previous pass gave every generated field a shared baseline. This layer
  * handles the harder real edit screens: long tabbed forms, System Config style
@@ -2873,7 +2873,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form--tabbed .c
   }
 }
 
-/* WP-744: form intelligence and section polish.
+/* form intelligence and section polish.
  *
  * Real ISPConfig masks vary wildly: some sections contain a single notice,
  * others carry dozens of generated rows. These rules use the runtime section
@@ -3042,7 +3042,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form .wb-field-
   }
 }
 
-/* WP-745: form profile stabilization for high-risk real-world masks.
+/* form profile stabilization for high-risk real-world masks.
    Runtime-owned page profiles keep the remaining large legacy masks calm
    without changing form names, submit targets or business behaviour. */
 body.wb-form-page:is(.wb-form-profile--system-config, .wb-form-profile--server-config, .wb-form-profile--limits) #pageForm.wb-modern-form {
@@ -3200,7 +3200,7 @@ html[data-wb-theme='dark'] body.wb-form-page.wb-form-profile--branding #pageForm
   }
 }
 
-/* WP-746: real-mask premium stabilization.
+/* real-mask premium stabilization.
    This pass targets the remaining generated ISPConfig form shapes that still
    looked like old Bootstrap islands: accordions, panels, select overlays,
    technical textareas, SSL/certificate fields and compound button groups. */
@@ -3411,7 +3411,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form :where(.fo
   }
 }
 
-/* WP-747: form completion surface pass.
+/* form completion surface pass.
    Final broad guard for mixed legacy masks: tables embedded in forms,
    fieldsets, static/locked values, dense help text and over-wide controls. */
 body.wb-form-page.wb-form-profile--wide-content #pageForm.wb-modern-form,
@@ -3571,7 +3571,7 @@ html[data-wb-theme='dark'] body.wb-form-page.wb-form-profile--embedded-tables #p
   }
 }
 
-/* WP-1138: premium working density.
+/* premium working density.
  *
  * The final form surface keeps generous focus targets while removing the
  * presentation-like vertical rhythm that made long ISPConfig masks feel
@@ -3626,7 +3626,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   padding-block: 0.58rem;
 }
 
-/* WP-1007: form V1 premium convergence.
+/* form V1 premium convergence.
  *
  * The final form layer is intentionally calm and information-led. Required
  * state, focus and actions remain obvious without turning every field into a
@@ -3739,7 +3739,7 @@ body.wb-form-page:is(.wb-form-profile--system-config, .wb-form-profile--server-c
   }
 }
 
-/* WP-963: native customer/reseller composition.
+/* native customer/reseller composition.
    These primitives replace the last Bootstrap input groups, suffix columns,
    identity summaries and alert boxes used by the client module. */
 body.wb-form-page #pageForm.wb-modern-form .wb-field-control {
@@ -3764,7 +3764,7 @@ body.wb-form-page #pageForm.wb-modern-form .wb-field-action > :where(button, a) 
   white-space: nowrap;
 }
 
-/* WP-964: native compound fields used by the complete Sites V1 surface. */
+/* native compound fields used by the complete Sites V1 surface. */
 body.wb-form-page #pageForm.wb-modern-form .wb-field-composite {
   display: flex;
   inline-size: 100%;
@@ -3852,7 +3852,7 @@ body.wb-form-page #pageForm.wb-modern-form .wb-content-panel {
   box-shadow: 0 0.9rem 2.4rem color-mix(in srgb, var(--wb-text) 5%, transparent);
 }
 
-/* WP-965: explicit spans for operational forms that previously relied on
+/* explicit spans for operational forms that previously relied on
    Bootstrap's twelve-column grid. They stay intrinsic inside native fields. */
 body.wb-form-page #pageForm.wb-modern-form .wb-field-label {
   color: var(--wb-text);
@@ -3943,7 +3943,7 @@ body.wb-form-page #pageForm.wb-modern-form .wb-identity-summary li {
   }
 }
 
-/* WP-758: form authority pass.
+/* form authority pass.
  *
  * ISPConfig forms still arrive from many old templates. The modern Workbench
  * layer now provides a final contrast and geometry floor so white-on-white or
@@ -4048,7 +4048,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form :where(
   background: color-mix(in srgb, var(--wb-surface-muted) 88%, #fff 2%) !important;
 }
 
-/* WP-759: runtime form authority pass.
+/* runtime form authority pass.
  *
  * The content runtime now marks residual inline geometry and colour fragments
  * after every page load. Forms use that signal to keep old generated masks
@@ -4096,7 +4096,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form :where(.wb
   background-color: color-mix(in srgb, var(--wb-surface-muted) 88%, #fff 2%) !important;
 }
 
-/* WP-778: native form and option surface closure.
+/* native form and option surface closure.
  *
  * The old template stack can still expose browser-native option lists,
  * disabled rows, add-on dropdowns and generated action bars. This layer gives
@@ -4189,7 +4189,7 @@ body.wb-form-page #pageForm.wb-modern-form :where(.wb-form-actions, .form-action
     linear-gradient(180deg, color-mix(in srgb, var(--wb-surface) 86%, transparent), color-mix(in srgb, var(--wb-surface-muted) 88%, var(--wb-surface))) !important;
 }
 
-/* WP-781: premium form authority closure.
+/* premium form authority closure.
  *
  * This is the final form surface guard for real ISPConfig pages and installed
  * addons. It removes the remaining Bootstrap-era white islands, forced dark
@@ -4454,7 +4454,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form :where(
   background-color: color-mix(in srgb, var(--wb-surface) 92%, #fff 1%) !important;
 }
 
-/* WP-800: premium form finalization contract */
+/* premium form finalization contract */
 body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'],
 body.wb-form-page [data-workbench-form-finalized='true'] {
   color-scheme: light;
@@ -4619,7 +4619,7 @@ html[data-wb-theme='light'] body.wb-form-page #pageForm.wb-modern-form :where(.w
   }
 }
 
-/* WP-801: real form mask premium convergence.
+/* real form mask premium convergence.
  * This layer targets the actual generated edit masks that still leak old
  * geometry: tabbed System Config pages, branding uploads, dense user/customer
  * forms, extension panels and billing/product forms. It remains presentation
@@ -4779,7 +4779,7 @@ html[data-wb-theme='light'] body.wb-form-page #pageForm.wb-modern-form[data-work
   }
 }
 
-/* WP-802: residual legacy form surface closure.
+/* residual legacy form surface closure.
  * This is the broad guardrail for generated masks after the real-form pass:
  * Bootstrap wells/panels, legacy form tables, Select2/Chosen search boxes,
  * dropdowns, popovers, tooltips, datepickers, jQuery UI widgets and progress
@@ -5068,7 +5068,7 @@ body.wb-app-navigation-enabled .wb-jail-symbol svg {
   stroke-linejoin: round;
 }
 
-/* WP-868: form surface finalization.
+/* form surface finalization.
  *
  * Detail masks now finish as one premium Workbench surface. This block is the
  * final visual owner for form cards, tab strips, field rows, native controls,
@@ -5274,7 +5274,7 @@ html[data-wb-theme='light'] body.wb-form-page #pageForm.wb-modern-form[data-work
   }
 }
 
-/* WP-887: special form finalization.
+/* special form finalization.
  *
  * High-risk detail masks no longer borrow accidental layout from generic
  * Bootstrap-era forms. Branding/System Config, billing, extensions, technical
@@ -5412,7 +5412,7 @@ html[data-wb-theme='dark'] body.wb-form-page:is(
   }
 }
 
-/* WP-888: form state and guidance finalization.
+/* form state and guidance finalization.
  *
  * The final form layer now treats feedback, help text, fieldsets, locked
  * values and sensitive technical inputs as first-class UI states. Accent
@@ -5562,7 +5562,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form[data-workb
   background-color: color-mix(in srgb, var(--wb-surface) 90%, #020617) !important;
 }
 
-/* WP-893: special forms DONE contract.
+/* special forms DONE contract.
  *
  * This is the final authority layer for high-risk and historically uneven form
  * masks: System Config, branding uploads, billing settings, extension screens,
@@ -5755,7 +5755,7 @@ html[data-wb-theme='dark'] body.wb-form-page:is(
     linear-gradient(145deg, color-mix(in srgb, var(--wb-surface-muted) 86%, #fff 1.5%), var(--wb-surface) 72%) !important;
 }
 
-/* WP-1012: validation guidance follows the control axis instead of wrapping
+/* validation guidance follows the control axis instead of wrapping
    inside the narrow label column. */
 body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group.has-error > :where(
   .help-block,

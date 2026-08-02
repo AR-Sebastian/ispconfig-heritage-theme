@@ -1,12 +1,3 @@
-<!--
-  WP-925 Bootstrap-removal pilot: native, Bootstrap-free variant of the shared
-  help/faq_sections_edit.htm. Resolved by tpl.inc.php::_fileSearch() for the
-  active workbench theme; the shared template stays untouched and keeps serving
-  the default theme. Uses the native .wb-field-group / .wb-form-actions structure
-  instead of the shared template's Bootstrap grid. All
-  {tmpl_var} placeholders and data-* hooks are preserved verbatim so the
-  controller and workbench-content-states.js behave exactly as before.
--->
 <section class="wb-content-panel wb-content-panel--form" data-wb-support-surface="faq-section-editor">
             <div class="wb-field-group">
                 <label for="hfs_name">{tmpl_var name='faq_section_name_txt'}</label>

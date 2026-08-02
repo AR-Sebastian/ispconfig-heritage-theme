@@ -70,7 +70,7 @@ body.heritage-shell.wb-app-navigation-enabled #logo a {
 }
 
 html[data-wb-theme='dark'] body.heritage-shell.wb-app-navigation-enabled #logo {
-  background-image: url('../images/ispconfig-workbench-logo-dark.svg') !important;
+  background-image: url('../images/ispconfig-heritage-logo-dark.svg') !important;
 }
 
 body.heritage-shell.wb-app-navigation-enabled #headerbar {

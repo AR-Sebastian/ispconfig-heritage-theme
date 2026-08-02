@@ -26,6 +26,10 @@ Release ZIP and TAR.GZ files are reproducible from the same source revision.
 The builder normalizes path order, timestamps, file modes, ownership metadata
 and compression headers before generating SHA-256 checksums.
 
+Public logo and favicon asset filenames now use the HERITAGE namespace. Internal
+work-package annotations have been removed from the complete template set
+without changing controller variables, markup contracts or runtime hooks.
+
 ## Previous release
 
 HERITAGE 1.0.33 extends compact states to all five server capabilities and the

@@ -1,4 +1,4 @@
-/* WP-363: authoritative dashboard workspace.
+/* authoritative dashboard workspace.
  * The dashboard owns one fluid, container-driven composition. Historical
  * dashboard declarations in workbench.css are structural input only and
  * must not decide the rendered geometry. */
@@ -451,7 +451,7 @@ body.wb-dashboard-page .wb-dashlet[data-wb-density='compact'] .modules { grid-te
   }
 }
 
-/* WP-1137: intentional secondary-content composition.
+/* intentional secondary-content composition.
  *
  * News is useful context, not a narrow metric tile. Whenever it is the only
  * remaining dashboard card it owns the available row; in a populated
@@ -503,7 +503,7 @@ html[data-wb-theme='dark'] .wb-dashboard-overview__stat {
   .wb-dashboard-metric-card { border: 1px solid CanvasText !important; box-shadow: none !important; }
 }
 
-/* WP-625: premium operations workspace direction.
+/* premium operations workspace direction.
  * The dashboard may exceed the original visual demo when real ISPConfig
  * workflows need stronger hierarchy. Warnings, capacity and shortcuts stay
  * operationally prominent; news remains a secondary widget. */
@@ -547,7 +547,7 @@ body.wb-dashboard-page .wb-dashboard-toolbar {
   border-color: color-mix(in srgb, var(--wb-action) 10%, var(--wb-border));
 }
 
-/* WP-630: premium calm layer.
+/* premium calm layer.
  *
  * The first dashboard passes proved the structure, but the red default accent
  * was too dominant. The dashboard now treats accent as guidance and state,
@@ -629,9 +629,9 @@ html[data-wb-theme='dark'] body.wb-dashboard-page .wb-dashboard-toolbar {
     inset 0 1px 0 rgba(255, 255, 255, .035);
 }
 
-/* WP-633: atomic dashboard visual calm pass.
+/* atomic dashboard visual calm pass.
  *
- * WP-632 made modules and metric charts individually placeable. This layer
+ * made modules and metric charts individually placeable. This layer
  * makes those smaller widgets feel intentional instead of looking like red
  * fragments cut out of the former combined dashboard panels. */
 body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-wb-atomic-source] {
@@ -668,7 +668,7 @@ body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-wb-at
   box-shadow: none;
 }
 
-/* WP-643: premium atomic dashboard resize controls.
+/* premium atomic dashboard resize controls.
  *
  * The dashboard already splits module shortcuts and metrics into independent
  * widgets. These controls make the behaviour understandable: small, tall and
@@ -867,7 +867,7 @@ html[data-wb-theme='dark'] body.wb-dashboard-page .wb-dashlet-metric-atomic .wb-
     inset 0 1px 0 rgba(255, 255, 255, .035) !important;
 }
 
-/* WP-652: individual atomic widget polish.
+/* individual atomic widget polish.
  *
  * Each module shortcut and each metric chart can now live as its own dashboard
  * widget. This layer makes the individual widgets read like first-class
@@ -950,7 +950,7 @@ body.wb-dashboard-page .wb-dashlet-metric-atomic[data-wb-metric-viewport='detail
   }
 }
 
-/* WP-634: self-healing dashboard grid.
+/* self-healing dashboard grid.
  *
  * The old step-down model still acted like a set of fixed intermediate
  * layouts while resizing. This final layer lets the dashboard choose as many
@@ -981,7 +981,7 @@ body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet-size-2x2 {
   }
 }
 
-/* WP-647: premium atomic widget refinement.
+/* premium atomic widget refinement.
  *
  * Module and metric widgets are now individual dashboard objects. This layer
  * makes that explicit: each card has a clearer handle, calmer header rhythm,
@@ -1110,7 +1110,7 @@ body.wb-dashboard-page .wb-dashlet-metric-atomic .wb-dashboard-sparkline__line {
 
 }
 
-/* WP-654: atomic dashboard controls as first-class demo widgets.
+/* atomic dashboard controls as first-class demo widgets.
  *
  * The user should not have to infer that a split module card or a split metric
  * chart is movable on its own. This layer gives every atomic widget an explicit
@@ -1216,7 +1216,7 @@ body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-wb-at
   }
 }
 
-/* WP-657: premium atomic dashboard cockpit pass.
+/* premium atomic dashboard cockpit pass.
  *
  * The dashboard now treats split modules and split metric charts as deliberate
  * cockpit objects. This final layer improves card hierarchy, edit affordances,
@@ -1380,7 +1380,7 @@ body.wb-dashboard-page .wb-dashlet-metric-atomic[data-wb-size='2x2'] .wb-dashboa
   }
 }
 
-/* WP-658: atomic dashboard resilience and preview parity.
+/* atomic dashboard resilience and preview parity.
  *
  * Module shortcuts and metric graphs are no longer a grouped afterthought.
  * Each card is a standalone cockpit object with predictable clipping,
@@ -1459,7 +1459,7 @@ body.wb-dashboard-page .wb-dashlet-metric-atomic .wb-dashboard-sparkline {
   }
 }
 
-/* WP-666: flatten atomic module widgets.
+/* flatten atomic module widgets.
  * The module dashlet is now split into individual dashboard widgets. Once a
  * module has its own card header, repeating the same title inside a nested
  * launcher makes the card feel generated instead of designed. Keep the
@@ -1528,7 +1528,7 @@ body.wb-dashboard-page .wb-dashlet-module-atomic[data-wb-size='2x2'] .wb-module-
   min-block-size: 100% !important;
 }
 
-/* WP-666 follow-up: keep the visual identity of each atomic module. */
+/* follow-up: keep the visual identity of each atomic module. */
 body.wb-dashboard-page .wb-dashlet-module-atomic .wb-module-launcher > .clear > :first-child {
   display: grid !important;
   grid-column: 1 / -1;
@@ -1556,7 +1556,7 @@ body.wb-dashboard-page .wb-dashlet-module-atomic[data-wb-size='2x2'] .wb-module-
   font-size: 1.2em;
 }
 
-/* WP-706: restore useful, interactive system metric widgets.
+/* restore useful, interactive system metric widgets.
  * The dashboard now splits every live metric into its own movable widget, but the
  * card must still expose the information users had before the atomic refactor:
  * trend, current value, range and sample context. Details stay quiet in compact
@@ -1656,7 +1656,7 @@ body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-wb-at
   align-self: end;
 }
 
-/* WP-707: metric cards become analysis cards instead of flat sparklines. */
+/* metric cards become analysis cards instead of flat sparklines. */
 .wb-dashboard-metric-card__toggle[aria-expanded='true']::after {
   content: '-';
 }
@@ -1712,7 +1712,7 @@ body.wb-dashboard-page .wb-dashlet-metric-atomic[data-wb-size='2x2'] .wb-dashboa
   padding: 12px;
 }
 
-/* WP-712: premium dashboard cockpit convergence.
+/* premium dashboard cockpit convergence.
  *
  * The dashboard is now treated as one calm cockpit instead of a set of
  * disconnected generated cards. This last layer intentionally overrides older
@@ -1923,7 +1923,7 @@ html[data-wb-theme='dark'] body.wb-dashboard-page #pageContent.wb-dashboard-layo
     linear-gradient(145deg, color-mix(in srgb, var(--wb-surface-muted) 86%, #fff 2%), var(--wb-surface) 70%);
 }
 
-/* WP-712 follow-up: accent is guidance, not wallpaper. */
+/* follow-up: accent is guidance, not wallpaper. */
 body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-wb-atomic-source='modules'] {
   border-color: color-mix(in srgb, var(--wb-dashlet-accent, var(--wb-action)) 11%, var(--wb-border));
   background:
@@ -1957,7 +1957,7 @@ html[data-wb-theme='dark'] body.wb-dashboard-page #pageContent.wb-dashboard-layo
     linear-gradient(145deg, color-mix(in srgb, var(--wb-surface-muted) 82%, #fff 1.5%), var(--wb-surface) 72%);
 }
 
-/* WP-713: dashboard accent is orientation, not danger. */
+/* dashboard accent is orientation, not danger. */
 body.wb-dashboard-page #pageContent.wb-dashboard-layout {
   --wb-dashboard-accent-line: var(--wb-action-line);
 }
@@ -2001,7 +2001,7 @@ body.wb-dashboard-page .wb-dashboard-overview__stat--attention::before {
   background: color-mix(in srgb, var(--wb-status-warning) 64%, transparent);
 }
 
-/* WP-726: dashboard toolbar contrast hardening.
+/* dashboard toolbar contrast hardening.
  *
  * The dashboard customization action must read as a calm primary control, not
  * as an error/warning surface. A solid neutral background also gives the
@@ -2032,10 +2032,10 @@ body.wb-dashboard-page .wb-dashboard-layout-toggle:focus-visible {
     linear-gradient(135deg, #101827, color-mix(in srgb, var(--wb-action) 30%, #101827)) !important;
 }
 
-/* WP-827: dashboard no longer owns legacy Bootstrap/formbutton action tones.
+/* dashboard no longer owns legacy Bootstrap/formbutton action tones.
  * Shared wb-action-control classes provide the visible action authority. */
 
-/* WP-730: calm dashboard accent discipline.
+/* calm dashboard accent discipline.
  *
  * The user-facing default accent can still be ISPConfig red, but normal
  * dashboard information must not read as danger. This final dashboard layer
@@ -2123,7 +2123,7 @@ html[data-wb-theme='dark'] body.wb-dashboard-page #pageContent.wb-dashboard-layo
     linear-gradient(145deg, color-mix(in srgb, var(--wb-surface-muted) 82%, #fff 1%), var(--wb-surface) 76%) !important;
 }
 
-/* WP-721: system metrics as real, independent dashboard widgets.
+/* system metrics as real, independent dashboard widgets.
  *
  * The metric split is intentionally kept, but the cards now behave less like
  * static chart thumbnails and more like compact live-analysis tiles. The
@@ -2270,7 +2270,7 @@ body.wb-dashboard-page .wb-dashlet-metric-atomic[data-wb-metric-viewport='detail
   }
 }
 
-/* WP-723: stable dashboard editing controls.
+/* stable dashboard editing controls.
  *
  * The dashboard editor is part of the product surface, not a temporary debug
  * strip. Keep movement, size and hide actions in a predictable control deck so
@@ -2371,7 +2371,7 @@ body.wb-dashboard-page #pageContent.wb-dashboard-layout.wb-dashboard-layout-edit
   }
 }
 
-/* WP-783: premium dashboard cockpit closure.
+/* premium dashboard cockpit closure.
  *
  * Atomic module and metric widgets are now first-class cockpit cards. This
  * final dashboard layer avoids another round of selector patching by binding
@@ -2652,7 +2652,7 @@ html[data-wb-theme='dark'] body.wb-dashboard-page #pageContent.wb-dashboard-layo
   }
 }
 
-/* WP-870: final dashboard widget granularity.
+/* final dashboard widget granularity.
  *
  * Dashboard modules and system metrics are no longer treated as previews inside
  * a large collection widget. They are independent workspace objects with their
@@ -2740,7 +2740,7 @@ body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-wb-at
   }
 }
 
-/* WP-892: dashboard DONE contract.
+/* dashboard DONE contract.
  *
  * The dashboard is now treated as the first-class Workbench cockpit:
  * independent cards, calm accent usage, browser-saved layout, accessible edit
@@ -2887,7 +2887,7 @@ html[data-wb-theme='dark'] body.wb-dashboard-page #pageContent.wb-dashboard-layo
   }
 }
 
-/* WP-999: stable first-login dashboard composition.
+/* stable first-login dashboard composition.
  *
  * Widget sizes describe the card itself, never a shared CSS-grid row. A long
  * statistics or quota widget must not stretch the row occupied by unrelated

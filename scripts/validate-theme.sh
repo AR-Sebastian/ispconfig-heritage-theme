@@ -28,6 +28,10 @@ if grep -RIEq 'lorem ipsum|\bTODO\b|\bFIXME\b|themes/workbench/' "$theme"; then
   echo 'Theme contains a forbidden public-release marker.' >&2
   exit 1
 fi
+if grep -RIEq 'WP-[0-9]+|ispconfig-workbench-(logo|favicon)' "$theme/templates" "$theme/assets"; then
+  echo 'Theme contains an internal work-package marker or obsolete public asset name.' >&2
+  exit 1
+fi
 while IFS= read -r -d '' file; do node --check "$file"; done < <(find "$theme" -type f -name '*.js' -print0)
 
 node - "$theme" "$version" <<'NODE'
@@ -119,7 +123,7 @@ if (manifest.name !== 'ISPConfig HERITAGE') throw new Error(`Unexpected public t
 if (webManifest.name !== 'ISPConfig HERITAGE' || webManifest.short_name !== 'HERITAGE') {
   throw new Error('PWA branding must identify ISPConfig HERITAGE consistently.');
 }
-for (const logo of ['ispconfig-workbench-logo.svg', 'ispconfig-workbench-logo-dark.svg', 'ispconfig-workbench-favicon.svg']) {
+for (const logo of ['ispconfig-heritage-logo.svg', 'ispconfig-heritage-logo-dark.svg', 'ispconfig-heritage-favicon.svg']) {
   const artwork = fs.readFileSync(path.join(theme, 'assets', 'images', logo), 'utf8');
   if (!artwork.includes('<title id="title">ISPConfig HERITAGE</title>')) {
     throw new Error(`Accessible HERITAGE title is missing from ${logo}.`);
@@ -196,7 +200,7 @@ for (const shellName of ['main.tpl.htm', 'main_login.tpl.htm']) {
   const stale = references.filter(reference => reference.slice(reference.lastIndexOf('?ver=') + 5) !== releaseVersion);
   if (stale.length) throw new Error(`${shellName} has assets outside release ${releaseVersion}: ${stale.join(', ')}`);
   const normalized = references.map(reference => reference.replace(/^\.\.\//, '').replace(/\?ver=[0-9]+(?:\.[0-9]+){2}$/, ''));
-  const duplicates = normalized.filter((reference, index) => normalized.indexOf(reference) !== index && !reference.endsWith('/images/ispconfig-workbench-favicon.svg'));
+  const duplicates = normalized.filter((reference, index) => normalized.indexOf(reference) !== index && !reference.endsWith('/images/ispconfig-heritage-favicon.svg'));
   if (duplicates.length) throw new Error(`${shellName} loads assets twice: ${[...new Set(duplicates)].join(', ')}`);
   const stylesheets = [...markup.matchAll(/<link[^>]+heritage-(?:app|login)\.bundle\.css\?ver=[0-9]+(?:\.[0-9]+){2}[^>]*>/g)];
   if (stylesheets.length !== 1) throw new Error(`${shellName} must load exactly one CSS bundle.`);

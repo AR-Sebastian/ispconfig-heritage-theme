@@ -29,7 +29,7 @@
    for contexts that render the stylesheet without the shell inline style. */
 :root { --wb-action: var(--wb-accent, #cc151c); }
 
-/* WP-713: semantic accent discipline.
+/* semantic accent discipline.
  *
  * The selected accent is a brand/action signal. It must not make ordinary
  * navigation, dashboards or filters read as warning/danger. Dedicated status
@@ -153,7 +153,7 @@ textarea:focus-visible,
 #pageContent:focus { outline: none; }
 #content { padding: 24px; }
 
-/* WP-308: Workbench owns visual theming without default theme.min.css. */
+/* Workbench owns visual theming without default theme.min.css. */
 body.wb-app-navigation-enabled {
   color: var(--wb-text);
   background: var(--wb-canvas);
@@ -163,7 +163,7 @@ body.wb-app-navigation-enabled {
 body.wb-app-navigation-enabled .green { color: var(--wb-success-ink); }
 
 /* source: workbench-auth.css */
-/* WP-365: authoritative authentication surface for login, OTP and recovery. */
+/* authoritative authentication surface for login, OTP and recovery. */
 body.wb-login-page {
   min-height: 100vh;
   margin: 0;
@@ -493,7 +493,7 @@ html[data-wb-theme='dark'] .wb-login-badge { color: color-mix(in srgb, var(--wb-
   .wb-login-is-submitting::after { animation: none; }
 }
 
-/* WP-626: premium login error and saved-session polish.
+/* premium login error and saved-session polish.
  *
  * Legacy ISPConfig login errors can still inject image placeholders or
  * unbounded SVGs. The authentication surface owns the complete feedback
@@ -560,7 +560,7 @@ html[data-wb-theme='dark'] .wb-login-badge { color: color-mix(in srgb, var(--wb-
   accent-color: var(--wb-action);
 }
 
-/* WP-638: login legacy error-box quarantine.
+/* login legacy error-box quarantine.
  *
  * Failed login responses still contain the historic `.box.box_error` fragment
  * inside the modern alert. The old fragment can carry icon backgrounds or
@@ -633,7 +633,7 @@ html[data-wb-theme='dark'] .wb-login-badge { color: color-mix(in srgb, var(--wb-
   overflow: hidden;
 }
 
-/* WP-649: direct legacy login feedback quarantine.
+/* direct legacy login feedback quarantine.
  *
  * Some failed-login responses expose the old `.box_error` surface directly
  * instead of nesting it inside `.alert`. That path could still show a giant
@@ -713,7 +713,7 @@ html[data-wb-theme='dark'] .wb-login-badge { color: color-mix(in srgb, var(--wb-
   content: none !important;
 }
 
-/* WP-656: login feedback DOM normalization.
+/* login feedback DOM normalization.
  *
  * CSS quarantine is the fallback. The login helper now also converts legacy
  * alert/error markup into text-only feedback at runtime, so server-side error
@@ -761,7 +761,7 @@ html[data-wb-theme='dark'] .wb-login-badge { color: color-mix(in srgb, var(--wb-
   font: inherit;
 }
 
-/* WP-717: login feedback hard stop.
+/* login feedback hard stop.
  *
  * Failed-login responses may contain arbitrary historic HTML while the page is
  * still settling. The normalized feedback node is now a strict text-only
@@ -803,7 +803,7 @@ html[data-wb-theme='dark'] .wb-login-badge { color: color-mix(in srgb, var(--wb-
   z-index: 2;
 }
 
-/* WP-731: final login demo finish.
+/* final login demo finish.
  *
  * This is the authentication authority layer. The login page should now feel
  * intentionally designed rather than like old ISPConfig form fragments inside
@@ -965,7 +965,7 @@ html[data-wb-theme='dark'] .wb-login-badge {
   }
 }
 
-/* WP-758: login authority pass.
+/* login authority pass.
  *
  * The failed-login surface is text-only. If a historic template manages to
  * inject a placeholder, SVG or browser media fallback before the login helper
@@ -1167,7 +1167,7 @@ body.wb-login-page.heritage-shell .wb-login-hero__logo img {
 }
 
 html[data-wb-theme='dark'] body.wb-login-page.heritage-shell .wb-login-hero__logo img {
-  content: url('../images/ispconfig-workbench-logo-dark.svg');
+  content: url('../images/ispconfig-heritage-logo-dark.svg');
 }
 
 html[data-wb-theme='dark'] body.wb-login-page.heritage-shell .wb-login-hero__logo {

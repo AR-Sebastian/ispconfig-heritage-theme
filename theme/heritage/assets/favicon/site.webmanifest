@@ -3,7 +3,7 @@
   "short_name": "HERITAGE",
   "icons": [
     {
-      "src": "/themes/heritage/assets/images/ispconfig-workbench-favicon.svg",
+      "src": "/themes/heritage/assets/images/ispconfig-heritage-favicon.svg",
       "sizes": "64x64",
       "type": "image/svg+xml"
     }

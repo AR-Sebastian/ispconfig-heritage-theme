@@ -29,7 +29,7 @@
    for contexts that render the stylesheet without the shell inline style. */
 :root { --wb-action: var(--wb-accent, #cc151c); }
 
-/* WP-713: semantic accent discipline.
+/* semantic accent discipline.
  *
  * The selected accent is a brand/action signal. It must not make ordinary
  * navigation, dashboards or filters read as warning/danger. Dedicated status
@@ -153,7 +153,7 @@ textarea:focus-visible,
 #pageContent:focus { outline: none; }
 #content { padding: 24px; }
 
-/* WP-308: Workbench owns visual theming without default theme.min.css. */
+/* Workbench owns visual theming without default theme.min.css. */
 body.wb-app-navigation-enabled {
   color: var(--wb-text);
   background: var(--wb-canvas);
@@ -164,7 +164,7 @@ body.wb-app-navigation-enabled .green { color: var(--wb-success-ink); }
 
 /* source: workbench-structure.css */
 /*
- * WP-770: structural Workbench markup boundary.
+ * structural Workbench markup boundary.
  *
  * ISPConfig and optional extensions still emit a small server-rendered markup
  * vocabulary. This file supplies structure only; every visual decision still lives
@@ -364,7 +364,7 @@ body.wb-app-navigation-enabled .close { float: right; padding: 0; border: 0; bac
 }
 
 /* source: workbench-shell.css */
-/* WP-364: authoritative authenticated application shell.
+/* authoritative authenticated application shell.
  *
  * This final layer owns header, global search, persistent navigation, compact
  * drawer and shell geometry. The native ISPConfig menus remain hidden data
@@ -486,7 +486,7 @@ body.wb-app-navigation-enabled #headerbar > * + * { margin-left: 0; }
    legacy inline background declaration emitted by the ISPConfig template. */
 body.wb-app-navigation-enabled #logo,
 body.wb-app-navigation-enabled .wb-app-navigation__brand-logo {
-  background-image: url('../images/ispconfig-workbench-logo.svg') !important;
+  background-image: url('../images/ispconfig-heritage-logo.svg') !important;
   background-repeat: no-repeat !important;
 }
 
@@ -549,7 +549,7 @@ body.wb-app-navigation-enabled #searchform {
   margin: 0;
 }
 
-/* WP-605: the header is only for global utilities. User identity and logout
+/* the header is only for global utilities. User identity and logout
  * belong to the navigation footer so the shell never shows two competing
  * account areas at once. These guards also neutralise late legacy fragments
  * from modules that still try to render account/logout affordances in the
@@ -1083,7 +1083,7 @@ body.wb-app-navigation-enabled .wb-module-transition { position: absolute; width
   body.wb-app-navigation-enabled .wb-global-search-message--loading::before { animation: none; border-color: var(--wb-action); }
 }
 
-/* WP-570: shell convergence guard.
+/* shell convergence guard.
  *
  * This final guard catches intermediate viewport states where old Bootstrap
  * widths, native controls or injected module content would otherwise push the
@@ -1145,7 +1145,7 @@ body.wb-app-navigation-enabled :where(.dropdown-menu, .wb-owned-enhanced-select_
   }
 }
 
-/* WP-626: remove the remaining "between states".
+/* remove the remaining "between states".
  *
  * The Workbench shell has one account surface: the navigation footer. Header
  * identity fragments, legacy logout buttons and late module account snippets
@@ -1174,7 +1174,7 @@ body.wb-app-navigation-enabled :where(
 }
 
 
-/* WP-630: calmer navigation chrome.
+/* calmer navigation chrome.
  *
  * Sidebar markers and scrollbars should feel like part of the shell, not red
  * rendering artefacts while the user scrolls through long module trees. */
@@ -1215,7 +1215,7 @@ body.wb-app-navigation-enabled .wb-app-navigation__footer {
     linear-gradient(135deg, rgba(255, 255, 255, .058), rgba(255, 255, 255, .026));
 }
 
-/* WP-642: deterministic navigation groups.
+/* deterministic navigation groups.
  *
  * The secondary navigation is no longer an old sidebar list hidden inside the
  * new shell. Groups look and behave like a first-class part of the Workbench
@@ -1269,7 +1269,7 @@ body.wb-app-navigation-enabled #sidebar.wb-secondary-navigation--grouped > ul.wb
   box-shadow: 0 12px 24px color-mix(in srgb, var(--wb-action) 20%, transparent);
 }
 
-/* WP-718: left-aligned secondary navigation rhythm.
+/* left-aligned secondary navigation rhythm.
  *
  * The secondary menu should feel like part of the application chrome, not a
  * centered card list. Keep every submenu label on one readable left axis,
@@ -1335,7 +1335,7 @@ body.wb-app-navigation-enabled .wb-secondary-navigation__group a::after {
   justify-self: end;
 }
 
-/* WP-713: semantic accent discipline for the app shell.
+/* semantic accent discipline for the app shell.
  * Navigation uses the accent as quiet orientation. Destructive/error meaning is
  * reserved for explicit status components and badges. */
 body.wb-app-navigation-enabled .notification {
@@ -1391,7 +1391,7 @@ body.wb-app-navigation-enabled .wb-app-navigation__logout:focus-visible {
   box-shadow: 0 0 0 3px var(--wb-action-ring);
 }
 
-/* WP-725: single identity owner and stable utility header.
+/* single identity owner and stable utility header.
  *
  * The authenticated header is now only a utility strip: search, theme and
  * datalog. User identity and logout live in the navigation footer. This
@@ -1437,10 +1437,10 @@ body.wb-app-navigation-enabled .wb-app-navigation__user > :where(strong, small) 
   white-space: nowrap;
 }
 
-/* WP-811: final navigation authority.
+/* final navigation authority.
  * One final block owns the visible Workbench navigation contract. Main modules
  * may disclose or hide their submenu. Submenu groups are static dividers, not
- * nested accordions. This replaces the previous late WP-782/WP-798 override
+ * nested accordions. This replaces the previous late override
  * split with one deterministic navigation endpoint.
  */
 body.wb-app-navigation-enabled .wb-mobile-navigation__module.wb-has-submenu {
@@ -1501,7 +1501,7 @@ body.wb-app-navigation-enabled .wb-mobile-navigation__secondary-link {
   text-align: left !important;
 }
 
-/* WP-869: navigation and shell finalization.
+/* navigation and shell finalization.
  *
  * The application shell now owns the visible navigation endpoint: primary
  * modules, secondary groups, utility header and account/logout footer. This is
@@ -1577,9 +1577,9 @@ body.wb-app-navigation-enabled .wb-mobile-navigation__quick-action:is(:hover, :f
   background: color-mix(in srgb, var(--wb-action) 8%, var(--wb-surface)) !important;
 }
 
-/* WP-876: final navigation composition.
+/* final navigation composition.
  *
- * This block replaces the older WP-782/WP-719/WP-758 navigation generations
+ * This block replaces the older navigation generations
  * with one readable left-axis contract. Modules, section dividers, quick
  * create actions, server selectors and the account footer share one geometry.
  */
@@ -1854,7 +1854,7 @@ body.wb-app-navigation-enabled :is(.wb-app-navigation__theme, .wb-app-navigation
   }
 }
 
-/* WP-874: final chrome surface polish.
+/* final chrome surface polish.
  *
  * This is the authoritative endpoint for the authenticated shell chrome. It
  * neutralizes older Bootstrap/search states that could still flash during
@@ -1981,7 +1981,7 @@ body.wb-app-navigation-enabled .wb-global-search-results {
   }
 }
 
-/* WP-890: navigation DONE contract.
+/* navigation DONE contract.
  *
  * The final Workbench navigation is a single left-axis product surface:
  * - primary modules may disclose one submenu;
@@ -2052,7 +2052,7 @@ body.wb-app-navigation-enabled .wb-mobile-navigation__quick-action {
   justify-self: end;
 }
 
-/* WP-1139: premium navigation density and geometry.
+/* premium navigation density and geometry.
  *
  * Navigation is persistent application chrome, not a stack of large cards.
  * Every row keeps the same inline geometry across rest, hover and active
@@ -2145,7 +2145,7 @@ body.wb-app-navigation-enabled .wb-mobile-navigation__quick-action {
 
 /* source: workbench-surfaces.css */
 /*
- * WP-357: authoritative authenticated surface layer.
+ * authoritative authenticated surface layer.
  *
  * ISPConfig still renders a mixture of legacy Bootstrap-era components and
  * newer Workbench components. This last-loaded layer maps their presentation
@@ -2236,7 +2236,7 @@ body.wb-app-navigation-enabled :where(
   color: var(--wb-muted);
 }
 
-/* WP-369: generic authenticated controls, actions and secondary navigation. */
+/* generic authenticated controls, actions and secondary navigation. */
 body.wb-app-navigation-enabled :where(
   .form-control,
   input[type='text'],
@@ -2466,7 +2466,7 @@ body.wb-app-navigation-enabled :where(.btn-default, .btn-secondary):focus-visibl
   background-color: color-mix(in srgb, var(--wb-action) 8%, var(--wb-surface));
 }
 
-/* WP-827: old Bootstrap button classes are still emitted by many ISPConfig
+/* old Bootstrap button classes are still emitted by many ISPConfig
  * modules, but visible tones are now owned by wb-action-control classes. This
  * reset keeps legacy gradients and text shadows out without reintroducing
  * Bootstrap/formbutton color authority. */
@@ -2528,7 +2528,7 @@ body.wb-app-navigation-enabled .tab-content {
   background-color: var(--wb-surface);
 }
 
-/* WP-368: one shared table and pagination surface for every authenticated module. */
+/* one shared table and pagination surface for every authenticated module. */
 body.wb-app-navigation-enabled #pageContent :where(.table-wrapper, .table-responsive) {
   min-width: 0;
   max-width: 100%;
@@ -3050,7 +3050,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled :where(
   }
 }
 
-/* WP-370: shared validation, icon and overflow-tab surfaces. */
+/* shared validation, icon and overflow-tab surfaces. */
 body.wb-app-navigation-enabled .wb-validation-summary { border-left: 4px solid var(--wb-danger); text-align: left; }
 body.wb-app-navigation-enabled .wb-validation-summary--generated {
   display: block;
@@ -3074,7 +3074,7 @@ body.wb-app-navigation-enabled .wb-validation-summary__list a:focus-visible { ou
 
 body.wb-app-navigation-enabled .tab-content > .tab-pane { min-width: 0; }
 
-/* WP-576: residual contrast and legacy-surface convergence.
+/* residual contrast and legacy-surface convergence.
  *
  * Some rarely visited ISPConfig and addon screens still emit Bootstrap-era
  * surfaces after the main Workbench decorators have run. This guard keeps
@@ -3206,7 +3206,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
   color: var(--wb-text);
 }
 
-/* WP-608: final legacy chrome neutralisation for rarely visited pages.
+/* final legacy chrome neutralisation for rarely visited pages.
  *
  * The old UI still emits gradients, text shadows and white table fragments in
  * several modules and addons. This layer does not change behaviour; it only
@@ -3359,7 +3359,7 @@ body.wb-app-navigation-enabled .wb-svg-icon > svg {
   body.wb-app-navigation-enabled .wb-tabstrip > .nav-tabs > li > a { padding: 9px 12px; }
 }
 
-/* WP-637: authenticated contrast cleanup guard.
+/* authenticated contrast cleanup guard.
  *
  * Some ISPConfig pages and addons still arrive with old Bootstrap/default-theme
  * fragments after Ajax navigation. This final surface guard deliberately stays
@@ -3609,7 +3609,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
   background-color: color-mix(in srgb, var(--wb-action) 7%, var(--wb-surface-muted)) !important;
 }
 
-/* WP-713: semantic accent discipline for shared controls.
+/* semantic accent discipline for shared controls.
  * Primary actions may use the brand accent, but neutral hover/focus states and
  * informational surfaces stay quiet so status colors remain unmistakable. */
 body.wb-app-navigation-enabled :where(.btn-default, .btn-secondary):hover,
@@ -3647,7 +3647,7 @@ body.wb-app-navigation-enabled .alert-info {
   background-color: color-mix(in srgb, var(--wb-status-info) 8%, var(--wb-surface));
 }
 
-/* WP-805: runtime-owned residual surface quarantine.
+/* runtime-owned residual surface quarantine.
  * Dynamic ISPConfig fragments can still emit Bootstrap-era panels, overlays,
  * compound controls and inline bright surfaces. The runtime now marks those
  * fragments explicitly; this layer gives them one Workbench-owned visual
@@ -3728,7 +3728,7 @@ body.wb-app-navigation-enabled #pageContent :where(.wb-owned-control-cluster > .
   white-space: nowrap;
 }
 
-/* WP-828: semantic bridge for residual Select2/Chosen fragments.
+/* semantic bridge for residual Select2/Chosen fragments.
  * The Workbench runtime marks old enhanced-select markup with these classes so
  * vendor selectors can be retired without losing readable, premium controls. */
 body.wb-app-navigation-enabled #pageContent :where(.wb-owned-enhanced-select) {
@@ -3835,7 +3835,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled #pageContent :where(
   background: var(--wb-surface) !important;
 }
 
-/* WP-996: one native feedback surface for forms, lists and module pages. */
+/* one native feedback surface for forms, lists and module pages. */
 body.wb-app-navigation-enabled #pageContent .wb-alert {
   position: relative;
   display: grid;
@@ -3918,7 +3918,7 @@ body.wb-app-navigation-enabled #pageContent .wb-alert__dismiss:focus-visible {
 }
 
 /* source: workbench-modules.css */
-/* WP-358: authoritative module workspaces for monitoring and extensions. */
+/* authoritative module workspaces for monitoring and extensions. */
 
 body.wb-app-navigation-enabled :where(.wb-monitor-workspace, .wb-extension-workspace) {
   display: grid;
@@ -4015,7 +4015,7 @@ body.wb-app-navigation-enabled .wb-monitor-empty p {
   }
 }
 
-/* WP-362: authoritative Monitoring, Statistics and Extension workspaces. */
+/* authoritative Monitoring, Statistics and Extension workspaces. */
 
 /* Monitoring cockpit, diagnostics, states, charts and logs. */
 body.wb-app-navigation-enabled.wb-monitor-page #pageContent.wb-monitor-surface,
@@ -4275,7 +4275,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled .wb-statistics-metric-
   body.wb-app-navigation-enabled :is(.wb-monitor-state-card, .wb-monitor-chart, .wb-statistics-table, .wb-statistics-metric) { border: 1px solid CanvasText; }
 }
 
-/* WP-602: hardened module action, extension and monitoring surfaces. */
+/* hardened module action, extension and monitoring surfaces. */
 body.wb-app-navigation-enabled :where(.wb-extension-workspace, .wb-monitor-workspace, .wb-statistics-workspace) {
   container-type: inline-size;
 }
@@ -4351,7 +4351,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled.wb-monitor-page .pnl_f
   background: color-mix(in srgb, var(--wb-surface-muted) 88%, #000);
 }
 
-/* WP-1007: monitoring V1 premium convergence.
+/* monitoring V1 premium convergence.
  *
  * Monitoring is an operational workspace, not a permanent warning surface.
  * Accent and semantic colours are reserved for interaction and real state,
@@ -4527,7 +4527,7 @@ body.wb-app-navigation-enabled.wb-monitor-page .wb-monitor-chart__details dt {
   }
 }
 
-/* WP-1008: specialty V1 premium convergence.
+/* specialty V1 premium convergence.
  *
  * Extensions, reports and help lists share the same hierarchy as native
  * Workbench lists. Specialty context remains visible, while duplicate
@@ -4637,7 +4637,7 @@ body.wb-app-navigation-enabled #pageContent [data-wb-support-surface] + p:empty 
   }
 }
 
-/* WP-710: specialty module convergence layer.
+/* specialty module convergence layer.
  *
  * Monitoring, statistics and Extension Installer pages are generated outside
  * the normal list/form pipeline. This final scoped layer makes their heroes,
@@ -4795,7 +4795,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled #pageContent .wb-speci
 }
 
 /* source: workbench-lists.css */
-/* WP-360: authoritative authenticated list and filter workspace. */
+/* authoritative authenticated list and filter workspace. */
 
 body.wb-list-page #pageContent {
   container: wb-page-content / inline-size;
@@ -4944,7 +4944,7 @@ body.wb-list-page .wb-list-command-bar__primary:focus-visible {
   background: color-mix(in srgb, var(--wb-action) 86%, #000);
 }
 
-/* WP-740: premium table completion pass.
+/* premium table completion pass.
  *
  * Tables are one of the oldest rendered surfaces in ISPConfig. This final
  * list layer makes the shared Workbench treatment explicit: calm command
@@ -5706,7 +5706,7 @@ html[data-wb-theme='dark'] body.wb-list-page .wb-data-table .wb-table-actions .w
   }
 }
 
-/* WP-570: list convergence guard.
+/* list convergence guard.
  *
  * List pages are allowed to scroll inside their table workspace, never by
  * enlarging the complete document. This layer also catches browser-native
@@ -5796,7 +5796,7 @@ html[data-wb-theme='dark'] body.wb-list-page .wb-data-table > thead > tr[data-wo
   }
 }
 
-/* WP-604: deterministic list controls across in-between widths. */
+/* deterministic list controls across in-between widths. */
 body.wb-list-page #pageContent > .wb-list-command-bar {
   container-type: inline-size;
 }
@@ -5946,7 +5946,7 @@ body.wb-list-page .wb-filter-toolbar--idle .wb-filter-toggle {
   }
 }
 
-/* WP-614: container-owned list command convergence.
+/* container-owned list command convergence.
    The toolbar now responds to its own available width, not to fragile viewport
    bands. This prevents old desktop/tablet states from leaking into resized
    windows where primary actions, filters and page-size controls used to float
@@ -6058,7 +6058,7 @@ body.wb-list-page #pageContent > .table-wrapper:has(> .wb-data-table) + .wb-list
   }
 }
 
-/* WP-621: final premium list controls.
+/* final premium list controls.
  * These rules intentionally live after the older convergence guards. They
  * polish the remaining list edges without changing filtering, paging or row
  * action semantics. */
@@ -6144,7 +6144,7 @@ html[data-wb-theme='dark'] body.wb-list-page .wb-list-footer {
   }
 }
 
-/* WP-625: modern table command workspace.
+/* modern table command workspace.
  * Filters are moving away from legacy header-row editing toward a toolbar,
  * drawer and chip model. The old row remains functional during migration but
  * should visually read as a contained filter panel, not as a second table
@@ -6211,7 +6211,7 @@ body.wb-list-page .wb-list-filter-status::before {
   body.wb-list-page .wb-list-filter-status::before { animation: none; }
 }
 
-/* WP-626: list overlay and table-width hardening.
+/* list overlay and table-width hardening.
  *
  * Select/dropdown overlays must belong to the table workspace visually, not
  * float as old white Bootstrap panels across the page. */
@@ -6293,7 +6293,7 @@ body.wb-list-page .wb-data-table {
   }
 }
 
-/* WP-630: premium list calm layer.
+/* premium list calm layer.
  *
  * Tables keep the modern command model, but the old hard table chrome is
  * softened while the table-owned footer reads as a control area, not as a
@@ -6338,7 +6338,7 @@ html[data-wb-theme='dark'] body.wb-list-page #pageContent > :where(.wb-list-comm
     inset 0 1px 0 rgba(255, 255, 255, .035);
 }
 
-/* WP-642: list workspace containment pass.
+/* list workspace containment pass.
  *
  * Filters and page-size choices stay attached while the table-owned footer stays aligned with
  * the table workspace. This layer prevents legacy controls from creating
@@ -6404,7 +6404,7 @@ html[data-wb-theme='dark'] body > .wb-select__panel--page-size {
   border-color: color-mix(in srgb, var(--wb-action) 22%, var(--wb-border));
 }
 
-/* WP-648: premium list workspace finalization.
+/* premium list workspace finalization.
  *
  * The list workspace now behaves like one product surface: command bar,
  * table-scroll card and table-owned footer stay visually connected while
@@ -6558,7 +6558,7 @@ html[data-wb-theme='dark'] body.wb-list-page :where(.wb-owned-enhanced-select__p
 
 }
 
-/* WP-655: premium list control docking and resize stability.
+/* premium list control docking and resize stability.
  *
  * Real list pages still expose many old table/control combinations. The
  * Workbench now treats the command bar, table scroller, page-size picker and
@@ -6710,7 +6710,7 @@ body > .wb-select__panel--page-size .wb-select__option[aria-selected='true'] {
 
 }
 
-/* WP-658: list workspace resize lock.
+/* list workspace resize lock.
  *
  * The list command bar, filter buttons and page-size menu now keep one
  * deliberate layout across awkward intermediate widths. The table may scroll,
@@ -6780,7 +6780,7 @@ body.wb-list-page .wb-list-command-bar__primary {
   }
 }
 
-/* WP-714: premium list control deck.
+/* premium list control deck.
  *
  * List pages must read as one deliberate workspace: command bar, bounded table
  * viewport and detached table-owned footer. Controls may move responsively, but
@@ -6877,7 +6877,7 @@ html[data-wb-theme='dark'] body.wb-list-page .wb-page-size-select {
   }
 }
 
-/* WP-720: list controls and filter overlay stabilization.
+/* list controls and filter overlay stabilization.
  *
  * Tables can be much wider than the viewport, but their controls must not feel
  * trapped inside the scrollable grid. This late layer keeps command actions,
@@ -7368,7 +7368,7 @@ html[data-wb-theme='dark'] body.wb-list-page #pageContent .wb-table-footer {
   }
 }
 
-/* WP-812: final table surface authority.
+/* final table surface authority.
  *
  * Tables are now a first-class Workbench surface. The older list stylesheet
  * may still bridge ISPConfig's legacy markup into stable classes, but all
@@ -7569,7 +7569,7 @@ html[data-wb-theme='dark'] body.wb-list-page .wb-table-workspace .wb-data-table 
   }
 }
 
-/* WP-867: table surface finalization.
+/* table surface finalization.
  *
  * This is the visible contract for list/table pages. The table workspace owns
  * its command deck, scroll boundary, footer and responsive card conversion.
@@ -7803,7 +7803,7 @@ html[data-wb-theme='dark'] body.wb-list-page .wb-table-workspace--finalized .wb-
   }
 }
 
-/* WP-877: final table card composition.
+/* final table card composition.
  *
  * Compact table behavior now belongs to the finalized table workspace itself.
  * The old page-content breakpoint is intentionally retired: tables decide
@@ -8028,7 +8028,7 @@ body.wb-list-page .wb-dns-zone-actions__secondary:is(:hover, :focus-visible) {
   }
 }
 
-/* WP-879: list adapter boundary hardening.
+/* list adapter boundary hardening.
  *
  * Row headers, table actions and empty-table states no longer live in the
  * list adapter. They are part of the final table authority so list CSS can
@@ -8255,7 +8255,7 @@ body.wb-list-page .wb-table-workspace--finalized .wb-empty-state--table .wb-empt
   font-weight: 650;
 }
 
-/* WP-880: bounded table geometry authority.
+/* bounded table geometry authority.
  *
  * Bounded table geometry moved out of the list adapter. The finalized table
  * workspace owns fixed layout, overflow containment and action-column sizing.
@@ -8318,7 +8318,7 @@ body.wb-list-page .wb-table-workspace--finalized .wb-data-table > thead > tr[dat
   min-inline-size: 0 !important;
 }
 
-/* WP-881: table footer and filter-row authority.
+/* table footer and filter-row authority.
  *
  * The final table workspace owns table viewport chrome, filter-row containment
  * and pagination footer behavior. The list adapter no longer paints these
@@ -8395,7 +8395,7 @@ body.wb-list-page .wb-table-workspace--finalized .wb-list-footer__pagination :wh
   }
 }
 
-/* WP-882: empty table state authority.
+/* empty table state authority.
  *
  * Empty table rows are final table states, not list-adapter decoration. The
  * primary action remains docked in the command bar while the table body
@@ -8443,7 +8443,7 @@ body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport--empty + .
   margin-top: 0;
 }
 
-/* WP-883: runtime wrapper and pagination authority.
+/* runtime wrapper and pagination authority.
  *
  * Runtime remnants that still appear after module scripts run are table
  * concerns. Lists may provide command bars and filters, but naked table
@@ -8519,7 +8519,7 @@ html[data-wb-theme='dark'] body.wb-list-page #pageContent :where(.wb-residual-in
   background-color: color-mix(in srgb, var(--wb-surface-muted) 88%, #fff 2%) !important;
 }
 
-/* WP-1137: compact terminal state.
+/* compact terminal state.
  *
  * An empty result is a short, informative terminal state. It must not reserve
  * the vertical space of a populated data set or push pagination below a large
@@ -8540,7 +8540,7 @@ body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport--empty .wb
 
 /* source: workbench-forms.css */
 /*
- * WP-359: authoritative authenticated form workspace.
+ * authoritative authenticated form workspace.
  *
  * This layer owns form geometry after the structure, shell, surface and
  * module layers. It intentionally relies on the progressive classes added by
@@ -8947,7 +8947,7 @@ body.wb-form-page #pageForm.wb-modern-form .wb-form-actions > :where(
   box-shadow: none;
 }
 
-/* WP-369: complex form sections and branding tools belong to the form owner. */
+/* complex form sections and branding tools belong to the form owner. */
 body.wb-form-page #pageForm.wb-modern-form .wb-field-group--with-affix { align-items: start; }
 
 body.wb-form-page #pageForm.wb-modern-form .wb-field-affix {
@@ -9180,7 +9180,7 @@ body.wb-app-navigation-enabled .wb-branding-manager[data-branding-locked='true']
   border-color: color-mix(in srgb, var(--wb-danger) 55%, var(--wb-border));
 }
 
-/* WP-572: final form contrast guard.
+/* final form contrast guard.
  *
  * Complex ISPConfig forms can still inject legacy columns, native controls and
  * plugin widgets. This guard keeps them readable in light and dark mode without
@@ -9256,7 +9256,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form :where(
   background-color: var(--wb-surface-muted);
 }
 
-/* WP-630: premium branding manager finish.
+/* premium branding manager finish.
  *
  * The branding section remains a normal ISPConfig form, but visually it is a
  * product configuration surface: calm cards, clear previews and less noisy
@@ -9442,7 +9442,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled .wb-branding-manager i
   }
 }
 
-/* WP-370/WP-510: form-specific server-rendered structure presentation. */
+/* form-specific server-rendered structure presentation. */
 
 body.wb-app-navigation-enabled .form-horizontal .control-label { padding-top: 10px; color: var(--wb-text); font-size: 13px; font-weight: 700; letter-spacing: .01em; line-height: 1.35; }
 body.wb-app-navigation-enabled .form-horizontal .form-group { margin-right: 0; margin-left: 0; padding: 14px 0; border-bottom: 1px solid var(--wb-border); }
@@ -9455,7 +9455,7 @@ body.wb-app-navigation-enabled .confirmpassworderror { color: var(--wb-danger-in
 body.wb-app-navigation-enabled .confirmpasswordok { color: var(--wb-success-ink); font-weight: 600; }
 body.wb-app-navigation-enabled #passBar { overflow: hidden; border-radius: 999px; }
 
-/* WP-576: final readable form guard for legacy/addon fragments. */
+/* final readable form guard for legacy/addon fragments. */
 body.wb-app-navigation-enabled :where(.form-horizontal, #pageForm, .pnl_formsarea, .tab-content, .tab-pane) {
   min-width: 0;
   color: var(--wb-text);
@@ -9533,7 +9533,7 @@ body.wb-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(
   background-color: var(--wb-surface-muted);
 }
 
-/* WP-601: residual form-surface contrast hardening.
+/* residual form-surface contrast hardening.
  *
  * Some module pages still inject Bootstrap-era panels, wells, tab panes and
  * muted labels inside the modern form. These elements must inherit the
@@ -9766,7 +9766,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled :where(.form-horizonta
   background: var(--wb-surface);
 }
 
-/* WP-615: last-mile legacy form contrast safety net.
+/* last-mile legacy form contrast safety net.
  *
  * A few rarely used ISPConfig and addon templates still ship inline white text,
  * pale table cells or white background snippets. This guard catches those
@@ -9837,7 +9837,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled :where(.form-horizonta
   body.wb-app-navigation-enabled .wb-branding-manager__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-/* WP-631: premium form density pass.
+/* premium form density pass.
  *
  * Long ISPConfig settings pages are generated from legacy form definitions and
  * can otherwise feel like stretched tables. This final Workbench layer keeps
@@ -10008,7 +10008,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form :where(.wb
   box-shadow: 0 20px 52px rgba(0, 0, 0, .38);
 }
 
-/* WP-645: generated form surface hardening.
+/* generated form surface hardening.
  *
  * The remaining ISPConfig pages are a mixture of generated form rows,
  * Bootstrap fragments and addon widgets. This pass makes those fragments use
@@ -10260,7 +10260,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form :where(
   }
 }
 
-/* WP-653: final generated form contrast and legacy fragment ownership.
+/* final generated form contrast and legacy fragment ownership.
  *
  * Real ISPConfig forms and add-ons still emit a mix of legacy tables,
  * Bootstrap rows, inline helpers and old enhanced-select markup. This final
@@ -10416,7 +10416,7 @@ body.wb-form-page #pageForm.wb-modern-form :where(
   color: var(--wb-text) !important;
 }
 
-/* WP-671: broad generated-form surface quarantine.
+/* broad generated-form surface quarantine.
  *
  * After the navigation and dashboard conversion the remaining visual defects
  * are mostly generated module forms: nested Bootstrap panels, old table-based
@@ -10587,7 +10587,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form :where(
     linear-gradient(180deg, color-mix(in srgb, var(--wb-surface-muted) 90%, #fff 2%), var(--wb-surface-muted)) !important;
 }
 
-/* WP-709: premium form orientation layer.
+/* premium form orientation layer.
  *
  * Generated ISPConfig forms can be very long and inconsistent. The
  * JavaScript decorator now exposes field counts, required fields and visible
@@ -10690,7 +10690,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form .wb-form-s
   }
 }
 
-/* WP-716: premium form workspace convergence.
+/* premium form workspace convergence.
  *
  * This is the late authority layer for generated ISPConfig forms. It keeps
  * all server-rendered controls and submissions intact, but makes the form
@@ -10853,7 +10853,7 @@ body.wb-app-navigation-enabled .wb-branding-manager [data-workbench-logo-reset] 
   background: color-mix(in srgb, var(--wb-status-warning) 8%, var(--wb-surface));
 }
 
-/* WP-827: form actions are visually owned by wb-action-control. Legacy
+/* form actions are visually owned by wb-action-control. Legacy
  * Bootstrap/formbutton classes remain as runtime input signals only. */
 
 html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form :where(input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='color']), select, textarea, .form-control, .inputbox, .wb-select__control),
@@ -10894,7 +10894,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled .wb-branding-manager__
   }
 }
 
-/* WP-742: premium form completion pass.
+/* premium form completion pass.
  *
  * This final authority layer normalizes generated ISPConfig edit masks into a
  * calmer product-grade workspace. It does not change form submission or server
@@ -11023,7 +11023,7 @@ body.wb-form-page #pageForm.wb-modern-form :where(input[type='checkbox'], input[
   margin: 0;
 }
 
-/* WP-1009: single boolean settings are native, legible switches rather than
+/* single boolean settings are native, legible switches rather than
    detached legacy checkboxes. The original input remains the form authority. */
 body.wb-form-page #pageForm.wb-modern-form .wb-field-group--boolean {
   align-items: center;
@@ -11209,7 +11209,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form :where(.in
   }
 }
 
-/* WP-743: detail-mask finish pass.
+/* detail-mask finish pass.
  *
  * The previous pass gave every generated field a shared baseline. This layer
  * handles the harder real edit screens: long tabbed forms, System Config style
@@ -11414,7 +11414,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form--tabbed .c
   }
 }
 
-/* WP-744: form intelligence and section polish.
+/* form intelligence and section polish.
  *
  * Real ISPConfig masks vary wildly: some sections contain a single notice,
  * others carry dozens of generated rows. These rules use the runtime section
@@ -11583,7 +11583,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form .wb-field-
   }
 }
 
-/* WP-745: form profile stabilization for high-risk real-world masks.
+/* form profile stabilization for high-risk real-world masks.
    Runtime-owned page profiles keep the remaining large legacy masks calm
    without changing form names, submit targets or business behaviour. */
 body.wb-form-page:is(.wb-form-profile--system-config, .wb-form-profile--server-config, .wb-form-profile--limits) #pageForm.wb-modern-form {
@@ -11741,7 +11741,7 @@ html[data-wb-theme='dark'] body.wb-form-page.wb-form-profile--branding #pageForm
   }
 }
 
-/* WP-746: real-mask premium stabilization.
+/* real-mask premium stabilization.
    This pass targets the remaining generated ISPConfig form shapes that still
    looked like old Bootstrap islands: accordions, panels, select overlays,
    technical textareas, SSL/certificate fields and compound button groups. */
@@ -11952,7 +11952,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form :where(.fo
   }
 }
 
-/* WP-747: form completion surface pass.
+/* form completion surface pass.
    Final broad guard for mixed legacy masks: tables embedded in forms,
    fieldsets, static/locked values, dense help text and over-wide controls. */
 body.wb-form-page.wb-form-profile--wide-content #pageForm.wb-modern-form,
@@ -12112,7 +12112,7 @@ html[data-wb-theme='dark'] body.wb-form-page.wb-form-profile--embedded-tables #p
   }
 }
 
-/* WP-1138: premium working density.
+/* premium working density.
  *
  * The final form surface keeps generous focus targets while removing the
  * presentation-like vertical rhythm that made long ISPConfig masks feel
@@ -12167,7 +12167,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   padding-block: 0.58rem;
 }
 
-/* WP-1007: form V1 premium convergence.
+/* form V1 premium convergence.
  *
  * The final form layer is intentionally calm and information-led. Required
  * state, focus and actions remain obvious without turning every field into a
@@ -12280,7 +12280,7 @@ body.wb-form-page:is(.wb-form-profile--system-config, .wb-form-profile--server-c
   }
 }
 
-/* WP-963: native customer/reseller composition.
+/* native customer/reseller composition.
    These primitives replace the last Bootstrap input groups, suffix columns,
    identity summaries and alert boxes used by the client module. */
 body.wb-form-page #pageForm.wb-modern-form .wb-field-control {
@@ -12305,7 +12305,7 @@ body.wb-form-page #pageForm.wb-modern-form .wb-field-action > :where(button, a) 
   white-space: nowrap;
 }
 
-/* WP-964: native compound fields used by the complete Sites V1 surface. */
+/* native compound fields used by the complete Sites V1 surface. */
 body.wb-form-page #pageForm.wb-modern-form .wb-field-composite {
   display: flex;
   inline-size: 100%;
@@ -12393,7 +12393,7 @@ body.wb-form-page #pageForm.wb-modern-form .wb-content-panel {
   box-shadow: 0 0.9rem 2.4rem color-mix(in srgb, var(--wb-text) 5%, transparent);
 }
 
-/* WP-965: explicit spans for operational forms that previously relied on
+/* explicit spans for operational forms that previously relied on
    Bootstrap's twelve-column grid. They stay intrinsic inside native fields. */
 body.wb-form-page #pageForm.wb-modern-form .wb-field-label {
   color: var(--wb-text);
@@ -12484,7 +12484,7 @@ body.wb-form-page #pageForm.wb-modern-form .wb-identity-summary li {
   }
 }
 
-/* WP-758: form authority pass.
+/* form authority pass.
  *
  * ISPConfig forms still arrive from many old templates. The modern Workbench
  * layer now provides a final contrast and geometry floor so white-on-white or
@@ -12589,7 +12589,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form :where(
   background: color-mix(in srgb, var(--wb-surface-muted) 88%, #fff 2%) !important;
 }
 
-/* WP-759: runtime form authority pass.
+/* runtime form authority pass.
  *
  * The content runtime now marks residual inline geometry and colour fragments
  * after every page load. Forms use that signal to keep old generated masks
@@ -12637,7 +12637,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form :where(.wb
   background-color: color-mix(in srgb, var(--wb-surface-muted) 88%, #fff 2%) !important;
 }
 
-/* WP-778: native form and option surface closure.
+/* native form and option surface closure.
  *
  * The old template stack can still expose browser-native option lists,
  * disabled rows, add-on dropdowns and generated action bars. This layer gives
@@ -12730,7 +12730,7 @@ body.wb-form-page #pageForm.wb-modern-form :where(.wb-form-actions, .form-action
     linear-gradient(180deg, color-mix(in srgb, var(--wb-surface) 86%, transparent), color-mix(in srgb, var(--wb-surface-muted) 88%, var(--wb-surface))) !important;
 }
 
-/* WP-781: premium form authority closure.
+/* premium form authority closure.
  *
  * This is the final form surface guard for real ISPConfig pages and installed
  * addons. It removes the remaining Bootstrap-era white islands, forced dark
@@ -12995,7 +12995,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form :where(
   background-color: color-mix(in srgb, var(--wb-surface) 92%, #fff 1%) !important;
 }
 
-/* WP-800: premium form finalization contract */
+/* premium form finalization contract */
 body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'],
 body.wb-form-page [data-workbench-form-finalized='true'] {
   color-scheme: light;
@@ -13160,7 +13160,7 @@ html[data-wb-theme='light'] body.wb-form-page #pageForm.wb-modern-form :where(.w
   }
 }
 
-/* WP-801: real form mask premium convergence.
+/* real form mask premium convergence.
  * This layer targets the actual generated edit masks that still leak old
  * geometry: tabbed System Config pages, branding uploads, dense user/customer
  * forms, extension panels and billing/product forms. It remains presentation
@@ -13320,7 +13320,7 @@ html[data-wb-theme='light'] body.wb-form-page #pageForm.wb-modern-form[data-work
   }
 }
 
-/* WP-802: residual legacy form surface closure.
+/* residual legacy form surface closure.
  * This is the broad guardrail for generated masks after the real-form pass:
  * Bootstrap wells/panels, legacy form tables, Select2/Chosen search boxes,
  * dropdowns, popovers, tooltips, datepickers, jQuery UI widgets and progress
@@ -13609,7 +13609,7 @@ body.wb-app-navigation-enabled .wb-jail-symbol svg {
   stroke-linejoin: round;
 }
 
-/* WP-868: form surface finalization.
+/* form surface finalization.
  *
  * Detail masks now finish as one premium Workbench surface. This block is the
  * final visual owner for form cards, tab strips, field rows, native controls,
@@ -13815,7 +13815,7 @@ html[data-wb-theme='light'] body.wb-form-page #pageForm.wb-modern-form[data-work
   }
 }
 
-/* WP-887: special form finalization.
+/* special form finalization.
  *
  * High-risk detail masks no longer borrow accidental layout from generic
  * Bootstrap-era forms. Branding/System Config, billing, extensions, technical
@@ -13953,7 +13953,7 @@ html[data-wb-theme='dark'] body.wb-form-page:is(
   }
 }
 
-/* WP-888: form state and guidance finalization.
+/* form state and guidance finalization.
  *
  * The final form layer now treats feedback, help text, fieldsets, locked
  * values and sensitive technical inputs as first-class UI states. Accent
@@ -14103,7 +14103,7 @@ html[data-wb-theme='dark'] body.wb-form-page #pageForm.wb-modern-form[data-workb
   background-color: color-mix(in srgb, var(--wb-surface) 90%, #020617) !important;
 }
 
-/* WP-893: special forms DONE contract.
+/* special forms DONE contract.
  *
  * This is the final authority layer for high-risk and historically uneven form
  * masks: System Config, branding uploads, billing settings, extension screens,
@@ -14296,7 +14296,7 @@ html[data-wb-theme='dark'] body.wb-form-page:is(
     linear-gradient(145deg, color-mix(in srgb, var(--wb-surface-muted) 86%, #fff 1.5%), var(--wb-surface) 72%) !important;
 }
 
-/* WP-1012: validation guidance follows the control axis instead of wrapping
+/* validation guidance follows the control axis instead of wrapping
    inside the narrow label column. */
 body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group.has-error > :where(
   .help-block,
@@ -14341,7 +14341,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
 
 /* source: workbench-controls.css */
 /*
- * WP-366: authoritative authenticated control surfaces.
+ * authoritative authenticated control surfaces.
  *
  * Native ISPConfig fields remain the source of truth. This layer owns only
  * the presentation of advanced text fields, date/time helpers and searchable
@@ -14740,7 +14740,7 @@ html[data-wb-theme='dark'] body > .wb-select__panel {
   .wb-select__arrow { transition: none; }
 }
 
-/* WP-604: portaled select overlay hardening for list controls. */
+/* portaled select overlay hardening for list controls. */
 body > .wb-select__panel {
   box-sizing: border-box;
   color: var(--wb-text);
@@ -14809,7 +14809,7 @@ html[data-wb-theme='dark'] body > .wb-select__panel--page-size .wb-select__optio
   background: color-mix(in srgb, var(--wb-action) 18%, var(--wb-surface));
 }
 
-/* WP-635: compact table dropdown convergence.
+/* compact table dropdown convergence.
  * Page-size controls can come from different templates or addons. Once the
  * controller detects a page-size-like select, the overlay must stay compact,
  * free of the searchable field and detached from wide table scrollbars. */
@@ -14851,7 +14851,7 @@ body > .wb-select__panel--page-size .wb-select__option.is-selected::after {
   }
 }
 
-/* WP-658: resilient premium overlay layer.
+/* resilient premium overlay layer.
  *
  * Selects are used inside tables, forms, branding settings and addons. The
  * visual shell must never expose a full-width table popup, a white native
@@ -14912,7 +14912,7 @@ html[data-wb-theme='dark'] body > .wb-select__panel .wb-select__search {
 
 /* source: workbench-content.css */
 /*
- * WP-361: authoritative page-content surface layer.
+ * authoritative page-content surface layer.
  *
  * This file owns authenticated page hierarchy, page feedback, content cards,
  * legacy panel bridges, dialogs and operational states. It is intentionally
@@ -14920,7 +14920,7 @@ html[data-wb-theme='dark'] body > .wb-select__panel .wb-select__search {
  * No route, value, permission, request or ISPConfig behavior is changed here.
  */
 
-/* WP-367: authoritative feedback, operational-state and dialog presentation. */
+/* authoritative feedback, operational-state and dialog presentation. */
 
 body.wb-app-navigation-enabled #pageContent {
   container: wb-page-content / inline-size;
@@ -15481,7 +15481,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled #pageContent :is(.wb-n
   body.wb-app-navigation-enabled :is(.modal-content, .wb-dialog__surface) { border: 1px solid CanvasText; }
 }
 
-/* WP-370: bounded native and extension content utilities. */
+/* bounded native and extension content utilities. */
 body.wb-app-navigation-enabled #pageContent .page-header { margin: 0 0 20px; border-color: var(--wb-border); }
 body.wb-app-navigation-enabled #pageContent .page-header h1 { margin-top: 0; font-size: 24px; font-weight: 700; letter-spacing: -.02em; }
 body.wb-app-navigation-enabled #pageContent .panel-group { display: grid; gap: 10px; margin-bottom: 18px; }
@@ -15552,7 +15552,7 @@ html[data-wb-theme='dark'] .wb-code-surface {
   background: var(--wb-surface-elevated);
 }
 
-/* WP-983: native informational, FAQ and operation-result surfaces. */
+/* native informational, FAQ and operation-result surfaces. */
 body.wb-app-navigation-enabled #pageContent .wb-content-panel__header {
   display: grid;
   gap: .45rem;
@@ -15616,7 +15616,7 @@ body.wb-app-navigation-enabled #pageContent .wb-faq-item__actions {
   }
 }
 
-/* WP-984: native tabbed-form navigation, independent of Bootstrap tabs. */
+/* native tabbed-form navigation, independent of Bootstrap tabs. */
 body.wb-form-page #pageForm.wb-modern-form .wb-form-tabs-shell {
   min-inline-size: 0;
   border: 1px solid var(--wb-border);
@@ -15703,7 +15703,7 @@ body.wb-form-page #pageForm.wb-modern-form .wb-tabstrip[data-overflow='false'] >
 }
 
 /* source: workbench-dashboard.css */
-/* WP-363: authoritative dashboard workspace.
+/* authoritative dashboard workspace.
  * The dashboard owns one fluid, container-driven composition. Historical
  * dashboard declarations in workbench.css are structural input only and
  * must not decide the rendered geometry. */
@@ -16156,7 +16156,7 @@ body.wb-dashboard-page .wb-dashlet[data-wb-density='compact'] .modules { grid-te
   }
 }
 
-/* WP-1137: intentional secondary-content composition.
+/* intentional secondary-content composition.
  *
  * News is useful context, not a narrow metric tile. Whenever it is the only
  * remaining dashboard card it owns the available row; in a populated
@@ -16208,7 +16208,7 @@ html[data-wb-theme='dark'] .wb-dashboard-overview__stat {
   .wb-dashboard-metric-card { border: 1px solid CanvasText !important; box-shadow: none !important; }
 }
 
-/* WP-625: premium operations workspace direction.
+/* premium operations workspace direction.
  * The dashboard may exceed the original visual demo when real ISPConfig
  * workflows need stronger hierarchy. Warnings, capacity and shortcuts stay
  * operationally prominent; news remains a secondary widget. */
@@ -16252,7 +16252,7 @@ body.wb-dashboard-page .wb-dashboard-toolbar {
   border-color: color-mix(in srgb, var(--wb-action) 10%, var(--wb-border));
 }
 
-/* WP-630: premium calm layer.
+/* premium calm layer.
  *
  * The first dashboard passes proved the structure, but the red default accent
  * was too dominant. The dashboard now treats accent as guidance and state,
@@ -16334,9 +16334,9 @@ html[data-wb-theme='dark'] body.wb-dashboard-page .wb-dashboard-toolbar {
     inset 0 1px 0 rgba(255, 255, 255, .035);
 }
 
-/* WP-633: atomic dashboard visual calm pass.
+/* atomic dashboard visual calm pass.
  *
- * WP-632 made modules and metric charts individually placeable. This layer
+ * made modules and metric charts individually placeable. This layer
  * makes those smaller widgets feel intentional instead of looking like red
  * fragments cut out of the former combined dashboard panels. */
 body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-wb-atomic-source] {
@@ -16373,7 +16373,7 @@ body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-wb-at
   box-shadow: none;
 }
 
-/* WP-643: premium atomic dashboard resize controls.
+/* premium atomic dashboard resize controls.
  *
  * The dashboard already splits module shortcuts and metrics into independent
  * widgets. These controls make the behaviour understandable: small, tall and
@@ -16572,7 +16572,7 @@ html[data-wb-theme='dark'] body.wb-dashboard-page .wb-dashlet-metric-atomic .wb-
     inset 0 1px 0 rgba(255, 255, 255, .035) !important;
 }
 
-/* WP-652: individual atomic widget polish.
+/* individual atomic widget polish.
  *
  * Each module shortcut and each metric chart can now live as its own dashboard
  * widget. This layer makes the individual widgets read like first-class
@@ -16655,7 +16655,7 @@ body.wb-dashboard-page .wb-dashlet-metric-atomic[data-wb-metric-viewport='detail
   }
 }
 
-/* WP-634: self-healing dashboard grid.
+/* self-healing dashboard grid.
  *
  * The old step-down model still acted like a set of fixed intermediate
  * layouts while resizing. This final layer lets the dashboard choose as many
@@ -16686,7 +16686,7 @@ body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet-size-2x2 {
   }
 }
 
-/* WP-647: premium atomic widget refinement.
+/* premium atomic widget refinement.
  *
  * Module and metric widgets are now individual dashboard objects. This layer
  * makes that explicit: each card has a clearer handle, calmer header rhythm,
@@ -16815,7 +16815,7 @@ body.wb-dashboard-page .wb-dashlet-metric-atomic .wb-dashboard-sparkline__line {
 
 }
 
-/* WP-654: atomic dashboard controls as first-class demo widgets.
+/* atomic dashboard controls as first-class demo widgets.
  *
  * The user should not have to infer that a split module card or a split metric
  * chart is movable on its own. This layer gives every atomic widget an explicit
@@ -16921,7 +16921,7 @@ body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-wb-at
   }
 }
 
-/* WP-657: premium atomic dashboard cockpit pass.
+/* premium atomic dashboard cockpit pass.
  *
  * The dashboard now treats split modules and split metric charts as deliberate
  * cockpit objects. This final layer improves card hierarchy, edit affordances,
@@ -17085,7 +17085,7 @@ body.wb-dashboard-page .wb-dashlet-metric-atomic[data-wb-size='2x2'] .wb-dashboa
   }
 }
 
-/* WP-658: atomic dashboard resilience and preview parity.
+/* atomic dashboard resilience and preview parity.
  *
  * Module shortcuts and metric graphs are no longer a grouped afterthought.
  * Each card is a standalone cockpit object with predictable clipping,
@@ -17164,7 +17164,7 @@ body.wb-dashboard-page .wb-dashlet-metric-atomic .wb-dashboard-sparkline {
   }
 }
 
-/* WP-666: flatten atomic module widgets.
+/* flatten atomic module widgets.
  * The module dashlet is now split into individual dashboard widgets. Once a
  * module has its own card header, repeating the same title inside a nested
  * launcher makes the card feel generated instead of designed. Keep the
@@ -17233,7 +17233,7 @@ body.wb-dashboard-page .wb-dashlet-module-atomic[data-wb-size='2x2'] .wb-module-
   min-block-size: 100% !important;
 }
 
-/* WP-666 follow-up: keep the visual identity of each atomic module. */
+/* follow-up: keep the visual identity of each atomic module. */
 body.wb-dashboard-page .wb-dashlet-module-atomic .wb-module-launcher > .clear > :first-child {
   display: grid !important;
   grid-column: 1 / -1;
@@ -17261,7 +17261,7 @@ body.wb-dashboard-page .wb-dashlet-module-atomic[data-wb-size='2x2'] .wb-module-
   font-size: 1.2em;
 }
 
-/* WP-706: restore useful, interactive system metric widgets.
+/* restore useful, interactive system metric widgets.
  * The dashboard now splits every live metric into its own movable widget, but the
  * card must still expose the information users had before the atomic refactor:
  * trend, current value, range and sample context. Details stay quiet in compact
@@ -17361,7 +17361,7 @@ body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-wb-at
   align-self: end;
 }
 
-/* WP-707: metric cards become analysis cards instead of flat sparklines. */
+/* metric cards become analysis cards instead of flat sparklines. */
 .wb-dashboard-metric-card__toggle[aria-expanded='true']::after {
   content: '-';
 }
@@ -17417,7 +17417,7 @@ body.wb-dashboard-page .wb-dashlet-metric-atomic[data-wb-size='2x2'] .wb-dashboa
   padding: 12px;
 }
 
-/* WP-712: premium dashboard cockpit convergence.
+/* premium dashboard cockpit convergence.
  *
  * The dashboard is now treated as one calm cockpit instead of a set of
  * disconnected generated cards. This last layer intentionally overrides older
@@ -17628,7 +17628,7 @@ html[data-wb-theme='dark'] body.wb-dashboard-page #pageContent.wb-dashboard-layo
     linear-gradient(145deg, color-mix(in srgb, var(--wb-surface-muted) 86%, #fff 2%), var(--wb-surface) 70%);
 }
 
-/* WP-712 follow-up: accent is guidance, not wallpaper. */
+/* follow-up: accent is guidance, not wallpaper. */
 body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-wb-atomic-source='modules'] {
   border-color: color-mix(in srgb, var(--wb-dashlet-accent, var(--wb-action)) 11%, var(--wb-border));
   background:
@@ -17662,7 +17662,7 @@ html[data-wb-theme='dark'] body.wb-dashboard-page #pageContent.wb-dashboard-layo
     linear-gradient(145deg, color-mix(in srgb, var(--wb-surface-muted) 82%, #fff 1.5%), var(--wb-surface) 72%);
 }
 
-/* WP-713: dashboard accent is orientation, not danger. */
+/* dashboard accent is orientation, not danger. */
 body.wb-dashboard-page #pageContent.wb-dashboard-layout {
   --wb-dashboard-accent-line: var(--wb-action-line);
 }
@@ -17706,7 +17706,7 @@ body.wb-dashboard-page .wb-dashboard-overview__stat--attention::before {
   background: color-mix(in srgb, var(--wb-status-warning) 64%, transparent);
 }
 
-/* WP-726: dashboard toolbar contrast hardening.
+/* dashboard toolbar contrast hardening.
  *
  * The dashboard customization action must read as a calm primary control, not
  * as an error/warning surface. A solid neutral background also gives the
@@ -17737,10 +17737,10 @@ body.wb-dashboard-page .wb-dashboard-layout-toggle:focus-visible {
     linear-gradient(135deg, #101827, color-mix(in srgb, var(--wb-action) 30%, #101827)) !important;
 }
 
-/* WP-827: dashboard no longer owns legacy Bootstrap/formbutton action tones.
+/* dashboard no longer owns legacy Bootstrap/formbutton action tones.
  * Shared wb-action-control classes provide the visible action authority. */
 
-/* WP-730: calm dashboard accent discipline.
+/* calm dashboard accent discipline.
  *
  * The user-facing default accent can still be ISPConfig red, but normal
  * dashboard information must not read as danger. This final dashboard layer
@@ -17828,7 +17828,7 @@ html[data-wb-theme='dark'] body.wb-dashboard-page #pageContent.wb-dashboard-layo
     linear-gradient(145deg, color-mix(in srgb, var(--wb-surface-muted) 82%, #fff 1%), var(--wb-surface) 76%) !important;
 }
 
-/* WP-721: system metrics as real, independent dashboard widgets.
+/* system metrics as real, independent dashboard widgets.
  *
  * The metric split is intentionally kept, but the cards now behave less like
  * static chart thumbnails and more like compact live-analysis tiles. The
@@ -17975,7 +17975,7 @@ body.wb-dashboard-page .wb-dashlet-metric-atomic[data-wb-metric-viewport='detail
   }
 }
 
-/* WP-723: stable dashboard editing controls.
+/* stable dashboard editing controls.
  *
  * The dashboard editor is part of the product surface, not a temporary debug
  * strip. Keep movement, size and hide actions in a predictable control deck so
@@ -18076,7 +18076,7 @@ body.wb-dashboard-page #pageContent.wb-dashboard-layout.wb-dashboard-layout-edit
   }
 }
 
-/* WP-783: premium dashboard cockpit closure.
+/* premium dashboard cockpit closure.
  *
  * Atomic module and metric widgets are now first-class cockpit cards. This
  * final dashboard layer avoids another round of selector patching by binding
@@ -18357,7 +18357,7 @@ html[data-wb-theme='dark'] body.wb-dashboard-page #pageContent.wb-dashboard-layo
   }
 }
 
-/* WP-870: final dashboard widget granularity.
+/* final dashboard widget granularity.
  *
  * Dashboard modules and system metrics are no longer treated as previews inside
  * a large collection widget. They are independent workspace objects with their
@@ -18445,7 +18445,7 @@ body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-wb-at
   }
 }
 
-/* WP-892: dashboard DONE contract.
+/* dashboard DONE contract.
  *
  * The dashboard is now treated as the first-class Workbench cockpit:
  * independent cards, calm accent usage, browser-saved layout, accessible edit
@@ -18592,7 +18592,7 @@ html[data-wb-theme='dark'] body.wb-dashboard-page #pageContent.wb-dashboard-layo
   }
 }
 
-/* WP-999: stable first-login dashboard composition.
+/* stable first-login dashboard composition.
  *
  * Widget sizes describe the card itself, never a shared CSS-grid row. A long
  * statistics or quota widget must not stretch the row occupied by unrelated
@@ -23061,7 +23061,7 @@ body.heritage-shell.wb-app-navigation-enabled #logo a {
 }
 
 html[data-wb-theme='dark'] body.heritage-shell.wb-app-navigation-enabled #logo {
-  background-image: url('../images/ispconfig-workbench-logo-dark.svg') !important;
+  background-image: url('../images/ispconfig-heritage-logo-dark.svg') !important;
 }
 
 body.heritage-shell.wb-app-navigation-enabled #headerbar {

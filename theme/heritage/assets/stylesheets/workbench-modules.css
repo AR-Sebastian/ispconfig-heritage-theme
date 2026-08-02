@@ -1,4 +1,4 @@
-/* WP-358: authoritative module workspaces for monitoring and extensions. */
+/* authoritative module workspaces for monitoring and extensions. */
 
 body.wb-app-navigation-enabled :where(.wb-monitor-workspace, .wb-extension-workspace) {
   display: grid;
@@ -95,7 +95,7 @@ body.wb-app-navigation-enabled .wb-monitor-empty p {
   }
 }
 
-/* WP-362: authoritative Monitoring, Statistics and Extension workspaces. */
+/* authoritative Monitoring, Statistics and Extension workspaces. */
 
 /* Monitoring cockpit, diagnostics, states, charts and logs. */
 body.wb-app-navigation-enabled.wb-monitor-page #pageContent.wb-monitor-surface,
@@ -355,7 +355,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled .wb-statistics-metric-
   body.wb-app-navigation-enabled :is(.wb-monitor-state-card, .wb-monitor-chart, .wb-statistics-table, .wb-statistics-metric) { border: 1px solid CanvasText; }
 }
 
-/* WP-602: hardened module action, extension and monitoring surfaces. */
+/* hardened module action, extension and monitoring surfaces. */
 body.wb-app-navigation-enabled :where(.wb-extension-workspace, .wb-monitor-workspace, .wb-statistics-workspace) {
   container-type: inline-size;
 }
@@ -431,7 +431,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled.wb-monitor-page .pnl_f
   background: color-mix(in srgb, var(--wb-surface-muted) 88%, #000);
 }
 
-/* WP-1007: monitoring V1 premium convergence.
+/* monitoring V1 premium convergence.
  *
  * Monitoring is an operational workspace, not a permanent warning surface.
  * Accent and semantic colours are reserved for interaction and real state,
@@ -607,7 +607,7 @@ body.wb-app-navigation-enabled.wb-monitor-page .wb-monitor-chart__details dt {
   }
 }
 
-/* WP-1008: specialty V1 premium convergence.
+/* specialty V1 premium convergence.
  *
  * Extensions, reports and help lists share the same hierarchy as native
  * Workbench lists. Specialty context remains visible, while duplicate
@@ -717,7 +717,7 @@ body.wb-app-navigation-enabled #pageContent [data-wb-support-surface] + p:empty 
   }
 }
 
-/* WP-710: specialty module convergence layer.
+/* specialty module convergence layer.
  *
  * Monitoring, statistics and Extension Installer pages are generated outside
  * the normal list/form pipeline. This final scoped layer makes their heroes,

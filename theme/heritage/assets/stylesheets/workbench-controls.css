@@ -1,5 +1,5 @@
 /*
- * WP-366: authoritative authenticated control surfaces.
+ * authoritative authenticated control surfaces.
  *
  * Native ISPConfig fields remain the source of truth. This layer owns only
  * the presentation of advanced text fields, date/time helpers and searchable
@@ -398,7 +398,7 @@ html[data-wb-theme='dark'] body > .wb-select__panel {
   .wb-select__arrow { transition: none; }
 }
 
-/* WP-604: portaled select overlay hardening for list controls. */
+/* portaled select overlay hardening for list controls. */
 body > .wb-select__panel {
   box-sizing: border-box;
   color: var(--wb-text);
@@ -467,7 +467,7 @@ html[data-wb-theme='dark'] body > .wb-select__panel--page-size .wb-select__optio
   background: color-mix(in srgb, var(--wb-action) 18%, var(--wb-surface));
 }
 
-/* WP-635: compact table dropdown convergence.
+/* compact table dropdown convergence.
  * Page-size controls can come from different templates or addons. Once the
  * controller detects a page-size-like select, the overlay must stay compact,
  * free of the searchable field and detached from wide table scrollbars. */
@@ -509,7 +509,7 @@ body > .wb-select__panel--page-size .wb-select__option.is-selected::after {
   }
 }
 
-/* WP-658: resilient premium overlay layer.
+/* resilient premium overlay layer.
  *
  * Selects are used inside tables, forms, branding settings and addons. The
  * visual shell must never expose a full-width table popup, a white native
