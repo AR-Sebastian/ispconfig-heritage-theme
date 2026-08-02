@@ -58,6 +58,23 @@ This closes the clean-merge reproducibility gate. These remain candidate
 hashes until the tag workflow publishes the release and every downloaded asset
 is verified independently.
 
+## Published-asset verification
+
+The `v1.0.34` workflow completed successfully and the three public assets were
+downloaded again. `SHA256SUMS.txt` verifies both archives. Their published
+hashes are:
+
+- ZIP: `7c10cba1bdcf3b97963f25b038861d6621b72d1240519b553c0ca26350a89ab1`
+- TAR.GZ: `7506c43c29a033ff0e11d307c049f47d598dd92df13f176048a78ddee6aa48b2`
+- SHA256SUMS.txt: `3217f33bc1666c760c5cad25437996eb66f47b381632d9529a8f492488f6541a`
+
+The TAR.GZ matched the pre-publication candidate exactly. The ZIP payload was
+also byte-identical after extraction, but its DOS timestamps exposed a two-hour
+Europe/Berlin versus UTC offset. The public workflow output was already the
+desired UTC form. A follow-up builder hardening exports `TZ=UTC`, allowing the
+same public ZIP hash to be reproduced outside GitHub without changing the
+published tag or assets.
+
 ## Historical release decision
 
 `v1.0.20` exists as a Git tag but has no GitHub Release entry. The 1.0.34

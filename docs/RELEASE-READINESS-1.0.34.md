@@ -1,6 +1,6 @@
 # HERITAGE 1.0.34 release readiness
 
-Status: **NO-GO until every open gate below is closed**  
+Status: **RELEASED — all recorded gates closed**  
 Candidate date: 2026-08-02  
 Target: ISPConfig 3.3.1p1
 
@@ -30,7 +30,8 @@ Target: ISPConfig 3.3.1p1
 - The complete branch-to-`main` pre-merge audit found no ISPConfig core path, unexpected binary, secret signature or file outside the declared theme/release-tooling boundary.
 - The release candidate and checkout-independent follow-up were merged through green pull requests #1 and #2; final `main` merge commit: `19056b9e1ac7b3710b1a296ecaabc7e7f6d46bbe`.
 - The release builder now packages the committed Git tree and rejects uncommitted payload changes, eliminating platform-dependent checkout line endings.
-- The committed-tree build before merge and the clean final-merge build are bit-identical: ZIP `23a189343af2fdae8dc9073c79b5419be179f5e921f733a7bfc3010d42ea5850`, TAR.GZ `7506c43c29a033ff0e11d307c049f47d598dd92df13f176048a78ddee6aa48b2`, checksum manifest `36eb18952d1e3bedd472d97b8e0a66f8f6c88191bc36810ad0517b67302b6c1b`.
+- The published UTC build and a downloaded-asset verification agree: ZIP `7c10cba1bdcf3b97963f25b038861d6621b72d1240519b553c0ca26350a89ab1`, TAR.GZ `7506c43c29a033ff0e11d307c049f47d598dd92df13f176048a78ddee6aa48b2`, checksum manifest `3217f33bc1666c760c5cad25437996eb66f47b381632d9529a8f492488f6541a`.
+- Post-publication cross-timezone comparison found identical payload bytes but exposed ZIP's local wall-clock metadata. The builder now forces UTC so European and GitHub runners reproduce the same public ZIP hash without rewriting the existing tag.
 
 The detailed, reproducible evidence and the lab limitation are recorded in
 [`RUNTIME-SMOKE-1.0.34.md`](RUNTIME-SMOKE-1.0.34.md).
@@ -48,8 +49,8 @@ The detailed, reproducible evidence and the lab limitation are recorded in
 - [x] Review and merge the release-candidate pull request into `main` with green checks.
 - [x] Rebuild from the clean merge commit and compare the final archive hashes.
 - [x] Preserve `v1.0.20` as the existing tag-only historical state; do not reconstruct or rewrite a past GitHub Release during the 1.0.34 publication.
-- [ ] Create and push `v1.0.34` only after all previous blockers are closed.
-- [ ] Verify the published release body, ZIP, TAR.GZ and `SHA256SUMS.txt` after the tag workflow completes.
+- [x] Create and push `v1.0.34` only after all previous blockers are closed.
+- [x] Verify the published release body, ZIP, TAR.GZ and `SHA256SUMS.txt` after the tag workflow completes.
 
 ## Release boundary
 
