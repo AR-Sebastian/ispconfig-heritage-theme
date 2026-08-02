@@ -5,9 +5,11 @@ root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 version="${1:-$(tr -d '[:space:]' < "$root/VERSION")}"
 if (($#)); then shift; fi
 require_attestation=0
+require_sbom=0
 while (($#)); do
   case "$1" in
     --require-attestation) require_attestation=1 ;;
+    --require-sbom) require_sbom=1 ;;
     *) echo "Unknown option: $1" >&2; exit 2 ;;
   esac
   shift
@@ -16,6 +18,7 @@ tag="v$version"
 base_url="https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/download/$tag"
 zip_name="ispconfig-heritage-theme-$version.zip"
 tar_name="ispconfig-heritage-theme-$version.tar.gz"
+sbom_name="ispconfig-heritage-theme-$version.spdx.json"
 audit="$(mktemp -d)"
 trap 'rm -rf "$audit"' EXIT
 
@@ -29,6 +32,11 @@ for asset in "$zip_name" "$tar_name" SHA256SUMS.txt; do
     --retry 5 --retry-all-errors --retry-delay 2 \
     --output "$audit/$asset" "$base_url/$asset"
 done
+if ((require_sbom)); then
+  curl --fail --location --silent --show-error \
+    --retry 5 --retry-all-errors --retry-delay 2 \
+    --output "$audit/$sbom_name" "$base_url/$sbom_name"
+fi
 
 actual_manifest="$(awk 'NF == 2 { print $2 }' "$audit/SHA256SUMS.txt" | LC_ALL=C sort)"
 expected_manifest="$(printf '%s\n' "$tar_name" "$zip_name" | LC_ALL=C sort)"
@@ -52,6 +60,17 @@ if ((require_attestation)); then
       --repo AR-Sebastian/ispconfig-heritage-theme \
       --signer-workflow AR-Sebastian/ispconfig-heritage-theme/.github/workflows/release.yml
   done
+  if ((require_sbom)); then
+    gh attestation verify "$audit/$sbom_name" \
+      --repo AR-Sebastian/ispconfig-heritage-theme \
+      --signer-workflow AR-Sebastian/ispconfig-heritage-theme/.github/workflows/release.yml
+    for asset in "$zip_name" "$tar_name"; do
+      gh attestation verify "$audit/$asset" \
+        --repo AR-Sebastian/ispconfig-heritage-theme \
+        --signer-workflow AR-Sebastian/ispconfig-heritage-theme/.github/workflows/release.yml \
+        --predicate-type https://spdx.dev/Document
+    done
+  fi
 fi
 
 if unzip -Z1 "$audit/$zip_name" | grep -Eq '(^/|(^|/)\.\.(/|$))'; then
@@ -81,6 +100,12 @@ tar -xzf "$audit/$tar_name" -C "$audit/from-tar"
 git -C "$root" archive --format=tar "$tag_commit:theme" heritage | tar -xf - -C "$audit/from-git"
 diff -qr "$audit/from-zip/heritage" "$audit/from-tar/heritage"
 diff -qr "$audit/from-git/heritage" "$audit/from-tar/heritage"
+
+if ((require_sbom)); then
+  git -C "$root" show "$tag_commit:scripts/generate-sbom.js" > "$audit/generate-sbom.js"
+  node "$audit/generate-sbom.js" "$audit/from-tar/heritage" "$audit/expected.spdx.json"
+  cmp "$audit/expected.spdx.json" "$audit/$sbom_name"
+fi
 
 mkdir -p "$audit/package/theme" "$audit/package/scripts" "$audit/targets" "$audit/backups"
 cp -a "$audit/from-tar/heritage" "$audit/package/theme/heritage"

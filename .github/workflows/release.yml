@@ -25,6 +25,11 @@ jobs:
         run: test "${GITHUB_REF_NAME#v}" = "$(tr -d '[:space:]' < VERSION)"
       - name: Build assets
         run: bash scripts/build-release.sh
+      - name: Build SPDX SBOM
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          echo "RELEASE_VERSION=$version" >> "$GITHUB_ENV"
+          node scripts/generate-sbom.js theme/heritage "dist/ispconfig-heritage-theme-$version.spdx.json"
       - name: Verify reproducible release assets
         shell: bash
         run: |
@@ -54,6 +59,14 @@ jobs:
             dist/ispconfig-heritage-theme-*.zip
             dist/ispconfig-heritage-theme-*.tar.gz
             dist/SHA256SUMS.txt
+            dist/ispconfig-heritage-theme-*.spdx.json
+      - name: Attest release SBOM
+        uses: actions/attest@508db95dd578ae2727ebd6217d5ba78e4fbda05d # v4
+        with:
+          subject-path: |
+            dist/ispconfig-heritage-theme-*.zip
+            dist/ispconfig-heritage-theme-*.tar.gz
+          sbom-path: dist/ispconfig-heritage-theme-${{ env.RELEASE_VERSION }}.spdx.json
       - name: Publish assets
         uses: softprops/action-gh-release@c12583777ecdfd3be55c69cf75464299dc01057e # v3.0.2
         with:
@@ -63,5 +76,6 @@ jobs:
             dist/ispconfig-heritage-theme-*.zip
             dist/ispconfig-heritage-theme-*.tar.gz
             dist/SHA256SUMS.txt
+            dist/ispconfig-heritage-theme-*.spdx.json
       - name: Verify published assets
-        run: bash scripts/verify-published-release.sh "${GITHUB_REF_NAME#v}" --require-attestation
+        run: bash scripts/verify-published-release.sh "${GITHUB_REF_NAME#v}" --require-attestation --require-sbom
