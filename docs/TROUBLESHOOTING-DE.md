@@ -11,7 +11,7 @@ cat /usr/local/ispconfig/interface/web/themes/heritage/ispconfig_version
 ```
 
 Für diese Ausgabe muss `3.3.1p1` erscheinen. Andere ISPConfig-Versionen sind
-nicht Bestandteil der Freigabe von HERITAGE 1.0.33.
+nicht Bestandteil der Freigabe von HERITAGE 1.0.34.
 
 ## Nach der Auswahl bleibt das bisherige Theme sichtbar
 
@@ -28,7 +28,7 @@ test -f /usr/local/ispconfig/interface/web/themes/heritage/templates/main.tpl.ht
 test -f /usr/local/ispconfig/interface/web/themes/heritage/assets/stylesheets/workbench.css
 ```
 
-Installiere das signierte Release erneut, wenn eine Datei fehlt. Keine Dateien
+Installiere das anhand der SHA-256-Prüfsumme geprüfte Release erneut, wenn eine Datei fehlt. Keine Dateien
 aus verschiedenen HERITAGE-Versionen übereinander kopieren.
 
 ## Sofort auf das Standardtheme zurückkehren

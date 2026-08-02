@@ -35,12 +35,80 @@ const fs = require('fs');
 const path = require('path');
 const theme = process.argv[2];
 const releaseVersion = process.argv[3];
+const projectRoot = path.resolve(theme, '..', '..');
 const textExtensions = new Set(['.css', '.htm', '.html', '.js', '.json', '.md', '.xml', '.webmanifest', '.svg', '.php']);
 const walk = directory => fs.readdirSync(directory, {withFileTypes: true}).flatMap(entry => {
   const target = path.join(directory, entry.name);
+  if (entry.isDirectory() && ['.git', 'dist'].includes(entry.name)) return [];
   return entry.isDirectory() ? walk(target) : [target];
 });
 const themeFiles = walk(theme);
+
+const publicReleaseContracts = new Map([
+  ['README.md', [
+    `### Version ${releaseVersion}`,
+    `HERITAGE ${releaseVersion} herunterladen`,
+    `Download HERITAGE ${releaseVersion}`,
+    `--branch v${releaseVersion}`
+  ]],
+  ['docs/INSTALLATION-DE.md', [
+    `releases/download/v${releaseVersion}/ispconfig-heritage-theme-${releaseVersion}.tar.gz`,
+    `sudo tar -xzf ispconfig-heritage-theme-${releaseVersion}.tar.gz`
+  ]],
+  ['docs/INSTALLATION-EN.md', [
+    `releases/download/v${releaseVersion}/ispconfig-heritage-theme-${releaseVersion}.tar.gz`,
+    `sudo tar -xzf ispconfig-heritage-theme-${releaseVersion}.tar.gz`
+  ]],
+  ['docs/COMPATIBILITY.md', [`HERITAGE ${releaseVersion} targets ISPConfig 3.3.1p1`]],
+  ['docs/TROUBLESHOOTING-DE.md', [`Freigabe von HERITAGE ${releaseVersion}`]],
+  ['docs/TROUBLESHOOTING-EN.md', [`HERITAGE ${releaseVersion} release scope`]],
+  ['CHANGELOG.md', [`## ${releaseVersion} –`]],
+  [`RELEASE_NOTES_${releaseVersion}.md`, [`# ISPConfig HERITAGE ${releaseVersion}`]]
+]);
+for (const [relative, contracts] of publicReleaseContracts) {
+  const target = path.join(projectRoot, relative);
+  if (!fs.existsSync(target)) throw new Error(`Missing public release document: ${relative}`);
+  const content = fs.readFileSync(target, 'utf8');
+  for (const contract of contracts) {
+    if (!content.includes(contract)) throw new Error(`Stale public release contract in ${relative}: ${contract}`);
+  }
+}
+for (const relative of ['README.md', 'docs/INSTALLATION-DE.md', 'docs/INSTALLATION-EN.md']) {
+  const content = fs.readFileSync(path.join(projectRoot, relative), 'utf8');
+  if (/signed release|signiertes release/i.test(content)) {
+    throw new Error(`${relative} claims an artifact signature that the release workflow does not create.`);
+  }
+}
+
+for (const relative of ['.github/workflows/validate.yml', '.github/workflows/release.yml']) {
+  const workflow = fs.readFileSync(path.join(projectRoot, relative), 'utf8');
+  if (/uses:\s*[^\s@]+@v\d+/i.test(workflow)) {
+    throw new Error(`${relative} contains a mutable major-version action reference.`);
+  }
+}
+const releaseWorkflow = fs.readFileSync(path.join(projectRoot, '.github', 'workflows', 'release.yml'), 'utf8');
+for (const contract of [
+  'body_path: dist/RELEASE_NOTES.md',
+  'fail_on_unmatched_files: true',
+  'diff -u /tmp/heritage-first-build.sha256 /tmp/heritage-second-build.sha256',
+  'cp "RELEASE_NOTES_$version.md" dist/RELEASE_NOTES.md'
+]) {
+  if (!releaseWorkflow.includes(contract)) throw new Error(`Release workflow contract is missing: ${contract}`);
+}
+
+const markdownFiles = walk(projectRoot).filter(file => path.extname(file).toLowerCase() === '.md' && !file.includes(`${path.sep}.git${path.sep}`));
+for (const markdownFile of markdownFiles) {
+  const markdown = fs.readFileSync(markdownFile, 'utf8');
+  for (const match of markdown.matchAll(/\[[^\]]*\]\(([^)]+)\)/g)) {
+    let reference = match[1].trim().replace(/^<|>$/g, '').split('#', 1)[0];
+    if (!reference || /^(?:https?:|mailto:)/i.test(reference)) continue;
+    reference = decodeURIComponent(reference);
+    const target = path.resolve(path.dirname(markdownFile), reference);
+    if (!fs.existsSync(target)) {
+      throw new Error(`Broken local Markdown link in ${path.relative(projectRoot, markdownFile)}: ${match[1]}`);
+    }
+  }
+}
 const corpus = themeFiles.filter(file => textExtensions.has(path.extname(file).toLowerCase()))
   .map(file => fs.readFileSync(file, 'utf8')).join('\n');
 const assets = walk(path.join(theme, 'assets'));

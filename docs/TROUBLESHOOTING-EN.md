@@ -11,7 +11,7 @@ cat /usr/local/ispconfig/interface/web/themes/heritage/ispconfig_version
 ```
 
 The expected value is `3.3.1p1`. Other ISPConfig versions are outside the
-HERITAGE 1.0.33 release scope.
+HERITAGE 1.0.34 release scope.
 
 ## The previous theme remains visible
 
@@ -28,7 +28,7 @@ test -f /usr/local/ispconfig/interface/web/themes/heritage/templates/main.tpl.ht
 test -f /usr/local/ispconfig/interface/web/themes/heritage/assets/stylesheets/workbench.css
 ```
 
-Reinstall the signed release if a file is missing. Do not layer files from
+Reinstall the SHA-256-verified release if a file is missing. Do not layer files from
 different HERITAGE versions.
 
 ## Return to the default theme immediately

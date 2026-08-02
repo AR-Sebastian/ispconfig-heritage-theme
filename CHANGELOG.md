@@ -1,11 +1,43 @@
 # Changelog
 
+## 1.0.34 – 2026-08-02
+
+- Public branding is consistently presented as ISPConfig HERITAGE.
+- Release-version cache fingerprints prevent mixed old and current assets.
+- Login, form-label and mailbox-quota accessibility contracts are corrected.
+- Validation permanently protects branding and the repaired UI contracts.
+- ZIP and TAR.GZ release artifacts are reproducible and traversal-checked.
+
 ## 1.0.33 – 2026-07-31
 
 - Tools and Admin now expose explicit, stable semantic workspaces.
 - Personal settings no longer inherit stale table state after dynamic navigation.
 - Resynchronization, ISPConfig import, users, PHP versions, firewall and IP addresses join real-browser acceptance.
 - Eighty-four browser states protect seven surfaces across six widths and both colour schemes.
+
+## 1.0.32 – 2026-07-31
+
+- Boolean active, locked and remote-access states use compact accessible indicators.
+- Content columns retain more useful width while row actions remain stable.
+- The full navigation remains available at 721 pixels and switches below 670 pixels.
+
+## 1.0.31 – 2026-07-31
+
+- Tools and Admin expose explicit, stable semantic workspaces.
+- Dynamic navigation clears stale table state before rendering non-table views.
+- Seven real surfaces are protected across six widths and both colour schemes.
+
+## 1.0.30 – 2026-07-31
+
+- System configuration, extensions and monitoring share one specialty-surface contract.
+- Monitoring navigation removes stale form profiles correctly.
+- Long operational headings remain contained at compact intermediate widths.
+
+## 1.0.29 – 2026-07-31
+
+- Dashboard and monitoring received dedicated real-browser acceptance coverage.
+- Embedded quota tables no longer classify the dashboard as a list page.
+- Charts, widgets and refresh controls are protected across responsive light and dark states.
 
 ## 1.0.28 – 2026-07-31
 
