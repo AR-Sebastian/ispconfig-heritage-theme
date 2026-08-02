@@ -4,6 +4,24 @@
 [![Release](https://img.shields.io/github/v/release/AR-Sebastian/ispconfig-heritage-theme?display_name=tag)](https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/latest)
 [![ISPConfig](https://img.shields.io/badge/ISPConfig-3.3.1p1-d71920)](docs/COMPATIBILITY.md)
 
+## Vorschau / Preview
+
+Aktuelle authentisierte Laufzeitaufnahmen von HERITAGE 1.0.33 auf ISPConfig
+3.3.1p1. Alle sichtbaren Datensätze und `.test`-Adressen sind synthetisch.
+
+Current authenticated runtime captures of HERITAGE 1.0.33 on ISPConfig
+3.3.1p1. All visible records and `.test` addresses are synthetic.
+
+| Desktop hell / light | Kompakt dunkel / compact dark |
+|---|---|
+| [![Serverübersicht im hellen Desktop-Modus](docs/images/heritage-1.0.33-servers-desktop-light.png)](docs/images/heritage-1.0.33-servers-desktop-light.png) | [![Webseiten im kompakten dunklen Modus](docs/images/heritage-1.0.33-websites-compact-dark.png)](docs/images/heritage-1.0.33-websites-compact-dark.png) |
+
+| E-Mail Desktop hell / light | E-Mail mobil dunkel / mobile dark |
+|---|---|
+| [![E-Mail-Konten im hellen Desktop-Modus](docs/images/heritage-1.0.33-mailboxes-desktop-light.png)](docs/images/heritage-1.0.33-mailboxes-desktop-light.png) | [![Responsive E-Mail-Konten im dunklen Mobilmodus](docs/images/heritage-1.0.33-mailboxes-mobile-dark.png)](docs/images/heritage-1.0.33-mailboxes-mobile-dark.png) |
+
+[Aufnahme- und Datenschutzangaben / Capture and privacy notes](docs/SCREENSHOTS.md)
+
 ## Deutsch
 
 HERITAGE ist ein eigenständiges Premium-Theme für ISPConfig 3.3.1p1. Es
