@@ -4979,6 +4979,15 @@
     var activated = 0;
     Array.prototype.slice.call(host.querySelectorAll('script')).forEach(function(original) {
       var source = original.getAttribute('src');
+      var inlineSource = original.textContent || '';
+      // The stock dashboard donation fragment still carries a jQuery toggle.
+      // HERITAGE owns that disclosure natively, so discard only this redundant
+      // handler when the modern ISPConfig shell does not provide jQuery.
+      var isLegacyDonationToggle = /#description/.test(inlineSource) && /\.toggle\s*\(/.test(inlineSource);
+      if (!source && typeof window.jQuery === 'undefined' && isLegacyDonationToggle) {
+        original.remove();
+        return;
+      }
       if (source) {
         var resolved;
         try { resolved = new URL(source, document.baseURI); } catch (error) { resolved = null; }
@@ -4992,7 +5001,7 @@
         replacement.setAttribute(attribute.name, attribute.value);
       });
       if (source) replacement.async = false;
-      else replacement.textContent = original.textContent || '';
+      else replacement.textContent = inlineSource;
       original.parentNode.replaceChild(replacement, original);
       activated += 1;
     });

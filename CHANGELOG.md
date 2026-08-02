@@ -20,6 +20,9 @@
 - Component classes and CSS custom properties now use the unified `hg-*` / `--hg-*` HERITAGE design namespace.
 - Dashboard layout preferences migrate to the HERITAGE storage key; internal runtime names and generated classes no longer expose Workbench-era terminology.
 - Release notes and readiness evidence now describe the completed namespace architecture and keep unproven runtime gates explicitly open.
+- Dashboard fallback content spans the complete responsive grid instead of collapsing into a narrow implicit column.
+- The redundant legacy jQuery donation toggle is skipped safely when the ISPConfig shell does not provide jQuery; unrelated inline scripts remain observable.
+- Authenticated Debian 13 desktop/mobile and light/dark smoke evidence is recorded separately from the still-open stock 3.3.1p1 release gate.
 
 ## 1.0.33 – 2026-07-31
 

@@ -15315,10 +15315,12 @@ body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-overview
 body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-toolbar,
 body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-feedback,
 body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-empty-state,
+body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-server-content,
 body.hg-dashboard-page #pageContent.hg-dashboard-layout > #errormsg,
 body.hg-dashboard-page #pageContent.hg-dashboard-layout > #warningmsg,
 body.hg-dashboard-page #pageContent.hg-dashboard-layout > #infomsg {
   grid-column: 1 / -1;
+  min-width: 0;
 }
 
 body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashboard-feedback:empty {

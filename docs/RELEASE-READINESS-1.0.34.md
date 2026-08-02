@@ -21,12 +21,19 @@ Target: ISPConfig 3.3.1p1
 - SHA-256 verification passes for both release archives.
 - Public Markdown links and active release instructions pass validation.
 - GitHub Actions dependencies are commit-pinned and release notes are mandatory.
+- The 1.0.34 candidate installs atomically in the Debian 13 multiserver lab and serves the expected HERITAGE CSS/JavaScript asset set.
+- Authenticated desktop light, desktop dark and 390-pixel mobile-dark smoke tests confirm the HERITAGE shell, logo, theme switch and responsive navigation without horizontal overflow.
+- Runtime testing exposed and repaired two theme-owned defects: an undecorated dashboard server-content wrapper now spans the full grid, and the redundant jQuery donation toggle is ignored when ISPConfig provides no jQuery runtime.
+
+The detailed, reproducible evidence and the lab limitation are recorded in
+[`RUNTIME-SMOKE-1.0.34.md`](RUNTIME-SMOKE-1.0.34.md).
 
 ## Open release blockers
 
 - [ ] Prove the controller-independent shell, login and Admin settings view in an authenticated, unmodified ISPConfig 3.3.1p1 runtime.
-- [ ] Run authenticated 1.0.34 visual smoke tests for light and dark desktop/mobile states.
-- [ ] Confirm the new HERITAGE logo and refreshed asset cache in a real ISPConfig session.
+- [x] Run authenticated 1.0.34 shell smoke tests for light and dark desktop/mobile states in the available Debian 13 lab.
+- [x] Confirm the new HERITAGE logo and refreshed asset cache in an authenticated ISPConfig session.
+- [ ] Repeat the authenticated visual gates against a rebuilt, unmodified ISPConfig 3.3.1p1 runtime; the current snapshot reports `3.3dev` internally.
 - [ ] Confirm login session controls, additional-PHP sorting, alias-domain source and mailbox quota presentation in the runtime lab.
 - [ ] Review and merge the release-candidate pull request into `main` with green checks.
 - [ ] Rebuild from the clean merge commit and compare the final archive hashes.
