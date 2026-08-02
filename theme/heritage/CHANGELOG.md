@@ -22,6 +22,8 @@
   Pfaden, normalisierten Zeitstempeln, Rechten und Besitzermetadaten erzeugt.
 - Öffentliche Logo- und Favicon-Assets tragen ausschließlich HERITAGE-Namen;
   interne Arbeitspaket-Kommentare wurden aus allen Theme-Templates entfernt.
+- Alle modularen CSS-Quellen wurden aus dem historischen Workbench-Dateinamensraum
+  in eindeutige `heritage-*-core.css`-Autoritäten überführt.
 
 ## 1.0.33 – 2026-07-31
 

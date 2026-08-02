@@ -1,6 +1,6 @@
 /* Generated from heritage-css-bundles.json; edit the modular sources, not this file. */
 
-/* source: workbench.css */
+/* source: heritage-core.css */
 :root {
   --wb-bg: #f4f6fa;
   --wb-surface: #ffffff;
@@ -162,7 +162,7 @@ body.wb-app-navigation-enabled {
 
 body.wb-app-navigation-enabled .green { color: var(--wb-success-ink); }
 
-/* source: workbench-structure.css */
+/* source: heritage-structure-core.css */
 /*
  * structural Workbench markup boundary.
  *
@@ -363,7 +363,7 @@ body.wb-app-navigation-enabled .close { float: right; padding: 0; border: 0; bac
   body.wb-app-navigation-enabled .hidden-lg { display: none !important; }
 }
 
-/* source: workbench-shell.css */
+/* source: heritage-shell-core.css */
 /* authoritative authenticated application shell.
  *
  * This final layer owns header, global search, persistent navigation, compact
@@ -2143,7 +2143,7 @@ body.wb-app-navigation-enabled .wb-mobile-navigation__quick-action {
   }
 }
 
-/* source: workbench-surfaces.css */
+/* source: heritage-surfaces-core.css */
 /*
  * authoritative authenticated surface layer.
  *
@@ -3917,7 +3917,7 @@ body.wb-app-navigation-enabled #pageContent .wb-alert__dismiss:focus-visible {
   }
 }
 
-/* source: workbench-modules.css */
+/* source: heritage-modules-core.css */
 /* authoritative module workspaces for monitoring and extensions. */
 
 body.wb-app-navigation-enabled :where(.wb-monitor-workspace, .wb-extension-workspace) {
@@ -4794,7 +4794,7 @@ html[data-wb-theme='dark'] body.wb-app-navigation-enabled #pageContent .wb-speci
   }
 }
 
-/* source: workbench-lists.css */
+/* source: heritage-lists-core.css */
 /* authoritative authenticated list and filter workspace. */
 
 body.wb-list-page #pageContent {
@@ -6973,13 +6973,13 @@ body.wb-list-page #pageContent :where(.wb-control--filter-reset, .wb-control--fi
   white-space: nowrap;
 }
 
-/* source: workbench-tables.css */
+/* source: heritage-tables-core.css */
 /* Workbench Premium Tables
  *
  * This file is the new table authority for authenticated Workbench pages.
  * This layer owns the visible table workspace: command bar, filter row,
  * viewport, compact record cards, empty state, row actions and footer
- * pagination. workbench-lists.css may still normalize old ISPConfig markup,
+ * pagination. heritage-lists-core.css may still normalize old ISPConfig markup,
  * but it is no longer the table source of truth.
  */
 
@@ -8538,7 +8538,7 @@ body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport--empty .wb
   block-size: auto;
 }
 
-/* source: workbench-forms.css */
+/* source: heritage-forms-core.css */
 /*
  * authoritative authenticated form workspace.
  *
@@ -14339,7 +14339,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
   }
 }
 
-/* source: workbench-controls.css */
+/* source: heritage-controls-core.css */
 /*
  * authoritative authenticated control surfaces.
  *
@@ -14910,7 +14910,7 @@ html[data-wb-theme='dark'] body > .wb-select__panel .wb-select__search {
   }
 }
 
-/* source: workbench-content.css */
+/* source: heritage-content-core.css */
 /*
  * authoritative page-content surface layer.
  *
@@ -15702,10 +15702,10 @@ body.wb-form-page #pageForm.wb-modern-form .wb-tabstrip[data-overflow='false'] >
   }
 }
 
-/* source: workbench-dashboard.css */
+/* source: heritage-dashboard-core.css */
 /* authoritative dashboard workspace.
  * The dashboard owns one fluid, container-driven composition. Historical
- * dashboard declarations in workbench.css are structural input only and
+ * dashboard declarations in heritage-core.css are structural input only and
  * must not decide the rendered geometry. */
 
 body.wb-dashboard-page #pageContent.wb-dashboard-layout {

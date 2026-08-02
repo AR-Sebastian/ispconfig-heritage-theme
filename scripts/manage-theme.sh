@@ -83,7 +83,7 @@ validate_payload() {
     "theme-manifest.json"
     "templates/main.tpl.htm"
     "templates/main_login.tpl.htm"
-    "assets/stylesheets/workbench.css"
+    "assets/stylesheets/heritage-core.css"
     "assets/javascripts/workbench-boot.js"
   )
   local file

@@ -32,6 +32,10 @@ if grep -RIEq 'WP-[0-9]+|ispconfig-workbench-(logo|favicon)' "$theme/templates" 
   echo 'Theme contains an internal work-package marker or obsolete public asset name.' >&2
   exit 1
 fi
+if find "$theme/assets/stylesheets" -maxdepth 1 -type f -name 'workbench*.css' -print -quit | grep -q .; then
+  echo 'Theme contains a stylesheet in the obsolete Workbench filename namespace.' >&2
+  exit 1
+fi
 while IFS= read -r -d '' file; do node --check "$file"; done < <(find "$theme" -type f -name '*.js' -print0)
 
 node - "$theme" "$version" <<'NODE'

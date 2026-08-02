@@ -25,7 +25,7 @@ Verify the two central files:
 
 ```bash
 test -f /usr/local/ispconfig/interface/web/themes/heritage/templates/main.tpl.htm
-test -f /usr/local/ispconfig/interface/web/themes/heritage/assets/stylesheets/workbench.css
+test -f /usr/local/ispconfig/interface/web/themes/heritage/assets/stylesheets/heritage-core.css
 ```
 
 Reinstall the SHA-256-verified release if a file is missing. Do not layer files from

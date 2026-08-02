@@ -30,6 +30,10 @@ Public logo and favicon asset filenames now use the HERITAGE namespace. Internal
 work-package annotations have been removed from the complete template set
 without changing controller variables, markup contracts or runtime hooks.
 
+All modular stylesheet sources now use explicit HERITAGE core filenames. Bundle
+order and authored CSS remain unchanged while the former Workbench source-file
+namespace is removed from the distributed package.
+
 ## Previous release
 
 HERITAGE 1.0.33 extends compact states to all five server capabilities and the

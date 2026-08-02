@@ -25,7 +25,7 @@ Prüfe, ob die beiden zentralen Dateien erreichbar sind:
 
 ```bash
 test -f /usr/local/ispconfig/interface/web/themes/heritage/templates/main.tpl.htm
-test -f /usr/local/ispconfig/interface/web/themes/heritage/assets/stylesheets/workbench.css
+test -f /usr/local/ispconfig/interface/web/themes/heritage/assets/stylesheets/heritage-core.css
 ```
 
 Installiere das anhand der SHA-256-Prüfsumme geprüfte Release erneut, wenn eine Datei fehlt. Keine Dateien

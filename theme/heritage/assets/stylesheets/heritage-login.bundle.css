@@ -1,6 +1,6 @@
 /* Generated from heritage-css-bundles.json; edit the modular sources, not this file. */
 
-/* source: workbench.css */
+/* source: heritage-core.css */
 :root {
   --wb-bg: #f4f6fa;
   --wb-surface: #ffffff;
@@ -162,7 +162,7 @@ body.wb-app-navigation-enabled {
 
 body.wb-app-navigation-enabled .green { color: var(--wb-success-ink); }
 
-/* source: workbench-auth.css */
+/* source: heritage-auth-core.css */
 /* authoritative authentication surface for login, OTP and recovery. */
 body.wb-login-page {
   min-height: 100vh;

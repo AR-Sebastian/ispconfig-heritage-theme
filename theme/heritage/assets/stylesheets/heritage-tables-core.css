@@ -3,7 +3,7 @@
  * This file is the new table authority for authenticated Workbench pages.
  * This layer owns the visible table workspace: command bar, filter row,
  * viewport, compact record cards, empty state, row actions and footer
- * pagination. workbench-lists.css may still normalize old ISPConfig markup,
+ * pagination. heritage-lists-core.css may still normalize old ISPConfig markup,
  * but it is no longer the table source of truth.
  */
 

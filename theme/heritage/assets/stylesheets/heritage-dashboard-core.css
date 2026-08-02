@@ -1,6 +1,6 @@
 /* authoritative dashboard workspace.
  * The dashboard owns one fluid, container-driven composition. Historical
- * dashboard declarations in workbench.css are structural input only and
+ * dashboard declarations in heritage-core.css are structural input only and
  * must not decide the rendered geometry. */
 
 body.wb-dashboard-page #pageContent.wb-dashboard-layout {
