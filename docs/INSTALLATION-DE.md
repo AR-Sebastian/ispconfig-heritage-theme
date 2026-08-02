@@ -49,6 +49,10 @@ Die Prüfung muss das Archiv ausdrücklich mit `OK` bestätigen. Bei einer
 Warnung oder Abweichung nicht installieren. Das Archiv erzeugt
 `/usr/local/ispconfig/interface/web/themes/heritage`.
 
+Die vollständige Release-Prüfung einschließlich Tag-Payload sowie der für
+künftige Releases verpflichtenden Provenienz- und SBOM-Kontrollen ist unter
+[Sicherheit und Release-Verifikation](../SECURITY.md) dokumentiert.
+
 ## Status und Rückkehr
 
 ```bash

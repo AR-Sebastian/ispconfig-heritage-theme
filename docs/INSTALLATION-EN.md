@@ -48,6 +48,10 @@ Verification must report the archive as `OK`. Do not install after a checksum
 warning or mismatch. The archive creates
 `/usr/local/ispconfig/interface/web/themes/heritage`.
 
+The complete release procedure, including tagged-payload verification and the
+provenance/SBOM gates required for future releases, is documented in
+[security and release verification](../SECURITY.md).
+
 ## Status and recovery
 
 ```bash
