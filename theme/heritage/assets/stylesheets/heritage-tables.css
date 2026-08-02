@@ -1,6 +1,6 @@
 /* ISPConfig HERITAGE — table-system authority.
  *
- * The shared Workbench adapters provide semantics and lifecycle behavior.
+ * The shared Heritage adapters provide semantics and lifecycle behavior.
  * This layer owns the Heritage composition only: command bar, filter row,
  * records, actions, empty states, pagination and responsive record cards.
  */

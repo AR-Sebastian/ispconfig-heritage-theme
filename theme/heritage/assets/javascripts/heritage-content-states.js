@@ -162,18 +162,18 @@
     });
   }
 
-  // Shared native GET transport for Workbench navigation. It deliberately
+  // Shared native GET transport for Heritage navigation. It deliberately
   // retains the small jqXHR-compatible handle expected by legacy callers.
   function requestHtml(url, data, timeout) {
     var api = runtime();
-    if (!api || typeof api.requestText !== 'function') throw new Error('Workbench runtime requestText is unavailable.');
+    if (!api || typeof api.requestText !== 'function') throw new Error('Heritage runtime requestText is unavailable.');
     return api.requestText(url || '', { query: data || null, timeout: timeout || 30000 });
   }
 
   function isSupersededRequest(request, error) {
     if (request && request.aborted) return true;
     if (error && error.name === 'AbortError') return true;
-    if (error && error.name === 'WorkbenchHttpError' && /superseded|aborted|ersetzt/i.test(error.message || '')) return true;
+    if (error && error.name === 'HeritageHttpError' && /superseded|aborted|ersetzt/i.test(error.message || '')) return true;
     return false;
   }
 
@@ -534,7 +534,7 @@
     bar.appendChild(meta);
     bar.appendChild(actions);
 
-    /* Native Workbench templates may publish their primary action next to the
+    /* Native Heritage templates may publish their primary action next to the
      * table so the controller contract stays untouched. Consolidate that
      * source toolbar into the generated command bar instead of rendering two
      * competing headers above one dataset. */
@@ -1071,9 +1071,9 @@
     try {
       callback();
     } catch (error) {
-      if (window.console && console.warn) console.warn('Workbench enhancement skipped: ' + label, error);
+      if (window.console && console.warn) console.warn('Heritage enhancement skipped: ' + label, error);
       var api = runtime();
-      if (api && api.reportError) api.reportError('Workbench enhancement skipped: ' + label);
+      if (api && api.reportError) api.reportError('Heritage enhancement skipped: ' + label);
     }
   }
 
@@ -1778,7 +1778,7 @@
           return;
         }
         host.setAttribute('aria-busy', 'false');
-        if (!api || typeof api.replaceServerFragment !== 'function') throw new TypeError('Workbench fragment renderer is not available.');
+        if (!api || typeof api.replaceServerFragment !== 'function') throw new TypeError('Heritage fragment renderer is not available.');
         api.replaceServerFragment(host, response);
         var loadedModule = moduleFromPageName(pagename);
         if (loadedModule) {
@@ -1865,7 +1865,7 @@
         var api = runtime();
         if (cacheKey === 'top') menuCache.top = response;
         else if (cacheKey) menuCache.side[cacheKey] = response;
-        if (!api || typeof api.replaceServerFragment !== 'function') throw new TypeError('Workbench fragment renderer is not available.');
+        if (!api || typeof api.replaceServerFragment !== 'function') throw new TypeError('Heritage fragment renderer is not available.');
         api.replaceServerFragment(host, response);
         if (cacheKey === 'top') syncPrimaryModule(host, activeModule);
         decorateNavigation(host);
@@ -1962,7 +1962,7 @@
         if (token !== refreshSequence || request.aborted) return;
         var host = document.getElementById('pageContent');
         if (window.heritageMonitoring) window.heritageMonitoring.destroy(host);
-        if (!api || typeof api.replaceServerFragment !== 'function') throw new TypeError('Workbench fragment renderer is not available.');
+        if (!api || typeof api.replaceServerFragment !== 'function') throw new TypeError('Heritage fragment renderer is not available.');
         api.replaceServerFragment(host, response);
         enhanceLoadedContent(host, pagename, 'refresh=' + interval);
         announceContentReady(host, pagename, { source: 'refresh', params: 'refresh=' + interval });
@@ -2005,7 +2005,7 @@
   };
 
   legacy.registerHook('onAfterContentLoad', function(name, params) {
-    if (params && params.__workbenchEnhanced) return;
+    if (params && params.__heritageEnhanced) return;
     if (legacy && typeof legacy.heritageEnhanceContent === 'function') {
       legacy.heritageEnhanceContent(params && params.url ? params.url : name || '', '', { source: 'legacy-after-content-hook' });
     }

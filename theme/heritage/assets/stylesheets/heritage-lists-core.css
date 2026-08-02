@@ -150,7 +150,7 @@ body.hg-list-page .hg-list-command-bar__primary:focus-visible {
 /* premium table completion pass.
  *
  * Tables are one of the oldest rendered surfaces in ISPConfig. This final
- * list layer makes the shared Workbench treatment explicit: calm command
+ * list layer makes the shared Heritage treatment explicit: calm command
  * bars, readable filter panels, compact page-size overlays, stronger empty
  * states and predictable action columns without touching module behaviour.
  */
@@ -1764,7 +1764,7 @@ html[data-heritage-theme='dark'] body.hg-list-page :where(.hg-owned-enhanced-sel
 /* premium list control docking and resize stability.
  *
  * Real list pages still expose many old table/control combinations. The
- * Workbench now treats the command bar, table scroller, page-size picker and
+ * Heritage now treats the command bar, table scroller, page-size picker and
  * table controls as one docked workspace so resize states do not reveal detached
  * legacy controls.
  */
@@ -2085,7 +2085,7 @@ html[data-heritage-theme='dark'] body.hg-list-page .hg-page-size-select {
  * Tables can be much wider than the viewport, but their controls must not feel
  * trapped inside the scrollable grid. This late layer keeps command actions,
  * filter controls and page-size selection visually attached while the footer remains table-owned
- * to the list workspace while preventing native/Workbench dropdown panels from
+ * to the list workspace while preventing native/Heritage dropdown panels from
  * being clipped by table overflow.
  */
 body.hg-list-page #pageContent > .hg-list-command-bar {

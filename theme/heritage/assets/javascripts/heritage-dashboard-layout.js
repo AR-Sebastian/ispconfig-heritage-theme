@@ -1,7 +1,8 @@
 (function () {
   'use strict';
 
-  var STORAGE_KEY = 'ispconfig-workbench.dashboard.layout.v7';
+  var STORAGE_KEY = 'ispconfig-heritage.dashboard.layout.v7';
+  var LEGACY_STORAGE_KEY = 'ispconfig-workbench.dashboard.layout.v7';
   // V2 retires persisted row-spanning layouts that could turn quota and
   // statistics widgets into a single extremely tall grid track after login.
   // The storage key stays stable; the revision deliberately resets only the
@@ -120,7 +121,10 @@
 
   function readLayout() {
     try {
-      var stored = JSON.parse(window.localStorage.getItem(STORAGE_KEY) || '{}');
+      var serialized = window.localStorage.getItem(STORAGE_KEY) || window.localStorage.getItem(LEGACY_STORAGE_KEY) || '{}';
+      if (!window.localStorage.getItem(STORAGE_KEY) && serialized !== '{}') window.localStorage.setItem(STORAGE_KEY, serialized);
+      window.localStorage.removeItem(LEGACY_STORAGE_KEY);
+      var stored = JSON.parse(serialized);
       return stored && stored.__revision === LAYOUT_REVISION ? stored : {};
     }
     catch (error) { return {}; }
@@ -1148,7 +1152,10 @@
         reset.dataset.heritageConfirm = 'false';
         reset.classList.remove('hg-dashboard-layout-reset--armed');
         reset.textContent = t('resetLayout');
-        try { window.localStorage.removeItem(STORAGE_KEY); } catch (error) { /* ignore */ }
+        try {
+          window.localStorage.removeItem(STORAGE_KEY);
+          window.localStorage.removeItem(LEGACY_STORAGE_KEY);
+        } catch (error) { /* ignore */ }
         dashlets(host).sort(function (a, b) {
           return Number(a.dataset.heritageDefaultOrder || 0) - Number(b.dataset.heritageDefaultOrder || 0);
         }).forEach(function (node) {

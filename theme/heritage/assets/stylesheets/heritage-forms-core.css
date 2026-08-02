@@ -816,7 +816,7 @@ body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(
  *
  * Some module pages still inject Bootstrap-era panels, wells, tab panes and
  * muted labels inside the modern form. These elements must inherit the
- * Workbench semantic surface instead of carrying pale text on pale backgrounds
+ * Heritage semantic surface instead of carrying pale text on pale backgrounds
  * or white panels inside dark mode. */
 body.hg-form-page #pageForm.hg-modern-form :where(
   .panel,
@@ -1050,7 +1050,7 @@ html[data-heritage-theme='dark'] body.hg-app-navigation-enabled :where(.form-hor
  * A few rarely used ISPConfig and addon templates still ship inline white text,
  * pale table cells or white background snippets. This guard catches those
  * fragments only inside authenticated form workspaces and maps them back to
- * the active Workbench tokens, so light and dark modes stay readable during
+ * the active Heritage tokens, so light and dark modes stay readable during
  * the migration away from old Bootstrap-era markup. */
 body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm, .pnl_formsarea, .tab-content, .tab-pane) :where(
   [style*='color: #fff'],
@@ -1118,7 +1118,7 @@ html[data-heritage-theme='dark'] body.hg-app-navigation-enabled :where(.form-hor
 /* premium form density pass.
  *
  * Long ISPConfig settings pages are generated from legacy form definitions and
- * can otherwise feel like stretched tables. This final Workbench layer keeps
+ * can otherwise feel like stretched tables. This final Heritage layer keeps
  * the backend contract untouched while making those forms denser, clearer and
  * more product-like in light and dark themes. */
 body.hg-form-page #pageForm.hg-modern-form {
@@ -1290,7 +1290,7 @@ html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :whe
  *
  * The remaining ISPConfig pages are a mixture of generated form rows,
  * Bootstrap fragments and addon widgets. This pass makes those fragments use
- * Workbench tokens by default, so old light/dark leftovers do not punch holes
+ * Heritage tokens by default, so old light/dark leftovers do not punch holes
  * into the premium interface while backend templates are still being migrated.
  */
 body.hg-form-page #pageForm.hg-modern-form :where(
@@ -1542,7 +1542,7 @@ html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :whe
  *
  * Real ISPConfig forms and add-ons still emit a mix of legacy tables,
  * Bootstrap rows, inline helpers and old enhanced-select markup. This final
- * scoped layer makes Workbench own those surfaces consistently in light and
+ * scoped layer makes Heritage own those surfaces consistently in light and
  * dark mode without touching the default theme. */
 body.hg-form-page #pageForm.hg-modern-form :where(
   table,
@@ -1699,7 +1699,7 @@ body.hg-form-page #pageForm.hg-modern-form :where(
  * After the navigation and dashboard conversion the remaining visual defects
  * are mostly generated module forms: nested Bootstrap panels, old table-based
  * form layouts, add-on snippets and inline white fragments. This layer keeps
- * those fragments inside the Workbench card system, especially in dark mode
+ * those fragments inside the Heritage card system, especially in dark mode
  * and during live resizing. */
 body.hg-form-page #pageForm.hg-modern-form :where(
   .content-tab-wrapper,
@@ -1973,7 +1973,7 @@ html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form .hg-
  * This is the late authority layer for generated ISPConfig forms. It keeps
  * all server-rendered controls and submissions intact, but makes the form
  * shell, tabs, labels, native fields, branding manager and action shelf read
- * as one deliberate Workbench workspace in both light and dark themes.
+ * as one deliberate Heritage workspace in both light and dark themes.
  */
 body.hg-form-page #pageContent {
   --hg-form-label-fluid: clamp(9.5rem, 18cqi, 15rem);
@@ -3630,7 +3630,7 @@ body.hg-form-page #pageForm.hg-modern-form .hg-identity-summary li {
 
 /* form authority pass.
  *
- * ISPConfig forms still arrive from many old templates. The modern Workbench
+ * ISPConfig forms still arrive from many old templates. The modern Heritage
  * layer now provides a final contrast and geometry floor so white-on-white or
  * dark-on-dark form fragments cannot reappear while individual templates are
  * being retired.
@@ -3785,7 +3785,7 @@ html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :whe
  *
  * The old template stack can still expose browser-native option lists,
  * disabled rows, add-on dropdowns and generated action bars. This layer gives
- * those surfaces the same token contract as the rest of the Premium Workbench
+ * those surfaces the same token contract as the rest of the Premium Heritage
  * without reintroducing plugin-specific JavaScript or legacy Bootstrap chrome.
  */
 body.hg-form-page #pageForm.hg-modern-form :where(select, option, optgroup) {
@@ -4444,7 +4444,7 @@ html[data-heritage-theme='light'] body.hg-form-page #pageForm.hg-modern-form[dat
  * This is the broad guardrail for generated masks after the real-form pass:
  * Bootstrap wells/panels, legacy form tables, Select2/Chosen search boxes,
  * dropdowns, popovers, tooltips, datepickers, jQuery UI widgets and progress
- * strips must use Workbench surfaces in both themes.
+ * strips must use Heritage surfaces in both themes.
  */
 body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
   .well,
@@ -4731,7 +4731,7 @@ body.hg-app-navigation-enabled .hg-jail-symbol svg {
 
 /* form surface finalization.
  *
- * Detail masks now finish as one premium Workbench surface. This block is the
+ * Detail masks now finish as one premium Heritage surface. This block is the
  * final visual owner for form cards, tab strips, field rows, native controls,
  * compound controls, embedded legacy panels/tables and the sticky action dock.
  */
@@ -4939,7 +4939,7 @@ html[data-heritage-theme='light'] body.hg-form-page #pageForm.hg-modern-form[dat
  *
  * High-risk detail masks no longer borrow accidental layout from generic
  * Bootstrap-era forms. Branding/System Config, billing, extensions, technical
- * text, uploads and wide configuration fields receive explicit Workbench
+ * text, uploads and wide configuration fields receive explicit Heritage
  * composition on top of the finalized form base.
  */
 body.hg-form-page:is(

@@ -219,6 +219,20 @@ for (const bundle of Object.values(bundles)) {
   }
 }
 const scriptsDirectory = path.join(theme, 'assets', 'javascripts');
+const compatibilityWorkbenchLiterals = [
+  'ispconfig-workbench.dashboard.layout.v7',
+  'ispconfig-workbench-theme',
+  'ispconfig-workbench-login-username',
+  'ispconfig-workbench-login-stay',
+  'WORKBENCH_RELOAD:',
+  "workbench: 'Workbench'"
+];
+for (const file of walk(path.join(theme, 'assets')).filter(file => !file.includes('.bundle.'))) {
+  if (!textExtensions.has(path.extname(file).toLowerCase())) continue;
+  let authored = fs.readFileSync(file, 'utf8');
+  for (const literal of compatibilityWorkbenchLiterals) authored = authored.split(literal).join('');
+  if (/workbench/i.test(authored)) throw new Error(`Unapproved Workbench-era terminology remains in ${path.relative(theme, file)}.`);
+}
 const runtime = fs.readFileSync(path.join(scriptsDirectory, 'heritage-runtime.js'), 'utf8');
 for (const contract of ['contentObserver.disconnect()', 'window.setTimeout(enhanceObservedContent, 24)', 'observeContent();']) {
   if (!runtime.includes(contract)) throw new Error(`Runtime observer stability contract is missing: ${contract}`);

@@ -260,7 +260,7 @@
       [/^Refresh request was not successful\./, 'Die Ansicht konnte nicht aktualisiert werden.', 'The view could not be refreshed.'],
       [/^(?:(?:Side|Top) navigation|Navigation menu) request was not successful\./, 'Die Navigation konnte nicht vollständig geladen werden.', 'The navigation could not be loaded completely.'],
       [/^Session expired\./, 'Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.', 'Your session has expired. Please sign in again.'],
-      [/^Workbench enhancement skipped:/, 'Ein Teil dieser Ansicht konnte nicht vollständig dargestellt werden.', 'Part of this view could not be displayed completely.']
+      [/^Heritage enhancement skipped:/, 'Ein Teil dieser Ansicht konnte nicht vollständig dargestellt werden.', 'Part of this view could not be displayed completely.']
     ];
     for (var index = 0; index < messages.length; index += 1) {
       if (messages[index][0].test(text)) return localized(messages[index][1], messages[index][2]);

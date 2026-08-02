@@ -1048,7 +1048,7 @@
     return true;
   }
 
-  function bootWorkbench() {
+  function bootHeritage() {
     if (!applyRuntimeConfig()) return;
     var runtime = app();
     if (runtime && typeof runtime.loadInitContent === 'function') {
@@ -1057,8 +1057,8 @@
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', bootWorkbench, { once: true });
+    document.addEventListener('DOMContentLoaded', bootHeritage, { once: true });
   } else {
-    bootWorkbench();
+    bootHeritage();
   }
 })(window, document);

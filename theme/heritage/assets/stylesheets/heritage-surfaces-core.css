@@ -2,9 +2,9 @@
  * authoritative authenticated surface layer.
  *
  * ISPConfig still renders a mixture of legacy Bootstrap-era components and
- * newer Workbench components. This last-loaded layer maps their presentation
- * to the Workbench tokens without changing markup, values or behaviour.
- * Keep every rule below scoped to the authenticated Workbench application.
+ * newer Heritage components. This last-loaded layer maps their presentation
+ * to the Heritage tokens without changing markup, values or behaviour.
+ * Keep every rule below scoped to the authenticated Heritage application.
  */
 
 body.hg-app-navigation-enabled {
@@ -931,7 +931,7 @@ body.hg-app-navigation-enabled .tab-content > .tab-pane { min-width: 0; }
 /* residual contrast and legacy-surface convergence.
  *
  * Some rarely visited ISPConfig and addon screens still emit Bootstrap-era
- * surfaces after the main Workbench decorators have run. This guard keeps
+ * surfaces after the main Heritage decorators have run. This guard keeps
  * those fragments readable in both themes without changing their behaviour or
  * persisted values. */
 body.hg-app-navigation-enabled #pageContent :where(
@@ -1064,7 +1064,7 @@ html[data-heritage-theme='dark'] body.hg-app-navigation-enabled #pageContent :wh
  *
  * The old UI still emits gradients, text shadows and white table fragments in
  * several modules and addons. This layer does not change behaviour; it only
- * forces those fragments back onto the Workbench token system so light and
+ * forces those fragments back onto the Heritage token system so light and
  * dark themes remain readable. */
 body.hg-app-navigation-enabled #pageContent :where(
   .table,
@@ -1217,7 +1217,7 @@ body.hg-app-navigation-enabled .hg-svg-icon > svg {
  *
  * Some ISPConfig pages and addons still arrive with old Bootstrap/default-theme
  * fragments after Ajax navigation. This final surface guard deliberately stays
- * scoped to the authenticated Workbench shell and converts those fragments back
+ * scoped to the authenticated Heritage shell and converts those fragments back
  * to token driven light/dark surfaces. It is presentation-only: no form names,
  * request targets, permissions or server actions are changed. */
 body.hg-app-navigation-enabled #pageContent :where(
@@ -1504,7 +1504,7 @@ body.hg-app-navigation-enabled .alert-info {
 /* runtime-owned residual surface quarantine.
  * Dynamic ISPConfig fragments can still emit Bootstrap-era panels, overlays,
  * compound controls and inline bright surfaces. The runtime now marks those
- * fragments explicitly; this layer gives them one Workbench-owned visual
+ * fragments explicitly; this layer gives them one Heritage-owned visual
  * contract instead of relying on page-specific patch selectors. */
 body.hg-app-navigation-enabled #pageContent :where(
   .hg-owned-surface,
@@ -1583,7 +1583,7 @@ body.hg-app-navigation-enabled #pageContent :where(.hg-owned-control-cluster > .
 }
 
 /* semantic bridge for residual Select2/Chosen fragments.
- * The Workbench runtime marks old enhanced-select markup with these classes so
+ * The Heritage runtime marks old enhanced-select markup with these classes so
  * vendor selectors can be retired without losing readable, premium controls. */
 body.hg-app-navigation-enabled #pageContent :where(.hg-owned-enhanced-select) {
   display: inline-block;

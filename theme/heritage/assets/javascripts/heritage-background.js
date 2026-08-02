@@ -31,7 +31,7 @@
     contentRequests[elementId] = request;
     request.promise.then(function(responseText) {
       if (contentRequests[elementId] !== request) return;
-      if (typeof api.replaceServerFragment !== 'function') throw new TypeError('Workbench fragment renderer is not available.');
+      if (typeof api.replaceServerFragment !== 'function') throw new TypeError('Heritage fragment renderer is not available.');
       api.replaceServerFragment(host, responseText);
       if (window.heritageContentStates && typeof window.heritageContentStates.enhance === 'function') {
         window.heritageContentStates.enhance(host, pageName, { source: 'partial-content' });

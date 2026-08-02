@@ -610,7 +610,7 @@ body.hg-app-navigation-enabled.hg-monitor-page .hg-monitor-chart__details dt {
 /* specialty V1 premium convergence.
  *
  * Extensions, reports and help lists share the same hierarchy as native
- * Workbench lists. Specialty context remains visible, while duplicate
+ * Heritage lists. Specialty context remains visible, while duplicate
  * headings and decorative accent surfaces no longer compete with the data.
  */
 body.hg-app-navigation-enabled #pageContent .hg-extension-hero {
@@ -721,7 +721,7 @@ body.hg-app-navigation-enabled #pageContent [data-heritage-support-surface] + p:
  *
  * Monitoring, statistics and Extension Installer pages are generated outside
  * the normal list/form pipeline. This final scoped layer makes their heroes,
- * metadata, filters and action rows feel like one Premium Workbench surface
+ * metadata, filters and action rows feel like one Premium Heritage surface
  * without taking ownership of controller behaviour. */
 body.hg-app-navigation-enabled #pageContent :where(.hg-specialty-workspace, .hg-extension-workspace, .hg-monitor-workspace, .hg-statistics-workspace) {
   inline-size: min(100%, var(--hg-content-max, 1480px));

@@ -45,7 +45,7 @@ body.hg-app-navigation-enabled #inner-wrapper {
   flex-direction: column;
 }
 
-/* The permission-filtered native menus stay available to the Workbench
+/* The permission-filtered native menus stay available to the Heritage
  * controller but never create a second visible navigation surface. */
 body.hg-app-navigation-enabled #topnav-container,
 body.hg-app-navigation-enabled #main-navigation,
@@ -721,7 +721,7 @@ body.hg-app-navigation-enabled .hg-module-transition { position: absolute; width
  *
  * This final guard catches intermediate viewport states where old Bootstrap
  * widths, native controls or injected module content would otherwise push the
- * Workbench shell wider than the visible page. The only intentional horizontal
+ * Heritage shell wider than the visible page. The only intentional horizontal
  * scroll owner is a bounded table workspace. */
 html:has(body.hg-app-navigation-enabled),
 body.hg-app-navigation-enabled {
@@ -781,7 +781,7 @@ body.hg-app-navigation-enabled :where(.dropdown-menu, .hg-owned-enhanced-select_
 
 /* remove the remaining "between states".
  *
- * The Workbench shell has one account surface: the navigation footer. Header
+ * The Heritage shell has one account surface: the navigation footer. Header
  * identity fragments, legacy logout buttons and late module account snippets
  * are treated as data leaks from the old UI and are suppressed globally. */
 body.hg-app-navigation-enabled :where(
@@ -852,7 +852,7 @@ body.hg-app-navigation-enabled .hg-app-navigation__footer {
 /* deterministic navigation groups.
  *
  * The secondary navigation is no longer an old sidebar list hidden inside the
- * new shell. Groups look and behave like a first-class part of the Workbench
+ * new shell. Groups look and behave like a first-class part of the Heritage
  * navigation: groups are calm section labels, not interactive accordions.
  * Links and adjacent quick actions carry the interaction weight; the groups
  * simply structure the module like a premium, always-readable drawer. */
@@ -1072,7 +1072,7 @@ body.hg-app-navigation-enabled .hg-app-navigation__user > :where(strong, small) 
 }
 
 /* final navigation authority.
- * One final block owns the visible Workbench navigation contract. Main modules
+ * One final block owns the visible Heritage navigation contract. Main modules
  * may disclose or hide their submenu. Submenu groups are static dividers, not
  * nested accordions. This replaces the previous late override
  * split with one deterministic navigation endpoint.
@@ -1617,7 +1617,7 @@ body.hg-app-navigation-enabled .hg-global-search-results {
 
 /* navigation DONE contract.
  *
- * The final Workbench navigation is a single left-axis product surface:
+ * The final Heritage navigation is a single left-axis product surface:
  * - primary modules may disclose one submenu;
  * - secondary group labels are static section dividers;
  * - quick actions live on the right edge of a row;

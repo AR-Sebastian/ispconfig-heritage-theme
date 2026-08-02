@@ -94,7 +94,7 @@
 
   function requestRuntimeJson(url, options) {
     var api = runtimeApi();
-    if (!api || typeof api.requestJson !== 'function') throw new TypeError('Workbench JSON runtime is not available.');
+    if (!api || typeof api.requestJson !== 'function') throw new TypeError('Heritage JSON runtime is not available.');
     return api.requestJson(url, options || {});
   }
 
@@ -137,7 +137,7 @@
   function setHtml(host, markup) {
     if (!host) return;
     host.innerHTML = markup || '';
-    normalizeWorkbenchContentContracts(host);
+    normalizeHeritageContentContracts(host);
     activateRuntimeFragment(host);
   }
 
@@ -185,7 +185,7 @@
     });
   }
 
-  function normalizeWorkbenchContentContracts(root) {
+  function normalizeHeritageContentContracts(root) {
     root = root || document;
     mirrorAttribute(root, '[' + HERITAGE_CONTENT_CONTRACTS.load.legacy + ']', HERITAGE_CONTENT_CONTRACTS.load.legacy, HERITAGE_CONTENT_CONTRACTS.load.native);
     mirrorAttribute(root, '[' + HERITAGE_CONTENT_CONTRACTS.template.legacy + ']', HERITAGE_CONTENT_CONTRACTS.template.legacy, HERITAGE_CONTENT_CONTRACTS.template.native);
@@ -342,7 +342,7 @@
       try {
         setVisible(selector, allowed.indexOf(value) !== -1);
       } catch (error) {
-        if (window.console && console.warn) console.warn('Invalid Workbench visibility selector:', selector, error);
+        if (window.console && console.warn) console.warn('Invalid Heritage visibility selector:', selector, error);
       }
     });
     return true;
@@ -403,7 +403,7 @@
     });
   }
 
-  function generateWorkbenchPassword(length) {
+  function generateHeritagePassword(length) {
     var size = Math.max(8, Number(length || 16));
     var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#%+=?';
     var values = new Uint32Array(size);
@@ -422,7 +422,7 @@
       if (input.getAttribute('data-heritage-default-password-initialized') === 'true') return;
       input.setAttribute('data-heritage-default-password-initialized', 'true');
       if (input.value) return;
-      input.value = generateWorkbenchPassword(input.getAttribute('data-heritage-default-password'));
+      input.value = generateHeritagePassword(input.getAttribute('data-heritage-default-password'));
     });
   }
 
@@ -520,7 +520,7 @@
       var selected = select.options && select.selectedIndex >= 0 ? select.options[select.selectedIndex] : null;
       var label = selected ? selected.textContent : select.value;
       var text = document.createElement('p');
-      text.className = 'form-control-static workbench-static-field';
+      text.className = 'form-control-static hg-static-field';
       text.textContent = label || select.value || '';
       var hidden = document.createElement('input');
       hidden.type = 'hidden';
@@ -766,7 +766,7 @@
     return request;
   }
 
-  function rerenderWorkbenchSelect(elem) {
+  function rerenderHeritageSelect(elem) {
     var select = document.getElementById(elem);
     if (select) callRuntime('enhanceSelect', [select, {}]);
   }
@@ -774,8 +774,8 @@
   function reloadVhostWebIp(ctx) {
     var serverId = getVhostServerId(ctx);
     var clientGroupId = ctx.clientGroupField ? ctx.clientGroupField.value : '';
-    callRuntime('loadOptionInto', ['ip_address', heritageEndpoint('sitesIpOptions') + '?ip_type=IPv4&server_id=' + encodeURIComponent(serverId || '') + '&client_group_id=' + encodeURIComponent(clientGroupId || ''), rerenderWorkbenchSelect]);
-    callRuntime('loadOptionInto', ['ipv6_address', heritageEndpoint('sitesIpOptions') + '?ip_type=IPv6&server_id=' + encodeURIComponent(serverId || '') + '&client_group_id=' + encodeURIComponent(clientGroupId || ''), rerenderWorkbenchSelect]);
+    callRuntime('loadOptionInto', ['ip_address', heritageEndpoint('sitesIpOptions') + '?ip_type=IPv4&server_id=' + encodeURIComponent(serverId || '') + '&client_group_id=' + encodeURIComponent(clientGroupId || ''), rerenderHeritageSelect]);
+    callRuntime('loadOptionInto', ['ipv6_address', heritageEndpoint('sitesIpOptions') + '?ip_type=IPv6&server_id=' + encodeURIComponent(serverId || '') + '&client_group_id=' + encodeURIComponent(clientGroupId || ''), rerenderHeritageSelect]);
   }
 
   function reloadVhostDirectiveSnippets(ctx) {
@@ -1204,8 +1204,8 @@
       return heritageEndpoint(name, options.cacheBust === true);
     },
 
-    normalizeWorkbenchContentContracts: function(root) {
-      return normalizeWorkbenchContentContracts(root || document);
+    normalizeHeritageContentContracts: function(root) {
+      return normalizeHeritageContentContracts(root || document);
     },
 
     replaceServerFragment: function(host, markup) {
@@ -1351,7 +1351,7 @@
 
     onAfterContentLoad: function(url, data) {
       var host = document.getElementById('pageContent') || document;
-      normalizeWorkbenchContentContracts(host);
+      normalizeHeritageContentContracts(host);
       if (ISPConfig.options.useComboBox === true) {
         ISPConfig.enhanceSelect(queryAll(host, 'select:not(.chosen-select)'), {
           placeholder: '',
@@ -1628,7 +1628,7 @@
     'endRequest',
     'showLoadIndicator',
     'hideLoadIndicator',
-    'normalizeWorkbenchContentContracts',
+    'normalizeHeritageContentContracts',
     'activateFragmentScripts',
     'onAfterContentLoad',
     'onAfterSideNavLoaded',

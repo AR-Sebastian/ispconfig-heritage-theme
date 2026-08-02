@@ -2742,7 +2742,7 @@ body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-herit
 
 /* dashboard DONE contract.
  *
- * The dashboard is now treated as the first-class Workbench cockpit:
+ * The dashboard is now treated as the first-class Heritage cockpit:
  * independent cards, calm accent usage, browser-saved layout, accessible edit
  * controls and responsive widget-owned sizing. Accent colors are informational
  * by default; warning and danger remain reserved for real status messages.

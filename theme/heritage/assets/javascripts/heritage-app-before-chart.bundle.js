@@ -441,7 +441,7 @@
   if (window.heritageHttp) return;
 
   function HttpError(message, status, url) {
-    this.name = 'WorkbenchHttpError';
+    this.name = 'HeritageHttpError';
     this.message = message;
     this.status = status || 0;
     this.url = url || '';
@@ -450,7 +450,7 @@
   HttpError.prototype.constructor = HttpError;
 
   function normalizeFetchError(error, url) {
-    if (error && error.name === 'WorkbenchHttpError') return error;
+    if (error && error.name === 'HeritageHttpError') return error;
     if (error && error.name === 'AbortError') return error;
     if (error instanceof TypeError) return new HttpError('Network request failed.', 0, url && url.href || '');
     return error;
@@ -460,7 +460,7 @@
     if (handle && handle.aborted) return false;
     if (!error) return false;
     if (error.name === 'AbortError') return false;
-    if (error.name === 'WorkbenchHttpError' && error.status === 0) return true;
+    if (error.name === 'HeritageHttpError' && error.status === 0) return true;
     return error instanceof TypeError;
   }
 
@@ -483,7 +483,7 @@
   function sameOriginUrl(input, query) {
     var url = new URL(input, window.location.href);
     if (url.origin !== window.location.origin) {
-      throw new HttpError('Cross-origin Workbench requests are blocked.', 0, url.href);
+      throw new HttpError('Cross-origin Heritage requests are blocked.', 0, url.href);
     }
     if (query) {
       var values = typeof query === 'string' ? new URLSearchParams(query) : new URLSearchParams();
@@ -743,7 +743,7 @@
 
   function requestRuntimeJson(url, options) {
     var api = runtimeApi();
-    if (!api || typeof api.requestJson !== 'function') throw new TypeError('Workbench JSON runtime is not available.');
+    if (!api || typeof api.requestJson !== 'function') throw new TypeError('Heritage JSON runtime is not available.');
     return api.requestJson(url, options || {});
   }
 
@@ -786,7 +786,7 @@
   function setHtml(host, markup) {
     if (!host) return;
     host.innerHTML = markup || '';
-    normalizeWorkbenchContentContracts(host);
+    normalizeHeritageContentContracts(host);
     activateRuntimeFragment(host);
   }
 
@@ -834,7 +834,7 @@
     });
   }
 
-  function normalizeWorkbenchContentContracts(root) {
+  function normalizeHeritageContentContracts(root) {
     root = root || document;
     mirrorAttribute(root, '[' + HERITAGE_CONTENT_CONTRACTS.load.legacy + ']', HERITAGE_CONTENT_CONTRACTS.load.legacy, HERITAGE_CONTENT_CONTRACTS.load.native);
     mirrorAttribute(root, '[' + HERITAGE_CONTENT_CONTRACTS.template.legacy + ']', HERITAGE_CONTENT_CONTRACTS.template.legacy, HERITAGE_CONTENT_CONTRACTS.template.native);
@@ -991,7 +991,7 @@
       try {
         setVisible(selector, allowed.indexOf(value) !== -1);
       } catch (error) {
-        if (window.console && console.warn) console.warn('Invalid Workbench visibility selector:', selector, error);
+        if (window.console && console.warn) console.warn('Invalid Heritage visibility selector:', selector, error);
       }
     });
     return true;
@@ -1052,7 +1052,7 @@
     });
   }
 
-  function generateWorkbenchPassword(length) {
+  function generateHeritagePassword(length) {
     var size = Math.max(8, Number(length || 16));
     var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#%+=?';
     var values = new Uint32Array(size);
@@ -1071,7 +1071,7 @@
       if (input.getAttribute('data-heritage-default-password-initialized') === 'true') return;
       input.setAttribute('data-heritage-default-password-initialized', 'true');
       if (input.value) return;
-      input.value = generateWorkbenchPassword(input.getAttribute('data-heritage-default-password'));
+      input.value = generateHeritagePassword(input.getAttribute('data-heritage-default-password'));
     });
   }
 
@@ -1169,7 +1169,7 @@
       var selected = select.options && select.selectedIndex >= 0 ? select.options[select.selectedIndex] : null;
       var label = selected ? selected.textContent : select.value;
       var text = document.createElement('p');
-      text.className = 'form-control-static workbench-static-field';
+      text.className = 'form-control-static hg-static-field';
       text.textContent = label || select.value || '';
       var hidden = document.createElement('input');
       hidden.type = 'hidden';
@@ -1415,7 +1415,7 @@
     return request;
   }
 
-  function rerenderWorkbenchSelect(elem) {
+  function rerenderHeritageSelect(elem) {
     var select = document.getElementById(elem);
     if (select) callRuntime('enhanceSelect', [select, {}]);
   }
@@ -1423,8 +1423,8 @@
   function reloadVhostWebIp(ctx) {
     var serverId = getVhostServerId(ctx);
     var clientGroupId = ctx.clientGroupField ? ctx.clientGroupField.value : '';
-    callRuntime('loadOptionInto', ['ip_address', heritageEndpoint('sitesIpOptions') + '?ip_type=IPv4&server_id=' + encodeURIComponent(serverId || '') + '&client_group_id=' + encodeURIComponent(clientGroupId || ''), rerenderWorkbenchSelect]);
-    callRuntime('loadOptionInto', ['ipv6_address', heritageEndpoint('sitesIpOptions') + '?ip_type=IPv6&server_id=' + encodeURIComponent(serverId || '') + '&client_group_id=' + encodeURIComponent(clientGroupId || ''), rerenderWorkbenchSelect]);
+    callRuntime('loadOptionInto', ['ip_address', heritageEndpoint('sitesIpOptions') + '?ip_type=IPv4&server_id=' + encodeURIComponent(serverId || '') + '&client_group_id=' + encodeURIComponent(clientGroupId || ''), rerenderHeritageSelect]);
+    callRuntime('loadOptionInto', ['ipv6_address', heritageEndpoint('sitesIpOptions') + '?ip_type=IPv6&server_id=' + encodeURIComponent(serverId || '') + '&client_group_id=' + encodeURIComponent(clientGroupId || ''), rerenderHeritageSelect]);
   }
 
   function reloadVhostDirectiveSnippets(ctx) {
@@ -1853,8 +1853,8 @@
       return heritageEndpoint(name, options.cacheBust === true);
     },
 
-    normalizeWorkbenchContentContracts: function(root) {
-      return normalizeWorkbenchContentContracts(root || document);
+    normalizeHeritageContentContracts: function(root) {
+      return normalizeHeritageContentContracts(root || document);
     },
 
     replaceServerFragment: function(host, markup) {
@@ -2000,7 +2000,7 @@
 
     onAfterContentLoad: function(url, data) {
       var host = document.getElementById('pageContent') || document;
-      normalizeWorkbenchContentContracts(host);
+      normalizeHeritageContentContracts(host);
       if (ISPConfig.options.useComboBox === true) {
         ISPConfig.enhanceSelect(queryAll(host, 'select:not(.chosen-select)'), {
           placeholder: '',
@@ -2277,7 +2277,7 @@
     'endRequest',
     'showLoadIndicator',
     'hideLoadIndicator',
-    'normalizeWorkbenchContentContracts',
+    'normalizeHeritageContentContracts',
     'activateFragmentScripts',
     'onAfterContentLoad',
     'onAfterSideNavLoaded',
@@ -3415,18 +3415,18 @@
     });
   }
 
-  // Shared native GET transport for Workbench navigation. It deliberately
+  // Shared native GET transport for Heritage navigation. It deliberately
   // retains the small jqXHR-compatible handle expected by legacy callers.
   function requestHtml(url, data, timeout) {
     var api = runtime();
-    if (!api || typeof api.requestText !== 'function') throw new Error('Workbench runtime requestText is unavailable.');
+    if (!api || typeof api.requestText !== 'function') throw new Error('Heritage runtime requestText is unavailable.');
     return api.requestText(url || '', { query: data || null, timeout: timeout || 30000 });
   }
 
   function isSupersededRequest(request, error) {
     if (request && request.aborted) return true;
     if (error && error.name === 'AbortError') return true;
-    if (error && error.name === 'WorkbenchHttpError' && /superseded|aborted|ersetzt/i.test(error.message || '')) return true;
+    if (error && error.name === 'HeritageHttpError' && /superseded|aborted|ersetzt/i.test(error.message || '')) return true;
     return false;
   }
 
@@ -3787,7 +3787,7 @@
     bar.appendChild(meta);
     bar.appendChild(actions);
 
-    /* Native Workbench templates may publish their primary action next to the
+    /* Native Heritage templates may publish their primary action next to the
      * table so the controller contract stays untouched. Consolidate that
      * source toolbar into the generated command bar instead of rendering two
      * competing headers above one dataset. */
@@ -4324,9 +4324,9 @@
     try {
       callback();
     } catch (error) {
-      if (window.console && console.warn) console.warn('Workbench enhancement skipped: ' + label, error);
+      if (window.console && console.warn) console.warn('Heritage enhancement skipped: ' + label, error);
       var api = runtime();
-      if (api && api.reportError) api.reportError('Workbench enhancement skipped: ' + label);
+      if (api && api.reportError) api.reportError('Heritage enhancement skipped: ' + label);
     }
   }
 
@@ -5031,7 +5031,7 @@
           return;
         }
         host.setAttribute('aria-busy', 'false');
-        if (!api || typeof api.replaceServerFragment !== 'function') throw new TypeError('Workbench fragment renderer is not available.');
+        if (!api || typeof api.replaceServerFragment !== 'function') throw new TypeError('Heritage fragment renderer is not available.');
         api.replaceServerFragment(host, response);
         var loadedModule = moduleFromPageName(pagename);
         if (loadedModule) {
@@ -5118,7 +5118,7 @@
         var api = runtime();
         if (cacheKey === 'top') menuCache.top = response;
         else if (cacheKey) menuCache.side[cacheKey] = response;
-        if (!api || typeof api.replaceServerFragment !== 'function') throw new TypeError('Workbench fragment renderer is not available.');
+        if (!api || typeof api.replaceServerFragment !== 'function') throw new TypeError('Heritage fragment renderer is not available.');
         api.replaceServerFragment(host, response);
         if (cacheKey === 'top') syncPrimaryModule(host, activeModule);
         decorateNavigation(host);
@@ -5215,7 +5215,7 @@
         if (token !== refreshSequence || request.aborted) return;
         var host = document.getElementById('pageContent');
         if (window.heritageMonitoring) window.heritageMonitoring.destroy(host);
-        if (!api || typeof api.replaceServerFragment !== 'function') throw new TypeError('Workbench fragment renderer is not available.');
+        if (!api || typeof api.replaceServerFragment !== 'function') throw new TypeError('Heritage fragment renderer is not available.');
         api.replaceServerFragment(host, response);
         enhanceLoadedContent(host, pagename, 'refresh=' + interval);
         announceContentReady(host, pagename, { source: 'refresh', params: 'refresh=' + interval });
@@ -5258,7 +5258,7 @@
   };
 
   legacy.registerHook('onAfterContentLoad', function(name, params) {
-    if (params && params.__workbenchEnhanced) return;
+    if (params && params.__heritageEnhanced) return;
     if (legacy && typeof legacy.heritageEnhanceContent === 'function') {
       legacy.heritageEnhanceContent(params && params.url ? params.url : name || '', '', { source: 'legacy-after-content-hook' });
     }
@@ -5301,7 +5301,7 @@
     contentRequests[elementId] = request;
     request.promise.then(function(responseText) {
       if (contentRequests[elementId] !== request) return;
-      if (typeof api.replaceServerFragment !== 'function') throw new TypeError('Workbench fragment renderer is not available.');
+      if (typeof api.replaceServerFragment !== 'function') throw new TypeError('Heritage fragment renderer is not available.');
       api.replaceServerFragment(host, responseText);
       if (window.heritageContentStates && typeof window.heritageContentStates.enhance === 'function') {
         window.heritageContentStates.enhance(host, pageName, { source: 'partial-content' });
@@ -5814,7 +5814,7 @@
       [/^Refresh request was not successful\./, 'Die Ansicht konnte nicht aktualisiert werden.', 'The view could not be refreshed.'],
       [/^(?:(?:Side|Top) navigation|Navigation menu) request was not successful\./, 'Die Navigation konnte nicht vollständig geladen werden.', 'The navigation could not be loaded completely.'],
       [/^Session expired\./, 'Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.', 'Your session has expired. Please sign in again.'],
-      [/^Workbench enhancement skipped:/, 'Ein Teil dieser Ansicht konnte nicht vollständig dargestellt werden.', 'Part of this view could not be displayed completely.']
+      [/^Heritage enhancement skipped:/, 'Ein Teil dieser Ansicht konnte nicht vollständig dargestellt werden.', 'Part of this view could not be displayed completely.']
     ];
     for (var index = 0; index < messages.length; index += 1) {
       if (messages[index][0].test(text)) return localized(messages[index][1], messages[index][2]);
@@ -5976,7 +5976,7 @@
     return moduleFromTarget(canonical);
   }
 
-  function setWorkbenchModule(module, options) {
+  function setHeritageModule(module, options) {
     if (!runtime()) return '';
     var nextModule = normalizeModule(module);
     if (!nextModule) return '';
@@ -6249,7 +6249,7 @@
     var declared = (document.documentElement.lang || '').toLowerCase();
     var primary = document.querySelector('#main-navigation');
     var footer = document.querySelector('.hg-app-navigation__footer');
-    return declared.indexOf('de') === 0 || /\u00fcbersicht|kunden|webseiten|\u00fcberwachung|einstellungen/i.test(primary ? primary.textContent : '') || /ispconfig workbench/i.test(footer ? footer.textContent : '');
+    return declared.indexOf('de') === 0 || /\u00fcbersicht|kunden|webseiten|\u00fcberwachung|einstellungen/i.test(primary ? primary.textContent : '') || /ispconfig heritage/i.test(footer ? footer.textContent : '');
   }
 
   function navigationResource(link, suffix) {
@@ -6591,7 +6591,7 @@
 
   function loadDashboardFromNavigation() {
     var api = runtime();
-    setWorkbenchModule('dashboard', { resetUserCollapsed: true });
+    setHeritageModule('dashboard', { resetUserCollapsed: true });
     currentPageTarget = dashboardTarget;
     pendingModule = null;
     render();
@@ -6804,7 +6804,7 @@
         setModuleSubmenuExpanded(link, nextExpanded);
         if (nextExpanded) {
           pendingModule = module;
-          setWorkbenchModule(module, { resetUserCollapsed: false });
+          setHeritageModule(module, { resetUserCollapsed: false });
         }
         return;
       }
@@ -6813,7 +6813,7 @@
         return;
       }
       pendingModule = module;
-      setWorkbenchModule(module, { resetUserCollapsed: true });
+      setHeritageModule(module, { resetUserCollapsed: true });
       var api = runtime();
       syncActiveNavigationState(pendingModule + '/');
       render();
@@ -6836,7 +6836,7 @@
       var targetModule = moduleFromTarget(target);
       var api = runtime();
       if (targetModule && api) {
-        setWorkbenchModule(targetModule, { resetUserCollapsed: true });
+        setHeritageModule(targetModule, { resetUserCollapsed: true });
       }
       syncActiveNavigationState(target);
     }
@@ -7282,7 +7282,8 @@
 (function () {
   'use strict';
 
-  var STORAGE_KEY = 'ispconfig-workbench.dashboard.layout.v7';
+  var STORAGE_KEY = 'ispconfig-heritage.dashboard.layout.v7';
+  var LEGACY_STORAGE_KEY = 'ispconfig-workbench.dashboard.layout.v7';
   // V2 retires persisted row-spanning layouts that could turn quota and
   // statistics widgets into a single extremely tall grid track after login.
   // The storage key stays stable; the revision deliberately resets only the
@@ -7401,7 +7402,10 @@
 
   function readLayout() {
     try {
-      var stored = JSON.parse(window.localStorage.getItem(STORAGE_KEY) || '{}');
+      var serialized = window.localStorage.getItem(STORAGE_KEY) || window.localStorage.getItem(LEGACY_STORAGE_KEY) || '{}';
+      if (!window.localStorage.getItem(STORAGE_KEY) && serialized !== '{}') window.localStorage.setItem(STORAGE_KEY, serialized);
+      window.localStorage.removeItem(LEGACY_STORAGE_KEY);
+      var stored = JSON.parse(serialized);
       return stored && stored.__revision === LAYOUT_REVISION ? stored : {};
     }
     catch (error) { return {}; }
@@ -8429,7 +8433,10 @@
         reset.dataset.heritageConfirm = 'false';
         reset.classList.remove('hg-dashboard-layout-reset--armed');
         reset.textContent = t('resetLayout');
-        try { window.localStorage.removeItem(STORAGE_KEY); } catch (error) { /* ignore */ }
+        try {
+          window.localStorage.removeItem(STORAGE_KEY);
+          window.localStorage.removeItem(LEGACY_STORAGE_KEY);
+        } catch (error) { /* ignore */ }
         dashlets(host).sort(function (a, b) {
           return Number(a.dataset.heritageDefaultOrder || 0) - Number(b.dataset.heritageDefaultOrder || 0);
         }).forEach(function (node) {
@@ -10179,7 +10186,7 @@
   document.addEventListener('heritage:navigation-complete', function (event) {
     decorate(event.detail && event.detail.root ? event.detail.root : document.getElementById('pageContent'));
   });
-  window.WorkbenchAdvancedControls = { decorate: decorate };
+  window.HeritageAdvancedControls = { decorate: decorate };
 })();
 
 /* source: heritage-upload-feedback.js */

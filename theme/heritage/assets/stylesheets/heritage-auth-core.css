@@ -473,7 +473,7 @@ html[data-heritage-theme='dark'] .hg-login-badge { color: color-mix(in srgb, var
  * Some failed-login responses expose the old `.box_error` surface directly
  * instead of nesting it inside `.alert`. That path could still show a giant
  * browser placeholder or SVG triangle. Treat every legacy feedback box inside
- * the modern login form as text-only feedback and let Workbench draw the icon.
+ * the modern login form as text-only feedback and let Heritage draw the icon.
  */
 .hg-login-form-surface > :where(
   .box,

@@ -1,9 +1,9 @@
 /*
- * structural Workbench markup boundary.
+ * structural Heritage markup boundary.
  *
  * ISPConfig and optional extensions still emit a small server-rendered markup
  * vocabulary. This file supplies structure only; every visual decision still lives
- * in the later Workbench surface, form, list, module and content layers.
+ * in the later Heritage surface, form, list, module and content layers.
  */
 
 body.hg-app-navigation-enabled { overflow-x: clip; overflow-y: auto; }

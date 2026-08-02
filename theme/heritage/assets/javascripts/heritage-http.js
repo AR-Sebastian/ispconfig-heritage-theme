@@ -4,7 +4,7 @@
   if (window.heritageHttp) return;
 
   function HttpError(message, status, url) {
-    this.name = 'WorkbenchHttpError';
+    this.name = 'HeritageHttpError';
     this.message = message;
     this.status = status || 0;
     this.url = url || '';
@@ -13,7 +13,7 @@
   HttpError.prototype.constructor = HttpError;
 
   function normalizeFetchError(error, url) {
-    if (error && error.name === 'WorkbenchHttpError') return error;
+    if (error && error.name === 'HeritageHttpError') return error;
     if (error && error.name === 'AbortError') return error;
     if (error instanceof TypeError) return new HttpError('Network request failed.', 0, url && url.href || '');
     return error;
@@ -23,7 +23,7 @@
     if (handle && handle.aborted) return false;
     if (!error) return false;
     if (error.name === 'AbortError') return false;
-    if (error.name === 'WorkbenchHttpError' && error.status === 0) return true;
+    if (error.name === 'HeritageHttpError' && error.status === 0) return true;
     return error instanceof TypeError;
   }
 
@@ -46,7 +46,7 @@
   function sameOriginUrl(input, query) {
     var url = new URL(input, window.location.href);
     if (url.origin !== window.location.origin) {
-      throw new HttpError('Cross-origin Workbench requests are blocked.', 0, url.href);
+      throw new HttpError('Cross-origin Heritage requests are blocked.', 0, url.href);
     }
     if (query) {
       var values = typeof query === 'string' ? new URLSearchParams(query) : new URLSearchParams();

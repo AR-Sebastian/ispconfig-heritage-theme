@@ -150,7 +150,7 @@ textarea:focus-visible,
 #pageContent:focus { outline: none; }
 #content { padding: 24px; }
 
-/* Workbench owns visual theming without default theme.min.css. */
+/* Heritage owns visual theming without default theme.min.css. */
 body.hg-app-navigation-enabled {
   color: var(--hg-text);
   background: var(--hg-canvas);

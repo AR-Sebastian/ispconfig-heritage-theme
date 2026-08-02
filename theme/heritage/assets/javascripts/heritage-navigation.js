@@ -106,7 +106,7 @@
     return moduleFromTarget(canonical);
   }
 
-  function setWorkbenchModule(module, options) {
+  function setHeritageModule(module, options) {
     if (!runtime()) return '';
     var nextModule = normalizeModule(module);
     if (!nextModule) return '';
@@ -379,7 +379,7 @@
     var declared = (document.documentElement.lang || '').toLowerCase();
     var primary = document.querySelector('#main-navigation');
     var footer = document.querySelector('.hg-app-navigation__footer');
-    return declared.indexOf('de') === 0 || /\u00fcbersicht|kunden|webseiten|\u00fcberwachung|einstellungen/i.test(primary ? primary.textContent : '') || /ispconfig workbench/i.test(footer ? footer.textContent : '');
+    return declared.indexOf('de') === 0 || /\u00fcbersicht|kunden|webseiten|\u00fcberwachung|einstellungen/i.test(primary ? primary.textContent : '') || /ispconfig heritage/i.test(footer ? footer.textContent : '');
   }
 
   function navigationResource(link, suffix) {
@@ -721,7 +721,7 @@
 
   function loadDashboardFromNavigation() {
     var api = runtime();
-    setWorkbenchModule('dashboard', { resetUserCollapsed: true });
+    setHeritageModule('dashboard', { resetUserCollapsed: true });
     currentPageTarget = dashboardTarget;
     pendingModule = null;
     render();
@@ -934,7 +934,7 @@
         setModuleSubmenuExpanded(link, nextExpanded);
         if (nextExpanded) {
           pendingModule = module;
-          setWorkbenchModule(module, { resetUserCollapsed: false });
+          setHeritageModule(module, { resetUserCollapsed: false });
         }
         return;
       }
@@ -943,7 +943,7 @@
         return;
       }
       pendingModule = module;
-      setWorkbenchModule(module, { resetUserCollapsed: true });
+      setHeritageModule(module, { resetUserCollapsed: true });
       var api = runtime();
       syncActiveNavigationState(pendingModule + '/');
       render();
@@ -966,7 +966,7 @@
       var targetModule = moduleFromTarget(target);
       var api = runtime();
       if (targetModule && api) {
-        setWorkbenchModule(targetModule, { resetUserCollapsed: true });
+        setHeritageModule(targetModule, { resetUserCollapsed: true });
       }
       syncActiveNavigationState(target);
     }

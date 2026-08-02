@@ -153,7 +153,7 @@ textarea:focus-visible,
 #pageContent:focus { outline: none; }
 #content { padding: 24px; }
 
-/* Workbench owns visual theming without default theme.min.css. */
+/* Heritage owns visual theming without default theme.min.css. */
 body.hg-app-navigation-enabled {
   color: var(--hg-text);
   background: var(--hg-canvas);
@@ -164,11 +164,11 @@ body.hg-app-navigation-enabled .green { color: var(--hg-success-ink); }
 
 /* source: heritage-structure-core.css */
 /*
- * structural Workbench markup boundary.
+ * structural Heritage markup boundary.
  *
  * ISPConfig and optional extensions still emit a small server-rendered markup
  * vocabulary. This file supplies structure only; every visual decision still lives
- * in the later Workbench surface, form, list, module and content layers.
+ * in the later Heritage surface, form, list, module and content layers.
  */
 
 body.hg-app-navigation-enabled { overflow-x: clip; overflow-y: auto; }
@@ -411,7 +411,7 @@ body.hg-app-navigation-enabled #inner-wrapper {
   flex-direction: column;
 }
 
-/* The permission-filtered native menus stay available to the Workbench
+/* The permission-filtered native menus stay available to the Heritage
  * controller but never create a second visible navigation surface. */
 body.hg-app-navigation-enabled #topnav-container,
 body.hg-app-navigation-enabled #main-navigation,
@@ -1087,7 +1087,7 @@ body.hg-app-navigation-enabled .hg-module-transition { position: absolute; width
  *
  * This final guard catches intermediate viewport states where old Bootstrap
  * widths, native controls or injected module content would otherwise push the
- * Workbench shell wider than the visible page. The only intentional horizontal
+ * Heritage shell wider than the visible page. The only intentional horizontal
  * scroll owner is a bounded table workspace. */
 html:has(body.hg-app-navigation-enabled),
 body.hg-app-navigation-enabled {
@@ -1147,7 +1147,7 @@ body.hg-app-navigation-enabled :where(.dropdown-menu, .hg-owned-enhanced-select_
 
 /* remove the remaining "between states".
  *
- * The Workbench shell has one account surface: the navigation footer. Header
+ * The Heritage shell has one account surface: the navigation footer. Header
  * identity fragments, legacy logout buttons and late module account snippets
  * are treated as data leaks from the old UI and are suppressed globally. */
 body.hg-app-navigation-enabled :where(
@@ -1218,7 +1218,7 @@ body.hg-app-navigation-enabled .hg-app-navigation__footer {
 /* deterministic navigation groups.
  *
  * The secondary navigation is no longer an old sidebar list hidden inside the
- * new shell. Groups look and behave like a first-class part of the Workbench
+ * new shell. Groups look and behave like a first-class part of the Heritage
  * navigation: groups are calm section labels, not interactive accordions.
  * Links and adjacent quick actions carry the interaction weight; the groups
  * simply structure the module like a premium, always-readable drawer. */
@@ -1438,7 +1438,7 @@ body.hg-app-navigation-enabled .hg-app-navigation__user > :where(strong, small) 
 }
 
 /* final navigation authority.
- * One final block owns the visible Workbench navigation contract. Main modules
+ * One final block owns the visible Heritage navigation contract. Main modules
  * may disclose or hide their submenu. Submenu groups are static dividers, not
  * nested accordions. This replaces the previous late override
  * split with one deterministic navigation endpoint.
@@ -1983,7 +1983,7 @@ body.hg-app-navigation-enabled .hg-global-search-results {
 
 /* navigation DONE contract.
  *
- * The final Workbench navigation is a single left-axis product surface:
+ * The final Heritage navigation is a single left-axis product surface:
  * - primary modules may disclose one submenu;
  * - secondary group labels are static section dividers;
  * - quick actions live on the right edge of a row;
@@ -2148,9 +2148,9 @@ body.hg-app-navigation-enabled .hg-mobile-navigation__quick-action {
  * authoritative authenticated surface layer.
  *
  * ISPConfig still renders a mixture of legacy Bootstrap-era components and
- * newer Workbench components. This last-loaded layer maps their presentation
- * to the Workbench tokens without changing markup, values or behaviour.
- * Keep every rule below scoped to the authenticated Workbench application.
+ * newer Heritage components. This last-loaded layer maps their presentation
+ * to the Heritage tokens without changing markup, values or behaviour.
+ * Keep every rule below scoped to the authenticated Heritage application.
  */
 
 body.hg-app-navigation-enabled {
@@ -3077,7 +3077,7 @@ body.hg-app-navigation-enabled .tab-content > .tab-pane { min-width: 0; }
 /* residual contrast and legacy-surface convergence.
  *
  * Some rarely visited ISPConfig and addon screens still emit Bootstrap-era
- * surfaces after the main Workbench decorators have run. This guard keeps
+ * surfaces after the main Heritage decorators have run. This guard keeps
  * those fragments readable in both themes without changing their behaviour or
  * persisted values. */
 body.hg-app-navigation-enabled #pageContent :where(
@@ -3210,7 +3210,7 @@ html[data-heritage-theme='dark'] body.hg-app-navigation-enabled #pageContent :wh
  *
  * The old UI still emits gradients, text shadows and white table fragments in
  * several modules and addons. This layer does not change behaviour; it only
- * forces those fragments back onto the Workbench token system so light and
+ * forces those fragments back onto the Heritage token system so light and
  * dark themes remain readable. */
 body.hg-app-navigation-enabled #pageContent :where(
   .table,
@@ -3363,7 +3363,7 @@ body.hg-app-navigation-enabled .hg-svg-icon > svg {
  *
  * Some ISPConfig pages and addons still arrive with old Bootstrap/default-theme
  * fragments after Ajax navigation. This final surface guard deliberately stays
- * scoped to the authenticated Workbench shell and converts those fragments back
+ * scoped to the authenticated Heritage shell and converts those fragments back
  * to token driven light/dark surfaces. It is presentation-only: no form names,
  * request targets, permissions or server actions are changed. */
 body.hg-app-navigation-enabled #pageContent :where(
@@ -3650,7 +3650,7 @@ body.hg-app-navigation-enabled .alert-info {
 /* runtime-owned residual surface quarantine.
  * Dynamic ISPConfig fragments can still emit Bootstrap-era panels, overlays,
  * compound controls and inline bright surfaces. The runtime now marks those
- * fragments explicitly; this layer gives them one Workbench-owned visual
+ * fragments explicitly; this layer gives them one Heritage-owned visual
  * contract instead of relying on page-specific patch selectors. */
 body.hg-app-navigation-enabled #pageContent :where(
   .hg-owned-surface,
@@ -3729,7 +3729,7 @@ body.hg-app-navigation-enabled #pageContent :where(.hg-owned-control-cluster > .
 }
 
 /* semantic bridge for residual Select2/Chosen fragments.
- * The Workbench runtime marks old enhanced-select markup with these classes so
+ * The Heritage runtime marks old enhanced-select markup with these classes so
  * vendor selectors can be retired without losing readable, premium controls. */
 body.hg-app-navigation-enabled #pageContent :where(.hg-owned-enhanced-select) {
   display: inline-block;
@@ -4530,7 +4530,7 @@ body.hg-app-navigation-enabled.hg-monitor-page .hg-monitor-chart__details dt {
 /* specialty V1 premium convergence.
  *
  * Extensions, reports and help lists share the same hierarchy as native
- * Workbench lists. Specialty context remains visible, while duplicate
+ * Heritage lists. Specialty context remains visible, while duplicate
  * headings and decorative accent surfaces no longer compete with the data.
  */
 body.hg-app-navigation-enabled #pageContent .hg-extension-hero {
@@ -4641,7 +4641,7 @@ body.hg-app-navigation-enabled #pageContent [data-heritage-support-surface] + p:
  *
  * Monitoring, statistics and Extension Installer pages are generated outside
  * the normal list/form pipeline. This final scoped layer makes their heroes,
- * metadata, filters and action rows feel like one Premium Workbench surface
+ * metadata, filters and action rows feel like one Premium Heritage surface
  * without taking ownership of controller behaviour. */
 body.hg-app-navigation-enabled #pageContent :where(.hg-specialty-workspace, .hg-extension-workspace, .hg-monitor-workspace, .hg-statistics-workspace) {
   inline-size: min(100%, var(--hg-content-max, 1480px));
@@ -4947,7 +4947,7 @@ body.hg-list-page .hg-list-command-bar__primary:focus-visible {
 /* premium table completion pass.
  *
  * Tables are one of the oldest rendered surfaces in ISPConfig. This final
- * list layer makes the shared Workbench treatment explicit: calm command
+ * list layer makes the shared Heritage treatment explicit: calm command
  * bars, readable filter panels, compact page-size overlays, stronger empty
  * states and predictable action columns without touching module behaviour.
  */
@@ -6561,7 +6561,7 @@ html[data-heritage-theme='dark'] body.hg-list-page :where(.hg-owned-enhanced-sel
 /* premium list control docking and resize stability.
  *
  * Real list pages still expose many old table/control combinations. The
- * Workbench now treats the command bar, table scroller, page-size picker and
+ * Heritage now treats the command bar, table scroller, page-size picker and
  * table controls as one docked workspace so resize states do not reveal detached
  * legacy controls.
  */
@@ -6882,7 +6882,7 @@ html[data-heritage-theme='dark'] body.hg-list-page .hg-page-size-select {
  * Tables can be much wider than the viewport, but their controls must not feel
  * trapped inside the scrollable grid. This late layer keeps command actions,
  * filter controls and page-size selection visually attached while the footer remains table-owned
- * to the list workspace while preventing native/Workbench dropdown panels from
+ * to the list workspace while preventing native/Heritage dropdown panels from
  * being clipped by table overflow.
  */
 body.hg-list-page #pageContent > .hg-list-command-bar {
@@ -6974,9 +6974,9 @@ body.hg-list-page #pageContent :where(.hg-control--filter-reset, .hg-control--fi
 }
 
 /* source: heritage-tables-core.css */
-/* Workbench Premium Tables
+/* Heritage Premium Tables
  *
- * This file is the new table authority for authenticated Workbench pages.
+ * This file is the new table authority for authenticated Heritage pages.
  * This layer owns the visible table workspace: command bar, filter row,
  * viewport, compact record cards, empty state, row actions and footer
  * pagination. heritage-lists-core.css may still normalize old ISPConfig markup,
@@ -7370,7 +7370,7 @@ html[data-heritage-theme='dark'] body.hg-list-page #pageContent .hg-table-footer
 
 /* final table surface authority.
  *
- * Tables are now a first-class Workbench surface. The older list stylesheet
+ * Tables are now a first-class Heritage surface. The older list stylesheet
  * may still bridge ISPConfig's legacy markup into stable classes, but all
  * visible table decisions live here: command bar, filters, viewport, rows,
  * actions, empty states, pagination and responsive record cards.
@@ -7575,7 +7575,7 @@ html[data-heritage-theme='dark'] body.hg-list-page .hg-table-workspace .hg-data-
  * its command deck, scroll boundary, footer and responsive card conversion.
  * Legacy list CSS may still normalize incoming ISPConfig markup, but it must
  * not leak old white surfaces, oversized dropdowns or document-level overflow
- * back into Workbench screens.
+ * back into Heritage screens.
  */
 body.hg-list-page .hg-table-workspace--finalized {
   inline-size: min(100%, var(--hg-content-measure, 100%));
@@ -8448,7 +8448,7 @@ body.hg-list-page .hg-table-workspace--finalized > .hg-table-viewport--empty + .
  * Runtime remnants that still appear after module scripts run are table
  * concerns. Lists may provide command bars and filters, but naked table
  * wrappers, residual inline geometry and Bootstrap-era pagination are kept
- * inside the same table authority as the finalized Workbench tables.
+ * inside the same table authority as the finalized Heritage tables.
  */
 body.hg-list-page #pageContent :where(.table-wrapper, .table-responsive, .hg-table-wrapper--runtime) {
   max-inline-size: 100%;
@@ -9357,7 +9357,7 @@ body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm) :where(
  *
  * Some module pages still inject Bootstrap-era panels, wells, tab panes and
  * muted labels inside the modern form. These elements must inherit the
- * Workbench semantic surface instead of carrying pale text on pale backgrounds
+ * Heritage semantic surface instead of carrying pale text on pale backgrounds
  * or white panels inside dark mode. */
 body.hg-form-page #pageForm.hg-modern-form :where(
   .panel,
@@ -9591,7 +9591,7 @@ html[data-heritage-theme='dark'] body.hg-app-navigation-enabled :where(.form-hor
  * A few rarely used ISPConfig and addon templates still ship inline white text,
  * pale table cells or white background snippets. This guard catches those
  * fragments only inside authenticated form workspaces and maps them back to
- * the active Workbench tokens, so light and dark modes stay readable during
+ * the active Heritage tokens, so light and dark modes stay readable during
  * the migration away from old Bootstrap-era markup. */
 body.hg-app-navigation-enabled :where(.form-horizontal, #pageForm, .pnl_formsarea, .tab-content, .tab-pane) :where(
   [style*='color: #fff'],
@@ -9659,7 +9659,7 @@ html[data-heritage-theme='dark'] body.hg-app-navigation-enabled :where(.form-hor
 /* premium form density pass.
  *
  * Long ISPConfig settings pages are generated from legacy form definitions and
- * can otherwise feel like stretched tables. This final Workbench layer keeps
+ * can otherwise feel like stretched tables. This final Heritage layer keeps
  * the backend contract untouched while making those forms denser, clearer and
  * more product-like in light and dark themes. */
 body.hg-form-page #pageForm.hg-modern-form {
@@ -9831,7 +9831,7 @@ html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :whe
  *
  * The remaining ISPConfig pages are a mixture of generated form rows,
  * Bootstrap fragments and addon widgets. This pass makes those fragments use
- * Workbench tokens by default, so old light/dark leftovers do not punch holes
+ * Heritage tokens by default, so old light/dark leftovers do not punch holes
  * into the premium interface while backend templates are still being migrated.
  */
 body.hg-form-page #pageForm.hg-modern-form :where(
@@ -10083,7 +10083,7 @@ html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :whe
  *
  * Real ISPConfig forms and add-ons still emit a mix of legacy tables,
  * Bootstrap rows, inline helpers and old enhanced-select markup. This final
- * scoped layer makes Workbench own those surfaces consistently in light and
+ * scoped layer makes Heritage own those surfaces consistently in light and
  * dark mode without touching the default theme. */
 body.hg-form-page #pageForm.hg-modern-form :where(
   table,
@@ -10240,7 +10240,7 @@ body.hg-form-page #pageForm.hg-modern-form :where(
  * After the navigation and dashboard conversion the remaining visual defects
  * are mostly generated module forms: nested Bootstrap panels, old table-based
  * form layouts, add-on snippets and inline white fragments. This layer keeps
- * those fragments inside the Workbench card system, especially in dark mode
+ * those fragments inside the Heritage card system, especially in dark mode
  * and during live resizing. */
 body.hg-form-page #pageForm.hg-modern-form :where(
   .content-tab-wrapper,
@@ -10514,7 +10514,7 @@ html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form .hg-
  * This is the late authority layer for generated ISPConfig forms. It keeps
  * all server-rendered controls and submissions intact, but makes the form
  * shell, tabs, labels, native fields, branding manager and action shelf read
- * as one deliberate Workbench workspace in both light and dark themes.
+ * as one deliberate Heritage workspace in both light and dark themes.
  */
 body.hg-form-page #pageContent {
   --hg-form-label-fluid: clamp(9.5rem, 18cqi, 15rem);
@@ -12171,7 +12171,7 @@ body.hg-form-page #pageForm.hg-modern-form .hg-identity-summary li {
 
 /* form authority pass.
  *
- * ISPConfig forms still arrive from many old templates. The modern Workbench
+ * ISPConfig forms still arrive from many old templates. The modern Heritage
  * layer now provides a final contrast and geometry floor so white-on-white or
  * dark-on-dark form fragments cannot reappear while individual templates are
  * being retired.
@@ -12326,7 +12326,7 @@ html[data-heritage-theme='dark'] body.hg-form-page #pageForm.hg-modern-form :whe
  *
  * The old template stack can still expose browser-native option lists,
  * disabled rows, add-on dropdowns and generated action bars. This layer gives
- * those surfaces the same token contract as the rest of the Premium Workbench
+ * those surfaces the same token contract as the rest of the Premium Heritage
  * without reintroducing plugin-specific JavaScript or legacy Bootstrap chrome.
  */
 body.hg-form-page #pageForm.hg-modern-form :where(select, option, optgroup) {
@@ -12985,7 +12985,7 @@ html[data-heritage-theme='light'] body.hg-form-page #pageForm.hg-modern-form[dat
  * This is the broad guardrail for generated masks after the real-form pass:
  * Bootstrap wells/panels, legacy form tables, Select2/Chosen search boxes,
  * dropdowns, popovers, tooltips, datepickers, jQuery UI widgets and progress
- * strips must use Workbench surfaces in both themes.
+ * strips must use Heritage surfaces in both themes.
  */
 body.hg-form-page #pageForm.hg-modern-form[data-heritage-form-finalized='true'] :where(
   .well,
@@ -13272,7 +13272,7 @@ body.hg-app-navigation-enabled .hg-jail-symbol svg {
 
 /* form surface finalization.
  *
- * Detail masks now finish as one premium Workbench surface. This block is the
+ * Detail masks now finish as one premium Heritage surface. This block is the
  * final visual owner for form cards, tab strips, field rows, native controls,
  * compound controls, embedded legacy panels/tables and the sticky action dock.
  */
@@ -13480,7 +13480,7 @@ html[data-heritage-theme='light'] body.hg-form-page #pageForm.hg-modern-form[dat
  *
  * High-risk detail masks no longer borrow accidental layout from generic
  * Bootstrap-era forms. Branding/System Config, billing, extensions, technical
- * text, uploads and wide configuration fields receive explicit Workbench
+ * text, uploads and wide configuration fields receive explicit Heritage
  * composition on top of the finalized form base.
  */
 body.hg-form-page:is(
@@ -18036,7 +18036,7 @@ body.hg-dashboard-page #pageContent.hg-dashboard-layout > .hg-dashlet[data-herit
 
 /* dashboard DONE contract.
  *
- * The dashboard is now treated as the first-class Workbench cockpit:
+ * The dashboard is now treated as the first-class Heritage cockpit:
  * independent cards, calm accent usage, browser-saved layout, accessible edit
  * controls and responsive widget-owned sizing. Accent colors are informational
  * by default; warning and danger remain reserved for real status messages.
@@ -18971,7 +18971,7 @@ body.heritage-shell.hg-form-page #pageForm.hg-modern-form :is(
 /* ISPConfig HERITAGE
  *
  * Detail-workspace primitives for real ISPConfig forms. The selectors enhance
- * existing semantic markup and progressive Workbench classes only.
+ * existing semantic markup and progressive Heritage classes only.
  */
 
 body.heritage-shell.hg-form-page #pageContent .breadcrumb {
@@ -19715,7 +19715,7 @@ body.heritage-shell.hg-app-navigation-enabled #pageContent :is(
 /* source: heritage-tables.css */
 /* ISPConfig HERITAGE — table-system authority.
  *
- * The shared Workbench adapters provide semantics and lifecycle behavior.
+ * The shared Heritage adapters provide semantics and lifecycle behavior.
  * This layer owns the Heritage composition only: command bar, filter row,
  * records, actions, empty states, pagination and responsive record cards.
  */

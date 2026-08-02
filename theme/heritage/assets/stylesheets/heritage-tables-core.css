@@ -1,6 +1,6 @@
-/* Workbench Premium Tables
+/* Heritage Premium Tables
  *
- * This file is the new table authority for authenticated Workbench pages.
+ * This file is the new table authority for authenticated Heritage pages.
  * This layer owns the visible table workspace: command bar, filter row,
  * viewport, compact record cards, empty state, row actions and footer
  * pagination. heritage-lists-core.css may still normalize old ISPConfig markup,
@@ -394,7 +394,7 @@ html[data-heritage-theme='dark'] body.hg-list-page #pageContent .hg-table-footer
 
 /* final table surface authority.
  *
- * Tables are now a first-class Workbench surface. The older list stylesheet
+ * Tables are now a first-class Heritage surface. The older list stylesheet
  * may still bridge ISPConfig's legacy markup into stable classes, but all
  * visible table decisions live here: command bar, filters, viewport, rows,
  * actions, empty states, pagination and responsive record cards.
@@ -599,7 +599,7 @@ html[data-heritage-theme='dark'] body.hg-list-page .hg-table-workspace .hg-data-
  * its command deck, scroll boundary, footer and responsive card conversion.
  * Legacy list CSS may still normalize incoming ISPConfig markup, but it must
  * not leak old white surfaces, oversized dropdowns or document-level overflow
- * back into Workbench screens.
+ * back into Heritage screens.
  */
 body.hg-list-page .hg-table-workspace--finalized {
   inline-size: min(100%, var(--hg-content-measure, 100%));
@@ -1472,7 +1472,7 @@ body.hg-list-page .hg-table-workspace--finalized > .hg-table-viewport--empty + .
  * Runtime remnants that still appear after module scripts run are table
  * concerns. Lists may provide command bars and filters, but naked table
  * wrappers, residual inline geometry and Bootstrap-era pagination are kept
- * inside the same table authority as the finalized Workbench tables.
+ * inside the same table authority as the finalized Heritage tables.
  */
 body.hg-list-page #pageContent :where(.table-wrapper, .table-responsive, .hg-table-wrapper--runtime) {
   max-inline-size: 100%;
