@@ -10,7 +10,7 @@
   <meta name='description' lang='en' content='' />
   <meta name='keywords' lang='en' content='' />
   <meta name='robots' content='noindex, nofollow' />
-  <meta name='workbench-language-probe' content="<tmpl_var name='logout_txt'>|<tmpl_var name='globalsearch_searchfield_watermark_txt'>" />
+  <meta name='heritage-language-probe' content="<tmpl_var name='logout_txt'>|<tmpl_var name='globalsearch_searchfield_watermark_txt'>" />
 
   <link rel='apple-touch-icon' href='/themes/heritage/assets/images/ispconfig-heritage-favicon.svg?ver=1.0.34'>
   <link rel='icon' type='image/svg+xml' href='/themes/heritage/assets/images/ispconfig-heritage-favicon.svg?ver=1.0.34'>
@@ -27,7 +27,7 @@
 
 <body class='wb-app-navigation-enabled' data-heritage-filter-reset="Reset filters" data-heritage-filter-reset-active="Reset active filters" data-heritage-search-clear="Clear search" data-heritage-filter-toggle="Toggle filters" data-heritage-filter-show="Show filters" data-heritage-filter-hide="Hide filters" data-heritage-pagination="Pagination" data-heritage-pagination-page="Page" data-heritage-pagination-summary="Page {current} of {total}" data-heritage-list-visible-results="{count} items on this page" data-heritage-table-actions="Actions" data-heritage-tab-change-discard="<tmpl_var name='tabchange_discard_enabled'>" data-heritage-tab-change-warning="<tmpl_var name='tabchange_warning_enabled'>" data-heritage-tab-change-warning-text="<tmpl_var name='global_tabchange_warning_txt'>" data-heritage-tab-change-discard-text="<tmpl_var name='global_tabchange_discard_txt'>" data-heritage-use-load-indicator="<tmpl_if name='use_loadindicator' value='y'>true<tmpl_else>false</tmpl_if>" data-heritage-use-combobox="<tmpl_if name='use_combobox' value='y'>true<tmpl_else>false</tmpl_if>">
   <a class='wb-skip-link' href='#pageContent' data-heritage-i18n-de='Zum Hauptinhalt springen' data-heritage-i18n-en='Skip to main content'>Skip to main content</a>
-  <div id='workbench-mobile-navigation' class='wb-mobile-navigation' role='dialog' aria-modal='true' aria-label='Open navigation' data-heritage-i18n-aria-label-de='Navigation öffnen' data-heritage-i18n-aria-label-en='Open navigation' aria-hidden='true'>
+  <div id='heritage-mobile-navigation' class='wb-mobile-navigation' role='dialog' aria-modal='true' aria-label='Open navigation' data-heritage-i18n-aria-label-de='Navigation öffnen' data-heritage-i18n-aria-label-en='Open navigation' aria-hidden='true'>
     <div class='wb-mobile-navigation__header'>
       <strong data-heritage-i18n-de='Navigation öffnen' data-heritage-i18n-en='Open navigation'>Open navigation</strong>
       <button type='button' class='wb-mobile-navigation__close' aria-label='{tmpl_var name="datalog_changes_close_txt"}'>&times;</button>
@@ -46,7 +46,7 @@
       <div id='inner-wrapper'>
         <div class='clear'>
           <div class='left clear'>
-            <button type='button' class='menu-btn left' aria-label='Open navigation' data-heritage-i18n-aria-label-de='Navigation öffnen' data-heritage-i18n-aria-label-en='Open navigation' aria-controls='workbench-mobile-navigation' aria-expanded='false'>&#9776;</button>
+            <button type='button' class='menu-btn left' aria-label='Open navigation' data-heritage-i18n-aria-label-de='Navigation öffnen' data-heritage-i18n-aria-label-en='Open navigation' aria-controls='heritage-mobile-navigation' aria-expanded='false'>&#9776;</button>
             <!-- logo -->
             <div id='logo' style="background: url({tmpl_var name="base64_logo_txt"}) no-repeat;width:{tmpl_var name="base64_logo_width"};height:{tmpl_var name="base64_logo_height"}"><a href='#'></a></div>
           </div>
@@ -96,14 +96,14 @@
 			  </div>
 			</div>
 			<!-- END native datalog dialog -->
-			<div id="workbenchTabChangeDialog" class="wb-dialog wb-tab-change-dialog" role="dialog" aria-modal="true" aria-labelledby="workbenchTabChangeDialogTitle" aria-describedby="workbenchTabChangeDialogMessage" aria-hidden="true" tabindex="-1" hidden data-warning-message="This page contains unsaved changes." data-discard-message="Discard the unsaved changes and continue?">
+			<div id="heritageTabChangeDialog" class="wb-dialog wb-tab-change-dialog" role="dialog" aria-modal="true" aria-labelledby="heritageTabChangeDialogTitle" aria-describedby="heritageTabChangeDialogMessage" aria-hidden="true" tabindex="-1" hidden data-warning-message="This page contains unsaved changes." data-discard-message="Discard the unsaved changes and continue?">
 			  <button type="button" class="wb-dialog__backdrop" data-heritage-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}" tabindex="-1"></button>
 			  <div class="wb-dialog__surface" role="document">
 			    <div class="wb-dialog__header">
-			      <h2 class="wb-dialog__title" id="workbenchTabChangeDialogTitle" data-heritage-i18n-de="Ungespeicherte Änderungen" data-heritage-i18n-en="Unsaved changes">Unsaved changes</h2>
+			      <h2 class="wb-dialog__title" id="heritageTabChangeDialogTitle" data-heritage-i18n-de="Ungespeicherte Änderungen" data-heritage-i18n-en="Unsaved changes">Unsaved changes</h2>
 			      <button type="button" class="wb-dialog__close" data-heritage-dialog-close aria-label="{tmpl_var name='datalog_changes_close_txt'}">&times;</button>
 			    </div>
-			    <div class="wb-dialog__body"><p id="workbenchTabChangeDialogMessage" data-heritage-tab-confirm-message></p></div>
+			    <div class="wb-dialog__body"><p id="heritageTabChangeDialogMessage" data-heritage-tab-confirm-message></p></div>
 			    <div class="wb-dialog__footer">
 			      <button type="button" class="wb-dialog__action wb-dialog__action--secondary" data-heritage-tab-confirm-action="cancel" data-heritage-dialog-autofocus data-heritage-i18n-de="Weiter bearbeiten" data-heritage-i18n-en="Keep editing">Keep editing</button>
 			      <button type="button" class="wb-dialog__action wb-dialog__action--danger" data-heritage-tab-confirm-action="discard" data-heritage-i18n-de="Verwerfen und fortfahren" data-heritage-i18n-en="Discard and continue">Discard and continue</button>
@@ -133,7 +133,7 @@
     </div>
   </div>
 
-  <script type='application/json' id='workbench-content-messages'>{}</script>
+  <script type='application/json' id='heritage-content-messages'>{}</script>
   <script defer src='themes/heritage/assets/javascripts/heritage-app-before-chart.bundle.js?ver=1.0.34'></script>
   <script defer src="js/chartjs/chart.umd.js"></script>
   <script defer src='themes/heritage/assets/javascripts/heritage-app-after-chart.bundle.js?ver=1.0.34'></script>

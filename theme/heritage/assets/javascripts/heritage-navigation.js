@@ -2,7 +2,7 @@
   'use strict';
 
   var button = document.querySelector('.menu-btn');
-  var panel = document.querySelector('#workbench-mobile-navigation');
+  var panel = document.querySelector('#heritage-mobile-navigation');
   var overlay = document.querySelector('.wb-navigation-overlay');
   var closeButton = panel && panel.querySelector('.wb-mobile-navigation__close');
   var content = panel && panel.querySelector('.wb-mobile-navigation__content');
@@ -482,7 +482,7 @@
     if (!header || !header.textContent.trim()) return;
     var label = document.createElement('div');
     var labelText = header.textContent.trim();
-    var listId = 'workbench-mobile-secondary-group-' + (index + 1);
+    var listId = 'heritage-mobile-secondary-group-' + (index + 1);
     groupList.id = listId;
     label.className = 'wb-mobile-navigation__secondary-label';
     label.setAttribute('role', 'presentation');
@@ -530,7 +530,7 @@
     var useSidebar = sidebarMatchesModule(sidebar, activeModule);
     var links = useSidebar ? Array.from(sidebar.querySelectorAll('#sub-navigation a, .wb-secondary-navigation__group a')) : [];
     container.className = 'wb-mobile-navigation__secondary';
-    container.id = 'workbench-mobile-secondary-navigation';
+    container.id = 'heritage-mobile-secondary-navigation';
     if (!sidebar) return { node: container, count: 0 };
 
     var groups = useSidebar ? Array.from(sidebar.querySelectorAll(':scope > header')) : [];
@@ -672,7 +672,7 @@
     });
 
     if (!canonicalPage) return;
-    document.querySelectorAll('#sidebar a, #workbench-mobile-navigation a:not(.wb-mobile-navigation__module)').forEach(function (link) {
+    document.querySelectorAll('#sidebar a, #heritage-mobile-navigation a:not(.wb-mobile-navigation__module)').forEach(function (link) {
       var active = navigationTargetMatches(navigationTarget(link), canonicalPage);
       link.classList.toggle('active', active);
       if (active) link.setAttribute('aria-current', 'page');
@@ -740,7 +740,7 @@
     headers.forEach(function (header, index) {
       var list = header.nextElementSibling;
       if (!list || list.tagName !== 'UL') return;
-      var groupId = 'workbench-secondary-group-' + (index + 1);
+      var groupId = 'heritage-secondary-group-' + (index + 1);
       list.id = groupId;
       list.classList.add('wb-secondary-navigation__group');
       header.classList.add('wb-secondary-navigation__header');

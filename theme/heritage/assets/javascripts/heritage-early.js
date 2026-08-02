@@ -6,7 +6,7 @@
     if (declared.indexOf('de') === 0) return 'de';
     if (declared && declared !== 'en') return declared.split('-')[0];
 
-    var source = document.querySelector('meta[name="workbench-language-probe"]');
+    var source = document.querySelector('meta[name="heritage-language-probe"]');
     var probe = source ? String(source.getAttribute('content') || '') : '';
     if (/(?:anmelden|benutzername|kennwort)/i.test(probe)) return 'de';
     if (/(?:^|[\s|])(abmelden|ausloggen|suche|schlie(?:ß|ss)en|navigation\s+öffnen)(?:$|[\s|])/i.test(probe)) return 'de';
@@ -54,7 +54,7 @@
       };
       var active = messages[language] || messages.en;
       Object.keys(active).forEach(function(key) { document.body.dataset['heritage' + key.charAt(0).toUpperCase() + key.slice(1)] = active[key]; });
-      var tabDialog = document.getElementById('workbenchTabChangeDialog');
+      var tabDialog = document.getElementById('heritageTabChangeDialog');
       if (tabDialog) {
         tabDialog.dataset.warningMessage = active.tabWarning;
         tabDialog.dataset.discardMessage = active.tabDiscard;

@@ -4,7 +4,7 @@
   var messages = {};
   var sequence = 0;
   try {
-    var source = document.getElementById('workbench-content-messages');
+    var source = document.getElementById('heritage-content-messages');
     messages = JSON.parse(source ? source.textContent : '{}');
   } catch (error) {
     messages = {};
@@ -84,7 +84,7 @@
       var wrapper = document.createElement('div');
       wrapper.className = 'wb-tabstrip';
       wrapper.dataset.heritageTabstrip = 'true';
-      list.id = list.id || 'workbench-tab-list-' + (++sequence);
+      list.id = list.id || 'heritage-tab-list-' + (++sequence);
       list.setAttribute('aria-label', messages.tab_sections || 'Form sections');
       synchronizeAccessibility(list);
       list.parentNode.insertBefore(wrapper, list);

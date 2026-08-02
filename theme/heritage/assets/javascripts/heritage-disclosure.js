@@ -16,7 +16,7 @@
     if (!legacyTrigger || !panel) return false;
 
     generatedId += 1;
-    var panelId = 'workbench-donation-details-' + generatedId;
+    var panelId = 'heritage-donation-details-' + generatedId;
     var trigger = document.createElement('button');
     trigger.type = 'button';
     trigger.className = 'wb-disclosure__trigger';

@@ -1327,7 +1327,7 @@
     });
     window.setTimeout(enhanceForms, 0);
 
-    var navigation = document.getElementById('workbench-mobile-navigation');
+    var navigation = document.getElementById('heritage-mobile-navigation');
     if (navigation) {
       navigation.setAttribute('data-heritage-navigation', 'true');
       navigation.setAttribute('aria-label', 'Navigation');

@@ -76,6 +76,10 @@ if grep -RIEq 'dataset\.wb[A-Z]' "$theme/assets/javascripts"; then
   echo 'Theme contains a dataset property in the retired abbreviated namespace.' >&2
   exit 1
 fi
+if grep -RIEq 'workbench-(content-messages|mobile-navigation|mobile-secondary-navigation|mobile-secondary-group-|secondary-group-|tab-list-|native-tooltip|global-search-results|global-search-option-|donation-details-|language-probe)|workbenchTabChangeDialog' "$theme/templates" "$theme/assets/stylesheets" "$theme/assets/javascripts" --exclude='*.bundle.*'; then
+  echo 'Theme contains a retired Workbench-owned DOM identifier.' >&2
+  exit 1
+fi
 while IFS= read -r -d '' file; do node --check "$file"; done < <(find "$theme" -type f -name '*.js' -print0)
 
 node - "$theme" "$version" <<'NODE'

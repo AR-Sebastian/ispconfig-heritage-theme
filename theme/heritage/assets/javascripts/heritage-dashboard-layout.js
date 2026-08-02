@@ -326,7 +326,7 @@
       var title = titleNode ? titleNode.textContent.replace(/\s+/g, ' ').trim() : t('moduleWidget') + ' ' + (index + 1);
       var moduleLink = item.querySelector('[data-capp]');
       var moduleName = moduleLink ? moduleLink.getAttribute('data-capp') : '';
-      var navigationItems = Array.prototype.slice.call(document.querySelectorAll('#workbench-mobile-navigation [data-heritage-module], #main-navigation [data-heritage-module]'));
+      var navigationItems = Array.prototype.slice.call(document.querySelectorAll('#heritage-mobile-navigation [data-heritage-module], #main-navigation [data-heritage-module]'));
       var matchingNavigationItems = navigationItems.filter(function (candidate) {
         return candidate.getAttribute('data-heritage-module') === moduleName;
       });

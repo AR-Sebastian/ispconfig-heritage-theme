@@ -169,7 +169,7 @@
 
   var activeTooltipControl = null;
   var tooltipNode = null;
-  var tooltipId = 'workbench-native-tooltip';
+  var tooltipId = 'heritage-native-tooltip';
 
   function emitNative(element, name, detail, cancelable) {
     if (!element) return false;
@@ -3092,7 +3092,7 @@
   }
 
   try {
-    var messageSource = document.getElementById('workbench-content-messages');
+    var messageSource = document.getElementById('heritage-content-messages');
     messages = JSON.parse(messageSource ? messageSource.textContent : '{}');
   } catch (error) {
     messages = {};
@@ -3303,7 +3303,7 @@
   }
 
   try {
-    var messageSource = document.getElementById('workbench-content-messages');
+    var messageSource = document.getElementById('heritage-content-messages');
     messages = JSON.parse(messageSource ? messageSource.textContent : '{}');
   } catch (error) {
     messages = {};
@@ -3626,7 +3626,7 @@
       output.classList.add('wb-code-output');
     });
     Array.prototype.forEach.call(host.querySelectorAll('.label, .badge'), function(status) {
-      if (status.closest('#main-navigation, #sidebar, #workbench-mobile-navigation')) return;
+      if (status.closest('#main-navigation, #sidebar, #heritage-mobile-navigation')) return;
       status.classList.add('wb-status-chip');
       if (!status.getAttribute('role')) status.setAttribute('role', 'status');
     });
@@ -4204,20 +4204,20 @@
     if (!host) return;
 
     Array.prototype.forEach.call(host.querySelectorAll('.panel, .well, .content-box, .box, .pnl_formsarea, .tab-content, .tab-pane'), function(surface) {
-      if (surface.closest('#topnav-container, #sidebar, #workbench-mobile-navigation')) return;
+      if (surface.closest('#topnav-container, #sidebar, #heritage-mobile-navigation')) return;
       surface.classList.add('wb-owned-surface');
       if (surface.matches('.tab-content, .tab-pane')) surface.classList.add('wb-owned-surface--tabs');
       if (surface.matches('.panel, .well, .content-box, .box, .pnl_formsarea')) surface.classList.add('wb-owned-surface--card');
     });
 
     Array.prototype.forEach.call(host.querySelectorAll('.dropdown-menu, .popover, .modal-content, .ui-datepicker, .ui-dialog, .select2-drop, .chosen-drop'), function(overlay) {
-      if (overlay.closest('#topnav-container, #sidebar, #workbench-mobile-navigation')) return;
+      if (overlay.closest('#topnav-container, #sidebar, #heritage-mobile-navigation')) return;
       overlay.classList.add('wb-owned-overlay');
       if (overlay.matches('.select2-drop, .chosen-drop')) overlay.classList.add('wb-owned-enhanced-select__panel');
     });
 
     Array.prototype.forEach.call(host.querySelectorAll('.input-group, .input-append, .input-prepend, .btn-group, .btn-toolbar'), function(cluster) {
-      if (cluster.closest('#topnav-container, #sidebar, #workbench-mobile-navigation, .wb-header-actions')) return;
+      if (cluster.closest('#topnav-container, #sidebar, #heritage-mobile-navigation, .wb-header-actions')) return;
       cluster.classList.add('wb-owned-control-cluster');
     });
 
@@ -4226,7 +4226,7 @@
     });
 
     Array.prototype.forEach.call(host.querySelectorAll('.select2-container, .select2-container-multi, .chosen-container, .chosen-container-single, .chosen-container-multi'), function(container) {
-      if (container.closest('#topnav-container, #sidebar, #workbench-mobile-navigation')) return;
+      if (container.closest('#topnav-container, #sidebar, #heritage-mobile-navigation')) return;
       container.classList.add('wb-owned-enhanced-select');
       Array.prototype.forEach.call(container.querySelectorAll('.select2-choice, .select2-choices, .chosen-single, .chosen-choices'), function(control) {
         control.classList.add('wb-owned-enhanced-select__control');
@@ -4255,7 +4255,7 @@
     });
 
     Array.prototype.forEach.call(host.querySelectorAll('.help-block, .help-inline, .description, .hint, .text-muted, small, label, legend, .control-label'), function(textNode) {
-      if (textNode.closest('#topnav-container, #sidebar, #workbench-mobile-navigation')) return;
+      if (textNode.closest('#topnav-container, #sidebar, #heritage-mobile-navigation')) return;
       textNode.classList.add('wb-owned-readable-text');
     });
 
@@ -4303,7 +4303,7 @@
     if (!node || !style || node.dataset.heritagePreserveInlineStyle === 'true') return false;
     if (/^(?:canvas|svg|path|circle|rect|line|polyline|polygon|img|picture|source|video|meter|progress)$/i.test(node.tagName || '')) return false;
     if (node.closest('[data-heritage-preserve-style="true"], .wb-chart-card, .wb-sparkline, .wb-stat-visual, .wb-logo, #logo, .notification_text')) return false;
-    if (node.closest('#topnav-container, #workbench-mobile-navigation, .wb-app-navigation, .wb-header-actions')) return false;
+    if (node.closest('#topnav-container, #heritage-mobile-navigation, .wb-app-navigation, .wb-header-actions')) return false;
 
     var properties = [];
     var legacyPaint = /(?:^|;)\s*(?:color|background(?:-color)?|font(?:-family|-size)?|line-height)\s*:/i.test(style);
@@ -4874,7 +4874,7 @@
   }
 
   document.addEventListener('click', function(event) {
-    var trigger = event.target.closest('#main-navigation a[data-heritage-module], #workbench-mobile-navigation a[data-heritage-module], #main-navigation a[data-capp], #workbench-mobile-navigation a[data-capp]');
+    var trigger = event.target.closest('#main-navigation a[data-heritage-module], #heritage-mobile-navigation a[data-heritage-module], #main-navigation a[data-capp], #heritage-mobile-navigation a[data-capp]');
     if (!trigger) return;
     var moduleName = moduleAttribute(trigger);
     if (!moduleName) return;
@@ -5037,7 +5037,7 @@
         if (loadedModule) {
           api.workbenchActiveModule = loadedModule;
           syncPrimaryModule(document.querySelector('#topnav-container'), loadedModule);
-          syncPrimaryModule(document.querySelector('#workbench-mobile-navigation'), loadedModule);
+          syncPrimaryModule(document.querySelector('#heritage-mobile-navigation'), loadedModule);
         }
         enhanceLoadedContent(host, pagename, params || null);
         announceContentReady(host, pagename, { source: 'navigation', params: params || null });
@@ -5125,7 +5125,7 @@
         if (window.heritageIcons) window.heritageIcons.render(host);
         afterLoad();
         if (api && typeof api.loadPushyMenu === 'function') api.loadPushyMenu();
-        if (window.heritageIcons) window.heritageIcons.render(document.querySelector('#workbench-mobile-navigation'));
+        if (window.heritageIcons) window.heritageIcons.render(document.querySelector('#heritage-mobile-navigation'));
       }).catch(function(error) {
         if (!request.aborted && (!error || error.name !== 'AbortError') && token === menuSequence) {
           var api = runtime();
@@ -5489,7 +5489,7 @@
   };
   var messages = {};
   try {
-    var source = document.getElementById('workbench-content-messages');
+    var source = document.getElementById('heritage-content-messages');
     messages = JSON.parse(source ? source.textContent : '{}');
   } catch (error) { messages = {}; }
 
@@ -5872,7 +5872,7 @@
   'use strict';
 
   var button = document.querySelector('.menu-btn');
-  var panel = document.querySelector('#workbench-mobile-navigation');
+  var panel = document.querySelector('#heritage-mobile-navigation');
   var overlay = document.querySelector('.wb-navigation-overlay');
   var closeButton = panel && panel.querySelector('.wb-mobile-navigation__close');
   var content = panel && panel.querySelector('.wb-mobile-navigation__content');
@@ -6352,7 +6352,7 @@
     if (!header || !header.textContent.trim()) return;
     var label = document.createElement('div');
     var labelText = header.textContent.trim();
-    var listId = 'workbench-mobile-secondary-group-' + (index + 1);
+    var listId = 'heritage-mobile-secondary-group-' + (index + 1);
     groupList.id = listId;
     label.className = 'wb-mobile-navigation__secondary-label';
     label.setAttribute('role', 'presentation');
@@ -6400,7 +6400,7 @@
     var useSidebar = sidebarMatchesModule(sidebar, activeModule);
     var links = useSidebar ? Array.from(sidebar.querySelectorAll('#sub-navigation a, .wb-secondary-navigation__group a')) : [];
     container.className = 'wb-mobile-navigation__secondary';
-    container.id = 'workbench-mobile-secondary-navigation';
+    container.id = 'heritage-mobile-secondary-navigation';
     if (!sidebar) return { node: container, count: 0 };
 
     var groups = useSidebar ? Array.from(sidebar.querySelectorAll(':scope > header')) : [];
@@ -6542,7 +6542,7 @@
     });
 
     if (!canonicalPage) return;
-    document.querySelectorAll('#sidebar a, #workbench-mobile-navigation a:not(.wb-mobile-navigation__module)').forEach(function (link) {
+    document.querySelectorAll('#sidebar a, #heritage-mobile-navigation a:not(.wb-mobile-navigation__module)').forEach(function (link) {
       var active = navigationTargetMatches(navigationTarget(link), canonicalPage);
       link.classList.toggle('active', active);
       if (active) link.setAttribute('aria-current', 'page');
@@ -6610,7 +6610,7 @@
     headers.forEach(function (header, index) {
       var list = header.nextElementSibling;
       if (!list || list.tagName !== 'UL') return;
-      var groupId = 'workbench-secondary-group-' + (index + 1);
+      var groupId = 'heritage-secondary-group-' + (index + 1);
       list.id = groupId;
       list.classList.add('wb-secondary-navigation__group');
       header.classList.add('wb-secondary-navigation__header');
@@ -7607,7 +7607,7 @@
       var title = titleNode ? titleNode.textContent.replace(/\s+/g, ' ').trim() : t('moduleWidget') + ' ' + (index + 1);
       var moduleLink = item.querySelector('[data-capp]');
       var moduleName = moduleLink ? moduleLink.getAttribute('data-capp') : '';
-      var navigationItems = Array.prototype.slice.call(document.querySelectorAll('#workbench-mobile-navigation [data-heritage-module], #main-navigation [data-heritage-module]'));
+      var navigationItems = Array.prototype.slice.call(document.querySelectorAll('#heritage-mobile-navigation [data-heritage-module], #main-navigation [data-heritage-module]'));
       var matchingNavigationItems = navigationItems.filter(function (candidate) {
         return candidate.getAttribute('data-heritage-module') === moduleName;
       });
@@ -8626,7 +8626,7 @@
     if (!legacyTrigger || !panel) return false;
 
     generatedId += 1;
-    var panelId = 'workbench-donation-details-' + generatedId;
+    var panelId = 'heritage-donation-details-' + generatedId;
     var trigger = document.createElement('button');
     trigger.type = 'button';
     trigger.className = 'wb-disclosure__trigger';
@@ -8710,7 +8710,7 @@
   var snapshotAction = null;
   var legacy = window.ISPConfig;
   try {
-    var source = document.getElementById('workbench-content-messages');
+    var source = document.getElementById('heritage-content-messages');
     messages = JSON.parse(source ? source.textContent : '{}');
   } catch (error) {
     messages = {};
@@ -8906,7 +8906,7 @@
   var messages = {};
   var sequence = 0;
   try {
-    var source = document.getElementById('workbench-content-messages');
+    var source = document.getElementById('heritage-content-messages');
     messages = JSON.parse(source ? source.textContent : '{}');
   } catch (error) {
     messages = {};
@@ -8986,7 +8986,7 @@
       var wrapper = document.createElement('div');
       wrapper.className = 'wb-tabstrip';
       wrapper.dataset.heritageTabstrip = 'true';
-      list.id = list.id || 'workbench-tab-list-' + (++sequence);
+      list.id = list.id || 'heritage-tab-list-' + (++sequence);
       list.setAttribute('aria-label', messages.tab_sections || 'Form sections');
       synchronizeAccessibility(list);
       list.parentNode.insertBefore(wrapper, list);
@@ -9048,7 +9048,7 @@
   }
 
   function dialog() {
-    return document.getElementById('workbenchTabChangeDialog');
+    return document.getElementById('heritageTabChangeDialog');
   }
 
   function recordId() {
@@ -9116,7 +9116,7 @@
   }, true);
 
   document.addEventListener('click', function (event) {
-    var action = event.target.closest('#workbenchTabChangeDialog [data-heritage-tab-confirm-action]');
+    var action = event.target.closest('#heritageTabChangeDialog [data-heritage-tab-confirm-action]');
     if (!action) return;
     event.preventDefault();
     event.stopPropagation();
@@ -9355,7 +9355,7 @@
   var generatedId = 0;
   var messages = {};
   try {
-    var source = document.getElementById('workbench-content-messages');
+    var source = document.getElementById('heritage-content-messages');
     messages = JSON.parse(source ? source.textContent : '{}');
   } catch (error) {
     messages = {};
@@ -9521,7 +9521,7 @@
   var active = null;
   var messages = {};
   try {
-    var source = document.getElementById('workbench-content-messages');
+    var source = document.getElementById('heritage-content-messages');
     messages = JSON.parse(source ? source.textContent : '{}');
   } catch (error) {
     messages = {};
@@ -10196,7 +10196,7 @@
   var messages = {};
 
   try {
-    var source = document.getElementById('workbench-content-messages');
+    var source = document.getElementById('heritage-content-messages');
     messages = JSON.parse(source ? source.textContent : '{}');
   } catch (error) { messages = {}; }
 
@@ -10400,7 +10400,7 @@
     input.setAttribute('aria-expanded', 'false');
 
     var resultBox = document.createElement('div');
-    resultBox.id = 'workbench-global-search-results';
+    resultBox.id = 'heritage-global-search-results';
     resultBox.className = 'wb-global-search-results';
     resultBox.setAttribute('role', 'listbox');
     resultBox.setAttribute('aria-label', input.getAttribute('aria-label') || tr('Suchergebnisse', 'Search results'));
@@ -10623,7 +10623,7 @@
           count += 1;
           var option = document.createElement('button');
           option.type = 'button';
-          option.id = 'workbench-global-search-option-' + count;
+          option.id = 'heritage-global-search-option-' + count;
           option.className = 'wb-global-search-result';
           option.setAttribute('role', 'option');
           option.setAttribute('aria-selected', 'false');

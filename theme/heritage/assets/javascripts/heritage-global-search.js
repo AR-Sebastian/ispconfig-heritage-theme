@@ -56,7 +56,7 @@
     input.setAttribute('aria-expanded', 'false');
 
     var resultBox = document.createElement('div');
-    resultBox.id = 'workbench-global-search-results';
+    resultBox.id = 'heritage-global-search-results';
     resultBox.className = 'wb-global-search-results';
     resultBox.setAttribute('role', 'listbox');
     resultBox.setAttribute('aria-label', input.getAttribute('aria-label') || tr('Suchergebnisse', 'Search results'));
@@ -279,7 +279,7 @@
           count += 1;
           var option = document.createElement('button');
           option.type = 'button';
-          option.id = 'workbench-global-search-option-' + count;
+          option.id = 'heritage-global-search-option-' + count;
           option.className = 'wb-global-search-result';
           option.setAttribute('role', 'option');
           option.setAttribute('aria-selected', 'false');

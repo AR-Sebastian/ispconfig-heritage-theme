@@ -50,7 +50,7 @@
   }
 
   try {
-    var messageSource = document.getElementById('workbench-content-messages');
+    var messageSource = document.getElementById('heritage-content-messages');
     messages = JSON.parse(messageSource ? messageSource.textContent : '{}');
   } catch (error) {
     messages = {};
@@ -373,7 +373,7 @@
       output.classList.add('wb-code-output');
     });
     Array.prototype.forEach.call(host.querySelectorAll('.label, .badge'), function(status) {
-      if (status.closest('#main-navigation, #sidebar, #workbench-mobile-navigation')) return;
+      if (status.closest('#main-navigation, #sidebar, #heritage-mobile-navigation')) return;
       status.classList.add('wb-status-chip');
       if (!status.getAttribute('role')) status.setAttribute('role', 'status');
     });
@@ -951,20 +951,20 @@
     if (!host) return;
 
     Array.prototype.forEach.call(host.querySelectorAll('.panel, .well, .content-box, .box, .pnl_formsarea, .tab-content, .tab-pane'), function(surface) {
-      if (surface.closest('#topnav-container, #sidebar, #workbench-mobile-navigation')) return;
+      if (surface.closest('#topnav-container, #sidebar, #heritage-mobile-navigation')) return;
       surface.classList.add('wb-owned-surface');
       if (surface.matches('.tab-content, .tab-pane')) surface.classList.add('wb-owned-surface--tabs');
       if (surface.matches('.panel, .well, .content-box, .box, .pnl_formsarea')) surface.classList.add('wb-owned-surface--card');
     });
 
     Array.prototype.forEach.call(host.querySelectorAll('.dropdown-menu, .popover, .modal-content, .ui-datepicker, .ui-dialog, .select2-drop, .chosen-drop'), function(overlay) {
-      if (overlay.closest('#topnav-container, #sidebar, #workbench-mobile-navigation')) return;
+      if (overlay.closest('#topnav-container, #sidebar, #heritage-mobile-navigation')) return;
       overlay.classList.add('wb-owned-overlay');
       if (overlay.matches('.select2-drop, .chosen-drop')) overlay.classList.add('wb-owned-enhanced-select__panel');
     });
 
     Array.prototype.forEach.call(host.querySelectorAll('.input-group, .input-append, .input-prepend, .btn-group, .btn-toolbar'), function(cluster) {
-      if (cluster.closest('#topnav-container, #sidebar, #workbench-mobile-navigation, .wb-header-actions')) return;
+      if (cluster.closest('#topnav-container, #sidebar, #heritage-mobile-navigation, .wb-header-actions')) return;
       cluster.classList.add('wb-owned-control-cluster');
     });
 
@@ -973,7 +973,7 @@
     });
 
     Array.prototype.forEach.call(host.querySelectorAll('.select2-container, .select2-container-multi, .chosen-container, .chosen-container-single, .chosen-container-multi'), function(container) {
-      if (container.closest('#topnav-container, #sidebar, #workbench-mobile-navigation')) return;
+      if (container.closest('#topnav-container, #sidebar, #heritage-mobile-navigation')) return;
       container.classList.add('wb-owned-enhanced-select');
       Array.prototype.forEach.call(container.querySelectorAll('.select2-choice, .select2-choices, .chosen-single, .chosen-choices'), function(control) {
         control.classList.add('wb-owned-enhanced-select__control');
@@ -1002,7 +1002,7 @@
     });
 
     Array.prototype.forEach.call(host.querySelectorAll('.help-block, .help-inline, .description, .hint, .text-muted, small, label, legend, .control-label'), function(textNode) {
-      if (textNode.closest('#topnav-container, #sidebar, #workbench-mobile-navigation')) return;
+      if (textNode.closest('#topnav-container, #sidebar, #heritage-mobile-navigation')) return;
       textNode.classList.add('wb-owned-readable-text');
     });
 
@@ -1050,7 +1050,7 @@
     if (!node || !style || node.dataset.heritagePreserveInlineStyle === 'true') return false;
     if (/^(?:canvas|svg|path|circle|rect|line|polyline|polygon|img|picture|source|video|meter|progress)$/i.test(node.tagName || '')) return false;
     if (node.closest('[data-heritage-preserve-style="true"], .wb-chart-card, .wb-sparkline, .wb-stat-visual, .wb-logo, #logo, .notification_text')) return false;
-    if (node.closest('#topnav-container, #workbench-mobile-navigation, .wb-app-navigation, .wb-header-actions')) return false;
+    if (node.closest('#topnav-container, #heritage-mobile-navigation, .wb-app-navigation, .wb-header-actions')) return false;
 
     var properties = [];
     var legacyPaint = /(?:^|;)\s*(?:color|background(?:-color)?|font(?:-family|-size)?|line-height)\s*:/i.test(style);
@@ -1621,7 +1621,7 @@
   }
 
   document.addEventListener('click', function(event) {
-    var trigger = event.target.closest('#main-navigation a[data-heritage-module], #workbench-mobile-navigation a[data-heritage-module], #main-navigation a[data-capp], #workbench-mobile-navigation a[data-capp]');
+    var trigger = event.target.closest('#main-navigation a[data-heritage-module], #heritage-mobile-navigation a[data-heritage-module], #main-navigation a[data-capp], #heritage-mobile-navigation a[data-capp]');
     if (!trigger) return;
     var moduleName = moduleAttribute(trigger);
     if (!moduleName) return;
@@ -1784,7 +1784,7 @@
         if (loadedModule) {
           api.workbenchActiveModule = loadedModule;
           syncPrimaryModule(document.querySelector('#topnav-container'), loadedModule);
-          syncPrimaryModule(document.querySelector('#workbench-mobile-navigation'), loadedModule);
+          syncPrimaryModule(document.querySelector('#heritage-mobile-navigation'), loadedModule);
         }
         enhanceLoadedContent(host, pagename, params || null);
         announceContentReady(host, pagename, { source: 'navigation', params: params || null });
@@ -1872,7 +1872,7 @@
         if (window.heritageIcons) window.heritageIcons.render(host);
         afterLoad();
         if (api && typeof api.loadPushyMenu === 'function') api.loadPushyMenu();
-        if (window.heritageIcons) window.heritageIcons.render(document.querySelector('#workbench-mobile-navigation'));
+        if (window.heritageIcons) window.heritageIcons.render(document.querySelector('#heritage-mobile-navigation'));
       }).catch(function(error) {
         if (!request.aborted && (!error || error.name !== 'AbortError') && token === menuSequence) {
           var api = runtime();

@@ -20,7 +20,7 @@
   }
 
   try {
-    var messageSource = document.getElementById('workbench-content-messages');
+    var messageSource = document.getElementById('heritage-content-messages');
     messages = JSON.parse(messageSource ? messageSource.textContent : '{}');
   } catch (error) {
     messages = {};

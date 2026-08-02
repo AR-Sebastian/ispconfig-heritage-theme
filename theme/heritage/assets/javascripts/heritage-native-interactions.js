@@ -3,7 +3,7 @@
 
   var activeTooltipControl = null;
   var tooltipNode = null;
-  var tooltipId = 'workbench-native-tooltip';
+  var tooltipId = 'heritage-native-tooltip';
 
   function emitNative(element, name, detail, cancelable) {
     if (!element) return false;

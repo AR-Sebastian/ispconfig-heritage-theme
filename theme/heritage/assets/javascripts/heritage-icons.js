@@ -47,7 +47,7 @@
   };
   var messages = {};
   try {
-    var source = document.getElementById('workbench-content-messages');
+    var source = document.getElementById('heritage-content-messages');
     messages = JSON.parse(source ? source.textContent : '{}');
   } catch (error) { messages = {}; }
 

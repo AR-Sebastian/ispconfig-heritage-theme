@@ -9,7 +9,7 @@
   }
 
   function dialog() {
-    return document.getElementById('workbenchTabChangeDialog');
+    return document.getElementById('heritageTabChangeDialog');
   }
 
   function recordId() {
@@ -77,7 +77,7 @@
   }, true);
 
   document.addEventListener('click', function (event) {
-    var action = event.target.closest('#workbenchTabChangeDialog [data-heritage-tab-confirm-action]');
+    var action = event.target.closest('#heritageTabChangeDialog [data-heritage-tab-confirm-action]');
     if (!action) return;
     event.preventDefault();
     event.stopPropagation();
