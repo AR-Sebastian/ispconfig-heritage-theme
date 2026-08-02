@@ -9,6 +9,18 @@ cannot combine stale and current presentation layers in the browser.
 The technical theme identifier remains unchanged to preserve compatibility
 with existing theme-manager installations and update paths.
 
+The login template also restores the current ISPConfig session-timeout guard
+around the stay-signed-in option. The control is therefore only presented when
+the configured session lifecycle can actually honor it.
+
+Label associations for the additional-PHP sort priority and alias-domain source
+controls are corrected as well, restoring predictable click focus and assistive
+technology output on those theme-owned forms.
+
+Mailbox quota progress bars now expose the numeric controller value through
+`aria-valuenow`; a legacy whitespace typo had previously referenced a missing
+template variable.
+
 ## Previous release
 
 HERITAGE 1.0.33 extends compact states to all five server capabilities and the

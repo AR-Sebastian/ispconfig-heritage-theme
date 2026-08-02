@@ -9,6 +9,13 @@
   Cache-Schlüssel. Dadurch können Browser nach einem Theme-Update keine alten
   CSS-, JavaScript-, Logo- oder Manifeststände mehr miteinander mischen.
 - Die bestehende technische Theme-ID bleibt zur Abwärtskompatibilität stabil.
+- Die Option „angemeldet bleiben“ folgt wieder vollständig dem aktuellen
+  ISPConfig-Sessionvertrag und wird bei deaktiviertem Session-Timeout nicht
+  mehr als wirkungslose, visuell irreführende Auswahl angeboten.
+- Sortierpriorität und Aliasdomain-Quelle besitzen wieder eindeutige
+  Label-Eingabefeld-Zuordnungen für korrekten Klickfokus und Screenreader.
+- Mail-Quota-Fortschrittsanzeigen liefern wieder einen gültigen numerischen
+  `aria-valuenow`-Wert statt einer nicht existierenden Template-Variable.
 
 ## 1.0.33 – 2026-07-31
 

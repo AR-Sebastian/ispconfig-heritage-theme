@@ -15,6 +15,7 @@
 							<label class="wb-visually-hidden" for="password">{tmpl_var name='password_txt'}</label>
 							<input class="form-control" placeholder="{tmpl_var name='password_txt'}" name="password" id="password" type="password" value="" autocomplete="current-password" enterkeyhint="go" required aria-required="true">
 			    		</div>
+						<tmpl_if name="session_timeout" op=">" value="0">
 						<tmpl_if name="session_allow_endless" value="y">
 						<div class="checkbox wb-login-stay-option">
 			    	    	<label>
@@ -22,6 +23,7 @@
 			    	    	</label>
 							<small>{tmpl_var name='stay_logged_in_hint_txt'}</small>
 							</div>
+						</tmpl_if>
 						</tmpl_if>
 						<tmpl_if name="workbench_remember_username" value="y">
 						<div class="checkbox wb-login-remember-option">
