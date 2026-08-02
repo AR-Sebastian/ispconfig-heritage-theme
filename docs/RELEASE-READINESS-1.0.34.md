@@ -34,6 +34,7 @@ Target: ISPConfig 3.3.1p1
 - Post-publication cross-timezone comparison found identical payload bytes but exposed ZIP's local wall-clock metadata. The builder now forces UTC so European and GitHub runners reproduce the same public ZIP hash without rewriting the existing tag.
 - A repository-owned public-release verifier downloads all three assets by their real names, requires both checksum validations, rejects unsafe paths, compares ZIP/TAR/Git payloads and proves install/update/rollback/uninstall/restore with normalized modes.
 - Future tag workflows create commit-pinned GitHub/Sigstore SLSA provenance for ZIP, TAR.GZ and the checksum manifest; the post-publish verifier requires those attestations and pins the signer workflow identity. Release 1.0.34 predates this additional gate and remains verifiable through its hashes and tagged payload.
+- Future releases also publish a deterministic SPDX 2.3 SBOM containing SHA-1/SHA-256 identities and package relationships for every theme file. GitHub signs the SBOM predicate for both archives, and post-publication verification regenerates the document from the tagged payload byte for byte. Release 1.0.34 predates this asset.
 
 The detailed, reproducible evidence and the lab limitation are recorded in
 [`RUNTIME-SMOKE-1.0.34.md`](RUNTIME-SMOKE-1.0.34.md).
