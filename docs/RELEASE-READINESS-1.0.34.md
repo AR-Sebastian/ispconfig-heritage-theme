@@ -24,17 +24,23 @@ Target: ISPConfig 3.3.1p1
 - The 1.0.34 candidate installs atomically in the Debian 13 multiserver lab and serves the expected HERITAGE CSS/JavaScript asset set.
 - Authenticated desktop light, desktop dark and 390-pixel mobile-dark smoke tests confirm the HERITAGE shell, logo, theme switch and responsive navigation without horizontal overflow.
 - Runtime testing exposed and repaired two theme-owned defects: an undecorated dashboard server-content wrapper now spans the full grid, and the redundant jQuery donation toggle is ignored when ISPConfig provides no jQuery runtime.
+- The theme compatibility markers now match ISPConfig 3.3.1p1's stock internal ABI, `ISPC_APP_VERSION=3.3dev`; the manifest continues to identify the public 3.3.1p1 target.
+- Atomic installation normalizes staged directory/file modes to `0755`/`0644`, independent of archive or Windows-transfer metadata.
+- A cache-independent corrected-package rerun delivered HTTP 200 assets and rendered Dashboard, User Settings, System Config, Additional PHP, Domain Alias and Mailbox routes without console errors, overflow or retired component classes.
 
 The detailed, reproducible evidence and the lab limitation are recorded in
 [`RUNTIME-SMOKE-1.0.34.md`](RUNTIME-SMOKE-1.0.34.md).
 
 ## Open release blockers
 
-- [ ] Prove the controller-independent shell, login and Admin settings view in an authenticated, unmodified ISPConfig 3.3.1p1 runtime.
+- [x] Prove the controller-independent authenticated shell and Admin settings view in an unmodified ISPConfig 3.3.1p1 runtime.
+- [ ] Decide and document whether deployment will explicitly set ISPConfig's global pre-login theme; stock `$conf['theme']='default'` cannot be changed from a presentation-only package.
 - [x] Run authenticated 1.0.34 shell smoke tests for light and dark desktop/mobile states in the available Debian 13 lab.
 - [x] Confirm the new HERITAGE logo and refreshed asset cache in an authenticated ISPConfig session.
-- [ ] Repeat the authenticated visual gates against a rebuilt, unmodified ISPConfig 3.3.1p1 runtime; the current snapshot reports `3.3dev` internally.
-- [ ] Confirm login session controls, additional-PHP sorting, alias-domain source and mailbox quota presentation in the runtime lab.
+- [x] Repeat the authenticated visual gates with the corrected `3.3dev` compatibility markers and no temporary lab edits.
+- [x] Confirm Additional PHP list ordering/priority and the alias-domain source contract in the runtime lab.
+- [ ] Confirm HERITAGE login session controls after an explicit global-theme deployment decision.
+- [ ] Confirm mailbox quota presentation with a synthetic mailbox fixture; the current stock lab contains no mailbox rows.
 - [ ] Review and merge the release-candidate pull request into `main` with green checks.
 - [ ] Rebuild from the clean merge commit and compare the final archive hashes.
 - [ ] Decide whether the existing `v1.0.20` tag requires a reconstructed GitHub Release entry; no historical publication is changed automatically.

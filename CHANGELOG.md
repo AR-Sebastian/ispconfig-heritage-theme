@@ -23,6 +23,9 @@
 - Dashboard fallback content spans the complete responsive grid instead of collapsing into a narrow implicit column.
 - The redundant legacy jQuery donation toggle is skipped safely when the ISPConfig shell does not provide jQuery; unrelated inline scripts remain observable.
 - Authenticated Debian 13 desktop/mobile and light/dark smoke evidence is recorded separately from the still-open stock 3.3.1p1 release gate.
+- Theme compatibility markers match the literal `3.3dev` ABI exposed by stock ISPConfig 3.3.1p1 while the manifest retains the public release target.
+- Managed installation normalizes directory and file permissions before the atomic swap, preventing transport-specific modes from blocking Apache asset delivery.
+- Stock-runtime evidence now distinguishes authenticated account theming from ISPConfig's operator-controlled global pre-login theme.
 
 ## 1.0.33 – 2026-07-31
 

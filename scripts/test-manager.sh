@@ -9,6 +9,8 @@ backup_root="$sandbox/backups"
 manager="$root/scripts/manage-theme.sh"
 
 "$manager" install --target-root "$target_root" --backup-root "$backup_root"
+test "$(stat -c '%a' "$target_root/heritage")" = 755
+test "$(stat -c '%a' "$target_root/heritage/assets/javascripts/heritage-early.js")" = 644
 "$manager" status --target-root "$target_root" --backup-root "$backup_root" |
   grep -q 'Installed version:'
 

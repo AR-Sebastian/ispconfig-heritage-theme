@@ -52,6 +52,8 @@ standalone ISPConfig 3.3.1p1 theme.
 ## Compatibility
 
 - ISPConfig: `3.3.1p1`
+- Internal theme compatibility marker: `3.3dev` (the value exposed by ISPConfig 3.3.1p1)
+- Managed payload permissions: directories `0755`, files `0644`, normalized before activation
 - PHP: 8.1 or newer
 - Validated platforms: Ubuntu 22.04/24.04 and Debian 12/13 with Apache or Nginx
 - Required recovery path: ISPConfig's original `default` theme remains installed

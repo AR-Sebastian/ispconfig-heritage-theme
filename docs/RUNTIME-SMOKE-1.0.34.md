@@ -31,21 +31,51 @@ Also, a legacy donation fragment contained a jQuery-ready handler although the
 active shell did not provide jQuery. Both defects were repaired in theme-owned
 CSS and JavaScript and the complete theme validator passed afterward.
 
+A later cache-independent install test found that a Windows-to-Linux transfer
+could preserve non-traversable directory modes in the staging payload. Apache
+then returned 403 for HERITAGE assets. The managed installer now normalizes all
+staged directories to `0755` and files to `0644` before the atomic swap; its
+lifecycle test asserts both modes.
+
 ## Lab limitation and release decision
 
-The saved lab snapshot is documented as ISPConfig 3.3.1p1, but both installed
-core configuration files define `ISPC_APP_VERSION` as `3.3dev`. HERITAGE's
-unaltered `ispconfig_version` marker correctly targets `3.3.1p1`, so ISPConfig
-rejects it in that inconsistent snapshot. For this visual smoke only, the
-installed lab copy of the marker was temporarily set to the exact runtime value
-and the template asset query was temporarily cache-busted. Neither adjustment
-exists in the repository candidate, and both are restored during teardown.
+The pinned ISPConfig 3.3.1p1 archive, commit
+`5005589c22794b504cd7e580a86752a93a619917`, installs
+`ISPC_APP_VERSION=3.3dev` from its stock `install/tpl/config.inc.php.master`.
+ISPConfig compares that internal value literally with a theme's
+`ispconfig_version` marker. The earlier `3.3.1p1` marker was therefore a theme
+packaging defect, not evidence of a contaminated lab. Both HERITAGE marker
+files now carry the required `3.3dev` compatibility ABI while the manifest and
+public support target remain 3.3.1p1.
 
-Consequently, this run proves installation, asset delivery and focused shell
-behaviour in the available Debian 13 lab. It does **not** close the release gate
-for an authenticated, unmodified ISPConfig 3.3.1p1 runtime. Rebuild or repair
-the lab from a verified 3.3.1p1 source and repeat shell, login, Admin settings
-and feature-specific acceptance before release.
+The temporary runtime marker and cache-buster used during discovery were
+restored during teardown. Repeat the shell, login, Admin settings and
+feature-specific acceptance with the corrected, unmodified package before
+release.
+
+## Corrected stock-package rerun
+
+The corrected package was then installed again without marker, template or
+ISPConfig core edits. The following cache-independent checks passed from a new
+browser origin:
+
+- compatibility marker `3.3dev` matched the installed stock runtime;
+- managed installation produced `0755` on the theme root and `0644` on an
+  application asset;
+- Apache returned HTTP 200 for the uncached early bootstrap;
+- authenticated dashboard, User Settings, System Config, Additional PHP
+  Versions, Domain Alias and Mailbox routes rendered without console errors;
+- all five authenticated routes had zero horizontal overflow and zero retired
+  `wb-*` component classes;
+- Additional PHP displayed both Debian 13 nodes with its priority column;
+- Domain Alias exposed the source/destination columns and Mailbox exposed its
+  operational status columns, including their empty states.
+
+The unauthenticated route correctly remained on ISPConfig's `default` theme.
+Stock ISPConfig initializes pre-login rendering from `$conf['theme']`, before a
+user-specific `app_theme` exists. Testing or deploying the HERITAGE login page
+therefore requires an explicit global ISPConfig theme configuration decision.
+The package must not silently edit that core configuration.
 
 No public gallery image was accepted from this run because the saved browser
 profile has every dashboard widget hidden. That state is useful regression

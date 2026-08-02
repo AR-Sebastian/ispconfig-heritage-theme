@@ -21,8 +21,8 @@ manifest_tag="$(node -p "JSON.parse(require('fs').readFileSync(process.argv[1],'
 test "$version" = "$manifest_version"
 test "$manifest_stage" = stable
 test "$manifest_tag" = "v$version"
-test "$(tr -d '[:space:]' < "$theme/ispconfig_version")" = 3.3.1p1
-test "$(tr -d '[:space:]' < "$theme/ISPC_VERSION")" = 3.3.1p1
+test "$(tr -d '[:space:]' < "$theme/ispconfig_version")" = 3.3dev
+test "$(tr -d '[:space:]' < "$theme/ISPC_VERSION")" = 3.3dev
 
 if grep -RIEq 'lorem ipsum|\bTODO\b|\bFIXME\b|themes/workbench/' "$theme"; then
   echo 'Theme contains a forbidden public-release marker.' >&2
