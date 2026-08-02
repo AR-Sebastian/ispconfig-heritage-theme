@@ -24,10 +24,19 @@ source_date_epoch="${SOURCE_DATE_EPOCH:-$(date -u -d "$release_date 00:00:00 UTC
   exit 1
 }
 
+git -C "$root" diff --quiet -- theme/heritage || {
+  echo "Release payload has unstaged changes; commit them before building." >&2
+  exit 1
+}
+git -C "$root" diff --cached --quiet -- theme/heritage || {
+  echo "Release payload has staged but uncommitted changes; commit them before building." >&2
+  exit 1
+}
+
 "$root/scripts/validate-theme.sh"
 rm -rf "$dist"
 mkdir -p "$dist"
-cp -a "$root/theme/heritage" "$stage/heritage"
+git -C "$root" archive --format=tar HEAD:theme heritage | tar -xf - -C "$stage"
 find "$stage/heritage" -type d -exec chmod 0755 {} +
 find "$stage/heritage" -type f -exec chmod 0644 {} +
 find "$stage/heritage" -exec touch -h -d "@$source_date_epoch" {} +
