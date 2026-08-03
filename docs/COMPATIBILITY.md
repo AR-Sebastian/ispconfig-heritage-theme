@@ -1,6 +1,6 @@
 # Compatibility and validation scope
 
-HERITAGE 1.0.34 targets ISPConfig 3.3.1p1 and PHP 8.1 or newer.
+HERITAGE 1.0.35 targets ISPConfig 3.3.1p1 and PHP 8.1 or newer.
 
 ISPConfig 3.3.1p1 exposes the internal theme compatibility ABI as
 `ISPC_APP_VERSION=3.3dev`. The package therefore carries `3.3dev` in both

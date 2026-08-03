@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.35 – 2026-08-03
+
+- Same-origin navigation now permits only explicit HTTP(S) URLs.
+- Dynamic tab lookup no longer interpolates identifiers into CSS selectors.
+- Field-search result placeholders are replaced globally and deterministically.
+- CodeQL extended analysis covers Actions and JavaScript/TypeScript with no open findings.
+- Release archives are checkout- and timezone-independent and verified after publication.
+- Future release assets include signed SLSA provenance and a deterministic SPDX 2.3 SBOM.
+- Branch protection, CODEOWNERS, Dependabot, secret scanning and private vulnerability reporting harden repository governance.
+
 ## 1.0.34 – 2026-08-02
 
 - Public branding is consistently presented as ISPConfig HERITAGE.

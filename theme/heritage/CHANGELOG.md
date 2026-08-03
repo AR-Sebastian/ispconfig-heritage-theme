@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.0.35 – 2026-08-03
+
+- Navigation targets from field search and login controls are restricted to
+  same-origin HTTP(S) URLs.
+- Form-tab title lookup compares DOM attributes directly instead of building a
+  selector from runtime identifiers.
+- Result-count placeholders are replaced globally, including repeated tokens.
+- Extended CodeQL analysis closes all actionable JavaScript findings; the
+  generated bundles match their hardened authoritative sources.
+- Release metadata and asset cache fingerprints advance to 1.0.35.
+
 ## 1.0.34 – 2026-08-02
 
 - Sichtbare Altbezeichnungen aus der Workbench-Entwicklung wurden in Logo,
