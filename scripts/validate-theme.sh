@@ -161,6 +161,9 @@ for (const contract of [
 if (releaseWorkflow.indexOf('name: Build SPDX SBOM') < releaseWorkflow.indexOf('name: Verify reproducible release assets')) {
   throw new Error('SPDX SBOM must be generated after the second release build replaces dist/.');
 }
+if (!/name: Verify published assets\s+env:\s+GH_TOKEN: \$\{\{ github\.token \}\}/.test(releaseWorkflow)) {
+  throw new Error('Public release attestation verification must receive the scoped GitHub token.');
+}
 
 const markdownFiles = walk(projectRoot).filter(file => path.extname(file).toLowerCase() === '.md' && !file.includes(`${path.sep}.git${path.sep}`));
 for (const markdownFile of markdownFiles) {

@@ -78,4 +78,6 @@ jobs:
             dist/SHA256SUMS.txt
             dist/ispconfig-heritage-theme-*.spdx.json
       - name: Verify published assets
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: bash scripts/verify-published-release.sh "${GITHUB_REF_NAME#v}" --require-attestation --require-sbom
