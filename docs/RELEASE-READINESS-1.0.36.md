@@ -1,7 +1,9 @@
 # HERITAGE 1.0.36 release readiness
 
-Status: **RELEASED — public payload and attestations verified**  
-Release date: 2026-08-03  
+Status: **RELEASED — public payload and attestations verified**
+
+Release date: 2026-08-03
+
 Target: ISPConfig 3.3.1p1
 
 ## Verified candidate gates
