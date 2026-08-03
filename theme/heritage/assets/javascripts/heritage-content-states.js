@@ -1280,7 +1280,10 @@
     var heading = section.querySelector(':scope > legend, :scope > .fieldset-legend, :scope > .panel-heading, :scope > h2, :scope > h3, :scope > h4');
     if (heading && heading.textContent.trim()) return heading.textContent.replace(/\s+/g, ' ').trim();
     if (section.id && scope) {
-      var tab = scope.querySelector('.content-tab-wrapper > .hg-form-tabs a[href="#' + section.id.replace(/"/g, '\\"') + '"]');
+      var tab = Array.prototype.find.call(
+        scope.querySelectorAll('.content-tab-wrapper > .hg-form-tabs a[href^="#"]'),
+        function(candidate) { return candidate.getAttribute('href') === '#' + section.id; }
+      );
       if (tab && tab.textContent.trim()) return tab.textContent.replace(/\s+/g, ' ').trim();
     }
     return '';

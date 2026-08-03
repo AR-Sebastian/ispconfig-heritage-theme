@@ -2796,10 +2796,11 @@
   }
 
   function safeUrl(value) {
-    if (!value || value === '#' || value.indexOf('java' + 'script:') === 0) return '';
+    if (!value || value === '#') return '';
     try {
       var url = new URL(value, window.location.href);
-      return url.origin === window.location.origin ? url.href : '';
+      var allowedProtocol = url.protocol === 'http:' || url.protocol === 'https:';
+      return allowedProtocol && url.origin === window.location.origin ? url.href : '';
     } catch (error) {
       return '';
     }
@@ -2880,7 +2881,7 @@
       statusRow(
         state,
         header.title === undefined ? '' : String(header.title),
-        state.options.resultsLimit.replace('%', String(total)).replace('$', String(visible)),
+        state.options.resultsLimit.replaceAll('%', String(total)).replaceAll('$', String(visible)),
         'category'
       );
       category.cdata.slice(0, limit).forEach(function(item) { addOption(state, item || {}); });
@@ -4533,7 +4534,10 @@
     var heading = section.querySelector(':scope > legend, :scope > .fieldset-legend, :scope > .panel-heading, :scope > h2, :scope > h3, :scope > h4');
     if (heading && heading.textContent.trim()) return heading.textContent.replace(/\s+/g, ' ').trim();
     if (section.id && scope) {
-      var tab = scope.querySelector('.content-tab-wrapper > .hg-form-tabs a[href="#' + section.id.replace(/"/g, '\\"') + '"]');
+      var tab = Array.prototype.find.call(
+        scope.querySelectorAll('.content-tab-wrapper > .hg-form-tabs a[href^="#"]'),
+        function(candidate) { return candidate.getAttribute('href') === '#' + section.id; }
+      );
       if (tab && tab.textContent.trim()) return tab.textContent.replace(/\s+/g, ' ').trim();
     }
     return '';

@@ -350,6 +350,16 @@
     });
   }
 
+  function safeNavigationUrl(value) {
+    try {
+      var url = new URL(value, window.location.href);
+      var allowedProtocol = url.protocol === 'http:' || url.protocol === 'https:';
+      return allowedProtocol && url.origin === window.location.origin ? url.href : '';
+    } catch (error) {
+      return '';
+    }
+  }
+
   function normalizeFeedback() {
     var surface = document.querySelector('.hg-login-form-surface');
     if (!surface) return;
@@ -407,7 +417,7 @@
     document.addEventListener('click', function (event) {
       var control = event.target && event.target.closest ? event.target.closest('[data-login-navigate]') : null;
       if (!control) return;
-      var target = control.getAttribute('data-login-navigate');
+      var target = safeNavigationUrl(control.getAttribute('data-login-navigate'));
       if (!target) return;
       event.preventDefault();
       window.location.href = target;
