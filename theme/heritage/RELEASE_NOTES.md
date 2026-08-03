@@ -1,6 +1,6 @@
-# ISPConfig HERITAGE 1.0.35
+# ISPConfig HERITAGE 1.0.36
 
-HERITAGE 1.0.35 includes the complete 1.0.34 visual consistency baseline and
+HERITAGE 1.0.36 includes the complete 1.0.34 visual consistency baseline and
 adds same-origin navigation hardening, CodeQL closure and current reproducible
 release metadata for the standalone theme. Logo artwork, accessible SVG titles, PWA metadata and the
 theme display name now consistently identify ISPConfig HERITAGE. Application,

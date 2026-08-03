@@ -47,19 +47,19 @@ fachlichen Aktionen, APIs und Provisionierungsabläufe bleiben bei ISPConfig.
 - eigenständiges Paket ohne NEXT-, LIQUID- oder Workbench-Abhängigkeit;
 - atomare Installation mit Backup und Rollback.
 
-### Version 1.0.35
+### Version 1.0.36
 
 Geprüft mit ISPConfig 3.3.1p1 für Administrator-, Reseller-, Kunden- und
 Mailuser-Ansichten sowie Ubuntu 22.04/24.04 und Debian 12/13 mit Apache und
 Nginx. Das originale ISPConfig-Theme `default` muss als Rückfallebene
 installiert bleiben.
 
-**[HERITAGE 1.0.35 herunterladen](https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/latest)**
+**[HERITAGE 1.0.36 herunterladen](https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/latest)**
 
 ### Schnellstart
 
 ```bash
-git clone --branch v1.0.35 --depth 1 https://github.com/AR-Sebastian/ispconfig-heritage-theme.git
+git clone --branch v1.0.36 --depth 1 https://github.com/AR-Sebastian/ispconfig-heritage-theme.git
 cd ispconfig-heritage-theme
 sudo ./scripts/manage-theme.sh install
 sudo ./scripts/manage-theme.sh status
@@ -74,7 +74,7 @@ Update automatisch eine rücksetzbare Sicherung des Themes an.
 - [Kompatibilität und Prüfbereich](docs/COMPATIBILITY.md)
 - [Sicherheit und Release-Verifikation](SECURITY.md)
 - [Release-Bereitschaft 1.0.34](docs/RELEASE-READINESS-1.0.34.md)
-- [Release-Bereitschaft 1.0.35](docs/RELEASE-READINESS-1.0.35.md)
+- [Release-Bereitschaft 1.0.36](docs/RELEASE-READINESS-1.0.36.md)
 - [Release-Abnahme 1.0.0](docs/RELEASE-GATE-1.0.0.md)
 - [Änderungsprotokoll](CHANGELOG.md)
 - [Lizenz](LICENSE.md)
@@ -116,13 +116,13 @@ remain owned by ISPConfig.
 - standalone package without NEXT, LIQUID or Workbench dependencies;
 - atomic installation with backup and rollback.
 
-### Version 1.0.35
+### Version 1.0.36
 
 Validated with ISPConfig 3.3.1p1 for administrator, reseller, client and
 mail-user views, plus Ubuntu 22.04/24.04 and Debian 12/13 with Apache and Nginx.
 Keep ISPConfig's original `default` theme installed as the recovery path.
 
-**[Download HERITAGE 1.0.35](https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/latest)**
+**[Download HERITAGE 1.0.36](https://github.com/AR-Sebastian/ispconfig-heritage-theme/releases/latest)**
 
 ### Development validation
 
@@ -137,7 +137,7 @@ bash scripts/validate-theme.sh
 ### Quick start
 
 ```bash
-git clone --branch v1.0.35 --depth 1 https://github.com/AR-Sebastian/ispconfig-heritage-theme.git
+git clone --branch v1.0.36 --depth 1 https://github.com/AR-Sebastian/ispconfig-heritage-theme.git
 cd ispconfig-heritage-theme
 sudo ./scripts/manage-theme.sh install
 sudo ./scripts/manage-theme.sh status
@@ -152,7 +152,7 @@ backup during updates.
 - [Compatibility and validation scope](docs/COMPATIBILITY.md)
 - [Security and release verification](SECURITY.md)
 - [Release readiness 1.0.34](docs/RELEASE-READINESS-1.0.34.md)
-- [Release readiness 1.0.35](docs/RELEASE-READINESS-1.0.35.md)
+- [Release readiness 1.0.36](docs/RELEASE-READINESS-1.0.36.md)
 - [Release gate 1.0.0](docs/RELEASE-GATE-1.0.0.md)
 - [Changelog](CHANGELOG.md)
 - [License](LICENSE.md)

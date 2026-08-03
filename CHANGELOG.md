@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.36 – 2026-08-03
+
+- The SPDX SBOM is generated after the reproducibility rebuild, so the second
+  build can no longer remove it before attestation.
+- Validation permanently enforces the required rebuild-before-SBOM order.
+- Version 1.0.35 remains an unpublished failed-build tag and was not rewritten.
+- Runtime, security, compatibility and visual contents remain identical to the
+  reviewed 1.0.35 candidate.
+
 ## 1.0.35 – 2026-08-03
 
 - Same-origin navigation now permits only explicit HTTP(S) URLs.
