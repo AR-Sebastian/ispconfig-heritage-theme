@@ -13,7 +13,7 @@ cat /usr/local/ispconfig/interface/web/themes/heritage/ispconfig_version
 The expected compatibility-marker value is `3.3dev`. ISPConfig 3.3.1p1 uses
 that internal `ISPC_APP_VERSION` value when validating selectable themes. The
 public release target remains ISPConfig 3.3.1p1. Other ISPConfig releases are
-outside the HERITAGE 1.0.35 release scope.
+outside the HERITAGE 1.0.36 release scope.
 
 ## The previous theme remains visible
 

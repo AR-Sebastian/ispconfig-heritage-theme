@@ -12,8 +12,8 @@ cat /usr/local/ispconfig/interface/web/themes/heritage/ispconfig_version
 
 Als interner Kompatibilitätswert muss `3.3dev` erscheinen. ISPConfig 3.3.1p1
 verwendet diesen Wert in `ISPC_APP_VERSION`, um auswählbare Themes zu prüfen.
-Das öffentliche Release-Ziel von HERITAGE 1.0.35 bleibt ISPConfig 3.3.1p1.
-Andere ISPConfig-Versionen sind nicht Bestandteil der Freigabe von HERITAGE 1.0.35.
+Das öffentliche Release-Ziel von HERITAGE 1.0.36 bleibt ISPConfig 3.3.1p1.
+Andere ISPConfig-Versionen sind nicht Bestandteil der Freigabe von HERITAGE 1.0.36.
 
 ## Nach der Auswahl bleibt das bisherige Theme sichtbar
 

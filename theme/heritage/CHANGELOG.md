@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.36 – 2026-08-03
+
+- Release metadata and asset cache fingerprints advance to 1.0.36.
+- Runtime, security and visual contents remain identical to the reviewed
+  1.0.35 candidate; the release-pipeline correction is repository-only.
+
 ## 1.0.35 – 2026-08-03
 
 - Navigation targets from field search and login controls are restricted to
