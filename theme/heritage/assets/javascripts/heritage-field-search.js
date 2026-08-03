@@ -98,10 +98,11 @@
   }
 
   function safeUrl(value) {
-    if (!value || value === '#' || value.indexOf('java' + 'script:') === 0) return '';
+    if (!value || value === '#') return '';
     try {
       var url = new URL(value, window.location.href);
-      return url.origin === window.location.origin ? url.href : '';
+      var allowedProtocol = url.protocol === 'http:' || url.protocol === 'https:';
+      return allowedProtocol && url.origin === window.location.origin ? url.href : '';
     } catch (error) {
       return '';
     }
@@ -182,7 +183,7 @@
       statusRow(
         state,
         header.title === undefined ? '' : String(header.title),
-        state.options.resultsLimit.replace('%', String(total)).replace('$', String(visible)),
+        state.options.resultsLimit.replaceAll('%', String(total)).replaceAll('$', String(visible)),
         'category'
       );
       category.cdata.slice(0, limit).forEach(function(item) { addOption(state, item || {}); });
